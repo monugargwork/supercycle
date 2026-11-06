@@ -5,7 +5,7 @@ import { Pen, bodyFront, bodySide, fxBurst, fxPuff, fxNote, fxShadow, fxContact,
 import * as art from "./art";
 import {
   FPS, SHOTS, V3, at, SHOP, LIVING, POLICE, COURT, INSERT, clamp01, smooth, easeOut, pop, SNAP, TRACK_SPOT, TUG, GRAB, SIP, PHONE_UP, NOD, NOD2,
-  PIN1, PIN2, TRUCK_STOP, PEN_DROP, FIND, YANK, SLAP, ADMIT, LOCK_CLICK, TICK1, TICK2, ENGINE, GAVEL, STAMP1, BILLS, STAMP2, ANKLE, blinkOn, truckPose,
+  PIN1, PIN2, TRUCK_STOP, PEN_DROP, FIND, YANK, SLAP, ADMIT, LOCK_CLICK, TICK1, TICK2, ENGINE, GAVEL, STAMP1, BILLS, STAMP2, ANKLE, blinkOn, truckPose, POV6, POV8, vanD, clockMin, clockStr, AER_LOOK,
 } from "./story";
 import { NOINK } from "./ink";
 import { cardShade, blobMaterial, CARD_K } from "./cardshade";
@@ -202,10 +202,12 @@ export const truckWorld = (id: number, f: number, l: V3): V3 => {
   return [px + dx * c + dz * s, l[1], pz - dx * s + dz * c];
 };
 const glowAt = (out: Stage, key: string, p: V3, s: number) => out.fx.push({ key: "glow" + key, cw: 128, ch: 128, draw: (pp) => art.glow(pp), x: p[0], y: p[1], z: p[2], w: s, h: s, soft: true });
-const phoneCard = (out: Stage, p: V3, w: number, mode: art.MapMode, k: number, blink: boolean, pins = 0, finger = -1, flat = false) => {
-  const kq = q(k, 90), fq = finger < 0 ? -1 : q(finger, 90);
-  out.fx.push({ key: `phone|${mode}|${kq}|${blink}|${pins}|${fq}`, cw: 600, ch: 1100, draw: (pp) => art.phoneMap(pp, mode, kq, blink, pins, fq), x: p[0], y: p[1], z: p[2], w, h: w * 11 / 6, flat });
+/** his view of his own phone (POV card filling the frame at the insert plinth slot x) */
+const povCard = (out: Stage, x: number, m: art.PovMap) => {
+  const k = `pov|${q(m.t.cx, 4)}|${q(m.t.cz, 4)}|${q(m.t.s, 40)}|${m.dot ? q(m.dot[0], 4) + "," + q(m.dot[1], 4) : "-"}|${m.blink}|${q(m.trail, 4)}|${m.route ?? "-"}|${m.pins.map((p) => q(p.k, 30)).join(",")}|${m.time}|${m.finger === undefined ? "-" : q(m.finger, 2)}`;
+  out.fx.push({ key: k, cw: 720, ch: 1280, draw: (pp) => art.povPhone(pp, m), x: I(x, 0, 0)[0], y: I(x, 0.004, 0)[1], z: I(x, 0, 0)[2], w: 0.36, h: 0.64, flat: true });
 };
+const MAP_SCREEN_C = { ax: (art.SCREEN[0] + art.SCREEN[2]) / 2, ay: (art.SCREEN[1] + art.SCREEN[3]) / 2 };
 
 /** everything with a face or an effect in shot `id` at frame f */
 export const stage = (id: number, f: number, cam: CamInfo): Stage => {
@@ -249,21 +251,34 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
       break;
     }
     case 5: break; // the house front: the KUBASTA mailbox (sets.ts)
-    case 6: { // calm in his armchair: tea, then the phone
-      const [x, , z] = Lv(0, 0, -1.15);
-      const prop = f < PHONE_UP - 6 ? (["hold", "teacup"] as const) : (["hold", "phoneMap"] as const);
-      front(out, cam, "kub", x, 0.45, z, { mode: "sit", expr: f >= SIP && f < SIP + 14 ? "relief" : "smile_closed", facing: 1, prop: [prop[0], prop[1]], headTilt: f >= SIP && f < SIP + 14 ? -0.12 : 0 }, f, [SIP]);
-      if (f >= PHONE_UP - 6) phoneCard(out, Lv(0.18, 0.86, -0.42), 0.16, "live", (f - 610) / 220, blink);
+    case 6: { // calm in his armchair: tea; he puts the cup on the side table and lifts the phone (its back to us, screen to him);
+      // then his own view: the screen between his hands, the dot crawling along the main road; the dive into the map
+      if (f < POV6) {
+        const [x, , z] = Lv(0, 0, -1.15), hasCup = f < PHONE_UP - 6;
+        front(out, cam, "kub", x, 0.45, z, { mode: "sit", expr: f >= SIP && f < SIP + 14 ? "relief" : hasCup ? "smile_closed" : "smile", facing: 1, prop: ["hold", hasCup ? "teacup" : "phoneBack"], headTilt: f >= SIP && f < SIP + 14 ? -0.12 : hasCup ? 0 : 0.08 }, f, [SIP]);
+        if (!hasCup) card(out, "cupDown", 160, 140, (p) => { p.poly(art.rr(30, 40, 120, 120, 18), "#fbf7ec", 6); p.ell(128, 74, 18, 22, null, 6); p.ell(75, 124, 60, 10, "#e9e1cf", 5); }, ...Lv(0.95, 0.6, -1.0), 0.12, 0.105);
+      } else {
+        const u = smooth((f - 690) / 38), d = vanD(f), dot = art.alongD(art.ROUTE, d), s0 = 4, s1 = 22, s = s0 * (s1 / s0) ** u;
+        // the dive keeps the dot on screen: its screen offset slides from the overview's to the aerial's
+        const ox = (dot[0] + 45) * s0 * (1 - u) + (dot[0] - AER_LOOK[0]) * s1 * u, oz = (dot[1] - 60) * s0 * (1 - u) + (dot[1] - AER_LOOK[2]) * s1 * u;
+        povCard(out, 120, { t: { cx: dot[0] - ox / s, cz: dot[1] - oz / s, s, ...MAP_SCREEN_C }, dot, blink, trail: d, pins: [], time: clockStr(clockMin(f)), tag: "Theo dõi trực tiếp" });
+      }
       break;
     }
     case 7: { // aerial: the truck turns left, its tracker blinking green
       if (blink) glowAt(out, "aer", truckWorld(7, f, [-3.22, 0.6, 3.72]), 2.2);
       break;
     }
-    case 8: { // the knowing nod; then the locked frame: phone in the foreground, the wall clock behind
-      const [x, , z] = Lv(0, 0, -1.15), nod = (f0: number) => (f >= f0 && f < f0 + 10 ? -0.14 * Math.sin(((f - f0) / 10) * Math.PI) : 0);
-      front(out, cam, "kub", x, 0.45, z, { mode: "sit", expr: "smile", facing: 1, look: f >= 795 ? 1 : 0, prop: ["hold", "phoneMap"], headTilt: nod(NOD) + nod(NOD2) }, f);
-      if (f >= 795) phoneCard(out, Lv(0.632, 0.928, 0.252), 0.12, "pins", (f - 795) / 23, blink, f >= PIN2 ? 2 : f >= PIN1 ? 1 : 0);
+    case 8: { // the knowing nod; his view: the dot stops at Target, then Walmart, his phone clock racing; back on him, the clock moved on
+      if (f < POV8[0] || f >= POV8[1]) {
+        const [x, , z] = Lv(0, 0, -1.15), nod = (f0: number) => (f >= f0 && f < f0 + 10 ? -0.14 * Math.sin(((f - f0) / 10) * Math.PI) : 0);
+        front(out, cam, "kub", x, 0.45, z, { mode: "sit", expr: "smile", facing: 1, prop: ["hold", "phoneBack"], headTilt: 0.08 + nod(NOD) + nod(NOD2) }, f);
+        card(out, "cupDown", 160, 140, (p) => { p.poly(art.rr(30, 40, 120, 120, 18), "#fbf7ec", 6); p.ell(128, 74, 18, 22, null, 6); p.ell(75, 124, 60, 10, "#e9e1cf", 5); }, ...Lv(0.95, 0.6, -1.0), 0.12, 0.105);
+      } else {
+        const d = vanD(f), pk = (f0: number) => clamp01((f - f0) / 12);
+        povCard(out, 120, { t: { cx: -108, cz: 75, s: 2.6, ...MAP_SCREEN_C }, dot: art.alongD(art.ROUTE, d), blink, trail: d,
+          pins: [{ d: art.ROUTE_STOP[1], k: pk(PIN1), chip: "Target · 9:10" }, { d: art.ROUTE_STOP[2], k: pk(PIN2), chip: "Walmart · 10:30" }], time: clockStr(clockMin(f)), tag: "Theo dõi trực tiếp" });
+      }
       break;
     }
     case 9: { // 18 June: she walks to the back, drops her pen, finds the box, holds it up
@@ -310,9 +325,10 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
       }
       break;
     }
-    case 15: { // match: his phone, the same route; his fingertip follows the dot to the store
-      const k = (f - 1648) / 66;
-      phoneCard(out, I(40, 0.004, 0), 0.3, "route", k, blink, 0, k - 0.03, true);
+    case 15: { // match: her route line becomes the recorded route on his phone; his fingertip traces it to where the cards go
+      const k = smooth((f - 1648) / 64), fin = art.ROUTE_STOP[4] * k;
+      povCard(out, 40, { t: { ...art.ROUTE_T }, dot: art.ROUTE[art.ROUTE.length - 1], blink, trail: 0, route: 999, finger: fin,
+        pins: [{ d: art.ROUTE_STOP[4], k: clamp01((f - 1712) / 12), chip: "Thẻ về đây", cards: true }], time: "19:20", tag: "Lộ trình hôm nay" });
       break;
     }
     case 16: case 17: { // court: the gavel; then the stamps and the five bills
@@ -351,7 +367,11 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
       if (on) glowAt(out, "him", [x, 0.4, 8.7], Math.max(0.15, (cam.pos.y - 1) * 0.045));
       break;
     }
-    case 20: phoneCard(out, I(80, 0.004, 0), 0.3, "him", (f - 2150) / 400, blink, 0, -1, true); break;
+    case 20: { // the crane's view became a map of the same street; it zooms out: one slow green dot, him
+      const x = -14.0 - 0.45 * ((f - 2096) / 30), s = 27.8 * (2.4 / 27.8) ** smooth((f - 2172) / 37);
+      card(out, `town|${q(x, 40)}|${q(s, 20)}|${blink}`, 720, 1280, (p) => art.townMapFull(p, { cx: -15.5, cz: 8.4, s, ax: 360, ay: 640 }, [x, 8.6], blink), ...I(80, 0.004, 0), 0.36, 0.64, { flat: true });
+      break;
+    }
   }
   return out;
 };

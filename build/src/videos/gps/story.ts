@@ -46,16 +46,36 @@ export const GAVEL = 1786;              // "tội"
 export const STAMP1 = 1862, BILLS = [1887, 1894, 1902, 1910, 1918] as const, STAMP2 = 1927;
 export const ANKLE = 2050;              // "đeo": the ankle monitor clacks shut
 export const blinkOn = (f: number, f0 = -999) => f >= f0 && ((f - f0) % 30) < 9; // the tracker LED: once a second
+// ---- the morning he follows on his phone (shots 6-8): one clock and one van position for the wall clock, his phone and the aerial
+export const POV6 = 632;                // cut to his own view of the phone
+export const POV8 = [805, 858] as const;
+const lerp = (a: number, b: number, u: number) => a + (b - a) * u;
+/** minutes since midnight: 8:52 at home, a time-lapse to 9:10 (Target, PIN1) and 10:30 (Walmart, PIN2): the route sheet's times */
+export const clockMin = (f: number) => {
+  if (f < POV8[0]) return 532 + (f - 560) * 0.012;
+  if (f < PIN1) return lerp(532 + 245 * 0.012, 550, smooth((f - POV8[0]) / (PIN1 - POV8[0])));
+  if (f < 826) return 550;
+  if (f < PIN2) return lerp(550, 630, smooth((f - 826) / (PIN2 - 826)));
+  return 630 + (f - PIN2) * 0.012;
+};
+export const clockStr = (m: number) => `${Math.floor(m / 60)}:${String(Math.floor(m % 60)).padStart(2, "0")}`;
+/** the van's distance (m) along her route (art.ROUTE): along the main road toward the cross road, then store to store */
+export const vanD = (f: number) => {
+  if (f < 790) return 61 - 0.27 * (728 - f);
+  if (f < PIN1) return lerp(87, 167, smooth((f - POV8[0]) / (PIN1 - POV8[0])));
+  if (f < 826) return 167;
+  return lerp(167, 297, smooth((f - 826) / (PIN2 - 826)));
+};
 
 // ---------------- truck ----------------
 /** truck pose: hook/crowd parked at x 0; aerial drive with a left turn into the cross road at x -70; 18 June drive-in */
 export const CROSS_X = -70;
 export const truckPose = (id: number, f: number): { x: number; z: number; yaw: number; dip: number } => {
   if (id === 7) { // aerial: heading -x along the main road, then a left turn into +z
-    const R = 4.5, x0 = -40, xT = CROSS_X + R, zLane = 3.2;
+    const R = 4.5, x0 = -61, xT = CROSS_X + R, zLane = 3.2; // same speed as the dot on his phone (0.27 m/f)
     if (f < TURN[0]) { const u = (f - 728) / (TURN[0] - 728); return { x: x0 + (xT - x0) * u, z: zLane, yaw: Math.PI, dip: 0 }; }
     if (f < TURN[1]) { const u = (f - TURN[0]) / (TURN[1] - TURN[0]), a = (u * Math.PI) / 2; return { x: xT - R * Math.sin(a), z: zLane + R * (1 - Math.cos(a)), yaw: Math.PI + a, dip: 0 }; }
-    const u = f - TURN[1]; return { x: CROSS_X, z: zLane + R + u * 0.32, yaw: 1.5 * Math.PI, dip: 0 };
+    const u = f - TURN[1]; return { x: CROSS_X, z: zLane + R + u * 0.3, yaw: 1.5 * Math.PI, dip: 0 };
   }
   if (id >= 9 && id <= 14) { // 18 June: drives in from -x and brakes
     const x = f >= TRUCK_STOP ? 0 : -45 * (1 - easeOut((f - 925) / (TRUCK_STOP - 925))), b = f - TRUCK_STOP;
@@ -75,7 +95,7 @@ export const SHOTS: ShotDef[] = [
   { id: 4, a: 440, b: 495, light: "day", place: "shop", sunAz: 140, sunEl: 62 },
   { id: 5, a: 495, b: 560, light: "golden", place: "home", sunAz: 30, sunEl: 9 },
   { id: 6, a: 560, b: 728, light: "golden", place: "living", sunAz: 120, sunEl: 40 },
-  { id: 7, a: 728, b: 772, light: "golden", place: "street", sunAz: 40, sunEl: 14 },
+  { id: 7, a: 728, b: 772, light: "golden", place: "street", sunAz: 40, sunEl: 55 },
   { id: 8, a: 772, b: 895, light: "golden", place: "living", sunAz: 120, sunEl: 40 },
   { id: 9, a: 895, b: 1135, light: "day", place: "street", sunAz: 110 },
   { id: 10, a: 1135, b: 1195, light: "day", place: "police", sunAz: 140, sunEl: 62 },
@@ -137,6 +157,14 @@ const C = (x: number, y: number, z: number) => at(COURT, x, y, z);
 /** the paper / phone inserts live on a bare plinth far off the street (top-down macro, see sets.ts INSERT) */
 export const INSERT: V3 = [0, 0.2, -300];
 const I = (x: number, y: number, z: number) => at(INSERT, x, y, z);
+/** the aerial (shot 7) looks straight down the way the phone map does; the phone's last frame shows this exact patch of town */
+export const AER_LOOK: V3 = [CROSS_X + 3, 0, 9], AER_POS: V3 = [CROSS_X + 3, 46, 17];
+/** POV push in shot 6: a slow drift, then from f690 a dive until the screen fills the frame at f728 (k 0.643) */
+const povPush = (f: number) => {
+  const k690 = Math.exp(-0.0008 * (690 - POV6));
+  if (f < 690) return Math.exp(-0.0008 * (f - POV6));
+  return k690 * (0.643 / k690) ** glide((f - 690) / 38);
+};
 
 const CAMS: Record<number, Key[]> = {
   // hook: low at the rear bumper; the clack; then rise and pull back to the store as the driver walks out
@@ -159,18 +187,21 @@ const CAMS: Record<number, Key[]> = {
   ],
   // house front: the KUBASTA mailbox, push toward the lit window
   5: [{ f: 495, s: (f) => dolly(H(4.2, 1.45, 9.6), H(2.2, 1.35, 5.0), pushK(f, 495, 0.004), { fov: 44 }) }],
-  // living room: calm in his armchair, the tea, then the phone insert
+  // living room: calm in his armchair, the tea, he lifts the phone (its back to us); then HIS view: the screen between his hands,
+  // the dot crawling; the camera dives into the screen and the map becomes the town (shot 7)
   6: [
     { f: 560, s: (f) => dolly(Lv(1.6, 1.35, 2.6), Lv(0, 0.95, -1.0), pushK(f, 560, 0.002), { fov: 44 }) },
-    { f: 600, dur: 30, s: (f) => dolly(Lv(0.25, 0.95, 0.05), Lv(0.18, 0.86, -0.42), pushK(f, 600, 0.002, 0.004, 20), { fov: 34 }) },
-    { f: 690, dur: 36, s: (f) => dolly(Lv(0.2, 0.9, -0.22), Lv(0.18, 0.86, -0.44), pushK(f, 690, 0.003), { fov: 30 }) },
+    { f: 600, dur: 30, s: (f) => dolly(Lv(0.7, 1.2, 0.6), Lv(0, 1.0, -1.0), pushK(f, 600, 0.002), { fov: 38 }) },
+    { f: POV6, cut: true, s: (f) => dolly(I(120, 0.95, 0.047), I(120, 0, 0.027), povPush(f), { fov: 34 }) },
   ],
   // aerial over the town: the truck (blinking green) turns left into the cross road
-  7: [{ f: 728, s: (f) => dolly([CROSS_X + 6, 46, 14], [CROSS_X - 2, 0, 6], pushK(f, 728, 0.002), { fov: 40 }) }],
-  // back with him: knowing nod, then the locked over-the-shoulder frame on the phone + wall clock
+  7: [{ f: 728, s: (f) => dolly(AER_POS, AER_LOOK, pushK(f, 728, 0.002), { fov: 40 }) }], // top-down like the map: map-up = world -z
+  // back with him: the knowing nod (phone back to us, wall clock behind); his view: the dot stops at two stores as his phone's
+  // clock races (time-lapse); back on him, the wall clock moved on too, the second nod
   8: [
     { f: 772, s: (f) => dolly(Lv(1.3, 1.25, 1.6), Lv(0, 1.05, -1.0), pushK(f, 772, 0.003, 0.006, 16), { fov: 40 }) },
-    { f: 795, cut: true, s: (f) => dolly(Lv(0.75, 1.05, 0.75), Lv(-0.6, 1.1, -2.2), pushK(f, 795, 0.0012), { fov: 44 }) },
+    { f: POV8[0], cut: true, s: (f) => dolly(I(120, 0.95, 0.047), I(120, 0, 0.027), pushK(f, POV8[0], 0.0008), { fov: 34 }) },
+    { f: POV8[1], cut: true, s: (f) => dolly(Lv(1.0, 1.2, 1.0), Lv(0, 1.05, -1.0), pushK(f, POV8[1], 0.002), { fov: 40 }) },
   ],
   // 18 June: wide as the truck pulls in; low insert under the bumper; she holds the box into the lens
   9: [
@@ -192,10 +223,10 @@ const CAMS: Record<number, Key[]> = {
   // the driver's route sheet, top-down macro; she ticks a store and its time
   14: [
     { f: 1485, s: (f) => dolly([3.0, 1.7, -0.6], [4.6, 1.3, 4.9], pushK(f, 1485, 0.002), { fov: 42 }) },
-    { f: 1512, cut: true, s: (f) => dolly(I(0, 0.95, 0.02), I(0, 0, 0), pushK(f, 1512, 0.0015), { fov: 34 }) },
+    { f: 1512, cut: true, s: (f) => dolly(I(0, 0.95, 0.02), I(0, 0, 0), pushK(f, 1512, 0.0008), { fov: 34 }) },
   ],
   // match: the route line becomes the line on his phone map
-  15: [{ f: 1630, s: (f) => dolly(I(40, 0.95, 0.02), I(40, 0, 0), pushK(f, 1630, 0.0015), { fov: 34 }) }],
+  15: [{ f: 1630, s: (f) => dolly(I(40, 0.95, 0.02), I(40, 0, 0), pushK(f, 1512, 0.0008), { fov: 34 }) }], // continues shot 14's push: the route lines match
   // court: the gavel
   16: [
     { f: 1745, s: (f) => dolly(C(2.4, 1.9, 4.4), C(0.4, 1.6, -4.2), pushK(f, 1745, 0.003, 0.008, 20), { fov: 46 }) },
@@ -213,7 +244,7 @@ const CAMS: Record<number, Key[]> = {
     { f: 2112, dur: 56, s: (f) => dolly([-15.5, 60, 9.0], [-15.5, 0, 8.4], pushK(f, 2112, 0.0008), { fov: 40 }) },
   ],
   // the town is the map now: the slow green dot is him
-  20: [{ f: 2168, s: (f) => dolly(I(80, 0.95, 0.02), I(80, 0, 0), pushK(f, 2168, 0.0012), { fov: 34 }) }],
+  20: [{ f: 2168, s: () => dolly(I(80, 0.95, 0.02), I(80, 0, 0), 1, { fov: 34 }) }], // the map itself zooms out (cast.ts)
 };
 /** impact kicks: the clack, the slap, the gavel, the ankle clack */
 export const KICKS: [number, number][] = [[SNAP, 0.9], [YANK, 0.7], [SLAP, 0.8], [LOCK_CLICK, 0.3], [GAVEL, 1.0], [STAMP1, 0.4], [STAMP2, 0.5], [ANKLE, 0.9]];
@@ -242,10 +273,12 @@ export const DOF: Dof[] = [
   { f: 440, cInf: 10, focus: () => S(5.5, 1.5, -6.4) },
   { f: 495, cInf: 9, focus: () => H(2.9, 1.15, 6.9) },
   { f: 560, cInf: 9, focus: () => Lv(0, 1.1, -1.0) },
-  { f: 600, dur: 30, cInf: 14, focus: () => Lv(0.18, 0.86, -0.42) },
+  { f: 600, dur: 30, cInf: 10, focus: () => Lv(0, 1.1, -1.0) },
+  { f: POV6, cInf: 0 },
   { f: 728, cInf: 0 },
   { f: 772, cInf: 10, focus: () => Lv(0, 1.2, -1.0) },
-  { f: 795, cInf: 12, focus: () => Lv(0.18, 0.86, -0.42) },
+  { f: POV8[0], cInf: 0 },
+  { f: POV8[1], cInf: 10, focus: () => Lv(0, 1.2, -1.0) },
   { f: 895, cInf: 0 },
   { f: 990, dur: 30, cInf: 8, focus: () => [-3.7, 1.0, 4.6] },
   { f: 1040, cInf: 15, focus: () => TRACK_SPOT },

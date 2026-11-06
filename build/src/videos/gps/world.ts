@@ -9,7 +9,7 @@ import { NOINK } from "./ink";
 import { Pool, Actor, Fx, stage } from "./cast";
 import { buildSets, Sets } from "./sets";
 import { tempBoard, clockFace } from "./art";
-import { SHOTS, ShotDef, camAt, truckPose, SNAP, TRACK_SPOT, TUG, GRAB, YANK, PIN1, PIN2, blinkOn, smooth, easeOut, clamp01, V3 } from "./story";
+import { SHOTS, ShotDef, camAt, truckPose, SNAP, TRACK_SPOT, TUG, GRAB, YANK, PIN1, PIN2, blinkOn, smooth, easeOut, clamp01, clockMin, V3 } from "./story";
 
 const V = (x: number, y: number, z: number) => new THREE.Vector3(x, y, z);
 const discTex = () => ctex("sunDisc", 128, 128, (g) => {
@@ -232,8 +232,8 @@ export class World {
     const deg = Math.round(88 + 24 * smooth((f - 196) / 84)), on = Math.floor(f / 8) % 2 === 0;
     const bk = `${deg}|${deg >= 104 ? on : 1}`;
     if (bk !== S.board.key) { S.board.key = bk; S.board.g.setTransform(1, 0, 0, 1, 0, 0); tempBoard(new Pen(S.board.g), deg, on); S.board.tex.needsUpdate = true; }
-    // the wall clock jumps as the dot stops at each store
-    const mins = 22 * 60 + 40 + 25 * smooth((f - PIN1) / 6) + 50 * smooth((f - PIN2) / 6) + 0.05 * (f - 560);
+    // the wall clock: the same morning as his phone (8:52, then 9:10 and 10:30 like her route sheet)
+    const mins = clockMin(f);
     const ck = String(Math.round(mins * 2));
     if (ck !== S.clock.key) { S.clock.key = ck; S.clock.g.setTransform(1, 0, 0, 1, 0, 0); clockFace(new Pen(S.clock.g), mins); S.clock.tex.needsUpdate = true; }
     // stockroom drawer: open, slides shut, click

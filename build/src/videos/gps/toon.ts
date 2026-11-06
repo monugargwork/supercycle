@@ -454,7 +454,7 @@ const hatOn = (p: Pen, o: Outfit, hp: P2[], H: Blob, cx: number, hc: number, lig
 export type Arms = [P2[], P2[]];
 /** held prop; for the hammer the number is the strike 0 (raised) .. 1 (struck) */
 export type Item = "clipboard" | "coffee" | "phone" | "phoneOk" | "slab" | "slabS" | "rawcard" | "notepad" | "scanner" | "cash" | "magnifier"
-  | "tracker" | "trackerLit" | "teacup" | "bill" | "phoneMap";
+  | "tracker" | "trackerLit" | "teacup" | "bill" | "phoneMap" | "phoneBack";
 export type Prop = null | "icecream" | "shako" | ["hammer", number] | ["gavel", number] | ["press", number] | ["hold", Item];
 
 const BUILD: Record<Build, { a: number; torso: number; legs: number; tw: number }> = {
@@ -1007,6 +1007,10 @@ const holdItem = (p: Pen, it: Item, hx: number, hy: number, u: number) => {
       p.ell(hx + 14 * u, hy - 11 * u, 5 * u, 5 * u, null, 2 * u); p.ell(hx, hy - 20 * u, 12 * u, 3 * u, "#b8743a", 1.4 * u); break;
     case "bill":
       p.poly(R(-22, -16, 22, 2, 2), "#8fd18a", 1.8 * u); p.ell(hx, hy - 7 * u, 5 * u, 5 * u, "#5aa55a", 1.2 * u); break;
+    case "phoneBack": // his phone seen from behind: the screen faces him, so we see the case and its camera (+ the screen's glow on its rim)
+      p.poly(R(-15, -48, 15, 6, 6), "#7fe0a0", 0); p.poly(R(-14, -46, 14, 5, 5), "#2c2a34", 2.2 * u);
+      p.poly(R(-10, -42, -1, -31, 3), "#3d3a46", 1.6 * u); p.ell(hx - 7 * u, hy - 39 * u, 2.2 * u, 2.2 * u, "#15131a", 0); p.ell(hx - 4 * u, hy - 34 * u, 2.2 * u, 2.2 * u, "#15131a", 0);
+      p.ell(hx, hy - 16 * u, 4 * u, 4 * u, "#3d3a46", 0); break;
     case "phoneMap": // phone showing the street map with the green dot
       p.poly(R(-14, -46, 14, 6, 5), "#25232d", 2.2 * u); p.poly(R(-11, -41, 11, 0, 2), "#e9e4d6", 0);
       p.stroke([[hx - 11 * u, hy - 24 * u], [hx + 11 * u, hy - 24 * u]], 2.4 * u, "#ffffff"); p.stroke([[hx - 2 * u, hy - 41 * u], [hx - 2 * u, hy]], 2.4 * u, "#ffffff");

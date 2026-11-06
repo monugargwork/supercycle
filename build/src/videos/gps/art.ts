@@ -345,69 +345,216 @@ export const trail = (p: Pen, pts: P2[], k: number) => {
 };
 
 // ======================= GPS-tracker reel =======================
-/** the street map shared by the phone screen and the aerial (main road across at y 620, cross road up at x 180) */
-export type MapMode = "live" | "pins" | "route" | "him";
-const MAP_ROUTE: [number, number][] = [[540, 620], [180, 620], [180, 300], [180, 160]]; // live: along the main road, left turn up
-const ROUTE_B: [number, number][] = [[90, 980], [300, 980], [300, 760], [470, 760], [470, 430], [250, 430], [250, 250]]; // shared with the route sheet
-const along = (pts: [number, number][], k: number): [number, number] => {
-  const L: number[] = []; let tot = 0;
-  for (let i = 1; i < pts.length; i++) { const d = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); L.push(d); tot += d; }
-  let r = Math.max(0, Math.min(1, k)) * tot;
+// One map of the town in WORLD metres (x right, z down = map "up" is world -z, like the top-down aerial cameras). The phone
+// screens, the driver's route sheet and the final town map all draw from it, so every map agrees with the 3D street:
+// main road along z 0 (12 m), the cross road down at x -70 (the aerial left turn), the Walmart from the hook at x -19..31.
+type W2 = [number, number];
+export type MapT = { cx: number; cz: number; s: number; ax: number; ay: number }; // world (cx, cz) lands at canvas (ax, ay), s px per metre
+const toC = (t: MapT, x: number, z: number): W2 => [t.ax + (x - t.cx) * t.s, t.ay + (z - t.cz) * t.s];
+const ROADS: { pts: W2[]; w: number }[] = [
+  { pts: [[-600, 0], [600, 0]], w: 12 }, { pts: [[-70, 0], [-70, 600]], w: 12 },
+  { pts: [[-600, 150], [600, 150]], w: 9 }, { pts: [[60, -600], [60, 600]], w: 9 }, { pts: [[-600, -120], [600, -120]], w: 9 },
+  { pts: [[-220, -600], [-220, 600]], w: 9 }, { pts: [[-150, 150], [-150, 600]], w: 6 }, { pts: [[-220, 60], [-70, 60]], w: 6 },
+  { pts: [[60, 80], [400, 80]], w: 6 }, { pts: [[-600, 300], [600, 300]], w: 9 }, { pts: [[200, -600], [200, 600]], w: 6 },
+];
+// real footprints from the street set (sets.ts) + the stores on her route
+const SIDEWALK: [number, number, number, number][] = [[-600, -11, 600, -6], [-600, 6, 600, 11], [-81, 11, -76, 600], [-64, 11, -59, 600]];
+const BUILT: [number, number, number, number, string][] = [
+  [-19, 13.5, 31, 48, "#d3dbe6"], [-16, -25, -4, -13, "#f1d2b4"], [2, -25, 16, -13, "#e8dcc4"],          // the Walmart, the two shops across
+  [-58, 84, -34, 116, "#ead0cc"], [-176, 158, -124, 196, "#d3dbe6"], [-262, 22, -228, 58, "#f0e6b8"], [72, -150, 112, -128, "#d3dbe6"],
+];
+export const STORES: { name: string; x: number; z: number; col: string }[] = [
+  { name: "Walmart", x: 6, z: 30, col: "#1f63b6" }, { name: "Target", x: -46, z: 100, col: "#d8322f" },
+  { name: "Walmart", x: -150, z: 177, col: "#1f63b6" }, { name: "Best Buy", x: -245, z: 40, col: "#e2b21f" }, { name: "Walmart", x: 92, z: -139, col: "#1f63b6" },
+];
+// her delivery route (the route sheet): Walmart 7:40, Target 9:10, Walmart 10:30, Best Buy 12:15, Walmart 13:50
+export const ROUTE: W2[] = [[0, 3], [-70, 3], [-70, 100], [-70, 150], [-150, 150], [-220, 150], [-220, 40], [-220, -120], [60, -120], [60, -136]];
+export const ROUTE_STOP = [0, 167, 297, 477, 933]; // metres along ROUTE where each store is
+const segLens = (pts: W2[]) => { const L: number[] = []; for (let i = 1; i < pts.length; i++) L.push(Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1])); return L; };
+/** point at distance d (metres) along a polyline */
+export const alongD = (pts: W2[], d: number): W2 => {
+  const L = segLens(pts); let r = Math.max(0, d);
   for (let i = 0; i < L.length; i++) { if (r <= L[i]) { const u = r / L[i]; return [pts[i][0] + (pts[i + 1][0] - pts[i][0]) * u, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * u]; } r -= L[i]; }
   return pts[pts.length - 1];
 };
-const pin = (p: Pen, x: number, y: number, s: number, col = "#e2433b", icon: "box" | "store" | "court" = "store") => {
-  p.poly([[x, y], [x - 16 * s, y - 30 * s], [x - 22 * s, y - 50 * s], [x, y - 72 * s], [x + 22 * s, y - 50 * s], [x + 16 * s, y - 30 * s]], col, 5 * s);
-  if (icon === "box") { p.poly(rr(x - 12 * s, y - 58 * s, x + 12 * s, y - 40 * s, 2 * s), "#f2c84a", 3 * s); p.poly(rr(x - 12 * s, y - 52 * s, x + 12 * s, y - 48 * s, 0), "#2f7fbf", 0); }
-  else if (icon === "court") { p.poly([[x - 13 * s, y - 44 * s], [x + 13 * s, y - 44 * s], [x, y - 58 * s]], "#ffffff", 2.5 * s); for (const dx of [-8, 0, 8]) p.stroke([[x + dx * s, y - 44 * s], [x + dx * s, y - 34 * s]], 3 * s, "#ffffff"); }
-  else p.ell(x, y - 50 * s, 9 * s, 9 * s, "#ffffff", 0);
+/** the polyline from 0 to distance d */
+const partD = (pts: W2[], d: number): W2[] => {
+  const L = segLens(pts), out: W2[] = [pts[0]]; let r = Math.max(0, d);
+  for (let i = 0; i < L.length; i++) { if (r <= L[i]) { out.push(alongD(pts, d)); return out; } out.push(pts[i + 1]); r -= L[i]; }
+  return out;
 };
-/** phone with the map (600 x 1100). k: progress along the route; blink: LED/dot pulse on; pins: how many store pins show */
-export const phoneMap = (p: Pen, mode: MapMode, k: number, blink: boolean, pins = 0, finger = -1) => {
-  p.poly(rr(10, 10, 590, 1090, 70), "#1d1b22", 10);
-  const g = p.g; g.save(); g.beginPath(); g.roundRect(44, 70, 512, 960, 30); g.clip();
-  g.fillStyle = "#ece6d6"; g.fillRect(44, 70, 512, 960);
-  for (const [x, y, rx, ry] of [[420, 200, 90, 60], [110, 860, 70, 90], [480, 960, 60, 40]] as const) p.ell(x, y, rx, ry, "#bfdca8", 0);
-  p.ell(330, 330, 70, 40, "#a9d4f2", 0);
-  const road = (pts: [number, number][], w: number) => { p.line(pts, "#b8b0a0", w + 8); p.line(pts, "#ffffff", w); };
-  road([[40, 620], [560, 620]], 34); road([[180, 620], [180, 60]], 30); road([[440, 620], [440, 1040]], 26); road([[40, 300], [560, 300]], 22);
-  road([[300, 1040], [300, 760], [560, 760]], 20); road([[40, 980], [560, 980]], 18); road([[250, 430], [470, 430], [470, 760]], 18); road([[250, 430], [250, 60]], 16);
-  for (let x = 60; x < 560; x += 70) for (const y of [470, 830]) p.poly(rr(x, y, x + 40, y + 50, 4), "#d9d0bd", 0);
-  if (mode === "route") { p.line(ROUTE_B, "#3d7fe0", 16); }
-  if (mode === "live" || mode === "pins") { pin(p, 180, 300, 1, "#e2433b"); pin(p, 440, 840, 1, "#e2433b"); if (pins > 0) pin(p, 300, 620, 1.1, "#e2433b", "box"); if (pins > 1) pin(p, 440, 900, 1.1, "#e2433b", "box"); }
-  if (mode === "route") { pin(p, 250, 250, 1.1, "#e2433b", k > 0.97 ? "box" : "store"); }
-  if (mode === "him") pin(p, 470, 780, 1.1, "#5a6f8f", "court");
-  // the dot
-  let d: [number, number] = [540, 620];
-  if (mode === "live") d = along(MAP_ROUTE, k);
-  else if (mode === "pins") d = pins > 1 ? [440, 900] : pins > 0 ? [300, 620] : along([[180, 300], [180, 620], [300, 620]], k);
-  else if (mode === "route") d = along(ROUTE_B, k);
-  else d = along([[470, 760], [470, 620], [380, 620]], k);
-  p.ell(d[0], d[1], blink ? 38 : 26, blink ? 38 : 26, "rgba(46,204,85,0.28)", 0);
-  p.ell(d[0], d[1], 17, 17, "#2ecc55", 5); p.ell(d[0], d[1], 7, 7, "#ffffff", 0);
-  if (finger >= 0) { const [fx, fy] = mode === "route" ? along(ROUTE_B, finger) : d; p.poly([[fx + 6, fy + 10], [fx + 40, fy + 60], [fx + 70, fy + 200], [fx + 150, fy + 230], [fx + 120, fy + 40], [fx + 30, fy - 4]], "#f5c9a0", 6); }
+const strokeW = (g: CanvasRenderingContext2D, t: MapT, pts: W2[], w: number, col: string, cap: CanvasLineCap = "round") => {
+  g.beginPath(); pts.forEach(([x, z], i) => { const [cx, cy] = toC(t, x, z); if (i) g.lineTo(cx, cy); else g.moveTo(cx, cy); });
+  g.lineCap = cap; g.lineJoin = "round"; g.strokeStyle = col; g.lineWidth = w; g.stroke();
+};
+const rectW = (g: CanvasRenderingContext2D, t: MapT, x0: number, z0: number, x1: number, z1: number, col: string, ol = 0) => {
+  const [a, b] = toC(t, x0, z0), [c, d] = toC(t, x1, z1);
+  g.fillStyle = col; g.fillRect(a, b, c - a, d - b);
+  if (ol) { g.strokeStyle = "rgba(90,80,60,0.35)"; g.lineWidth = ol; g.strokeRect(a, b, c - a, d - b); }
+};
+const nearRoad = (x0: number, z0: number, x1: number, z1: number) => ROADS.some(({ pts, w }) => {
+  for (let i = 1; i < pts.length; i++) {
+    const [ax, az] = pts[i - 1], [bx, bz] = pts[i], m = w / 2 + 4;
+    if (Math.max(x0, x1) > Math.min(ax, bx) - m && Math.min(x0, x1) < Math.max(ax, bx) + m && Math.max(z0, z1) > Math.min(az, bz) - m && Math.min(z0, z1) < Math.max(az, bz) + m) return true;
+  }
+  return false;
+});
+const BLOCKS: [number, number, number, number][] = (() => { // filler houses, kept out of the part of town the 3D sets show
+  const out: [number, number, number, number][] = [];
+  for (let x = -600; x < 600; x += 24) for (let z = -600; z < 600; z += 24) {
+    const h = Math.abs(Math.sin(x * 12.9898 + z * 78.233) * 43758.5453) % 1;
+    const x0 = x + 4 + h * 4, z0 = z + 4 + ((h * 7) % 1) * 4, x1 = x0 + 10 + h * 6, z1 = z0 + 9 + ((h * 3) % 1) * 6;
+    if (h < 0.18) continue;
+    if (x1 > -100 && x0 < 45 && z1 > -40 && z0 < 70) continue;
+    if (nearRoad(x0, z0, x1, z1) || BUILT.some(([a, b, c, d]) => x1 > a - 3 && x0 < c + 3 && z1 > b - 3 && z0 < d + 3)) continue;
+    out.push([x0, z0, x1, z1]);
+  }
+  return out;
+})();
+/** the town map in the clip rect (canvas px); px of ui scale `ui` keep pins/labels readable at any zoom */
+export const townMapLayer = (p: Pen, t: MapT, clip: [number, number, number, number], ui = 1, labels = true) => {
+  const g = p.g; g.save(); g.beginPath(); g.rect(clip[0], clip[1], clip[2] - clip[0], clip[3] - clip[1]); g.clip();
+  g.fillStyle = "#e0d8c4"; g.fillRect(clip[0], clip[1], clip[2] - clip[0], clip[3] - clip[1]);
+  for (const [x0, z0, x1, z1] of [[-330, 190, -240, 280], [110, 170, 190, 290], [-200, -300, -120, -150]]) {
+    const [a, b] = toC(t, x0, z0), [c, d] = toC(t, x1, z1); g.fillStyle = "#bfdca8"; g.beginPath(); g.roundRect(a, b, c - a, d - b, 14 * ui); g.fill();
+  }
+  { const [a, b] = toC(t, -300, -40), [c, d] = toC(t, -250, 10); g.fillStyle = "#a9d4f2"; g.beginPath(); g.ellipse((a + c) / 2, (b + d) / 2, (c - a) / 2, (d - b) / 2, 0, 0, Math.PI * 2); g.fill(); }
+  for (const [x0, z0, x1, z1] of SIDEWALK) rectW(g, t, x0, z0, x1, z1, "#efe9dc");
+  for (const r of BLOCKS) rectW(g, t, ...r, "#cdbfa3", Math.max(1, 1.2 * ui));
+  for (const [x0, z0, x1, z1, col] of BUILT) rectW(g, t, x0, z0, x1, z1, col, Math.max(1.5, 2 * ui));
+  for (const r of ROADS) strokeW(g, t, r.pts, r.w * t.s + 6 * ui, "#9c8f76", "butt");
+  for (const r of ROADS) strokeW(g, t, r.pts, r.w * t.s, "#ffffff", "butt");
+  if (t.s > 8) for (const r of ROADS.slice(0, 2)) { g.setLineDash([3 * t.s, 3 * t.s]); strokeW(g, t, r.pts, Math.max(1, 0.16 * t.s), "#e7c34a", "butt"); g.setLineDash([]); }
+  if (labels) for (const st of STORES) { // store markers: brand dot + name
+    const [cx, cy] = toC(t, st.x, st.z);
+    if (cx < clip[0] - 80 || cx > clip[2] + 80 || cy < clip[1] - 80 || cy > clip[3] + 80) continue;
+    g.fillStyle = "#ffffff"; g.beginPath(); g.arc(cx, cy, 15 * ui, 0, Math.PI * 2); g.fill();
+    g.fillStyle = st.col; g.beginPath(); g.arc(cx, cy, 11 * ui, 0, Math.PI * 2); g.fill();
+    g.fillStyle = "#ffffff"; g.beginPath(); g.arc(cx, cy, 4 * ui, 0, Math.PI * 2); g.fill();
+    g.font = `700 ${Math.round(19 * ui)}px Arial, sans-serif`; g.textAlign = "center"; g.textBaseline = "top";
+    g.lineWidth = 5 * ui; g.strokeStyle = "rgba(255,255,255,0.9)"; g.strokeText(st.name, cx, cy + 18 * ui); g.fillStyle = "#3a3542"; g.fillText(st.name, cx, cy + 18 * ui);
+  }
   g.restore();
-  p.poly(rr(230, 30, 370, 52, 11), "#2b2933", 0);
 };
-/** the driver's route sheet on her clipboard (600 x 1100); tick1 marks the store, tick2 circles its time */
+/** red pin dropping onto a map point (k 0..1 drop with bounce), optional chip text above it */
+export const mapPin = (p: Pen, x: number, y: number, k: number, ui: number, chip = "", cards = false, xr: [number, number] = [-1e9, 1e9]) => {
+  if (k <= 0) return;
+  const g = p.g, drop = k < 0.6 ? (1 - k / 0.6) ** 2 * -120 * ui : -10 * ui * Math.sin(((k - 0.6) / 0.4) * Math.PI) * (1 - (k - 0.6) / 0.4), s = ui * 1.15;
+  g.save(); g.globalAlpha = Math.min(1, k * 3);
+  g.fillStyle = "rgba(0,0,0,0.18)"; g.beginPath(); g.ellipse(x, y, 12 * s, 5 * s, 0, 0, Math.PI * 2); g.fill();
+  g.translate(x, y + drop);
+  g.beginPath(); g.moveTo(0, 0); g.bezierCurveTo(-8 * s, -18 * s, -24 * s, -30 * s, -24 * s, -48 * s); g.arc(0, -48 * s, 24 * s, Math.PI, 0); g.bezierCurveTo(24 * s, -30 * s, 8 * s, -18 * s, 0, 0);
+  g.fillStyle = "#e2433b"; g.fill(); g.lineWidth = 4 * s; g.strokeStyle = "#7a1f1a"; g.stroke();
+  if (cards) { g.fillStyle = "#ffd23f"; g.fillRect(-9 * s, -62 * s, 18 * s, 26 * s); g.strokeStyle = "#7a1f1a"; g.lineWidth = 2.5 * s; g.strokeRect(-9 * s, -62 * s, 18 * s, 26 * s); g.fillStyle = "#e2433b"; g.beginPath(); g.arc(0, -49 * s, 5 * s, 0, Math.PI * 2); g.fill(); }
+  else { g.fillStyle = "#ffffff"; g.beginPath(); g.arc(0, -48 * s, 9 * s, 0, Math.PI * 2); g.fill(); }
+  if (chip && k > 0.7) {
+    const a = Math.min(1, (k - 0.7) / 0.3); g.globalAlpha = a; g.font = `800 ${Math.round(24 * ui)}px Arial, sans-serif`;
+    const w = g.measureText(chip).width + 30 * ui, cx = Math.min(xr[1] - 12 - w / 2, Math.max(xr[0] + 12 + w / 2, x)) - x; // kept on the screen
+    g.fillStyle = "#ffffff"; g.beginPath(); g.roundRect(cx - w / 2, -118 * s, w, 44 * ui, 22 * ui); g.fill();
+    g.strokeStyle = "#2a2733"; g.lineWidth = 3 * ui; g.stroke(); g.fillStyle = "#2a2733"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(chip, cx, -118 * s + 22 * ui);
+  }
+  g.restore();
+};
+/** the tracker dot: green with a pulse ring on each blink */
+export const mapDot = (p: Pen, x: number, y: number, blink: boolean, ui: number) => {
+  const g = p.g;
+  if (blink) { g.fillStyle = "rgba(46,204,85,0.28)"; g.beginPath(); g.arc(x, y, 34 * ui, 0, Math.PI * 2); g.fill(); }
+  g.fillStyle = "#ffffff"; g.beginPath(); g.arc(x, y, 18 * ui, 0, Math.PI * 2); g.fill();
+  g.fillStyle = blink ? "#2ee85e" : "#22b04c"; g.beginPath(); g.arc(x, y, 13 * ui, 0, Math.PI * 2); g.fill();
+};
+export type PovMap = {
+  t: MapT; dot: W2 | null; blink: boolean; trail: number; route?: number; // trail: metres of ROUTE already driven (green history); route: metres of the blue route drawn
+  pins: { d: number; k: number; chip: string; cards?: boolean }[]; time: string; tag: string; finger?: number; // finger: metres along ROUTE under his fingertip
+};
+const SKIN_K = "#f2c4a4", CUFF = "#8a6a4a";
+/** POV: his own phone in his two hands over his lap (720 x 1280 canvas, 2000 px per metre; phone 0.82 scale at (114, 243)).
+ *  We look over his hands at the screen, so the screen faces us and his hands frame it: the only way a held screen is ever seen. */
+export const PHONE_O = { x: 114, y: 243, s: 0.82 };
+export const SCREEN: [number, number, number, number] = [PHONE_O.x + 44 * PHONE_O.s, PHONE_O.y + 70 * PHONE_O.s, PHONE_O.x + 556 * PHONE_O.s, PHONE_O.y + 1030 * PHONE_O.s];
+export const povPhone = (p: Pen, m: PovMap) => {
+  const g = p.g, O = PHONE_O;
+  // his lap below, soft (out of focus): cardigan fronts, shirt, trousers
+  g.save(); g.filter = "blur(7px)";
+  g.fillStyle = "#5b5f6e"; g.fillRect(-20, -20, 760, 1320);
+  g.fillStyle = "#6a6e7e"; for (const cx of [210, 510]) { g.beginPath(); g.ellipse(cx, 1000, 190, 420, 0, 0, Math.PI * 2); g.fill(); }
+  g.fillStyle = "#e9e1cf"; g.fillRect(250, -20, 220, 420);
+  g.fillStyle = CUFF; g.beginPath(); g.moveTo(-20, -20); g.lineTo(300, -20); g.lineTo(240, 470); g.lineTo(-20, 560); g.fill();
+  g.beginPath(); g.moveTo(740, -20); g.lineTo(420, -20); g.lineTo(480, 470); g.lineTo(740, 560); g.fill();
+  g.fillStyle = "#6e5236"; for (const y of [90, 230, 370]) { g.beginPath(); g.arc(262, y, 11, 0, Math.PI * 2); g.fill(); }
+  g.filter = "none"; g.restore();
+  const hand = (sx: number, point: boolean) => { // palm + cuff behind the phone; sx = -1 left, 1 right
+    const cx = 360 + sx * 190;
+    p.poly(rr(cx - 120, 1190, cx + 120, 1320, 30), CUFF, 6);
+    for (let i = 0; i < 6; i++) p.stroke([[cx - 100 + i * 40, 1200], [cx - 100 + i * 40, 1290]], 3, "#6e5236");
+    if (!point) p.poly([[cx - sx * 110, 1196], [cx - sx * 125, 1060], [cx - sx * 70, 985], [cx + sx * 120, 980], [cx + sx * 115, 1196]].map(([x, y]) => [x, y] as P2), SKIN_K, 6);
+  };
+  hand(-1, false); hand(1, m.finger !== undefined);
+  // the phone
+  g.save(); g.translate(O.x, O.y); g.scale(O.s, O.s);
+  p.poly(rr(10, 10, 590, 1090, 70), "#1d1b22", 10);
+  g.restore();
+  const [s0, s1, s2, s3] = SCREEN;
+  g.save(); g.beginPath(); g.roundRect(s0, s1, s2 - s0, s3 - s1, 26); g.clip();
+  townMapLayer(p, m.t, [s0, s1, s2, s3], 1);
+  if (m.route !== undefined) strokeW(g, m.t, partD(ROUTE, m.route), 12, "#3d7fe0");
+  if (m.trail > 0) { strokeW(g, m.t, partD(ROUTE, m.trail), 13, "rgba(255,255,255,0.9)"); strokeW(g, m.t, partD(ROUTE, m.trail), 7, "#2ecc55"); }
+  for (const pn of m.pins) { const [x, z] = alongD(ROUTE, pn.d), [cx, cy] = toC(m.t, x, z); mapPin(p, cx, cy, pn.k, 1, pn.chip, pn.cards, [s0, s2]); }
+  if (m.dot) { const [cx, cy] = toC(m.t, m.dot[0], m.dot[1]); mapDot(p, cx, cy, m.blink, 1); }
+  // status bar + app bar
+  g.fillStyle = "rgba(255,255,255,0.92)"; g.fillRect(s0, s1, s2 - s0, 46);
+  g.font = "800 26px Arial, sans-serif"; g.textBaseline = "middle"; g.textAlign = "left"; g.fillStyle = "#1d1b22"; g.fillText(m.time, s0 + 26, s1 + 24);
+  g.fillRect(s2 - 70, s1 + 15, 40, 18); g.fillRect(s2 - 29, s1 + 20, 4, 8);
+  for (let i = 0; i < 4; i++) g.fillRect(s2 - 128 + i * 11, s1 + 33 - i * 5, 7, 5 + i * 5);
+  g.font = "800 24px Arial, sans-serif"; const tw = g.measureText(m.tag).width + 58;
+  const ty = s3 - 70;
+  g.fillStyle = "#ffffff"; g.beginPath(); g.roundRect(s0 + 18, ty, tw, 44, 22); g.fill(); g.strokeStyle = "#2a2733"; g.lineWidth = 3; g.stroke();
+  g.fillStyle = m.blink ? "#2ee85e" : "#22b04c"; g.beginPath(); g.arc(s0 + 42, ty + 22, 9, 0, Math.PI * 2); g.fill();
+  g.fillStyle = "#2a2733"; g.textAlign = "left"; g.fillText(m.tag, s0 + 60, ty + 23);
+  g.restore();
+  g.save(); g.translate(O.x, O.y); g.scale(O.s, O.s); p.poly(rr(230, 30, 370, 52, 11), "#2b2933", 0); g.restore();
+  // fingertips wrapped round the phone's sides, thumbs on the bottom corners
+  const tips = (sx: number) => {
+    const ex = sx < 0 ? O.x + 6 : O.x + 590 * O.s - 6;
+    for (const y of [760, 845, 925]) p.ell(ex, y, 24, 34, SKIN_K, 5);
+    p.ell(sx < 0 ? O.x + 70 : O.x + 590 * O.s - 70, O.y + 1060 * O.s, 46, 30, SKIN_K, 5, 0, 360, sx * -0.5);
+  };
+  tips(-1);
+  if (m.finger === undefined) tips(1);
+  else { // his right forefinger on the screen, tracing her route
+    const [x, z] = alongD(ROUTE, m.finger), [fx, fy0] = toC(m.t, x, z), fy = fy0 + 14;
+    const bx = fx + 170, by = 1330, dx = fx - bx, dy = fy - by, L = Math.hypot(dx, dy), nx = -dy / L, ny = dx / L, w = 30;
+    p.poly(rr(bx - 110, 1150, bx + 110, 1340, 60), SKIN_K, 6);
+    p.poly([[bx + nx * w, by + ny * w], [fx + nx * w * 0.9, fy + ny * w * 0.9], [fx - nx * w * 0.9, fy - ny * w * 0.9], [bx - nx * w, by - ny * w]], SKIN_K, 6);
+    p.ell(fx, fy, w * 0.9, w * 0.9, SKIN_K, 6);
+    p.ell(fx - (dx / L) * 4, fy - (dy / L) * 4, 15, 19, "#fbe3d2", 3, 0, 360, Math.atan2(dy, dx) + Math.PI / 2);
+    for (const u of [0.38, 0.62]) { const cx = fx - dx * u * 0.55, cy = fy - dy * u * 0.55; p.stroke([[cx + nx * 18, cy + ny * 18], [cx - nx * 18, cy - ny * 18]], 3, "#b98a70"); }
+  }
+};
+/** full-bleed town map (720 x 1280) for the last shot: the town seen from the crane, now a map; the dot is him */
+export const townMapFull = (p: Pen, t: MapT, dot: W2, blink: boolean) => {
+  townMapLayer(p, t, [0, 0, 720, 1280], 1.4);
+  const [cx, cy] = toC(t, dot[0], dot[1]); mapDot(p, cx, cy, blink, 1.4);
+};
+/** the driver's route sheet on her clipboard (600 x 1100); tick1 marks the store, tick2 circles its time.
+ *  The little map is the same town map at the same place on the card as on his phone (POV canvas - (60, 90)), so the line matches */
+export const ROUTE_T: MapT = { cx: -80, cz: 8, s: 1.3, ax: 340, ay: 790 }; // in POV canvas px
 export const routeSheet = (p: Pen, tick1: number, tick2: number) => {
   p.poly(rr(20, 40, 580, 1080, 26), "#b98a52", 10);
   p.poly(rr(60, 110, 540, 1050, 8), "#fbf7ec", 6);
   p.poly(rr(220, 20, 380, 120, 18), "#9aa0aa", 8);
-  text(p, "LỘ TRÌNH GIAO HÀNG", 300, 170, 34, INK, INK, 0, 900);
+  text(p, "LỘ TRÌNH GIAO HÀNG", 300, 160, 32, INK, INK, 0, 900);
   const rows: [string, string][] = [["Walmart", "7:40"], ["Target", "9:10"], ["Walmart", "10:30"], ["Best Buy", "12:15"], ["Walmart", "13:50"]];
   rows.forEach(([n, t], i) => {
-    const y = 250 + i * 66;
-    text(p, n, 100, y, 34, "#2a2733", INK, 0, 700, "left"); text(p, t, 500, y, 34, "#2a2733", INK, 0, 700, "right");
-    p.stroke([[100, y + 26], [500, y + 26]], 2, "#c9c2b0");
+    const y = 222 + i * 54;
+    text(p, n, 104, y, 30, "#2a2733", INK, 0, 700, "left"); text(p, t, 500, y, 30, "#2a2733", INK, 0, 700, "right");
+    p.stroke([[100, y + 22], [500, y + 22]], 2, "#c9c2b0");
   });
-  if (tick1 > 0) { const k = Math.min(1, tick1); p.line([[70, 250], [70 + 10 * k, 262], [70 + 26 * k, 232 - 6 * k]], "#3d7fe0", 7); }
-  if (tick2 > 0) { const g = p.g; g.save(); g.strokeStyle = "#e2433b"; g.lineWidth = 6; g.beginPath(); const [cx, cy] = p.P(462, 250); g.ellipse(cx, cy, 58, 30, 0, 0, Math.PI * 2 * Math.min(1, tick2)); g.stroke(); g.restore(); }
-  // the same route drawn as a little map: its line matches the phone's route (the match dissolve)
-  const g = p.g; g.save(); g.beginPath(); g.rect(60, 590, 480, 460); g.clip();
-  for (const pts of [[[40, 980], [560, 980]], [[300, 1040], [300, 760], [560, 760]], [[250, 430], [470, 430], [470, 760]], [[250, 430], [250, 60]]] as [number, number][][]) p.line(pts.map(([x, y]) => [x, 590 + (y - 200) * 0.55] as [number, number]), "#d8cfbb", 10);
-  p.line(ROUTE_B.map(([x, y]) => [x, 590 + (y - 200) * 0.55] as [number, number]), "#3d7fe0", 9);
-  g.restore();
+  if (tick1 > 0) { const k = Math.min(1, tick1); p.line([[72, 276], [72 + 10 * k, 288], [72 + 26 * k, 258 - 6 * k]], "#3d7fe0", 7); }
+  if (tick2 > 0) { const g = p.g; g.save(); g.strokeStyle = "#e2433b"; g.lineWidth = 6; g.beginPath(); g.ellipse(466, 276, 54, 26, 0, 0, Math.PI * 2 * Math.min(1, tick2)); g.stroke(); g.restore(); }
+  const t: MapT = { ...ROUTE_T, ax: ROUTE_T.ax - 60, ay: ROUTE_T.ay - 90 };
+  const g = p.g; g.save(); g.globalAlpha = 0.85; townMapLayer(p, t, [70, 510, 530, 1040], 0.8, true); g.restore();
+  strokeW(g, t, ROUTE, 10, "#3d7fe0");
+  g.strokeStyle = "#8a7f6a"; g.lineWidth = 3; g.strokeRect(70, 510, 460, 530);
 };
 /** store temperature board (512 x 256): amber digits; red and blinking once it runs hot */
 export const tempBoard = (p: Pen, deg: number, on: boolean) => {

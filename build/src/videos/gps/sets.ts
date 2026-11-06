@@ -541,7 +541,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   const lw = lam("livWall", () => ({ map: rep(stucco("liv", "#e9cf9c"), 1, 1) }));
   box(b, lw, -5, 0, -3.2, 5, 3.2, -3, 4); box(b, lw, -5.2, 0, -3.2, -5, 3.2, 5, 4);
   box(b, lam("livWain", () => ({ color: "#7a4f33" })), -5, 0, -2.99, 5, 0.9, -2.93);
-  box(b, M.white(), 1.0, 0.95, -3.0, 2.8, 2.35, -2.94); box(b, lam("dusk", () => ({ color: "#3a4f8a" })), 1.1, 1.05, -3.02, 2.7, 2.25, -2.95);
+  box(b, M.white(), 1.0, 0.95, -3.0, 2.8, 2.35, -2.94); box(b, lam("dusk", () => ({ color: "#9cc8ec" })), 1.1, 1.05, -3.02, 2.7, 2.25, -2.95);
   box(b, M.white(), 1.87, 1.05, -2.99, 1.93, 2.25, -2.93);
   const chairM = lam("armchair", () => ({ color: "#4f7a5a" }));
   box(b, chairM, -0.5, 0.18, -1.6, 0.5, 0.45, -0.85); box(b, chairM, -0.5, 0.45, -1.62, 0.5, 1.25, -1.38);
