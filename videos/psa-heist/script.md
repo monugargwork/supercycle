@@ -1,0 +1,5 @@
+# PSA truck heist: approved script (Vietnamese)
+
+Voiced by ElevenLabs, 62.8 s. Approved before the director skill existed, so it follows the news order, not the hook shape.
+
+Ngày 13 tháng 10, tại Santa Ana, California, một chiếc xe tải FedEx đỗ bên ngoài cơ sở chấm điểm của PSA. Tài xế rời đi. Kẻ trộm tháo khóa thùng xe và mang theo hai pallet hàng chứa những lá bài vừa được chấm điểm đang trên đường trở về tay chủ nhân. Theo danh sách PSA công bố, có 6.451 món bị đánh cắp, gần 3.000 trong số đó là Pokémon. Cảnh sát ước tính thiệt hại gần 1 triệu đô la, và FBI đã vào cuộc. Nhưng thứ thật sự bảo vệ những lá bài này không phải ổ khóa. Mỗi slab đều mang một số chứng nhận riêng, được lưu trong cơ sở dữ liệu của PSA. Ngay sau vụ trộm, PSA vô hiệu hóa toàn bộ những con số đó và gửi danh sách đến các sàn giao dịch và nhà đấu giá. Đem slab đi bán, con số sẽ tố cáo nó. Phá vỏ ra, điểm chấm chính thức cũng biến mất theo. Giao dịch riêng tư vẫn có thể lọt qua, nên trước khi mua, hãy luôn kiểm tra số chứng nhận. Bởi với người sưu tầm, điều làm nên một lá bài không chỉ là tấm bìa, mà là hồ sơ đi theo nó. Ai đã xác thực, và nó đã đi qua những đâu.
