@@ -1,0 +1,5 @@
+# Pokémon GPS tracker: script (Vietnamese)
+
+Draft v1, 239 tiếng (~61 s). Waiting for approval.
+
+Một ông cụ bảy mươi hai tuổi lén gắn máy định vị lên xe của một nữ tài xế chở thẻ Pokémon. Ở Mỹ, cơn sốt Pokémon đang nóng chưa từng thấy. Người ta cắm trại trước cửa siêu thị từ nửa đêm, cãi nhau giành từng chỗ xếp hàng, giành từng hộp vừa lên kệ. Ông Kent Kubasta ở Ohio có cách khác. Một chiếc điện thoại, một chấm xanh nhỏ đang bò trên bản đồ. Chấm xanh rẽ trái, ông biết. Chấm xanh dừng ở cửa hàng nào, ông cũng biết. Cho đến ngày mười tám tháng sáu, khi cô tài xế dừng xe giao hàng ở một siêu thị Walmart, và phát hiện một chiếc hộp nhỏ lạ gắn trên xe mình. Cô mang nó thẳng đến cảnh sát. Ông Kubasta thừa nhận hết. Khoan, sao một ông cụ lại đi bám theo người chở thẻ bài? Hóa ra, giờ hàng về luôn là bí mật. Người duy nhất biết chắc thẻ sẽ đến đâu, lúc nào, là người chở chúng tới. Ông muốn biết cô đi đâu, để biết thẻ Pokémon về đâu. Tòa án tuyên ông có tội dùng thiết bị theo dõi trái phép. Một năm quản chế, năm trăm đô tiền phạt, cấm liên lạc với cô. Và trong chín mươi ngày đầu, chính ông phải đeo một chiếc máy định vị. Lần này, chấm xanh nhỏ trên bản đồ, là ông.
