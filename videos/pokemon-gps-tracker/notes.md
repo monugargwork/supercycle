@@ -10,3 +10,8 @@
 - Shot 8: his view, the dot stops at Target then Walmart; pins drop with "Target · 9:10" / "Walmart · 10:30"; phone clock races (time-lapse). The wall clock and the phone share one clock (story.ts clockMin), set to the morning so it agrees with her route sheet (was 22:40 at night, deliveries in the day: contradiction). Window now daylight. He puts his tea on the side table before lifting the phone.
 - Shot 15: her route sheet's line matches the recorded route on his phone (same map, same place on the card, same camera push); his forefinger traces it to the last store, pin "Thẻ về đây".
 - Shot 20: no phone at the end; the crane's view becomes a map of the same street and zooms out until he is one small green dot.
+
+## 2026-11-06 · note 3: "hands too detailed; these are stickman characters, lines for arms and legs, nothing more"
+- Taste: the cast are stick figures. Arms and legs are plain lines; no hands, no fingers, ever, even in close POV shots.
+- POV phone shots: the hands, fingertips, thumbs and cuffs are gone. Two plain stick-arm lines (his arm colour) come up from below and end on the phone's sides; in shot 15 one arm line's tip traces the route.
+- Seated legs: new toon option `chair` (seat height in head-heights). Thighs short toward camera, knees at the seat edge, shins straight down, feet on the floor. Kub in the armchair uses chair 1.1 with his card on the floor at the seat front (Lv(0, 0, -0.8)).

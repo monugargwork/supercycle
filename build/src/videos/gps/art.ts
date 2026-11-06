@@ -466,29 +466,25 @@ export type PovMap = {
   t: MapT; dot: W2 | null; blink: boolean; trail: number; route?: number; // trail: metres of ROUTE already driven (green history); route: metres of the blue route drawn
   pins: { d: number; k: number; chip: string; cards?: boolean }[]; time: string; tag: string; finger?: number; // finger: metres along ROUTE under his fingertip
 };
-const SKIN_K = "#f2c4a4", CUFF = "#8a6a4a";
-/** POV: his own phone in his two hands over his lap (720 x 1280 canvas, 2000 px per metre; phone 0.82 scale at (114, 243)).
- *  We look over his hands at the screen, so the screen faces us and his hands frame it: the only way a held screen is ever seen. */
+const ARM_K = "#5a4733", BODY_K = "#8a6a4a"; // his stick arm (jacket mixed with ink, as on his card) and cardigan
+/** POV: his own phone held up in front of him (720 x 1280 canvas, 2000 px per metre; phone 0.82 scale at (114, 243)). We look
+ *  past the phone at nothing but the screen side, the only side a held screen is seen from. He is a stick figure: his arms are
+ *  two plain lines that end on the phone's edges (no hands, no fingers), his round cardigan body soft below. */
 export const PHONE_O = { x: 114, y: 243, s: 0.82 };
 export const SCREEN: [number, number, number, number] = [PHONE_O.x + 44 * PHONE_O.s, PHONE_O.y + 70 * PHONE_O.s, PHONE_O.x + 556 * PHONE_O.s, PHONE_O.y + 1030 * PHONE_O.s];
+const stickArm = (p: Pen, pts: P2[]) => { const ol = p.ol; p.ol = 5; p.line(pts, ARM_K, 30); p.ol = ol; };
 export const povPhone = (p: Pen, m: PovMap) => {
   const g = p.g, O = PHONE_O;
-  // his lap below, soft (out of focus): cardigan fronts, shirt, trousers
-  g.save(); g.filter = "blur(7px)";
-  g.fillStyle = "#5b5f6e"; g.fillRect(-20, -20, 760, 1320);
-  g.fillStyle = "#6a6e7e"; for (const cx of [210, 510]) { g.beginPath(); g.ellipse(cx, 1000, 190, 420, 0, 0, Math.PI * 2); g.fill(); }
-  g.fillStyle = "#e9e1cf"; g.fillRect(250, -20, 220, 420);
-  g.fillStyle = CUFF; g.beginPath(); g.moveTo(-20, -20); g.lineTo(300, -20); g.lineTo(240, 470); g.lineTo(-20, 560); g.fill();
-  g.beginPath(); g.moveTo(740, -20); g.lineTo(420, -20); g.lineTo(480, 470); g.lineTo(740, 560); g.fill();
-  g.fillStyle = "#6e5236"; for (const y of [90, 230, 370]) { g.beginPath(); g.arc(262, y, 11, 0, Math.PI * 2); g.fill(); }
+  // below: the rug, and his round cardigan body with its buttons, out of focus
+  g.save(); g.filter = "blur(8px)";
+  g.fillStyle = "#b8483e"; g.fillRect(-20, -20, 760, 1320);
+  g.fillStyle = BODY_K; g.beginPath(); g.ellipse(360, 520, 470, 820, 0, 0, Math.PI * 2); g.fill();
+  g.fillStyle = "#6e5236"; for (const y of [160, 420, 680, 940]) { g.beginPath(); g.arc(360, y, 16, 0, Math.PI * 2); g.fill(); }
   g.filter = "none"; g.restore();
-  const hand = (sx: number, point: boolean) => { // palm + cuff behind the phone; sx = -1 left, 1 right
-    const cx = 360 + sx * 190;
-    p.poly(rr(cx - 120, 1190, cx + 120, 1320, 30), CUFF, 6);
-    for (let i = 0; i < 6; i++) p.stroke([[cx - 100 + i * 40, 1200], [cx - 100 + i * 40, 1290]], 3, "#6e5236");
-    if (!point) p.poly([[cx - sx * 110, 1196], [cx - sx * 125, 1060], [cx - sx * 70, 985], [cx + sx * 120, 980], [cx + sx * 115, 1196]].map(([x, y]) => [x, y] as P2), SKIN_K, 6);
-  };
-  hand(-1, false); hand(1, m.finger !== undefined);
+  const right = m.finger === undefined;
+  // left arm (and the right one when it isn't pointing) come up from below and end on the phone's sides
+  stickArm(p, [[40, 1330], [70, 1120], [O.x + 8, 900]]);
+  if (right) stickArm(p, [[680, 1330], [650, 1120], [O.x + 590 * O.s - 8, 900]]);
   // the phone
   g.save(); g.translate(O.x, O.y); g.scale(O.s, O.s);
   p.poly(rr(10, 10, 590, 1090, 70), "#1d1b22", 10);
@@ -500,7 +496,7 @@ export const povPhone = (p: Pen, m: PovMap) => {
   if (m.trail > 0) { strokeW(g, m.t, partD(ROUTE, m.trail), 13, "rgba(255,255,255,0.9)"); strokeW(g, m.t, partD(ROUTE, m.trail), 7, "#2ecc55"); }
   for (const pn of m.pins) { const [x, z] = alongD(ROUTE, pn.d), [cx, cy] = toC(m.t, x, z); mapPin(p, cx, cy, pn.k, 1, pn.chip, pn.cards, [s0, s2]); }
   if (m.dot) { const [cx, cy] = toC(m.t, m.dot[0], m.dot[1]); mapDot(p, cx, cy, m.blink, 1); }
-  // status bar + app bar
+  // status bar + app tag
   g.fillStyle = "rgba(255,255,255,0.92)"; g.fillRect(s0, s1, s2 - s0, 46);
   g.font = "800 26px Arial, sans-serif"; g.textBaseline = "middle"; g.textAlign = "left"; g.fillStyle = "#1d1b22"; g.fillText(m.time, s0 + 26, s1 + 24);
   g.fillRect(s2 - 70, s1 + 15, 40, 18); g.fillRect(s2 - 29, s1 + 20, 4, 8);
@@ -512,22 +508,9 @@ export const povPhone = (p: Pen, m: PovMap) => {
   g.fillStyle = "#2a2733"; g.textAlign = "left"; g.fillText(m.tag, s0 + 60, ty + 23);
   g.restore();
   g.save(); g.translate(O.x, O.y); g.scale(O.s, O.s); p.poly(rr(230, 30, 370, 52, 11), "#2b2933", 0); g.restore();
-  // fingertips wrapped round the phone's sides, thumbs on the bottom corners
-  const tips = (sx: number) => {
-    const ex = sx < 0 ? O.x + 6 : O.x + 590 * O.s - 6;
-    for (const y of [760, 845, 925]) p.ell(ex, y, 24, 34, SKIN_K, 5);
-    p.ell(sx < 0 ? O.x + 70 : O.x + 590 * O.s - 70, O.y + 1060 * O.s, 46, 30, SKIN_K, 5, 0, 360, sx * -0.5);
-  };
-  tips(-1);
-  if (m.finger === undefined) tips(1);
-  else { // his right forefinger on the screen, tracing her route
-    const [x, z] = alongD(ROUTE, m.finger), [fx, fy0] = toC(m.t, x, z), fy = fy0 + 14;
-    const bx = fx + 170, by = 1330, dx = fx - bx, dy = fy - by, L = Math.hypot(dx, dy), nx = -dy / L, ny = dx / L, w = 30;
-    p.poly(rr(bx - 110, 1150, bx + 110, 1340, 60), SKIN_K, 6);
-    p.poly([[bx + nx * w, by + ny * w], [fx + nx * w * 0.9, fy + ny * w * 0.9], [fx - nx * w * 0.9, fy - ny * w * 0.9], [bx - nx * w, by - ny * w]], SKIN_K, 6);
-    p.ell(fx, fy, w * 0.9, w * 0.9, SKIN_K, 6);
-    p.ell(fx - (dx / L) * 4, fy - (dy / L) * 4, 15, 19, "#fbe3d2", 3, 0, 360, Math.atan2(dy, dx) + Math.PI / 2);
-    for (const u of [0.38, 0.62]) { const cx = fx - dx * u * 0.55, cy = fy - dy * u * 0.55; p.stroke([[cx + nx * 18, cy + ny * 18], [cx - nx * 18, cy - ny * 18]], 3, "#b98a70"); }
+  if (!right) { // his right arm reaches in and its tip traces her route on the screen
+    const [x, z] = alongD(ROUTE, m.finger!), [fx, fy] = toC(m.t, x, z);
+    stickArm(p, [[fx + 230, 1330], [fx + 120, 1080], [fx, fy + 6]]);
   }
 };
 /** full-bleed town map (720 x 1280) for the last shot: the town seen from the crane, now a map; the dot is him */

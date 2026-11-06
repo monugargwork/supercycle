@@ -254,8 +254,8 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
     case 6: { // calm in his armchair: tea; he puts the cup on the side table and lifts the phone (its back to us, screen to him);
       // then his own view: the screen between his hands, the dot crawling along the main road; the dive into the map
       if (f < POV6) {
-        const [x, , z] = Lv(0, 0, -1.15), hasCup = f < PHONE_UP - 6;
-        front(out, cam, "kub", x, 0.45, z, { mode: "sit", expr: f >= SIP && f < SIP + 14 ? "relief" : hasCup ? "smile_closed" : "smile", facing: 1, prop: ["hold", hasCup ? "teacup" : "phoneBack"], headTilt: f >= SIP && f < SIP + 14 ? -0.12 : hasCup ? 0 : 0.08 }, f, [SIP]);
+        const [x, , z] = Lv(0, 0, -0.8), hasCup = f < PHONE_UP - 6;
+        front(out, cam, "kub", x, 0, z, { mode: "sit", chair: 1.1, expr: f >= SIP && f < SIP + 14 ? "relief" : hasCup ? "smile_closed" : "smile", facing: 1, prop: ["hold", hasCup ? "teacup" : "phoneBack"], headTilt: f >= SIP && f < SIP + 14 ? -0.12 : hasCup ? 0 : 0.08 }, f, [SIP]);
         if (!hasCup) card(out, "cupDown", 160, 140, (p) => { p.poly(art.rr(30, 40, 120, 120, 18), "#fbf7ec", 6); p.ell(128, 74, 18, 22, null, 6); p.ell(75, 124, 60, 10, "#e9e1cf", 5); }, ...Lv(0.95, 0.6, -1.0), 0.12, 0.105);
       } else {
         const u = smooth((f - 690) / 38), d = vanD(f), dot = art.alongD(art.ROUTE, d), s0 = 4, s1 = 22, s = s0 * (s1 / s0) ** u;
@@ -271,8 +271,8 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
     }
     case 8: { // the knowing nod; his view: the dot stops at Target, then Walmart, his phone clock racing; back on him, the clock moved on
       if (f < POV8[0] || f >= POV8[1]) {
-        const [x, , z] = Lv(0, 0, -1.15), nod = (f0: number) => (f >= f0 && f < f0 + 10 ? -0.14 * Math.sin(((f - f0) / 10) * Math.PI) : 0);
-        front(out, cam, "kub", x, 0.45, z, { mode: "sit", expr: "smile", facing: 1, prop: ["hold", "phoneBack"], headTilt: 0.08 + nod(NOD) + nod(NOD2) }, f);
+        const [x, , z] = Lv(0, 0, -0.8), nod = (f0: number) => (f >= f0 && f < f0 + 10 ? -0.14 * Math.sin(((f - f0) / 10) * Math.PI) : 0);
+        front(out, cam, "kub", x, 0, z, { mode: "sit", chair: 1.1, expr: "smile", facing: 1, prop: ["hold", "phoneBack"], headTilt: 0.08 + nod(NOD) + nod(NOD2) }, f);
         card(out, "cupDown", 160, 140, (p) => { p.poly(art.rr(30, 40, 120, 120, 18), "#fbf7ec", 6); p.ell(128, 74, 18, 22, null, 6); p.ell(75, 124, 60, 10, "#e9e1cf", 5); }, ...Lv(0.95, 0.6, -1.0), 0.12, 0.105);
       } else {
         const d = vanD(f), pk = (f0: number) => clamp01((f - f0) / 12);
