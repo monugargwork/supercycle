@@ -89,9 +89,9 @@ export type Light = "day" | "golden";
 export type Place = "street" | "home" | "living" | "shop" | "police" | "court" | "office" | "alley";
 export type ShotDef = { id: number; a: number; b: number; light: Light; place: Place; sunAz?: number; sunEl?: number };
 export const SHOTS: ShotDef[] = [
-  { id: 1, a: 0, b: 178, light: "golden", place: "street", sunAz: 140, sunEl: 10 },
-  { id: 2, a: 178, b: 290, light: "golden", place: "street", sunAz: 140, sunEl: 10 },
-  { id: 3, a: 290, b: 440, light: "golden", place: "street", sunAz: 140, sunEl: 10 },
+  { id: 1, a: 0, b: 178, light: "golden", place: "street", sunAz: 140, sunEl: 22 },
+  { id: 2, a: 178, b: 290, light: "golden", place: "street", sunAz: 140, sunEl: 22 },
+  { id: 3, a: 290, b: 440, light: "golden", place: "street", sunAz: 140, sunEl: 22 },
   { id: 4, a: 440, b: 495, light: "day", place: "shop", sunAz: 140, sunEl: 62 },
   { id: 5, a: 495, b: 560, light: "golden", place: "home", sunAz: 30, sunEl: 9 },
   { id: 6, a: 560, b: 728, light: "golden", place: "living", sunAz: 120, sunEl: 40 },
@@ -176,7 +176,7 @@ const CAMS: Record<number, Key[]> = {
   2: [{ f: 178, s: (f) => dolly([-12.5, 2.0, 3.0], [-4.5, 4.4, 12.0], pushK(f, 178, 0.0025, 0.006, 24), { fov: 50 }) }],
   // camping crowd, the chair tug-of-war, push toward the doors
   3: [
-    { f: 290, s: (f) => dolly([-1.0, 1.8, 3.6], [2.4, 1.0, 11.6], pushK(f, 290, 0.002), { fov: 48 }) },
+    { f: 290, s: (f) => dolly([-1.0, 1.8, 6.3], [2.4, 1.0, 11.6], pushK(f, 290, 0.002), { fov: 48 }) }, // outside the parked truck (was inside it)
     { f: 370, dur: 26, s: (f) => dolly([4.0, 1.45, 7.0], [6.9, 1.1, 10.7], pushK(f, 370, 0.0025, 0.006, 20), { fov: 40, roll: -0.03 }) },
     { f: 418, dur: 22, s: (f) => dolly([6.4, 1.7, 9.2], [7.1, 1.6, 13.4], pushK(f, 418, 0.004), { fov: 42 }) },
   ],
@@ -208,6 +208,8 @@ const CAMS: Record<number, Key[]> = {
     { f: 895, s: (f) => dolly([-12.5, 1.6, -4.5], [-1.0, 1.8, 4.0], pushK(f, 895, 0.0015), { fov: 46 }) },
     { f: 990, dur: 30, s: (f) => dolly([-7.4, 1.35, 1.2], [-3.7, 1.0, 4.6], pushK(f, 990, 0.002), { fov: 42 }) },
     { f: 1040, cut: true, s: (f) => dolly([-3.9, 0.22, 2.55], [-3.22, 0.45, 3.72], pushK(f, 1040, 0.003, 0.008, 20), { fov: 30 }) },
+    { f: FIND, cut: true, s: (f) => dolly([-6.1, 0.85, 4.7], [-3.7, 1.05, 4.1], pushK(f, FIND, 0.004, 0.008, 14), { fov: 34 }) }, // her face as she sees it
+    { f: 1076, cut: true, s: (f) => dolly([-3.9, 0.22, 2.55], [-3.22, 0.45, 3.72], pushK(f, 1040, 0.003), { fov: 30 }) },     // back on the box: her arm comes in
     { f: 1102, cut: true, s: (f) => dolly([-5.6, 0.85, 3.6], [-4.15, 1.45, 4.85], pushK(f, 1102, 0.004), { fov: 40, roll: 0.04 }) },
   ],
   // police desk: the slap
@@ -222,7 +224,7 @@ const CAMS: Record<number, Key[]> = {
   13: [{ f: 1385, s: (f) => dolly(S(-4.2, 1.55, -1.6), S(-7.2, 1.0, -4.0), pushK(f, 1385, 0.003, 0.006, 20), { fov: 42 }) }],
   // the driver's route sheet, top-down macro; she ticks a store and its time
   14: [
-    { f: 1485, s: (f) => dolly([3.0, 1.7, -0.6], [4.6, 1.3, 4.9], pushK(f, 1485, 0.002), { fov: 42 }) },
+    { f: 1485, s: (f) => dolly([5.2, 1.6, 8.8], [4.6, 1.35, 5.0], pushK(f, 1485, 0.002), { fov: 42 }) }, // in front of her (was inside the truck)
     { f: 1512, cut: true, s: (f) => dolly(I(0, 0.95, 0.02), I(0, 0, 0), pushK(f, 1512, 0.0008), { fov: 34 }) },
   ],
   // match: the route line becomes the line on his phone map
@@ -235,7 +237,7 @@ const CAMS: Record<number, Key[]> = {
   17: [{ f: 1846, cut: true, s: (f) => dolly(C(0.95, 3.0, -2.6), C(0.95, 1.5, -3.8), pushK(f, 1846, 0.0012), { fov: 50 }) }],
   // the ankle monitor: low insert, then up to his face
   18: [
-    { f: 1968, s: (f) => dolly(C(1.7, 0.22, 1.7), C(1.0, 0.16, 0.6), pushK(f, 1968, 0.002, 0.006, 20), { fov: 32 }) },
+    { f: 1968, s: (f) => dolly(C(1.75, 0.32, 1.9), C(1.1, 0.12, 0.62), pushK(f, 1968, 0.002, 0.006, 20), { fov: 26 }) },
     { f: 2062, dur: 26, s: (f) => dolly(C(2.1, 1.4, 2.4), C(1.0, 1.45, 0.6), pushK(f, 2062, 0.003), { fov: 38 }) },
   ],
   // outside: he shuffles along; crane straight up until the town is the map
@@ -282,6 +284,8 @@ export const DOF: Dof[] = [
   { f: 895, cInf: 0 },
   { f: 990, dur: 30, cInf: 8, focus: () => [-3.7, 1.0, 4.6] },
   { f: 1040, cInf: 15, focus: () => TRACK_SPOT },
+  { f: FIND, cInf: 10, focus: () => [-3.7, 1.1, 4.1] },
+  { f: 1076, cInf: 12, focus: () => TRACK_SPOT },
   { f: 1102, cInf: 12, focus: () => [-4.15, 1.45, 4.85] },
   { f: 1135, cInf: 9, focus: () => P(0, 1.1, -0.9) },
   { f: 1195, cInf: 9, focus: () => P(11, 1.0, -0.6) },
@@ -291,7 +295,7 @@ export const DOF: Dof[] = [
   { f: 1512, dur: 24, cInf: 0 },
   { f: 1745, cInf: 8, focus: () => C(0.2, 1.9, -4.2) },
   { f: 1846, cInf: 6, focus: () => C(0.95, 1.55, -3.75) },
-  { f: 1968, cInf: 14, focus: () => C(1.0, 0.16, 0.6) },
+  { f: 1968, cInf: 12, focus: () => C(1.08, 0.12, 0.62) },
   { f: 2062, dur: 26, cInf: 10, focus: () => C(1.0, 1.5, 0.6) },
   { f: 2096, cInf: 10, focus: () => [-15, 0.6, 8.6] },
   { f: 2112, dur: 50, cInf: 0 },

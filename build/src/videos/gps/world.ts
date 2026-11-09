@@ -103,7 +103,7 @@ export class World {
     const s = SHOTS[id - 1], L = LIGHTS[s.light], K = LOOK[s.light];
     const c = camAt(id, f);
     cam.position.set(...c.pos); cam.up.set(0, 1, 0); cam.lookAt(...c.look); cam.rotateZ(c.roll);
-    cam.fov = c.fov; cam.near = 0.05; cam.far = 1500; cam.updateProjectionMatrix(); cam.updateMatrixWorld();
+    cam.fov = c.fov; cam.near = c.pos[1] > 20 ? 1.0 : 0.05; cam.far = 1500; cam.updateProjectionMatrix(); cam.updateMatrixWorld();
     const focus = V(...c.look), dist = cam.position.distanceTo(focus);
     cam.layers.enable(NOINK);
     // ---- light rig ----
@@ -149,6 +149,7 @@ export class World {
     const right = V(0, 0, 0).setFromMatrixColumn(cam.matrixWorld, 0), upv = V(0, 0, 0).setFromMatrixColumn(cam.matrixWorld, 1);
     const fwd = V(0, 0, 0); cam.getWorldDirection(fwd);
     const st = stage(id, f, { pos: cam.position.clone(), right, up: upv, fwd, sun: sunDir });
+    if (st.track) { this.S.tracker.position.set(...st.track); this.S.tracker.rotation.set(0, 0, 0); this.S.tracker.visible = true; } // carried in a hand
     this.frustum.setFromProjectionMatrix(this.m4.multiplyMatrices(cam.projectionMatrix, cam.matrixWorldInverse));
     let ai = 0;
     const used: Actor[] = [];
@@ -209,14 +210,8 @@ export class World {
     // the tracker: leaps from his hand onto the steel (magnet: accelerating), rides the truck, wiggles and pops off on 18 June
     const spot = S.truck.localToWorld(V(...TRACK_SPOT));
     let vis = true;
-    if (id === 1 && f < SNAP) {
-      const u = clamp01((f - (SNAP - 3)) / 3);
-      if (u <= 0) vis = false;
-      else S.tracker.position.set(-3.62 + (spot.x + 3.62) * u * u, 1.0 + (spot.y - 1.0) * u * u, 4.4 + (spot.z - 4.4) * u * u);
-    } else if (id === 9 && f >= YANK) {
-      const u = (f - YANK) / 4; vis = u < 1;
-      S.tracker.position.set(spot.x - 0.5 * u, spot.y + 0.6 * u, spot.z - 0.9 * u);
-    } else {
+    if ((id === 1 && f < SNAP) || (id === 9 && f >= YANK)) vis = false; // in a hand: cast.ts places it (stage().track)
+    else {
       const w = id === 9 && f >= YANK - 12 ? 0.012 * Math.sin((f - (YANK - 12)) * 2.4) : 0;
       S.tracker.position.set(spot.x + w, spot.y, spot.z);
     }

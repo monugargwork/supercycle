@@ -562,12 +562,17 @@ export const evidenceBag = (p: Pen, led: boolean) => {
   p.poly(rr(70, 170, 230, 250, 12), "#1f1d24", 6); p.ell(196, 210, 10, 10, led ? "#5dff7a" : "#1d4a28", 0);
 };
 /** the ankle monitor (360 x 220): strap closes with k (0 open .. 1 shut), the box's LED blinks once it is on */
+/** ankle monitor (360 x 280) clamped round a stick leg: a strap band just wider than the leg line, the box on its front.
+ *  k 0..1: the two strap halves swing shut round the leg */
 export const ankleMonitor = (p: Pen, k: number, led: boolean) => {
-  const open = 1 - Math.min(1, k);
-  p.line([[60, 120 - 50 * open], [100, 150], [180, 162], [260, 150], [300, 120 - 50 * open]], "#2a2733", 34);
-  p.poly(rr(120, 70, 240, 170, 16), "#1f1d24", 7); p.poly(rr(132, 82, 228, 98, 4), "#3a3742", 0);
-  p.ell(214, 140, 10, 10, led ? "#5dff7a" : "#1d4a28", 0);
-  if (led) p.ell(214, 140, 22, 22, "rgba(93,255,122,0.35)", 0);
+  const open = 1 - Math.min(1, k), g = p.g;
+  for (const s of [-1, 1]) { // strap halves, hinged at the box
+    g.save(); const [hx, hy] = p.P(180 + s * 70, 140); g.translate(hx, hy); g.rotate(s * -open * 1.1); g.translate(-hx, -hy);
+    p.poly(rr(s < 0 ? 96 : 184, 112, s < 0 ? 176 : 264, 168, 10), "#2a2733", 5); g.restore();
+  }
+  p.poly(rr(120, 82, 240, 198, 18), "#1f1d24", 6); p.poly(rr(134, 96, 226, 112, 4), "#3a3742", 0);
+  p.ell(208, 166, 10, 10, led ? "#5dff7a" : "#1d4a28", 0);
+  if (led) p.ell(208, 166, 22, 22, "rgba(93,255,122,0.35)", 0);
 };
 /** a judgment sheet (400 x 520) with optional red stamps */
 export const judgment = (p: Pen, s1: number, s2: number) => {

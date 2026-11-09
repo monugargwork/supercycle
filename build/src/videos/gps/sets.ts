@@ -271,8 +271,8 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   car(b, -24, 5.05, "#d7463e"); car(b, 21, 5.05, "#3f78c4"); car(b, 33, 5.05, "#e8c34a");
   car(b, -31, -5.05, "#7bb35a"); car(b, -42, -5.05, "#e7e2d8"); car(b, 30, -5.05, "#8a5ac9");
   // cross road (the aerial left turn), dashed centre line
-  up(b, M.asphalt(), CROSS_X - 6, CROSS_X + 6, 6, 200, 0.155, 8);
-  for (let z = 8; z < 200; z += 6) box(b, M.line(), CROSS_X - 0.08, 0.16, z, CROSS_X + 0.08, 0.167, z + 3);
+  up(b, M.asphalt(), CROSS_X - 6, CROSS_X + 6, 6, 200, 0.2, 8); // clear of the walk/lot planes (no z-fighting from the aerial)
+  for (let z = 8; z < 200; z += 6) box(b, M.line(), CROSS_X - 0.08, 0.2, z, CROSS_X + 0.08, 0.21, z + 3);
   // overnight campers in front of the store: tents (pyramid + dome), camping chairs, a cooler
   const tentCols = ["#e2453c", "#2f7fbf", "#f2c84a", "#3f9a55", "#f08a3c"];
   ([[-4.6, 12.0, 0], [-1.6, 12.1, 1], [1.5, 11.9, 2], [4.3, 12.2, 3]] as const).forEach(([x, z, k]) => {

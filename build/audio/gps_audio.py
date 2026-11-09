@@ -167,7 +167,7 @@ def sfx():
     W(fr(436), 0.3, 0.6)
     P(S(thud(220, 0.12, r, 0.6), noise_burst(0.2, 2000, 7000, r, 0.002, 0.06)), fr(476), 0.6); P(slide_up(0.4, 600, 1800), fr(476), 0.3)
     # house, tea sip, phone unlock, dot blips; the aerial whoosh; pins ding; wall clock tick
-    W(fr(495), 0.3, 0.7); P(noise_burst(0.4, 300, 1500, r, 0.05, 0.2), fr(584), 0.3)
+    W(fr(495), 0.3, 0.7)  # (no tea sip: he holds the phone from the start)
     P(chime([m2f(84), m2f(88)], r, 0.06), fr(604), 0.4)
     for f0 in range(640, 895, 30): P(beep(2400, 0.03, "sine", 0.22), fr(f0), 0.3, 0.2)
     W(fr(728), 0.35, 0.9); W(fr(772), 0.3, 0.7)

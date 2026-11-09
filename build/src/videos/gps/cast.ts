@@ -1,7 +1,7 @@
 // The GPS-tracker reel's cast and 2D effects as lit flat cards in the 3D sets (pool/actor/fx machinery from the bridge short).
 // stage(id, f, cam) returns everything with a face or an effect for shot `id` at frame f: a pure function of f.
 import * as THREE from "three";
-import { Pen, bodyFront, bodySide, fxBurst, fxPuff, fxNote, fxShadow, fxContact, Outfit, Expr, FrontOpts, SideOpts, SKIN } from "./toon";
+import { Pen, bodyFront, bodySide, frontPts, fxBurst, fxPuff, fxNote, fxShadow, fxContact, Outfit, Expr, FrontOpts, SideOpts, SKIN } from "./toon";
 import * as art from "./art";
 import {
   FPS, SHOTS, V3, at, SHOP, LIVING, POLICE, COURT, INSERT, clamp01, smooth, easeOut, pop, SNAP, TRACK_SPOT, TUG, GRAB, SIP, PHONE_UP, NOD, NOD2,
@@ -98,7 +98,7 @@ export type FxPlace = { key: string; cw: number; ch: number; draw: (p: Pen) => v
   /** ribbon between two world points, turned about its own axis to face the camera (true 3D, so perspective is right) */
   axis?: [V3, V3] };
 export type CamInfo = { pos: THREE.Vector3; right: THREE.Vector3; fwd: THREE.Vector3; up: THREE.Vector3; sun: THREE.Vector3 };
-export type Stage = { places: Place[]; fx: FxPlace[] };
+export type Stage = { places: Place[]; fx: FxPlace[]; track?: V3 }; // track: where the tracker is when a hand carries it
 
 const hh = (i: number, s = 0) => { const v = Math.sin(i * 127.1 + s * 311.7) * 43758.5453; return v - Math.floor(v); };
 const q = (v: number, n = 120) => Math.round(v * n) / n;
@@ -201,6 +201,45 @@ export const truckWorld = (id: number, f: number, l: V3): V3 => {
   const px = id === 7 ? t.x : t.x + TC[0], pz = id === 7 ? t.z : t.z + TC[2];
   return [px + dx * c + dz * s, l[1], pz - dx * s + dz * c];
 };
+// ---- stick limbs in the 3D world: an arm that really reaches an object (the card's own arm is switched off with armOff) ----
+/** world position of a front card's design-unit point (card standing at x, y, z, facing the camera) */
+const cardWorld = (cam: CamInfo, x: number, y: number, z: number, [u, v]: [number, number]): V3 => {
+  const yaw = Math.atan2(cam.pos.x - x, cam.pos.z - z), X = (u - 300) * SU, Y = (975 - v) * SU;
+  return [x + X * Math.cos(yaw), y + Y, z - X * Math.sin(yaw)];
+};
+const v3 = (a: V3) => new THREE.Vector3(...a);
+const lerp3 = (a: V3, b: V3, k: number): V3 => [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k, a[2] + (b[2] - a[2]) * k];
+/** one straight limb segment A -> B as a camera-facing line card (plain line, round ends; optional ink knob at B: the hand) */
+const seg3d = (out: Stage, cam: CamInfo, A: V3, B: V3, wM: number, col: string, knobM = 0) => {
+  const E = cam.pos, Fw = cam.fwd, M = v3(lerp3(A, B, 0.5)), dM = M.clone().sub(E).dot(Fw);
+  const onPlane = (P: V3) => { const d = v3(P).sub(E), t = dM / d.dot(Fw); return E.clone().add(d.multiplyScalar(t)); };
+  const a = onPlane(A), b = onPlane(B), d = b.clone().sub(a), dx = d.dot(cam.right), dy = d.dot(cam.up), L = Math.hypot(dx, dy);
+  const hM = Math.max(wM, knobM), W = L + hM, ch = 48, cw = Math.max(48, Math.min(2048, Math.round((W / hM) * ch)));
+  const draw = (p: Pen) => {
+    const r = ch / 2, lw = (wM / hM) * ch;
+    p.stroke([[r, r], [cw - r, r]], lw, col);
+    if (knobM) p.dot(cw - r, r, r * 0.98);
+  };
+  const mid = a.clone().add(b).multiplyScalar(0.5);
+  card(out, `limb|${cw}|${col}|${knobM > 0}`, cw, ch, draw, mid.x, mid.y, mid.z, W, hM, { rot: Math.atan2(dy, dx) });
+};
+/** a stick arm from the card's shoulder to a world point, with a soft elbow bending outward (side -1 = screen left) */
+const arm3d = (out: Stage, cam: CamInfo, who: Who, at: V3, fo: FrontOpts, side: -1 | 1, hand: V3) => {
+  const J = frontPts(C[who], { ...fo, seed: IDX[who] + 1 }), S = cardWorld(cam, at[0], at[1], at[2], J.shoulder(side));
+  const m = lerp3(S, hand, 0.5), out2 = cam.right.clone().multiplyScalar(0.06 * side);
+  const El: V3 = [m[0] + out2.x, m[1] + 0.03, m[2] + out2.z];
+  seg3d(out, cam, S, El, J.armW * SU, J.armCol); seg3d(out, cam, El, hand, J.armW * SU, J.armCol, J.hand * 2 * SU);
+};
+/** where the card's hand rests (arm hanging) and a hold point in front of its belly, in the world */
+const restHand = (cam: CamInfo, who: Who, at: V3, fo: FrontOpts, side: number): V3 => {
+  const J = frontPts(C[who], { ...fo, seed: IDX[who] + 1 }), [sx, sy] = J.shoulder(side);
+  return cardWorld(cam, at[0], at[1], at[2], [sx + side * 6 * J.u, sy + 0.92 * J.HH]);
+};
+const holdHand = (cam: CamInfo, who: Who, at: V3, fo: FrontOpts, side: number, toLens = 0.08): V3 => {
+  const J = frontPts(C[who], { ...fo, seed: IDX[who] + 1 }), [sx, sy] = J.shoulder(side);
+  const w = cardWorld(cam, at[0], at[1], at[2], [sx + side * 16 * J.u, sy + 0.62 * J.HH]); // beside the body, so the arm shows
+  return [w[0] - cam.fwd.x * toLens, w[1], w[2] - cam.fwd.z * toLens];
+};
 const glowAt = (out: Stage, key: string, p: V3, s: number) => out.fx.push({ key: "glow" + key, cw: 128, ch: 128, draw: (pp) => art.glow(pp), x: p[0], y: p[1], z: p[2], w: s, h: s, soft: true });
 /** his view of his own phone (POV card filling the frame at the insert plinth slot x) */
 const povCard = (out: Stage, x: number, m: art.PovMap) => {
@@ -216,15 +255,28 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
   SUN = cam.sun;
   const blink = blinkOn(f);
   switch (id) {
-    case 1: { // the hook: he looks both ways, the box leaps onto the steel; the driver comes out of the store
+    case 1: { // the hook: he looks both ways, crouches, reaches under the bumper and presses the box on: click; then grins and goes
       if (f < 104) {
-        const look = f >= 49 && f < 62 ? (f < 55 ? -1 : 1) : 0;
-        front(out, cam, "kub", -3.85, 0.15, 4.45, { mode: "stand", expr: f < SNAP ? "nervous" : "grin", facing: 1, look, prop: f < SNAP - 3 ? ["hold", "tracker"] : null, tilt: f < SNAP ? 0.06 : 0 }, f, [SNAP]);
+        const cr = f < 26 ? 0 : f < 48 ? 0.75 * smooth((f - 26) / 22) : f < 68 ? 0.75 : 0.75 * (1 - smooth((f - 68) / 14));
+        const at: V3 = [-3.85 + 0.12 * (cr / 0.75), 0.15, 4.45 - 0.25 * (cr / 0.75)];   // a half step in toward the bumper as he crouches
+        const look = f < 10 ? 1 : f < 20 ? -1 : f < 26 ? 1 : f < SNAP + 4 ? -1 : 0;
+        const fo: FrontOpts = { mode: "stand", expr: f < SNAP ? "nervous" : "grin", facing: 1, look, crouch: cr, armOff: f < 80 ? -1 : undefined };
+        front(out, cam, "kub", ...at, fo, f, [SNAP]);
+        if (f < 80) { // his left arm carries the box from his belly to the bumper, holds it there, lets go
+          const H0 = holdHand(cam, "kub", at, fo, -1), spot = TRACK_SPOT as V3;
+          let hand: V3;
+          if (f < 28) hand = H0;
+          else if (f < 56) { const k = smooth((f - 28) / 28); hand = lerp3(H0, spot, k); hand[1] -= 0.12 * Math.sin(Math.PI * k); }
+          else if (f < 68) hand = spot;
+          else hand = lerp3(spot, restHand(cam, "kub", at, fo, -1), smooth((f - 68) / 12));
+          arm3d(out, cam, "kub", at, fo, -1, hand);
+          if (f < SNAP) out.track = [hand[0] - cam.fwd.x * 0.04, hand[1] + 0.02, hand[2] - cam.fwd.z * 0.04]; // the box in front of the hand
+        }
       } else {
         const u = (f - 104) / 30;
-        side(out, cam, "kub", -3.85 - 1.1 * u, 0.15, 4.45 + 0.2 * u, -1, 0, { mode: "march", phase: walkPhase(f, 0.8), stride: 0.55, expr: "grin" }, f);
+        side(out, cam, "kub", -3.73 - 1.1 * u, 0.15, 4.2 + 0.2 * u, -1, 0, { mode: "march", phase: walkPhase(f, 0.8), stride: 0.55, expr: "grin" }, f);
       }
-      burst(out, f, SNAP, ...TRACK_SPOT, 0.38, 7, "#ffffff");
+      burst(out, f, SNAP, ...TRACK_SPOT, 0.3, 6, "#ffffff");
       if (f >= SNAP && blinkOn(f, SNAP + 6)) glowAt(out, "hook", [TRACK_SPOT[0] - 0.03, TRACK_SPOT[1] - 0.02, TRACK_SPOT[2]], 0.12);
       if (f >= 104) { const u = clamp01((f - 104) / 74); side(out, cam, "driver", 7.1 - 2.0 * u, 0.15, 12.6 - 6.8 * u, -0.28, -0.96, { mode: "march", phase: walkPhase(f, 0.9), stride: 0.75, expr: "whistle" }, f); }
       break;
@@ -253,10 +305,9 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
     case 5: break; // the house front: the KUBASTA mailbox (sets.ts)
     case 6: { // calm in his armchair: tea; he puts the cup on the side table and lifts the phone (its back to us, screen to him);
       // then his own view: the screen between his hands, the dot crawling along the main road; the dive into the map
-      if (f < POV6) {
-        const [x, , z] = Lv(0, 0, -0.8), hasCup = f < PHONE_UP - 6;
-        front(out, cam, "kub", x, 0, z, { mode: "sit", chair: 1.1, expr: f >= SIP && f < SIP + 14 ? "relief" : hasCup ? "smile_closed" : "smile", facing: 1, prop: ["hold", hasCup ? "teacup" : "phoneBack"], headTilt: f >= SIP && f < SIP + 14 ? -0.12 : hasCup ? 0 : 0.08 }, f, [SIP]);
-        if (!hasCup) card(out, "cupDown", 160, 140, (p) => { p.poly(art.rr(30, 40, 120, 120, 18), "#fbf7ec", 6); p.ell(128, 74, 18, 22, null, 6); p.ell(75, 124, 60, 10, "#e9e1cf", 5); }, ...Lv(0.95, 0.6, -1.0), 0.12, 0.105);
+      if (f < POV6) { // the phone in his hand from the start (its back to us), he looks at it
+        const [x, , z] = Lv(0, 0, -0.8);
+        front(out, cam, "kub", x, 0, z, { mode: "sit", chair: 1.1, expr: "smile", facing: 1, prop: ["hold", "phoneBack"], headTilt: 0.08 }, f);
       } else {
         const u = smooth((f - 690) / 38), d = vanD(f), dot = art.alongD(art.ROUTE, d), s0 = 4, s1 = 22, s = s0 * (s1 / s0) ** u;
         // the dive keeps the dot on screen: its screen offset slides from the overview's to the aerial's
@@ -273,7 +324,6 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
       if (f < POV8[0] || f >= POV8[1]) {
         const [x, , z] = Lv(0, 0, -0.8), nod = (f0: number) => (f >= f0 && f < f0 + 10 ? -0.14 * Math.sin(((f - f0) / 10) * Math.PI) : 0);
         front(out, cam, "kub", x, 0, z, { mode: "sit", chair: 1.1, expr: "smile", facing: 1, prop: ["hold", "phoneBack"], headTilt: 0.08 + nod(NOD) + nod(NOD2) }, f);
-        card(out, "cupDown", 160, 140, (p) => { p.poly(art.rr(30, 40, 120, 120, 18), "#fbf7ec", 6); p.ell(128, 74, 18, 22, null, 6); p.ell(75, 124, 60, 10, "#e9e1cf", 5); }, ...Lv(0.95, 0.6, -1.0), 0.12, 0.105);
       } else {
         const d = vanD(f), pk = (f0: number) => clamp01((f - f0) / 12);
         povCard(out, 120, { t: { cx: -108, cz: 75, s: 2.6, ...MAP_SCREEN_C }, dot: art.alongD(art.ROUTE, d), blink, trail: d,
@@ -281,16 +331,35 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
       }
       break;
     }
-    case 9: { // 18 June: she walks to the back, drops her pen, finds the box, holds it up
+    case 9: { // 18 June: she walks to the back, her pen falls, she crouches and looks under; she sees the box; her arm reaches in, pulls it off
+      const DR: V3 = [-3.75, 0.15, 4.95];
       if (f >= 990 && f < 1028) { const u = (f - 990) / 38; side(out, cam, "driver", 4.8 - 8.55 * u, 0.15, 4.95, -1, 0, { mode: "march", phase: walkPhase(f, 1), stride: 0.8, expr: "whistle" }, f); }
-      else if (f >= 1028 && f < 1102) front(out, cam, "driver", -3.75, 0.15, 4.95, { mode: f >= PEN_DROP + 6 ? "sit" : "stand", expr: f >= FIND ? "shock" : "neutral", facing: -1, prop: f < PEN_DROP ? ["hold", "clipboard"] : null }, f, [FIND]);
-      else if (f >= 1102) front(out, cam, "driver", -4.15, 0.15, 4.85, { mode: "stand", expr: f < 1118 ? "shock" : "stern", facing: 1, prop: ["hold", blink ? "trackerLit" : "tracker"], tilt: 0.06 }, f, [1118]);
-      if (f >= PEN_DROP && f < 1102) { // the pen falls and bounces under the bumper
+      else if (f >= 1028 && f < 1102) {
+        const cr = f < PEN_DROP + 4 ? 0 : 0.85 * smooth((f - PEN_DROP - 4) / 12), at: V3 = [DR[0] + 0.05 * (cr / 0.85), 0.15, DR[2] - 0.85 * (cr / 0.85)];
+        const reaching = f >= 1076;
+        const fo: FrontOpts = { mode: "stand", expr: f >= FIND ? "shock" : f >= PEN_DROP ? "neutral" : "neutral", facing: -1, look: f >= PEN_DROP ? -1 : 0, crouch: cr, prop: ["hold", "clipboard"], armOff: reaching ? -1 : undefined };
+        front(out, cam, "driver", ...at, fo, f, [FIND]);
+        if (reaching) { // her arm comes in, takes the box, wiggles it and pulls it free on YANK; the box goes with her hand
+          const spot = TRACK_SPOT as V3, H0 = restHand(cam, "driver", at, fo, -1);
+          let hand: V3;
+          if (f < 1090) hand = lerp3(H0, spot, smooth((f - 1076) / 14));
+          else if (f < YANK) { const w = f >= YANK - 12 ? 0.012 * Math.sin((f - (YANK - 12)) * 2.4) : 0; hand = [spot[0] + w, spot[1], spot[2]]; }
+          else hand = lerp3(spot, holdHand(cam, "driver", at, fo, -1), smooth((f - YANK) / 6));
+          arm3d(out, cam, "driver", at, fo, -1, hand);
+          if (f >= YANK) out.track = [hand[0] - cam.fwd.x * 0.04, hand[1] + 0.02, hand[2] - cam.fwd.z * 0.04];
+        }
+      } else if (f >= 1102) { // up on her feet: the box held up into the lens in her left hand, the clipboard still in her right
+        const at: V3 = [-4.15, 0.15, 4.85], fo: FrontOpts = { mode: "stand", expr: f < 1118 ? "shock" : "stern", facing: 1, prop: ["hold", "clipboard"], armOff: -1 };
+        front(out, cam, "driver", ...at, fo, f, [1118]);
+        const hand = holdHand(cam, "driver", at, fo, -1, 0.22); hand[1] += 0.12;
+        arm3d(out, cam, "driver", at, fo, -1, hand);
+        out.track = [hand[0] - cam.fwd.x * 0.04, hand[1] + 0.03, hand[2] - cam.fwd.z * 0.04];
+      }
+      if (f >= PEN_DROP && f < 1102) { // the pen falls and bounces by the bumper
         const t = f - PEN_DROP, y = t < 8 ? 1.0 - 0.83 * (t / 8) ** 2 : 0.17 + 0.08 * Math.max(0, Math.sin(((t - 8) / 6) * Math.PI)) * Math.exp(-(t - 8) / 8);
         card(out, "pen", 240, 40, (p) => art.pen(p), -3.55 + 0.012 * Math.min(t, 14), y + 0.01, 4.55, 0.16, 0.027, { rot: t * 0.5 });
       }
       if (f >= 1040 && f < YANK && blink) glowAt(out, "find", [TRACK_SPOT[0] - 0.03, TRACK_SPOT[1] - 0.02, TRACK_SPOT[2]], 0.12);
-      burst(out, f, YANK, ...TRACK_SPOT, 0.4, 7, "#ffffff");
       break;
     }
     case 10: { // the police desk: she slaps it down
@@ -351,19 +420,20 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
       }
       break;
     }
-    case 18: { // the ankle monitor clacks shut; the same green blink
-      front(out, cam, "kub", ...Ct(1.0, 0, 0.6), { mode: "stand", expr: f > ANKLE ? "dazed" : "nervous", facing: -1, look: f > ANKLE + 20 ? 0 : -1 }, f, [ANKLE + 1]);
+    case 18: { // the ankle monitor clamps shut round his (stick) leg; the same green blink
+      const at = Ct(1.0, 0, 0.6), fo: FrontOpts = { mode: "stand", expr: f > ANKLE ? "dazed" : "nervous", facing: -1, look: f > ANKLE + 20 ? 0 : -1 };
+      front(out, cam, "kub", ...at, fo, f, [ANKLE + 1]);
       front(out, cam, "officer", ...Ct(1.85, 0, 0.15), { mode: "stand", expr: "stern", facing: -1 }, f);
+      const J = frontPts(C.kub, { ...fo, seed: IDX.kub + 1 }), [ax, ay] = J.ankle(1), w = cardWorld(cam, at[0], at[1], at[2], [ax, ay - 0.08 * J.HH]);
       const k = q(clamp01((f - (ANKLE - 6)) / 6), 12), on = f > ANKLE + 3 && blinkOn(f, ANKLE + 3);
-      card(out, `ankle${k}|${on}`, 360, 220, (p) => art.ankleMonitor(p, k, on), ...Ct(1.0, 0.17, 0.66), 0.2, 0.122);
-      burst(out, f, ANKLE, ...Ct(1.0, 0.18, 0.7), 0.2, 5, "#ffffff");
+      card(out, `ankle${k}|${on}`, 360, 280, (p) => art.ankleMonitor(p, k, on), w[0] - cam.fwd.x * 0.03, w[1], w[2] - cam.fwd.z * 0.03, 0.09, 0.07);
       break;
     }
     case 19: { // he shuffles home; the camera cranes up until he is the dot
       const x = -14.0 - 0.45 * ((f - 2096) / 30);
       side(out, cam, "kub", x, 0.15, 8.6, -1, 0, { mode: "march", phase: walkPhase(f, 0.7), stride: 0.45, expr: "dazed" }, f);
       const on = blinkOn(f);
-      card(out, "ankleW" + on, 360, 220, (p) => art.ankleMonitor(p, 1, on), x, 0.28, 8.66, 0.14, 0.085);
+      card(out, "ankleW" + on, 360, 280, (p) => art.ankleMonitor(p, 1, on), x, 0.24, 8.66, 0.07, 0.054);
       if (on) glowAt(out, "him", [x, 0.4, 8.7], Math.max(0.15, (cam.pos.y - 1) * 0.045));
       break;
     }

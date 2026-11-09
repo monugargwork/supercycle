@@ -15,3 +15,14 @@
 - Taste: the cast are stick figures. Arms and legs are plain lines; no hands, no fingers, ever, even in close POV shots.
 - POV phone shots: the hands, fingertips, thumbs and cuffs are gone. Two plain stick-arm lines (his arm colour) come up from below and end on the phone's sides; in shot 15 one arm line's tip traces the route.
 - Seated legs: new toon option `chair` (seat height in head-heights). Thighs short toward camera, knees at the seat edge, shins straight down, feet on the floor. Kub in the armchair uses chair 1.1 with his card on the floor at the seat front (Lv(0, 0, -0.8)).
+
+## 2026-11-09 · Frame.io round on "GPS Creep.mp4" (v1)
+- f43 / f564 "too many shadows / no shadows needed": character cards no longer cast shadows in golden light (only the soft contact blob under the feet); golden shadow colour lifted (shade 0.15 -> 0.34); hook sun raised (el 10 -> 22) so shadows are shorter.
+- f65 "tracker teleported, make him apply it by hand": new 3D stick arm (cast.ts arm3d: the card's own arm is switched off with toon `armOff`, a two-segment line runs from his shoulder to a world point). He holds the box at his side, crouches (new toon `crouch`), half-steps in, his arm carries it under the bumper, holds, click, lets go, stands and grins. The tracker object follows his hand (stage().track).
+- f311 all blue: shot 3's camera was inside the parked truck. Moved outside (z 3.6 -> 6.3).
+- f564 "why the cup? keep the phone from the start": tea and side-table cup removed, phone in hand from f560, tea-sip sound removed from the mix.
+- f731 aerial glitch: z-fighting stripes where the cross road met the walk/lot planes; cross road lifted to y 0.2 and the camera near plane is 1 m on high aerials.
+- f1032 "needs to get better": the pen falls, she crouches and leans in, cut to her shocked face on "phát hiện", back on the box: her arm reaches in, wiggles it, pulls it free on YANK; then she holds it up in her left hand, clipboard still in her right.
+- f1500 glitch: shot 14's opening camera was inside the truck body; now in front of her.
+- f2031 "what is this lol": the ankle monitor was a strap with arm-like ends floating between the legs. Now a small box on a strap clamped round his stick leg at the ankle (strap halves swing shut), framed tighter (fov 26); the white flash disc removed.
+- Taste: every prop must be carried by a hand from where it was to where it goes. Never let a camera sit inside geometry (check the truck in every street shot).
