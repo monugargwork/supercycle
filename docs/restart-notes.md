@@ -9,6 +9,11 @@ Running list for the clean restart of the story-reel workflow. Add to it; build 
   - Faces stay hand-drawn 2D artwork on the head, swapped per expression.
   - Toon shading + ink outlines so it still reads as the same flat cartoon style.
   - Hands lock onto props (grab, carry, hand over, let go); characters can turn, show side/back, sit, crouch, walk with planted feet.
+- 2026-11-10 · **Character rules (user):**
+  - Keep them simple. They bend, crouch or lie down when the action needs it.
+  - **Limbs never stretch or shrink.** Every limb has one fixed length. To reach something, the body moves (steps closer, bends, crouches, lies down); the arm never gets longer. (The GPS hook/yank arms stretched: not allowed.)
+  - **Limbs are plain lines: no hands, no feet, no shoes, no knobs.** A limb just ends. Contact with a prop is the line's end touching it.
+  - Simple on purpose: easier to animate (two-bone joints, fixed lengths, end points pinned to targets).
 
 ## Rules learned from PSA + GPS (for the one-page rulebook)
 - Logic and physics above everything; pixel detail second.
