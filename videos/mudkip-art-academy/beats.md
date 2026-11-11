@@ -45,7 +45,7 @@ A drawing a fan made in a Nintendo drawing game became a prize card of 100 copie
 
 ## Visual laws
 - **Price = the board**, always in the same locked frame; **time = the flap date plate** above it (11.2024, 9.2026, three days later, a month later).
-- **Scarcity = counting real cards on a table:** 100 dealt out, 3 get a case, 97 swept away.
+- **Scarcity = counting real cards on a table:** 100 dealt out, 3 get a case, 97 blown away.
 - **Weight = money:** the sack squashes the desk; the slab outweighs the villa.
 
 ## Gags
@@ -71,7 +71,7 @@ Loud hook, a laugh, calm at the desk (the one quiet stretch), then the board esc
 | the price rises | the same board in the same frame, a new date each time |
 | more than a villa | the balance |
 | paying for a number | the picture is covered with card; a loupe sits on the grade 10 |
-| 100 printed, 3 perfect | 100 dealt, 3 cases drop, 97 swept off the table |
+| 100 printed, 3 perfect | 100 dealt, 3 cases drop, 97 blown off the table |
 | second place | the podium |
 
 ## Scene list
@@ -93,7 +93,7 @@ Loud hook, a laugh, calm at the desk (the one quiet stretch), then the board esc
 | S14 ★ | 0:49.9-0:52.7 | hammered at $4.88M | gavel held, the board rolls, stillness, strike | cut |
 | S15 ★ | 0:52.7-0:55.8 | a mud fish dearer than a villa? | the balance: the villa goes up | dissolve 8 |
 | S16 | 0:55.8-1:00.7 | not the Pokémon: a number | the picture is covered; a loupe on the 10 | dissolve 6 |
-| S17 | 1:00.7-1:06.5 | 100 printed; 3 graded 10 | 100 dealt; 3 cases drop; 97 swept away | dissolve 8 |
+| S17 | 1:00.7-1:06.5 | 100 printed; 3 graded 10 | 100 dealt; 3 cases drop; 97 blown away | dissolve 8 |
 | S18 ★ | 1:06.5-1:13.1 | the 1997 trophy Pikachu: $3M, second | column B rises; the trophy card; $3,080,500; the podium | cut |
 | S19 | 1:13.1-1:15.0 | behind a mud fish | the three jaws drop; the Charizard flutters to the carpet | end |
 

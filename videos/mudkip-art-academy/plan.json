@@ -19,8 +19,8 @@
    "from": "left"
   },
   {
-   "f": 692,
-   "out": 730,
+   "f": 680,
+   "out": 708,
    "text": "100",
    "style": 3,
    "from": "top"
@@ -40,15 +40,15 @@
    "from": "top"
   },
   {
-   "f": 1975,
-   "out": 1994,
+   "f": 1972,
+   "out": 1986,
    "text": "3/100",
    "style": 3,
    "from": "top"
   },
   {
-   "f": 2090,
-   "out": 2134,
+   "f": 2082,
+   "out": 2102,
    "text": "1997",
    "style": 2,
    "from": "right"
@@ -139,15 +139,15 @@
     },
     {
      "id": "rostrum",
-     "build": "adapt:rostrum (on the stage; desk top at y 1.62-1.67; a round oak sound block where the gavel lands)",
+     "build": "adapt:rostrum (on the stage; desk top at y 1.42-1.47; a round oak sound block where the gavel lands)",
      "pos": [
-      -0.425,
-      1.06,
+      -0.465,
+      0.96,
       -4.35
      ],
      "size": [
-      0.85,
-      1.12,
+      0.97,
+      0.92,
       0.3
      ]
     },
@@ -155,21 +155,21 @@
      "id": "gavel_block",
      "build": "new: oak disc 12 cm, 3 cm thick",
      "pos": [
-      -0.2,
-      1.685,
+      -0.03,
+      1.485,
       -4.32
      ],
      "size": [
-      0.12,
+      0.14,
       0.03,
-      0.12
+      0.14
      ]
     },
     {
      "id": "columnA",
      "build": "new: lot column, oak post 22 x 30 cm, top height animates (1.78 -> 1.95 in S18), light-up numeral 1 on its front",
      "pos": [
-      0.11,
+      0.18,
       1.14,
       -4.6
      ],
@@ -183,7 +183,7 @@
      "id": "columnB",
      "build": "new: second lot column, rises out of the stage in S18 (0.5 -> 1.78), then sinks to 1.45; light-up numeral 2",
      "pos": [
-      0.37,
+      0.43,
       1.14,
       -4.6
      ],
@@ -197,7 +197,7 @@
      "id": "slabA",
      "build": "new: PSA-style slab, 19 x 30 cm display size (about 2x life), clear case, red-bordered label GEM MT 10, the REAL card scan in the well; stands upright on the column on a 2 cm acrylic foot",
      "pos": [
-      0.11,
+      0.18,
       1.94,
       -4.6
      ],
@@ -211,7 +211,7 @@
      "id": "slabB",
      "build": "new: same slab build with the 1997 No.1 Trainer scan, label NM-MT 8",
      "pos": [
-      0.37,
+      0.43,
       1.94,
       -4.6
      ],
@@ -310,16 +310,16 @@
      1.25
     ],
     "auctioneer": [
-     -0.42,
+     -0.47,
      -4.8
     ],
     "attendant12": [
-     0.5,
-     -4.4
+     0.6,
+     -4.8
     ],
     "attendant18": [
-     0.78,
-     -4.4
+     0.9,
+     -4.8
     ],
     "b1": [
      -0.62,
@@ -478,25 +478,25 @@
     },
     {
      "id": "desk",
-     "build": "reuse:desk (top y 0.76)",
+     "build": "adapt:desk (top y 0.76, deeper: its back edge reaches him)",
      "pos": [
       -0.1,
       0.38,
-      -0.2
+      -0.285
      ],
      "size": [
       1.7,
       0.76,
-      0.7
+      0.87
      ]
     },
     {
      "id": "console",
-     "build": "new: clamshell handheld, pale blue, no logos: base 25 x 2.2 x 15 cm with the lower touch screen (13 x 9.8 cm) and round buttons; lid hinged on the far edge, open 165 deg, upper screen 17 x 10.2 cm",
+     "build": "new: clamshell handheld, pale blue, no logos: base 25 x 2.2 x 15 cm with the lower touch screen (13 x 9.8 cm) and round buttons; lid hinged on the far edge, open 145 deg, upper screen 17 x 10.2 cm",
      "pos": [
       0,
       0.771,
-      -0.36
+      -0.4
      ],
      "size": [
       0.25,
@@ -510,7 +510,7 @@
      "pos": [
       0.02,
       0.8,
-      -0.36
+      -0.4
      ],
      "size": [
       0.008,
@@ -524,7 +524,7 @@
      "pos": [
       0,
       0.82,
-      -0.2
+      -0.38
      ],
      "size": [
       0.3,
@@ -537,8 +537,8 @@
      "build": "new: the 100 printed cards as one block 14 x 7 x 19.5 cm (card edges ruled on the sides, the REAL Mudkip scan on top)",
      "pos": [
       0,
-      0.805,
-      -0.2
+      0.807,
+      -0.38
      ],
      "size": [
       0.14,
@@ -694,16 +694,16 @@
     },
     {
      "id": "pan_near",
-     "build": "new: brass pan 90 cm on three chains 4.175 m long; starts at y 1.35, ends on the grass at y 0.05",
+     "build": "new: brass pan 72 cm on three chains 4.175 m long; starts at y 1.35, ends on the grass at y 0.05",
      "pos": [
       1.05,
       1.35,
       2.3
      ],
      "size": [
-      0.9,
+      0.72,
       0.05,
-      0.9
+      0.72
      ]
     },
     {
@@ -752,7 +752,7 @@
    "marks": {
     "dA": [
      1.6,
-     2.45
+     2.4
     ]
    }
   },
@@ -842,7 +842,7 @@
     },
     {
      "id": "cases",
-     "build": "three PSA-style slabs at life size (8.5 x 13.5 cm) that drop onto cards (row,col) 3,2 / 5,7 / 7,4",
+     "build": "three PSA-style slabs at life size (8.5 x 13.5 cm) that drop onto cards (row,col) 3,2 / 5,7 / 7,4 (counted from 1)",
      "pos": [
       0,
       0.012,
@@ -1156,7 +1156,7 @@
    },
    "build": "reuse:auction room seen toward the rostrum wall (soft). REAL Base Set Charizard in dB's hand.",
    "blocking": "Three collectors in a tight row, front view, low wide lens: dA left, dB middle half a step forward, dC right.",
-   "action": "f130 all three crack up on 'bật cười' (shoulders bounce 3 cm at 4 Hz). f170 'Mudkip á?': dA points off screen left toward the cash desk. f202 'Con cá bùn': dC wipes an eye. f232-240 dB lunges 0.6 m to the lens and thrusts the Charizard out at arm's length, card square to the lens on 'Charizard' f236; holo sheen sweeps it.",
+   "action": "f130 all three crack up on 'bật cười' (shoulders bounce 3 cm at 4 Hz). f170 'Mudkip á?': dC points off screen right toward the cash desk. f202 'Con cá bùn': dA throws his head back. f232-240 dB lunges 0.6 m to the lens and thrusts the Charizard out at arm's length, card square to the lens on 'Charizard' f236; holo sheen sweeps it.",
    "acting": "Laugh, laugh, laugh; dB switches to a smug grin for his line, leaning into the lens.",
    "cams": [
     {
@@ -1225,7 +1225,7 @@
       1.2
      ],
      "view": "front",
-     "pose": "pointing left",
+     "pose": "stand, head back",
      "expr": "laugh"
     },
     {
@@ -1245,7 +1245,7 @@
       1.25
      ],
      "view": "front",
-     "pose": "stand",
+     "pose": "points off screen right",
      "expr": "laugh"
     }
    ],
@@ -1567,7 +1567,7 @@
    },
    "build": "console screens are live canvases: the lower one shows the REAL card art (the art window cropped from the scan) appearing under the stylus; the upper one shows a plain contest page, then a gold WINNER rosette.",
    "blocking": "Top-down over the console; the stylus and his forearm come in from the bottom right.",
-   "action": "f466-551 the stylus scrubs across the lower screen and the drawing appears where it has been (pencil lines first, colour 20 f behind). f551 last stroke, stylus lifts. f586 'thắng': the upper screen flashes and a gold rosette stamps on; a ring of confetti bursts over the console; two fists punch up from the bottom corners. f634-659 push into the drawing.",
+   "action": "f466-551 the stylus scrubs across the lower screen and the drawing appears where it has been (pencil lines first, colour 20 f behind). f551 last stroke, stylus lifts. f586 'thắng': the upper screen flashes and a gold rosette stamps on; a ring of confetti bursts over the console. f634-659 push into the drawing.",
    "acting": "hands only",
    "cams": [
     {
@@ -1575,12 +1575,12 @@
      "pos": [
       0,
       1.9,
-      -0.325
+      -0.365
      ],
      "look": [
       0,
       0.77,
-      -0.309
+      -0.349
      ],
      "fov": 34,
      "roll": 0,
@@ -1593,12 +1593,12 @@
      "pos": [
       0,
       1.306,
-      -0.37
+      -0.41
      ],
      "look": [
       0,
       0.783,
-      -0.36
+      -0.4
      ],
      "fov": 34,
      "roll": 0,
@@ -1620,8 +1620,8 @@
      "n": "upper screen",
      "p": [
       0,
-      0.8,
-      -0.21
+      0.82,
+      -0.27
      ],
      "f": [
       462,
@@ -1633,7 +1633,7 @@
      "p": [
       0,
       0.783,
-      -0.36
+      -0.4
      ],
      "f": [
       462,
@@ -1643,7 +1643,7 @@
    ],
    "physics": "confetti: 24 paper bits on short arcs.",
    "light_mood": "day; the screens glow.",
-   "sound": "pencil scratch loop f466-551, Realization Sound f586, chime, two whooshes for the fists.",
+   "sound": "pencil scratch loop f466-551, Realization Sound f586, chime.",
    "after": "The finished drawing stays on the lower screen."
   },
   {
@@ -1667,9 +1667,9 @@
     "n": 8,
     "to": "S07"
    },
-   "build": "new: open parcel on the desk with the 100-card block inside, REAL Mudkip scan on top. The console is pushed to the desk's left end.",
-   "blocking": "Starts top-down on the card's art window (same picture, same place in frame as the screen). Daisuke sits behind the desk.",
-   "action": "f667-695 the camera lifts back and tilts up: the whole card, the block's ruled edge, the open parcel around it (he is still above the frame). f715 the camera comes down to him. f692 title '100' on 'đúng một trăm lá'. f731-752 both arms reach in, grip the block's sides, lift it out of the parcel; f752-769 he hugs it to his chest on 'về tay anh'.",
+   "build": "new: open parcel on the desk with the 100-card block inside, REAL Mudkip scan on top. The console is pushed to the desk's left end; the parcel sits at his edge of the desk, inside his reach.",
+   "blocking": "Starts top-down on the card's art window (same picture, same place in frame as the screen; the lens is now on our side of the desk, so the card lies with its top toward him and reads upright for us). Daisuke sits behind the desk.",
+   "action": "f667-695 the camera lifts back and tilts up: the whole card, the block's ruled edge, the open parcel around it (he is still above the frame). f715 the camera comes down to him. f680 title '100' on 'đúng một trăm lá'. f725-737 both arms reach in and grip the block's sides; f737-751 he lifts it out of the parcel and tips its face to us; f752-769 he hugs it to his chest on 'về tay anh'.",
    "acting": "Open-mouthed awe, then a closed-eye grin hugging the block.",
    "cams": [
     {
@@ -1677,12 +1677,12 @@
      "pos": [
       0,
       1.334,
-      -0.172
+      -0.408
      ],
      "look": [
       0,
       0.84,
-      -0.1615
+      -0.4185
      ],
      "fov": 34,
      "roll": 0,
@@ -1695,12 +1695,12 @@
      "pos": [
       0,
       1.6,
-      0.25
+      0.07
      ],
      "look": [
       0,
       0.84,
-      -0.2
+      -0.38
      ],
      "fov": 36,
      "roll": 0,
@@ -1711,7 +1711,7 @@
      "focus": [
       0,
       0.84,
-      -0.2
+      -0.38
      ]
     },
     {
@@ -1758,7 +1758,7 @@
      "p": [
       0,
       0.84,
-      -0.2
+      -0.38
      ],
      "f": [
       663,
@@ -1979,7 +1979,7 @@
       2.0,
       -5.1
      ],
-     "fov": 44,
+     "fov": 50,
      "roll": 0,
      "push": 0.0005,
      "blur": 3,
@@ -1988,12 +1988,12 @@
     {
      "f": 905,
      "pos": [
-      0.11,
+      0.18,
       1.92,
       -3.455
      ],
      "look": [
-      0.11,
+      0.18,
       1.888,
       -4.6
      ],
@@ -2016,7 +2016,7 @@
       2.0,
       -5.1
      ],
-     "fov": 44,
+     "fov": 50,
      "roll": 0,
      "push": 0.0005,
      "blur": 3,
@@ -2038,7 +2038,7 @@
     {
      "who": "auctioneer",
      "at": [
-      -0.42,
+      -0.47,
       -4.8
      ],
      "view": "front",
@@ -2098,7 +2098,7 @@
     {
      "n": "auctioneer head",
      "p": [
-      -0.42,
+      -0.47,
       2.1,
       -4.8
      ],
@@ -2110,7 +2110,7 @@
     {
      "n": "slab top",
      "p": [
-      0.11,
+      0.18,
       2.09,
       -4.6
      ],
@@ -2122,7 +2122,7 @@
     {
      "n": "slab bottom",
      "p": [
-      0.11,
+      0.18,
       1.79,
       -4.6
      ],
@@ -2291,7 +2291,7 @@
       2.0,
       -5.1
      ],
-     "fov": 44,
+     "fov": 50,
      "roll": 0,
      "push": 0.0005,
      "blur": 3,
@@ -2316,7 +2316,7 @@
     {
      "who": "auctioneer",
      "at": [
-      -0.42,
+      -0.47,
       -4.8
      ],
      "view": "front",
@@ -2364,7 +2364,7 @@
     {
      "n": "auctioneer head",
      "p": [
-      -0.42,
+      -0.47,
       2.1,
       -4.8
      ],
@@ -2376,7 +2376,7 @@
     {
      "n": "slab",
      "p": [
-      0.11,
+      0.18,
       1.94,
       -4.6
      ],
@@ -2430,7 +2430,7 @@
       2.0,
       -5.1
      ],
-     "fov": 44,
+     "fov": 50,
      "roll": 0,
      "push": 0.0005,
      "blur": 3,
@@ -2439,12 +2439,12 @@
     {
      "f": 1213,
      "pos": [
-      0.11,
+      0.18,
       1.92,
       -3.455
      ],
      "look": [
-      0.11,
+      0.18,
       1.888,
       -4.6
      ],
@@ -2467,7 +2467,7 @@
       2.0,
       -5.1
      ],
-     "fov": 44,
+     "fov": 50,
      "roll": 0,
      "push": 0.0005,
      "blur": 3,
@@ -2489,7 +2489,7 @@
     {
      "who": "auctioneer",
      "at": [
-      -0.42,
+      -0.47,
       -4.8
      ],
      "view": "front",
@@ -2525,7 +2525,7 @@
     {
      "n": "slab top",
      "p": [
-      0.11,
+      0.18,
       2.09,
       -4.6
      ],
@@ -2537,7 +2537,7 @@
     {
      "n": "slab bottom",
      "p": [
-      0.11,
+      0.18,
       1.79,
       -4.6
      ],
@@ -2574,23 +2574,23 @@
     "to": "S13"
    },
    "build": "the stage in warm evening light; column A empty; attendant with the Mudkip slab on a red velvet cushion (26 x 6 x 20 cm).",
-   "blocking": "Attendant walks in along the stage from screen right (side view), stops right of column A, turns front.",
-   "action": "f1376-1384 the date plate flaps to '1 THÁNG SAU'; the board resets to $0 and narrows. f1386-1420 he walks in (1.3 m, 3 steps), cushion at chest height. f1420-1433 his left arm lifts the slab off the cushion and stands it on the column; contact f1433, two frames before 'sàn'; a gleam crosses it.",
+   "blocking": "Attendant walks in along the back of the stage from screen right (side view), stops behind and to the right of column A, turns front.",
+   "action": "f1376-1384 the date plate flaps to '1 THÁNG SAU'; the board resets to $0 (its wings stay out). f1380-1414 he walks in (0.7 m, 2 steps), cushion at chest height. f1420-1433 his left arm lifts the slab off the cushion and stands it on the column; contact f1433, two frames before 'sàn'; a gleam crosses it.",
    "acting": "Careful, held breath (nervous), relief after.",
    "cams": [
     {
      "f": 1368,
      "pos": [
-      0.15,
+      0.05,
       2.02,
       -1.75
      ],
      "look": [
-      0.15,
+      0.05,
       1.98,
       -5.1
      ],
-     "fov": 46,
+     "fov": 48,
      "roll": 0,
      "push": 0.0005,
      "blur": 4,
@@ -2612,8 +2612,8 @@
     {
      "who": "attendant",
      "at": [
-      0.5,
-      -4.4
+      0.6,
+      -4.8
      ],
      "view": "side -> front",
      "pose": "carry cushion; place slab",
@@ -2622,7 +2622,7 @@
     {
      "who": "auctioneer",
      "at": [
-      -0.42,
+      -0.47,
       -4.8
      ],
      "view": "front",
@@ -2634,7 +2634,7 @@
     {
      "n": "slab",
      "p": [
-      0.11,
+      0.18,
       1.94,
       -4.6
      ],
@@ -2646,9 +2646,9 @@
     {
      "n": "attendant head",
      "p": [
-      0.5,
+      0.6,
       2.1,
-      -4.4
+      -4.8
      ],
      "f": [
       1420,
@@ -2670,7 +2670,7 @@
     {
      "n": "auctioneer head",
      "p": [
-      -0.42,
+      -0.47,
       2.1,
       -4.8
      ],
@@ -2898,7 +2898,7 @@
       2.0,
       -5.1
      ],
-     "fov": 44,
+     "fov": 50,
      "roll": 0,
      "push": 0.0008,
      "blur": 3,
@@ -2915,7 +2915,7 @@
     {
      "who": "auctioneer",
      "at": [
-      -0.42,
+      -0.47,
       -4.8
      ],
      "view": "front",
@@ -2951,7 +2951,7 @@
     {
      "n": "auctioneer head",
      "p": [
-      -0.42,
+      -0.47,
       2.1,
       -4.8
      ],
@@ -2963,7 +2963,7 @@
     {
      "n": "slab",
      "p": [
-      0.11,
+      0.18,
       1.94,
       -4.6
      ],
@@ -3001,8 +3001,8 @@
    },
    "build": "new: a giant brass balance on a lawn. The villa sits on the far pan, resting on the grass; the near pan hangs empty at chest height.",
    "blocking": "dA stands right of the near pan, front view, the slab in his left hand (screen left, the pan side).",
-   "action": "f1580 'Khoan': wide, he stares at the slab in his hand; the villa sits on the far pan in the distance. f1597 the camera steps in. f1604-1622 he lifts the slab over the pan and stands it down; contact f1624. f1626-1638 the near pan drops 1.3 m, accelerating, as the camera pulls back; f1638 it hits the grass on 'đắt hơn': thud, kick, dust ring, the slab hops 6 cm. The far pan is thrown up 3.9 m: the villa leaves it by 0.4 m and lands back at f1652, pool water slopping over the side. It hangs there on 'căn biệt thự'.",
-   "acting": "dA: dazed at the slab, then shock; his jaw drops to the grass at f1652.",
+   "action": "f1580 'Khoan': wide, he stares at the slab in his hand; the villa sits on the far pan in the distance. f1597 the camera steps in. f1604-1622 he lifts the slab over the pan and stands it down; contact f1624. f1626-1638 the near pan drops 1.3 m, accelerating, as the camera pulls back; f1638 it hits the grass on 'đắt hơn': thud, kick, dust ring, the slab hops 6 cm. The far pan is thrown up 3.9 m: the villa leaves it by 0.4 m and lands back at f1654, pool water slopping over the side. It hangs there on 'căn biệt thự'.",
+   "acting": "dA: dazed at the slab, then shock; his jaw drops to the grass at f1654.",
    "cams": [
     {
      "f": 1580,
@@ -3082,7 +3082,7 @@
      1.0
     ],
     [
-     1652,
+     1654,
      0.4
     ]
    ],
@@ -3091,7 +3091,7 @@
      "who": "dA",
      "at": [
       1.6,
-      2.45
+      2.4
      ],
      "view": "front",
      "pose": "stands the slab on the pan",
@@ -3104,7 +3104,7 @@
      "p": [
       1.6,
       1.6,
-      2.45
+      2.4
      ],
      "f": [
       1580,
@@ -3186,7 +3186,7 @@
    ],
    "physics": "beam: constant angular acceleration over 12 f, hard stop on the grass; villa: thrown at the far end's speed, free flight 0.4 m above the pan, lands with one 5 cm bounce; pans hang plumb on their chains.",
    "light_mood": "bright day, blue sky: the joke gets daylight.",
-   "sound": "Huh meme f1582, brass creak f1626, heavy thud f1638, water splash f1644, Instagram Thud for the jaw f1652.",
+   "sound": "Huh meme f1582, brass creak f1626, heavy thud f1638, water splash f1644, Instagram Thud for the jaw f1654.",
    "after": "none (one-off set)."
   },
   {
@@ -3326,7 +3326,7 @@
    },
    "build": "same table, wider. 100 REAL Mudkip cards; three slab cases.",
    "blocking": "Hands only.",
-   "action": "f1823-1856 the 100 cards are dealt in from the bottom edge, three per frame, each sliding to its place in a 10 x 10 spread (rows shingled); title '100'. f1903, 1910, 1917 three slab cases drop onto three of the cards (clack, clack, clack) on 'ba lá'; their 10s flash on 'mười' f1937. f1950-1964 two forearms sweep outward from the middle and push the 97 loose cards off both sides; the three slabs do not move. f1962 the camera pushes in on them; title '3/100' on 'có ba'.",
+   "action": "f1823-1856 the 100 cards are dealt in from the bottom edge, three per frame, each sliding to its place in a 10 x 10 spread (rows shingled); title '100'. f1903, 1910, 1917 three slab cases drop onto three of the cards (clack, clack, clack) on 'ba lá'; their 10s flash on 'mười' f1937. f1950 a gust crosses the table from the bottom of the frame (someone blows): the 97 loose cards lift and skid away up and off the table, bottom rows first, gone by f1972; the three heavy slabs stay put. f1962 the camera pushes in on them; title '3/100' on 'có ba'.",
    "acting": "hands only",
    "cams": [
     {
@@ -3350,14 +3350,14 @@
     {
      "f": 1962,
      "pos": [
-      -0.02,
-      1.65,
-      -0.047
+      -0.07,
+      1.85,
+      -0.077
      ],
      "look": [
-      -0.02,
+      -0.07,
       0,
-      -0.067
+      -0.097
      ],
      "fov": 34,
      "roll": 0,
@@ -3444,9 +3444,9 @@
      ]
     }
    ],
-   "physics": "cards: 8 f slide with ease-out and a 3 deg settle; cases: 0.5 m drop each (10 f), 4 mm bounce; sweep: a card moves only while the forearm touches it, then coasts 4 f.",
+   "physics": "cards: 8 f slide with ease-out and a 3 deg settle; cases: 0.5 m drop each (10 f), 4 mm bounce; gust: each loose card accelerates at 6 m/s2 from the moment the gust front reaches it (bottom rows first, 8 f bottom to top), lifting 3 cm and spinning; the slabs (30x the weight) do not move.",
    "light_mood": "warm desk light.",
-   "sound": "card riffle f1823-1856, glock on '100', three clacks, shimmer f1937, long paper sweep f1950-1964, low hit on '3/100' f1977.",
+   "sound": "card riffle f1823-1856, glock on '100', three clacks, shimmer f1937, a blown whoosh and paper flutter f1950-1972, low hit on '3/100' f1977.",
    "after": "none"
   },
   {
@@ -3471,7 +3471,7 @@
     "to": "S19"
    },
    "build": "the locked board frame, golden. Column B; the REAL 1997 No.1 Trainer in a slab on the red cushion; light-up numerals on both columns.",
-   "blocking": "Auctioneer at his mark. Attendant waits at stage right with the cushion, then steps to column B; he stands at the right edge of the locked frame.",
+   "blocking": "Auctioneer at his mark. Attendant stands at stage right behind the line of the columns, at the edge of the locked frame, the cushion at his chest; his arm reaches forward to column B.",
    "action": "f1996-2020 column B grinds up out of the stage beside the Mudkip (0.5 -> 1.78 m); the board resets to $0. f2022 glide to the cushion in the attendant's hands: the trophy Pikachu, gold gleam on 'cúp vàng' f2056-2067; title '1997'. f2105 back to the locked frame; f2109-2122 his arm stands the slab on column B on 'lên sàn'. f2137-2157 the board rolls to $3,080,500; f2153 gavel up, f2159 strike on 'đô'. f2163 the camera drops to the two columns. f2167-2181 'Về nhì': column B sinks to 1.45 m and column A rises to 1.95 m with a stone grind; f2181 the numerals light: 1 under the Mudkip, 2 under the trophy Pikachu.",
    "acting": "Auctioneer: stern -> grin. Attendant: neutral.",
    "cams": [
@@ -3487,7 +3487,7 @@
       2.0,
       -5.1
      ],
-     "fov": 44,
+     "fov": 50,
      "roll": 0,
      "push": 0.0004,
      "blur": 3,
@@ -3496,21 +3496,21 @@
     {
      "f": 2022,
      "pos": [
-      1.2,
+      0.9,
       1.85,
-      -3.0
+      -3.4
      ],
      "look": [
-      1.2,
+      0.9,
       1.72,
-      -4.2
+      -4.6
      ],
      "fov": 34,
      "roll": 0,
      "push": 0.0015,
      "blur": 9,
      "why": "the trophy Pikachu on its cushion",
-     "glide": 28
+     "glide": 24
     },
     {
      "f": 2105,
@@ -3524,26 +3524,22 @@
       2.0,
       -5.1
      ],
-     "fov": 44,
+     "fov": 50,
      "roll": 0,
-     "push": 0.0004,
+     "push": 0.0002,
      "blur": 3,
      "why": "back: it goes on the block, the price, the gavel",
-     "glide": 14,
-     "punch": [
-      0.002,
-      12
-     ]
+     "glide": 14
     },
     {
      "f": 2163,
      "pos": [
-      0.24,
+      0.32,
       1.72,
       -1.7
      ],
      "look": [
-      0.24,
+      0.32,
       1.5,
       -5.1
      ],
@@ -3554,7 +3550,7 @@
      "why": "down to the two columns: a podium",
      "glide": 16,
      "focus": [
-      0.24,
+      0.32,
       1.6,
       -4.6
      ]
@@ -3578,7 +3574,7 @@
     {
      "who": "auctioneer",
      "at": [
-      -0.42,
+      -0.47,
       -4.8
      ],
      "view": "front",
@@ -3588,11 +3584,11 @@
     {
      "who": "attendant",
      "at": [
-      1.2,
-      -4.4
+      0.9,
+      -4.8
      ],
      "view": "front",
-     "pose": "holds the cushion; steps to [0.78,-4.4] and places the slab",
+     "pose": "holds the cushion at his chest; his left arm stands the slab on column B",
      "expr": "neutral"
     }
    ],
@@ -3624,7 +3620,7 @@
     {
      "n": "slab A",
      "p": [
-      0.11,
+      0.18,
       1.94,
       -4.6
      ],
@@ -3636,7 +3632,7 @@
     {
      "n": "col B right edge",
      "p": [
-      0.48,
+      0.54,
       1.78,
       -4.45
      ],
@@ -3648,9 +3644,9 @@
     {
      "n": "cushion slab",
      "p": [
-      1.2,
+      0.9,
       1.75,
-      -4.2
+      -4.6
      ],
      "f": [
       2050,
@@ -3660,7 +3656,7 @@
     {
      "n": "A slab top (podium)",
      "p": [
-      0.11,
+      0.18,
       2.26,
       -4.6
      ],
@@ -3672,7 +3668,7 @@
     {
      "n": "numeral 1",
      "p": [
-      0.11,
+      0.18,
       1.68,
       -4.45
      ],
@@ -3684,7 +3680,7 @@
     {
      "n": "numeral 2",
      "p": [
-      0.37,
+      0.43,
       1.25,
       -4.45
      ],
@@ -3696,7 +3692,7 @@
     {
      "n": "B slab",
      "p": [
-      0.37,
+      0.43,
       1.6,
       -4.6
      ],
