@@ -226,6 +226,7 @@ export type Sets = {
   hatch: THREE.Group; cord: THREE.Object3D; ladder: THREE.Group; glow: THREE.MeshBasicMaterial; glowMesh: THREE.Mesh;
   stack: THREE.Group; dust: THREE.MeshBasicMaterial; binders: THREE.Group[];
   book: { g: THREE.Group; hinge: THREE.Group };
+  tbook: { g: THREE.Group; hinge: THREE.Group };
   crt: THREE.Group; flat: THREE.Group; crtScreen: Canvas; parcels: THREE.Mesh[]; paper: THREE.Mesh;
   ball: THREE.Mesh; board: Canvas;
 };
@@ -366,7 +367,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   }
   // the newspaper lying on the desk (15 years later)
   const paper = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.004, 0.3), [M.white(), M.white(), new THREE.MeshBasicMaterial({ map: ctex("paper6000", 840, 600, (g) => newspaper(new Pen(g))) }), M.white(), M.white(), M.white()]);
-  paper.position.set(0.12, 0.762, -0.3); paper.rotation.y = 0.1; study.add(paper);
+  paper.position.set(0.12, 0.762, -0.2); paper.rotation.y = Math.PI + 0.1; study.add(paper); // headline toward the far edge: the right way up for him (he sits at -z)
   const book = openBinder(); study.add(book.g); book.g.position.set(-0.08, 0.76, -0.22);
 
   // ===== SCHOOL YARD (late 90s) =====
@@ -424,7 +425,9 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   b = new Batch();
   up(b, lam("tableTop", () => ({ map: rep(planksHD(), 1, 1) })), -1.5, 1.5, -1.5, 1.5, 0, 1.2);
   b.build(table);
+  // the binder that drops onto the table in S14 (a real 3D open binder: base, page block with the Skyridge page, hinged cover)
+  const tbook = openBinder(); table.add(tbook.g); tbook.g.visible = false;
 
   for (const g of [house, study, school, auction, table]) g.traverse((o) => { if ((o as THREE.Mesh).isMesh) { o.castShadow = true; o.receiveShadow = true; } });
-  return { groups, hatch, cord, ladder, glow, glowMesh, stack, dust, binders, book, crt, flat, crtScreen, parcels, paper, ball, board };
+  return { groups, hatch, cord, ladder, glow, glowMesh, stack, dust, binders, book, tbook, crt, flat, crtScreen, parcels, paper, ball, board };
 };

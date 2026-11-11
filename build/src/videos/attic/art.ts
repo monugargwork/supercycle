@@ -63,6 +63,26 @@ export const creature = (p: Pen, k: Kind, x0: number, y0: number, x1: number, y1
 /** trading card (no slab): yellow border, art window, text lines */
 /** bare card cut out of slab2's image (public/psa/cards/card2.png), used after the case is smashed */
 export const CARD_IMG: { card2: HTMLImageElement | null } = { card2: null };
+/** Real Pokémon TCG card scans for this reel (public/attic/cards, fetched from the Pokémon TCG image CDN, 1999-2003 sets to match
+ *  the auction "A Decade of Masters 1999-2009"): Base Set, Jungle, Fossil, Neo Genesis, Legendary Collection, Skyridge.
+ *  Loaded once before the world is built (Reel.tsx gates rendering on them), then drawn by tcard({ img }). */
+export const TCG = {
+  heroes: ["zard_base", "zard_lc", "blastoise", "venusaur", "mewtwo"],
+  commons: ["pikachu", "charmander", "squirtle", "bulbasaur", "machop", "diglett", "magikarp", "onix", "jigglypuff", "meowth", "psyduck", "eevee",
+    "gastly", "abra", "ponyta", "vulpix", "totodile", "cyndaquil", "chikorita", "mantine"],
+  skyridge: ["sky_h1", "sky_h2", "sky_h3", "sky_h4", "sky_h5", "sky_h6", "sky_h7", "sky_h8", "sky_h9"],
+};
+export const TCG_ALL = [...TCG.heroes, ...TCG.commons, ...TCG.skyridge];
+export const TCG_IMG: Record<string, HTMLImageElement> = {};
+export const loadTcg = (url: (n: string) => string) => Promise.all(TCG_ALL.map((n) => new Promise<void>((ok) => {
+  if (TCG_IMG[n]) return ok();
+  const im = new Image(); im.onload = () => { TCG_IMG[n] = im; ok(); }; im.onerror = () => ok(); im.src = url(n);
+})));
+/** a real card scan into a rounded rectangle (cards have rounded corners; the scans' corners are cut by the clip) */
+const scan = (g: CanvasRenderingContext2D, im: HTMLImageElement, x0: number, y0: number, x1: number, y1: number) => {
+  const w = x1 - x0, h = y1 - y0, r = w * 0.045;
+  g.save(); g.beginPath(); g.roundRect(x0, y0, w, h, r); g.clip(); g.drawImage(im, x0, y0, w, h); g.restore();
+};
 export const card = (p: Pen, k: Kind, x0: number, y0: number, x1: number, y1: number) => {
   const w = x1 - x0, h = y1 - y0, s = w / 100;
   if (k === 1 && CARD_IMG.card2) {
@@ -594,10 +614,17 @@ export const glow = (p: Pen, col = "93,255,122") => { const g = p.g, gr = g.crea
 
 // ======================= attic Pokémon reel =======================
 /** a generic trading card at (x0,y0)-(x1,y1); bent > 0 folds the top-right corner over; holo adds a rainbow sheen */
-export const tcard = (p: Pen, k: Kind, x0: number, y0: number, x1: number, y1: number, o: { bent?: number; holo?: boolean; scuff?: boolean } = {}) => {
-  card(p, k, x0, y0, x1, y1);
-  const w = x1 - x0, h = y1 - y0, g = p.g;
-  if (o.holo) {
+export const tcard = (p: Pen, k: Kind, x0: number, y0: number, x1: number, y1: number, o: { bent?: number; holo?: boolean; scuff?: boolean; img?: string } = {}) => {
+  const w = x1 - x0, h = y1 - y0, g = p.g, im = o.img ? TCG_IMG[o.img] : undefined;
+  if (im) {
+    scan(g, im, x0, y0, x1, y1);
+    if (o.holo) { // a soft rainbow sheen over the art window only (the scan already has the real holo pattern)
+      g.save(); g.globalCompositeOperation = "soft-light"; g.globalAlpha = 0.55; const gr = g.createLinearGradient(x0, y0, x1, y1);
+      ["#ff6b6b", "#ffd93d", "#6bff95", "#6bc5ff", "#c56bff"].forEach((c, i) => gr.addColorStop(i / 4, c));
+      g.fillStyle = gr; g.fillRect(x0 + w * 0.09, y0 + h * 0.1, w * 0.82, h * 0.4); g.restore();
+    }
+  } else card(p, k, x0, y0, x1, y1);
+  if (!im && o.holo) {
     g.save(); g.globalAlpha = 0.35; const gr = g.createLinearGradient(x0, y0, x1, y1);
     ["#ff6b6b", "#ffd93d", "#6bff95", "#6bc5ff", "#c56bff"].forEach((c, i) => gr.addColorStop(i / 4, c));
     g.fillStyle = gr; g.fillRect(x0 + w * 0.09, y0 + h * 0.14, w * 0.82, h * 0.42); g.restore();
@@ -616,7 +643,7 @@ export const binderPage = (p: Pen, gleam = -1) => {
   for (let r = 0; r < 3; r++) for (let c = 0; c < 3; c++) {
     const x = 40 + c * 180, y = 30 + r * 200;
     p.poly(rr(x - 6, y - 6, x + 166, y + 196, 8), "#e6ecf2", 3);
-    tcard(p, ((r * 3 + c) % NSLAB) as Kind, x + 6, y + 6, x + 154, y + 184, { holo: (r + c) % 3 === 0 });
+    tcard(p, ((r * 3 + c) % NSLAB) as Kind, x + 6, y + 6, x + 154, y + 184, { img: TCG.skyridge[r * 3 + c] }); // the Skyridge holos, as in the real master set
   }
   if (gleam >= 0) { // a diagonal shine sweeping across the sleeves
     g.save(); const x = -300 + 1200 * gleam; const gr = g.createLinearGradient(x - 120, 0, x + 120, 640);
@@ -629,7 +656,7 @@ export const cardHeap = (p: Pen) => {
   const g = p.g;
   for (let i = 0; i < 26; i++) {
     const a = Math.sin(i * 12.9) * 1.4, x = 350 + 230 * Math.sin(i * 2.17) * Math.abs(Math.sin(i * 0.7)), y = 350 + 230 * Math.cos(i * 1.73) * Math.abs(Math.cos(i * 0.9));
-    g.save(); g.translate(x, y); g.rotate(a); tcard(p, (i % NSLAB) as Kind, -62, -86, 62, 86, { bent: i % 3 === 0 ? 0.7 : i % 4 === 0 ? 0.4 : 0, scuff: i % 2 === 0 }); g.restore();
+    g.save(); g.translate(x, y); g.rotate(a); tcard(p, (i % NSLAB) as Kind, -62, -86, 62, 86, { bent: i % 3 === 0 ? 0.7 : i % 4 === 0 ? 0.4 : 0, scuff: i % 2 === 0, img: TCG.commons[i % TCG.commons.length] }); g.restore();
   }
 };
 /** 90s web auction page on the CRT, 512 x 400: listing, price, a big MUA NGAY button; bought = 0..3 purchases stamped */
@@ -640,7 +667,7 @@ export const crtPage = (p: Pen, bought: number, cursor: number, press: boolean) 
   for (let i = 0; i < 3; i++) {
     const y = 58 + i * 110;
     g.fillStyle = "#e9eef6"; g.fillRect(22, y, 468, 96);
-    tcard(p, (i % NSLAB) as Kind, 32, y + 8, 92, y + 88);
+    tcard(p, (i % NSLAB) as Kind, 30, y + 4, 95, y + 93, { img: ["zard_base", "jigglypuff", "psyduck"][i] }); // Base Set, Jungle, Fossil
     g.fillStyle = "#1d1b22"; g.font = "700 20px Arial, sans-serif"; g.fillText(["Base Set - complete", "Jungle - complete", "Fossil - complete"][i], 108, y + 24);
     g.fillStyle = "#c23a32"; g.font = "800 24px Arial, sans-serif"; g.fillText(["£95", "£60", "£70"][i], 108, y + 60);
     const bx = 330, by = y + 30, pressed = press && i === Math.min(2, Math.floor(cursor));
@@ -658,9 +685,15 @@ export const newspaper = (p: Pen) => {
   g.fillStyle = "#1d1b22"; g.font = "900 54px Georgia, serif"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText("THE DAILY POST", 420, 52);
   g.fillRect(30, 88, 780, 4); g.fillRect(30, 96, 780, 1.5);
   g.font = "900 62px Arial, sans-serif"; g.fillText("POKÉMON CARD", 420, 160); g.fillText("SELLS FOR £6,000", 420, 228);
-  tcard(p, 0 as Kind, 60, 280, 260, 560, { holo: true });
+  tcard(p, 0 as Kind, 60, 274, 260, 549, { img: "zard_base" });
   g.textAlign = "left"; g.fillStyle = "#77706a";
   for (let i = 0; i < 9; i++) g.fillRect(300, 290 + i * 30, 480 - (i % 3) * 40, 12);
+};
+/** a diagonal shine band (for sweeping across a binder page), 400 x 400 transparent, u 0..1 = position */
+export const gleamBand = (p: Pen, u: number) => {
+  const g = p.g, x = -200 + 800 * u, gr = g.createLinearGradient(x - 90, 0, x + 90, 400);
+  gr.addColorStop(0, "rgba(255,255,255,0)"); gr.addColorStop(0.5, "rgba(255,255,255,0.38)"); gr.addColorStop(1, "rgba(255,255,255,0)");
+  g.fillStyle = gr; g.fillRect(0, 0, 400, 400);
 };
 /** auction price board, 1024 x 400: dark panel, amber digits */
 export const priceBoard = (p: Pen, v: number) => {

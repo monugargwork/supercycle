@@ -237,7 +237,7 @@ export class World {
     else S.ball.visible = false;
   }
   /** pieces the cast drives (stage()): the stack and the openable binder */
-  private placeProps(id: number, f: number, st: { stack?: { p: V3; ry?: number; lift?: number; tilt?: number } | null; book?: { p: V3; open: number; ry?: number } | null }) {
+  private placeProps(id: number, f: number, st: { stack?: { p: V3; ry?: number; lift?: number; tilt?: number } | null; book?: { p: V3; open: number; ry?: number } | null; tbook?: { p: V3; open: number; ry?: number; s?: number } | null }) {
     const S = this.S, place = SHOTS[id - 1].place;
     const inAttic = place === "house" && id !== 20;
     const sp = st.stack ?? (inAttic && id !== 6 && id !== 10 ? { p: STACK_AT } : null);
@@ -246,6 +246,8 @@ export class World {
     const top = S.binders[5];
     top.position.y = 5 * BINDER.h + (sp?.lift ?? 0); top.rotation.set(sp?.tilt ?? 0, 0.03 * Math.sin(5 * 3.1), 0);
     S.dust.opacity = place === "house" ? 0.8 * dustAt(f) : 0;
+    S.tbook.g.visible = !!st.tbook;
+    if (st.tbook) { const tb = S.tbook.g; tb.position.set(...st.tbook.p); tb.parent!.updateWorldMatrix(true, false); tb.parent!.worldToLocal(tb.position); tb.rotation.set(0, st.tbook.ry ?? 0, 0); tb.scale.setScalar(st.tbook.s ?? 1); S.tbook.hinge.rotation.z = st.tbook.open; }
     S.book.g.visible = !!st.book;
     if (st.book) { S.book.g.position.set(...st.book.p); if (S.book.g.parent) { S.book.g.parent.updateWorldMatrix(true, false); S.book.g.parent.worldToLocal(S.book.g.position); } S.book.g.rotation.set(0, st.book.ry ?? 0, 0); S.book.hinge.rotation.z = st.book.open; }
     void f;

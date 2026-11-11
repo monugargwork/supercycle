@@ -20,6 +20,7 @@ import { useThree } from "@react-three/fiber";
 import { EffectComposer } from "@react-three/postprocessing";
 import { BlendFunction, BloomEffect, ToneMappingEffect, ToneMappingMode } from "postprocessing";
 import { World } from "./world";
+import { TCG_IMG, TCG_ALL, loadTcg } from "./art";
 import { InkPass, noInkFallback } from "./ink";
 import { LensBlur, GrainEffect } from "./lensblur";
 import { GradeEffect, GRADES, GRADE_STRENGTH, gradeFor } from "./grade";
@@ -100,6 +101,13 @@ const ShotView: React.FC<{ id: number; alpha: number }> = ({ id, alpha }) => (
   </AbsoluteFill>
 );
 
+/** real card scans: everything that draws a card waits for these (one delayRender for the whole set) */
+const useTcg = () => {
+  const [ready, setReady] = useState(() => Object.keys(TCG_IMG).length >= TCG_ALL.length);
+  const [h] = useState(() => (ready ? null : delayRender("tcg card scans")));
+  useEffect(() => { if (!h) return; loadTcg((n) => staticFile(`attic/cards/${n}.png`)).then(() => { setReady(true); continueRender(h); }); }, [h]);
+  return ready;
+};
 /** inputProps { audio: false } renders silent stills */
 const withAudio = () => (getInputProps() as { audio?: boolean }).audio !== false;
 /** Enzo house titles (Title2 from the Enzo repo: red box, Bolota Bold, glides in while typing), one block per beat.
@@ -148,9 +156,10 @@ export const AtticCaptions: React.FC = () => (
 export const AtticReel: React.FC = () => {
   const f = useCurrentFrame();
   const flash = f >= FLASH_AT && f < FLASH_AT + 4 ? [1, 0.75, 0.45, 0.2][f - FLASH_AT] : 0;
+  const tcg = useTcg();
   return (
     <AbsoluteFill style={{ background: "#cfe3f2" }}>
-      {layersAt(f).map((l, i) => <ShotView key={i ? "over" : "base"} id={l.id} alpha={l.alpha} />)}
+      {tcg && layersAt(f).map((l, i) => <ShotView key={i ? "over" : "base"} id={l.id} alpha={l.alpha} />)}
       {flash > 0 && <AbsoluteFill style={{ background: "#ffffff", opacity: flash }} />}
       <Titles f={f} />
       {(getInputProps() as { captions?: boolean }).captions && <Captions f={f} />}

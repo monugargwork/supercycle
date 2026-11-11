@@ -100,7 +100,7 @@ export type FxPlace = { key: string; cw: number; ch: number; draw: (p: Pen) => v
 export type CamInfo = { pos: THREE.Vector3; right: THREE.Vector3; fwd: THREE.Vector3; up: THREE.Vector3; sun: THREE.Vector3 };
 /** moving set pieces the cast drives: the binder stack (where it is, which way it faces, the top binder lifted/tilted),
  *  the openable binder (where, how open) */
-export type Stage = { places: Place[]; fx: FxPlace[]; stack?: { p: V3; ry?: number; lift?: number; tilt?: number } | null; book?: { p: V3; open: number; ry?: number } | null };
+export type Stage = { places: Place[]; fx: FxPlace[]; stack?: { p: V3; ry?: number; lift?: number; tilt?: number } | null; book?: { p: V3; open: number; ry?: number } | null; tbook?: { p: V3; open: number; ry?: number; s?: number } | null };
 
 const hh = (i: number, s = 0) => { const v = Math.sin(i * 127.1 + s * 311.7) * 43758.5453; return v - Math.floor(v); };
 const q = (v: number, n = 120) => Math.round(v * n) / n;
@@ -265,10 +265,11 @@ const jaw = (out: Stage, cam: CamInfo, who: Who, at: V3, fo: FrontOpts, k: numbe
   card(out, `jaw|${skin}|${q(k, 10)}`, 200, 600, (p) => art.jawDrop(p, skin), chin[0] - cam.fwd.x * 0.06, chin[1] - len / 2, chin[2] - cam.fwd.z * 0.06, 0.15, len);
 };
 const glowAt = (out: Stage, key: string, p: V3, s: number, col = "255,214,120") => out.fx.push({ key: "glow" + key + col, cw: 128, ch: 128, draw: (pp) => art.glow(pp, col), x: p[0], y: p[1], z: p[2], w: s, h: s, soft: true });
-const tcardFx = (out: Stage, key: string, p: V3, h: number, o: { bent?: number; holo?: boolean; scuff?: boolean; k?: number; rot?: number } = {}) =>
-  card(out, `tc|${key}|${q(o.bent ?? 0, 10)}|${!!o.holo}|${!!o.scuff}`, 260, 360, (pp) => art.tcard(pp, (o.k ?? 0) as art.Kind, 10, 10, 250, 350, o), p[0], p[1], p[2], h * 0.72, h, { rot: o.rot ?? 0 });
+const tcardFx = (out: Stage, key: string, p: V3, h: number, o: { bent?: number; holo?: boolean; scuff?: boolean; k?: number; rot?: number; img?: string } = {}) =>
+  card(out, `tc|${key}|${q(o.bent ?? 0, 10)}|${!!o.holo}|${!!o.scuff}|${o.img ?? ""}`, 260, 360, (pp) => art.tcard(pp, (o.k ?? 0) as art.Kind, 10, 10, 250, 350, o), p[0], p[1], p[2], h * 0.72, h, { rot: o.rot ?? 0 });
 
 // ---------------- per-shot staging ----------------
+const TB_DROP = 1407, TB_LAND = 1414; // S14: the binder falls onto the table, lands on the beat
 const HOOK_AT = (f: number): V3 => [0.18, f < 100 ? 1.5 + 0.12 * smooth(f / 20) : 1.62 - 1.1 * smooth((f - 100) / 20), 0.05];
 /** the hatch scene in the attic (hook and shot 8): he comes up with the stack, slides it onto the boards, pats it, sinks */
 const atticPlace = (out: Stage, cam: CamInfo, f: number, f0: number, who: Who, pats: boolean, sc = 1) => {
@@ -317,7 +318,7 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
       const hS = arm3d(out, cam, "son", pS, fs, 1, lerp3(restHand(cam, "son", pS, fs, 1), meet, reach), f);
       const hA = arm3d(out, cam, "kidA", pA, fa, -1, lerp3(restHand(cam, "kidA", pA, fa, -1), meet, reach), f);
       const cp = f < SWAP ? hS : hA;
-      if (f >= 230) tcardFx(out, "swap", [cp[0] - cam.fwd.x * 0.03, cp[1] + 0.05, cp[2] - cam.fwd.z * 0.03], 0.13, { holo: true, rot: f < SWAP ? 0.2 : -0.2 });
+      if (f >= 230) tcardFx(out, "swap", [cp[0] - cam.fwd.x * 0.03, cp[1] + 0.05, cp[2] - cam.fwd.z * 0.03], 0.13, { holo: true, rot: f < SWAP ? 0.2 : -0.2, img: "zard_base" });
       if (f >= 272) { const u = smooth((f - 272) / 34); if (u < 1) side(out, cam, "painter", ...Sc(2.6 - 1.8 * u, 0, 1.2 - 0.25 * u), -1, -0.1, { mode: "march", phase: walkPhase(f, 0.9), stride: 0.65, expr: "smile" }, f); else front(out, cam, "painter", ...Sc(0.8, 0, 0.95), { mode: "stand", expr: "smile", facing: -1, look: -1 }, f); }
       break;
     }
@@ -332,7 +333,7 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
       const dHand = f < TAKE ? lerp3(restHand(cam, "painter", pD, fd, 1), between, smooth((f - 322) / 16)) : lerp3(between, up, smooth((f - TAKE) / 20));
       const hD = arm3d(out, cam, "painter", pD, fd, 1, dHand, f);
       const cp = f < TAKE ? hS : hD;
-      tcardFx(out, "take", [cp[0] - cam.fwd.x * 0.03, cp[1] + 0.07, cp[2] - cam.fwd.z * 0.03], f >= TAKE + 10 ? 0.19 : 0.14, { holo: true, rot: 0.05 });
+      tcardFx(out, "take", [cp[0] - cam.fwd.x * 0.03, cp[1] + 0.07, cp[2] - cam.fwd.z * 0.03], f >= TAKE + 10 ? 0.19 : 0.14, { holo: true, rot: 0.05, img: "zard_base" });
       sparkle(out, f, SHINE - 2, cp[0] - cam.fwd.x * 0.06, cp[1] + 0.09, cp[2] - cam.fwd.z * 0.06, 0.5, 16);
       break;
     }
@@ -353,7 +354,7 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
         const hand = f < 1690 ? lerp3(rR, page, smooth((f - 1674) / 14)) : f < 1700 ? lerp3(page, rR, smooth((f - 1690) / 8)) : lerp3(rR, top, smooth((f - 1700) / 9));
         const h = arm3d(out, cam, "painter", at, fo, 1, hand, f);
         arm3d(out, cam, "painter", at, fo, -1, f < 1694 ? lerp3(rL, edge, smooth((f - 1684) / 10)) : f < 1701 ? edge : lerp3(edge, rL, smooth((f - 1701) / 8)), f);
-        if (f < 1690) tcardFx(out, "store", [h[0], h[1] + 0.03, h[2]], 0.1, { holo: true, rot: 0.3 });
+        if (f < 1690) tcardFx(out, "store", [h[0], h[1] + 0.03, h[2]], 0.1, { holo: true, rot: 0.3, img: "zard_lc" });
       }
       break;
     }
@@ -374,14 +375,14 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
         const fo: FrontOpts = { mode: "stand", expr: f < 650 ? "neutral" : "dazed", facing: -1, look: -1, armOff: -1 };
         front(out, cam, "son", ...at, fo, f);
         const over: V3 = [-1.8, 0.62, 0.78], h = arm3d(out, cam, "son", at, fo, -1, f < 652 ? holdHand(cam, "son", at, fo, -1) : lerp3(holdHand(cam, "son", at, fo, -1), over, smooth((f - 652) / 8)), f);
-        if (f < 662) tcardFx(out, "stack", [h[0], h[1] + 0.04, h[2]], 0.11, { scuff: true });
+        if (f < 662) tcardFx(out, "stack", [h[0], h[1] + 0.04, h[2]], 0.11, { scuff: true, img: "pikachu" });
       } else {
         const u = (f - QUIT) / 30;
         side(out, cam, "son", -1.35 + 1.5 * u, 0, 1.1 + 0.15 * u, 1, 0.1, { mode: "march", phase: walkPhase(f, 1.1), stride: 0.55, expr: "whistle" }, f);
       }
       for (let i = 0; i < 4; i++) { // the cards tumble into the box
         const t = f - 662 - i * 2; if (t < 0 || t > 10) continue;
-        tcardFx(out, `fall${i}`, [-1.8 + 0.03 * i, 0.62 - 0.17 * Math.min(1, t / 7) ** 2, 0.78], 0.1, { k: i, rot: t * 0.4 + i });
+        tcardFx(out, `fall${i}`, [-1.8 + 0.03 * i, 0.62 - 0.17 * Math.min(1, t / 7) ** 2, 0.78], 0.1, { k: i, rot: t * 0.4 + i, img: ["squirtle", "machop", "diglett", "magikarp", "onix", "meowth"][i % 6] });
       }
       break;
     }
@@ -455,11 +456,16 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
     }
     case 13: case 14: { // the table, top-down: the heap of loose cards; his binder lands beside it, opens, a gleam runs across
       const hk = smooth((f - 1306) / 18), x = -0.5 + 0.5 * hk - (id === 14 ? 0.05 * smooth((f - 1410) / 20) : 0);
-      card(out, "heap", 700, 700, (p) => art.cardHeap(p), ...I(x, 0.004, id === 14 ? -0.13 : -0.02), 0.3, 0.3, { flat: true, rot: 0.1 });
-      if (id === 14) {
-        const d = pop(f, 1410, 7), o = smooth((f - 1430) / 14), g = f >= 1500 ? q(smooth((f - 1500) / 40), 30) : -1;
-        if (d > 0) card(out, `page${q(o, 20)}|${g}`, 600, 640, (p) => art.binderPage(p, g), ...I(0.02, 0.006, 0.15), 0.26 * Math.max(0.05, o) * d, 0.28 * d, { flat: true, rot: -0.04 });
-        if (d > 0 && o < 1) card(out, "cover", 300, 320, (p) => { p.poly(art.rr(4, 4, 296, 316, 14), "#2f8a4c", 8); p.poly(art.rr(70, 120, 230, 190, 6), "#f6f2e6", 4); }, ...I(0.02 - 0.13 * o, 0.008, 0.15), 0.26 * (1 - o) + 0.01, 0.28 * d, { flat: true, rot: -0.04 });
+      card(out, "heap", 700, 700, (p) => art.cardHeap(p), ...I(x, 0.004, id === 14 ? -0.17 : -0.02), 0.3, 0.3, { flat: true, rot: 0.1 });
+      if (id === 14 && f >= TB_DROP) {
+        // the real 3D binder falls onto the table (gravity, one small bounce, a puff of dust), then its cover swings up toward
+        // the lens and flops over to the left (hinge on its left edge), showing the full Skyridge page; a gleam runs across the sleeves
+        const t = (f - TB_DROP) / 30, fall = Math.max(0, 0.3 - 0.5 * 9.8 * t * t), bounce = f >= TB_LAND && f < TB_LAND + 8 ? 0.018 * Math.sin(((f - TB_LAND) / 8) * Math.PI) : 0;
+        const y = f < TB_LAND ? fall : bounce, open = Math.PI * smooth((f - 1432) / 18);
+        out.tbook = { p: I(0.02, y, 0.07), open, s: 0.8 };
+        burst(out, f, TB_LAND, ...I(0.02, 0.02, 0.07), 0.42, 9, "#efe6cf");
+        if (f >= 1500 && f < 1542) { const u = q(smooth((f - 1500) / 40), 30), top = BINDER.h * 0.8 * 0.73 + 0.003;
+          out.fx.push({ key: `gleam${u}`, cw: 400, ch: 400, draw: (p) => art.gleamBand(p, u), x: I(0.02, 0, 0.07)[0], y: I(0, top, 0)[1], z: I(0, 0, 0.07)[2], w: 0.23, h: 0.25, flat: true, soft: true } as FxPlace); }
       }
       break;
     }
@@ -469,16 +475,16 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
       const fc: FrontOpts = { mode: "stand", expr: "laugh", facing: -1, armOff: -1 };
       front(out, cam, "kidA", ...pa, fa, f, [BEND]); front(out, cam, "kidB", ...pb, fb, f, [DROP]); front(out, cam, "kidC", ...pc, fc, f);
       const ha = arm3d(out, cam, "kidA", pa, fa, 1, holdHand(cam, "kidA", pa, fa, 1, 0.12), f);
-      tcardFx(out, "bend", [ha[0] - cam.fwd.x * 0.03, ha[1] + 0.07, ha[2] - cam.fwd.z * 0.03], 0.16, { k: 1, bent: smooth((f - BEND + 4) / 5), scuff: true });
+      tcardFx(out, "bend", [ha[0] - cam.fwd.x * 0.03, ha[1] + 0.07, ha[2] - cam.fwd.z * 0.03], 0.16, { k: 1, bent: smooth((f - BEND + 4) / 5), scuff: true, img: "bulbasaur" });
       const mid: V3 = lerp3(pb, pc, 0.5), meet: V3 = [mid[0] - cam.fwd.x * 0.12, 0.85, mid[2] - cam.fwd.z * 0.12], rk = smooth((f - 1638) / 10) * (1 - smooth((f - 1660) / 10));
       const hb = arm3d(out, cam, "kidB", pb, fb, 1, f < DROP + 10 ? holdHand(cam, "kidB", pb, fb, 1, 0.12) : lerp3(restHand(cam, "kidB", pb, fb, 1), meet, rk), f);
       const hc = arm3d(out, cam, "kidC", pc, fc, -1, lerp3(holdHand(cam, "kidC", pc, fc, -1, 0.12), meet, rk), f);
-      if (f < DROP - 4) tcardFx(out, "dropC", [hb[0] - cam.fwd.x * 0.03, hb[1] + 0.07, hb[2] - cam.fwd.z * 0.03], 0.15, { k: 2 });
-      else if (f < DROP + 8) { const t = (f - (DROP - 4)) / 8, y = hb[1] + 0.07 - (hb[1] + 0.07) * Math.min(1, t * t); tcardFx(out, "dropF", [Sc(0.4, 0, -1.1)[0], Math.max(0.02, y), Sc(0, 0, -1.1)[2]], 0.15, { k: 2, rot: t * 2 }); }
-      else card(out, "soggy", 260, 360, (p) => art.tcard(p, 2, 10, 10, 250, 350, { scuff: true }), ...Sc(0.4, 0.012, -1.1), 0.11, 0.15, { flat: true, rot: 0.6 });
+      if (f < DROP - 4) tcardFx(out, "dropC", [hb[0] - cam.fwd.x * 0.03, hb[1] + 0.07, hb[2] - cam.fwd.z * 0.03], 0.15, { k: 2, img: "squirtle" });
+      else if (f < DROP + 8) { const t = (f - (DROP - 4)) / 8, y = hb[1] + 0.07 - (hb[1] + 0.07) * Math.min(1, t * t); tcardFx(out, "dropF", [Sc(0.4, 0, -1.1)[0], Math.max(0.02, y), Sc(0, 0, -1.1)[2]], 0.15, { k: 2, rot: t * 2, img: "squirtle" }); }
+      else card(out, "soggy", 260, 360, (p) => art.tcard(p, 2, 10, 10, 250, 350, { scuff: true, img: "squirtle" }), ...Sc(0.4, 0.012, -1.1), 0.11, 0.15, { flat: true, rot: 0.6 });
       burst(out, f, DROP + 4, ...Sc(0.4, 0.08, -1.1), 0.5, 10, "#9fd0f2");
       const swapP = f < SWAP2 ? hc : hb;
-      if (f >= 1630) tcardFx(out, "swapB", [swapP[0] - cam.fwd.x * 0.03, swapP[1] + 0.07, swapP[2] - cam.fwd.z * 0.03], 0.15, { k: 3, holo: true });
+      if (f >= 1630) tcardFx(out, "swapB", [swapP[0] - cam.fwd.x * 0.03, swapP[1] + 0.07, swapP[2] - cam.fwd.z * 0.03], 0.15, { k: 3, img: "charmander" });
       break;
     }
     case 17: { // the shelf: the son's arm creeps up to a binder; dad swats it away

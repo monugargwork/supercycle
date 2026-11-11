@@ -166,7 +166,7 @@ const CAMS: Record<number, Key[]> = {
   // fifteen years later, same study framing: flat screen, older him, tea; the newspaper on the desk; the spit
   9: [
     { f: 862, s: (f) => dolly(St(-0.1, 1.3, 2.4), St(-0.38, 1.05, -0.6), pushK(f, 862, 0.002), { fov: 42 }) },
-    { f: 932, cut: true, s: (f) => dolly(St(0.12, 1.62, -0.28), St(0.12, 0.76, -0.3), pushK(f, 932, 0.0025), { fov: 30 }) },
+    { f: 932, cut: true, s: (f) => dolly(St(0.12, 1.98, -0.22), St(0.12, 0.76, -0.2), pushK(f, 932, 0.001), { fov: 40 }) }, // over his shoulder, wide enough for the whole page (Frame.io v1: zoom out)
     { f: 988, cut: true, s: (f) => dolly(St(0.9, 1.2, 1.2), St(0.0, 1.15, -1.0), pushK(f, 988, 0.003, 0.01, 10), { fov: 38 }) },
   ],
   // hallway: he yanks the cord, the hatch drops, the ladder slides down, he scrambles up
@@ -180,7 +180,7 @@ const CAMS: Record<number, Key[]> = {
   12: [{ f: 1210, s: (f) => dolly(Au(3.6, 2.3, 4.3), Au(3.4, 1.3, 2.4), pushK(f, 1210, 0.0015), { fov: 34 }) }],
   // "you see": top-down on a warm table; the heap of loose cards, then his binder page
   13: [{ f: 1303, s: (f) => dolly(I(0, 0.95, 0.02), I(0, 0, 0), pushK(f, 1303, 0.0008), { fov: 34 }) }],
-  14: [{ f: 1403, s: (f) => dolly(I(0, 0.95, 0.02), I(0, 0, 0), pushK(f, 1303, 0.0008), { fov: 34 }) }],
+  14: [{ f: 1403, s: (f) => dolly(I(0, 0.95, 0.02), I(0, 0, 0), pushK(f, 1303, 0.0005), { fov: 34 }) }],
   // the yard, locked: bent, dropped in the puddle, traded away
   15: [{ f: 1567, s: (f) => dolly(Sc(0.1, 1.1, 1.6), Sc(0.1, 0.85, -1.5), pushK(f, 1567, 0.0015), { fov: 48 }) }],
   // the study: one card into a sleeve, the binder closed, gently
@@ -201,7 +201,7 @@ const CAMS: Record<number, Key[]> = {
   ],
 };
 /** impact kicks: the hatch slam, the plonk, the jaws, the swat, the gavel */
-export const KICKS: [number, number][] = [[HATCH_SLAM, 0.9], [SHUT8, 0.35], [SPIT, 0.5], [CORD + 4, 0.6], [PLONK, 0.6], [JAW + 6, 1.0], [SWAT, 0.7], [GAVEL, 1.0], [CHEER, 0.5]];
+export const KICKS: [number, number][] = [[HATCH_SLAM, 0.9], [SHUT8, 0.35], [SPIT, 0.5], [CORD + 4, 0.6], [PLONK, 0.6], [JAW + 6, 1.0], [SWAT, 0.7], [GAVEL, 1.0], [CHEER, 0.5], [1414, 0.35]];
 const kickAt = (f: number) => {
   let a = 0;
   for (const [f0, g] of KICKS) { const n = f - f0; if (n >= 0 && n < 7) a += g * (n % 2 ? -1 : 1) * (1 - n / 7) ** 1.5; }
