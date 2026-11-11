@@ -1,0 +1,7 @@
+Real card scans for the Mudkip Art Academy reel, fetched 11 Nov 2026.
+mudkip_aa.png    2015 JP XY-P Art Academy Mudkip (illus. Daisuke Ochiai)   https://cdn6966.templcdn.com/wp-content/uploads/2022/06/JP_U067Daisuke-OchiaiXY-P.jpg (pokumon.com)
+pika_rain.png    2015 JP XY-P Art Academy Pikachu, raincoat (Y. Fujishima) https://cdn6966.templcdn.com/wp-content/uploads/2022/06/JP_U072Y-FujishimaXY-P.jpg (pokumon.com)
+pika_trophy.png  1997 No.1 Trainer, Official Tournament (trophy Pikachu)   https://cdn6966.templcdn.com/wp-content/uploads/2021/03/JP_U011Unnumbered.jpg (pokumon.com)
+zard.png         Base Set Charizard 4/102                                  https://images.pokemontcg.io/base1/4_hires.png
+press (factory): sv1 13 sprigatito, 36 fuecoco, 52 quaxly, 73 pawmi, 154 lechonk, 97 fidough, 159 tandemaus, 20 smoliv   https://images.pokemontcg.io/sv1/<n>.png
+packs (shop):    xy1 12 chespin, 24 fennekin, 39 froakie, 42 pikachu_xy, 111 bunnelby, 113 fletchling, 18 skiddo, 92 spritzee https://images.pokemontcg.io/xy1/<n>.png
