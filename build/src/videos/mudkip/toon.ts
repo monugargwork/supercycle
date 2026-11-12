@@ -480,7 +480,8 @@ const footStroke = (p: Pen, a: P2, b: P2, w: number, col: string) => {
 export const frontPts = (o: Outfit, opts: FrontOpts) => {
   const { facing = 0, seed = 1, crouch = 0 } = opts;
   const Bd = BUILD[o.build ?? "adult"], H = headBlob(seed, Bd.a, facing), W = 2 * H.a, HH = 2 * H.b, u = W / 100, sole = 975;
-  const torsoBot = sole - Bd.legs * HH + crouch * 0.8 * HH, chin = torsoBot - Bd.torso * HH, Ta = ((Bd.tw / 2) * W) / 1.06, tcx = 300 + 3 * u * facing;
+  const torsoBot = opts.mode === "sit" ? sole - (opts.chair ?? 0.2) * HH : sole - Bd.legs * HH + crouch * 0.8 * HH; // a seated torso sits lower: the 3D arms must start at the drawn shoulders
+  const chin = torsoBot - Bd.torso * HH, Ta = ((Bd.tw / 2) * W) / 1.06, tcx = 300 + 3 * u * facing;
   return {
     shoulder: (side: number): P2 => [tcx + side * 0.85 * Ta, chin + 0.12 * HH],
     ankle: (side: number): P2 => [300 + side * 22 * u, sole - 0.14 * HH],

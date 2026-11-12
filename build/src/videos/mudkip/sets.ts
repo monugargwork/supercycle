@@ -319,7 +319,8 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   slab(b, cardM, 0, ph - 0.035, pd / 2 + 0.07, pw, 0.006, 0.16, 0, 0.5); slab(b, cardM, 0, ph - 0.035, -pd / 2 - 0.07, pw, 0.006, 0.16, 0, -0.5);
   b.build(parcel);
   const bs = local("room", "stack100").s, edge = new THREE.MeshLambertMaterial({ map: ctex("cardEdges", 64, 256, (g) => { g.fillStyle = "#f4f1e8"; g.fillRect(0, 0, 64, 256); g.fillStyle = "rgba(90,84,70,0.5)"; for (let y = 2; y < 256; y += 5) g.fillRect(0, y, 64, 1.4); }) });
-  const top = new THREE.MeshLambertMaterial({ map: ctex("blockTop", 420, 586, (g) => tcard(new Pen(g), 0, 0, 0, 420, 586, { img: "mudkip_aa" })) });
+  const topTex = ctex("blockTop", 420, 586, (g) => tcard(new Pen(g), 0, 0, 0, 420, 586, { img: "mudkip_aa" }));
+  const top = new THREE.MeshLambertMaterial({ map: topTex, emissive: new THREE.Color("#ffffff"), emissiveMap: topTex, emissiveIntensity: 0.45 }); // the card reads even when he tips it into his own shadow
   const block = mesh(new THREE.BoxGeometry(bs[0], bs[1], bs[2]), [edge, edge, top, C("#f4f1e8"), edge, edge], root);
 
   // ===== CARD SHOP =====

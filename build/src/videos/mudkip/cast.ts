@@ -357,7 +357,7 @@ const doubters = (out: Stage, cam: CamInfo, f: number, id: number) => {
   if (id !== 19 || f < SLIP + 8) {
     const out2 = chestAt(cam, "dB", pB, fb, 0.3, 0.42), hand = arm3d(out, cam, "dB", pB, fb, -1, lerp3(rest, [out2[0], out2[1], out2[2]], lunge), f);
     if (id !== 19 || f < SLIP) tcardFx(out, "zard", [hand[0] - cam.fwd.x * 0.03, hand[1] + 0.07 + 0.08 * lunge, hand[2] - cam.fwd.z * 0.03], 0.14 + 0.16 * lunge, { holo: lunge > 0.6, rot: 0.12 * (1 - lunge), img: "zard" });
-    if (id === 2) sparkle(out, f, LUNGE + 6, hand[0], hand[1] + 0.12, hand[2] + 0.06, 0.5, 14);
+    if (id === 2) sparkle(out, f, LUNGE + 6, hand[0] + 0.12, hand[1] + 0.3, hand[2] + 0.06, 0.16, 14);
   }
   if (id === 19) {
     [["dA", pA, fa], ["dB", pB, fb], ["dC", pC, fc]].forEach(([w, p, fo], i) => jaw(out, cam, w as Who, p as V3, fo as FrontOpts, smooth((f - JAWS[i]) / 5)));
@@ -460,7 +460,7 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
       const at = mark("room", "daisuke"), reach = smooth((f - (LIFT6 - 6)) / 10), k = smooth((f - (LIFT6 + 6)) / 14);
       const fo: FrontOpts = { mode: "sit", chair: 1.0, expr: f < LIFT6 - 6 ? "relief_open" : f < HUG6 + 6 ? "grin" : "smile_closed", facing: 0, headTilt: f < LIFT6 - 6 ? 0.1 : 0, armOff: reach > 0 ? 2 : undefined };
       front(out, cam, "daisuke", ...at, fo, f, [LIFT6 - 6, HUG6 + 6]);
-      const R0 = obj("room", "stack100").p, C6 = chestAt(cam, "daisuke", at, fo, 0.5, 0.17), p = lerp3(R0, C6, k); p[1] += 0.1 * Math.sin(Math.PI * k);
+      const R0 = obj("room", "stack100").p, C6 = chestAt(cam, "daisuke", at, fo, -0.1, 0.2), p = lerp3(R0, C6, k); p[1] += 0.1 * Math.sin(Math.PI * k);
       out.block = { p, ry: 0, rx: 1.15 * smooth((f - (LIFT6 + 10)) / 10) };
       if (reach > 0) for (const sd of [-1, 1] as const) { const side3: V3 = [p[0] + sd * 0.075, p[1] + 0.01 - 0.03 * k, p[2] - 0.05 * (1 - k)]; arm3d(out, cam, "daisuke", at, fo, sd, lerp3(restHand(cam, "daisuke", at, fo, sd), side3, reach), f); }
       break;

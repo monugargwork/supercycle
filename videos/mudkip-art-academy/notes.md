@@ -17,6 +17,7 @@ Direction and build done in one pass, on the user's instruction ("create the dir
 | S05 -> S06 | The match cuts across the desk: after it the lens is on our side | From his side the card would be upside down for us in the pull-back |
 | S08-S18 | The locked frame is 50 degrees wide; columns are 22 cm wide; desk top at 1.47 m | To fit the auctioneer, the board and two columns side by side, with the gavel hand visible above the desk |
 | S12, S18 | The attendant stands behind the line of the columns | In front of them his head hid the slab |
+| S04-S06 | A seated character's 3D arms now start at the drawn shoulders (`frontPts` knows about sitting); he holds the block up under his chin | The arms came out of his cheeks, and at chest height the block was hidden behind the parcel |
 | S15 | The balance has unequal arms (2.5 m and 7.5 m) and runs away from the lens | So a villa-sized villa fits a 9:16 frame and rises 3.9 m when the pan drops 1.3 m |
 | S16 | A loupe on the label's grade, not a tally counter | A counter was too small to read once the frame widened for the 100 cards |
 | S17 | A gust blows the 97 loose cards away, not two forearms | Arms sweeping the table would have hit the three slabs too |

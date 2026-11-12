@@ -36,7 +36,7 @@ Three hard cuts (into S14, S15 and S19: the hammer, the gag, the reaction). Ever
 | f31 | f118 | $4.880.000 |
 | f433 | f556 | DAISUKE OCHIAI |
 | f680 | f708 | 100 |
-| f1447 | f1493 | 73 |
+| f1447 | f1470 | 73 |
 | f1827 | f1861 | 100 |
 | f1972 | f1986 | 3/100 |
 | f2082 | f2102 | 1997 |
