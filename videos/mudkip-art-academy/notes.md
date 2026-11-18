@@ -3,9 +3,9 @@
 ## Build round 1 (11 Nov 2026)
 Direction and build done in one pass, on the user's instruction ("create the direction and continue the edit and dont wait for my permission").
 
-- Build: `build/src/videos/mudkip/` (composition `MudkipReel`, 2250 f, 30 fps). The timeline reads `plan.json` directly: camera keys, glides, pushes, kicks, depth of field, dissolves and titles are never retyped in code.
+- Build: `src/videos/mudkip/` (composition `MudkipReel`, 2250 f, 30 fps). The timeline reads `plan.json` directly: camera keys, glides, pushes, kicks, depth of field, dissolves and titles are never retyped in code.
 - Real cards only (standing rule): Art Academy Mudkip, raincoat Pikachu, 1997 No.1 Trainer, Base Set Charizard, eight Scarlet & Violet commons on the factory line, eight XY (2014) commons in the shop. Sources in `cards/SOURCES.txt`.
-- Sound: `build/audio/mudkip_audio.py` (score, SFX on the plan's frames, a few meme sounds where they are the joke: Kaching, Emoji Laugh, Huh, Instagram Thud, Sad Violin).
+- Sound: `audio/mudkip_audio.py` (score, SFX on the plan's frames, a few meme sounds where they are the joke: Kaching, Emoji Laugh, Huh, Instagram Thud, Sad Violin).
 
 ### Changed while building (plan.json updated each time, check re-run)
 | Scene | What changed | Why |
@@ -33,4 +33,4 @@ Direction and build done in one pass, on the user's instruction ("create the dir
 
 Taste: a cartoon exaggeration still has to be physically possible for the body. A mouth can open wide, but it stays part of the face; it does not stretch past the chin or reach the floor.
 
-Delivery: v2 = v1 with frames 1650-1683 and 2200-2249 re-rendered on the Mac and spliced in frame-exact (`build/scripts/mudkip-patch.sh` at the repo root); audio copied from v1.
+Delivery: only the changed frames (1653-1678, 2206-2249, listed in `PATCH_FRAMES` in `Reel.tsx`) re-rendered on the Mac as a transparent ProRes 4444 overlay, which the user lays over v1 in his editor (`PATCH=1 scripts/render.command MudkipReel Mudkip_v1_patch`). The cloud render was too slow for this (about 2.5 min per 1440x2560 frame on 2 CPU cores, no GPU): the Mac's GPU is the place for renders.
