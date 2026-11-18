@@ -9,9 +9,10 @@ This is the Remotion project for the user's animated story reels: Vietnamese voi
 ## Before any work, read
 1. `docs/rules.md`, the rulebook. Logic and physics first; stick-figure cards; real TCG cards; every detail directed, cameras included.
 2. `docs/production-flow.md`, the per-reel loop: script, VO, direction, build, check, render, review, fixes.
-3. `library/INDEX.md`, the moves, props and helpers we have and where they live.
-4. `taste/rejected.md`. Never pitch these again.
-5. `videos/<slug>/notes.md` (plus `plan.json`, `direction.md`) for the reel you're working on.
+3. `docs/sources.md`, the sources we edit with: the four loved reference reels (`~/Downloads/reference`), the meme-sound library (`~/Downloads/meme sounds`), the ElevenLabs voice, where real card scans come from, fonts, the original kit, Frame.io reviews.
+4. `library/INDEX.md`, the moves, props and helpers we have and where they live.
+5. `taste/rejected.md`. Never pitch these again.
+6. `videos/<slug>/notes.md` (plus `plan.json`, `direction.md`) for the reel you're working on.
 
 Workflow skills in this repo (`.claude/skills/`, also typed as commands): `/story-kickoff` for a new reel, `/story-feedback` for a round of notes, `/story-final` for an approved reel.
 Account skills they call: `vn-news-script` (the script), `story-reel-director` (beats, plan, direction), `cartoon-3d-short` (the look; the original kit is in `templates/`, `references/` and `SKILL.md`).
