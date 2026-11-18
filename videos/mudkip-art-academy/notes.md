@@ -25,3 +25,12 @@ Direction and build done in one pass, on the user's instruction ("create the dir
 ### Open
 - Not yet seen in motion: only check stills were rendered in the cloud (every ~47 frames plus the beats). Timing of glides and the physics arcs want a look in the first full render.
 - S18's glide to the cushion is fast (about 63 px per frame at 720p).
+
+## Review of v1 (Frame.io, 18 Nov 2026)
+| Time | Note | Scene | What changed |
+|---|---|---|---|
+| 01:14:06 (f2226) | "fix this dropping mouths, why they touch the ground lol. be logical" | S19 (and the same gag in S15) | The jaw drop is now a mouth on the face that opens from a small O to a tall gape with teeth and tongue (5 f), staying inside the head and ending just above the chin. The floor-length mouth overlay is gone (`FrontOpts.gape` in toon.ts). |
+
+Taste: a cartoon exaggeration still has to be physically possible for the body. A mouth can open wide, but it stays part of the face; it does not stretch past the chin or reach the floor.
+
+Delivery: v2 = v1 with frames 1650-1683 and 2200-2249 re-rendered on the Mac and spliced in frame-exact (`build/scripts/mudkip-patch.sh`); audio copied from v1.

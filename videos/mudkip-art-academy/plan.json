@@ -3002,7 +3002,7 @@
    "build": "new: a giant brass balance on a lawn. The villa sits on the far pan, resting on the grass; the near pan hangs empty at chest height.",
    "blocking": "dA stands right of the near pan, front view, the slab in his left hand (screen left, the pan side).",
    "action": "f1580 'Khoan': wide, he stares at the slab in his hand; the villa sits on the far pan in the distance. f1597 the camera steps in. f1604-1622 he lifts the slab over the pan and stands it down; contact f1624. f1626-1638 the near pan drops 1.3 m, accelerating, as the camera pulls back; f1638 it hits the grass on 'đắt hơn': thud, kick, dust ring, the slab hops 6 cm. The far pan is thrown up 3.9 m: the villa leaves it by 0.4 m and lands back at f1654, pool water slopping over the side. It hangs there on 'căn biệt thự'.",
-   "acting": "dA: dazed at the slab, then shock; his jaw drops to the grass at f1654.",
+   "acting": "dA: dazed at the slab, then shock; his jaw drops open at f1653: the mouth grows from a small O to a tall gape with teeth and tongue, inside his head, ending just above the chin.",
    "cams": [
     {
      "f": 1580,
@@ -3727,7 +3727,7 @@
    },
    "build": "same as S02, golden light.",
    "blocking": "The three collectors, same marks and framing as S02.",
-   "action": "f2192 all three stare, mouths shut. f2205 on 'một con cá bùn' their jaws drop to the carpet one after another (dA f2205, dB f2209, dC f2213). f2211 the Charizard slips out of dB's hand, flutters down side to side and lands face up on the carpet at f2236. Hold to f2250.",
+   "action": "f2192 all three stare, mouths shut. f2205 on 'một con cá bùn' their jaws drop open one after another (the mouth grows from an O to a tall gape inside the head, never past the chin) (dA f2205, dB f2209, dC f2213). f2211 the Charizard slips out of dB's hand, flutters down side to side and lands face up on the carpet at f2236. Hold to f2250.",
    "acting": "Stunned: shock, eyes wide.",
    "cams": [
     {

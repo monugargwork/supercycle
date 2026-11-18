@@ -484,7 +484,7 @@ Three hard cuts (into S14, S15 and S19: the hammer, the gag, the reaction). Ever
 - Blocking: dA stands right of the near pan, front view, the slab in his left hand (screen left, the pan side).
   - dA at [1.6, 2.4], front; stands the slab on the pan; dazed -> shock.
 - Action, against the words: f1580 'Khoan': wide, he stares at the slab in his hand; the villa sits on the far pan in the distance. f1597 the camera steps in. f1604-1622 he lifts the slab over the pan and stands it down; contact f1624. f1626-1638 the near pan drops 1.3 m, accelerating, as the camera pulls back; f1638 it hits the grass on 'đắt hơn': thud, kick, dust ring, the slab hops 6 cm. The far pan is thrown up 3.9 m: the villa leaves it by 0.4 m and lands back at f1654, pool water slopping over the side. It hangs there on 'căn biệt thự'.
-- Acting: dA: dazed at the slab, then shock; his jaw drops to the grass at f1654.
+- Acting: dA: dazed at the slab, then shock; his jaw drops open at f1653: the mouth grows from a small O to a tall gape with teeth and tongue, inside his head, ending just above the chin.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
@@ -579,7 +579,7 @@ Three hard cuts (into S14, S15 and S19: the hammer, the gag, the reaction). Ever
   - dA at [-2, 1.2], front; jaw drop; shock.
   - dB at [-1.5, 0.9], front; jaw drop; drops the Charizard; shock.
   - dC at [-1, 1.25], front; jaw drop; shock.
-- Action, against the words: f2192 all three stare, mouths shut. f2205 on 'một con cá bùn' their jaws drop to the carpet one after another (dA f2205, dB f2209, dC f2213). f2211 the Charizard slips out of dB's hand, flutters down side to side and lands face up on the carpet at f2236. Hold to f2250.
+- Action, against the words: f2192 all three stare, mouths shut. f2205 on 'một con cá bùn' their jaws drop open one after another (the mouth grows from an O to a tall gape inside the head, never past the chin) (dA f2205, dB f2209, dC f2213). f2211 the Charizard slips out of dB's hand, flutters down side to side and lands face up on the carpet at f2236. Hold to f2250.
 - Acting: Stunned: shock, eyes wide.
 - Camera keys:
 
