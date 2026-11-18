@@ -148,10 +148,13 @@ export const MudkipCaptions: React.FC = () => (
   </AbsoluteFill>
 );
 /** the main render carries the titles and the sound; captions are burned in with inputProps { captions: true } */
+/** frames changed after the v1 review (jaw drop on the face): a { patch: true } render draws only these, the rest stay transparent */
+export const PATCH_FRAMES: [number, number][] = [[1653, 1678], [2206, 2249]];
 export const MudkipReel: React.FC = () => {
   const f = useCurrentFrame();
   const flash = f >= FLASH_AT && f < FLASH_AT + 4 ? [1, 0.75, 0.45, 0.2][f - FLASH_AT] : 0;
   const tcg = useTcg();
+  if ((getInputProps() as { patch?: boolean }).patch && !PATCH_FRAMES.some(([a, b]) => f >= a && f <= b)) return <AbsoluteFill />;
   return (
     <AbsoluteFill style={{ background: "#cfe3f2" }}>
       {tcg && layersAt(f).map((l, i) => <ShotView key={i ? "over" : "base"} id={l.id} alpha={l.alpha} />)}
