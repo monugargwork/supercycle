@@ -33,4 +33,4 @@ Direction and build done in one pass, on the user's instruction ("create the dir
 
 Taste: a cartoon exaggeration still has to be physically possible for the body. A mouth can open wide, but it stays part of the face; it does not stretch past the chin or reach the floor.
 
-Delivery: v2 = v1 with frames 1650-1683 and 2200-2249 re-rendered on the Mac and spliced in frame-exact (`build/scripts/mudkip-patch.sh`); audio copied from v1.
+Delivery: v2 = v1 with frames 1650-1683 and 2200-2249 re-rendered on the Mac and spliced in frame-exact (`build/scripts/mudkip-patch.sh` at the repo root); audio copied from v1.

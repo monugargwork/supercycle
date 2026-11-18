@@ -248,13 +248,6 @@ const chestAt = (cam: CamInfo, who: Who, at: V3, fo: FrontOpts, drop = 0.45, toL
   const w = cardWorld(cam, at[0], at[1], at[2], [300, sy + drop * J.HH]);
   return [w[0] - cam.fwd.x * toLens, w[1], w[2] - cam.fwd.z * toLens];
 };
-/** the jaw-drop gag: a long open mouth from the chin to the floor, laid over the front card */
-const jaw = (out: Stage, cam: CamInfo, who: Who, at: V3, fo: FrontOpts, k: number) => {
-  if (k <= 0) return;
-  const J = frontPts(C[who], { ...fo, seed: IDX[who] + 1 }), [, sy] = J.shoulder(1), chin = cardWorld(cam, at[0], at[1], at[2], [300, sy - 0.1 * J.HH]);
-  const len = Math.max(0.05, (chin[1] - at[1]) * k), skin = C[who].skin ?? SKIN;
-  card(out, `jaw|${skin}|${q(k, 10)}`, 200, 600, (p) => art.jawDrop(p, skin), chin[0] - cam.fwd.x * 0.06, chin[1] - len / 2, chin[2] - cam.fwd.z * 0.06, 0.15, len);
-};
 const glowAt = (out: Stage, key: string, p: V3, s: number, col = "255,214,120") => out.fx.push({ key: "glow" + key + col, cw: 128, ch: 128, draw: (pp) => art.glow(pp, col), x: p[0], y: p[1], z: p[2], w: s, h: s, soft: true });
 const tcardFx = (out: Stage, key: string, p: V3, h: number, o: { bent?: number; holo?: boolean; scuff?: boolean; k?: number; rot?: number; img?: string } = {}) =>
   card(out, `tc|${key}|${q(o.bent ?? 0, 10)}|${!!o.holo}|${!!o.scuff}|${o.img ?? ""}`, 260, 360, (pp) => art.tcard(pp, (o.k ?? 0) as art.Kind, 10, 10, 250, 350, o), p[0], p[1], p[2], h * 0.72, h, { rot: o.rot ?? 0 });
@@ -343,9 +336,9 @@ const doubters = (out: Stage, cam: CamInfo, f: number, id: number) => {
     fb = { mode: "stand", expr: "smile", facing: 0, crouch: f >= 1021 && f < 1045 ? [0, 0.04, 0.04, 0, 0, 0][Math.floor((f - 1021) / 2) % 6] : 0, armOff: -1 };
     fc = { mode: "stand", expr: f >= 1045 ? "smile_closed" : "neutral", facing: -1, headTilt: f >= 1045 ? 0.1 : 0 };
   } else {
-    fa = { mode: "stand", expr: f < JAWS[0] ? "nervous" : "shock", facing: 1 };
-    fb = { mode: "stand", expr: f < JAWS[1] ? "nervous" : "shock", facing: 0, armOff: f < SLIP + 8 ? -1 : undefined };
-    fc = { mode: "stand", expr: f < JAWS[2] ? "nervous" : "shock", facing: -1 };
+    fa = { mode: "stand", expr: f < JAWS[0] ? "nervous" : "shock", facing: 1, gape: f > JAWS[0] ? smooth((f - JAWS[0]) / 5) : undefined };
+    fb = { mode: "stand", expr: f < JAWS[1] ? "nervous" : "shock", facing: 0, armOff: f < SLIP + 8 ? -1 : undefined, gape: f > JAWS[1] ? smooth((f - JAWS[1]) / 5) : undefined };
+    fc = { mode: "stand", expr: f < JAWS[2] ? "nervous" : "shock", facing: -1, gape: f > JAWS[2] ? smooth((f - JAWS[2]) / 5) : undefined };
   }
   front(out, cam, "dA", ...pA, fa, f, id === 2 ? [LAUGH] : id === 19 ? [JAWS[0]] : []);
   front(out, cam, "dB", ...pB, fb, f, id === 2 ? [LAUGH, LUNGE] : id === 19 ? [JAWS[1]] : []);
@@ -360,7 +353,6 @@ const doubters = (out: Stage, cam: CamInfo, f: number, id: number) => {
     if (id === 2) sparkle(out, f, LUNGE + 6, hand[0] + 0.12, hand[1] + 0.3, hand[2] + 0.06, 0.16, 14);
   }
   if (id === 19) {
-    [["dA", pA, fa], ["dB", pB, fb], ["dC", pC, fc]].forEach(([w, p, fo], i) => jaw(out, cam, w as Who, p as V3, fo as FrontOpts, smooth((f - JAWS[i]) / 5)));
     if (f >= SLIP) { // the card flutters down: slow fall, side to side, lands flat and stays
       const t = f - SLIP, T = FLOOR19 - SLIP, u = Math.min(1, t / T), y0 = rest[1] + 0.07, land: V3 = Au(-1.4, 0.014, 1.2);
       if (u < 1) tcardFx(out, "zardFall", [rest[0] + (land[0] - rest[0]) * u + 0.1 * Math.sin(t * 0.55), y0 + (land[1] - y0) * (0.35 * u + 0.65 * u * u), rest[2] + (land[2] - rest[2]) * u], 0.14, { rot: 0.7 * Math.sin(t * 0.45), img: "zard" });
@@ -505,7 +497,7 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
     }
     case 15: { // the balance: he stands the slab on the near pan; it drops, the villa flies up
       const at = mark("lawn", "dA"), B = balance(f);
-      const fo: FrontOpts = { mode: "stand", expr: f < 1600 ? "dazed" : f < HIT15 ? "neutral" : "shock", facing: -1, look: -1, armOff: -1 };
+      const fo: FrontOpts = { mode: "stand", expr: f < 1600 ? "dazed" : f < HIT15 ? "neutral" : "shock", facing: -1, look: -1, armOff: -1, gape: f > LAND15 ? smooth((f - LAND15) / 5) : undefined };
       front(out, cam, "dA", ...at, fo, f, [1600, HIT15]);
       const onPan: V3 = [B.near[0] + 0.1, B.near[1] + 0.03 + SLAB_H / 2 + hop(f, HIT15, 1.05), B.near[2]];
       const hold = holdHand(cam, "dA", at, fo, -1, 0.1), carry: V3 = [hold[0], hold[1] + 0.1, hold[2]], k = smooth((f - 1604) / 18);
@@ -515,7 +507,6 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
       slabFx(out, "mudkip_aa", sp, { bill: true });
       burst(out, f, HIT15, B.near[0], 0.25, B.near[2] + 0.3, 1.6, 10, "#e9f2c8");
       if (f >= LAND15 && f < LAND15 + 16) { const u = q((f - LAND15) / 16, 16), F = balance(f).far; card(out, `splash${u}`, 800, 800, (p) => fxSplash(p, u), F[0] - 0.4, F[1] + 0.75, F[2] + 1.1, 1.7, 1.7); }
-      jaw(out, cam, "dA", at, fo, smooth((f - LAND15) / 5));
       break;
     }
     case 16: { // the table: the slab drops flat; a kraft card covers the picture; a loupe sits on the grade

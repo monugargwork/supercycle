@@ -308,7 +308,7 @@ const mouth = (p: Pen, kind: MouthK, mx: number, my: number, u: number, k = 1) =
 /** face v2 (front / 3-4). u = 1 % of the head path width W. Eyes 26u apart on the centre line, brows 20u up, mouth 20u
  *  down, everything slid toward the facing side. No blush, no catchlights. */
 const faceFront = (p: Pen, cx: number, cy: number, W: number, expr: Expr, facing: number, look: number, lid: number, brim: boolean,
-  skin: string, moustache?: string, stout = false, o?: Outfit) => {
+  skin: string, moustache?: string, stout = false, o?: Outfit, gape = 0) => {
   const u = W / 100, F = FACE[expr], fx = cx + 7 * u * facing;
   const ex = (F.eye[0] === "shock" ? 12 : 13) * u, ey = cy;
   if (o?.mask) { // black domino mask band with two eye holes
@@ -327,7 +327,15 @@ const faceFront = (p: Pen, cx: number, cy: number, W: number, expr: Expr, facing
   }
   const mx = cx + 8 * u * facing, my = cy + 20 * u;
   if (o?.shades || o?.glasses) p.stroke([[fx - ex + 11 * u, ey - 2 * u], [fx + ex - 11 * u, ey - 2 * u]], 2.4 * u);
-  mouth(p, F.mouth, mx, my, u);
+  if (gape > 0) { // jaw drop: O (centre my+2u, 9u x 11u) -> gape (centre cy+27u, 13u x 15u): top cy+12u, bottom cy+42u, inside the chin line (cy+47u)
+    const k = Math.min(1, gape), rx = (9 + 4 * k) * u, ry = (11 + 4 * k) * u, y = my + (2 + 5 * k) * u;
+    p.ell(mx, y, rx, ry, MOUTH, 0);
+    if (k > 0.3) {
+      p.clip([[mx - rx, y - ry], [mx + rx, y - ry], [mx + rx, y - ry + 4 * u * k], [mx - rx, y - ry + 4 * u * k]], () => p.ell(mx, y, rx, ry, WHITE, 0));
+      p.ell(mx + u, y + 0.55 * ry, 0.55 * rx, 0.32 * ry, TONGUE, 0);
+    }
+    p.ell(mx, y, rx, ry, null, 3.2 * u);
+  } else mouth(p, F.mouth, mx, my, u);
   if (moustache) for (const s of [-1, 1])
     taper(p, [mx + s * 1.5 * u, cy + 12.5 * u], [mx + s * (stout ? 19 : 15) * u, cy + (stout ? 10.5 : 15) * u], stout ? 5.5 * u : 4.5 * u, 1.6 * u, moustache);
   if (expr === "nervous") p.ell(cx + 40 * u * (facing || 1), cy - 22 * u, 3 * u, 5 * u, "#9fd4ff", 2 * u);
@@ -467,6 +475,7 @@ export type FrontOpts = {
   phase?: number; expr?: Expr; mode?: "march" | "stroll" | "stand" | "sit" | "fall"; look?: number; /** sit on a chair: seat height in head-heights above the soles; shins hang to the floor */ chair?: number;
   /** knees bent, body lowered (0..1) */ crouch?: number; /** this arm is drawn in the 3D world instead (cast.ts arm3d) */ armOff?: -1 | 1 | 2; blink?: boolean | number; lift?: number;
   prop?: Prop; tilt?: number; headTilt?: number; wave?: number;
+  /** jaw drop 0..1: the mouth opens from a small "O" to a tall gape that ends just above the chin (stays inside the head) */ gape?: number;
   /** canvas angle the key light comes FROM (painted crescent + thick outline side) */
   light?: number; facing?: -1 | 0 | 1; seed?: number;
 };
@@ -490,7 +499,7 @@ export const frontPts = (o: Outfit, opts: FrontOpts) => {
 };
 export const bodyFront = (p: Pen, o: Outfit, opts: FrontOpts) => {
   const { phase = 0, expr = "neutral", mode = "march", look = 0, blink = false, lift = 60, prop = null, tilt = 0, headTilt = 0, wave,
-    light = DEF_LIGHT, facing = 0, seed = 1, chair, crouch = 0, armOff } = opts;
+    light = DEF_LIGHT, facing = 0, seed = 1, chair, crouch = 0, armOff, gape = 0 } = opts;
   const Bd = BUILD[o.build ?? "adult"], skin = o.skin ?? SKIN, two = Math.PI * 2, lid = lidOf(blink);
   const H = headBlob(seed, Bd.a, facing), W = 2 * H.a, HH = 2 * H.b, u = W / 100;
   const tall = (1 + Bd.torso + Bd.legs) * HH, sole = 975;
@@ -674,7 +683,7 @@ export const bodyFront = (p: Pen, o: Outfit, opts: FrontOpts) => {
   p.inkRing(hp, ow, thick);
   hatOn(p, o, hp, H, 300, hc, light, seed, facing, false);
   const brim = !!o.hat && o.hat !== "hair" && o.hat !== "bonnet" && o.hat !== "cap";
-  faceFront(p, 300, hc, W, expr, facing, look, lid, brim, skin, o.moustache, o.build === "stout", o);
+  faceFront(p, 300, hc, W, expr, facing, look, lid, brim, skin, o.moustache, o.build === "stout", o, gape);
   p.rot = null;
 };
 
