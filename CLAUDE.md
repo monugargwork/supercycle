@@ -3,7 +3,8 @@
 This is the Remotion project for the user's animated story reels: Vietnamese voiceover stories about TCG collecting, told with flat 2D cartoon characters in an inked three.js world.
 - Compositions are 1080×1920 at 30 fps; renders come out at 1440×2560.
 - This repo (`monugargwork/supercycle`, **public**) is the **single master copy** of the code, assets, rules, taste and each reel's history. Renders never go in here.
-- Enzo's main-channel reels are a separate project (`monugargwork/Enzo`); only Enzo's `Title2` titles and fonts are shared (`src/enzo/`).
+- Enzo's main-channel reels are a separate project (`monugargwork/Enzo`, folder `~/Downloads/Enzo Projects/enzo-remotion`); only Enzo's `Title2` titles and fonts are shared (`src/enzo/`).
+- **Where you are:** usually a Claude Code session opened on the Mac folder `~/Movies/Story Reels/story-reels` (this repo, cloned), the same way the user works on Enzo. Sometimes a cloud session on the GitHub repo. Either way the repo is the truth.
 
 ## Before any work, read
 1. `docs/rules.md`, the rulebook. Logic and physics first; stick-figure cards; real TCG cards; every detail directed, cameras included.
@@ -12,7 +13,8 @@ This is the Remotion project for the user's animated story reels: Vietnamese voi
 4. `taste/rejected.md`. Never pitch these again.
 5. `videos/<slug>/notes.md` (plus `plan.json`, `direction.md`) for the reel you're working on.
 
-Skills: `vn-news-script` (the script), `story-reel-director` (beats, plan, direction), `cartoon-3d-short` (the look; the original kit is in `templates/`, `references/` and `SKILL.md`).
+Workflow skills in this repo (`.claude/skills/`, also typed as commands): `/story-kickoff` for a new reel, `/story-feedback` for a round of notes, `/story-final` for an approved reel.
+Account skills they call: `vn-news-script` (the script), `story-reel-director` (beats, plan, direction), `cartoon-3d-short` (the look; the original kit is in `templates/`, `references/` and `SKILL.md`).
 
 ## Hard rules
 - **Logic and physics above everything**; pixel-perfect design second. Exaggeration stays physically possible.
@@ -20,9 +22,8 @@ Skills: `vn-news-script` (the script), `story-reel-director` (beats, plan, direc
 - **Real TCG card scans** in every reel, fetched fresh and relevant to the story. Never drawn stand-ins.
 - **Captions** are burned into the main render (`{"captions":true}`).
 - **`plan.json` is the source of truth** for cameras and timing. Numbers are never retyped in code, and the plan is updated when the build changes something.
-- **Commit and push after every change.** Push in batches (about 60 files, well under 100 MB per push). After pushing, run `git update-ref refs/remotes/origin/main HEAD`.
-- **The Mac folder is a GitHub clone.** Never write code into it directly: push, and its launchers pull before every preview and render.
-- **Renders run on the Mac** for now (Lambda is parked until the user's AWS access is fixed). Claude writes the code and gives the exact command; the user runs it. The cloud has no GPU, so check stills only there.
+- **Commit and push after every change**, in batches (about 60 files, well under 100 MB per push). A session on the Mac works directly in this folder and never leaves uncommitted changes; end every session with `notes.md` updated and pushed. A cloud session pushes too (then `git update-ref refs/remotes/origin/main HEAD`), and the Mac launchers pull before every preview and render. If a push from the Mac is refused (403), the Keychain token doesn't cover this repo yet: tell the user to add `supercycle` to that GitHub token's repository access.
+- **Renders run on the Mac** for now (Lambda is parked until the user's AWS access is fixed). Claude gives the exact command and the user runs it; Claude runs it only when asked. On the Mac, Claude checks its own work with stills on the GPU (`scripts/stills.command`, about a second each). In a cloud session there is no GPU: stills only, about 20 s each.
 - When the user asks how long a render takes, answer with the time for a cloud render.
 - **Small fixes never mean a full re-render.** Use `REDO=<chunks>` (10 s each), or a transparent overlay of only the changed frames (`PATCH=1`, which needs `PATCH_FRAMES` in the reel's `Reel.tsx`).
 - **Every user note** (they arrive as Frame.io CSVs, frames at 30 fps) gets a row in `videos/<slug>/notes.md` with what changed and why. Repeated reactions get promoted into `docs/rules.md`; rejections go into `taste/rejected.md`.
@@ -50,9 +51,9 @@ Skills: `vn-news-script` (the script), `story-reel-director` (beats, plan, direc
 | PSA truck heist | `PsaReel` | `videos/psa-heist/` | done |
 
 ## Commands
-- Check stills (cloud): `COMP=MudkipReel node scripts/psa-stills.mjs out/mudkip/x_ 120,640,1500`. Contact sheet: `python3 scripts/sheet.py out.jpg 3 files…`.
+- Check stills: on the Mac `scripts/stills.command MudkipReel 120,640,1500` (→ `out/MudkipReel/chk_<f>.jpg`); in the cloud `COMP=MudkipReel node scripts/stills.mjs out/mudkip/x_ 120,640,1500`. Contact sheet: `python3 scripts/sheet.py out.jpg 3 files…`.
 - Preview on the Mac: double-click `scripts/Open Studio.command` (it pulls first).
-- Render on the Mac (the user runs it; Claude gives the exact line):
+- Render on the Mac (the user runs it; Claude gives the exact line; `out/` and the render folders are never committed):
   `cd ~/Movies/"Story Reels"/story-reels && scripts/render.command <Composition> <Name>_v<n>`
   - After a fix: `REDO=7,8 scripts/render.command …` re-renders only chunks 7-8 (60-80 s); `REDO=all` starts fresh.
   - A transparent overlay of only the changed frames: `PATCH=1 scripts/render.command <Composition> <Name>_patch`, which writes a `.mov`.
@@ -65,4 +66,4 @@ Skills: `vn-news-script` (the script), `story-reel-director` (beats, plan, direc
 - `Drafts/`: `<Name>_v1.mp4`, … (chunk cache in `Drafts/.chunks/`);
 - `Final Render/`: `<Name>_final.mp4`.
 
-The one-time `Connect to GitHub.command` (a copy of `scripts/Connect to GitHub.command`, left in `Story Reels/`) made the clone; double-clicking it again just updates. The old folder `~/Movies/psa-reel` holds the renders made before the move (`out/`).
+The one-time `Connect to GitHub.command` (a copy of `scripts/Connect to GitHub.command`, left in `Story Reels/`) made the clone and set pushes to use the GitHub token in the Mac's Keychain; double-clicking it again just updates. Node: the Mac's own, else nvm's, else `~/Downloads/Enzo Projects/.node/bin` (`scripts/common.sh` finds it). The old folder `~/Movies/psa-reel` holds the renders made before the move (`out/`).

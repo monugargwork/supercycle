@@ -1,12 +1,13 @@
 #!/bin/bash
 # One-time setup: makes ~/Movies/Story Reels/story-reels a copy of the GitHub repo (github.com/monugargwork/supercycle),
-# so every preview and render pulls the latest version first. The repo is public, so no token is needed.
+# so every preview and render pulls the latest version first, and Claude Code sessions opened on this folder can push.
+# The repo is public, so the download needs no token; pushes use the GitHub token macOS already keeps for Enzo (Keychain).
 # - Reuses the tools already installed in ~/Movies/psa-reel (copied, not moved), so psa-reel keeps working.
 # - Safe to run again: if the folder is already linked, it just updates it.
 export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 BASE="$HOME/Movies/Story Reels"
 DIR="$BASE/story-reels"
-REPO="https://github.com/monugargwork/supercycle.git"
+REPO="https://monugargwork@github.com/monugargwork/supercycle.git"
 
 finish() { echo; echo "$1"; echo; echo "Press any key to close."; read -n1; exit "${2:-0}"; }
 fail() { finish "❌ $1" 1; }
@@ -23,6 +24,7 @@ command -v git >/dev/null || fail "git isn't available yet. Finish installing th
 # 2. Already linked? Just update.
 if [ -d "$DIR/.git" ]; then
   echo "▶ Already linked to GitHub. Getting the latest version…"
+  git -C "$DIR" remote set-url origin "$REPO"; git -C "$DIR" config credential.helper osxkeychain
   git -C "$DIR" pull --ff-only || fail "Couldn't update. Tell Claude what this window says."
   finish "✅ Up to date: $(git -C "$DIR" log -1 --format='%h · %s' | cut -c1-80)"
 fi
@@ -31,6 +33,7 @@ fi
 # 3. Download from GitHub (about 300 MB: code, cards, voices, music).
 echo "▶ Downloading the project from GitHub…"
 git clone "$REPO" "$DIR" || { rm -rf "$DIR"; fail "The download from GitHub didn't work. Check the internet connection, then double-click this file again."; }
+git -C "$DIR" config credential.helper osxkeychain
 chmod +x "$DIR"/scripts/*.command 2>/dev/null
 
 # 4. Project tools: start from psa-reel's copy (instant on APFS), then bring them up to date.
@@ -49,6 +52,7 @@ fi
 
 open "$DIR/scripts" 2>/dev/null
 finish "✅ Linked to GitHub. 'Movies/Story Reels/story-reels' now always updates from GitHub.
+   In Claude Code, open this folder as the project (like enzo-remotion): Movies/Story Reels/story-reels
    To preview: double-click scripts/Open Studio.command (the folder just opened).
    Renders go to 'Story Reels/Drafts' and 'Story Reels/Final Render'.
    ~/Movies/psa-reel is untouched; keep it for its old renders in out/."

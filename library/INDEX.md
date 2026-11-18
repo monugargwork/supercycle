@@ -45,6 +45,6 @@ New reels start from the newest reel folder (`src/videos/mudkip/`). The modules 
 |---|---|
 | `scripts/vo_words.py` | VO to `words.json` plus the timed line table (whisper large-v3, aligned to the script) |
 | `scripts/plan_check.py`, `plan_view.py`, `plan_md.py`, `plan_lib.py` | Safe-area check, top-down blocking sheet, direction.md, the camera maths shared with story.ts |
-| `scripts/psa-stills.mjs`, `sheet.py`, `sbs_sheet.py`, `short_qa.py` | Check stills (`COMP=<Comp>`), contact sheets, side-by-side sheets, frame QA |
+| `scripts/stills.mjs`, `sheet.py`, `sbs_sheet.py`, `short_qa.py` | Check stills (`COMP=<Comp>`), contact sheets, side-by-side sheets, frame QA |
 | `audio/*_audio.py`, `dsp.py`, `instruments.py`, `sfx_gen.py` | Synthesized score and SFX, plus the mix with ducking and loudness |
 | `scripts/render.command`, `Open Studio.command` | Mac launchers that pull first: chunked renders with `REDO=`, transparent overlays with `PATCH=1` |
