@@ -34,8 +34,8 @@ One page of rules every reel follows. Where an older note disagrees, this page w
 - House titles: Enzo `Title2`, Bolota Bold, red box, in the zone at 13-23 % of the frame height. Keep key action out of that zone while a title is up.
   - Bolota lacks Ơ Ư Ầ Ệ Ỉ Ớ, so titles use digits and plain Latin only.
   - Title2 exit animations linger about 20 f after `out`: end titles early enough that they don't ghost over a face or a plate.
-- Channel logo: the static Supercycle logo (`public/brand/supercycle_logo.png`, `src/brand/Logo.tsx`) sits top right on every reel from the Fanatics reel on (older reels stay without it), at x 771-1023, y 118-268 of the 1080x1920 frame (71-95 % across, 6-14 % down). Keep text, faces and key action out of that corner.
-- Captions: Inter Regular, white with a black outline, in the band at 70-76 % of the frame height, hand-chunked per phrase. They're burned into the main render (`{"captions":true}`).
+- Channel logo: the static Supercycle logo (`public/brand/supercycle_logo.png`, `src/brand/Logo.tsx`) sits top right on every reel from the Fanatics reel on (older reels stay without it), at x 771-1023, y 118-268 of the 1080x1920 frame (71-95 % across, 6-14 % down). Small overlaps are fine; only move things when what is under the logo would be completely hidden.
+- Captions: Inter Regular, white with a black outline, in the band at 70-76 % of the frame height, hand-chunked per phrase. They're on by default in every reel (stills, previews and the main render); `{"captions":false}` turns them off.
 - Diegetic text belongs on real objects (boards, labels, screens). No floating labels or 3D number cards.
 - Sparkles and FX never cover a card face.
 

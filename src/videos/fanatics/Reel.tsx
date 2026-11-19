@@ -148,7 +148,7 @@ export const FanaticsCaptions: React.FC = () => (
     <div style={{ position: "absolute", left: 0, top: 0, width: 1080, height: 1920, transform: "scale(1.3333333)", transformOrigin: "0 0" }}><Captions f={useCurrentFrame()} /></div>
   </AbsoluteFill>
 );
-/** the main render carries the titles and the sound; captions are burned in with inputProps { captions: true } */
+/** the main render carries the titles, the captions (on by default; inputProps { captions: false } turns them off) and the sound */
 /** frames changed after the v1 review (jaw drop on the face): a { patch: true } render draws only these, the rest stay transparent */
 export const PATCH_FRAMES: [number, number][] = [[1653, 1678], [2206, 2249]];
 export const FanaticsReel: React.FC = () => {
@@ -162,7 +162,7 @@ export const FanaticsReel: React.FC = () => {
       {flash > 0 && <AbsoluteFill style={{ background: "#ffffff", opacity: flash }} />}
       <Titles f={f} />
       <Logo />
-      {(getInputProps() as { captions?: boolean }).captions && <Captions f={f} />}
+      {(getInputProps() as { captions?: boolean }).captions !== false && <Captions f={f} />}
       {withAudio() && <Audio src={staticFile("fanatics/mix.wav")} />}
     </AbsoluteFill>
   );
