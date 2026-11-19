@@ -1,0 +1,26 @@
+Real card scans for the Fanatics reel (from library/cards, see CATALOG.md).
+pika_rain.png     2015 JP XY-P Art Academy Pikachu, raincoat (Y. Fujishima)https://cdn6966.templcdn.com/wp-content/uploads/2022/06/JP_U072Y-FujishimaXY-P.jpg
+mewtwo.png        Base Set Mewtwo 10                                https://images.pokemontcg.io/base1/10_hires.png
+zard_base.png     Base Set Charizard 4                              https://images.pokemontcg.io/base1/4_hires.png
+zard_lc.png       Legendary Collection Charizard 3                  https://images.pokemontcg.io/base6/3_hires.png
+blastoise.png     Base Set Blastoise 2                              https://images.pokemontcg.io/base1/2_hires.png
+venusaur.png      Base Set Venusaur 15                              https://images.pokemontcg.io/base1/15_hires.png
+sky_h1.png        Skyridge Holo H1                                  https://images.pokemontcg.io/ecard3/H1.png
+sky_h4.png        Skyridge Holo H4                                  https://images.pokemontcg.io/ecard3/H4.png
+eevee.png         Jungle Eevee 51                                   https://images.pokemontcg.io/base2/51.png
+pikachu.png       Base Set Pikachu 58                               https://images.pokemontcg.io/base1/58.png
+sky_h2.png        Skyridge Holo H2                                  https://images.pokemontcg.io/ecard3/H2.png
+totodile.png      Neo Genesis Totodile 80                           https://images.pokemontcg.io/neo1/80.png
+cyndaquil.png     Neo Genesis Cyndaquil 56                          https://images.pokemontcg.io/neo1/56.png
+chikorita.png     Neo Genesis Chikorita 53                          https://images.pokemontcg.io/neo1/53.png
+sky_h6.png        Skyridge Holo H6                                  https://images.pokemontcg.io/ecard3/H6.png
+gastly.png        Base Set Gastly 50                                https://images.pokemontcg.io/base1/50.png
+squirtle.png      Base Set Squirtle 63                              https://images.pokemontcg.io/base1/63.png
+sky_h8.png        Skyridge Holo H8                                  https://images.pokemontcg.io/ecard3/H8.png
+jigglypuff.png    Jungle Jigglypuff 54                              https://images.pokemontcg.io/base2/54.png
+mantine.png       Neo Genesis Mantine 64                            https://images.pokemontcg.io/neo1/64.png
+sky_h3.png        Skyridge Holo H3                                  https://images.pokemontcg.io/ecard3/H3.png
+onix.png          Base Set Onix 56                                  https://images.pokemontcg.io/base1/56.png
+charmander.png    Base Set Charmander 46                            https://images.pokemontcg.io/base1/46.png
+sky_h9.png        Skyridge Holo H9                                  https://images.pokemontcg.io/ecard3/H9.png
+vulpix.png        Base Set Vulpix 68                                https://images.pokemontcg.io/base1/68.png
