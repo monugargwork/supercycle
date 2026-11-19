@@ -7,6 +7,7 @@ import { CharTest, CHAR_FRAMES } from "./videos/char/CharTest";
 import { AtticReel, AtticCaptions, ATTIC_FRAMES } from "./videos/attic/Reel";
 import { MudkipReel, MudkipCaptions, MUDKIP_FRAMES } from "./videos/mudkip/Reel";
 import { FanaticsReel, FanaticsCaptions, FANATICS_FRAMES } from "./videos/fanatics/Reel";
+import { ChocoboReel, ChocoboCaptions, CHOCOBO_FRAMES } from "./videos/chocobo/Reel";
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -22,5 +23,7 @@ export const RemotionRoot: React.FC = () => (
     <Composition id="BridgeShort" component={BridgeShort} durationInFrames={BRIDGE_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="FanaticsReel" component={FanaticsReel} durationInFrames={FANATICS_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="FanaticsCaptions" component={FanaticsCaptions} durationInFrames={FANATICS_FRAMES} fps={30} width={1440} height={2560} />
+    <Composition id="ChocoboReel" component={ChocoboReel} durationInFrames={CHOCOBO_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="ChocoboCaptions" component={ChocoboCaptions} durationInFrames={CHOCOBO_FRAMES} fps={30} width={1440} height={2560} />
   </>
 );

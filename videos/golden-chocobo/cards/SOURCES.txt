@@ -1,1 +1,3 @@
 Real card scans for the Chocobo reel (from library/cards, see CATALOG.md).
+chocobo_gold.png  MTG Final Fantasy Traveling Chocobo (Golden Chocobo, serialized /77)https://cards.scryfall.io/png/front/6/c/6ce8744a-ede3-4662-968a-360eb6639f08.png?1783906436
+chocobo_plain.png MTG Final Fantasy Traveling Chocobo (regular)     https://cards.scryfall.io/png/front/2/4/2462df62-fc35-47ed-9571-40452074dc6d.png?1783906576

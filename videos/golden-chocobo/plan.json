@@ -311,11 +311,11 @@
     },
     {
      "id": "chair",
-     "build": "new: two wooden chairs, the buyer's (S16-S17) at x 2.95",
+     "build": "new: two wooden chairs, the buyer's (S16-S17) in the back corner (x 3.0, z -7.0)",
      "pos": [
-      2.95,
+      3.0,
       0.45,
-      -6.5
+      -7.0
      ],
      "size": [
       0.42,
@@ -432,19 +432,19 @@
      -6.48
     ],
     "buyer_seat": [
-     2.95,
-     -6.5
+     3.0,
+     -7.0
     ],
     "dA": [
-     0.5,
+     0.35,
      -2.2
     ],
     "dB": [
-     1.0,
+     0.85,
      -2.25
     ],
     "dC": [
-     1.5,
+     1.3,
      -2.2
     ],
     "keeper": [
@@ -558,12 +558,12 @@
    ],
    "marks": {
     "keeper": [
-     2.35,
-     0.55
+     2.15,
+     -0.3
     ],
-    "keeper_sit": [
-     1.82,
-     0.42
+    "keeper_side": [
+     2.42,
+     0.62
     ]
    }
   },
@@ -824,13 +824,13 @@
      "f": 0,
      "pos": [
       2.3,
-      1.42,
+      1.8,
       -4.32
      ],
      "look": [
       2.3,
-      1.22,
-      -6.2
+      1.2,
+      -6.3
      ],
      "fov": 54,
      "roll": 0,
@@ -847,12 +847,12 @@
      "f": 58,
      "pos": [
       2.12,
-      1.2,
+      1.45,
       -4.75
      ],
      "look": [
       2.08,
-      1.02,
+      1.05,
       -6.05
      ],
      "fov": 44,
@@ -985,12 +985,12 @@
      "f": 100,
      "pos": [
       2.12,
-      1.2,
+      1.45,
       -4.75
      ],
      "look": [
       2.08,
-      1.02,
+      1.05,
       -6.05
      ],
      "fov": 44,
@@ -1263,16 +1263,16 @@
     {
      "f": 436,
      "pos": [
-      1.97,
+      1.95,
       1.52,
-      -6.36
+      -6.44
      ],
      "look": [
-      2.02,
-      1.1,
-      -5.98
+      1.86,
+      1.12,
+      -6.2
      ],
-     "fov": 42,
+     "fov": 40,
      "roll": 0,
      "push": 0.0015,
      "blur": 10,
@@ -1311,9 +1311,9 @@
     {
      "n": "phone",
      "p": [
-      2.02,
-      1.12,
-      -6.0
+      1.86,
+      1.13,
+      -6.2
      ],
      "f": [
       470,
@@ -1356,12 +1356,12 @@
      "f": 590,
      "pos": [
       2.15,
-      1.4,
+      1.75,
       -4.5
      ],
      "look": [
       2.1,
-      1.22,
+      1.25,
       -6.3
      ],
      "fov": 46,
@@ -1379,12 +1379,12 @@
      "f": 640,
      "pos": [
       2.25,
-      1.38,
+      1.6,
       -4.5
      ],
      "look": [
       2.2,
-      1.2,
+      1.25,
       -6.3
      ],
      "fov": 46,
@@ -1478,12 +1478,12 @@
      "f": 655,
      "pos": [
       2.25,
-      1.38,
+      1.6,
       -4.5
      ],
      "look": [
       2.2,
-      1.2,
+      1.25,
       -6.3
      ],
      "fov": 46,
@@ -1495,12 +1495,12 @@
     {
      "f": 657,
      "pos": [
-      1.6,
+      1.85,
       1.5,
       1.7
      ],
      "look": [
-      1.05,
+      0.9,
       1.3,
       -2.6
      ],
@@ -1626,12 +1626,12 @@
     {
      "f": 719,
      "pos": [
-      1.6,
+      1.85,
       1.5,
       1.7
      ],
      "look": [
-      1.05,
+      0.9,
       1.3,
       -2.6
      ],
@@ -2182,16 +2182,16 @@
     {
      "f": 1270,
      "pos": [
-      -2.72,
-      1.32,
-      -2.62
+      -2.73,
+      1.22,
+      -2.72
      ],
      "look": [
-      -2.74,
+      -2.75,
       0.96,
       -3.1
      ],
-     "fov": 30,
+     "fov": 26,
      "roll": 0,
      "push": 0.0015,
      "blur": 10,
@@ -2444,7 +2444,7 @@
    },
    "build": "garage: the two yellow hatchbacks, car A's door open on a worn seat; car B's door shut.",
    "blocking": "Shopkeeper (sleeves rolled) front view at the garage mark beside car B's door.",
-   "action": "f1560-1600 both cars, nose on. f1610-1640 the camera swings to car B's door; f1618-1630 the shopkeeper pulls it open on its front hinge ('chiếc' f1625): the seats inside still wrapped in glossy plastic. f1648-1662 he sits down sideways on the seat edge, legs out of the door: the plastic crinkles and shines on 'nilon' (f1661).",
+   "action": "f1560-1600 both cars, nose on. f1606-1640 the camera swings round to look straight in at car B's driver door; f1618-1630 the shopkeeper pulls it open on its front hinge ('chiếc' f1625): the seats inside still wrapped in glossy plastic. f1632-1648 he steps beside the doorway; f1652-1662 he points in at the seat, the plastic shines and crinkles on 'nilon' (f1661), he grins.",
    "acting": "Shopkeeper: smile -> grin.",
    "cams": [
     {
@@ -2468,16 +2468,16 @@
     {
      "f": 1606,
      "pos": [
-      3.5,
+      4.1,
       1.3,
-      2.75
+      0.2
      ],
      "look": [
       1.5,
-      0.78,
-      0.35
+      0.82,
+      0.25
      ],
-     "fov": 40,
+     "fov": 46,
      "roll": 0,
      "push": 0.0015,
      "blur": 5,
@@ -2504,7 +2504,7 @@
       0.55
      ],
      "view": "front",
-     "pose": "open the door, sit on the seat edge",
+     "pose": "open the door, step beside it, point at the seat",
      "expr": "smile -> grin"
     }
    ],
@@ -2538,7 +2538,7 @@
      "p": [
       1.45,
       0.6,
-      0.35
+      0.2
      ],
      "f": [
       1640,
@@ -2720,16 +2720,16 @@
     {
      "f": 1884,
      "pos": [
-      0.12,
-      1.22,
-      0.42
+      0.42,
+      1.55,
+      -0.22
      ],
      "look": [
       0.22,
       0.98,
       -1.05
      ],
-     "fov": 36,
+     "fov": 48,
      "roll": 0,
      "push": 0.002,
      "blur": 10,
@@ -2807,16 +2807,16 @@
     {
      "f": 1951,
      "pos": [
-      1.98,
-      1.05,
-      -5.38
+      2.05,
+      1.2,
+      -5.15
      ],
      "look": [
-      1.93,
-      0.79,
-      -5.76
+      1.96,
+      0.8,
+      -5.8
      ],
-     "fov": 30,
+     "fov": 38,
      "roll": 0,
      "push": 0.0015,
      "blur": 10,
@@ -2830,14 +2830,14 @@
     {
      "f": 2024,
      "pos": [
-      2.55,
+      2.35,
       1.62,
       -4.32
      ],
      "look": [
-      2.82,
+      2.55,
       0.95,
-      -6.4
+      -6.6
      ],
      "fov": 52,
      "roll": 0,
@@ -2909,9 +2909,9 @@
     {
      "n": "buyer head",
      "p": [
-      2.95,
+      3.0,
       1.3,
-      -6.5
+      -7.0
      ],
      "f": [
       2046,
@@ -3011,16 +3011,16 @@
     {
      "f": 2142,
      "pos": [
-      2.15,
-      1.42,
-      -7.2
+      2.25,
+      1.45,
+      -6.92
      ],
      "look": [
-      2.25,
+      2.28,
       1.3,
       -4.05
      ],
-     "fov": 44,
+     "fov": 46,
      "roll": 0,
      "push": 0.0008,
      "blur": 4,
@@ -3035,18 +3035,18 @@
     {
      "f": 2196,
      "pos": [
-      2.18,
-      1.3,
-      -6.75
+      2.4,
+      1.58,
+      -6.95
      ],
      "look": [
-      2.28,
-      1.22,
+      2.4,
+      0.98,
       -4.05
      ],
-     "fov": 40,
+     "fov": 50,
      "roll": 0,
-     "push": 0.0012,
+     "push": 0.0004,
      "blur": 5,
      "why": "slow push to the glass; the hen",
      "glide": 40,
@@ -3179,6 +3179,18 @@
      ],
      "f": [
       2186,
+      2200
+     ]
+    },
+    {
+     "n": "hen",
+     "p": [
+      2.45,
+      0.9,
+      -5.75
+     ],
+     "f": [
+      2246,
       2274
      ]
     }

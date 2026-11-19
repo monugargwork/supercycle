@@ -40,7 +40,7 @@ Account skills they call: `vn-news-script` (the script), `story-reel-director` (
 ## Layout
 | Path | What |
 |---|---|
-| `src/index.ts`, `src/Root.tsx` | Register the compositions: `FanaticsReel`, `MudkipReel`, `AtticReel`, `GpsReel`, `PsaReel` (each with a `…Captions` comp), `BridgeShort`, `CharTest` |
+| `src/index.ts`, `src/Root.tsx` | Register the compositions: `ChocoboReel`, `FanaticsReel`, `MudkipReel`, `AtticReel`, `GpsReel`, `PsaReel` (each with a `…Captions` comp), `BridgeShort`, `CharTest` |
 | `src/engine/` | The shared engine (toon characters, ink, shading, paint, lights, grade, lens blur, geometry). New reels import it; changes must be additive |
 | `src/videos/<reel>/` | One folder per reel: that reel's story, sets, cast, art, captions and `Reel.tsx` (see `library/INDEX.md`). The newest base is `fanatics/` (it carries the channel logo; older reels stay without it). Attic, GPS, PSA and Bridge still hold their own engine copies |
 | `src/enzo/` | Enzo's `Title2` titles and the Bolota font loader |
@@ -55,6 +55,7 @@ Account skills they call: `vn-news-script` (the script), `story-reel-director` (
 
 | Reel | Composition | Video folder | Status |
 |---|---|---|---|
+| Golden Chocobo private sale | `ChocoboReel` (2275 f) | `videos/golden-chocobo/` | v1 built, ready to render (19 Nov 2026) |
 | Fanatics unpaid Pikachu | `FanaticsReel` (2325 f) | `videos/fanatics-unpaid-pikachu/` | v1 built, ready to render (19 Nov 2026) |
 | Mudkip Art Academy | `MudkipReel` (2250 f) | `videos/mudkip-art-academy/` | v1 reviewed; jaw-drop fix delivered as a patch overlay (18 Nov 2026) |
 | Attic Pokémon millions | `AtticReel` | `videos/attic-pokemon-millions/` | v2 rendered on the Mac |

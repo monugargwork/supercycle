@@ -42,7 +42,7 @@ One hard cut (into S10, the squint). The store and its back room are one set joi
 ### store
 - Origin in the shared world: [0, 0, 0]. Axes: +x screen right from the store's front; the store's back wall face at z -4.0 holds the window into the back room (x 1.6..3.0, y 1.0..1.9); the back room behind it spans x 0..3.4, z -4.2..-7.6; +z = the store floor and its open front.
 - Light: day; sun az/el [70, 50]. Open camera sides: +z of the store; the back room is entered only through its window side (camera z between -4.25 and -7.4).
-- Marks [x, z]: seller [1.95, -6.48]; buyer [2.65, -6.48]; buyer_seat [2.95, -6.5]; dA [0.5, -2.2]; dB [1, -2.25]; dC [1.5, -2.2]; keeper [2.15, -1.25]; keeper11 [-2.5, -3.45]; w1 [1.8, -3.7]; w2 [2.25, -3.75]; w3 [2.72, -3.7]; dA17 [2.02, -3.3]; dB17 [2.5, -3.3]; dC17 [1.62, -3.35]; keeper17 [2.92, -3.35].
+- Marks [x, z]: seller [1.95, -6.48]; buyer [2.65, -6.48]; buyer_seat [3, -7]; dA [0.35, -2.2]; dB [0.85, -2.25]; dC [1.3, -2.2]; keeper [2.15, -1.25]; keeper11 [-2.5, -3.45]; w1 [1.8, -3.7]; w2 [2.25, -3.75]; w3 [2.72, -3.7]; dA17 [2.02, -3.3]; dB17 [2.5, -3.3]; dC17 [1.62, -3.35]; keeper17 [2.92, -3.35].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
@@ -60,7 +60,7 @@ One hard cut (into S10, the squint). The store and its back room are one set joi
 | receipt_pad | new: receipt book, blank top sheet, a pen beside it | [2.5, 0.765, -5.82] | [0.15, 0.01, 0.2] |
 | phone | new: the seller's phone (S04 his POV, S16 lying face up on the table, lit with the post) | [2.6, 0.77, -5.8] | [0.075, 0.01, 0.155] |
 | boxes | new: stacked shipping cartons in the back room's corners | [0.5, 0.5, -7.1] | [0.8, 1, 0.6] |
-| chair | new: two wooden chairs, the buyer's (S16-S17) at x 2.95 | [2.95, 0.45, -6.5] | [0.42, 0.9, 0.42] |
+| chair | new: two wooden chairs, the buyer's (S16-S17) in the back corner (x 3.0, z -7.0) | [3, 0.45, -7] | [0.42, 0.9, 0.42] |
 | play_table | new: store play table 160 x 90 cm, top 0.76, two playmats, scattered decks | [1.2, 0.38, -1.4] | [1.6, 0.76, 0.9] |
 | tower | new: the cash tower: strapped bricks 16 x 3.2 x 7 cm (green band, paper strap), 5 then 28 high (top 1.66) | [1.75, 1.21, -1.25] | [0.16, 0.9, 0.07] |
 | carton | new: cardboard carton of bricks on a stool (top 0.9) beside the shopkeeper | [2.4, 0.75, -0.95] | [0.35, 0.3, 0.3] |
@@ -123,8 +123,8 @@ One hard cut (into S10, the squint). The store and its back room are one set joi
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 0 | open | [2.3, 1.42, -4.32] | [2.3, 1.22, -6.2] | 54 | 0.2 | 4 | the deal: both men, the table, the covered cage |
-| 58 | glide 20 f | [2.12, 1.2, -4.75] | [2.08, 1.02, -6.05] | 44 | 0.3 | 6 | lean to the cage for the reveal |
+| 0 | open | [2.3, 1.8, -4.32] | [2.3, 1.2, -6.3] | 54 | 0.2 | 4 | the deal: both men, the table, the covered cage |
+| 58 | glide 20 f | [2.12, 1.45, -4.75] | [2.08, 1.05, -6.05] | 44 | 0.3 | 6 | lean to the cage for the reveal |
 
 - Kicks (7 f): f27 strength 1; f80 strength 0.5.
 - Physics & FX: briefcase: 4 f fall, 1 f squash, a 1 cm hop; lid: spring hinge, overshoots to 105 deg and settles at 95. Cloth: thrown on a 0.5 m arc, tumbles, lands as a heap (squashed to 25 %). Feathers: flutter down at 0.3 m/s with sway.
@@ -146,7 +146,7 @@ One hard cut (into S10, the squint). The store and its back room are one set joi
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 100 | open | [2.12, 1.2, -4.75] | [2.08, 1.02, -6.05] | 44 | 0 | 6 | continues from S01 |
+| 100 | open | [2.12, 1.45, -4.75] | [2.08, 1.05, -6.05] | 44 | 0 | 6 | continues from S01 |
 | 102 | glide 22 f | [2.3, 0.88, -4.35] | [2.25, 0.76, -5.8] | 46 | 0.3 | 6 | slab and hen side by side |
 
 - Kicks (7 f): f121 strength 0.2.
@@ -193,7 +193,7 @@ One hard cut (into S10, the squint). The store and its back room are one set joi
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 430 | open | [2.05, 1.38, -5.4] | [2.05, 1, -6] | 30 | 0 | 8 | back from the label |
-| 436 | glide 24 f | [1.97, 1.52, -6.36] | [2.02, 1.1, -5.98] | 42 | 0.15 (punch 0.4 for 12 f) | 10 | his POV: the phone |
+| 436 | glide 24 f | [1.95, 1.52, -6.44] | [1.86, 1.12, -6.2] | 40 | 0.15 (punch 0.4 for 12 f) | 10 | his POV: the phone |
 
 - Kicks (7 f): f572 strength 0.3.
 - Physics & FX: none
@@ -216,8 +216,8 @@ One hard cut (into S10, the squint). The store and its back room are one set joi
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 590 | open | [2.15, 1.4, -4.5] | [2.1, 1.22, -6.3] | 46 | 0.12 | 5 | the seller |
-| 640 | glide 15 f | [2.25, 1.38, -4.5] | [2.2, 1.2, -6.3] | 46 | 0 | 4 | settle for the pull back |
+| 590 | open | [2.15, 1.75, -4.5] | [2.1, 1.25, -6.3] | 46 | 0.12 | 5 | the seller |
+| 640 | glide 15 f | [2.25, 1.6, -4.5] | [2.2, 1.25, -6.3] | 46 | 0 | 4 | settle for the pull back |
 
 - Kicks (7 f): none.
 - Physics & FX: cage slide: friction, eases in 16 f.
@@ -241,8 +241,8 @@ One hard cut (into S10, the squint). The store and its back room are one set joi
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 655 | open | [2.25, 1.38, -4.5] | [2.2, 1.2, -6.3] | 46 | 0 | 3 | continues from S05 |
-| 657 | glide 44 f | [1.6, 1.5, 1.7] | [1.05, 1.3, -2.6] | 42 | 0.15 | 4 | pull back through the window: the players |
+| 655 | open | [2.25, 1.6, -4.5] | [2.2, 1.25, -6.3] | 46 | 0 | 3 | continues from S05 |
+| 657 | glide 44 f | [1.85, 1.5, 1.7] | [0.9, 1.3, -2.6] | 42 | 0.15 | 4 | pull back through the window: the players |
 
 - Kicks (7 f): f702 strength 0.2.
 - Physics & FX: none
@@ -264,7 +264,7 @@ One hard cut (into S10, the squint). The store and its back room are one set joi
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 719 | open | [1.6, 1.5, 1.7] | [1.05, 1.3, -2.6] | 42 | 0 | 4 | continues |
+| 719 | open | [1.85, 1.5, 1.7] | [0.9, 1.3, -2.6] | 42 | 0 | 4 | continues |
 | 721 | glide 24 f | [0.66, 1.34, -1.05] | [0.54, 1.44, -2.2] | 52 | 0.2 | 10 | low and wide on dA and his card |
 
 - Kicks (7 f): f770 strength 0.2.
@@ -360,7 +360,7 @@ One hard cut (into S10, the squint). The store and its back room are one set joi
 |---|---|---|---|---|---|---|---|
 | 1202 | open | [0.62, 1.22, -0.12] | [1.08, 1.45, -2.25] | 44 | 0 | 10 | continues |
 | 1204 | glide 56 f | [-2.5, 1.5, -1.5] | [-2.5, 1.22, -3.2] | 40 | 0.12 | 6 | the counter and the shopkeeper |
-| 1270 | glide 20 f | [-2.72, 1.32, -2.62] | [-2.74, 0.96, -3.1] | 30 | 0.15 | 10 | the raw card |
+| 1270 | glide 20 f | [-2.73, 1.22, -2.72] | [-2.75, 0.96, -3.1] | 26 | 0.15 | 10 | the raw card |
 | 1334 | glide 20 f | [-2.3, 1.32, -2.62] | [-2.29, 0.96, -3.1] | 30 | 0.15 (punch 0.4 for 12 f) | 10 | the PSA 10 |
 
 - Kicks (7 f): f1381 strength 0.3.
@@ -407,7 +407,7 @@ One hard cut (into S10, the squint). The store and its back room are one set joi
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 1560 | open | [0, 2.05, 7.6] | [0, 0.85, 0] | 44 | 0.15 | 2 | two identical cars |
-| 1606 | glide 34 f | [3.5, 1.3, 2.75] | [1.5, 0.78, 0.35] | 40 | 0.15 | 5 | car B's door, the plastic seats |
+| 1606 | glide 34 f | [4.1, 1.35, 0.2] | [1.5, 0.8, 0.22] | 40 | 0.15 | 5 | car B's door, the plastic seats |
 
 - Kicks (7 f): f1661 strength 0.2.
 - Physics & FX: door: swings on its hinge (heavy: slow start, 2 small rebounds at the stop).
@@ -454,7 +454,7 @@ One hard cut (into S10, the squint). The store and its back room are one set joi
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 1882 | open | [0, 1.45, 3] | [0, 1.32, 0] | 42 | 0 | 6 | continues |
-| 1884 | glide 22 f | [0.12, 1.22, 0.42] | [0.22, 0.98, -1.05] | 36 | 0.2 | 10 | the balance tips |
+| 1884 | glide 22 f | [0.42, 1.55, -0.22] | [0.22, 0.98, -1.05] | 48 | 0.2 | 10 | the balance tips |
 
 - Kicks (7 f): f1912 strength 0.3.
 - Physics & FX: beam: damped rotation (1.2 Hz) to 0.28 rad.
@@ -476,8 +476,8 @@ One hard cut (into S10, the squint). The store and its back room are one set joi
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1951 | open | [1.98, 1.05, -5.38] | [1.93, 0.79, -5.76] | 30 | 0.15 | 10 | the empty sound block |
-| 2024 | glide 34 f | [2.55, 1.62, -4.32] | [2.82, 0.95, -6.4] | 52 | 0 | 3 | the empty room |
+| 1951 | open | [2.05, 1.2, -5.15] | [1.96, 0.8, -5.8] | 38 | 0.15 | 10 | the empty sound block |
+| 2024 | glide 34 f | [2.35, 1.62, -4.32] | [2.55, 0.95, -6.6] | 52 | 0 | 3 | the empty room |
 | 2058 | glide 20 f | [2.62, 1.26, -5.36] | [2.6, 0.78, -5.8] | 30 | 0.15 (punch 0.4 for 12 f) | 10 | the phone lights up |
 
 - Kicks (7 f): f2074 strength 0.2.
@@ -509,8 +509,8 @@ One hard cut (into S10, the squint). The store and its back room are one set joi
 |---|---|---|---|---|---|---|---|
 | 2091 | open | [2.15, 1.02, -5.45] | [2.15, 0.99, -6] | 34 | 0.15 | 8 | the bird |
 | 2112 | glide 30 f | [3.08, 1.32, -5.72] | [2.15, 1, -6] | 42 | 0 | 6 | around the cage |
-| 2142 | glide 44 f | [2.15, 1.42, -7.2] | [2.25, 1.3, -4.05] | 44 | 0.08 | 4 | behind the cage: the faces at the window |
-| 2196 | glide 40 f | [2.18, 1.3, -6.75] | [2.28, 1.22, -4.05] | 40 | 0.12 | 5 | slow push to the glass; the hen |
+| 2142 | glide 44 f | [2.25, 1.45, -6.92] | [2.28, 1.3, -4.05] | 46 | 0.08 | 4 | behind the cage: the faces at the window |
+| 2196 | glide 40 f | [2.4, 1.58, -6.95] | [2.4, 0.98, -4.05] | 50 | 0.04 | 5 | slow push to the glass; the hen |
 
 - Kicks (7 f): f2250 strength 0.15.
 - Physics & FX: hen: a hop on a 0.25 m arc (12 f), lands, settles; the cage rings once when pecked.
