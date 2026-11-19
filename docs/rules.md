@@ -18,7 +18,8 @@ One page of rules every reel follows. Where an older note disagrees, this page w
 - Expressions come from the face artwork (`Expr`). The jaw drop is `FrontOpts.gape` (0..1).
 
 ## 3. Real cards
-- Every reel uses real TCG card scans (e.g. Pokémon), fetched fresh from the internet and relevant to that story. Never drawn stand-in cards.
+- Every reel uses real TCG card scans (e.g. Pokémon), relevant to that story. Never drawn stand-in cards.
+- Take a scan from the shared library (`library/cards/`, `python3 scripts/card.py find …`) when it has the right card; otherwise fetch it with `card.py add`, which stores it there for later reels. `card.py use <reel> …` copies scans into `public/<reel>/cards/` and writes `videos/<slug>/cards/SOURCES.txt`.
 - Sources go in `videos/<slug>/cards/SOURCES.txt`. Hosts that work from the cloud shell: `images.pokemontcg.io` and `cdn6966.templcdn.com` (pokumon.com).
 
 ## 4. Direction

@@ -47,7 +47,8 @@ Account skills they call: `vn-news-script` (the script), `story-reel-director` (
 | `public/<reel>/` | Each reel's assets: `voice.wav`, `words.json`, `mix.wav`, `cards/` (real scans), `memes/` |
 | `public/fonts/` | Fonts |
 | `audio/` | Synthesized score and SFX, plus the mix per reel (`<reel>_audio.py`) |
-| `scripts/` | Mac launchers (`render.command`, `Open Studio.command`), plan tools (`plan_*.py`), `vo_words.py`, stills and sheets |
+| `scripts/` | Mac launchers (`render.command`, `Open Studio.command`, `sweep.command`), `new_reel.sh` (scaffolds a reel), `card.py` (the card library), plan tools (`plan_*.py`), `vo_words.py`, stills and sheets |
+| `library/cards/` | Every real card scan fetched so far, stored once and listed in `CATALOG.md`; reels copy from here |
 | `videos/<slug>/` | Each reel's story and history: `script.md`, `facts.md`, `voice.*`, `words.json`, `beats.md`, `plan.json` (+ its generator), `direction.md`, `plan_view.jpg`, `notes.md`, `cards/SOURCES.txt` |
 | `docs/`, `library/`, `taste/` | Rules, flow, move library, rejections; `docs/history/` has older notes |
 | `SKILL.md`, `templates/`, `references/` | The original cartoon-3d-short kit (mromidev/claude-animated-shorts) and its reference reports |
@@ -60,6 +61,7 @@ Account skills they call: `vn-news-script` (the script), `story-reel-director` (
 | PSA truck heist | `PsaReel` | `videos/psa-heist/` | done |
 
 ## Commands
+- New reel: `scripts/new_reel.sh <slug> <Name>` (story folder at once; the build once `plan.json` exists). Cards: `python3 scripts/card.py find|add|use …`.
 - Check a reel: `scripts/sweep.command MudkipReel 60 333,1501` (every 60 frames plus beats → `out/MudkipReel/sweep/sheet_*.jpg`, frames listed in `sheets.txt`); only some frames: `scripts/sweep.command MudkipReel 0 333,1501`. Single stills: on the Mac `scripts/stills.command MudkipReel 120,640,1500` (→ `out/MudkipReel/chk_<f>.jpg`); in the cloud `COMP=MudkipReel node scripts/stills.mjs out/mudkip/x_ 120,640,1500`. Contact sheet: `python3 scripts/sheet.py out.jpg 3 files…`.
 - Preview on the Mac: double-click `scripts/Open Studio.command` (it pulls first).
 - Render on the Mac (the user runs it; Claude gives the exact line; `out/` and the render folders are never committed):

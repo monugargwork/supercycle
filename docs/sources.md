@@ -41,8 +41,9 @@ Everything outside the code that these reels are made from: where it lives, and 
 - `scripts/vo_words.py` turns it into `words.json`.
 
 ## 4. Real TCG cards
-- Fresh scans for every reel, relevant to its story. Never drawn stand-ins.
+- Real scans for every reel, relevant to its story. Never drawn stand-ins.
 - Hosts that work from the cloud shell: `images.pokemontcg.io` (English sets by set and number) and `cdn6966.templcdn.com` (pokumon.com, including Japanese promos).
+- Every scan we fetch is kept once in `library/cards/<set>/<name>.png`, listed in `library/cards/CATALOG.md` (card, set, number, source, which reels used it). Look there first: `python3 scripts/card.py find charizard`. New scans: `card.py add <name> <set> <no>` (pokemontcg.io by default, `--url` for any other host). Into a reel: `card.py use <reel> <name>[:<alias>] …`.
 - Each reel lists its cards in `videos/<slug>/cards/SOURCES.txt`. The PNGs the build loads are in `public/<reel>/cards/`.
 
 ## 5. Fonts

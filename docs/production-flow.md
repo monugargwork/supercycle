@@ -28,10 +28,10 @@ Each reel runs in one session; the user sets model and effort by hand. To save c
    - `python3 scripts/plan_md.py videos/<slug>/plan.json videos/<slug>/head.md > videos/<slug>/direction.md` writes the readable direction.
 
 ## 4. Build
-1. Copy the per-reel files of the newest reel folder as the base (`src/videos/mudkip/` today: `Reel.tsx`, `story.ts`, `sets.ts`, `cast.ts`, `world.ts`, `art.ts`, `captions.ts`), then rename the exports. The engine is not copied: these files import it from `src/engine/`. Point `story.ts` at `../../../videos/<slug>/plan.json`. If a scene needs an engine change, make it additive (a new option that defaults to the old behaviour) so older reels render the same. Register the new composition in `src/Root.tsx`: `<Reel>Reel` at 1080x1920 and `<Reel>Captions`.
+1. Run `scripts/new_reel.sh <slug> <Name>` (e.g. `gengar-heist Gengar`). It copies the per-reel files of the newest reel (`src/videos/mudkip/`) to `src/videos/<name>/` with the exports renamed, points the asset paths and the `plan.json` import at this reel, copies the sound script to `audio/<name>_audio.py`, makes `public/<name>/` with the voice and words, and registers `<Name>Reel` (1080x1920) and `<Name>Captions` in `src/Root.tsx`. Run it once at the script stage too: it makes `videos/<slug>/` with `notes.md` and `cards/SOURCES.txt`. The engine is not copied: the reel imports it from `src/engine/`. If a scene needs an engine change, make it additive (a new option that defaults to the old behaviour) so older reels render the same.
 2. Put the assets in `public/<reel>/`:
    - `voice.wav` and `words.json`;
-   - `cards/*.png`, which must be real scans;
+   - `cards/*.png`, which must be real scans: `python3 scripts/card.py use <name> <card> …` copies them from the library (`card.py find` / `card.py add` first);
    - `memes/`, sounds from the user's meme library (`~/Downloads/meme sounds` on the Mac);
    - `mix.wav`, built by the audio script below.
 3. Hand-chunk the captions in `captions.ts`, timed from `words.json`.

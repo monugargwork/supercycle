@@ -49,6 +49,8 @@ The shared engine lives once in `src/engine/` and new reels import it (`../../en
 |---|---|
 | `scripts/vo_words.py` | VO to `words.json` plus the timed line table (whisper large-v3, aligned to the script) |
 | `scripts/plan_check.py`, `plan_view.py`, `plan_md.py`, `plan_lib.py` | Safe-area check, top-down blocking sheet, direction.md, the camera maths shared with story.ts |
+| `scripts/new_reel.sh` | Scaffolds a reel: story folder, assets folder, per-reel code from the newest reel with exports and paths renamed, sound script, compositions registered. Safe to re-run |
+| `scripts/card.py` | The card library (`library/cards/`, `CATALOG.md`): `find`, `add` (fetch and store), `use` (copy into a reel and write `SOURCES.txt`) |
 | `scripts/sweep.command` | Still sweep as 3x3 contact sheets (`out/<Comp>/sweep/sheet_*.jpg` + `sheets.txt`); the default way to check |
 | `scripts/stills.mjs`, `sheet.py`, `sbs_sheet.py`, `short_qa.py` | Check stills (`COMP=<Comp>`), contact sheets, side-by-side sheets, frame QA |
 | `audio/*_audio.py`, `dsp.py`, `instruments.py`, `sfx_gen.py` | Synthesized score and SFX, plus the mix with ducking and loudness |

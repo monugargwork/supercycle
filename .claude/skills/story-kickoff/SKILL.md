@@ -8,19 +8,19 @@ description: Start a new 3D animated story reel (Vietnamese VO, Pokémon/TCG sto
 Read first: `CLAUDE.md`, `docs/rules.md`, `docs/production-flow.md`, `docs/sources.md`, `library/INDEX.md`, `taste/rejected.md`, and the `notes.md` of the two most recent reels (the table in `CLAUDE.md`).
 
 ## 1. Where are we?
-- **A story or article, no script yet:** use the `vn-news-script` skill. Confirm the facts with a second source, then write `videos/<slug>/script.md` and `facts.md` (a short English slug). Hand him only the paragraph. Stop there until he records the voiceover.
+- **A story or article, no script yet:** run `scripts/new_reel.sh <slug> <Name>` (it makes `videos/<slug>/`), then use the `vn-news-script` skill. Confirm the facts with a second source, then write `videos/<slug>/script.md` and `facts.md` (a short English slug). Hand him only the paragraph. Stop there until he records the voiceover.
 - **An approved voiceover:** save it as `videos/<slug>/voice.mp3` (with the script, if he sends one). Run `python3 scripts/vo_words.py videos/<slug>/voice.mp3 videos/<slug>/script.md videos/<slug>/` and check every `check:` line.
 
 ## 2. Direct (skill `story-reel-director`)
-1. Look again at the loved reference reels for the grammar (`docs/sources.md` §1; never copy them). Then write `beats.md`, and list the real TCG cards the story needs. Fetch fresh scans into `videos/<slug>/cards/`, with sources in `SOURCES.txt`.
+1. Look again at the loved reference reels for the grammar (`docs/sources.md` §1; never copy them). Then write `beats.md`, and list the real TCG cards the story needs. Look in the library first (`python3 scripts/card.py find …`); fetch only what's missing with `card.py add`, which keeps it there for later reels.
 2. Wait for his OK on the beats, unless he said "don't wait for my permission".
 3. Write `plan.json` with a generator script next to it (as `videos/mudkip-art-academy/mkplan.py` does). Every scene, mark and camera key goes in it. Change it only through the generator, and read `direction.md` rather than the raw JSON.
 4. Check and document it: `scripts/plan_check.py` (aim for 0 errors), `plan_view.py` and `plan_md.py` (which writes `direction.md`).
 
 ## 3. Build
-1. Copy the per-reel files of the newest reel folder (`src/videos/mudkip/`: `Reel.tsx`, `story.ts`, `sets.ts`, `cast.ts`, `world.ts`, `art.ts`, `captions.ts`) to `src/videos/<reel>/` and rename the exports. The engine stays in `src/engine/` and is imported, not copied; read it only if a scene needs an engine change, and keep any change additive. Point `story.ts` at `../../../videos/<slug>/plan.json`.
-2. Register `<Reel>Reel` (1080x1920) and `<Reel>Captions` in `src/Root.tsx`.
-3. Put the assets in `public/<reel>/`: `voice.wav`, `words.json`, `cards/`, `memes/` (from `~/Downloads/meme sounds`). Copy the sound script to `audio/<reel>_audio.py` and build `mix.wav`.
+1. `scripts/new_reel.sh <slug> <Name>` sets up the build in one go: the per-reel files of the newest reel copied to `src/videos/<name>/` with exports renamed and paths pointed at this reel, `audio/<name>_audio.py`, `public/<name>/` with the voice and words, and both compositions registered in `src/Root.tsx`. The engine stays in `src/engine/` and is imported, not copied; read it only if a scene needs an engine change, and keep any change additive.
+2. Cards: `python3 scripts/card.py use <name> <card>[:<alias>] …` copies the scans into `public/<name>/cards/` and writes `SOURCES.txt`.
+3. Memes into `public/<name>/memes/` (from `~/Downloads/meme sounds`), then build `mix.wav` with the sound script.
 4. Mechanical jobs (fetching card scans, copying meme sounds, renaming exports) can go to a subagent on a cheaper model.
 5. Reuse before inventing. Tag every move `reuse:` / `adapt:` / `new` (from `library/INDEX.md`).
 
