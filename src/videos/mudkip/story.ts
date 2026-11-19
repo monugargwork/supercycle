@@ -2,7 +2,7 @@
 // Everything a camera needs (keys, glides, pushes, kicks, depth of field, dissolves) is read from plan.json, the direction's
 // source of truth (supercycle repo videos/mudkip-art-academy/plan.json): numbers are never retyped here.
 // Sets live far apart in one scene: AUCTION, FACTORY, ROOM, SHOP, LAWN, TABLE.
-import plan from "./plan.json";
+import plan from "../../../videos/mudkip-art-academy/plan.json";
 export const FPS = 30;
 export const TOTAL = plan.frames;
 export type V3 = [number, number, number];

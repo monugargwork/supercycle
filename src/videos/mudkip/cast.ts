@@ -1,15 +1,15 @@
 // The Mudkip Art Academy reel's cast and 2D effects as lit flat cards in the 3D sets (pool/actor/fx machinery from the bridge short).
 // stage(id, f, cam) returns everything with a face or an effect for shot `id` at frame f: a pure function of f.
 import * as THREE from "three";
-import { Pen, bodyFront, bodySide, frontPts, fxBurst, fxPuff, fxSplash, fxShadow, fxContact, Outfit, FrontOpts, SideOpts, SKIN } from "./toon";
+import { Pen, bodyFront, bodySide, frontPts, fxBurst, fxPuff, fxSplash, fxShadow, fxContact, Outfit, FrontOpts, SideOpts, SKIN } from "../../engine/toon";
 import * as art from "./art";
 import {
   FPS, SHOTS, V3, at, AUCTION, FACTORY, ROOM, SHOP, LAWN, TABLE, clamp01, smooth, easeOut, pop, mark, obj, hop, colA, colB, lotA, beamSin, villaAir,
   SLAM, LAUGH, LUNGE, STAMPS, DRAW0, DRAW1, WIN, PUSH5, LIFT6, HUG6, RIP, GAVELS, WINGS, PLACE12, BID_LAST, HOLD14, STRIKE14, SET15, DROP15, HIT15, LAND15,
   SLAB16, COVER16, LOUPE16, DEAL0, CASES, TEN, SWEEP0, PLACE18, JAWS, SLIP, FLOOR19,
 } from "./story";
-import { NOINK } from "./ink";
-import { cardShade, blobMaterial, CARD_K } from "./cardshade";
+import { NOINK } from "../../engine/ink";
+import { cardShade, blobMaterial, CARD_K } from "../../engine/cardshade";
 
 // ---------------- canvas pool ----------------
 type Entry = { cv: HTMLCanvasElement; tex: THREE.CanvasTexture; w: number; h: number };

@@ -2,7 +2,7 @@
 // numbers, the stolen-items list, money), stamps (red X, green check), envelopes, alarm, shards, the dossier and the
 // journey icons. All drawn with the Pen (plum ink, flat fills) so they sit with the cast. Text is numbers only, so the
 // picture works with the Vietnamese voice.
-import { Pen, INK, shade, mix } from "./toon";
+import { Pen, INK, shade, mix } from "../../engine/toon";
 
 type P2 = [number, number];
 const rad = (d: number) => (d * Math.PI) / 180;

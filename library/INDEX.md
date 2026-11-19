@@ -1,18 +1,22 @@
 # Move library: what we have and where it lives
 
-New reels start from the newest reel folder (`src/videos/mudkip/`). The modules below are copied into each reel folder, so a fix made in one reel has to be carried into the base by hand. Tags in the direction: `reuse:<name>`, `adapt:<name>` (say what changes), `new` (say how it's built). Anything `new` that works gets a row here after the reel.
+The shared engine lives once in `src/engine/` and new reels import it (`../../engine/<module>`); a new reel copies only the per-reel files of the newest reel folder (`src/videos/mudkip/`). Older reels (Attic, GPS, PSA, Bridge) still carry their own engine copies and are left as they are. Engine changes must be additive: a new option defaults to the old behaviour, so every reel that imports the engine renders exactly as before. Tags in the direction: `reuse:<name>`, `adapt:<name>` (say what changes), `new` (say how it's built). Anything `new` that works gets a row here after the reel.
 
-## Engine (same in every reel folder)
+## Engine (`src/engine/`, shared)
 | Module | What |
 |---|---|
 | `toon.ts` | The flat cartoon characters. Includes: <ul><li>`Outfit`s and `Expr`essions</li><li>`frontPts`, which places the body and knows about sitting</li><li>`bodyFront` / `bodySide`</li><li>`FrontOpts.gape`, the jaw drop</li><li>FX sprites: `fxPuff`, `fxStars`, `fxRing`, `fxBurst`, `fxSplash`, `fxContact` and more</li></ul> |
-| `cast.ts` | Staging per scene (`stage()` cases), 3D arms with a fixed length (`arm3d`, which warns when short), held props, the doubters chorus (`doubters()`) |
-| `story.ts` | Reads `plan.json`: `SHOTS`, `XFADE` dissolves, `camAt`, `dofAt`, `KICKS`, `TITLES`, beat constants. Helpers `glide`, `smooth`, `easeOut`, `pop` |
-| `sets.ts`, `world.ts` | Set builders (`buildSets`), moving pieces per frame (`pose()`), placed props (`placeProps()`) |
-| `art.ts` | Canvas-drawn props and boards (list below) |
 | `paint.ts` | Textures: wood, stone, cobble, brick, roof, grass, water, clouds (HD versions too) |
 | `lights.ts`, `grade.ts` | Light presets (day, golden and more) and the colour grade per preset |
-| `ink.ts`, `shade.ts`, `cardshade.ts`, `lensblur.ts` | Ink outlines, two-tone shading, card shading, depth-of-field blur |
+| `ink.ts`, `shade.ts`, `cardshade.ts`, `lensblur.ts`, `geo.ts` | Ink outlines, two-tone shading, card shading, depth-of-field blur, geometry batching |
+
+## Per reel (`src/videos/<reel>/`, copied from the newest reel and rewritten)
+| Module | What |
+|---|---|
+| `cast.ts` | Staging per scene (`stage()` cases), 3D arms with a fixed length (`arm3d`, which warns when short), held props, the doubters chorus (`doubters()`) |
+| `story.ts` | Imports the plan straight from `videos/<slug>/plan.json` (no copy in `src/`): `SHOTS`, `XFADE` dissolves, `camAt`, `dofAt`, `KICKS`, `TITLES`, beat constants. Helpers `glide`, `smooth`, `easeOut`, `pop` |
+| `sets.ts`, `world.ts` | Set builders (`buildSets`), moving pieces per frame (`pose()`), placed props (`placeProps()`) |
+| `art.ts` | Canvas-drawn props and boards (list below) |
 | `Reel.tsx` | The composition: shots and dissolves, the flash, titles, captions, audio, and `PATCH_FRAMES` for overlay renders |
 | `captions.ts` | Hand-chunked caption phrases timed from `words.json` |
 | `src/enzo/` | Enzo's `Title2` titles (Bolota Bold, red box) and fonts |
@@ -45,6 +49,7 @@ New reels start from the newest reel folder (`src/videos/mudkip/`). The modules 
 |---|---|
 | `scripts/vo_words.py` | VO to `words.json` plus the timed line table (whisper large-v3, aligned to the script) |
 | `scripts/plan_check.py`, `plan_view.py`, `plan_md.py`, `plan_lib.py` | Safe-area check, top-down blocking sheet, direction.md, the camera maths shared with story.ts |
+| `scripts/sweep.command` | Still sweep as 3x3 contact sheets (`out/<Comp>/sweep/sheet_*.jpg` + `sheets.txt`); the default way to check |
 | `scripts/stills.mjs`, `sheet.py`, `sbs_sheet.py`, `short_qa.py` | Check stills (`COMP=<Comp>`), contact sheets, side-by-side sheets, frame QA |
 | `audio/*_audio.py`, `dsp.py`, `instruments.py`, `sfx_gen.py` | Synthesized score and SFX, plus the mix with ducking and loudness |
 | `scripts/render.command`, `Open Studio.command` | Mac launchers that pull first: chunked renders with `REDO=`, transparent overlays with `PATCH=1` |

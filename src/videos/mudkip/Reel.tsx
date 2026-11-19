@@ -20,9 +20,9 @@ import { EffectComposer } from "@react-three/postprocessing";
 import { BlendFunction, BloomEffect, ToneMappingEffect, ToneMappingMode } from "postprocessing";
 import { World } from "./world";
 import { TCG_IMG, TCG_ALL, loadTcg } from "./art";
-import { InkPass, noInkFallback } from "./ink";
-import { LensBlur, GrainEffect } from "./lensblur";
-import { GradeEffect, GRADES, GRADE_STRENGTH, gradeFor } from "./grade";
+import { InkPass, noInkFallback } from "../../engine/ink";
+import { LensBlur, GrainEffect } from "../../engine/lensblur";
+import { GradeEffect, GRADES, GRADE_STRENGTH, gradeFor } from "../../engine/grade";
 import { TOTAL, FLASH_AT, SHOTS, layersAt, dofAt, TITLES as PLAN_TITLES } from "./story";
 
 export const MUDKIP_FRAMES = TOTAL;

@@ -10,7 +10,15 @@ const inputProps = { audio: false, post: { dpr: Number(dpr) } };
 const serveUrl = await bundle({ entryPoint: path.resolve("src/index.ts"), publicDir: path.resolve("public") });
 const composition = await selectComposition({ serveUrl, id: process.env.COMP || "PsaReel", chromiumOptions, inputProps });
 const onBrowserLog = (l) => { if (l.type === "error" || l.type === "warning") console.log(`[${l.type}]`, l.text.slice(0, 400)); };
-for (const f of frames.split(",").map(Number)) {
+// frames: "120,640" or with "every:60" (0, 60, … up to the last frame), e.g. "every:60,333,1501"; sorted, no repeats
+const list = [...new Set(frames.split(",").flatMap((t) => {
+  if (!t.startsWith("every:")) return [Number(t)];
+  const step = Number(t.slice(6)), last = composition.durationInFrames - 1, out = [];
+  for (let f = 0; f <= last; f += step) out.push(f);
+  return out;
+}))].sort((a, b) => a - b);
+fs.writeFileSync(`${prefix}frames.txt`, list.join("\n") + "\n");
+for (const f of list) {
   const t0 = Date.now();
   await renderStill({ composition, serveUrl, frame: f, output: `${prefix}${f}.jpg`, imageFormat: "jpeg", jpegQuality: 88, scale: 1,
     chromiumOptions, inputProps, timeoutInMilliseconds: 300000, onBrowserLog });

@@ -2,11 +2,11 @@
 // their own objects (money sack and bundles, lot columns, price board and date plate, press head, handheld console, parcel and
 // the block of 100 cards, the balance with its pans and the villa, the loupe). Positions come from plan.json where they matter.
 import * as THREE from "three";
-import { Batch, V, lam, boxGeo, quad, tri } from "./geo";
-import { ctex, rep, grassHD, planksHD, roofHD, beam, jit, brick } from "./paint";
-import { Pen } from "./toon";
-import { untone } from "./shade";
-import { NOINK } from "./ink";
+import { Batch, V, lam, boxGeo, quad, tri } from "../../engine/geo";
+import { ctex, rep, grassHD, planksHD, roofHD, beam, jit, brick } from "../../engine/paint";
+import { Pen } from "../../engine/toon";
+import { untone } from "../../engine/shade";
+import { NOINK } from "../../engine/ink";
 import { tcard, numeral, loupeGlass } from "./art";
 import { AUCTION, FACTORY, ROOM, SHOP, LAWN, TABLE, V3, obj, ORIGIN } from "./story";
 

@@ -12,7 +12,7 @@ description: Finish an approved 3D story reel. Use when the user says a story re
    - rejections go into `taste/rejected.md`, and repeated reactions into `docs/rules.md`.
 3. **Freeze it:**
    - mark the reel done in the table in `CLAUDE.md`;
-   - its code is frozen from now on, and later reels copy from it rather than edit it;
+   - its code is frozen from now on, and later reels copy from it rather than edit it. It still imports the shared engine (`src/engine/`), which only ever changes additively, so it keeps rendering the same; the snapshot branch below is the exact copy;
    - create a milestone branch `snapshot/<reel>-final`.
 4. **Clean up,** after asking: `Drafts/.chunks/<Comp>` and old drafts on the Mac.
 5. **Commit and push.**

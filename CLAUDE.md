@@ -24,17 +24,26 @@ Account skills they call: `vn-news-script` (the script), `story-reel-director` (
 - **Captions** are burned into the main render (`{"captions":true}`).
 - **`plan.json` is the source of truth** for cameras and timing. Numbers are never retyped in code, and the plan is updated when the build changes something.
 - **Commit and push after every change**, in batches (about 60 files, well under 100 MB per push). A session on the Mac works directly in this folder and never leaves uncommitted changes; end every session with `notes.md` updated and pushed. A cloud session pushes too (then `git update-ref refs/remotes/origin/main HEAD`), and the Mac launchers pull before every preview and render. If a push from the Mac is refused (403), the Keychain token doesn't cover this repo yet: tell the user to add `supercycle` to that GitHub token's repository access.
-- **Renders run on the Mac** for now (Lambda is parked until the user's AWS access is fixed). Claude gives the exact command and the user runs it; Claude runs it only when asked. On the Mac, Claude checks its own work with stills on the GPU (`scripts/stills.command`, about a second each). In a cloud session there is no GPU: stills only, about 20 s each.
+- **Renders run on the Mac** for now (Lambda is parked until the user's AWS access is fixed). Claude gives the exact command and the user runs it; Claude runs it only when asked. On the Mac, Claude checks its own work with stills on the GPU, as contact sheets (`scripts/sweep.command`, about a second a frame, 9 frames per sheet). In a cloud session there is no GPU: stills only, about 20 s each.
 - When the user asks how long a render takes, answer with the time for a cloud render.
 - **Small fixes never mean a full re-render.** Use `REDO=<chunks>` (10 s each), or a transparent overlay of only the changed frames (`PATCH=1`, which needs `PATCH_FRAMES` in the reel's `Reel.tsx`).
 - **Every user note** (they arrive as Frame.io CSVs, frames at 30 fps) gets a row in `videos/<slug>/notes.md` with what changed and why. Repeated reactions get promoted into `docs/rules.md`; rejections go into `taste/rejected.md`.
 - When a doc in `docs/` changes, update its mirror in the claude.ai Project "enzo stories" (`claude/<same name>.md`) too.
 
+## Saving credits
+- **One session per reel stage**: a new session for each reel's kickoff and for each feedback round. The repo holds the memory (`notes.md`, rules, plan), so nothing is lost and old context isn't re-sent every turn.
+- **Effort by phase**: high for direction and building new scenes; medium for scripts and feedback rounds; low for routine steps (stills, render lines, commits, notes).
+- **Look at sheets, not stills**: check with `scripts/sweep.command` (9 frames per image); open a single full still only to inspect a detail.
+- **Read `direction.md`, not raw `plan.json`** (71 KB). Change the plan through its generator script (`mkplan.py`), then regenerate `direction.md`.
+- **Don't read the engine** (`src/engine/`) unless the scene needs an engine change; the per-reel files and `library/INDEX.md` are enough.
+- **Mechanical side jobs** (finding card scans, copying assets, renaming exports) can go to a subagent on a cheaper model (`sonnet` or `haiku`).
+
 ## Layout
 | Path | What |
 |---|---|
 | `src/index.ts`, `src/Root.tsx` | Register the compositions: `MudkipReel`, `AtticReel`, `GpsReel`, `PsaReel` (each with a `…Captions` comp), `BridgeShort`, `CharTest` |
-| `src/videos/<reel>/` | One folder per reel: engine copy plus that reel's story, sets, cast and art (see `library/INDEX.md`). The newest base is `mudkip/` |
+| `src/engine/` | The shared engine (toon characters, ink, shading, paint, lights, grade, lens blur, geometry). New reels import it; changes must be additive |
+| `src/videos/<reel>/` | One folder per reel: that reel's story, sets, cast, art, captions and `Reel.tsx` (see `library/INDEX.md`). The newest base is `mudkip/`. Attic, GPS, PSA and Bridge still hold their own engine copies |
 | `src/enzo/` | Enzo's `Title2` titles and the Bolota font loader |
 | `public/<reel>/` | Each reel's assets: `voice.wav`, `words.json`, `mix.wav`, `cards/` (real scans), `memes/` |
 | `public/fonts/` | Fonts |
@@ -52,7 +61,7 @@ Account skills they call: `vn-news-script` (the script), `story-reel-director` (
 | PSA truck heist | `PsaReel` | `videos/psa-heist/` | done |
 
 ## Commands
-- Check stills: on the Mac `scripts/stills.command MudkipReel 120,640,1500` (→ `out/MudkipReel/chk_<f>.jpg`); in the cloud `COMP=MudkipReel node scripts/stills.mjs out/mudkip/x_ 120,640,1500`. Contact sheet: `python3 scripts/sheet.py out.jpg 3 files…`.
+- Check a reel: `scripts/sweep.command MudkipReel 60 333,1501` (every 60 frames plus beats → `out/MudkipReel/sweep/sheet_*.jpg`, frames listed in `sheets.txt`); only some frames: `scripts/sweep.command MudkipReel 0 333,1501`. Single stills: on the Mac `scripts/stills.command MudkipReel 120,640,1500` (→ `out/MudkipReel/chk_<f>.jpg`); in the cloud `COMP=MudkipReel node scripts/stills.mjs out/mudkip/x_ 120,640,1500`. Contact sheet: `python3 scripts/sheet.py out.jpg 3 files…`.
 - Preview on the Mac: double-click `scripts/Open Studio.command` (it pulls first).
 - Render on the Mac (the user runs it; Claude gives the exact line; `out/` and the render folders are never committed):
   `cd ~/Movies/"Story Reels"/story-reels && scripts/render.command <Composition> <Name>_v<n>`

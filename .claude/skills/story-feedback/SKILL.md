@@ -5,10 +5,12 @@ description: Apply a round of notes on a 3D story reel. Use when the user sends 
 
 # Feedback round on a story reel
 
+Run each round in a new session, at medium effort (high only if a note needs a new scene or move).
+
 1. **Which reel:** match it to a row in `CLAUDE.md`. Read its `videos/<slug>/notes.md`, `docs/rules.md` and `taste/rejected.md`.
 2. **Get the comments:** usually a Frame.io CSV, where frame numbers are at 30 fps (`Frame` column). Map each comment to a scene ID with `plan.json`.
 3. **Fix the cause everywhere it occurs,** not only at the timestamp. A gag reused in another scene gets the same fix, and you say so. Logic and physics come first. If a comment is unclear, ask instead of guessing.
-4. **Check** with stills of every changed frame (`scripts/stills.command` on the Mac), before and after.
+4. **Check** the changed frames as a contact sheet, before and after: `scripts/sweep.command <Comp> 0 <f1>,<f2>,…` (9 frames per sheet in `out/<Comp>/sweep/`). Read `direction.md` for the scene, not raw `plan.json`, and change the plan only through its generator.
 5. **Write it down:**
    - in `notes.md`, a table for this round: time · comment · scene · what changed and why, plus a one-line taste note;
    - rejections go into `taste/rejected.md`;

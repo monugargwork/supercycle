@@ -6,6 +6,8 @@ Work happens in a Claude Code session opened on the Mac folder `~/Movies/Story R
 
 Commit and push after every stage.
 
+To save credits: start a new session for each reel's kickoff and for each feedback round; use high effort for direction and new scenes, medium for scripts and feedback, low for routine steps; check with contact sheets (`scripts/sweep.command`), read `direction.md` instead of raw `plan.json`, and leave `src/engine/` unread unless the scene needs an engine change.
+
 ## 1. Script (skill `vn-news-script`)
 1. The user feeds a news story or article. Confirm the facts with a second source.
 2. Write one Vietnamese paragraph, 220-280 syllables (about 60 s), with an act-hook.
@@ -19,14 +21,14 @@ Commit and push after every stage.
 
 ## 3. Direction (skill `story-reel-director`)
 1. Write `beats.md`, the film on one page. Wait for the user's OK unless he said not to wait.
-2. Write `plan.json`. Use a generator script in the video folder (see `videos/mudkip-art-academy/mkplan.py`).
+2. Write `plan.json`. Use a generator script in the video folder (see `videos/mudkip-art-academy/mkplan.py`), and change the plan only through it. Read `direction.md`, not the raw JSON. The build imports `plan.json` straight from `videos/<slug>/`, so there is no copy to keep in sync.
 3. Check and document the plan:
    - `python3 scripts/plan_check.py videos/<slug>/plan.json` checks the safe area (aim for 0 errors).
    - `python3 scripts/plan_view.py videos/<slug>/plan.json videos/<slug>/plan_view.jpg` draws the top-down blocking sheet.
    - `python3 scripts/plan_md.py videos/<slug>/plan.json videos/<slug>/head.md > videos/<slug>/direction.md` writes the readable direction.
 
 ## 4. Build
-1. Copy the newest reel folder as the base (`src/videos/mudkip/` today), then rename the exports. Register the new composition in `src/Root.tsx`: `<Reel>Reel` at 1080x1920 and `<Reel>Captions`.
+1. Copy the per-reel files of the newest reel folder as the base (`src/videos/mudkip/` today: `Reel.tsx`, `story.ts`, `sets.ts`, `cast.ts`, `world.ts`, `art.ts`, `captions.ts`), then rename the exports. The engine is not copied: these files import it from `src/engine/`. Point `story.ts` at `../../../videos/<slug>/plan.json`. If a scene needs an engine change, make it additive (a new option that defaults to the old behaviour) so older reels render the same. Register the new composition in `src/Root.tsx`: `<Reel>Reel` at 1080x1920 and `<Reel>Captions`.
 2. Put the assets in `public/<reel>/`:
    - `voice.wav` and `words.json`;
    - `cards/*.png`, which must be real scans;
@@ -36,11 +38,9 @@ Commit and push after every stage.
 4. Build the sound with `cd audio && python3 <reel>_audio.py ../public/<reel>/voice.wav ../public/<reel>/mix.wav`. Aim for about -14 LUFS, true peak under -1.
 
 ## 5. Check
-1. Render stills:
-   - on the Mac (a session opened on `~/Movies/Story Reels/story-reels`), use `scripts/stills.command <Reel>Reel <f1>,<f2>,…`, which writes `out/<Reel>Reel/chk_<f>.jpg` on the GPU, about a second each;
-   - in a cloud session, use `COMP=<Reel>Reel node scripts/stills.mjs out/<reel>/<prefix>_ <f1>,<f2>,…`, about 20 s each.
-2. Make contact sheets with `python3 scripts/sheet.py out.jpg <cols> files…`.
-3. Sweep about one still every 60 frames, plus every beat and hero moment. Fix anything that breaks the rules, and log what changed in `notes.md`.
+1. Sweep as contact sheets: `scripts/sweep.command <Reel>Reel 60 <beat frames>` renders one still every 60 frames plus every beat and hero moment on the Mac GPU (about a second each) and tiles them 3x3 into `out/<Reel>Reel/sweep/sheet_*.jpg`; `sheets.txt` lists the frames on each sheet. Look at the sheets; open a single still (`f_<frame>.jpg` in the same folder) only to inspect a detail.
+2. In a cloud session there is no GPU: `COMP=<Reel>Reel node scripts/stills.mjs out/<reel>/<prefix>_ every:60,<f1>,…` (about 20 s each), then `python3 scripts/sheet.py out.jpg 3 files…`.
+3. Fix anything that breaks the rules on the sheets. Fix anything that breaks the rules, and log what changed in `notes.md`.
 4. Full-resolution video renders in the cloud are far too slow (about 2.5 min per frame with no GPU). Renders go to the Mac.
 
 ## 6. Render (Mac)

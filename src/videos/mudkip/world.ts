@@ -1,11 +1,11 @@
 // The Mudkip Art Academy reel as one three.js scene: painted sky, camera-relative sun frozen per shot, the sets (sets.ts) and
 // the cast (cast.ts). update(id, f, camera) poses everything for shot `id` at frame f (a pure function of id + f).
 import * as THREE from "three";
-import { ctex, cloudHD } from "./paint";
-import { Pen } from "./toon";
-import { LIGHTS, LOOK, LightPreset } from "./lights";
-import { TONE, CHAR, untone } from "./shade";
-import { NOINK } from "./ink";
+import { ctex, cloudHD } from "../../engine/paint";
+import { Pen } from "../../engine/toon";
+import { LIGHTS, LOOK, LightPreset } from "../../engine/lights";
+import { TONE, CHAR, untone } from "../../engine/shade";
+import { NOINK } from "../../engine/ink";
 import { Pool, Actor, Fx, stage, Stage, sackAt, bundleAt, beltS, pressY, stylusAt, drawU, balance } from "./cast";
 import { buildSets, Sets, STAGE_Y } from "./sets";
 import { priceBoardW, datePlate, consoleLower, consoleUpper } from "./art";
