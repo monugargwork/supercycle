@@ -5,8 +5,6 @@ description: Start a new 3D animated story reel (Vietnamese VO, Pokémon/TCG sto
 
 # Kickoff: a new story reel
 
-Start each reel in a new session, at high effort for direction and the build.
-
 Read first: `CLAUDE.md`, `docs/rules.md`, `docs/production-flow.md`, `docs/sources.md`, `library/INDEX.md`, `taste/rejected.md`, and the `notes.md` of the two most recent reels (the table in `CLAUDE.md`).
 
 ## 1. Where are we?

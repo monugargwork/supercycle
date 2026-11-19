@@ -31,8 +31,7 @@ Account skills they call: `vn-news-script` (the script), `story-reel-director` (
 - When a doc in `docs/` changes, update its mirror in the claude.ai Project "enzo stories" (`claude/<same name>.md`) too.
 
 ## Saving credits
-- **One session per reel stage**: a new session for each reel's kickoff and for each feedback round. The repo holds the memory (`notes.md`, rules, plan), so nothing is lost and old context isn't re-sent every turn.
-- **Effort by phase**: high for direction and building new scenes; medium for scripts and feedback rounds; low for routine steps (stills, render lines, commits, notes).
+- **One session per reel**: the user keeps a whole reel (kickoff, build, every feedback round, final) in a single session, and the user switches model and effort by hand. Claude never starts extra sessions for a reel's stages and never changes levels on its own.
 - **Look at sheets, not stills**: check with `scripts/sweep.command` (9 frames per image); open a single full still only to inspect a detail.
 - **Read `direction.md`, not raw `plan.json`** (71 KB). Change the plan through its generator script (`mkplan.py`), then regenerate `direction.md`.
 - **Don't read the engine** (`src/engine/`) unless the scene needs an engine change; the per-reel files and `library/INDEX.md` are enough.
