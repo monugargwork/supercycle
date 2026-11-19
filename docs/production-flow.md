@@ -6,7 +6,7 @@ Work happens in a Claude Code session opened on the Mac folder `~/Movies/Story R
 
 Commit and push after every stage.
 
-To save credits: start a new session for each reel's kickoff and for each feedback round; use high effort for direction and new scenes, medium for scripts and feedback, low for routine steps; check with contact sheets (`scripts/sweep.command`), read `direction.md` instead of raw `plan.json`, and leave `src/engine/` unread unless the scene needs an engine change.
+To save credits: start a new session for each reel's kickoff and for each feedback round, at the level in `CLAUDE.md` ("Model and effort by phase": high for kickoff and build, medium for feedback and final); hand self-contained routine jobs (sweeps, card scans, assets, notes and commits) to subagents at low effort on `sonnet` or `haiku`; check with contact sheets (`scripts/sweep.command`), read `direction.md` instead of raw `plan.json`, and leave `src/engine/` unread unless the scene needs an engine change.
 
 ## 1. Script (skill `vn-news-script`)
 1. The user feeds a news story or article. Confirm the facts with a second source.

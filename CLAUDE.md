@@ -32,11 +32,24 @@ Account skills they call: `vn-news-script` (the script), `story-reel-director` (
 
 ## Saving credits
 - **One session per reel stage**: a new session for each reel's kickoff and for each feedback round. The repo holds the memory (`notes.md`, rules, plan), so nothing is lost and old context isn't re-sent every turn.
-- **Effort by phase**: high for direction and building new scenes; medium for scripts and feedback rounds; low for routine steps (stills, render lines, commits, notes).
 - **Look at sheets, not stills**: check with `scripts/sweep.command` (9 frames per image); open a single full still only to inspect a detail.
 - **Read `direction.md`, not raw `plan.json`** (71 KB). Change the plan through its generator script (`mkplan.py`), then regenerate `direction.md`.
 - **Don't read the engine** (`src/engine/`) unless the scene needs an engine change; the per-reel files and `library/INDEX.md` are enough.
-- **Mechanical side jobs** (finding card scans, copying assets, renaming exports) can go to a subagent on a cheaper model (`sonnet` or `haiku`).
+
+### Model and effort by phase (the user asks for this: apply it without asking)
+Claude can't change its own session's level, so the user picks it once when opening a session. Claude sets the level of every subagent and session it starts:
+
+| Work | Where | Effort | Model |
+|---|---|---|---|
+| Direction (beats, plan, cameras), new scenes and moves | main session (kickoff or build) | high | session model |
+| Script, feedback fixes, small edits | main session (feedback) | medium | session model |
+| Contact-sheet sweep + first-pass rule check (reports issues, fixes nothing) | subagent | low | `sonnet` |
+| Fetching real card scans (+ `SOURCES.txt`), copying meme sounds, assets into `public/<reel>/` | subagent | low | `sonnet` |
+| Renaming exports, registering comps, `notes.md` rows, commit and push | subagent | low | `haiku` |
+
+- Use a subagent only for a self-contained job, with a brief that names the files and what done looks like; it starts cold, so small edits stay in the main session. Claude checks a subagent's result before reporting it.
+- When a stage ends and the next one needs a different level, Claude starts it as a new session at that level instead of carrying on: after the beats are approved, the build starts in a new **high** session; after a draft is rendered, notes go to a new **medium** session. A higher level than this session's asks the user first.
+- The user picks: **high** for a session opened for a new reel (`/story-kickoff`), **medium** for one opened for notes (`/story-feedback`) or `/story-final`.
 
 ## Layout
 | Path | What |
