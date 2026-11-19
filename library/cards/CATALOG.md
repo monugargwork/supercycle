@@ -33,6 +33,8 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | sky_h7 | Skyridge Holo H7 | ecard3 | H7 | https://images.pokemontcg.io/ecard3/H7.png | attic |
 | sky_h8 | Skyridge Holo H8 | ecard3 | H8 | https://images.pokemontcg.io/ecard3/H8.png | attic, fanatics |
 | sky_h9 | Skyridge Holo H9 | ecard3 | H9 | https://images.pokemontcg.io/ecard3/H9.png | attic, fanatics |
+| chocobo_gold | MTG Final Fantasy Traveling Chocobo (Golden Chocobo, serialized /77) | fin | 551f | https://cards.scryfall.io/png/front/6/c/6ce8744a-ede3-4662-968a-360eb6639f08.png?1783906436 |  |
+| chocobo_plain | MTG Final Fantasy Traveling Chocobo (regular) | fin | 210 | https://cards.scryfall.io/png/front/2/4/2462df62-fc35-47ed-9571-40452074dc6d.png?1783906576 |  |
 | pika_trophy | 1997 No.1 Trainer, Official Tournament (trophy Pikachu) | jp-promo | U011 | https://cdn6966.templcdn.com/wp-content/uploads/2021/03/JP_U011Unnumbered.jpg | mudkip |
 | chikorita | Neo Genesis Chikorita 53 | neo1 | 53 | https://images.pokemontcg.io/neo1/53.png | attic, fanatics |
 | cyndaquil | Neo Genesis Cyndaquil 56 | neo1 | 56 | https://images.pokemontcg.io/neo1/56.png | attic, fanatics |
