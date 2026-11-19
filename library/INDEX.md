@@ -1,6 +1,6 @@
 # Move library: what we have and where it lives
 
-The shared engine lives once in `src/engine/` and new reels import it (`../../engine/<module>`); a new reel copies only the per-reel files of the newest reel folder (`src/videos/mudkip/`). Older reels (Attic, GPS, PSA, Bridge) still carry their own engine copies and are left as they are. Engine changes must be additive: a new option defaults to the old behaviour, so every reel that imports the engine renders exactly as before. Tags in the direction: `reuse:<name>`, `adapt:<name>` (say what changes), `new` (say how it's built). Anything `new` that works gets a row here after the reel.
+The shared engine lives once in `src/engine/` and new reels import it (`../../engine/<module>`); a new reel copies only the per-reel files of the newest reel folder (`src/videos/fanatics/`). Older reels (Attic, GPS, PSA, Bridge) still carry their own engine copies and are left as they are. Engine changes must be additive: a new option defaults to the old behaviour, so every reel that imports the engine renders exactly as before. Tags in the direction: `reuse:<name>`, `adapt:<name>` (say what changes), `new` (say how it's built). Anything `new` that works gets a row here after the reel.
 
 ## Engine (`src/engine/`, shared)
 | Module | What |

@@ -42,7 +42,7 @@ Account skills they call: `vn-news-script` (the script), `story-reel-director` (
 |---|---|
 | `src/index.ts`, `src/Root.tsx` | Register the compositions: `FanaticsReel`, `MudkipReel`, `AtticReel`, `GpsReel`, `PsaReel` (each with a `…Captions` comp), `BridgeShort`, `CharTest` |
 | `src/engine/` | The shared engine (toon characters, ink, shading, paint, lights, grade, lens blur, geometry). New reels import it; changes must be additive |
-| `src/videos/<reel>/` | One folder per reel: that reel's story, sets, cast, art, captions and `Reel.tsx` (see `library/INDEX.md`). The newest base is `mudkip/`. Attic, GPS, PSA and Bridge still hold their own engine copies |
+| `src/videos/<reel>/` | One folder per reel: that reel's story, sets, cast, art, captions and `Reel.tsx` (see `library/INDEX.md`). The newest base is `fanatics/` (it carries the channel logo; older reels stay without it). Attic, GPS, PSA and Bridge still hold their own engine copies |
 | `src/enzo/` | Enzo's `Title2` titles and the Bolota font loader |
 | `public/<reel>/` | Each reel's assets: `voice.wav`, `words.json`, `mix.wav`, `cards/` (real scans), `memes/` |
 | `public/fonts/` | Fonts |

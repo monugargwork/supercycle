@@ -9,7 +9,7 @@ def k(f, pos, look, fov, glide=None, cut=False, push=0.002, punch=None, blur=6, 
     if focus: d["focus"] = focus
     return d
 # locked frames (hall-local)
-LB = dict(pos=[0, 2.02, -1.9], look=[0, 2.0, -5.1], fov=50)        # the stage: board, date plate, auctioneer, the lot
+LB = dict(pos=[0, 2.32, -1.9], look=[0, 2.38, -5.1], fov=50)   # high enough that the date plate clears the channel logo (top right)        # the stage: board, date plate, auctioneer, the lot
 WL = dict(pos=[5.0, 1.85, -1.7], look=[5.0, 1.8, -5.2], fov=46)     # the sold wall: calendar, board, cabinet
 WIDE = dict(pos=[4.9, 2.0, 0.2], look=[4.95, 1.85, -5.2], fov=46)   # the sold wall from further back
 def lb(f, **kw): return k(f, LB["pos"], LB["look"], LB["fov"], blur=kw.pop("blur", 3), **kw)
@@ -109,7 +109,7 @@ P = {
    "blocking": "Auctioneer front view behind the rostrum at his mark, gavel raised from frame 0.",
    "action": "f0-62 the gavel is held up (wind-up held, a 1 cm tremble). f63-68 a beat of stillness, f69 strike (2 f before 'tám'): the board's TOTAL snaps to 8,400,000 and the SOLD lamp lights; the slab hops 4 cm. f78-122 the camera travels right along the back wall to the sold wall; f118 the hero ticket's pin pops out (it pings off and drops), f120-134 the ticket slides down the cork and drops into the 8 cm gap behind the filing cabinet on 'biến mất'. A pale clean rectangle stays on the cork where it hung, the pin lies on the cabinet top.",
    "acting": "Auctioneer: stern, then a grin after the strike.",
-   "cams": [k(0, [0.05, 1.85, -1.55], [-0.12, 2.0, -5.1], 46, push=0.002, punch=[0.006, 18], blur=4, focus=[-0.2, 1.9, -4.6], why="gavel, lot and board together"),
+   "cams": [k(0, [0.05, 2.15, -1.55], [-0.12, 2.38, -5.1], 46, push=0.0008, blur=4, focus=[-0.2, 1.9, -4.6], why="gavel, lot and board together"),
             k(72, [5.0, 1.7, -2.5], [5.0, 1.7, -5.2], 40, glide=54, push=0.0015, blur=6, focus=[5.0, 1.62, -5.15], why="travel along the wall to the record"),
             k(126, [5.0, 1.42, -2.6], [5.0, 1.25, -5.2], 40, glide=16, push=0.0, blur=6, focus=[5.0, 1.0, -5.15], why="follow the ticket down")],
    "kicks": [[69, 1.0], [133, 0.3]], "marks": [{"who": "auctioneer", "at": [-0.47, -4.8], "view": "front", "pose": "gavel up, strike f69", "expr": "stern -> grin"}],
@@ -125,7 +125,7 @@ P = {
    "blocking": "Auctioneer at his mark. Bidders are below the frame; only their paddles (on 25 cm handles) rise into it.",
    "action": "f176-185 the date plate flaps to THÁNG 9 · 2026. f254-296 paddles flick up at the bottom of frame (left, right, centre, 9 lifts) while BIDS counts 0 -> 64. f305 the gavel rises; f325 strike (2 f before 'bảy'): HAMMER 7,000,000. f349 PREMIUM +1,400,000 lights; f362-394 TOTAL rolls up to 8,400,000; f394 the SOLD lamp.",
    "acting": "Auctioneer: stern; a grin after the strike.",
-   "cams": [lb(172, push=0.0008, why="the locked stage frame"), k(340, [0, 2.45, -2.35], [0, 2.58, -5.17], 38, glide=20, push=0.0015, punch=[0.004, 14], blur=5, focus=[0, 2.6, -5.17], why="close on the board for the fees")],
+   "cams": [lb(172, push=0.0004, why="the locked stage frame"), k(340, [0, 2.6, -2.2], [0, 2.78, -5.17], 38, glide=20, push=0.0015, punch=[0.004, 14], blur=5, focus=[0, 2.6, -5.17], why="close on the board for the fees")],
    "kicks": [[325, 0.6], [394, 0.4]], "marks": [{"who": "auctioneer", "at": [-0.47, -4.8], "view": "front", "pose": "gavel", "expr": "stern -> grin"}],
    "subjects": [{"n": "board L", "p": [-0.38, 2.6, -5.17], "f": [172, 411]}, {"n": "board R", "p": [0.38, 2.6, -5.17], "f": [172, 411]}, {"n": "date", "p": [0, 3.25, -5.17], "f": [172, 300]},
                 {"n": "auctioneer head", "p": [-0.47, 2.1, -4.8], "f": [172, 339]}, {"n": "slab", "p": [0.18, 1.94, -4.6], "f": [172, 339]}],

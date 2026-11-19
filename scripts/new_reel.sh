@@ -12,7 +12,7 @@
 set -e
 cd "$(dirname "$0")/.."
 SLUG="${1:?Usage: scripts/new_reel.sh <slug> <Name>}"; NAME="${2:?Usage: scripts/new_reel.sh <slug> <Name>}"
-BASE="${BASE:-mudkip}"; BASE_NAME="${BASE_NAME:-Mudkip}"; BASE_SLUG="${BASE_SLUG:-mudkip-art-academy}"
+BASE="${BASE:-fanatics}"; BASE_NAME="${BASE_NAME:-Fanatics}"; BASE_SLUG="${BASE_SLUG:-fanatics-unpaid-pikachu}"
 LOW=$(echo "$NAME" | tr '[:upper:]' '[:lower:]'); UP=$(echo "$NAME" | tr '[:lower:]' '[:upper:]')
 BLOW=$(echo "$BASE_NAME" | tr '[:upper:]' '[:lower:]'); BUP=$(echo "$BASE_NAME" | tr '[:lower:]' '[:upper:]')
 [[ "$NAME" =~ ^[A-Z][A-Za-z0-9]*$ ]] || { echo "Name must be one word starting with a capital, e.g. Gengar"; exit 1; }

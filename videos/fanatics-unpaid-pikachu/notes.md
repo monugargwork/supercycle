@@ -12,3 +12,4 @@ Composition `FanaticsReel` · code `src/videos/fanatics/` · assets `public/fana
 
 | Time | Note | Scene | What changed |
 |---|---|---|---|
+| (chat, 19 Nov) | "use this static logo at top on each video at this position" (future edits incl. this one, not older ones) | all | Supercycle logo added top right (`src/brand/Logo.tsx`, `public/brand/supercycle_logo.png`, x 771-1023 / y 118-268). New reels are now scaffolded from this reel so they carry it. Hook and stage cameras raised and the wall lettering moved left so the date plate and lettering stay clear of the logo. |

@@ -38,7 +38,7 @@ Two hard cuts (into S07, the reaction, and S15, the museum). Time jumps dissolve
 ### hall
 - Origin in the shared world: [0, 0, 0]. Axes: +x screen right, the back wall face at z -5.2 (stage at x 0, the sold wall at x 5, the office door at x 6.6), +z = the room and the entrance.
 - Light: day; sun az/el [74.4, 48]. Open camera sides: +z; nothing between z -4.3 and the lens in the two locked frames.
-- Marks [x, z]: auctioneer [-0.47, -4.8]; clerk [3.8, -4.85]; clerk10 [3.75, -4.72]; writer [3.7, -4.4]; dA [2.75, -2.9]; dB [3.02, -2.6]; dC [2.45, -2.5].
+- Marks [x, z]: auctioneer [-0.47, -4.8]; clerk [3.8, -4.85]; clerk10 [3.85, -4.8]; writer [3.7, -4.4]; dA [2.75, -2.9]; dB [3.02, -2.6]; dC [2.45, -2.5].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
@@ -74,7 +74,7 @@ Two hard cuts (into S07, the reaction, and S15, the museum). Time jumps dissolve
 ### street
 - Origin in the shared world: [0, 0, 200]. Axes: the street runs along -z; houses on the left (-x) at z 0, -7, -14, -21, -28 with stake signs at x -2.3; two more streets behind at x -16 and -26.
 - Light: golden; sun az/el [150, 40]. Open camera sides: +z and +x.
-- Marks [x, z]: agent [-1.55, 2.6].
+- Marks [x, z]: agent [-1.95, 2.3].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
@@ -87,7 +87,7 @@ Two hard cuts (into S07, the reaction, and S15, the museum). Time jumps dissolve
 ### museum
 - Origin in the shared world: [200, 0, 0]. Axes: the case faces +z.
 - Light: day; sun az/el [20, 70]. Open camera sides: +z.
-- Marks [x, z]: v1 [-1.05, 0.55]; v2 [1.1, 0.45]; v3 [-1.65, -0.35]; v4 [1.7, -0.25].
+- Marks [x, z]: v1 [-0.6, 0.8]; v2 [0.62, 0.75]; v3 [-0.85, -0.5]; v4 [0.88, -0.55].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
@@ -125,7 +125,7 @@ Two hard cuts (into S07, the reaction, and S15, the museum). Time jumps dissolve
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 0 | open | [0.1, 1.78, -2.35] | [-0.08, 2.05, -5.1] | 46 | 0.2 (punch 0.6 for 18 f) | 4 | gavel, lot and board together |
+| 0 | open | [0.05, 2.15, -1.55] | [-0.12, 2.38, -5.1] | 46 | 0.08 | 4 | gavel, lot and board together |
 | 72 | glide 54 f | [4.4, 1.7, -2.5] | [4.4, 1.7, -5.2] | 40 | 0.15 | 6 | travel along the wall to the record |
 | 126 | glide 16 f | [4.4, 1.42, -2.6] | [4.4, 1.25, -5.2] | 40 | 0 | 6 | follow the ticket down |
 
@@ -149,8 +149,8 @@ Two hard cuts (into S07, the reaction, and S15, the museum). Time jumps dissolve
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 172 | open | [0, 2.02, -1.9] | [0, 2, -5.1] | 50 | 0.08 | 3 | the locked stage frame |
-| 340 | glide 20 f | [0, 2.45, -2.35] | [0, 2.58, -5.17] | 38 | 0.15 (punch 0.4 for 14 f) | 5 | close on the board for the fees |
+| 172 | open | [0, 2.32, -1.9] | [0, 2.38, -5.1] | 50 | 0.04 | 3 | the locked stage frame |
+| 340 | glide 20 f | [0, 2.6, -2.2] | [0, 2.78, -5.17] | 38 | 0.15 (punch 0.4 for 14 f) | 5 | close on the board for the fees |
 
 - Kicks (7 f): f325 strength 0.6; f394 strength 0.4.
 - Physics & FX: paddles: up in 4 f, held 6 f, down in 5 f.
@@ -171,8 +171,8 @@ Two hard cuts (into S07, the reaction, and S15, the museum). Time jumps dissolve
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 412 | open | [0.2, 1.95, 2.1] | [0, 1.02, 0] | 40 | 0.2 | 5 | the counter, the bundles landing |
-| 468 | glide 24 f | [0.04, 1.72, 0.85] | [0.02, 1.12, 0.08] | 34 | 0.2 | 8 | the middle front page |
+| 412 | open | [0.1, 2.35, 1.25] | [0, 1, 0] | 40 | 0.2 | 5 | the counter, the bundles landing |
+| 468 | glide 24 f | [0.03, 1.8, 0.5] | [0.02, 1.1, 0.06] | 34 | 0.2 | 8 | the middle front page |
 
 - Kicks (7 f): f414 strength 0.35; f428 strength 0.35; f445 strength 0.35.
 - Physics & FX: bundles: ballistic arcs (0.5 m up), land, one 3 cm hop, settle; twine holds.
@@ -240,8 +240,8 @@ Two hard cuts (into S07, the reaction, and S15, the museum). Time jumps dissolve
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 744 | open | [4.2, 1.6, -2.2] | [4.2, 1.4, -5.2] | 44 | 0 | 4 | continues from S05 |
-| 752 | glide 34 f | [4.46, 1.6, -4.35] | [4.46, 1.58, -5.15] | 30 | 0.15 | 10 | push to the ticket |
-| 834 | glide 12 f | [4.52, 1.55, -4.62] | [4.52, 1.54, -5.15] | 28 | 0.2 (punch 0.6 for 16 f) | 12 | the corner: CANCELLED |
+| 752 | glide 34 f | [4.4, 1.62, -4.2] | [4.4, 1.6, -5.15] | 30 | 0.15 | 10 | push to the ticket |
+| 834 | glide 12 f | [4.48, 1.57, -4.55] | [4.48, 1.57, -5.15] | 28 | 0.2 (punch 0.6 for 16 f) | 12 | the corner: CANCELLED |
 
 - Kicks (7 f): f856 strength 0.4.
 - Physics & FX: corner: a paper flap hinged on its diagonal; draught pushes it up in two flutters (damped spring), then it curls past 150 deg and stays.
@@ -327,7 +327,7 @@ Two hard cuts (into S07, the reaction, and S15, the museum). Time jumps dissolve
 - Set: hall. Light: day.
 - Build: the clerk at the board's lower left; the shredder; the spirit level.
 - Blocking: Clerk front view at mark clerk10.
-  - clerk at [3.75, -4.72], front; unpin, shred, level; neutral -> smile.
+  - clerk at [3.85, -4.8], front; unpin, shred, level; neutral -> smile.
 - Action, against the words: f1488-1500 he unpins the lower-left ticket (it carries a red UNPAID stamp). f1540-1570 he turns to the shredder and holds it over the slot; f1573 ('xóa') the shredder grabs it: it is pulled down into the slot by f1590 and strips drop behind the window. f1600-1620 he lays the spirit level along the top edge of the bottom row; its bubble slides from the left end to the centre on 'chính xác' f1640; he gives a small satisfied nod.
 - Acting: Clerk: matter-of-fact (neutral), a small smile at the level.
 - Camera keys:
@@ -335,7 +335,7 @@ Two hard cuts (into S07, the reaction, and S15, the museum). Time jumps dissolve
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 1484 | open | [4.4, 2.1, -3.55] | [4.4, 2.1, -5.15] | 32 | 0 | 9 | continues from S09 |
-| 1492 | glide 40 f | [3.9, 1.45, -2.75] | [3.8, 1.15, -5] | 42 | 0.15 | 6 | the clerk and the shredder |
+| 1492 | glide 40 f | [3.75, 1.5, -1.9] | [3.65, 1.15, -5] | 46 | 0.15 | 6 | the clerk and the shredder |
 | 1598 | glide 30 f | [4.4, 1.38, -4.05] | [4.45, 1.3, -5.12] | 32 | 0.15 (punch 0.4 for 14 f) | 10 | the level's bubble |
 
 - Kicks (7 f): f1573 strength 0.3.
@@ -351,7 +351,7 @@ Two hard cuts (into S07, the reaction, and S15, the museum). Time jumps dissolve
 - Set: street. Light: golden.
 - Build: the street: five houses on the left, five stake signs at the same height, all $300K.
 - Blocking: The agent stands on the near lawn beside sign 0, the SOLD rider in her hand.
-  - agent at [-1.55, 2.6], front; holds the rider; smile.
+  - agent at [-1.95, 2.3], front; holds the rider; smile.
 - Action, against the words: Golden calm. A slow push down the street.
 - Acting: Agent: smile.
 - Camera keys:
@@ -373,7 +373,7 @@ Two hard cuts (into S07, the reaction, and S15, the museum). Time jumps dissolve
 - Set: street. Light: golden.
 - Build: the SOLD rider hooks under sign 0 (red, SOLD $900K); the neighbours' signs rise on their stakes and their prices roll up.
 - Blocking: Agent beside sign 0.
-  - agent at [-1.55, 2.6], front; hooks the rider; grin.
+  - agent at [-1.95, 2.3], front; hooks the rider; grin.
 - Action, against the words: f1776-1784 she swings the rider up, f1786 ('bán') hooks it under sign 0 with a clack: SOLD $900K. f1810, 1818, 1826, 1834 the four neighbour signs shoot up their stakes one after another (0.75 -> 1.7 m, 6 f, overshoot 8 cm, settle), each price rolling $300K -> $450K, $480K, $520K, $560K.
 - Acting: Agent: grin.
 - Camera keys:
@@ -396,7 +396,7 @@ Two hard cuts (into S07, the reaction, and S15, the museum). Time jumps dissolve
 - Set: street. Light: golden.
 - Build: sign 0 pulled out of the lawn; the other signs and all the signs of the two streets behind stay high.
 - Blocking: Agent beside sign 0.
-  - agent at [-1.55, 2.6], front; yank, toss; neutral.
+  - agent at [-1.95, 2.3], front; yank, toss; neutral.
 - Action, against the words: f1878-1888 she grips sign 0's stake and yanks it out of the lawn on 'xóa' (a puff of dirt, a hole), f1890-1904 tosses it flat onto the lawn behind her. f1905-1990 the camera cranes up: every other sign on this street and on the two streets behind stands high.
 - Acting: Agent: neutral, a shrug.
 - Camera keys:
@@ -443,10 +443,10 @@ Two hard cuts (into S07, the reaction, and S15, the museum). Time jumps dissolve
 - Set: museum. Light: day.
 - Build: the dark gallery, the case on its plinth, the plaque; four visitors with phones flanking it.
 - Blocking: Visitors front view at their marks, turned toward the case (facing inward), phones held up at face height.
-  - v1 at [-1.05, 0.55], front; phone up; smile.
-  - v2 at [1.1, 0.45], front; phone up; relief_open.
-  - v3 at [-1.65, -0.35], front; phone up; grin.
-  - v4 at [1.7, -0.25], front; phone up; smile.
+  - v1 at [-0.6, 0.8], front; phone up; smile.
+  - v2 at [0.62, 0.75], front; phone up; relief_open.
+  - v3 at [-0.85, -0.5], front; phone up; grin.
+  - v4 at [0.88, -0.55], front; phone up; smile.
 - Action, against the words: Phones flash (f2120, 2134, 2151, 2163, 2178, 2196). f2124-2200 the camera pushes in past the visitors to the card. f2200-2240 it tilts down the plinth to the plaque: No.2 MOST EXPENSIVE POKEMON CARD, $8,400,000. f2256-2290 it pushes in on the last line, tiny: 'cancelled', landing on 'đã hủy' f2285-2300. Hold.
 - Acting: Visitors: smiles, a 'whoa' (relief_open).
 - Camera keys:

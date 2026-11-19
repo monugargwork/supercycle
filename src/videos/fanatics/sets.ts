@@ -241,7 +241,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   plane(sW, sH, new THREE.MeshLambertMaterial({ map: corkTex }), hall, sx, sy, -5.178);
   const tube = local("hall", "tube"); mesh(new THREE.BoxGeometry(tube.s[0], tube.s[1], tube.s[2]), new THREE.MeshBasicMaterial({ color: new THREE.Color(1.6, 1.7, 1.75) }), hall, tube.p[0], 3.6, tube.p[2]);
   plane(1.3, 0.17, new THREE.MeshBasicMaterial({ map: letters("", "SOLD HISTORY", "#2f5446"), transparent: true }), hall, sx, 3.32, -5.185);
-  plane(2.6, 0.33, new THREE.MeshBasicMaterial({ map: letters("FANATICS", "COLLECT", "#d8b25a"), transparent: true }), hall, 0.3, 3.75, -5.18);
+  plane(1.8, 0.23, new THREE.MeshBasicMaterial({ map: letters("FANATICS", "COLLECT", "#d8b25a"), transparent: true }), hall, -0.6, 3.7, -5.18); // left of the channel logo's corner
   const strips = canvasMat(200, 300); plane(0.3, 0.42, new THREE.MeshBasicMaterial({ map: strips.tex }), hall, sh.p[0], 0.4, sh.p[2] + 0.152);
   const board = canvasMat(800, 900), bo = local("hall", "board");
   mesh(new THREE.PlaneGeometry(bo.s[0], bo.s[1]), new THREE.MeshBasicMaterial({ map: board.tex }), hall, ...bo.p);

@@ -7,6 +7,7 @@
 // source; the grade is display-referred, so it comes after tone mapping. Every pixel-sized parameter is specified at
 // 1080x1920 and scaled with the output size, so stills at --scale 0.5 and the 1440x2560 final match.
 // Place changes crossfade by stacking a second canvas for the fade frames; the hook ends on a 4-frame white flash.
+import { Logo } from "../../brand/Logo";
 import React, { useEffect, useMemo, useState } from "react";
 import * as THREE from "three";
 import { AbsoluteFill, Audio, continueRender, delayRender, getInputProps, staticFile, useCurrentFrame } from "remotion";
@@ -160,6 +161,7 @@ export const FanaticsReel: React.FC = () => {
       {tcg && layersAt(f).map((l, i) => <ShotView key={i ? "over" : "base"} id={l.id} alpha={l.alpha} />)}
       {flash > 0 && <AbsoluteFill style={{ background: "#ffffff", opacity: flash }} />}
       <Titles f={f} />
+      <Logo />
       {(getInputProps() as { captions?: boolean }).captions && <Captions f={f} />}
       {withAudio() && <Audio src={staticFile("fanatics/mix.wav")} />}
     </AbsoluteFill>
