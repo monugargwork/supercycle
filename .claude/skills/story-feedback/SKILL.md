@@ -5,7 +5,7 @@ description: Apply a round of notes on a 3D story reel. Use when the user sends 
 
 # Feedback round on a story reel
 
-Run each round in a new session at medium effort (if a note needs a new scene or move, start that work as a high session). Route by `CLAUDE.md` "Model and effort by phase": the before/after sweep goes to a low-effort `sonnet` subagent; the `notes.md` table, commit and push to a `haiku` subagent.
+Run each round in a new session, at medium effort (high only if a note needs a new scene or move).
 
 1. **Which reel:** match it to a row in `CLAUDE.md`. Read its `videos/<slug>/notes.md`, `docs/rules.md` and `taste/rejected.md`.
 2. **Get the comments:** usually a Frame.io CSV, where frame numbers are at 30 fps (`Frame` column). Map each comment to a scene ID with `plan.json`.

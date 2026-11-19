@@ -5,8 +5,6 @@ description: Finish an approved 3D story reel. Use when the user says a story re
 
 # Final: an approved story reel
 
-Run at medium effort. The bookkeeping (CLAUDE.md row, library and notes entries, snapshot branch, commit and push) goes to a low-effort `haiku` subagent; Claude checks it.
-
 1. **Render** the final: `scripts/render.command <Comp> <Name>_final`. It lands in `~/Movies/Story Reels/Final Render/`. Use `REDO=` if only some chunks changed since the last draft.
 2. **Learn:**
    - in `videos/<slug>/notes.md`, why each version was approved or changed;
