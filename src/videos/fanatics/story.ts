@@ -45,7 +45,7 @@ export const FLASH15 = [2120, 2134, 2151, 2163, 2178, 2196];
 const roll = (f: number, a: number, b: number, f0: number, f1: number, step: number) => { const k = smooth((f - f0) / (f1 - f0)); return f >= f1 ? b : f < f0 ? a : Math.round((a + (b - a) * k * k) / step) * step; };
 /** the bid board's four lines at frame f (null = dark) */
 export const boardAt = (f: number) => {
-  if (f < 172) return { bids: 64, hammer: 7000000, prem: 1400000, total: f >= GAVELS[0] ? 8400000 : 7000000, sold: f >= GAVELS[0] };
+  if (f < 172) return { bids: 64, hammer: 7000000, prem: 1400000, total: f >= GAVELS[0] ? 8400000 : 0, sold: f >= GAVELS[0] };
   return { bids: Math.round(64 * clamp01((f - 254) / 42)), hammer: f >= GAVELS[1] ? 7000000 : roll(f, 0, 6800000, 254, 300, 50000), prem: f >= 349 ? 1400000 : 0,
     total: f < GAVELS[1] ? 0 : f < 362 ? 7000000 : roll(f, 7000000, 8400000, 362, 394, 50000), sold: f >= 394 };
 };

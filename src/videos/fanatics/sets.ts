@@ -221,7 +221,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   box(b, C("#1d1b22"), dx0 - 0.6, 0, -7.2, dx1 + 0.6, 3, -5.4); // the dark office behind the door (no light inside)
   for (const sd of [-1, 1]) { const x = sd < 0 ? -6 : 8.5; box(b, panelM, x, 0, -5.4, x + sd * 0.2, 1.1, 7); box(b, creamM, x, 1.1, -5.4, x + sd * 0.2, 4.2, 7, 3); }
   box(b, panelM, -6, 0, 7, 8.5, 1.1, 7.2); box(b, creamM, -6, 1.1, 7, 8.5, 4.2, 7.2, 3);
-  for (const x of [-4.5, -2.5]) { box(b, C("#6e4a30"), x - 0.5, 1.6, -5.2, x + 0.5, 2.5, -5.16); box(b, C(x < -3 ? "#c9a24a" : "#5a86b8"), x - 0.42, 1.68, -5.16, x + 0.42, 2.42, -5.14); }
+  for (const x of [-4.5, -2.5, 2.25]) { box(b, C("#6e4a30"), x - 0.5, 1.6, -5.2, x + 0.5, 2.5, -5.16); box(b, C(x < -3 ? "#c9a24a" : "#5a86b8"), x - 0.42, 1.68, -5.16, x + 0.42, 2.42, -5.14); }
   const st = local("hall", "stage"), woodM = C("#6e4428"), topM = C("#8a5a34");
   box(b, C("#7a5230"), st.p[0] - st.s[0] / 2, 0, -5.2, st.p[0] + st.s[0] / 2, STAGE_Y - 0.04, -4.0); box(b, topM, st.p[0] - st.s[0] / 2 - 0.03, STAGE_Y - 0.04, -5.2, st.p[0] + st.s[0] / 2 + 0.03, STAGE_Y, -3.97);
   box(b, woodM, -0.95, STAGE_Y, -4.5, 0.02, DESK_TOP - 0.05, -4.2); box(b, topM, -1.0, DESK_TOP - 0.05, -4.55, 0.06, DESK_TOP, -4.15);
@@ -289,7 +289,6 @@ export const buildSets = (root: THREE.Object3D): Sets => {
     g.setAttribute("position", new THREE.Float32BufferAttribute(v, 3)); g.setIndex([0, 2, 1, 3, 4, 5, 0, 3, 5, 0, 5, 2, 1, 2, 5, 1, 5, 4]); g.computeVertexNormals();
     b.add(g, roofM);
     box(b, C("#7a4f33"), x1, 0, z - 0.45, x1 + 0.03, 2.0, z + 0.45); box(b, M.glass(), x1, 1.0, z0 + 0.5, x1 + 0.03, 2.0, z0 + 1.5); box(b, M.glass(), x1, 1.0, z1 - 1.5, x1 + 0.03, 2.0, z1 - 0.5);
-    box(b, M.white(), x1 + 0.2, 0, z1 + 0.3, x1 + 0.6, 0.9, z1 + 0.34); // a bit of picket fence
     bush(b, x1 + 0.6, 0, z0 - 0.6, 0.6);
   });
   for (let k = 0; k < 8; k++) { const z = -40 - 5 * k; cyl(b, M.trunk(), 6 + 2 * Math.sin(k), 0, z, 0.25, 0.2, 2.5, 8); sph(b, M.bush(), 6 + 2 * Math.sin(k), 3.2, z, 1.6); }

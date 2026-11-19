@@ -317,9 +317,9 @@ export const bundleAt = (i: number, f: number) => {
 /** sign 0's stake in S13: yanked out of the lawn, tossed onto the lawn behind her (flat = lying there) */
 export const yank13 = (f: number, id: number) => {
   if (id !== 13 || f < YANK13 - 8) return { dx: 0, dy: 0, dz: 0, rx: 0, rz: 0, flat: false };
-  if (f < YANK13 + 2) { const k = smooth((f - (YANK13 - 8)) / 10); return { dx: 0, dy: 0.45 * k * k, dz: 0, rx: 0, rz: 0.1 * k, flat: false }; }
+  if (f < YANK13 + 2) { const k = smooth((f - (YANK13 - 8)) / 10); return { dx: -0.3 * k, dy: 0.4 * k * k, dz: 0, rx: 0, rz: 0.45 * k, flat: false }; }
   const u = clamp01((f - YANK13 - 2) / (TOSS13 - YANK13 - 2));
-  return { dx: 0.9 * u, dy: 0.45 + 0.6 * 4 * u * (1 - u) - 0.45 * u, dz: -0.9 * u, rx: -1.4 * u, rz: 0.1 + 1.2 * u, flat: u >= 1 };
+  return { dx: -0.3 - 0.3 * u, dy: 0.4 + 0.5 * 4 * u * (1 - u) - 0.4 * u, dz: 0.5 * u, rx: -1.4 * u, rz: 0.45 + 0.85 * u, flat: u >= 1 };
 };
 
 export const stage = (id: number, f: number, cam: CamInfo): Stage => {
@@ -427,7 +427,7 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
         if (id === 11 || f < RIDER12) card(out, "rider", 420, 120, (p) => art.soldRider(p), hand[0] - 0.12, hand[1] - 0.06, hand[2] + 0.02, 0.7, 0.2, { face: 0.4 });
       }
       if (id === 13 && yanking) hand = [S0[0] + y.dx + 0.03, 0.55 + y.dy, S0[2] + y.dz + 0.04];
-      if (id === 13 && f >= TOSS13 - 6) hand = lerp3([S0[0] + 0.5, 0.9, S0[2] - 0.4], rest, smooth((f - TOSS13 + 6) / 10));
+      if (id === 13 && f >= TOSS13 - 6) hand = lerp3([S0[0] - 0.3, 0.9, S0[2] + 0.3], rest, smooth((f - TOSS13 + 6) / 10));
       arm3d(out, cam, "agent", at, fo, -1, hand, f);
       // the rider hangs under sign 0 once hooked, and goes with it
       const riderOn = (id === 12 && f >= RIDER12) || id === 13;
@@ -437,7 +437,7 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
         card(out, "hole", 128, 128, (p) => art.glow(p, "60,40,25"), S0[0], 0.013, S0[2], 0.22, 0.16, { flat: true, soft: true });
         if (f < YANK13 + 10) { const u = q((f - YANK13) / 10, 10); card(out, `puff${u}`, 400, 400, (p) => fxPuff(p, u), S0[0], 0.12, S0[2] + 0.05, 0.4, 0.4); }
         if (y.flat) {
-          const L: V3 = [S0[0] + 0.9, 0.02, S0[2] - 0.9];
+          const L: V3 = [S0[0] - 0.6, 0.02, S0[2] + 0.5];
           card(out, "sign|flat", 420, 290, (p) => art.stakeSign(p, "$300K"), L[0], 0.025, L[2], 0.7, 0.48, { flat: true, rot: 0.5 });
           card(out, "rider|flat", 420, 120, (p) => art.soldRider(p), L[0] + 0.12, 0.028, L[2] + 0.28, 0.7, 0.2, { flat: true, rot: 0.5 });
           card(out, "stake|flat", 64, 400, (p) => { p.g.fillStyle = "#f4f1ea"; p.g.fillRect(16, 0, 32, 400); }, L[0] - 0.35, 0.022, L[2] - 0.35, 0.05, 1.0, { flat: true, rot: 0.5 + Math.PI / 2 });
@@ -473,7 +473,7 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
         const at = mark("museum", w), toward = at[0] - MUSEUM[0] < 0 ? 1 : -1, sd = toward as 1 | -1;
         const fo: FrontOpts = { mode: "stand", expr: (["smile", "relief_open", "grin", "smile"] as const)[i], facing: sd, look: sd, armOff: sd };
         front(out, cam, w, ...at, fo, f);
-        const S = shoulderAt(cam, w, at, fo, sd), ph: V3 = [S[0] + sd * 0.3, S[1] + 0.12, S[2] - 0.12];
+        const back = at[2] - MUSEUM[2] < 0, S = shoulderAt(cam, w, at, fo, sd), ph: V3 = back ? [S[0] + sd * 0.12, S[1] + 0.3, S[2] + 0.05] : [S[0] + sd * 0.3, S[1] + 0.12, S[2] - 0.12];
         arm3d(out, cam, w, at, fo, sd, ph, f);
         const fl = FLASH15.some((t0) => f >= t0 + i && f < t0 + i + 3 && (FLASH15.indexOf(t0) % 4) === i) ? 1 : 0;
         card(out, `phone${fl}`, 160, 300, (p) => art.phoneBack(p, fl), ph[0], ph[1] + 0.07, ph[2], 0.07, 0.13);

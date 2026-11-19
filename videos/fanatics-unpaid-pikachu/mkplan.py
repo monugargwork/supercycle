@@ -91,7 +91,7 @@ P = {
     {"id": "slab", "build": "reuse:slabReal, the REAL raincoat Pikachu, upright on an acrylic stand", "pos": [0, 1.32, 0], "size": [0.19, 0.30, 0.012]},
     {"id": "plaque", "build": "new: brass plaque 40 x 28 cm tilted back 25 deg on the plinth front: PIKACHU / ART ACADEMY / No.2 MOST EXPENSIVE POKEMON CARD / $8,400,000 / tiny last line: cancelled", "pos": [0, 0.86, 0.32], "size": [0.4, 0.28, 0.01]},
     {"id": "spot", "build": "new: spotlight from the ceiling: a soft cone of light down onto the case", "pos": [0, 3.9, 0], "size": [0.3, 0.3, 0.3]}],
-   "marks": {"v1": [-1.05, 0.55], "v2": [1.1, 0.45], "v3": [-1.65, -0.35], "v4": [1.7, -0.25]}}},
+   "marks": {"v1": [-0.6, 0.8], "v2": [0.62, 0.75], "v3": [-0.85, -0.5], "v4": [0.88, -0.55]}}},
  "cast": {
   "auctioneer": {"look": ["black suit", "red tie", "grey hair", "stout"], "items": ["gavel"], "views": ["front"]},
   "clerk": {"look": ["black polo", "lanyard", "dark hair", "glasses"], "items": ["rubber stamp", "yardstick", "a ticket", "spirit level"], "views": ["front", "side"]},
@@ -138,8 +138,8 @@ P = {
    "blocking": "No people: bundles are thrown in from the delivery van off screen left.",
    "action": "Three tied bundles land on the counter on arcs from screen left: f414 ('Báo'), f428 ('chí'), f445 ('đưa'), each a thud with a hop and a settle; fanned in a pile, the third on top; their front pages: PIKACHU $8.4M (EN), PIKACHU 8,4 M$ (FR), PIKACHU 8,4 TRIỆU ĐÔ (VI), each with the real raincoat Pikachu and a big No.2. f470 push in on the top page as the line lands on 'đắt thứ hai'.",
    "acting": "none",
-   "cams": [k(412, [0.2, 1.95, 2.1], [0, 1.02, 0.0], 40, push=0.002, blur=5, focus=[0, 1.05, 0.05], why="the counter, the bundles landing"),
-            k(468, [0.04, 1.72, 0.85], [0.02, 1.12, 0.08], 34, glide=24, push=0.002, blur=8, focus=[0.02, 1.16, 0.08], why="the middle front page")],
+   "cams": [k(412, [0.1, 2.35, 1.25], [0, 1.0, 0.0], 40, push=0.002, blur=5, focus=[0, 1.05, 0.05], why="the counter, the bundles landing"),
+            k(468, [0.03, 1.8, 0.5], [0.02, 1.1, 0.06], 34, glide=24, push=0.002, blur=8, focus=[0.02, 1.16, 0.08], why="the middle front page")],
    "kicks": [[414, 0.35], [428, 0.35], [445, 0.35]], "marks": [],
    "subjects": [{"n": "bundle L", "p": [-0.22, 1.05, -0.05], "f": [420, 466]}, {"n": "bundle R", "p": [0.24, 1.05, -0.02], "f": [450, 466]}, {"n": "page top", "p": [0.02, 1.16, 0.08], "f": [412, 530]}],
    "physics": "bundles: ballistic arcs (0.5 m up), land, one 3 cm hop, settle; twine holds.", "light_mood": "day, bright street.",
@@ -225,7 +225,7 @@ P = {
    "blocking": "Clerk front view at mark clerk10.",
    "action": "f1488-1500 he unpins the lower-left ticket (it carries a red UNPAID stamp). f1540-1570 he turns to the shredder and holds it over the slot; f1573 ('xóa') the shredder grabs it: it is pulled down into the slot by f1590 and strips drop behind the window. f1600-1620 he lays the spirit level along the top edge of the bottom row; its bubble slides from the left end to the centre on 'chính xác' f1640; he gives a small satisfied nod.",
    "acting": "Clerk: matter-of-fact (neutral), a small smile at the level.",
-   "cams": [k(1484, [5.0, 2.1, -3.55], [5.0, 2.1, -5.15], 32, push=0.0, blur=9, why="continues from S09"), k(1492, [4.55, 1.5, -1.9], [4.45, 1.2, -5.0], 46, glide=40, push=0.0015, blur=6, focus=[4.3, 1.2, -4.8], why="the clerk and the shredder"),
+   "cams": [k(1484, [5.0, 2.1, -3.55], [5.0, 2.1, -5.15], 32, push=0.0, blur=9, why="continues from S09"), k(1492, [4.35, 1.5, -1.9], [4.25, 1.15, -5.0], 46, glide=40, push=0.0015, blur=6, focus=[4.3, 1.2, -4.8], why="the clerk and the shredder"),
             k(1598, [5.0, 1.38, -4.05], [5.05, 1.3, -5.12], 32, glide=30, push=0.0015, punch=[0.004, 14], blur=10, focus=[5.05, 1.31, -5.1], why="the level's bubble")],
    "kicks": [[1573, 0.3]], "marks": [{"who": "clerk", "at": [4.45, -4.8], "view": "front", "pose": "unpin, shred, level", "expr": "neutral -> smile"}],
    "subjects": [{"n": "clerk head", "p": [4.45, 1.6, -4.8], "f": [1530, 1595]}, {"n": "shredder slot", "p": [4.05, 0.96, -4.97], "f": [1530, 1595]}, {"n": "level", "p": [5.05, 1.31, -5.1], "f": [1625, 1659]}],
@@ -285,7 +285,7 @@ P = {
    "cams": [k(2111, [0.0, 1.5, 4.4], [0.0, 1.22, 0.0], 40, push=0.0015, blur=4, focus=[0, 1.3, 0], why="the case, the flashes"), k(2124, [0.0, 1.42, 1.45], [0.0, 1.33, 0.0], 36, glide=70, push=0.001, blur=8, focus=[0, 1.32, 0], why="push to the card"),
             k(2200, [0.0, 1.12, 1.25], [0.0, 0.88, 0.32], 32, glide=36, push=0.001, blur=8, focus=[0, 0.86, 0.32], why="tilt down to the plaque"),
             k(2256, [0.0, 0.92, 0.72], [0.0, 0.77, 0.36], 26, glide=34, push=0.0012, blur=10, focus=[0, 0.77, 0.36], why="the last line: cancelled")],
-   "kicks": [], "marks": [{"who": "v1", "at": [-1.05, 0.55], "view": "front", "pose": "phone up", "expr": "smile"}, {"who": "v2", "at": [1.1, 0.45], "view": "front", "pose": "phone up", "expr": "relief_open"}, {"who": "v3", "at": [-1.65, -0.35], "view": "front", "pose": "phone up", "expr": "grin"}, {"who": "v4", "at": [1.7, -0.25], "view": "front", "pose": "phone up", "expr": "smile"}],
+   "kicks": [], "marks": [{"who": "v1", "at": [-0.6, 0.8], "view": "front", "pose": "phone up", "expr": "smile"}, {"who": "v2", "at": [0.62, 0.75], "view": "front", "pose": "phone up", "expr": "relief_open"}, {"who": "v3", "at": [-0.85, -0.5], "view": "front", "pose": "phone up", "expr": "grin"}, {"who": "v4", "at": [0.88, -0.55], "view": "front", "pose": "phone up", "expr": "smile"}],
    "subjects": [{"n": "slab", "p": [0, 1.32, 0], "f": [2111, 2199]}, {"n": "plaque", "p": [0, 0.86, 0.32], "f": [2230, 2255]}, {"n": "last line", "p": [0, 0.77, 0.36], "f": [2290, 2324]}],
    "physics": "none", "light_mood": "dark gallery, one warm spot on the case.", "sound": "gallery hush, phone shutters with each flash (Camera shutter), music swell then out at f2280; Suspicious Sound meme f2300.", "after": "end"}
  ]}
