@@ -1,0 +1,10 @@
+Real card scans for the Monaco reel (from library/cards, see CATALOG.md).
+ds_rayquaza.png   EX Delta Species Rayquaza δ (holo)                https://images.pokemontcg.io/ex11/13_hires.png
+pika_poncho_ray.png2016 JP XY-P Poncho-wearing Pikachu (Mega Rayquaza poncho)https://images.scrydex.com/pokemon/xyp_ja-231/large
+ds_metagross_star.pngEX Delta Species Metagross ★ (Gold Star)          https://images.pokemontcg.io/ex11/113_hires.png
+ds_latias.png     EX Delta Species Latias δ (holo)                  https://images.pokemontcg.io/ex11/8_hires.png
+ds_mewtwo.png     EX Delta Species Mewtwo δ (holo)                  https://images.pokemontcg.io/ex11/12_hires.png
+pika_rain.png     2015 JP XY-P Art Academy Pikachu, raincoat (Y. Fujishima)https://cdn6966.templcdn.com/wp-content/uploads/2022/06/JP_U072Y-FujishimaXY-P.jpg
+zard_base.png     Base Set Charizard 4                              https://images.pokemontcg.io/base1/4_hires.png
+blastoise.png     Base Set Blastoise 2                              https://images.pokemontcg.io/base1/2_hires.png
+venusaur.png      Base Set Venusaur 15                              https://images.pokemontcg.io/base1/15_hires.png

@@ -4,7 +4,7 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | name | card | set | no | source | used in |
 |---|---|---|---|---|---|
 | abra | Base Set Abra 43 | base1 | 43 | https://images.pokemontcg.io/base1/43.png | attic |
-| blastoise | Base Set Blastoise 2 | base1 | 2 | https://images.pokemontcg.io/base1/2_hires.png | attic, fanatics |
+| blastoise | Base Set Blastoise 2 | base1 | 2 | https://images.pokemontcg.io/base1/2_hires.png | attic, fanatics, monaco |
 | bulbasaur | Base Set Bulbasaur 44 | base1 | 44 | https://images.pokemontcg.io/base1/44.png | attic |
 | charmander | Base Set Charmander 46 | base1 | 46 | https://images.pokemontcg.io/base1/46.png | attic, fanatics |
 | diglett | Base Set Diglett 47 | base1 | 47 | https://images.pokemontcg.io/base1/47.png | attic |
@@ -16,9 +16,9 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | pikachu | Base Set Pikachu 58 | base1 | 58 | https://images.pokemontcg.io/base1/58.png | attic, fanatics |
 | ponyta | Base Set Ponyta 60 | base1 | 60 | https://images.pokemontcg.io/base1/60.png | attic |
 | squirtle | Base Set Squirtle 63 | base1 | 63 | https://images.pokemontcg.io/base1/63.png | attic, fanatics |
-| venusaur | Base Set Venusaur 15 | base1 | 15 | https://images.pokemontcg.io/base1/15_hires.png | attic, fanatics |
+| venusaur | Base Set Venusaur 15 | base1 | 15 | https://images.pokemontcg.io/base1/15_hires.png | attic, fanatics, monaco |
 | vulpix | Base Set Vulpix 68 | base1 | 68 | https://images.pokemontcg.io/base1/68.png | attic, fanatics |
-| zard_base | Base Set Charizard 4 | base1 | 4 | https://images.pokemontcg.io/base1/4_hires.png | attic, mudkip (as zard), fanatics |
+| zard_base | Base Set Charizard 4 | base1 | 4 | https://images.pokemontcg.io/base1/4_hires.png | attic, mudkip (as zard), fanatics, monaco |
 | eevee | Jungle Eevee 51 | base2 | 51 | https://images.pokemontcg.io/base2/51.png | attic, fanatics |
 | jigglypuff | Jungle Jigglypuff 54 | base2 | 54 | https://images.pokemontcg.io/base2/54.png | attic, fanatics |
 | meowth | Jungle Meowth 56 | base2 | 56 | https://images.pokemontcg.io/base2/56.png | attic |
@@ -33,6 +33,10 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | sky_h7 | Skyridge Holo H7 | ecard3 | H7 | https://images.pokemontcg.io/ecard3/H7.png | attic |
 | sky_h8 | Skyridge Holo H8 | ecard3 | H8 | https://images.pokemontcg.io/ecard3/H8.png | attic, fanatics |
 | sky_h9 | Skyridge Holo H9 | ecard3 | H9 | https://images.pokemontcg.io/ecard3/H9.png | attic, fanatics |
+| ds_latias | EX Delta Species Latias δ (holo) | ex11 | 8 | https://images.pokemontcg.io/ex11/8_hires.png | monaco |
+| ds_metagross_star | EX Delta Species Metagross ★ (Gold Star) | ex11 | 113 | https://images.pokemontcg.io/ex11/113_hires.png | monaco |
+| ds_mewtwo | EX Delta Species Mewtwo δ (holo) | ex11 | 12 | https://images.pokemontcg.io/ex11/12_hires.png | monaco |
+| ds_rayquaza | EX Delta Species Rayquaza δ (holo) | ex11 | 13 | https://images.pokemontcg.io/ex11/13_hires.png | monaco |
 | chocobo_gold | MTG Final Fantasy Traveling Chocobo (Golden Chocobo, serialized /77) | fin | 551f | https://cards.scryfall.io/png/front/6/c/6ce8744a-ede3-4662-968a-360eb6639f08.png?1783906436 | chocobo |
 | chocobo_plain | MTG Final Fantasy Traveling Chocobo (regular) | fin | 210 | https://cards.scryfall.io/png/front/2/4/2462df62-fc35-47ed-9571-40452074dc6d.png?1783906576 | chocobo |
 | pika_trophy | 1997 No.1 Trainer, Official Tournament (trophy Pikachu) | jp-promo | U011 | https://cdn6966.templcdn.com/wp-content/uploads/2021/03/JP_U011Unnumbered.jpg | mudkip |
@@ -57,4 +61,5 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | skiddo | XY Skiddo 18 | xy1 | 18 | https://images.pokemontcg.io/xy1/18.png | mudkip |
 | spritzee | XY Spritzee 92 | xy1 | 92 | https://images.pokemontcg.io/xy1/92.png | mudkip |
 | mudkip_aa | 2015 JP XY-P Art Academy Mudkip (Daisuke Ochiai) | xyp-jp | U067 | https://cdn6966.templcdn.com/wp-content/uploads/2022/06/JP_U067Daisuke-OchiaiXY-P.jpg | mudkip |
-| pika_rain | 2015 JP XY-P Art Academy Pikachu, raincoat (Y. Fujishima) | xyp-jp | U072 | https://cdn6966.templcdn.com/wp-content/uploads/2022/06/JP_U072Y-FujishimaXY-P.jpg | mudkip, fanatics |
+| pika_poncho_ray | 2016 JP XY-P Poncho-wearing Pikachu (Mega Rayquaza poncho) | xyp-jp | 231 | https://images.scrydex.com/pokemon/xyp_ja-231/large | monaco |
+| pika_rain | 2015 JP XY-P Art Academy Pikachu, raincoat (Y. Fujishima) | xyp-jp | U072 | https://cdn6966.templcdn.com/wp-content/uploads/2022/06/JP_U072Y-FujishimaXY-P.jpg | mudkip, fanatics, monaco |

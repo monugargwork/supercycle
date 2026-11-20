@@ -14,7 +14,7 @@ LIB = os.path.join(ROOT, "library", "cards")
 CAT = os.path.join(LIB, "CATALOG.md")
 HEAD = "| name | card | set | no | source | used in |\n|---|---|---|---|---|---|\n"
 SETS = {"base1": "Base Set", "base2": "Jungle", "base3": "Fossil", "base4": "Base Set 2", "base5": "Team Rocket",
-        "base6": "Legendary Collection", "neo1": "Neo Genesis", "ecard3": "Skyridge", "xy1": "XY", "sv1": "Scarlet & Violet"}
+        "base6": "Legendary Collection", "neo1": "Neo Genesis", "ecard3": "Skyridge", "xy1": "XY", "sv1": "Scarlet & Violet", "ex11": "EX Delta Species"}
 
 def load():
     rows = []
