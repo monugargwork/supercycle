@@ -8,6 +8,7 @@ import { AtticReel, AtticCaptions, ATTIC_FRAMES } from "./videos/attic/Reel";
 import { MudkipReel, MudkipCaptions, MUDKIP_FRAMES } from "./videos/mudkip/Reel";
 import { FanaticsReel, FanaticsCaptions, FANATICS_FRAMES } from "./videos/fanatics/Reel";
 import { ChocoboReel, ChocoboCaptions, CHOCOBO_FRAMES } from "./videos/chocobo/Reel";
+import { MonacoReel, MonacoCaptions, MONACO_FRAMES } from "./videos/monaco/Reel";
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -25,5 +26,7 @@ export const RemotionRoot: React.FC = () => (
     <Composition id="FanaticsCaptions" component={FanaticsCaptions} durationInFrames={FANATICS_FRAMES} fps={30} width={1440} height={2560} />
     <Composition id="ChocoboReel" component={ChocoboReel} durationInFrames={CHOCOBO_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="ChocoboCaptions" component={ChocoboCaptions} durationInFrames={CHOCOBO_FRAMES} fps={30} width={1440} height={2560} />
+    <Composition id="MonacoReel" component={MonacoReel} durationInFrames={MONACO_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="MonacoCaptions" component={MonacoCaptions} durationInFrames={MONACO_FRAMES} fps={30} width={1440} height={2560} />
   </>
 );

@@ -10,7 +10,7 @@ def k(f, pos, look, fov, glide=None, cut=False, push=0.002, punch=None, blur=6, 
     return d
 
 ST = 0.3                                     # stage top
-BOX = [0.4, 1.08 + 0.14, -4.55]              # the box on the lot table (centre)
+BOX = [0.25, 1.08 + 0.14, -4.55]              # the box on the lot table (centre)
 VIT = [1.4, 1.44, -4.6]                      # the box inside the vitrine (centre)
 SLAB = [2.4, 1.47, -4.6]                     # the Poncho Pikachu slab on its stand
 SEATS = [[x, z] for z in (-2.2, -1.2, -0.2) for x in (-3.3, -2.5, -1.7, -0.9, -0.1, 0.7)]   # 18 gentlemen; Minh = seat 3 (x -0.9, row 1)
@@ -19,7 +19,7 @@ CUBBY = [[0.25 + 0.4 * c, 0.3 + 0.37 * r] for r in range(6) for c in range(3)]  
 LAST = 7                                     # the box left sealed (col 1, row 2)
 OPEN_ORDER = [i for i in [12, 3, 16, 0, 9, 5, 14, 1, 11, 17, 4, 8, 2, 15, 6, 10, 13] if i != LAST]
 OPEN_AT = [1866 + round(6.6 * n) for n in range(len(OPEN_ORDER))]
-KIT = dict(table=[-0.35, -0.6], kid=[-0.25, -1.12], box=[-0.5, 0.75 + 0.14, -0.5], mom=[0.15, -0.75], cup=[-1.55, -2.22], stove=[1.3, -2.2])
+KIT = dict(table=[-0.35, -0.6], kid=[-0.15, -1.15], box=[-0.05, 0.75 + 0.14, -0.8], bowl=[-0.45, 0.75, -0.7], mom=[0.42, -0.8], mom26=[0.25, -0.85], shelf=[0.85, 1.75, -2.15], cup=[1.0, -2.22], stove=[-1.3, -2.2], momshelf=[0.7, -1.82])
 
 P = {
  "fps": 30, "frames": 2280, "voice_end": 2266,
@@ -28,7 +28,7 @@ P = {
   {"f": 335, "out": 392, "text": "17 · 11 · 2026", "style": 3, "from": "top"},
   {"f": 478, "out": 515, "text": "70 LOTS", "style": 3, "from": "top"},
   {"f": 1124, "out": 1180, "text": "2006", "style": 3, "from": "top"},
-  {"f": 1330, "out": 1384, "text": "€18,000 - €20,000", "style": 3, "from": "top"},
+  {"f": 1330, "out": 1384, "text": "€18K - €20K", "style": 3, "from": "top"},
   {"f": 1492, "out": 1514, "text": "X10", "style": 3, "from": "top"},
   {"f": 2198, "out": 2216, "text": "2026", "style": 3, "from": "top"}],
  "cards": {"ds_rayquaza": "EX Delta Species 13 Rayquaza δ (pokemontcg.io): the box's cover art",
@@ -45,7 +45,8 @@ P = {
     {"id": "windows", "build": "new: three tall windows in the x 6 wall (1.6 x 2.4 m, sills at y 1.0) at z -2.6, 1.4, 4.4: real openings onto the quay", "pos": [6, 2.2, -2.6], "size": [0.2, 2.4, 1.6]},
     {"id": "stage", "build": "adapt:stage (oak, top y 0.3)", "pos": [0, 0.15, -4.9], "size": [8, 0.3, 2.2]},
     {"id": "rostrum", "build": "reuse:rostrum + sound block (top y 1.45)", "pos": [-2.0, 0.875, -4.6], "size": [0.9, 1.15, 0.5]},
-    {"id": "lot_table", "build": "new: oak table draped in dark-red velvet, top y 1.08", "pos": [-0.4, 0.69, -4.45], "size": [1.8, 0.78, 0.5]},
+    {"id": "lot_table", "build": "new: oak table draped in dark-red velvet, top y 1.08", "pos": [-0.35, 0.69, -4.45], "size": [1.9, 0.78, 0.5]},
+    {"id": "pedestal", "build": "new: white column 24 cm wide, 1.45 m tall, velvet cushion holding the crown until S05", "pos": [0.9, 0.875, -4.62], "size": [0.24, 1.15, 0.24]},
     {"id": "yacht", "build": "new: model yacht 45 cm (white hull, blue stripe, cabin, mast) on two brass cradles", "pos": [-1.0, 1.2, -4.45], "size": [0.45, 0.3, 0.12]},
     {"id": "diamond", "build": "new: cut diamond (octahedron, 5 cm) on a navy cushion", "pos": [-0.45, 1.13, -4.45], "size": [0.14, 0.1, 0.14]},
     {"id": "watch", "build": "new: gold watch on a black stand, tag €2,500,000", "pos": [0.0, 1.16, -4.45], "size": [0.1, 0.16, 0.06]},
@@ -57,7 +58,7 @@ P = {
     {"id": "lots70", "build": "new: two-tier display table along the harbour wall (x 5.0-5.7, z -0.8..5.6), 70 small lots (mini slabs and sealed packs, real scans), numbered tags 1-70 on its front edge", "pos": [5.35, 0.9, 2.4], "size": [0.7, 0.3, 6.4]},
     {"id": "chairs", "build": "new: 18 gilt chairs, red seats (seat y 0.46), backs toward +z", "pos": [-1.3, 0.45, -1.2], "size": [4.6, 0.9, 2.6]},
     {"id": "scooters", "build": "new: ten red step-through scooters (wheels, footboard, seat, handlebar, front shield) parked down the aisle x 2.3 from S10 on, each with a €1,900 tag", "pos": [2.3, 0.55, 0.2], "size": [0.6, 1.1, 7.8]}],
-   "marks": {"auctioneer": [-2.0, -5.0], "porter": [0.55, -4.9], "porter_v": [1.0, -4.25], "waiter": [1.95, -4.25], "minh": [-0.9, -2.2]}},
+   "marks": {"auctioneer": [-2.0, -5.0], "porter": [0.4, -4.9], "porter_v": [1.0, -4.3], "waiter": [1.95, -4.25], "minh": [-0.9, -2.2]}},
   "quay": {"origin": [0, 0, 0], "axes": "same frame as the saleroom: the façade is the outside of its x 6 wall, the quay runs along z, the harbour at x > 16",
    "light": "golden", "sun": [150, 30], "open_sides": "+x",
    "objects": [
@@ -83,7 +84,7 @@ P = {
     {"id": "cupboard", "build": "new: tall painted cupboard 80 x 175 x 45 cm, two doors (top y 1.75): the box ends up on top", "pos": [KIT["cup"][0], 0.875, KIT["cup"][1]], "size": [0.8, 1.75, 0.45]},
     {"id": "stove", "build": "new: two-burner stove on a counter, a pot", "pos": [KIT["stove"][0], 0.45, KIT["stove"][1]], "size": [1.0, 0.9, 0.55]},
     {"id": "props", "build": "new: noodle bowl, a tin labelled ĂN SÁNG tipped over with coins, the box (2006)", "pos": KIT["box"], "size": [0.2, 0.28, 0.11]}],
-   "marks": {"kid": KIT["kid"], "mom": KIT["mom"], "minh_in": [2.4, -0.4], "minh": [0.45, -0.45]}}},
+   "marks": {"kid": KIT["kid"], "mom": KIT["mom"], "minh_in": [2.4, -0.4], "minh": [0.75, -0.45]}}},
  "cast": {
   "auctioneer": {"look": ["black suit", "red tie", "grey hair", "stout"], "items": ["gavel"], "views": ["front"]},
   "porter": {"look": ["white jacket", "black tie", "black trousers", "dark hair"], "items": ["the box", "the crown"], "views": ["front", "side"]},
@@ -108,7 +109,7 @@ scene(id="S01", hero=True, f=[0, 276], set="saleroom", light="day",
   acting="Auctioneer stern, then a satisfied grin; porter proud.",
   cams=[k(0, [-1.5, 1.85, -1.55], [-1.5, 1.4, -4.5], 50, push=0.002, blur=4, focus=[-1.3, 1.4, -4.6], why="gavel and yacht"),
         k(30, [-0.2, 1.6, -2.6], [-0.2, 1.18, -4.45], 42, glide=60, push=0.0015, blur=8, focus=[-0.25, 1.15, -4.45], why="glide along the lots"),
-        k(150, [1.9, 1.55, -3.3], [0.4, 1.2, -4.55], 36, glide=45, push=0.002, punch=[0.006, 14], blur=8, focus=BOX, why="the box arrives")],
+        k(150, [2.3, 1.75, -2.5], [0.25, 1.25, -4.55], 40, glide=45, push=0.002, punch=[0.006, 14], blur=8, focus=BOX, why="the box arrives")],
   kicks=[[3, 1.0], [257, 0.8]], marks=[{"who": "auctioneer", "at": [-2.0, -5.0], "view": "front", "pose": "gavel strike f3", "expr": "stern -> grin"},
                                        {"who": "porter", "at": [0.55, -4.9], "view": "side -> front", "pose": "carry, lower, thump f257", "expr": "proud"}],
   subjects=[{"n": "auctioneer head", "p": [-2.0, 2.1, -5.0], "f": [0, 25]}, {"n": "yacht", "p": [-1.0, 1.2, -4.45], "f": [0, 25]},
@@ -122,9 +123,9 @@ scene(id="S02", f=[276, 396], set="quay", light="golden", vo="Hôtel des Ventes 
   **{"in": {"type": "travel", "from": "S01"}, "out": {"type": "travel", "to": "S03"}},
   build="new: the façade with its lettering, the quay, palms, yachts, water, hills.", blocking="nobody.",
   action="f276-316 the camera pulls back from the box out through the window (z -2.6); f320-365 it cranes up and out over the moored yachts until the façade lettering sits upper middle. Title 17 · 11 · 2026 f335.",
-  acting="none", cams=[k(276, [1.9, 1.55, -3.3], [0.4, 1.2, -4.55], 36, push=0, blur=4, focus=BOX, why="start where S01 ends"),
-        k(277, [10.0, 3.1, -1.3], [0.4, 1.2, -4.55], 40, glide=40, push=0, blur=2, focus=[6, 2, -2.6], why="out through the window"),
-        k(320, [26, 9, 4], [6, 4.4, -1.5], 44, glide=45, push=0.0012, blur=2, focus=[6, 4.6, -1.5], why="the façade and the harbour")],
+  acting="none", cams=[k(276, [2.3, 1.75, -2.5], [0.25, 1.25, -4.55], 40, push=0, blur=4, focus=BOX, why="start where S01 ends"),
+        k(277, [10.0, 2.9, -1.8], [0.25, 1.25, -4.55], 40, glide=40, push=0, blur=2, focus=[6, 2, -2.6], why="out through the window"),
+        k(320, [30, 2.4, 8], [6, 4.2, -1.0], 50, glide=45, push=0.0012, blur=2, focus=[6, 4.6, -1.5], why="the façade and the harbour")],
   kicks=[], marks=[], subjects=[{"n": "lettering", "p": [6.45, 4.6, 0], "f": [365, 395]}],
   physics="yachts bob 3 cm on the swell.", light_mood="golden afternoon.", sound="room tone falls away; gulls, water slap, a far horn.",
   after="—")
@@ -134,7 +135,7 @@ scene(id="S03", f=[396, 520], set="quay", light="day", vo="Lần đầu tiên n�
   **{"in": {"type": "travel", "from": "S02"}, "out": {"type": "glide", "to": "S04"}},
   build="new: the 70-lot display table with numbered tags (real scans on mini slabs, sealed packs).", blocking="nobody.",
   action="f396-446 fly back in through the window; f446-476 turn to the display table; f480-518 track along it, tags 1 → 70 passing. Title 70 LOTS f478.",
-  acting="none", cams=[k(396, [26, 9, 4], [6, 4.4, -1.5], 44, push=0, blur=2),
+  acting="none", cams=[k(396, [30, 2.4, 8], [6, 4.2, -1.0], 50, push=0, blur=2),
         k(397, [8.2, 2.3, -2.6], [0, 1.5, -2.6], 44, glide=48, push=0, blur=2, focus=[0, 1.5, -2.6], why="into the window"),
         k(446, [4.5, 1.5, -1.9], [5.4, 1.0, 1.8], 42, glide=40, push=0, blur=6, focus=[5.3, 1.0, 0.8], why="turn to the lots"),
         k(487, [4.4, 1.45, 1.4], [5.35, 1.0, 4.6], 42, glide=32, push=0.001, blur=6, focus=[5.3, 1.0, 3.0], why="track along the 70 lots")],
@@ -147,8 +148,8 @@ scene(id="S04", f=[520, 661], set="saleroom", light="day", vo="Hãy hình dung n
   build="new: 18 gilt chairs; gentlemen seated with paddles on their laps.", blocking="18 gentlemen seated at SEATS, front view; Minh at seat 3.",
   action="f520-610 stern faces, paddles low; one adjusts his tie f572. f630 (2 f before 'Pikachu') all 18 paddles snap up at once and hold; f640 a few grins.",
   acting="stern, then the paddles up with straight faces.",
-  cams=[k(520, [3.2, 1.6, -0.6], [4.5, 1.0, 2.5], 42, push=0, blur=4),
-        k(521, [2.0, 1.55, -3.0], [-1.6, 1.05, -1.0], 44, glide=55, push=0.0015, punch=[0.006, 18], blur=5, focus=[-1.2, 1.2, -1.6], why="the audience from the stage")],
+  cams=[k(520, [4.4, 1.45, 1.4], [5.35, 1.0, 4.6], 42, push=0, blur=4),
+        k(521, [4.5, 1.7, -3.6], [-1.5, 1.0, -0.8], 44, glide=55, push=0.0015, punch=[0.006, 18], blur=5, focus=[-1.2, 1.2, -1.6], why="the audience from the stage")],
   kicks=[[630, 0.5]], marks=[{"who": "gentlemen", "at": [0.7, -2.2], "view": "front", "pose": "all 18 seats (plan.seats): seated, paddle on lap -> up f630", "expr": "stern"}],
   subjects=[{"n": "row 1 near", "p": [0.7, 1.3, -2.2], "f": [580, 660]}, {"n": "row 3 far", "p": [-3.3, 1.3, -0.2], "f": [580, 660]}],
   physics="paddles up in 3 f, 2 f overshoot.", light_mood="day.", sound="hushed room; a cough; paddle whoosh f630 in unison + a comic sting.", after="Paddles back down by S05.")
@@ -162,8 +163,8 @@ scene(id="S05", hero=True, f=[661, 964], set="saleroom", light="day",
   action="f661-676 the porter lifts the box; f676-700 carries it to the vitrine; f702 sets it inside; f716 swings the door shut (click). f722-900 macro: front printing ESPÈCES DELTA / 36 BOOSTERS (f750), down to 2006 (f809), a gleam slides across the wrap on 'niêm phong' (f866-880). f905-935 pull back; the porter sets the crown on top f935; f941 a spotlight snaps on.",
   acting="porter careful, then proud.",
   cams=[k(661, [1.05, 1.75, -2.0], [1.05, 1.35, -4.55], 44, glide=30, push=0.0012, blur=6, focus=[0.8, 1.3, -4.6], why="porter, table and vitrine"),
-        k(722, [1.4, 1.46, -4.0], [1.4, 1.44, -4.6], 30, glide=28, push=0.0012, blur=12, focus=VIT, why="macro on the box through the glass"),
-        k(790, [1.33, 1.38, -4.2], [1.42, 1.36, -4.6], 28, glide=30, push=0.0015, blur=12, focus=[1.4, 1.36, -4.55], why="down the printing to 2006"),
+        k(722, [1.4, 1.46, -3.85], [1.4, 1.44, -4.6], 32, glide=28, push=0.0012, blur=12, focus=VIT, why="macro on the box through the glass"),
+        k(790, [1.36, 1.40, -4.0], [1.41, 1.37, -4.6], 30, glide=30, push=0.0015, blur=12, focus=[1.4, 1.36, -4.55], why="down the printing to 2006"),
         k(905, [1.4, 1.7, -2.55], [1.4, 1.52, -4.6], 40, glide=30, push=0.002, punch=[0.006, 16], blur=6, focus=VIT, why="the crown and the spotlight")],
   kicks=[[716, 0.3], [941, 0.4]], marks=[{"who": "porter", "at": [0.55, -4.9], "view": "front", "pose": "lift, carry, place, crown", "expr": "careful -> proud"}],
   subjects=[{"n": "box", "p": VIT, "f": [700, 720]}, {"n": "vitrine", "p": VIT, "f": [940, 963]}, {"n": "crown", "p": [1.4, 1.76, -4.6], "f": [940, 963]}],
@@ -198,7 +199,7 @@ scene(id="S08", f=[1118, 1187], set="kitchen", light="golden", vo="Hồi đó t�
   action="f1125-1140 the kid pushes the bowl away (it slides 15 cm); f1145 he hugs the box with both arms, grinning; a coin rolls off the table f1150 and spins out on the floor. Title 2006.",
   acting="kid beaming; mum stirring, back to her pot (front view, looking at the pot).",
   cams=[k(1118, [-0.35, 1.25, 1.1], [-0.35, 0.95, -0.9], 42, push=0.002, blur=8, focus=[-0.35, 1.0, -0.8], why="kid, box, tin, bowl")],
-  kicks=[], marks=[{"who": "kid", "at": KIT["kid"], "view": "front", "pose": "sit, push bowl, hug box", "expr": "grin"}, {"who": "mom", "at": [1.3, -1.75], "view": "front", "pose": "stir", "expr": "neutral"}],
+  kicks=[], marks=[{"who": "kid", "at": KIT["kid"], "view": "front", "pose": "sit, push bowl, hug box", "expr": "grin"}, {"who": "mom", "at": [-1.3, -1.75], "view": "front", "pose": "stir", "expr": "neutral"}],
   subjects=[{"n": "kid head", "p": [-0.25, 1.25, -1.12], "f": [1118, 1186]}, {"n": "box", "p": KIT["box"], "f": [1118, 1186]}],
   physics="bowl slides with friction; coin rolls and spins down.", light_mood="golden 2006 morning.", sound="kitchen sizzle; coin roll + spin; kid giggle.", after="—")
 
@@ -280,7 +281,7 @@ scene(id="S16", f=[1996, 2063], set="cellar", light="golden", vo="Thứ càng í
   **{"in": {"type": "push", "from": "S15"}, "out": {"type": "dissolve", "n": 8, "to": "S17", "note": "back to 2006"}},
   build="numbered paddles thrust in from below the frame.", blocking="bidders below the frame (only their paddles).",
   action="f1996-2020 push to the last sealed box; f2024-2058 paddles (12) jab up from the bottom of the frame on all sides, jostling, 'giành' f2049 all at once.",
-  acting="none", cams=[k(1996, [0.65, 1.15, -0.9], [0.65, 1.04, -2.6], 38, glide=26, push=0.002, punch=[0.006, 14], blur=6, focus=[0.65, 1.04, -2.55], why="the last box")],
+  acting="none", cams=[k(1996, [0.65, 1.12, -0.45], [0.65, 1.0, -2.6], 44, glide=26, push=0.002, punch=[0.006, 14], blur=6, focus=[0.65, 1.04, -2.55], why="the last box")],
   kicks=[[2049, 0.5]], marks=[], subjects=[{"n": "last box", "p": [0.65, 1.04, -2.55], "f": [2022, 2062]}],
   physics="paddles up 4 f, wobble.", light_mood="golden.", sound="crowd clamour rising f2024, paddle whooshes; 'Gogogogogo'? no: a bidding hubbub.", after="—")
 
@@ -290,10 +291,10 @@ scene(id="S17", hero=True, f=[2063, 2196], set="kitchen", light="golden", vo="V�
   build="the kitchen again (2006); the box on the table.", blocking="Kid seated; mum standing at her mark beside the table; she walks to the cupboard f2150-2170.",
   action="f2110-2132 the kid's hand goes to the wrap; f2134 ('cấm') mum snatches the box up; f2150-2170 she walks it to the cupboard; f2172-2180 sets it on top ('bừa nhà' f2176), dusts her hands. Kid sulks.",
   acting="kid eager -> pained sulk; mum stern -> satisfied.",
-  cams=[k(2063, [-0.7, 1.45, 1.9], [-0.75, 1.15, -1.2], 50, push=0.0012, blur=5, focus=[-0.5, 1.1, -0.9], why="table, mum and the cupboard")],
+  cams=[k(2063, [0.35, 1.45, 1.9], [0.35, 1.15, -1.2], 54, push=0.0004, blur=5, focus=[-0.5, 1.1, -0.9], why="table, mum and the cupboard")],
   kicks=[[2134, 0.4]], marks=[{"who": "kid", "at": KIT["kid"], "view": "front", "pose": "reach -> sulk", "expr": "grin -> pained"},
                               {"who": "mom", "at": KIT["mom"], "view": "front -> side -> front", "pose": "snatch, walk, shelve", "expr": "stern -> smile_closed"}],
-  subjects=[{"n": "box", "p": KIT["box"], "f": [2063, 2133]}, {"n": "cupboard top", "p": [-1.55, 1.89, -2.22], "f": [2176, 2195]}],
+  subjects=[{"n": "box", "p": KIT["box"], "f": [2063, 2133]}, {"n": "cupboard top", "p": [0.85, 1.89, -2.15], "f": [2176, 2195]}],
   physics="box carried; set down with a 1 cm settle.", light_mood="golden.", sound="wrap crinkle f2128; mum's 'tsk' f2134; footsteps; thunk f2176.", after="The box on top of the cupboard.")
 
 scene(id="S18", hero=True, f=[2196, 2280], set="kitchen", light="day", vo="thì hôm nay, hãy về nhà và xin lỗi mẹ.",
@@ -302,10 +303,10 @@ scene(id="S18", hero=True, f=[2196, 2280], set="kitchen", light="day", vo="thì 
   build="the kitchen in 2026 (the box still on the cupboard, sealed, dusty); flowers.", blocking="Mum (grey hair) at her mark; Minh walks in from the door to his mark f2200-2232.",
   action="f2200-2232 Minh walks in holding flowers; f2240-2262 he bows ('xin lỗi' f2246); mum smiles and points up at the cupboard f2250; f2256-2280 tilt up to the box, a gleam on the wrap f2266.",
   acting="Minh sheepish; mum amused.",
-  cams=[k(2196, [0.1, 1.45, 1.9], [0.1, 1.15, -1.2], 50, push=0.0012, blur=5, focus=[0, 1.2, -0.7], why="same frame, 20 years later"),
-        k(2250, [-0.9, 1.6, 0.6], [-1.45, 1.82, -2.2], 40, glide=30, push=0.002, blur=6, focus=[-1.55, 1.89, -2.22], why="tilt to the sealed box")],
-  kicks=[], marks=[{"who": "mom", "at": KIT["mom"], "view": "front", "pose": "stand, point up", "expr": "smile"}, {"who": "minh", "at": [0.45, -0.45], "view": "side -> front", "pose": "walk in, bow", "expr": "nervous -> smile"}],
-  subjects=[{"n": "minh head", "p": [0.45, 2.0, -0.45], "f": [2232, 2250]}, {"n": "box", "p": [-1.55, 1.89, -2.22], "f": [2275, 2279]}],
+  cams=[k(2196, [0.3, 1.45, 1.9], [0.3, 1.15, -1.2], 50, push=0.0012, blur=5, focus=[0, 1.2, -0.7], why="same frame, 20 years later"),
+        k(2250, [1.9, 1.6, 0.3], [0.85, 1.85, -2.15], 40, glide=30, push=0.002, blur=6, focus=[0.85, 1.89, -2.15], why="tilt to the sealed box")],
+  kicks=[], marks=[{"who": "mom", "at": KIT["mom26"], "view": "front", "pose": "stand, point up", "expr": "smile"}, {"who": "minh", "at": [0.75, -0.45], "view": "side -> front", "pose": "walk in, bow", "expr": "nervous -> smile"}],
+  subjects=[{"n": "minh head", "p": [0.75, 2.0, -0.45], "f": [2232, 2250]}, {"n": "box", "p": [0.85, 1.89, -2.15], "f": [2275, 2279]}],
   physics="none.", light_mood="day 2026.", sound="door creak f2198; footsteps; a warm closing chord; 'Romantic' meme f2246.", after="End on the sealed box.")
 
 out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "plan.json")

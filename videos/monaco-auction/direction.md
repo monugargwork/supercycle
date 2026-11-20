@@ -13,7 +13,7 @@ One hard cut (into S07, the shout). Place changes in the saleroom travel (out th
 | f335 | f392 | 17 · 11 · 2026 |
 | f478 | f515 | 70 LOTS |
 | f1124 | f1180 | 2006 |
-| f1330 | f1384 | €18,000 - €20,000 |
+| f1330 | f1384 | €18K - €20K |
 | f1492 | f1514 | X10 |
 | f2198 | f2216 | 2026 |
 
@@ -22,7 +22,7 @@ One hard cut (into S07, the shout). Place changes in the saleroom travel (out th
 ### saleroom
 - Origin in the shared world: [0, 0, 0]. Axes: +x toward the harbour wall (x 6), the stage at the back wall z -6 faces +z, the audience toward +z.
 - Light: day; sun az/el [70, 50]. Open camera sides: +z (the room), the harbour windows at x 6.
-- Marks [x, z]: auctioneer [-2, -5]; porter [0.55, -4.9]; porter_v [1, -4.25]; waiter [1.95, -4.25]; minh [-0.9, -2.2].
+- Marks [x, z]: auctioneer [-2, -5]; porter [0.4, -4.9]; porter_v [1, -4.3]; waiter [1.95, -4.25]; minh [-0.9, -2.2].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
@@ -30,11 +30,12 @@ One hard cut (into S07, the shout). Place changes in the saleroom travel (out th
 | windows | new: three tall windows in the x 6 wall (1.6 x 2.4 m, sills at y 1.0) at z -2.6, 1.4, 4.4: real openings onto the quay | [6, 2.2, -2.6] | [0.2, 2.4, 1.6] |
 | stage | adapt:stage (oak, top y 0.3) | [0, 0.15, -4.9] | [8, 0.3, 2.2] |
 | rostrum | reuse:rostrum + sound block (top y 1.45) | [-2, 0.875, -4.6] | [0.9, 1.15, 0.5] |
-| lot_table | new: oak table draped in dark-red velvet, top y 1.08 | [-0.4, 0.69, -4.45] | [1.8, 0.78, 0.5] |
+| lot_table | new: oak table draped in dark-red velvet, top y 1.08 | [-0.35, 0.69, -4.45] | [1.9, 0.78, 0.5] |
+| pedestal | new: white column 24 cm wide, 1.45 m tall, velvet cushion holding the crown until S05 | [0.9, 0.875, -4.62] | [0.24, 1.15, 0.24] |
 | yacht | new: model yacht 45 cm (white hull, blue stripe, cabin, mast) on two brass cradles | [-1, 1.2, -4.45] | [0.45, 0.3, 0.12] |
 | diamond | new: cut diamond (octahedron, 5 cm) on a navy cushion | [-0.45, 1.13, -4.45] | [0.14, 0.1, 0.14] |
 | watch | new: gold watch on a black stand, tag €2,500,000 | [0, 1.16, -4.45] | [0.1, 0.16, 0.06] |
-| box | new: the booster display box (see box): built box, printed faces, REAL Rayquaza δ art, shrink-wrap gloss layer | [0.4, 1.22, -4.55] | [0.2, 0.28, 0.11] |
+| box | new: the booster display box (see box): built box, printed faces, REAL Rayquaza δ art, shrink-wrap gloss layer | [0.25, 1.22, -4.55] | [0.2, 0.28, 0.11] |
 | vitrine | new: white plinth 50 x 100 x 50 cm, glass hood 32 x 40 x 24 cm with brass edges, front door hinged on its left edge | [1.4, 1.5, -4.6] | [0.32, 0.4, 0.24] |
 | crown | new: small gold crown (lathe band + 5 points + red stones), 12 cm, set on the vitrine top in S05 | [1.4, 1.76, -4.6] | [0.12, 0.08, 0.12] |
 | slab_stand | new: white plinth 36 x 100 cm, acrylic foot; reuse:slabReal with the REAL Poncho Pikachu, GEM MT 10 | [2.4, 1.47, -4.6] | [0.19, 0.3, 0.012] |
@@ -70,15 +71,15 @@ One hard cut (into S07, the shout). Place changes in the saleroom travel (out th
 ### kitchen
 - Origin in the shared world: [-60, 0, 0]. Axes: the back wall z -2.5 faces +z; door in the right wall (x 2.2).
 - Light: golden; sun az/el [120, 30]. Open camera sides: +z.
-- Marks [x, z]: kid [-0.25, -1.12]; mom [0.15, -0.75]; minh_in [2.4, -0.4]; minh [0.45, -0.45].
+- Marks [x, z]: kid [-0.15, -1.15]; mom [0.42, -0.8]; minh_in [2.4, -0.4]; minh [0.75, -0.45].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
 | room | new: kitchen x -2.2..2.2, z -2.5..2, 2.7 m high: tiled floor, green half-tiled walls, a window above the stove | [0, 1.35, -0.25] | [4.4, 2.7, 4.5] |
 | table | new: wooden table 110 x 70 cm, top y 0.75, two stools | [-0.35, 0.375, -0.6] | [1.1, 0.75, 0.7] |
-| cupboard | new: tall painted cupboard 80 x 175 x 45 cm, two doors (top y 1.75): the box ends up on top | [-1.55, 0.875, -2.22] | [0.8, 1.75, 0.45] |
-| stove | new: two-burner stove on a counter, a pot | [1.3, 0.45, -2.2] | [1, 0.9, 0.55] |
-| props | new: noodle bowl, a tin labelled ĂN SÁNG tipped over with coins, the box (2006) | [-0.5, 0.89, -0.5] | [0.2, 0.28, 0.11] |
+| cupboard | new: tall painted cupboard 80 x 175 x 45 cm, two doors (top y 1.75): the box ends up on top | [1, 0.875, -2.22] | [0.8, 1.75, 0.45] |
+| stove | new: two-burner stove on a counter, a pot | [-1.3, 0.45, -2.2] | [1, 0.9, 0.55] |
+| props | new: noodle bowl, a tin labelled ĂN SÁNG tipped over with coins, the box (2006) | [-0.05, 0.89, -0.8] | [0.2, 0.28, 0.11] |
 
 ## Cast
 
@@ -109,7 +110,7 @@ One hard cut (into S07, the shout). Place changes in the saleroom travel (out th
 |---|---|---|---|---|---|---|---|
 | 0 | open | [-1.5, 1.85, -1.55] | [-1.5, 1.4, -4.5] | 50 | 0.2 | 4 | gavel and yacht |
 | 30 | glide 60 f | [-0.2, 1.6, -2.6] | [-0.2, 1.18, -4.45] | 42 | 0.15 | 8 | glide along the lots |
-| 150 | glide 45 f | [1.9, 1.55, -3.3] | [0.4, 1.2, -4.55] | 36 | 0.2 (punch 0.6 for 14 f) | 8 | the box arrives |
+| 150 | glide 45 f | [2.3, 1.75, -2.5] | [0.25, 1.25, -4.55] | 40 | 0.2 (punch 0.6 for 14 f) | 8 | the box arrives |
 
 - Kicks (7 f): f3 strength 1; f257 strength 0.8.
 - Physics & FX: gavel: 1 f down, 3 f rebound. Yacht: rocks 4 deg, damped. Thump: the box drops 2 cm in 1 f; diamond cushion and watch hop (0.25 m/s), settle.
@@ -130,9 +131,9 @@ One hard cut (into S07, the shout). Place changes in the saleroom travel (out th
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 276 | open | [1.9, 1.55, -3.3] | [0.4, 1.2, -4.55] | 36 | 0 | 4 | start where S01 ends |
-| 277 | glide 40 f | [10, 3.1, -1.3] | [0.4, 1.2, -4.55] | 40 | 0 | 2 | out through the window |
-| 320 | glide 45 f | [26, 9, 4] | [6, 4.4, -1.5] | 44 | 0.12 | 2 | the façade and the harbour |
+| 276 | open | [2.3, 1.75, -2.5] | [0.25, 1.25, -4.55] | 40 | 0 | 4 | start where S01 ends |
+| 277 | glide 40 f | [10, 2.9, -1.8] | [0.25, 1.25, -4.55] | 40 | 0 | 2 | out through the window |
+| 320 | glide 45 f | [30, 2.4, 8] | [6, 4.2, -1] | 50 | 0.12 | 2 | the façade and the harbour |
 
 - Kicks (7 f): none.
 - Physics & FX: yachts bob 3 cm on the swell.
@@ -153,7 +154,7 @@ One hard cut (into S07, the shout). Place changes in the saleroom travel (out th
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 396 | open | [26, 9, 4] | [6, 4.4, -1.5] | 44 | 0 | 2 |  |
+| 396 | open | [30, 2.4, 8] | [6, 4.2, -1] | 50 | 0 | 2 |  |
 | 397 | glide 48 f | [8.2, 2.3, -2.6] | [0, 1.5, -2.6] | 44 | 0 | 2 | into the window |
 | 446 | glide 40 f | [4.5, 1.5, -1.9] | [5.4, 1, 1.8] | 42 | 0 | 6 | turn to the lots |
 | 487 | glide 32 f | [4.4, 1.45, 1.4] | [5.35, 1, 4.6] | 42 | 0.1 | 6 | track along the 70 lots |
@@ -178,8 +179,8 @@ One hard cut (into S07, the shout). Place changes in the saleroom travel (out th
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 520 | open | [3.2, 1.6, -0.6] | [4.5, 1, 2.5] | 42 | 0 | 4 |  |
-| 521 | glide 55 f | [2, 1.55, -3] | [-1.6, 1.05, -1] | 44 | 0.15 (punch 0.6 for 18 f) | 5 | the audience from the stage |
+| 520 | open | [4.4, 1.45, 1.4] | [5.35, 1, 4.6] | 42 | 0 | 4 |  |
+| 521 | glide 55 f | [4.5, 1.7, -3.6] | [-1.5, 1, -0.8] | 44 | 0.15 (punch 0.6 for 18 f) | 5 | the audience from the stage |
 
 - Kicks (7 f): f630 strength 0.5.
 - Physics & FX: paddles up in 3 f, 2 f overshoot.
@@ -202,8 +203,8 @@ One hard cut (into S07, the shout). Place changes in the saleroom travel (out th
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 661 | open | [1.05, 1.75, -2] | [1.05, 1.35, -4.55] | 44 | 0.12 | 6 | porter, table and vitrine |
-| 722 | glide 28 f | [1.4, 1.46, -4] | [1.4, 1.44, -4.6] | 30 | 0.12 | 12 | macro on the box through the glass |
-| 790 | glide 30 f | [1.33, 1.38, -4.2] | [1.42, 1.36, -4.6] | 28 | 0.15 | 12 | down the printing to 2006 |
+| 722 | glide 28 f | [1.4, 1.46, -3.85] | [1.4, 1.44, -4.6] | 32 | 0.12 | 12 | macro on the box through the glass |
+| 790 | glide 30 f | [1.36, 1.4, -4] | [1.41, 1.37, -4.6] | 30 | 0.15 | 12 | down the printing to 2006 |
 | 905 | glide 30 f | [1.4, 1.7, -2.55] | [1.4, 1.52, -4.6] | 40 | 0.2 (punch 0.6 for 16 f) | 6 | the crown and the spotlight |
 
 - Kicks (7 f): f716 strength 0.3; f941 strength 0.4.
@@ -262,8 +263,8 @@ One hard cut (into S07, the shout). Place changes in the saleroom travel (out th
 - Set: kitchen. Light: golden.
 - Build: new: kitchen; the box (new, glossy), a noodle bowl, the ĂN SÁNG tin tipped over, coins.
 - Blocking: Kid seated behind the table facing the lens; mum at the stove.
-  - kid at [-0.25, -1.12], front; sit, push bowl, hug box; grin.
-  - mom at [1.3, -1.75], front; stir; neutral.
+  - kid at [-0.15, -1.15], front; sit, push bowl, hug box; grin.
+  - mom at [-1.3, -1.75], front; stir; neutral.
 - Action, against the words: f1125-1140 the kid pushes the bowl away (it slides 15 cm); f1145 he hugs the box with both arms, grinning; a coin rolls off the table f1150 and spins out on the floor. Title 2006.
 - Acting: kid beaming; mum stirring, back to her pot (front view, looking at the pot).
 - Camera keys:
@@ -446,7 +447,7 @@ One hard cut (into S07, the shout). Place changes in the saleroom travel (out th
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1996 | open | [0.65, 1.15, -0.9] | [0.65, 1.04, -2.6] | 38 | 0.2 (punch 0.6 for 14 f) | 6 | the last box |
+| 1996 | open | [0.65, 1.12, -0.45] | [0.65, 1, -2.6] | 44 | 0.2 (punch 0.6 for 14 f) | 6 | the last box |
 
 - Kicks (7 f): f2049 strength 0.5.
 - Physics & FX: paddles up 4 f, wobble.
@@ -461,15 +462,15 @@ One hard cut (into S07, the shout). Place changes in the saleroom travel (out th
 - Set: kitchen. Light: golden.
 - Build: the kitchen again (2006); the box on the table.
 - Blocking: Kid seated; mum standing at her mark beside the table; she walks to the cupboard f2150-2170.
-  - kid at [-0.25, -1.12], front; reach -> sulk; grin -> pained.
-  - mom at [0.15, -0.75], front -> side -> front; snatch, walk, shelve; stern -> smile_closed.
+  - kid at [-0.15, -1.15], front; reach -> sulk; grin -> pained.
+  - mom at [0.42, -0.8], front -> side -> front; snatch, walk, shelve; stern -> smile_closed.
 - Action, against the words: f2110-2132 the kid's hand goes to the wrap; f2134 ('cấm') mum snatches the box up; f2150-2170 she walks it to the cupboard; f2172-2180 sets it on top ('bừa nhà' f2176), dusts her hands. Kid sulks.
 - Acting: kid eager -> pained sulk; mum stern -> satisfied.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 2063 | open | [-0.7, 1.45, 1.9] | [-0.75, 1.15, -1.2] | 50 | 0.12 | 5 | table, mum and the cupboard |
+| 2063 | open | [0.35, 1.45, 1.9] | [0.35, 1.15, -1.2] | 54 | 0.04 | 5 | table, mum and the cupboard |
 
 - Kicks (7 f): f2134 strength 0.4.
 - Physics & FX: box carried; set down with a 1 cm settle.
@@ -484,16 +485,16 @@ One hard cut (into S07, the shout). Place changes in the saleroom travel (out th
 - Set: kitchen. Light: day.
 - Build: the kitchen in 2026 (the box still on the cupboard, sealed, dusty); flowers.
 - Blocking: Mum (grey hair) at her mark; Minh walks in from the door to his mark f2200-2232.
-  - mom at [0.15, -0.75], front; stand, point up; smile.
-  - minh at [0.45, -0.45], side -> front; walk in, bow; nervous -> smile.
+  - mom at [0.25, -0.85], front; stand, point up; smile.
+  - minh at [0.75, -0.45], side -> front; walk in, bow; nervous -> smile.
 - Action, against the words: f2200-2232 Minh walks in holding flowers; f2240-2262 he bows ('xin lỗi' f2246); mum smiles and points up at the cupboard f2250; f2256-2280 tilt up to the box, a gleam on the wrap f2266.
 - Acting: Minh sheepish; mum amused.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 2196 | open | [0.1, 1.45, 1.9] | [0.1, 1.15, -1.2] | 50 | 0.12 | 5 | same frame, 20 years later |
-| 2250 | glide 30 f | [-0.9, 1.6, 0.6] | [-1.45, 1.82, -2.2] | 40 | 0.2 | 6 | tilt to the sealed box |
+| 2196 | open | [0.3, 1.45, 1.9] | [0.3, 1.15, -1.2] | 50 | 0.12 | 5 | same frame, 20 years later |
+| 2250 | glide 30 f | [1.9, 1.6, 0.3] | [0.85, 1.85, -2.15] | 40 | 0.2 | 6 | tilt to the sealed box |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
