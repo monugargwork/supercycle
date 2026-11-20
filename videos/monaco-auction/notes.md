@@ -12,6 +12,8 @@ Composition `MonacoReel` · code `src/videos/monaco/` · assets `public/monaco/`
 - Physics is analytic (ballistic hops, a hinged chair fall, cork bounces, fluttering shreds that rest on the floor), not a cannon bake.
 - Sweep fixes before v1: the box went missing from the vitrine during the S05 macro (fixed); S04 lens moved so no gentleman blocks it; S02 camera lowered so the yachts sit in the foreground; S05 macro pulled back; cellar boxes scaled 0.8 so the opened lids show, and opened boxes dim; the kitchen cupboard moved to x 1.0 so mum, the kid, the box and the cupboard share one frame; the final tilt moved to the door side so Minh no longer blocks it; S16 widened and its paddles placed either side of the last box.
 
+- Render: `CONC=3 scripts/render.command MonacoReel Monaco_v1` → `Drafts/Monaco_v1.mp4` (1440x2560, 76.0 s, 90 MB), about 30 min on the Mac. Chunk 4 crashed the browser once (a GPU timeout on the first frame); re-running the same command resumed it and it finished.
+
 ### Open
 - Seen only as sweep stills: check the window pass (S02/S03), the porter's carry, the 17 rips and the kitchen snatch in motion.
 - The scooters are simple blocks; the porter crowds the left of frame in the S05 crown beat.
