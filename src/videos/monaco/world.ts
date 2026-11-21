@@ -96,6 +96,24 @@ export class World {
     this.sunCache.set(id, v);
     return v;
   }
+  private shadowCache = new Map<number, { centre: THREE.Vector3; R: number }>();
+  /** one shadow frustum per shot: centred on the shot's mean look point, big enough for every frame of it, texel-snapped */
+  private shotShadow(id: number, s: ShotDef, sunDir: THREE.Vector3) {
+    const hit = this.shadowCache.get(id); if (hit) return hit;
+    const L = LIGHTS[s.light]; void L;
+    let cx = 0, cy = 0, cz = 0, n = 0, maxD = 0;
+    for (let f = s.a; f < s.b; f += 2) { const c = camAt(id, f); cx += c.look[0]; cy += c.look[1]; cz += c.look[2]; n++; }
+    cx /= n; cy /= n; cz /= n;
+    for (let f = s.a; f < s.b; f += 2) { const c = camAt(id, f); maxD = Math.max(maxD, Math.hypot(c.pos[0] - cx, c.pos[1] - cy, c.pos[2] - cz) + Math.hypot(c.look[0] - cx, c.look[1] - cy, c.look[2] - cz)); }
+    let R = THREE.MathUtils.clamp(maxD * 1.15 + 7, 10, 95);
+    if (s.light === "golden") R = Math.max(R, 22);
+    // snap the centre to whole shadow texels along the light's right/up axes
+    const texel = (2 * R) / this.sun.shadow.mapSize.x, up = Math.abs(sunDir.y) > 0.99 ? V(1, 0, 0) : V(0, 1, 0);
+    const right = V(0, 0, 0).crossVectors(up, sunDir).normalize(), up2 = V(0, 0, 0).crossVectors(sunDir, right).normalize();
+    const c0 = V(cx, cy, cz), a = Math.round(c0.dot(right) / texel) * texel, b = Math.round(c0.dot(up2) / texel) * texel, d = c0.dot(sunDir);
+    const centre = right.multiplyScalar(a).add(up2.multiplyScalar(b)).add(sunDir.clone().multiplyScalar(d));
+    const out = { centre, R }; this.shadowCache.set(id, out); return out;
+  }
   private actor(i: number) { while (this.actors.length <= i) this.actors.push(new Actor(this.root)); return this.actors[i]; }
   private fx(i: number) { while (this.fxs.length <= i) this.fxs.push(new Fx(this.root)); return this.fxs[i]; }
 
@@ -103,16 +121,19 @@ export class World {
     const s = SHOTS[id - 1], L = LIGHTS[s.light], K = LOOK[s.light];
     const c = camAt(id, f);
     cam.position.set(...c.pos); cam.up.set(0, 1, 0); cam.lookAt(...c.look); cam.rotateZ(c.roll);
-    cam.fov = c.fov; cam.near = c.pos[1] > 20 ? 1.0 : 0.05; cam.far = 1500; cam.updateProjectionMatrix(); cam.updateMatrixWorld();
+    cam.fov = c.fov; cam.near = c.pos[1] > 20 ? 1.0 : 0.12; // 0.12 m (not 0.05): twice the depth precision, less z-fighting far away cam.far = 1500; cam.updateProjectionMatrix(); cam.updateMatrixWorld();
     const focus = V(...c.look), dist = cam.position.distanceTo(focus);
     cam.layers.enable(NOINK);
     // ---- light rig ----
     const sunDir = this.shotSun(id, s, L);
     this.hemi.color.set(L.sky); this.hemi.groundColor.set(L.ground); this.hemi.intensity = L.hemiI;
     this.sun.color.set(L.sunCol); this.sun.intensity = L.sunI;
-    let Rr = THREE.MathUtils.clamp(dist * 1.15 + 7, 10, 95);
-    if (s.light === "golden") Rr = Math.max(Rr, 22);
-    this.sun.position.copy(focus).addScaledVector(sunDir, 220); this.sun.target.position.copy(focus);
+    // shadow map frozen per shot (anti-flicker): one centre and one radius for the whole shot, centre snapped to the shadow
+    // map's texel grid in light space. A shadow camera that follows the look point / camera distance every frame makes shadow
+    // edges swim and whole areas pop in and out of shadow as the camera moves (the Monaco v1 "glitch").
+    const { centre: sCentre, R: Rr } = this.shotShadow(id, s, sunDir);
+    this.sun.position.copy(sCentre).addScaledVector(sunDir, 220); this.sun.target.position.copy(sCentre);
+    void focus; void dist;
     const sc = this.sun.shadow.camera;
     sc.left = -Rr; sc.right = Rr; sc.top = Rr; sc.bottom = -Rr; sc.near = 20; sc.far = 480; sc.updateProjectionMatrix();
     this.sun.shadow.bias = L.bias; this.sun.shadow.normalBias = L.normalBias * (Rr / 12);

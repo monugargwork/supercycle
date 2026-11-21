@@ -6,7 +6,7 @@ import { renderStill, selectComposition } from "@remotion/renderer";
 import path from "node:path";
 const [prefix, frames, dpr = "0.5"] = process.argv.slice(2);
 const chromiumOptions = { gl: process.env.REMOTION_GL || (process.platform === "darwin" ? "angle" : "swangle") }; // Mac GPU, else software
-const inputProps = { audio: false, post: { dpr: Number(dpr) } };
+const inputProps = { audio: false, post: { dpr: Number(dpr), ...JSON.parse(process.env.POST || "{}") } }; // POST='{"lens":false}' switches post passes off (A/B tests)
 const serveUrl = await bundle({ entryPoint: path.resolve("src/index.ts"), publicDir: path.resolve("public") });
 const composition = await selectComposition({ serveUrl, id: process.env.COMP || "PsaReel", chromiumOptions, inputProps });
 const onBrowserLog = (l) => { if (l.type === "error" || l.type === "warning") console.log(`[${l.type}]`, l.text.slice(0, 400)); };

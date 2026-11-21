@@ -118,10 +118,60 @@ const sign = (tex: THREE.Texture) => new THREE.MeshBasicMaterial({ map: tex, ton
 const twoToneLam = (col: string) => lam("tt" + col, () => ({ color: col }));
 
 // ---------------- small builders ----------------
-const box = (b: Batch, m: THREE.Material, x0: number, y0: number, z0: number, x1: number, y1: number, z1: number, tile = 0) =>
-  b.add(boxGeo(V(Math.min(x0, x1), Math.min(y0, y1), Math.min(z0, z1)), V(Math.max(x0, x1), Math.max(y0, y1), Math.max(z0, z1)), tile), m);
-const up = (b: Batch, m: THREE.Material, x0: number, x1: number, z0: number, z1: number, y: number, tile: number) =>
+// ---- coplanar-face audit (anti z-fighting): every box and floor quad is recorded; buildSets warns about any two faces
+// that lie in the same plane, face the same way and overlap: the GPU can't tell which is in front, so they flicker as the camera
+// moves (the Monaco v1 "glitch"). Fix by moving one face 2-5 mm (or trimming the box), never by ignoring the warning.
+type Face = { ax: number; c: number; dir: number; r: [number, number, number, number]; set: string; id: number; where: string };
+const FACES: Face[] = []; let SETL = "", BOXN = 0;
+const INSET = [0, 4, 8, 1, 5, 9, 2, 6, 3, 7].map((i) => 0.0005 + i * 0.00045); // ten insets 0.5-4.6 mm, each 0.45 mm apart
+const recBox = (x0: number, y0: number, z0: number, x1: number, y1: number, z1: number, where: string) => {
+  const id = ++BOXN, lo = [x0, y0, z0], hi = [x1, y1, z1];
+  for (let ax = 0; ax < 3; ax++) {
+    const u = (ax + 1) % 3, v = (ax + 2) % 3, r: [number, number, number, number] = [lo[u], hi[u], lo[v], hi[v]];
+    if (hi[u] - lo[u] < 1e-6 || hi[v] - lo[v] < 1e-6) continue;
+    FACES.push({ ax, c: lo[ax], dir: -1, r, set: SETL, id, where }, { ax, c: hi[ax], dir: 1, r, set: SETL, id, where });
+  }
+};
+const near = (a: number, b: number) => Math.abs(a - b) < 4e-4;
+/** would a box lo..hi put a face in the plane of an existing same-facing face of this set, overlapping it? */
+const clashes = (lo: THREE.Vector3, hi: THREE.Vector3) => {
+  const L = [lo.x, lo.y, lo.z], H = [hi.x, hi.y, hi.z];
+  for (const f of FACES) {
+    if (f.set !== SETL) continue;
+    const c = f.dir > 0 ? H[f.ax] : L[f.ax]; if (!near(c, f.c)) continue;
+    const u = (f.ax + 1) % 3, v = (f.ax + 2) % 3;
+    if (Math.min(H[u], f.r[1]) - Math.max(L[u], f.r[0]) > 1e-4 && Math.min(H[v], f.r[3]) - Math.max(L[v], f.r[2]) > 1e-4) return true;
+  }
+  return false;
+};
+export const coplanarReport = (): string[] => {
+  const out: string[] = [], key = (f: Face) => `${f.set}|${f.ax}|${f.dir}|${Math.round(f.c * 2000)}`, bins = new Map<string, Face[]>();
+  for (const f of FACES) { const k = key(f); const l = bins.get(k); if (l) l.push(f); else bins.set(k, [f]); }
+  for (const l of bins.values()) for (let i = 0; i < l.length; i++) for (let j = i + 1; j < l.length; j++) {
+    const a = l[i], b = l[j]; if (a.id === b.id || !near(a.c, b.c) || (a.ax === 1 && a.dir < 0 && Math.abs(a.c) < 1e-3)) continue; // bottoms resting on the floor are never seen
+    const ou = Math.min(a.r[1], b.r[1]) - Math.max(a.r[0], b.r[0]), ov = Math.min(a.r[3], b.r[3]) - Math.max(a.r[2], b.r[2]);
+    if (ou > 1e-4 && ov > 1e-4) out.push(`[coplanar] ${a.set}: ${"xyz"[a.ax]}=${a.c.toFixed(3)} (${a.dir > 0 ? "+" : "-"}) ${a.where} / ${b.where}, overlap ${(ou * 100).toFixed(0)}x${(ov * 100).toFixed(0)} cm`);
+  }
+  return out;
+};
+const where = () => { const l = (new Error().stack ?? "").split("\n")[3] ?? ""; const m = l.match(/:(\d+):\d+\)?$/); return m ? "sets.ts:" + m[1] : "?"; };
+const box = (b: Batch, m: THREE.Material, x0: number, y0: number, z0: number, x1: number, y1: number, z1: number, tile = 0) => {
+  const lo = V(Math.min(x0, x1), Math.min(y0, y1), Math.min(z0, z1)), hi = V(Math.max(x0, x1), Math.max(y0, y1), Math.max(z0, z1));
+  // every box is pulled in by a few tenths of a millimetre to 3 mm (never on a floor-standing bottom), choosing the first inset
+  // whose faces don't line up with any face already built in this set, so no two faces ever share a plane
+  const L0 = lo.clone(), H0 = hi.clone();
+  for (let t = 0; t < INSET.length; t++) {
+    const k = INSET[(BOXN + t) % INSET.length], e = [H0.x - L0.x, H0.y - L0.y, H0.z - L0.z].map((d) => Math.min(k, d / 5));
+    lo.set(L0.x + e[0], L0.y > 1e-4 ? L0.y + e[1] : L0.y, L0.z + e[2]); hi.set(H0.x - e[0], H0.y - e[1], H0.z - e[2]);
+    if (!clashes(lo, hi)) break;
+  }
+  recBox(lo.x, lo.y, lo.z, hi.x, hi.y, hi.z, where());
+  b.add(boxGeo(lo, hi, tile), m);
+};
+const up = (b: Batch, m: THREE.Material, x0: number, x1: number, z0: number, z1: number, y: number, tile: number) => {
+  FACES.push({ ax: 1, c: y, dir: 1, r: [Math.min(z0, z1), Math.max(z0, z1), Math.min(x0, x1), Math.max(x0, x1)], set: SETL, id: ++BOXN, where: where() });
   b.add(quad(V(x0, y, z1), V(x1, y, z1), V(x1, y, z0), V(x0, y, z0), (x1 - x0) / tile, (z1 - z0) / tile), m);
+};
 const cyl = (b: Batch, m: THREE.Material, x: number, y: number, z: number, r0: number, r1: number, h: number, seg = 14, rot?: THREE.Euler) => {
   const g = new THREE.CylinderGeometry(r1, r0, h, seg); g.translate(0, h / 2, 0);
   const mx = new THREE.Matrix4().compose(V(x, y, z), new THREE.Quaternion().setFromEuler(rot ?? new THREE.Euler()), V(1, 1, 1));
@@ -229,16 +279,18 @@ export const buildSets = (root: THREE.Object3D): Sets => {
     const sealedMats = [sideM, sideM, darkM, darkM, frontM, sideM], openMats = [sideDim, sideDim, darkM, darkM, frontDim, sideDim];
     const body = mesh(new THREE.BoxGeometry(BW, BH - 0.02, BD), sealedMats, g, 0, (BH - 0.02) / 2, 0);
     const lid = new THREE.Group(); lid.position.set(0, BH - 0.02, -BD / 2); g.add(lid);
-    mesh(new THREE.BoxGeometry(BW + 0.004, 0.02, BD + 0.004), [sideM, sideM, sideM, darkM, sideM, sideM], lid, 0, 0.01, BD / 2);
+    // the lid overhangs the body by a clear 6 mm: a 2 mm step drew its outline as flickering dashes
+    mesh(new THREE.BoxGeometry(BW + 0.012, 0.02, BD + 0.012), [sideM, sideM, sideM, darkM, sideM, sideM], lid, 0, 0.01, BD / 2);
     const wf = canvasMat(256, 360); wf.tex.colorSpace = THREE.SRGBColorSpace;
     const wfM = new THREE.MeshBasicMaterial({ map: wf.tex, transparent: true, depthWrite: false });
     const ws = wrapSideM.clone();
-    const wrap = mesh(new THREE.BoxGeometry(BW + 0.008, BH + 0.006, BD + 0.008), [ws, ws, ws, ws, wfM, ws], g, 0, BH / 2, 0);
-    wrap.renderOrder = 4;
+    const wrap = mesh(new THREE.BoxGeometry(BW + 0.018, BH + 0.008, BD + 0.018), [ws, ws, ws, ws, wfM, ws], g, 0, BH / 2, 0);
+    wrap.renderOrder = 4; wrap.layers.set(NOINK); // no ink on a shell 3 mm off the box: its outline flickers against the box's
     return { g, lid, wrap, wrapFront: wf, key: "", body, mats: [sealedMats, openMats] };
   };
 
   // ===== SALEROOM =====
+  SETL = "saleroom";
   const sale = G("saleroom", SALE);
   let b = new Batch();
   up(b, lam("carpet", () => ({ map: carpet() })), -6, 5.8, -6, 6, 0, 2);
@@ -328,7 +380,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   for (let i = 0; i < 5; i++) { const a = (i / 5) * Math.PI * 2; mesh(new THREE.ConeGeometry(0.012, 0.035, 8), lamC("#e0b23c"), crown, 0.05 * Math.cos(a), 0.05, 0.05 * Math.sin(a)); mesh(new THREE.SphereGeometry(0.007, 8, 6), lamC("#c2203a"), crown, 0.051 * Math.cos(a + 0.6), 0.016, 0.051 * Math.sin(a + 0.6)); }
   mesh(new THREE.CylinderGeometry(0.075, 0.075, 0.02, 20), velvet, crown, 0, -0.01, 0);
   const chair = new THREE.Group(); const ms = SEATS[MINH_SEAT]; chair.position.set(ms[0], 0, ms[1] + 0.22); sale.add(chair);
-  const cb = new Batch(); chairAt(cb, 0, -0.22); cb.build(chair);
+  SETL = "chair"; const cb = new Batch(); chairAt(cb, 0, -0.22); cb.build(chair); SETL = "saleroom";
   // ten scooters down the aisle (S10 on)
   const scooters = new THREE.Group(); sale.add(scooters);
   const sb = new Batch(), sred = C("#d8322f"), tyre = C("#26242b"), chrome = C("#c9ccd2");
@@ -369,6 +421,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   });
 
   // ===== CELLAR =====
+  SETL = "cellar";
   const cel = G("cellar", CELLAR);
   b = new Batch();
   const st = lam("cellarStone", () => ({ map: rep(stoneHD("cellarS", ["#a89a86", "#9d8f7b", "#b3a590", "#94877a"], "#6e6356"), 1, 1) }));
@@ -408,6 +461,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   const cellar = Array.from({ length: 18 }, (_, i) => { const r = makeBox(cel); const p = boxCubby(i); r.g.position.set(p[0], p[1], p[2] + 0.12); r.g.scale.setScalar(0.8); return r; });
 
   // ===== KITCHEN =====
+  SETL = "kitchen";
   const kit = G("kitchen", KITCH);
   b = new Batch();
   up(b, lam("kTiles", () => ({ map: tiles() })), -2.2, 2.2, -2.5, 2.1, 0, 1);
@@ -443,10 +497,14 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   const kitBox = makeBox(kit);
 
   for (const g of [sale, quay, cel, kit]) g.traverse((o) => { if ((o as THREE.Mesh).isMesh) { o.castShadow = true; o.receiveShadow = true; } });
-  for (const [g, x0, x1, z0, z1, y, col] of [[sale, -6, 5.8, -6, 6, 4.5, "#f3ead6"], [kit, -2.2, 2.2, -2.5, 2.1, 2.7, "#efe4c6"]] as const) {
+  // transparent glass and shrink-wrap draw no ink and cast no shadow (a shell 3 mm off a surface shadows and outlines itself
+  // unstably: it flickers); the brass edges and the box carry the outlines
+  for (const g of [sale, quay, cel, kit]) g.traverse((o) => { const m = o as THREE.Mesh; if (!m.isMesh) return; const ms = Array.isArray(m.material) ? m.material : [m.material]; if (ms.every((x) => x.transparent)) { m.layers.set(NOINK); m.castShadow = false; m.receiveShadow = false; } });
+  for (const [g, x0, x1, z0, z1, y, col] of [[sale, -6, 5.8, -6, 6, 4.48, "#f3ead6"], [kit, -2.2, 2.2, -2.5, 2.1, 2.68, "#efe4c6"], [cel, -3, 3, -2.8, 4.6, 2.84, "#3a2a22"]] as const) {
     const c = new THREE.Mesh(new THREE.PlaneGeometry(x1 - x0, z1 - z0), lamC(col)); c.rotation.x = Math.PI / 2; c.position.set((x0 + x1) / 2, y, (z0 + z1) / 2); c.castShadow = false; c.receiveShadow = false; g.add(c);
   }
   void SALE; void NOINK; void untone; void V; void boxGeo; void quad; void tri; void jit; void brick; void grassHD; void planksHD; void roofHD; void beam;
+  { const rep = coplanarReport(); console.warn(`[coplanar] ${rep.length} coplanar overlaps`); for (const l of rep.slice(0, 40)) console.warn(l); }
   return { groups, board, year, door, hero, kitBox, cellar, crown, chair, yacht, diamond, watch, bottle, bowl, scooters, yachts };
 };
 /** redraw a box's wrap front for its state */
