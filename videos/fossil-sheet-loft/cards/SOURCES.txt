@@ -1,1 +1,16 @@
 Real card scans for the Fossil reel (from library/cards, see CATALOG.md).
+fs_aerodactyl.png Fossil Fs 1                                       https://images.pokemontcg.io/base3/1_hires.png
+fs_articuno.png   Fossil Fs 2                                       https://images.pokemontcg.io/base3/2_hires.png
+fs_ditto.png      Fossil Fs 3                                       https://images.pokemontcg.io/base3/3_hires.png
+fs_dragonite.png  Fossil Fs 4                                       https://images.pokemontcg.io/base3/4_hires.png
+fs_gengar.png     Fossil Fs 5                                       https://images.pokemontcg.io/base3/5_hires.png
+fs_haunter.png    Fossil Fs 6                                       https://images.pokemontcg.io/base3/6_hires.png
+fs_hitmonlee.png  Fossil Fs 7                                       https://images.pokemontcg.io/base3/7_hires.png
+fs_hypno.png      Fossil Fs 8                                       https://images.pokemontcg.io/base3/8_hires.png
+fs_kabutops.png   Fossil Fs 9                                       https://images.pokemontcg.io/base3/9_hires.png
+fs_lapras.png     Fossil Fs 10                                      https://images.pokemontcg.io/base3/10_hires.png
+fs_magneton.png   Fossil Fs 11                                      https://images.pokemontcg.io/base3/11_hires.png
+fs_moltres.png    Fossil Fs 12                                      https://images.pokemontcg.io/base3/12_hires.png
+fs_muk.png        Fossil Fs 13                                      https://images.pokemontcg.io/base3/13_hires.png
+fs_raichu.png     Fossil Fs 14                                      https://images.pokemontcg.io/base3/14_hires.png
+fs_zapdos.png     Fossil Fs 15                                      https://images.pokemontcg.io/base3/15_hires.png

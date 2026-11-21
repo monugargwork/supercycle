@@ -22,6 +22,21 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | eevee | Jungle Eevee 51 | base2 | 51 | https://images.pokemontcg.io/base2/51.png | attic, fanatics |
 | jigglypuff | Jungle Jigglypuff 54 | base2 | 54 | https://images.pokemontcg.io/base2/54.png | attic, fanatics |
 | meowth | Jungle Meowth 56 | base2 | 56 | https://images.pokemontcg.io/base2/56.png | attic |
+| fs_aerodactyl | Fossil Fs 1 | base3 | 1 | https://images.pokemontcg.io/base3/1_hires.png | fossil |
+| fs_articuno | Fossil Fs 2 | base3 | 2 | https://images.pokemontcg.io/base3/2_hires.png | fossil |
+| fs_ditto | Fossil Fs 3 | base3 | 3 | https://images.pokemontcg.io/base3/3_hires.png | fossil |
+| fs_dragonite | Fossil Fs 4 | base3 | 4 | https://images.pokemontcg.io/base3/4_hires.png | fossil |
+| fs_gengar | Fossil Fs 5 | base3 | 5 | https://images.pokemontcg.io/base3/5_hires.png | fossil |
+| fs_haunter | Fossil Fs 6 | base3 | 6 | https://images.pokemontcg.io/base3/6_hires.png | fossil |
+| fs_hitmonlee | Fossil Fs 7 | base3 | 7 | https://images.pokemontcg.io/base3/7_hires.png | fossil |
+| fs_hypno | Fossil Fs 8 | base3 | 8 | https://images.pokemontcg.io/base3/8_hires.png | fossil |
+| fs_kabutops | Fossil Fs 9 | base3 | 9 | https://images.pokemontcg.io/base3/9_hires.png | fossil |
+| fs_lapras | Fossil Fs 10 | base3 | 10 | https://images.pokemontcg.io/base3/10_hires.png | fossil |
+| fs_magneton | Fossil Fs 11 | base3 | 11 | https://images.pokemontcg.io/base3/11_hires.png | fossil |
+| fs_moltres | Fossil Fs 12 | base3 | 12 | https://images.pokemontcg.io/base3/12_hires.png | fossil |
+| fs_muk | Fossil Fs 13 | base3 | 13 | https://images.pokemontcg.io/base3/13_hires.png | fossil |
+| fs_raichu | Fossil Fs 14 | base3 | 14 | https://images.pokemontcg.io/base3/14_hires.png | fossil |
+| fs_zapdos | Fossil Fs 15 | base3 | 15 | https://images.pokemontcg.io/base3/15_hires.png | fossil |
 | psyduck | Fossil Psyduck 53 | base3 | 53 | https://images.pokemontcg.io/base3/53.png | attic |
 | zard_lc | Legendary Collection Charizard 3 | base6 | 3 | https://images.pokemontcg.io/base6/3_hires.png | attic, fanatics |
 | sky_h1 | Skyridge Holo H1 | ecard3 | H1 | https://images.pokemontcg.io/ecard3/H1.png | attic, fanatics |
