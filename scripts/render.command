@@ -58,6 +58,13 @@ CACHE="../Drafts/.chunks/$COMP"; mkdir -p "$CACHE"   # kept between renders; del
 SIG="$TOTAL $CHUNK $SCALE $PROPS png-bt709"
 if [ "${REDO:-}" = "all" ] || [ "$(cat "$CACHE/settings" 2>/dev/null)" != "$SIG" ]; then rm -f "$CACHE"/part_*.mp4; fi
 echo "$SIG" > "$CACHE/settings"
+# Cached chunks are only reused on purpose: if the reel's code or assets changed since they were made, say which chunks to redo
+# (REDO=7,8 or REDO=all). Otherwise a new version would silently keep old frames (Monaco v2 nearly shipped v1's glitches).
+CODE=$(git rev-parse "HEAD:src" 2>/dev/null)-$(git rev-parse "HEAD:public/$(echo "${COMP%Reel}" | tr '[:upper:]' '[:lower:]')" 2>/dev/null)-$(git status --porcelain src public | md5 -q 2>/dev/null || true)
+if ls "$CACHE"/part_*.mp4 >/dev/null 2>&1 && [ -z "${REDO:-}" ] && [ "$(cat "$CACHE/code" 2>/dev/null)" != "$CODE" ]; then
+  fail "The code changed since the cached chunks of $COMP were rendered. Run again with REDO=<chunks that changed> (10 s each) or REDO=all."
+fi
+echo "$CODE" > "$CACHE/code"
 if [ -n "${REDO:-}" ] && [ "$REDO" != "all" ]; then
   for c in ${REDO//,/ }; do
     [[ "$c" =~ ^[0-9]+$ ]] || fail "REDO takes chunk numbers like 7,8 (chunk 1 = 0–10 s)."
