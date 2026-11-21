@@ -1,14 +1,14 @@
-// The sets of the Monaco auction reel, built once (static scenery batched per material) plus the moving pieces as their own objects.
-// Cards, people, spot cones and FX are flat cards placed by cast.ts; the props they move are posed by world.ts. Positions come from plan.json.
-// Import note: water and stoneHD come from the engine paint module.
+// The sets of the Fossil sheet reel, built once (static scenery batched per material) plus the moving pieces as their own objects.
+// People and FX are flat cards placed by cast.ts; the props they move are posed by world.ts. Positions come from plan.json.
+// The hero prop is the sheet rig: one deformable mesh (roll, end curl, corner fold) with a front, a back and a holo gleam layer.
 import * as THREE from "three";
 import { Batch, V, lam, boxGeo, quad, tri } from "../../engine/geo";
 import { ctex, rep, grassHD, planksHD, roofHD, beam, jit, brick, water, stoneHD } from "../../engine/paint";
 import { Pen } from "../../engine/toon";
 import { untone } from "../../engine/shade";
 import { NOINK } from "../../engine/ink";
-import { boxFront, boxSide, wrapGloss, wrapTorn, lotBoard, yearPlate, tagStrip, priceTag, tinLabel, lettering, coin } from "./art2";
-import { SALE, CELLAR, KITCH, V3, obj, ORIGIN, BOXS, SEATS, MINH_SEAT, SCOOT, KIT } from "./story";
+import { sheetFront, sheetBack, gleamBand, wallpaper, calendar, tvNews, lotBoard, kbSign, promoHeader, report, toyBox, SHW, SHH } from "./art2";
+import { HOUSE, AUC, STORE, PRESS, V3, obj, ORIGIN, H, AU, STO, PR, SHEET, CEIL, LOFT } from "./story";
 
 // ---------------- painted textures ----------------
 const U = (r: () => number, a: number, b: number) => a + (b - a) * r();
@@ -244,276 +244,282 @@ const mesh = (g: THREE.BufferGeometry, m: THREE.Material | THREE.Material[], par
 const local = (set: keyof typeof ORIGIN, id: string) => { const o = obj(set, id), g = ORIGIN[set]; return { p: [o.p[0] - g[0], o.p[1] - g[1], o.p[2] - g[2]] as V3, s: o.s }; };
 
 type Canvas = { tex: THREE.CanvasTexture; g: CanvasRenderingContext2D; key: string };
-/** a booster display box: origin at the centre of its base; lid hinged at the back top edge; shrink-wrap shell */
-export type BoxRig = { g: THREE.Group; lid: THREE.Group; wrap: THREE.Mesh; wrapFront: Canvas; key: string; body: THREE.Mesh; mats: THREE.Material[][] };
+const ceiling = (parent: THREE.Object3D, x0: number, x1: number, z0: number, z1: number, y: number, col: string) => {
+  const c = new THREE.Mesh(new THREE.PlaneGeometry(x1 - x0, z1 - z0), lam("tt" + col, () => ({ color: col }))); c.rotation.x = Math.PI / 2;
+  c.position.set((x0 + x1) / 2, y, (z0 + z1) / 2); c.castShadow = false; c.receiveShadow = false; parent.add(c); return c;
+};
+
+// ---------------- the sheet rig ----------------
+/** one uncut sheet: a 72 x 102 cm mesh (x across, z down the sheet, top row at -z, front face +y) that rolls up from its
+ *  bottom edge into a tube (front inside, the back outside), curls at its bottom end, and folds at its top-left corner */
+export type SheetRig = { g: THREE.Group; geo: THREE.BufferGeometry; base: Float32Array; front: THREE.Mesh; back: THREE.Mesh; gleam: THREE.Mesh; gtex: THREE.Texture;
+  band: THREE.Mesh; mats: { front: THREE.MeshLambertMaterial; back: THREE.MeshLambertMaterial }; key: string };
+export type SheetPose = { a: number; curl?: number; fold?: number; wreck?: boolean; gleam?: number; band?: boolean; dust?: number };
+export const SL = 1.02, SW = 0.72, R0 = SHEET.tube_r;
+let TEX: Record<string, THREE.Texture> | null = null;
+const sheetTex = () => {
+  if (TEX) return TEX;
+  const mk = (key: string, draw: (g: CanvasRenderingContext2D) => void) => { const t = ctex(key, SHW, SHH, (g) => draw(g)); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t; };
+  TEX = { front: mk("sheetF", (g) => sheetFront(g, false)), frontW: mk("sheetFW", (g) => sheetFront(g, true)), back: mk("sheetB", (g) => sheetBack(g, false)), backW: mk("sheetBW", (g) => sheetBack(g, true)) };
+  return TEX;
+};
+const makeSheet = (parent: THREE.Object3D): SheetRig => {
+  const T = sheetTex(), g = new THREE.Group(); parent.add(g);
+  const geo = new THREE.PlaneGeometry(SW, SL, 24, 72); geo.rotateX(-Math.PI / 2);
+  const pos = geo.attributes.position as THREE.BufferAttribute, base = new Float32Array(pos.count * 2);
+  for (let i = 0; i < pos.count; i++) { base[2 * i] = pos.getX(i); base[2 * i + 1] = pos.getZ(i); }
+  const front = new THREE.MeshLambertMaterial({ map: T.front, alphaTest: 0.5, side: THREE.FrontSide });
+  const back = new THREE.MeshLambertMaterial({ map: T.back, alphaTest: 0.5, side: THREE.BackSide });
+  const fm = new THREE.Mesh(geo, front), bm = new THREE.Mesh(geo, back); g.add(fm, bm);
+  const gtex = ctex("gleamBand", 512, 64, (gg) => gleamBand(gg)).clone(); gtex.wrapS = gtex.wrapT = THREE.ClampToEdgeWrapping; gtex.center.set(0.5, 0.5); gtex.rotation = 0.55; gtex.needsUpdate = true;
+  const gm = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ map: gtex, blending: THREE.AdditiveBlending, transparent: true, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -4, toneMapped: false }));
+  gm.layers.set(NOINK); gm.renderOrder = 3; gm.visible = false; g.add(gm);
+  const band = new THREE.Mesh(new THREE.TorusGeometry(R0 + 0.002, 0.0035, 6, 28), lam("band", () => ({ color: "#c0453a" }))); band.rotation.y = Math.PI / 2; g.add(band);
+  for (const m of [fm, bm]) { m.castShadow = true; m.receiveShadow = true; }
+  return { g, geo, base, front: fm, back: bm, gleam: gm, gtex, band, mats: { front, back }, key: "" };
+};
+/** pose a sheet: a = unrolled length (0 = a tube lying at the top edge, SL = flat), curl 0..1 at the bottom end, fold (rad) of the
+ *  top-left corner; the tube's centre is at z = a - SL/2, y = R0 */
+export const poseSheet = (r: SheetRig, o: SheetPose) => {
+  const T = sheetTex(), key = [o.a.toFixed(4), (o.curl ?? 0).toFixed(3), (o.fold ?? 0).toFixed(3)].join("|");
+  r.mats.front.map = o.wreck ? T.frontW : T.front; r.mats.back.map = o.wreck ? T.backW : T.back;
+  const d = o.dust ?? 0; r.mats.back.color.setRGB(1 - 0.35 * d, 1 - 0.37 * d, 1 - 0.42 * d); r.mats.front.color.setRGB(1 - 0.2 * d, 1 - 0.2 * d, 1 - 0.22 * d);
+  r.band.visible = !!o.band; r.band.position.set(0, R0, o.a - SL / 2);
+  const gl = o.gleam ?? -1; r.gleam.visible = gl > 0 && gl < 1; if (r.gleam.visible) { r.gtex.offset.x = 0.75 - 1.5 * gl; }
+  if (key === r.key) return; r.key = key;
+  const P = r.geo.attributes.position as THREE.BufferAttribute, a = Math.max(0, Math.min(SL, o.a)), c = o.curl ?? 0, fold = o.fold ?? 0;
+  const zr = a - SL / 2, rc = 0.07 / Math.max(c, 1e-3), s0 = SL - 0.22, D = 0.2, k = Math.SQRT1_2;
+  for (let i = 0; i < P.count; i++) {
+    const x = r.base[2 * i], z = r.base[2 * i + 1], s = z + SL / 2;
+    let Y = 0, Z = z, X = x;
+    if (s > a) { // wound on the tube: radius shrinks 4 mm a turn so the turns never touch
+      const th = (s - a) / R0, rr2 = R0 - 0.004 * (th / (2 * Math.PI)); Z = zr + rr2 * Math.sin(th); Y = R0 - rr2 * Math.cos(th);
+    } else if (a >= SL - 1e-4 && s > s0 && c > 0) { const th = (s - s0) / rc; Z = s0 - SL / 2 + rc * Math.sin(th); Y = rc * (1 - Math.cos(th)); }
+    if (fold && s <= a) { const u = x + SW / 2 + (z + SL / 2); if (u < D) { const w = (D - u) * k; X = x + w * k - w * Math.cos(fold) * k; Z = Z + w * k - w * Math.cos(fold) * k; Y += w * Math.sin(fold); } }
+    P.setXYZ(i, X, Y + 0.0015, Z);
+  }
+  P.needsUpdate = true; r.geo.computeVertexNormals(); r.geo.computeBoundingSphere();
+};
+
 export type Sets = {
   groups: Record<string, THREE.Group>;
-  board: Canvas; year: Canvas; door: THREE.Group;
-  hero: BoxRig; kitBox: BoxRig; cellar: BoxRig[];
-  crown: THREE.Group; chair: THREE.Group; yacht: THREE.Group; diamond: THREE.Group; watch: THREE.Group;
-  bottle: THREE.Group; bowl: THREE.Group; scooters: THREE.Group; yachts: THREE.Group[];
+  hero: SheetRig; easel: SheetRig; promo: SheetRig; press: SheetRig; press2: SheetRig;
+  door: THREE.Group; cord: THREE.Mesh; fanBlade: THREE.Group; tin: THREE.Group; ladder: THREE.Group;
+  cal: Canvas; tv: Canvas; board: Canvas; report: Canvas; dust: THREE.Mesh; dustClean: THREE.Mesh;
+  blade: THREE.Group; rollers: THREE.Mesh[]; strip: THREE.Mesh; lampOn: THREE.Mesh; flashes: THREE.Mesh[]; web: THREE.Group; toy: THREE.Group;
 };
-export const STAGE_Y = 0.3, TABLE_Y = 1.08, PLINTH_Y = 1.3;
-/** cellar rack: box cubby c (0..2), r (0..5) -> base centre (local); bottle cubby (0..3, 0..5) -> centre (local) */
-export const boxCubby = (i: number): V3 => { const c = i % 3, r = Math.floor(i / 3); return [0.25 + 0.4 * c, 0.12 + 0.37 * r, -2.62]; };
-export const bottleCubby = (c: number, r: number): V3 => [-1.3 + 0.3125 * (c + 0.5), 0.1 + 0.37 * r + 0.185, -2.6];
-export const PULLED = [1, 3]; // the bottle the sommelier pulls in S13 (col, row)
 
-const glassM = () => new THREE.MeshBasicMaterial({ color: "#d8eef8", transparent: true, opacity: 0.13, depthWrite: false, side: THREE.DoubleSide });
-
+const canvasOf = (w: number, h: number): Canvas => { const c = canvasMat(w, h); return c; };
 export const buildSets = (root: THREE.Object3D): Sets => {
   const groups: Record<string, THREE.Group> = {};
   const G = (name: string, o: V3) => { const g = new THREE.Group(); g.position.set(...o); root.add(g); groups[name] = g; return g; };
-  const plane = (w: number, h: number, m: THREE.Material, parent: THREE.Object3D, x: number, y: number, z: number, ry = 0) => { const o = mesh(new THREE.PlaneGeometry(w, h), m, parent, x, y, z); o.rotation.y = ry; return o; };
-  const lamC = (col: string) => lam("tt" + col, () => ({ color: col }));
-  const gold = C("#d4a83a"), oak = C("#8a5a34"), white = C("#f3f1ec"), velvet = C("#7a1f2a");
+  const white = C("#f3f1ec"), oak = C("#8a5a34"), dark = C("#2a2c33"), steel = C("#9aa3ad"), red = C("#d8322f");
+  const wallp = lam("wallp", () => ({ map: ctex("wallpaper", 512, 512, (g) => wallpaper(g)) }));
+  const carpetM = lam("carpetL", () => ({ map: ctex("carpetL", 256, 256, (g, r) => { g.fillStyle = "#8a7a9c"; g.fillRect(0, 0, 256, 256); for (let i = 0; i < 900; i++) { g.fillStyle = r() > 0.5 ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.08)"; g.fillRect(r() * 256, r() * 256, 3, 3); } }) }));
+  const boards = lam("boards", () => ({ map: planksHD() }));
+  const [hx0, hx1] = H.hatch_x, [hz0, hz1] = H.hatch_z;
 
-  // the booster display box (shared by the saleroom, the cellar and the kitchen)
-  const [BW, BH, BD] = BOXS;
-  const frontTex = ctex("boxFront", 400, 560, (g) => boxFront(new Pen(g))), sideTex = ctex("boxSide", 200, 560, (g) => boxSide(new Pen(g)));
-  const frontM = new THREE.MeshLambertMaterial({ map: frontTex }), sideM = new THREE.MeshLambertMaterial({ map: sideTex }), darkM = lamC("#1b1f3a");
-  const frontDim = new THREE.MeshLambertMaterial({ map: frontTex, color: "#7a7480" }), sideDim = new THREE.MeshLambertMaterial({ map: sideTex, color: "#7a7480" });
-  const wrapSideM = new THREE.MeshBasicMaterial({ color: "#ffffff", transparent: true, opacity: 0.12, depthWrite: false });
-  const makeBox = (parent: THREE.Object3D): BoxRig => {
-    const g = new THREE.Group(); parent.add(g);
-    const sealedMats = [sideM, sideM, darkM, darkM, frontM, sideM], openMats = [sideDim, sideDim, darkM, darkM, frontDim, sideDim];
-    const body = mesh(new THREE.BoxGeometry(BW, BH - 0.02, BD), sealedMats, g, 0, (BH - 0.02) / 2, 0);
-    const lid = new THREE.Group(); lid.position.set(0, BH - 0.02, -BD / 2); g.add(lid);
-    // the lid overhangs the body by a clear 6 mm: a 2 mm step drew its outline as flickering dashes
-    mesh(new THREE.BoxGeometry(BW + 0.012, 0.02, BD + 0.012), [sideM, sideM, sideM, darkM, sideM, sideM], lid, 0, 0.01, BD / 2);
-    const wf = canvasMat(256, 360); wf.tex.colorSpace = THREE.SRGBColorSpace;
-    const wfM = new THREE.MeshBasicMaterial({ map: wf.tex, transparent: true, depthWrite: false });
-    const ws = wrapSideM.clone();
-    const wrap = mesh(new THREE.BoxGeometry(BW + 0.018, BH + 0.008, BD + 0.018), [ws, ws, ws, ws, wfM, ws], g, 0, BH / 2, 0);
-    wrap.renderOrder = 4; wrap.layers.set(NOINK); // no ink on a shell 3 mm off the box: its outline flickers against the box's
-    return { g, lid, wrap, wrapFront: wf, key: "", body, mats: [sealedMats, openMats] };
-  };
-
-  // ===== SALEROOM =====
-  SETL = "saleroom";
-  const sale = G("saleroom", SALE);
+  // ===== LANDING =====
+  SETL = "landing";
+  const land = G("landing", HOUSE);
   let b = new Batch();
-  up(b, lam("carpet", () => ({ map: carpet() })), -6, 5.8, -6, 6, 0, 2);
-  const cream = lam("saleCream", () => ({ map: rep(stucco("sale", "#f1e6cc"), 1, 1) })), dado = C("#f7f3ea");
-  const wall = (x0: number, x1: number, z0: number, z1: number) => { box(b, dado, x0, 0, z0, x1, 1.0, z1); box(b, cream, x0, 1.0, z0, x1, 4.5, z1, 3); };
-  wall(-6, 5.8, -6.2, -6); wall(-6, 5.8, 6, 6.2); wall(-6.2, -6, -6, 6);
-  // the harbour wall (inner skin x 5.8-6.0) with three window openings (z c +-0.8, y 1.0-3.4)
-  const WIN = [-2.6, 1.4, 4.4], WH = [1.0, 3.4];
-  const holed = (x0: number, x1: number, m: THREE.Material, zA: number, zB: number, yTop: number) => {
-    let z = zA;
-    for (const c of WIN) { if (c - 0.8 > zA && c + 0.8 < zB) { box(b, m, x0, 0, z, x1, yTop, c - 0.8); box(b, m, x0, 0, c - 0.8, x1, WH[0], c + 0.8); box(b, m, x0, WH[1], c - 0.8, x1, yTop, c + 0.8); z = c + 0.8; } }
-    box(b, m, x0, 0, z, x1, yTop, zB);
-  };
-  holed(5.8, 6.0, cream, -6, 6, 4.5);
-  for (const c of WIN) { // white window frames and a cross muntin (clear of the camera's path through the S02/S03 window)
-    box(b, white, 5.78, WH[0] - 0.06, c - 0.86, 6.42, WH[0], c + 0.86); box(b, white, 5.78, WH[1], c - 0.86, 6.42, WH[1] + 0.06, c + 0.86);
-    box(b, white, 5.78, WH[0], c - 0.86, 6.42, WH[1], c - 0.8); box(b, white, 5.78, WH[0], c + 0.8, 6.42, WH[1], c + 0.86);
-    box(b, white, 6.18, WH[0], c - 0.012, 6.22, WH[1], c + 0.012); box(b, white, 6.18, 2.6 - 0.012, c - 0.8, 6.22, 2.6 + 0.012, c + 0.8);
-  }
-  for (const y of [1.0, 3.2]) { box(b, gold, -6, y - 0.03, -5.99, 5.8, y + 0.03, -5.96); box(b, gold, -5.99, y - 0.03, -6, -5.96, y + 0.03, 6); }
-  // stage, rostrum, lot table
-  box(b, oak, -4, 0, -6, 4, STAGE_Y - 0.03, -3.8); box(b, C("#a0703f"), -4.03, STAGE_Y - 0.03, -6, 4.03, STAGE_Y, -3.77);
-  const ro = local("saleroom", "rostrum");
-  box(b, C("#6e4428"), ro.p[0] - 0.45, STAGE_Y, ro.p[2] - 0.25, ro.p[0] + 0.45, 1.40, ro.p[2] + 0.25); box(b, C("#8a5a34"), ro.p[0] - 0.5, 1.40, ro.p[2] - 0.3, ro.p[0] + 0.5, 1.45, ro.p[2] + 0.3);
-  box(b, gold, ro.p[0] - 0.3, 0.9, ro.p[2] + 0.25, ro.p[0] + 0.3, 1.1, ro.p[2] + 0.26);
-  cyl(b, C("#c79b62"), ro.p[0] + 0.3, 1.45, ro.p[2], 0.07, 0.07, 0.03, 16);
-  const lt = local("saleroom", "lot_table");
-  box(b, velvet, lt.p[0] - 0.9, STAGE_Y, lt.p[2] - 0.25, lt.p[0] + 0.9, TABLE_Y - 0.02, lt.p[2] + 0.25); box(b, C("#8e2a36"), lt.p[0] - 0.92, TABLE_Y - 0.02, lt.p[2] - 0.27, lt.p[0] + 0.92, TABLE_Y, lt.p[2] + 0.27);
-  box(b, gold, lt.p[0] - 0.92, TABLE_Y - 0.12, lt.p[2] + 0.27, lt.p[0] + 0.92, TABLE_Y - 0.1, lt.p[2] + 0.275);
-  // vitrine plinth, slab stand
-  box(b, white, 1.15, STAGE_Y, -4.85, 1.65, PLINTH_Y, -4.35); box(b, gold, 1.13, PLINTH_Y - 0.03, -4.87, 1.67, PLINTH_Y, -4.33);
-  const pd = local("saleroom", "pedestal"); box(b, white, pd.p[0] - 0.1, STAGE_Y, pd.p[2] - 0.1, pd.p[0] + 0.1, 1.42, pd.p[2] + 0.1); box(b, velvet, pd.p[0] - 0.12, 1.42, pd.p[2] - 0.12, pd.p[0] + 0.12, 1.45, pd.p[2] + 0.12);
-  box(b, white, 2.22, STAGE_Y, -4.78, 2.58, PLINTH_Y, -4.42); box(b, C("#e9eef2"), 2.34, PLINTH_Y, -4.64, 2.46, PLINTH_Y + 0.03, -4.56);
-  // vitrine hood: brass edges + glass back/sides/top (the front is the door)
-  const vx0 = 1.24, vx1 = 1.56, vy0 = PLINTH_Y, vy1 = PLINTH_Y + 0.4, vz0 = -4.72, vz1 = -4.48, e = 0.008;
-  for (const [x, z] of [[vx0, vz0], [vx1, vz0], [vx0, vz1], [vx1, vz1]]) box(b, gold, x - e, vy0, z - e, x + e, vy1, z + e);
-  for (const y of [vy0, vy1]) { box(b, gold, vx0, y - e, vz0 - e, vx1, y + e, vz0 + e); box(b, gold, vx0, y - e, vz1 - e, vx1, y + e, vz1 + e); box(b, gold, vx0 - e, y - e, vz0, vx0 + e, y + e, vz1); box(b, gold, vx1 - e, y - e, vz0, vx1 + e, y + e, vz1); }
-  // gilt chairs (Minh's is its own object: it tips over)
-  const red = C("#b22a35");
-  const chairAt = (bb: Batch, x: number, z: number, dx = 0, dz = 0) => {
-    const X = x + dx, Z = z + dz;
-    box(bb, red, X - 0.22, 0.42, Z - 0.22, X + 0.22, 0.47, Z + 0.22);
-    for (const [ax, az] of [[-0.19, -0.19], [0.19, -0.19], [-0.19, 0.19], [0.19, 0.19]]) box(bb, gold, X + ax - 0.02, 0, Z + az - 0.02, X + ax + 0.02, 0.42, Z + az + 0.02);
-    box(bb, gold, X - 0.21, 0.47, Z + 0.18, X - 0.17, 0.95, Z + 0.22); box(bb, gold, X + 0.17, 0.47, Z + 0.18, X + 0.21, 0.95, Z + 0.22);
-    box(bb, red, X - 0.17, 0.58, Z + 0.19, X + 0.17, 0.9, Z + 0.215); box(bb, gold, X - 0.21, 0.9, Z + 0.18, X + 0.21, 0.95, Z + 0.22);
-  };
-  SEATS.forEach(([x, z], i) => { if (i !== MINH_SEAT) chairAt(b, x, z); });
-  // the 70-lot display table along the harbour wall, two tiers
-  box(b, C("#efe6d2"), 5.0, 0, -0.8, 5.7, 0.8, 5.6); box(b, C("#efe6d2"), 5.35, 0.8, -0.8, 5.7, 0.98, 5.6);
-  // chandeliers (gold ring + glowing bulbs)
-  for (const [x, z] of [[-1.5, -2.5], [-1.5, 2.0]]) { box(b, gold, x - 0.01, 3.7, z - 0.01, x + 0.01, 4.5, z + 0.01); cyl(b, gold, x, 3.65, z, 0.5, 0.5, 0.05, 24); }
-  b.build(sale);
-  const bulbM = new THREE.MeshBasicMaterial({ color: new THREE.Color(2.2, 1.9, 1.3) });
-  for (const [x, z] of [[-1.5, -2.5], [-1.5, 2.0]]) for (let i = 0; i < 8; i++) { const a = (i / 8) * Math.PI * 2; mesh(new THREE.SphereGeometry(0.05, 10, 8), bulbM, sale, x + 0.5 * Math.cos(a), 3.75, z + 0.5 * Math.sin(a)); }
-  // vitrine glass panes (back, sides, top) and the hinged front door
-  const gm = glassM();
-  plane(vx1 - vx0, 0.4, gm, sale, (vx0 + vx1) / 2, vy0 + 0.2, vz0); plane(vz1 - vz0, 0.4, gm, sale, vx0, vy0 + 0.2, (vz0 + vz1) / 2, Math.PI / 2); plane(vz1 - vz0, 0.4, gm, sale, vx1, vy0 + 0.2, (vz0 + vz1) / 2, Math.PI / 2);
-  const top = plane(vx1 - vx0, vz1 - vz0, gm, sale, (vx0 + vx1) / 2, vy1, (vz0 + vz1) / 2); top.rotation.x = -Math.PI / 2;
-  const door = new THREE.Group(); door.position.set(vx0, vy0, vz1); sale.add(door);
-  plane(vx1 - vx0, 0.4, gm, door, (vx1 - vx0) / 2, 0.2, 0.002);
-  mesh(new THREE.BoxGeometry(0.012, 0.4, 0.012), gold, door, vx1 - vx0, 0.2, 0.004); mesh(new THREE.SphereGeometry(0.01, 8, 6), gold, door, vx1 - vx0 - 0.02, 0.2, 0.012);
-  // the lot board
-  const board = canvasMat(1500, 800), bo = local("saleroom", "lot_board");
-  mesh(new THREE.PlaneGeometry(bo.s[0], bo.s[1]), new THREE.MeshBasicMaterial({ map: board.tex }), sale, ...bo.p);
-  // the 70-lot tag strips (front edges of the two tiers, facing -x)
-  const strip = (from: number, x: number, y: number) => { const t = ctex("tags" + from, 4096, 64, (g) => tagStrip(new Pen(g), from, 35)); plane(6.4, 0.06, new THREE.MeshBasicMaterial({ map: t }), sale, x, y, 2.4, -Math.PI / 2); };
-  strip(1, 4.995, 0.74); strip(36, 5.345, 0.94);
-  // watch tag (static) and the moving lots: yacht, diamond, watch
-  const yacht = new THREE.Group(); yacht.position.set(...local("saleroom", "yacht").p); yacht.position.y = TABLE_Y; sale.add(yacht);
-  const hull = new THREE.Shape(); hull.moveTo(-0.22, 0.06); hull.lineTo(0.2, 0.06); hull.lineTo(0.24, 0.12); hull.lineTo(-0.24, 0.12); hull.lineTo(-0.22, 0.06);
-  const hg = new THREE.ExtrudeGeometry(hull, { depth: 0.08, bevelEnabled: false }); hg.translate(0, 0, -0.04);
-  mesh(hg, lamC("#f6f4ee"), yacht); mesh(new THREE.BoxGeometry(0.46, 0.012, 0.082), lamC("#2f5fa8"), yacht, 0, 0.1, 0);
-  mesh(new THREE.BoxGeometry(0.16, 0.05, 0.06), lamC("#f6f4ee"), yacht, -0.02, 0.145, 0); mesh(new THREE.CylinderGeometry(0.004, 0.004, 0.22), lamC("#c9a06a"), yacht, 0.02, 0.28, 0);
-  for (const x of [-0.12, 0.12]) mesh(new THREE.BoxGeometry(0.02, 0.06, 0.08), gold, yacht, x, 0.03, 0);
-  const diamond = new THREE.Group(); diamond.position.set(...local("saleroom", "diamond").p); diamond.position.y = TABLE_Y; sale.add(diamond);
-  mesh(new THREE.BoxGeometry(0.13, 0.04, 0.13), lamC("#22305e"), diamond, 0, 0.02, 0);
-  const gem = mesh(new THREE.OctahedronGeometry(0.03), new THREE.MeshBasicMaterial({ color: new THREE.Color(1.6, 1.8, 2.0) }), diamond, 0, 0.075, 0); gem.scale.set(1, 1.2, 1);
-  const watch = new THREE.Group(); watch.position.set(...local("saleroom", "watch").p); watch.position.y = TABLE_Y; sale.add(watch);
-  mesh(new THREE.BoxGeometry(0.06, 0.09, 0.04), lamC("#1d1b22"), watch, 0, 0.045, 0);
-  const face = mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.012, 24), lamC("#d4a83a"), watch, 0, 0.1, 0.022); face.rotation.x = Math.PI / 2;
-  mesh(new THREE.CylinderGeometry(0.024, 0.024, 0.004, 24).rotateX(Math.PI / 2), lamC("#fbf7ec"), watch, 0, 0.1, 0.03);
-  const wtag = ctex("tagWatch", 300, 140, (g) => priceTag(new Pen(g), "€2,500,000")); plane(0.12, 0.056, new THREE.MeshBasicMaterial({ map: wtag, transparent: true, alphaTest: 0.5 }), watch, 0.08, 0.03, 0.03);
-  // the hero box, the crown, Minh's chair
-  const hero = makeBox(sale);
-  const crown = new THREE.Group(); sale.add(crown);
-  const cg = new THREE.CylinderGeometry(0.05, 0.045, 0.035, 24, 1, true); mesh(cg, new THREE.MeshLambertMaterial({ color: "#e0b23c", side: THREE.DoubleSide }), crown, 0, 0.0175, 0);
-  for (let i = 0; i < 5; i++) { const a = (i / 5) * Math.PI * 2; mesh(new THREE.ConeGeometry(0.012, 0.035, 8), lamC("#e0b23c"), crown, 0.05 * Math.cos(a), 0.05, 0.05 * Math.sin(a)); mesh(new THREE.SphereGeometry(0.007, 8, 6), lamC("#c2203a"), crown, 0.051 * Math.cos(a + 0.6), 0.016, 0.051 * Math.sin(a + 0.6)); }
-  mesh(new THREE.CylinderGeometry(0.075, 0.075, 0.02, 20), velvet, crown, 0, -0.01, 0);
-  const chair = new THREE.Group(); const ms = SEATS[MINH_SEAT]; chair.position.set(ms[0], 0, ms[1] + 0.22); sale.add(chair);
-  SETL = "chair"; const cb = new Batch(); chairAt(cb, 0, -0.22); cb.build(chair); SETL = "saleroom";
-  // ten scooters down the aisle (S10 on)
-  const scooters = new THREE.Group(); sale.add(scooters);
-  const sb = new Batch(), sred = C("#d8322f"), tyre = C("#26242b"), chrome = C("#c9ccd2");
-  for (const [x, z] of SCOOT) {
-    for (const dz of [-0.55, 0.5]) cyl(sb, tyre, x - 0.04, 0.2, z + dz, 0.2, 0.2, 0.08, 16, new THREE.Euler(0, 0, Math.PI / 2));
-    box(sb, sred, x - 0.14, 0.2, z - 0.45, x + 0.14, 0.32, z + 0.45); box(sb, sred, x - 0.17, 0.32, z + 0.05, x + 0.17, 0.66, z + 0.62);
-    box(sb, C("#1d1b22"), x - 0.15, 0.66, z + 0.1, x + 0.15, 0.72, z + 0.58); box(sb, sred, x - 0.16, 0.2, z - 0.62, x + 0.16, 0.92, z - 0.5);
-    box(sb, chrome, x - 0.02, 0.9, z - 0.6, x + 0.02, 1.12, z - 0.56); box(sb, chrome, x - 0.3, 1.1, z - 0.6, x + 0.3, 1.13, z - 0.56); box(sb, C("#fff3b0"), x - 0.06, 0.8, z - 0.63, x + 0.06, 0.88, z - 0.62);
-  }
-  sb.build(scooters);
+  up(b, carpetM, -1.3, 1.3, -3, 3, 0, 1);
+  const wall = (x0: number, x1: number, z0: number, z1: number, y1 = CEIL) => { box(b, white, x0, 0, z0, x1, 0.1, z1); box(b, wallp, x0, 0.1, z0, x1, y1, z1, 0.378); };
+  wall(-1.3, 1.3, -3.15, -3); wall(-1.3, 1.3, 3, 3.15); wall(1.3, 1.45, -3, 3);
+  // left wall with the doorway (z 1.2..2.0, 2.0 m high) into the living room
+  wall(-1.45, -1.3, -3, 1.2); wall(-1.45, -1.3, 2.0, 3); box(b, wallp, -1.45, 2.0, 1.2, -1.3, CEIL, 2.0, 0.378);
+  box(b, white, -1.47, 0, 1.14, -1.28, 2.06, 1.2); box(b, white, -1.47, 0, 2.0, -1.28, 2.06, 2.06); box(b, white, -1.47, 2.0, 1.2, -1.28, 2.06, 2.0);
+  // radiator on the right wall
+  box(b, C("#eef0f2"), 1.2, 0.2, -2.4, 1.29, 0.8, -1.4);
+  // ceiling: plaster around the hatch opening, the hatch lip
+  for (const [x0, x1, z0, z1] of [[-1.3, 1.3, -3, hz0], [-1.3, 1.3, hz1, 3], [-1.3, hx0, hz0, hz1], [hx1, 1.3, hz0, hz1]]) ceiling(land, x0, x1, z0, z1, CEIL, "#f2eee4");
+  box(b, white, hx0 - 0.04, CEIL - 0.03, hz0 - 0.04, hx0, LOFT, hz1 + 0.04); box(b, white, hx1, CEIL - 0.03, hz0 - 0.04, hx1 + 0.04, LOFT, hz1 + 0.04);
+  box(b, white, hx0, CEIL - 0.03, hz0 - 0.04, hx1, LOFT, hz0); box(b, white, hx0, CEIL - 0.03, hz1, hx1, LOFT, hz1 + 0.04);
+  // the bin bag and the KHO box
+  sph(b, C("#1d1b22"), H.bag[0], 0.26, H.bag[2], 0.27, 1.05); sph(b, C("#1d1b22"), H.bag[0] - 0.05, 0.5, H.bag[2] + 0.03, 0.14, 0.8);
+  box(b, lam("kho", () => ({ map: ctex("kho", 256, 256, (g) => { g.fillStyle = "#c99a62"; g.fillRect(0, 0, 256, 256); g.fillStyle = "#3a2a22"; g.font = "900 90px Arial"; g.textAlign = "center"; g.fillText("KHO", 128, 160); }) })), 0.75, 0, -2.85, 1.25, 0.45, -2.45);
+  // living room through the doorway: floor, walls, sofa, TV cabinet
+  up(b, lam("lvfloor", () => ({ map: planksHD() })), -5, -1.45, -0.5, 3, 0, 1.2);
+  box(b, C("#c7d8cf"), -5.15, 0, -0.5, -5, CEIL, 3); box(b, C("#c7d8cf"), -5, 0, -0.65, -1.45, CEIL, -0.5); box(b, C("#c7d8cf"), -5, 0, 3, -1.45, CEIL, 3.15);
+  ceiling(land, -5, -1.45, -0.5, 3, CEIL, "#f2eee4");
+  box(b, C("#7a5a3a"), -4.95, 0, 1.0, -4.6, 0.5, 2.2);
+  box(b, C("#4a6a8a"), -3.4, 0, -0.45, -2.6, 0.45, 0.85); box(b, C("#4a6a8a"), -3.4, 0.45, -0.45, -3.15, 0.85, 0.85);
+  b.build(land);
+  // the TV (screen canvas redrawn per frame)
+  const tv = canvasOf(600, 360); const tvM = new THREE.MeshBasicMaterial({ map: tv.tex });
+  { const t = new THREE.Group(); land.add(t); t.position.set(H.tv[0], H.tv[1], H.tv[2]); t.rotation.y = Math.PI / 2;
+    mesh(new THREE.BoxGeometry(1.06, 0.66, 0.05), C("#1d1b22"), t, 0, 0, -0.03); mesh(new THREE.PlaneGeometry(1.0, 0.6), tvM, t, 0, 0, 0.002); }
+  // the stepladder: two front legs, two back legs, four steps, a cap
+  const ladder = new THREE.Group(); land.add(ladder); ladder.position.set(H.ladder[0], 0, H.ladder[1]);
+  { const lb = new Batch(), wd = C("#b98e62"); SETL = "ladder";
+    for (const sx of [-0.22, 0.22]) { slab(lb, wd, sx, 0.625, -0.05, 0.04, 1.28, 0.03, 0, -0.42); slab(lb, wd, sx * 0.95, 0.6, -0.42, 0.035, 1.24, 0.03, 0, 0.36); }
+    for (let i = 0; i < 4; i++) { const y = 0.18 + i * 0.174, z = 0.2 - 0.53 * (y / 1.25); box(lb, wd, -0.24, y - 0.02, z - 0.14, 0.24, y, z + 0.0); }
+    box(lb, wd, -0.2, 1.22, -0.3, 0.2, 1.26, -0.12); lb.build(ladder); SETL = "landing"; }
+  // the hatch door: hinged along x = hx0 at the lip top; a pull cord hangs from its free edge
+  const door = new THREE.Group(); land.add(door); door.position.set(hx0, LOFT + 0.003, (hz0 + hz1) / 2);
+  mesh(new THREE.BoxGeometry(hx1 - hx0 + 0.06, 0.02, hz1 - hz0 + 0.06), [C("#b98e62"), C("#b98e62"), C("#b98e62"), white, C("#b98e62"), C("#b98e62")], door, (hx1 - hx0) / 2, 0.01, 0);
+  const cord = mesh(new THREE.CylinderGeometry(0.004, 0.004, 1, 6), C("#e9e2cf"), land, 0, 0, 0);
 
-  // ===== QUAY (outside the harbour wall) =====
-  const quay = G("quay", SALE);
+  // ===== LOFT =====
+  SETL = "loft";
+  const loft = G("loft", HOUSE);
   b = new Batch();
-  const fac = lam("facade", () => ({ map: rep(stucco("fac", "#f0dfba"), 1, 1) })), facD = C("#e6d1a6");
-  // outer skin x 6.0-6.4 with the three real openings; beyond the room it is solid, 13 m tall
-  holed(6.0, 6.4, fac, -16, 16, 13);
-  for (const y of [4.0, 8.4, 12.6]) box(b, facD, 6.4, y, -16.2, 6.7, y + 0.35, 16.2);
-  box(b, C("#7a5a4a"), 3, 12.95, -16.4, 6.8, 13.4, 16.4); box(b, fac, -14, 0, -16, 6.0, 13, -15.6); box(b, fac, -14, 0, 15.6, 6.0, 13, 16);
-  const glassD = C("#3d5f7a");
-  for (const z of [-13.4, -10.4, -7.4, 7.4, 10.4, 13.4]) box(b, glassD, 6.4, WH[0], z - 0.7, 6.42, WH[1], z + 0.7);
-  for (const y of [5.2, 9.4]) for (let z = -13.4; z <= 13.5; z += 3) { box(b, glassD, 6.4, y, z - 0.6, 6.42, y + 2.2, z + 0.6); box(b, white, 6.4, y - 0.08, z - 0.7, 6.47, y, z + 0.7); }
-  up(b, lam("quayStone", () => ({ map: rep(stoneHD(), 1, 1) })), 6.4, 16, -40, 40, 0, 3); box(b, C("#cfc3aa"), 15.7, -0.4, -40, 16.1, 0.08, 40);
-  for (const z of [-10, -3, 7]) palm(b, 8.2, 0, z, 6.5, z);
-  for (const [x, z, s] of [[-230, -60, 70], [-260, 40, 90], [-220, 150, 60], [-280, -180, 80]]) { const g = new THREE.SphereGeometry(s, 20, 12); g.scale(1, 0.6, 1); g.translate(x, 0, z); b.add(g, C("#7d9a7a")); }
-  b.build(quay);
-  const wmesh = mesh(new THREE.PlaneGeometry(800, 800), new THREE.MeshLambertMaterial({ map: rep(water(), 60, 60), color: "#4f8fc0" }), quay, 416, -0.4, 0); wmesh.rotation.x = -Math.PI / 2;
-  const letTex = ctex("lettering", 3000, 160, (g) => lettering(new Pen(g)));
-  plane(9.4, 0.5, new THREE.MeshBasicMaterial({ map: letTex, transparent: true, alphaTest: 0.3 }), quay, 6.72, 4.75, 0, Math.PI / 2);
-  const yachts = [[18.6, -9, 12], [21.5, -1, 14], [18.8, 7, 10], [22, 14, 12]].map(([x, z, L]) => {
-    const g = new THREE.Group(); g.position.set(x, -0.4, z); quay.add(g);
-    const s = new THREE.Shape(); s.moveTo(-L / 2, 0); s.lineTo(L / 2 - 1.2, 0); s.lineTo(L / 2, 1.4); s.lineTo(-L / 2, 1.4); s.lineTo(-L / 2, 0);
-    const geo = new THREE.ExtrudeGeometry(s, { depth: 3, bevelEnabled: false }); geo.translate(0, 0, -1.5); geo.rotateY(Math.PI / 2);
-    mesh(geo, lamC("#f6f4ee"), g); mesh(new THREE.BoxGeometry(3.04, 0.25, L * 0.92).translate(0, 1.05, 0.3), lamC("#2f5fa8"), g);
-    mesh(new THREE.BoxGeometry(2.4, 1.2, L * 0.4), lamC("#f6f4ee"), g, 0, 2.0, -L * 0.05); mesh(new THREE.BoxGeometry(2.42, 0.4, L * 0.38), lamC("#3d5f7a"), g, 0, 2.2, -L * 0.05);
-    mesh(new THREE.CylinderGeometry(0.06, 0.08, L * 0.8), lamC("#e9e4d8"), g, 0, 1.4 + L * 0.4, L * 0.08);
-    return g;
+  for (const [x0, x1, z0, z1] of [[-2.6, 2.6, -3.6, hz0], [-2.6, 2.6, hz1, 2.4], [-2.6, hx0, hz0, hz1], [hx1, 2.6, hz0, hz1]]) box(b, boards, x0, CEIL + 0.012, z0, x1, LOFT, z1, 1.2);
+  // roof: two slopes of felt between rafters, the ridge, gables
+  const RID = 4.4, KN = LOFT + 0.28, felt = lam("felt", () => ({ color: "#5a4a44", side: THREE.DoubleSide })), raf = C("#a8784a");
+  const slope = Math.atan2(RID - KN, 2.6), sl = Math.hypot(2.6, RID - KN);
+  for (const sd of [-1, 1]) {
+    slab(b, felt, sd * 1.3, (RID + KN) / 2 + 0.04, -0.6, sl + 0.05, 0.02, 6.0, sd * -slope);
+    for (let z = -3.5; z <= 2.3; z += 0.45) slab(b, raf, sd * 1.3, (RID + KN) / 2 - 0.03, z, sl, 0.1, 0.05, sd * -slope);
+    box(b, C("#6e5a4a"), sd > 0 ? 2.55 : -2.65, LOFT, -3.6, sd > 0 ? 2.65 : -2.55, KN, 2.4);
+  }
+  box(b, raf, -0.06, RID - 0.1, -3.6, 0.06, RID + 0.02, 2.4);
+  const gable = C("#7a6a5a");
+  for (const z of [-3.66, 2.4]) for (let i = 0; i < 6; i++) { const y0 = LOFT + i * 0.32, y1 = y0 + 0.32, hw = 2.6 * (1 - Math.max(0, (y1 - KN) / (RID - KN))); if (y0 < RID) box(b, gable, -Math.max(0.05, hw), y0, z, Math.max(0.05, hw), Math.min(y1, RID), z + 0.06); }
+  // the post with the calendar and the scissors' nail
+  box(b, raf, H.post[0] - 0.045, LOFT, H.post[1] - 0.045, H.post[0] + 0.045, RID - 0.1, H.post[1] + 0.045);
+  // the lights box: open cardboard box with lights spilling
+  const L0 = H.lights, cb = lam("cbox", () => ({ map: ctex("cbox", 256, 256, (g, r) => { g.fillStyle = "#c99a62"; g.fillRect(0, 0, 256, 256); g.fillStyle = "rgba(90,60,30,0.2)"; for (let i = 0; i < 20; i++) g.fillRect(r() * 256, r() * 256, 40, 3); }) }));
+  box(b, cb, L0[0] - 0.19, LOFT, L0[2] - 0.14, L0[0] + 0.19, LOFT + 0.22, L0[2] + 0.14);
+  slab(b, cb, L0[0], LOFT + 0.25, L0[2] + 0.19, 0.38, 0.005, 0.12, 0, -0.9); slab(b, cb, L0[0] - 0.23, LOFT + 0.26, L0[2], 0.12, 0.005, 0.28, 0.9, 0);
+  for (let i = 0; i < 7; i++) sph(b, C(["#e2453c", "#5aa64a", "#2f6fc4", "#ffd23a"][i % 4]), L0[0] - 0.12 + i * 0.04, LOFT + 0.225 + 0.01 * Math.sin(i), L0[2] + 0.02 * Math.cos(i * 2), 0.012, 1.4);
+  // the empty frame leaning on the box
+  { const F = H.frame, gm = C("#c9a24a"), lean = -0.18; for (const [dx, dy, w, h] of [[0, 0.02, 0.36, 0.04], [0, 0.28, 0.36, 0.04], [-0.16, 0.15, 0.04, 0.3], [0.16, 0.15, 0.04, 0.3]]) slab(b, gm, F[0] + dx, F[1] + dy * Math.cos(lean), F[2] + 0.06 - dy * Math.sin(-lean), w, h, 0.025, 0, lean); }
+  // suitcase, lampshade
+  box(b, C("#7a3a2a"), -1.15, LOFT, -2.6, -0.55, LOFT + 0.42, -2.4); box(b, C("#c9a24a"), -0.9, LOFT + 0.42, -2.52, -0.8, LOFT + 0.47, -2.48);
+  cyl(b, C("#e8dcc0"), 1.0, LOFT, -2.4, 0.2, 0.12, 0.28, 16);
+  // the fan: base, pole, motor, cage rings and bars, hub
+  { const F = H.fan, gr = C("#d9dde0"), dk = C("#5b6170"), cy0 = H.fan_cage[1];
+    cyl(b, dk, F[0], LOFT, F[2], 0.16, 0.14, 0.04, 20); cyl(b, gr, F[0], LOFT + 0.04, F[2], 0.016, 0.016, cy0 - LOFT - 0.1, 10);
+    cyl(b, dk, F[0], cy0 - 0.08, F[2] - 0.06, 0.07, 0.07, 0.14, 14, new THREE.Euler(Math.PI / 2, 0, 0));
+    const ring = (rad: number, z: number) => { const t = new THREE.TorusGeometry(rad, 0.005, 6, 36); b.add(t, gr, new THREE.Matrix4().makeTranslation(F[0], cy0, F[2] + z)); };
+    ring(0.2, 0.05); ring(0.2, -0.05); ring(0.08, 0.075);
+    for (let i = 0; i < 16; i++) { if (i === 3) continue; const a = (i / 16) * Math.PI * 2, ca = Math.cos(a), sa = Math.sin(a); slab(b, gr, F[0] + ca * 0.14, cy0 + sa * 0.14, F[2] + 0.06, 0.004, 0.13, 0.004, a - Math.PI / 2, 0); }
+    for (let i = 0; i < 2; i++) { const a = 0.6 + i * 2.1; slab(b, C("#c9d6e2"), F[0] + Math.cos(a) * 0.09, cy0 + Math.sin(a) * 0.09, F[2], 0.15, 0.06, 0.006, a, 0.3); }
+    sph(b, dk, F[0], cy0, F[2] + 0.01, 0.03, 0.6); }
+  // the gable window and its glow
+  box(b, raf, 0.08, 3.28, -3.6, 0.62, 3.32, -3.54); box(b, raf, 0.08, 3.68, -3.6, 0.62, 3.72, -3.54);
+  b.build(loft);
+  mesh(new THREE.PlaneGeometry(0.5, 0.36), new THREE.MeshBasicMaterial({ color: new THREE.Color(1.3, 1.45, 1.7) }), loft, 0.35, 3.5, -3.595);
+  ceiling(loft, -2.6, 2.6, -3.6, 2.4, RID + 0.06, "#3a302c");
+  // the loose blade (pendulum on the hub pin, drops in S20)
+  const fanBlade = new THREE.Group(); loft.add(fanBlade); fanBlade.position.set(H.fan[0], H.fan_cage[1], H.fan[2] + 0.02);
+  mesh(new THREE.BoxGeometry(0.06, 0.16, 0.006), C("#c9d6e2"), fanBlade, 0, -0.1, 0);
+  // the calendar (canvas: the year flips)
+  const cal = canvasOf(260, 360); mesh(new THREE.PlaneGeometry(0.26, 0.36), new THREE.MeshLambertMaterial({ map: cal.tex, transparent: true, alphaTest: 0.3 }), loft, H.calendar[0], H.calendar[1], H.post[1] + 0.047);
+  // the rusty scissors on their nail (open blades)
+  { const sc = new THREE.Group(); loft.add(sc); sc.position.set(H.scissors[0], H.scissors[1], H.post[1] + 0.05);
+    const rust = C("#8a4a2a"); for (const sd of [-1, 1]) { mesh(new THREE.BoxGeometry(0.012, 0.12, 0.004), rust, sc, sd * 0.02, -0.06, 0).rotation.z = sd * 0.25; mesh(new THREE.TorusGeometry(0.018, 0.004, 6, 14), rust, sc, sd * 0.03, 0.02, 0); } }
+  // dust on the boards (opacity grows), and the clean stripe left by the tube
+  const dustTex = (stripe: boolean) => ctex("loftDust" + stripe, 512, 512, (g, r) => {
+    for (let i = 0; i < 2600; i++) { g.fillStyle = `rgba(214,206,190,${0.15 + 0.3 * r()})`; g.fillRect(r() * 512, r() * 512, 2 + 4 * r(), 2 + 4 * r()); }
+    if (stripe) { const [x, y] = [(H.tube[0] + 1.0) / 2.0 * 512, (H.tube[2] + 2.6) / 2.0 * 512]; g.clearRect(x - 92, y - 9, 184, 18); }
   });
+  const dustP = (stripe: boolean) => { const m = mesh(new THREE.PlaneGeometry(2.0, 2.0), new THREE.MeshBasicMaterial({ map: dustTex(stripe), transparent: true, depthWrite: false, opacity: 0, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -2 }), loft, 0, LOFT + 0.001, -1.6); m.rotation.x = -Math.PI / 2; m.layers.set(NOINK); return m; };
+  const dust = dustP(false), dustClean = dustP(true);
+  // the cobweb between the fan and the box (a flat web card in the world, grows)
+  const web = new THREE.Group(); loft.add(web); web.position.set(H.tube[0] + 0.12, LOFT + 0.12, H.tube[2] - 0.02);
 
-  // ===== CELLAR =====
-  SETL = "cellar";
-  const cel = G("cellar", CELLAR);
+  // ===== AUCTION HOUSE =====
+  SETL = "auction";
+  const auc = G("auction", AUC);
   b = new Batch();
-  const st = lam("cellarStone", () => ({ map: rep(stoneHD("cellarS", ["#a89a86", "#9d8f7b", "#b3a590", "#94877a"], "#6e6356"), 1, 1) }));
-  up(b, st, -3, 3, -2.8, 4.6, 0, 1.5);
-  box(b, st, -3, 0, -3.0, 3, 3, -2.8, 1.5); box(b, st, -3.2, 0, -2.8, -3, 3, 4.6, 1.5); box(b, st, 3, 0, -2.8, 3.2, 3, 4.6, 1.5); box(b, st, -3.2, 0, 4.6, 3.2, 3, 4.8, 1.5);
-  for (let z = -2.6; z < 4.6; z += 1.4) box(b, C("#4a3426"), -3, 2.85, z - 0.08, 3, 3.0, z + 0.08);
-  const rk = C("#6e4a30");
-  box(b, rk, -1.34, 0, -2.8, 1.34, 0.1, -2.4); box(b, rk, -1.34, 2.32, -2.8, 1.34, 2.38, -2.4);
-  for (let r = 1; r < 6; r++) box(b, rk, -1.3, 0.1 + 0.37 * r - 0.01, -2.8, 1.3, 0.1 + 0.37 * r + 0.01, -2.4);
-  for (let c = 0; c <= 4; c++) { const x = -1.3 + 0.3125 * c; box(b, rk, x - 0.015, 0.1, -2.8, x + 0.015, 2.32, -2.4); }
-  for (let c = 0; c <= 3; c++) { const x = 0.05 + 0.4 * c; box(b, rk, x - 0.015, 0.1, -2.8, x + 0.015, 2.32, -2.4); }
-  box(b, C("#2a1f1a"), -1.3, 0.1, -2.82, 1.3, 2.32, -2.8);
-  const bot = C("#1f4a2e"), foil = C("#7a1f2a");
-  for (let c = 0; c < 4; c++) for (let r = 0; r < 6; r++) {
-    if (c === PULLED[0] && r === PULLED[1]) continue;
-    const [x, y] = bottleCubby(c, r);
-    for (const dx of [-0.075, 0.075]) for (const dy of [-0.06, 0.07]) {
-      cyl(b, bot, x + dx, y + dy, -2.78, 0.045, 0.045, 0.24, 12, new THREE.Euler(Math.PI / 2, 0, 0));
-      cyl(b, bot, x + dx, y + dy, -2.54, 0.016, 0.016, 0.1, 8, new THREE.Euler(Math.PI / 2, 0, 0)); cyl(b, foil, x + dx, y + dy, -2.45, 0.018, 0.018, 0.03, 8, new THREE.Euler(Math.PI / 2, 0, 0));
-    }
-  }
-  cyl(b, C("#7a5230"), -0.55, 0, -1.8, 0.28, 0.3, 0.95, 18); for (const y of [0.15, 0.8]) cyl(b, C("#3a3540"), -0.55, y, -1.8, 0.305, 0.305, 0.04, 18);
-  for (const x of [-2.6, 2.6]) { box(b, C("#2a2420"), x - 0.08, 1.8, -2.78, x + 0.08, 2.1, -2.7); }
-  b.build(cel);
-  for (const x of [-2.6, 2.6]) mesh(new THREE.SphereGeometry(0.06, 10, 8), new THREE.MeshBasicMaterial({ color: new THREE.Color(2.4, 1.6, 0.7) }), cel, x, 2.0, -2.66);
-  // the pulled bottle's 4 slots: 3 stay, the front-left one is the one he takes (its own object)
-  const bottle = new THREE.Group(); cel.add(bottle);
-  { const [x, y] = bottleCubby(PULLED[0], PULLED[1]); const bb = new Batch();
-    for (const dx of [-0.075, 0.075]) for (const dy of [-0.06, 0.07]) { if (dx < 0 && dy > 0) continue; cyl(bb, bot, x + dx, y + dy, -2.78, 0.045, 0.045, 0.24, 12, new THREE.Euler(Math.PI / 2, 0, 0)); cyl(bb, bot, x + dx, y + dy, -2.54, 0.016, 0.016, 0.1, 8, new THREE.Euler(Math.PI / 2, 0, 0)); }
-    bb.build(cel);
-    mesh(new THREE.CylinderGeometry(0.045, 0.045, 0.24, 12).rotateX(Math.PI / 2), lamC("#1f4a2e"), bottle, 0, 0, -0.12);
-    mesh(new THREE.CylinderGeometry(0.016, 0.016, 0.1, 8).rotateX(Math.PI / 2), lamC("#1f4a2e"), bottle, 0, 0, 0.05);
-    bottle.position.set(x - 0.075, y + 0.07, -2.66);
-  }
-  const year = canvasMat(600, 200), yp = local("cellar", "year_plate");
-  mesh(new THREE.PlaneGeometry(yp.s[0], yp.s[1]), new THREE.MeshLambertMaterial({ map: year.tex }), cel, ...yp.p);
-  const cellar = Array.from({ length: 18 }, (_, i) => { const r = makeBox(cel); const p = boxCubby(i); r.g.position.set(p[0], p[1], p[2] + 0.12); r.g.scale.setScalar(0.8); return r; });
+  up(b, lam("aucfloor", () => ({ map: planksHD() })), -5, 5, -5, 4, 0, 1.4);
+  const sage = lam("sage", () => ({ map: rep(stucco("sage", "#b9c9b0"), 1, 1) }));
+  const wallA = (x0: number, x1: number, z0: number, z1: number) => { box(b, white, x0, 0, z0, x1, 0.12, z1); box(b, sage, x0, 0.12, z0, x1, 3.4, z1, 3); };
+  wallA(-5, 5, -5.15, -5); wallA(-5.15, -5, -5, 4); wallA(5, 5.15, -5, 4); wallA(-5, 5, 4, 4.15);
+  ceiling(auc, -5, 5, -5, 4, 3.4, "#f3f0e8");
+  // the counter: table, baize, lamp
+  { const [tx, tz] = AU.table, [tw, td] = AU.table_size, T = AU.top;
+    box(b, oak, tx - tw / 2, T - 0.05, tz - td / 2, tx + tw / 2, T - 0.01, tz + td / 2);
+    for (const [dx, dz] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) box(b, oak, tx + dx * (tw / 2 - 0.06) - 0.03, 0, tz + dz * (td / 2 - 0.06) - 0.03, tx + dx * (tw / 2 - 0.06) + 0.03, T - 0.05, tz + dz * (td / 2 - 0.06) + 0.03);
+    box(b, C("#2f6a4a"), tx - 0.6, T - 0.01, tz - 0.56, tx + 0.6, T + 0.002, tz + 0.56);
+    const lp = AU.lamp; cyl(b, dark, lp[0], T + 0.002, lp[2], 0.08, 0.08, 0.02, 16); cyl(b, dark, lp[0], T + 0.02, lp[2], 0.01, 0.01, 0.38, 8); }
+  const lampOn = mesh(new THREE.ConeGeometry(0.1, 0.12, 18, 1, true), new THREE.MeshBasicMaterial({ color: new THREE.Color(1.0, 0.85, 0.55), side: THREE.DoubleSide }), auc, AU.lamp[0] + 0.08, AU.top + 0.42, AU.lamp[2] + 0.05);
+  lampOn.rotation.z = 0.5;
+  // photo corner: easel, softboxes, tripod camera, rope, report stand
+  { const E = AU.easel; for (const sd of [-1, 1]) slab(b, oak, E[0] + sd * 0.32, 0.95, E[2] - 0.03, 0.04, 1.9, 0.04, sd * 0.06, 0); slab(b, oak, E[0], 0.92, E[2] - 0.35, 0.04, 1.9, 0.04, 0, -0.35);
+    box(b, oak, E[0] - 0.4, 0.8, E[2] - 0.02, E[0] + 0.4, 0.84, E[2] + 0.06);
+    for (const [sx, sz] of AU.soft) { cyl(b, dark, sx, 0, sz, 0.015, 0.015, 1.7, 8); }
+    const [px, pz] = AU.tripod; for (let i = 0; i < 3; i++) { const a = (i / 3) * Math.PI * 2; slab(b, dark, px + 0.12 * Math.cos(a), 0.55, pz + 0.12 * Math.sin(a), 0.02, 1.12, 0.02, 0.2 * Math.cos(a), -0.2 * Math.sin(a)); }
+    box(b, dark, px - 0.08, 1.1, pz - 0.06, px + 0.08, 1.2, pz + 0.06); cyl(b, C("#3a3f4a"), px, 1.15, pz - 0.06, 0.035, 0.035, 0.09, 14, new THREE.Euler(-Math.PI / 2, 0, 0));
+    for (const [rx, rz] of AU.rope) { cyl(b, C("#c9a24a"), rx, 0, rz, 0.12, 0.12, 0.03, 16); cyl(b, C("#c9a24a"), rx, 0.03, rz, 0.02, 0.02, 0.9, 10); sph(b, C("#c9a24a"), rx, 0.95, rz, 0.04); }
+    const [r0, r1] = AU.rope; for (let i = 0; i < 10; i++) { const u0 = i / 10, u1 = (i + 1) / 10, y0 = 0.9 - 0.18 * Math.sin(Math.PI * u0), y1 = 0.9 - 0.18 * Math.sin(Math.PI * u1); const a = V(r0[0] + (r1[0] - r0[0]) * u0, y0, r0[1]), c2 = V(r0[0] + (r1[0] - r0[0]) * u1, y1, r1[1]); const g2 = new THREE.CylinderGeometry(0.02, 0.02, a.distanceTo(c2), 8); g2.translate(0, a.distanceTo(c2) / 2, 0); b.add(g2, red, new THREE.Matrix4().compose(a, new THREE.Quaternion().setFromUnitVectors(V(0, 1, 0), c2.clone().sub(a).normalize()), V(1, 1, 1))); }
+    const R = AU.report; cyl(b, dark, R[0], 0, R[2], 0.012, 0.012, R[1] - 0.15, 8); }
+  const flashes = AU.soft.map(([sx, sz]) => { const m = mesh(new THREE.BoxGeometry(0.5, 0.6, 0.12), [C("#1d1b22"), C("#1d1b22"), C("#1d1b22"), C("#1d1b22"), new THREE.MeshBasicMaterial({ color: new THREE.Color(1.2, 1.2, 1.15) }), C("#1d1b22")], auc, sx, 1.9, sz); m.lookAt(AUC[0] + AU.easel[0], 1.4, AUC[2] + AU.easel[2]); return m; });
+  // saleroom: rostrum, chairs
+  { const [rx, rz] = AU.rostrum; box(b, C("#6e4428"), rx - 0.45, 0, rz - 0.25, rx + 0.45, 1.15, rz + 0.25); box(b, oak, rx - 0.5, 1.15, rz - 0.3, rx + 0.5, 1.2, rz + 0.3);
+    for (const [cx, cz] of AU.seats) { box(b, C("#7a4a2a"), cx - 0.21, 0.42, cz - 0.2, cx + 0.21, 0.46, cz + 0.2); for (const [dx, dz] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) box(b, C("#5a3a22"), cx + dx * 0.18 - 0.015, 0, cz + dz * 0.17 - 0.015, cx + dx * 0.18 + 0.015, 0.42, cz + dz * 0.17 + 0.015); box(b, C("#5a3a22"), cx - 0.21, 0.46, cz + 0.17, cx + 0.21, 0.92, cz + 0.2); } }
+  b.build(auc);
+  const board = canvasOf(880, 380); mesh(new THREE.PlaneGeometry(2.2, 0.95), new THREE.MeshLambertMaterial({ map: board.tex }), auc, AU.board[0], AU.board[1], -4.995);
+  const rep2 = canvasOf(300, 400); { const m = mesh(new THREE.PlaneGeometry(0.3, 0.4), new THREE.MeshLambertMaterial({ map: rep2.tex, alphaTest: 0.3 }), auc, AU.report[0], AU.report[1], AU.report[2]); m.rotation.x = -0.25; }
 
-  // ===== KITCHEN =====
-  SETL = "kitchen";
-  const kit = G("kitchen", KITCH);
+  // ===== STORE (1999) =====
+  SETL = "store";
+  const sto = G("store", STORE);
   b = new Batch();
-  up(b, lam("kTiles", () => ({ map: tiles() })), -2.2, 2.2, -2.5, 2.1, 0, 1);
-  const ktile = C("#7fb79a"), kwall = lam("kCream", () => ({ map: rep(stucco("kit", "#f3e7c4"), 1, 1) }));
-  const kw = (x0: number, x1: number, z0: number, z1: number, yb = 0) => { box(b, ktile, x0, yb, z0, x1, Math.max(yb, 1.2), z1); box(b, kwall, x0, Math.max(yb, 1.2), z0, x1, 2.7, z1, 2); };
-  // back wall with the window above the stove (x 0.9-1.7, y 1.3-2.1)
-  const [wx0, wx1] = [KIT.stove[0] - 0.4, KIT.stove[0] + 0.4];
-  box(b, ktile, -2.2, 0, -2.7, 2.2, 1.2, -2.5); box(b, kwall, -2.2, 1.2, -2.7, wx0, 2.7, -2.5); box(b, kwall, wx1, 1.2, -2.7, 2.2, 2.7, -2.5); box(b, kwall, wx0, 1.2, -2.7, wx1, 1.3, -2.5); box(b, kwall, wx0, 2.1, -2.7, wx1, 2.7, -2.5);
-  kw(-2.4, -2.2, -2.5, 2.1); kw(2.2, 2.4, -2.5, -0.9); kw(2.2, 2.4, 0.1, 2.1); box(b, kwall, 2.2, 2.1, -0.9, 2.4, 2.7, 0.1);
-  box(b, C("#7a4f33"), 2.18, 0, -0.95, 2.22, 2.12, -0.9); box(b, C("#7a4f33"), 2.18, 0, 0.1, 2.22, 2.12, 0.15); box(b, C("#7a4f33"), 2.18, 2.08, -0.95, 2.22, 2.14, 0.15);
-  box(b, C("#2a2a33"), 2.4, 0, -1.2, 3.4, 2.4, 0.4); // the dark hall beyond the door
-  const [tx, tz] = KIT.table, wood = C("#a0703f");
-  box(b, wood, tx - 0.55, 0.71, tz - 0.35, tx + 0.55, 0.75, tz + 0.35);
-  for (const [ax, az] of [[-0.5, -0.3], [0.5, -0.3], [-0.5, 0.3], [0.5, 0.3]]) box(b, C("#7a5230"), tx + ax - 0.025, 0, tz + az - 0.025, tx + ax + 0.025, 0.71, tz + az + 0.025);
-  cyl(b, C("#c23a32"), KIT.kid[0], 0, KIT.kid[1] + 0.05, 0.16, 0.16, 0.45, 14);
-  const [cx, cz] = KIT.cup, cupM = C("#5f9fb8");
-  box(b, cupM, cx - 0.4, 0, cz - 0.225, cx + 0.4, 1.75, cz + 0.225); box(b, C("#3d7a92"), cx - 0.002, 0.1, cz + 0.225, cx + 0.002, 1.65, cz + 0.23);
-  for (const sd of [-1, 1]) cyl(b, gold, cx + sd * 0.06, 0.95, cz + 0.24, 0.015, 0.015, 0.03, 8, new THREE.Euler(Math.PI / 2, 0, 0));
-  const [sx, sz] = KIT.stove;
-  box(b, white, sx - 0.5, 0, sz - 0.275, sx + 0.5, 0.88, sz + 0.275); box(b, C("#5a5a62"), sx - 0.5, 0.88, sz - 0.275, sx + 0.5, 0.9, sz + 0.275);
-  for (const dx of [-0.22, 0.22]) cyl(b, C("#1d1b22"), sx + dx, 0.9, sz, 0.1, 0.1, 0.02, 16);
-  cyl(b, C("#b9bec6"), sx + 0.22, 0.92, sz, 0.13, 0.13, 0.16, 18);
-  b.build(kit);
-  mesh(new THREE.PlaneGeometry(0.8, 0.8), new THREE.MeshBasicMaterial({ color: new THREE.Color(1.6, 1.4, 1.0) }), kit, KIT.stove[0], 1.7, -2.6);
-  // bowl, tin, coins (the tin's label is the one canvas)
-  const bowl = new THREE.Group(); kit.add(bowl);
-  const bg = new THREE.SphereGeometry(0.08, 18, 10, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2); mesh(bg, new THREE.MeshLambertMaterial({ color: "#f6f4ee", side: THREE.DoubleSide }), bowl, 0, 0.08, 0);
-  const soup = mesh(new THREE.CircleGeometry(0.07, 18), lamC("#e9b25a"), bowl, 0, 0.065, 0); soup.rotation.x = -Math.PI / 2;
-  const tin = mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.13, 18), [new THREE.MeshLambertMaterial({ map: ctex("tinLabel", 400, 160, (g) => tinLabel(new Pen(g))) }), lamC("#c9ccd2"), lamC("#c9ccd2")], kit, tx + 0.42, 0.81, tz + 0.12);
-  tin.rotation.set(0, 0.5, Math.PI / 2);
-  const coinM = new THREE.MeshLambertMaterial({ map: ctex("coin", 64, 64, (g) => coin(new Pen(g))) });
-  for (const [dx, dz] of [[0.25, 0.22], [0.2, 0.26], [0.3, 0.3], [0.15, 0.2], [0.33, 0.18]]) { const c = mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.003, 12), coinM, kit, tx + dx, 0.752, tz + dz); c.rotation.y = dx * 10; }
-  const kitBox = makeBox(kit);
+  up(b, lam("chequer", () => ({ map: ctex("chequer", 256, 256, (g) => { for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) { g.fillStyle = (i + j) % 2 ? "#f2efe6" : "#c94a3c"; g.fillRect(i * 64, j * 64, 64, 64); } }) })), -3, 3, -4, 2.5, 0, 1.2);
+  const yel = lam("storeWall", () => ({ map: rep(stucco("yel", "#f4d870"), 1, 1) }));
+  for (const [x0, x1, z0, z1] of [[-3, 3, -4.15, -4], [-3.15, -3, -4, 2.5], [3, 3.15, -4, 2.5], [-3, 3, 2.5, 2.65]]) box(b, yel, x0, 0, z0, x1, 3, z1, 3);
+  ceiling(sto, -3, 3, -4, 2.5, 3, "#f6f3ea");
+  for (const z of [-3.2, -1.6, 0.0]) { mesh(new THREE.BoxGeometry(1.6, 0.04, 0.12), new THREE.MeshBasicMaterial({ color: new THREE.Color(1.5, 1.5, 1.4) }), sto, 0, 2.97, z); }
+  // shelves of toy boxes
+  const boxMats = [0, 1, 2, 3, 4].map((k) => lam("toy" + k, () => ({ map: ctex("toy" + k, 256, 256, (g) => toyBox(g, k)) })));
+  for (let s = 0; s < 4; s++) { const y = 0.1 + s * 0.48; box(b, steel, -2.95, y - 0.03, -3.8, -2.55, y, 0.5);
+    for (let i = 0; i < 9; i++) { const z0 = -3.75 + i * 0.47, hgt = 0.22 + 0.16 * ((i * 7 + s * 3) % 4) / 3; if (s === 3 && i === 4) continue; box(b, boxMats[(i + s * 2) % 5], -2.92, y, z0, -2.6, y + hgt, z0 + 0.4); } }
+  box(b, steel, -2.97, 0, -3.82, -2.94, 2.0, 0.52);
+  // counter + till
+  { const [tx, tz] = STO.till; box(b, C("#2f6fc4"), tx - 0.7, 0, tz - 0.3, tx + 0.7, 1.0, tz + 0.3); box(b, dark, tx - 0.18, 1.0, tz - 0.15, tx + 0.18, 1.18, tz + 0.15); }
+  // promotion board
+  { const P = STO.board; box(b, C("#c99a62"), P[0] - 0.5, P[1] - 0.75, -4.0, P[0] + 0.5, P[1] + 0.75, -3.96); }
+  b.build(sto);
+  { const m = mesh(new THREE.PlaneGeometry(0.85, 0.15), new THREE.MeshLambertMaterial({ map: ctex("promoH", 700, 120, (g) => promoHeader(new Pen(g))), alphaTest: 0.3 }), sto, STO.board[0], STO.board[1] + 0.66, -3.955); void m; }
+  { const sg = new THREE.Group(); sto.add(sg); sg.position.set(...(STO.sign as V3));
+    mesh(new THREE.BoxGeometry(1.6, 0.4, 0.04), [white, white, white, white, new THREE.MeshLambertMaterial({ map: ctex("kbSign", 800, 200, (g) => kbSign(new Pen(g))) }), white], sg, 0, 0, 0);
+    for (const sd of [-0.7, 0.7]) mesh(new THREE.CylinderGeometry(0.004, 0.004, 0.25, 6), steel, sg, sd, 0.32, 0); }
 
-  for (const g of [sale, quay, cel, kit]) g.traverse((o) => { if ((o as THREE.Mesh).isMesh) { o.castShadow = true; o.receiveShadow = true; } });
-  // transparent glass and shrink-wrap draw no ink and cast no shadow (a shell 3 mm off a surface shadows and outlines itself
-  // unstably: it flickers); the brass edges and the box carry the outlines
-  for (const g of [sale, quay, cel, kit]) g.traverse((o) => { const m = o as THREE.Mesh; if (!m.isMesh) return; const ms = Array.isArray(m.material) ? m.material : [m.material]; if (ms.every((x) => x.transparent)) { m.layers.set(NOINK); m.castShadow = false; m.receiveShadow = false; } });
-  for (const [g, x0, x1, z0, z1, y, col] of [[sale, -6, 5.8, -6, 6, 4.48, "#f3ead6"], [kit, -2.2, 2.2, -2.5, 2.1, 2.68, "#efe4c6"], [cel, -3, 3, -2.8, 4.6, 2.84, "#3a2a22"]] as const) {
-    const c = new THREE.Mesh(new THREE.PlaneGeometry(x1 - x0, z1 - z0), lamC(col)); c.rotation.x = Math.PI / 2; c.position.set((x0 + x1) / 2, y, (z0 + z1) / 2); c.castShadow = false; c.receiveShadow = false; g.add(c);
-  }
-  void SALE; void NOINK; void untone; void V; void boxGeo; void quad; void tri; void jit; void brick; void grassHD; void planksHD; void roofHD; void beam;
+  // ===== PRESS (1999) =====
+  SETL = "press";
+  const pre = G("press", PRESS);
+  b = new Batch();
+  up(b, lam("pconc", () => ({ map: concrete("pconc", "#b9b6ad") })), -4, 4, -4, 3, 0, 2);
+  const pw = C("#9fb0bd");
+  for (const [x0, x1, z0, z1] of [[-4, 4, -4.15, -4], [-4.15, -4, -4, 3], [4, 4.15, -4, 3], [-4, 4, 3, 3.15]]) box(b, pw, x0, 0, z0, x1, 3.4, z1);
+  ceiling(pre, -4, 4, -4, 3, 3.4, "#dfe3e6");
+  { const [px, pz] = PR.press, pg = C("#5f7a72"); box(b, pg, px - 1.2, 0, pz - 0.6, px + 1.2, 1.3, pz + 0.6); box(b, C("#4a5f58"), px - 1.0, 1.3, pz - 0.5, px + 0.6, 1.75, pz + 0.5);
+    for (let i = 0; i < 3; i++) cyl(b, C("#f3f1ec"), px - 0.6 + i * 0.35, 1.0, pz + 0.6, 0.07, 0.07, 0.02, 16, new THREE.Euler(Math.PI / 2, 0, 0));
+    box(b, steel, px + 1.2, 0.95, pz - 0.5, px + 1.25, 1.04, pz + 0.5); }
+  { const B = PR.bed, [g0, g1] = PR.gantry; box(b, steel, B[0] - 0.55, 0, B[2] - 0.6, B[0] + 0.55, B[1] - 0.004, B[2] + 0.6);
+    for (const gx of [g0, g1]) box(b, C("#5b6170"), gx - 0.05, B[1], PR.blade_z - 0.06, gx + 0.05, 1.8, PR.blade_z + 0.04); box(b, C("#5b6170"), g0 - 0.05, 1.8, PR.blade_z - 0.06, g1 + 0.05, 1.9, PR.blade_z + 0.04);
+    const T = PR.tray; box(b, steel, T[0] - 0.5, T[1] - 0.06, T[2] - 0.2, T[0] + 0.5, T[1], T[2] + 0.2); box(b, steel, T[0] - 0.5, 0, T[2] - 0.03, T[0] - 0.46, T[1] - 0.06, T[2] + 0.03); box(b, steel, T[0] + 0.46, 0, T[2] - 0.03, T[0] + 0.5, T[1] - 0.06, T[2] + 0.03); }
+  b.build(pre);
+  mesh(new THREE.PlaneGeometry(1.4, 1.0), new THREE.MeshBasicMaterial({ color: new THREE.Color(1.4, 1.4, 1.5) }), pre, 0, 3.395, -1.5).rotation.x = Math.PI / 2;
+  const rollers = [1.02, 1.12].map((y) => { const m = mesh(new THREE.CylinderGeometry(0.05, 0.05, 1.0, 20), lam("roller", () => ({ map: ctex("roller", 64, 256, (g) => { g.fillStyle = "#c9ccd2"; g.fillRect(0, 0, 64, 256); g.fillStyle = "#8a909a"; for (let i = 0; i < 8; i++) g.fillRect(0, i * 32, 64, 6); }) })), pre, PR.rollers_x, y, PR.press[1]); m.rotation.x = Math.PI / 2; return m; });
+  const blade = new THREE.Group(); pre.add(blade); blade.position.set(PR.bed[0], 1.55, PR.blade_z);
+  mesh(new THREE.BoxGeometry(1.25, 0.15, 0.03), [steel, steel, steel, steel, C("#c9ccd2"), steel], blade, 0, 0.075, 0);
+  // the cut strip (row 10 of a pristine sheet) and its texture slice
+  const stripTex = sheetTex().front.clone(); stripTex.repeat.set(1, 1 / 11 * 0.94); stripTex.offset.set(0, (52 / 2040)); stripTex.needsUpdate = true;
+  const strip = mesh(new THREE.PlaneGeometry(SW - 0.027, 0.088), new THREE.MeshLambertMaterial({ map: stripTex }), pre, 0, 0, 0); strip.rotation.x = -Math.PI / 2;
+
+  const toy = new THREE.Group(); sto.add(toy); mesh(new THREE.BoxGeometry(0.3, 0.26, 0.38), boxMats[3], toy, 0, 0.13, 0);
+  // ===== the sheet rigs =====
+  const hero = makeSheet(root), easel = makeSheet(auc), promo = makeSheet(sto), press = makeSheet(pre), press2 = makeSheet(pre);
+  easel.g.position.set(AU.easel[0], AU.easel[1], -3.74); easel.g.rotation.x = Math.PI / 2;
+  promo.g.position.set(STO.sheet[0], STO.sheet[1], -3.935); promo.g.rotation.x = Math.PI / 2;
+  press.g.position.set(PR.sheet[0], PR.sheet[1], PR.sheet[2]);
+  press2.g.rotation.y = Math.PI / 2;
+  poseSheet(easel, { a: SL, wreck: true }); poseSheet(promo, { a: SL }); poseSheet(press, { a: SL }); poseSheet(press2, { a: SL });
+  // the paint tin
+  const tin = new THREE.Group(); land.add(tin);
+  mesh(new THREE.CylinderGeometry(0.09, 0.09, 0.12, 20), [C("#c9ccd2"), C("#e9e2cf"), C("#c9ccd2")], tin, 0, 0.06, 0);
+  mesh(new THREE.TorusGeometry(0.09, 0.003, 4, 20, Math.PI), C("#5b6170"), tin, 0, 0.12, 0);
+
+  // room shells cast no shadow (the walls behind the lens would put every interior in shade); the props and the sheets do
+  for (const g of Object.values(groups)) g.traverse((o) => { if ((o as THREE.Mesh).isMesh) { o.castShadow = false; o.receiveShadow = true; } });
+  for (const o of [ladder, tin, toy, fanBlade, door, hero.g, easel.g, promo.g, press.g, press2.g]) o.traverse((c) => { if ((c as THREE.Mesh).isMesh && !(c as THREE.Mesh).layers.isEnabled(NOINK)) c.castShadow = true; });
+  for (const g of Object.values(groups)) g.traverse((o) => { const m = o as THREE.Mesh; if (!m.isMesh) return; const ms = Array.isArray(m.material) ? m.material : [m.material]; if (ms.every((x) => x.transparent)) { m.layers.set(NOINK); m.castShadow = false; m.receiveShadow = false; } });
+  // ceilings cast no shadow (interiors stay lit by the sun through the open side)
   { const rep = coplanarReport(); console.warn(`[coplanar] ${rep.length} coplanar overlaps`); for (const l of rep.slice(0, 40)) console.warn(l); }
-  return { groups, board, year, door, hero, kitBox, cellar, crown, chair, yacht, diamond, watch, bottle, bowl, scooters, yachts };
-};
-/** redraw a box's wrap front for its state */
-export const drawWrap = (r: BoxRig, state: "sealed" | "torn", gleam = -1) => {
-  const key = state + (gleam > 0 && gleam < 1 ? Math.round(gleam * 24) : -1);
-  if (r.key === key) return; r.key = key;
-  const g = r.wrapFront.g; g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, 256, 360);
-  r.body.material = r.mats[state === "sealed" ? 0 : 1];
-  if (state === "sealed") wrapGloss(new Pen(g), gleam > 0 && gleam < 1 ? Math.round(gleam * 24) / 24 : -1); else wrapTorn(new Pen(g));
-  r.wrapFront.tex.needsUpdate = true;
-  (r.wrap.material as THREE.Material[]).forEach((m, i) => { if (i !== 4) (m as THREE.MeshBasicMaterial).visible = state === "sealed"; });
+  void untone; void quad; void tri; void jit; void brick; void grassHD; void roofHD; void beam; void water; void stoneHD; void calendar; void tvNews; void lotBoard; void report; void obj; void ORIGIN; void local;
+  return { groups, hero, easel, promo, press, press2, door, cord, fanBlade, tin, ladder, cal, tv, board, report: rep2, dust, dustClean, blade, rollers, strip, lampOn, flashes, web, toy };
 };

@@ -1,4 +1,4 @@
-// "Monaco auction" reel (Vietnamese voice, 75.5 s) in the flat-characters-in-a-3D-toon-world style of the cartoon
+// "Fossil sheet in the loft" reel (Vietnamese voice, 75.8 s) in the flat-characters-in-a-3D-toon-world style of the cartoon
 // short skill. Same post chain as the bridge short; the sound mix (score, SFX, meme sounds) plays from public/fossil/mix.wav.
 // One three.js world (world.ts) posed per frame from the story timeline (story.ts). Post chain (look-match pass):
 //   InkPass (world ink lines, own pass) -> lens blur pre + main (thin-lens DOF per shot from dofAt) ->
@@ -24,7 +24,7 @@ import { TCG_IMG, TCG_ALL, loadTcg } from "./art";
 import { InkPass, noInkFallback } from "../../engine/ink";
 import { LensBlur, GrainEffect } from "../../engine/lensblur";
 import { GradeEffect, GRADES, GRADE_STRENGTH, gradeFor } from "../../engine/grade";
-import { TOTAL, FLASH_AT, SHOTS, layersAt, dofAt, TITLES as PLAN_TITLES } from "./story";
+import { TOTAL, FLASH_AT, FLASHES, SHOTS, layersAt, dofAt, TITLES as PLAN_TITLES } from "./story";
 
 export const FOSSIL_FRAMES = TOTAL;
 
@@ -47,7 +47,8 @@ const fwd = new THREE.Vector3(), fpt = new THREE.Vector3();
 
 const Inner: React.FC<{ id: number }> = ({ id }) => {
   const f = useCurrentFrame();
-  const { camera, scene } = useThree();
+  const { camera, scene, gl } = useThree();
+  gl.localClippingEnabled = true; // the press sheet loses its last row at the chop (a clipping plane)
   const world = useMemo(() => new World(), []);
   const target = useMemo(() => new THREE.Vector3(), []);
   const on = useMemo(toggles, []);
@@ -153,7 +154,8 @@ export const FossilCaptions: React.FC = () => (
 export const PATCH_FRAMES: [number, number][] = [];
 export const FossilReel: React.FC = () => {
   const f = useCurrentFrame();
-  const flash = f >= FLASH_AT && f < FLASH_AT + 4 ? [1, 0.75, 0.45, 0.2][f - FLASH_AT] : 0;
+  const fl = FLASHES.find((x) => f >= x && f < x + 3);
+  const flash = f >= FLASH_AT && f < FLASH_AT + 4 ? [1, 0.75, 0.45, 0.2][f - FLASH_AT] : fl !== undefined ? [0.55, 0.3, 0.12][f - fl] : 0;
   const tcg = useTcg();
   if ((getInputProps() as { patch?: boolean }).patch && !PATCH_FRAMES.some(([a, b]) => f >= a && f <= b)) return <AbsoluteFill />;
   return (

@@ -67,9 +67,10 @@ export const CARD_IMG: { card2: HTMLImageElement | null } = { card2: null };
  *  the auction "A Decade of Masters 1999-2009"): Base Set, Jungle, Fossil, Neo Genesis, Legendary Collection, Skyridge.
  *  Loaded once before the world is built (Reel.tsx gates rendering on them), then drawn by tcard({ img }). */
 export const TCG = {
-  heroes: ["ds_rayquaza", "pika_poncho_ray"],
+  heroes: ["fs_aerodactyl", "fs_articuno", "fs_ditto", "fs_dragonite", "fs_gengar", "fs_haunter", "fs_hitmonlee", "fs_hypno",
+    "fs_kabutops", "fs_lapras", "fs_magneton", "fs_moltres", "fs_muk", "fs_raichu", "fs_zapdos"],
   press: [] as string[],
-  packs: ["ds_metagross_star", "ds_latias", "ds_mewtwo", "pika_rain", "zard_base", "blastoise", "venusaur"],
+  packs: [] as string[],
 };
 export const TCG_ALL = [...TCG.heroes, ...TCG.press, ...TCG.packs];
 export const TCG_IMG: Record<string, HTMLImageElement> = {};

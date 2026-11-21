@@ -1,16 +1,16 @@
-// The Monaco auction reel's cast and 2D effects as lit flat cards in the 3D sets (pool/actor/fx machinery from the bridge short).
+// The Fossil sheet reel's cast and 2D effects as lit flat cards in the 3D sets (pool/actor/fx machinery from the bridge short).
 // stage(id, f, cam) returns everything with a face or an effect for shot `id` at frame f: a pure function of f.
 import * as THREE from "three";
 import { Pen, bodyFront, bodySide, frontPts, fxBurst, fxPuff, fxSplash, fxShadow, fxContact, Outfit, FrontOpts, SideOpts, SKIN } from "../../engine/toon";
 import * as art from "./art";
 import {
-  FPS, SHOTS, V3, at, SALE, CELLAR, KITCH, clamp01, smooth, easeOut, pop, mark, obj, hop,
-  GAVEL1, WALK1, THUMP1, PADDLES4, LIFT5, CARRY5, PLACE5, DOOR5, CROWN5, SPOT5, LEAP7, CHAIR7, PUSH8, HUG8, SPOT9, GLEAM9,
-  WALK11, BOTTLE11, PULL13, POP13, POUR13, OPEN_ORDER, OPEN_AT, JAB16, REACH17, SNATCH17, WALK17, SHELF17, WALK18, BOW18, POINT18,
-  SEATS, MINH_SEAT, SCOOT, KIT, BOXS,
+  FPS, SHOTS, V3, at, HOUSE, AUC, STORE, PRESS, clamp01, smooth, easeOut, pop, mark, obj, hop, H, AU, STO, PR, DMG, LOFT, CEIL,
+  BAND1, SHOVE1, CORD1, SLAM1, DUST3, SPIDER3, CREAK3, POPS3, OPEN5, HEAD5, RISE6, PULL6, DUCK6, PUSH7, ROLLED7, TIN7, TINLAND7,
+  LIFT8, DROP8, WALL9, PEEL9, ROLLUP9, TOSS9, DASH10, YANK10, HUG10, PEEK11, FREEZE12, STACK13, UNROLL14, LAMP14, GLEAM14,
+  NEXT15, BLADEUP15, CHOP15, POINT16, TAP16, FLASHES, STAMP17, GAPE18, RAISE19, DOOR20, BLADE20, SQUINT20, dustAt,
 } from "./story";
 import * as art2 from "./art2";
-import { boxCubby, bottleCubby, PULLED, STAGE_Y, TABLE_Y, PLINTH_Y } from "./sets";
+import { SL, SW, R0 } from "./sets";
 import { NOINK } from "../../engine/ink";
 import { cardShade, blobMaterial, CARD_K } from "../../engine/cardshade";
 
@@ -106,7 +106,9 @@ export type CamInfo = { pos: THREE.Vector3; right: THREE.Vector3; fwd: THREE.Vec
  */
 export type PropK = { p: number[]; ry?: number; rx?: number; rz?: number; vis?: boolean };
 /** props: set-LOCAL positions of the moving set pieces (hero box, crown, chair, yacht, diamond, watch, kitchen box, bottle, bowl) */
-export type Stage = { places: Place[]; fx: FxPlace[]; props: Record<string, PropK> };
+/** the hero sheet this frame: group position + rotation (world), and its shape */
+export type SheetK = { p: V3; r?: [number, number, number]; q?: THREE.Quaternion; pose: { a: number; curl?: number; fold?: number; wreck?: boolean; gleam?: number; band?: boolean; dust?: number }; vis?: boolean };
+export type Stage = { places: Place[]; fx: FxPlace[]; props: Record<string, PropK>; sheet?: SheetK; cordEnd?: V3 };
 
 const hh = (i: number, s = 0) => { const v = Math.sin(i * 127.1 + s * 311.7) * 43758.5453; return v - Math.floor(v); };
 const q = (v: number, n = 120) => Math.round(v * n) / n;
@@ -132,23 +134,23 @@ const fkey = (o: object) => JSON.stringify(o, (_k, v) => (typeof v === "number" 
 
 // ---------------- the cast ----------------
 const C = {
-  auctioneer: { jacket: "#1d1b22", pants: "#1d1b22", boots: "#15131a", hat: "hair", hair: "#9a9aa2", tie: "#c23a32", skin: "#f2c4a4", build: "stout" } as Outfit,
-  porter: { jacket: "#f4f1ea", pants: "#1d1b22", boots: "#15131a", hat: "hair", hair: "#2a201a", tie: "#1d1b22", skin: "#e8b896", buttons: "#c9a24a" } as Outfit,
-  waiter: { jacket: "#7a2a3a", pants: "#26242b", boots: "#15131a", hat: "hair", hair: "#15131a", tie: "#1d1b22", skin: "#f5c9a0", buttons: "#f6f2e6" } as Outfit,
-  minh: { jacket: "#24407a", pants: "#24407a", boots: "#15131a", hat: "hair", hair: "#5a3b2a", moustache: "#4a3020", skin: "#e8b896", tie: "#c9a24a" } as Outfit,
-  kid: { jacket: "#3f7fc9", pants: "#3b3f52", boots: "#f4f1ea", hat: "cap", cap: "#e2453c", skin: "#e8b896", build: "kid" } as Outfit,
-  mom: { jacket: "#3f9a55", pants: "#3f9a55", boots: "#5a3b2a", hat: "hair", hair: "#2a201a", dress: "#3f9a55", skin: "#ecd0b6" } as Outfit,
-  momOld: { jacket: "#3f9a55", pants: "#3f9a55", boots: "#5a3b2a", hat: "hair", hair: "#d9d6d0", dress: "#3f9a55", skin: "#ecd0b6", glasses: true } as Outfit,
-  g0: { jacket: "#2a2c33", pants: "#2a2c33", boots: "#15131a", hat: "hair", hair: "#ecebe8", skin: "#f2c4a4", tie: "#7a1f2a", build: "stout" } as Outfit,
-  g1: { jacket: "#1f2b4a", pants: "#1f2b4a", boots: "#15131a", hat: "hair", hair: "#2a201a", skin: "#c99067", tie: "#3f7fc9" } as Outfit,
-  g2: { jacket: "#3a2f2a", pants: "#3a2f2a", boots: "#15131a", hat: "hair", hair: "#8a5a34", skin: "#f5c9a0", tie: "#c9a24a", glasses: true } as Outfit,
-  g4: { jacket: "#1d1b22", pants: "#1d1b22", boots: "#15131a", hat: "hair", hair: "#9a9aa2", skin: "#ecd0b6", tie: "#c23a32" } as Outfit,
-  g5: { jacket: "#2f3e5c", pants: "#2f3e5c", boots: "#15131a", hat: "hair", hair: "#e8c46a", skin: "#f5c9a0", tie: "#2f8a4c" } as Outfit,
-  g6: { jacket: "#3b3f52", pants: "#3b3f52", boots: "#15131a", hat: "hair", hair: "#15131a", skin: "#c99067", tie: "#e2453c", build: "stout" } as Outfit,
+  relative: { jacket: "#d8322f", pants: "#3b3f52", boots: "#2a2c33", hat: "cap", cap: "#d8322f", skin: "#f5c9a0", badge: "#f6f2e6", buttons: "#f6f2e6" } as Outfit,
+  owner: { jacket: "#a98fd0", pants: "#4a4f6a", boots: "#5a3b2a", hat: "hair", hair: "#3a2a20", glasses: true, skin: "#ecd0b6" } as Outfit,
+  partner: { jacket: "#3f9a6a", pants: "#3b5b9a", boots: "#2a2c33", hat: "hair", hair: "#2a201a", skin: "#e8b896" } as Outfit,
+  valuer: { jacket: "#8a6a4a", pants: "#5a4a3a", boots: "#3a2a22", hat: "hair", hair: "#c9c6c0", glasses: true, tie: "#c23a32", skin: "#f2c4a4", build: "stout" } as Outfit,
+  photog: { jacket: "#1d1b22", pants: "#1d1b22", boots: "#15131a", hat: "cap", cap: "#2a2c33", skin: "#c99067" } as Outfit,
+  auctioneer: { jacket: "#24407a", pants: "#24407a", boots: "#15131a", hat: "hair", hair: "#9a9aa2", tie: "#c23a32", skin: "#f2c4a4" } as Outfit,
+  kid1: { jacket: "#f08a2c", pants: "#3b5b9a", boots: "#f4f1ea", hat: "cap", cap: "#2f6fc4", skin: "#f5c9a0", build: "kid" } as Outfit,
+  kid2: { jacket: "#2f6fc4", pants: "#3b3f52", boots: "#f4f1ea", hat: "hair", hair: "#2a201a", skin: "#c99067", build: "kid" } as Outfit,
+  head1: { jacket: "#5a6a3a", pants: "#3b3f52", boots: "#2a2c33", hat: "cap", cap: "#8a5a34", skin: "#e8b896", moustache: "#4a3020" } as Outfit,
+  head2: { jacket: "#d8322f", pants: "#3b3f52", boots: "#2a2c33", hat: "hair", hair: "#15131a", skin: "#f5c9a0", shades: true } as Outfit,
+  head3: { jacket: "#3f7fc9", pants: "#3b3f52", boots: "#2a2c33", hat: "hair", hair: "#5a3b2a", skin: "#ecd0b6" } as Outfit,
+  bid1: { jacket: "#2a2c33", pants: "#2a2c33", boots: "#15131a", hat: "hair", hair: "#ecebe8", skin: "#f2c4a4", tie: "#7a1f2a" } as Outfit,
+  bid2: { jacket: "#7a4a2a", pants: "#3a2f2a", boots: "#15131a", hat: "hair", hair: "#8a5a34", skin: "#f5c9a0", glasses: true } as Outfit,
+  bid3: { jacket: "#3b5b9a", pants: "#3b3f52", boots: "#15131a", hat: "hair", hair: "#15131a", skin: "#c99067" } as Outfit,
 };
 type Who = keyof typeof C;
-const GENTS: Who[] = ["g0", "g1", "g2", "minh", "g4", "g5", "g6", "g1", "g5", "g0", "g2", "g4", "g4", "g6", "g0", "g2", "g5", "g1"];
-const IDX: Record<Who, number> = { auctioneer: 9, porter: 2, waiter: 6, minh: 3, kid: 4, mom: 5, momOld: 5, g0: 10, g1: 11, g2: 12, g4: 13, g5: 14, g6: 15 };
+const IDX: Record<Who, number> = { relative: 2, owner: 5, partner: 3, valuer: 9, photog: 6, auctioneer: 10, kid1: 4, kid2: 11, head1: 12, head2: 13, head3: 14, bid1: 15, bid2: 16, bid3: 17 };
 
 /** front-facing person at (x, y, z) */
 const front = (out: Stage, cam: CamInfo, who: Who, x: number, y: number, z: number, fo: FrontOpts, f: number, swaps: number[] = [], mirror = false) => {
@@ -258,285 +260,243 @@ const tcardFx = (out: Stage, key: string, p: V3, h: number, o: { bent?: number; 
   card(out, `tc|${key}|${q(o.bent ?? 0, 10)}|${!!o.holo}|${!!o.scuff}|${o.img ?? ""}`, 260, 360, (pp) => art.tcard(pp, (o.k ?? 0) as art.Kind, 10, 10, 250, 350, o), p[0], p[1], p[2], h * 0.72, h, { rot: o.rot ?? 0 });
 
 // ---------------- per-shot staging ----------------
-const Sa = (x: number, y: number, z: number) => at(SALE, x, y, z);
-const Ce = (x: number, y: number, z: number) => at(CELLAR, x, y, z);
-const Ki = (x: number, y: number, z: number) => at(KITCH, x, y, z);
-const toLocal = (o: V3, p: V3): number[] => [p[0] - o[0], p[1] - o[1], p[2] - o[2]];
-const [BW, BH] = BOXS;
-const SLAB_H = 0.3;
-const PLAN_OBJ = (id: string) => obj("saleroom", id).p;
-/** a graded slab with the real card in it: upright facing +z by default (face), or a billboard */
-const slabFx = (out: Stage, img: string, p: V3, o: { h?: number; bill?: boolean; gleam?: number; yaw?: number } = {}) => {
-  const h = o.h ?? SLAB_H, gl = o.gleam !== undefined && o.gleam > 0 && o.gleam < 1 ? q(o.gleam, 24) : -1;
-  card(out, `slab|${img}|${gl}`, 380, 600, (pp) => art.slabReal(pp, 380, 600, img, { gleam: gl }), p[0], p[1], p[2], h * 0.633, h, o.bill ? {} : { face: o.yaw ?? 0 });
+const Ho = (x: number, y: number, z: number) => at(HOUSE, x, y, z);
+const Au = (x: number, y: number, z: number) => at(AUC, x, y, z);
+const St = (x: number, y: number, z: number) => at(STORE, x, y, z);
+const v3a = (a: number[]): V3 => [a[0], a[1], a[2]];
+const lerpQ = (a: THREE.Quaternion, b: THREE.Quaternion, k: number) => a.clone().slerp(b, clamp01(k));
+const QI = new THREE.Quaternion(), QUP = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0, Math.PI / 2));
+/** wall orientation: sheet x -> world +z, normal -> world -x, down the sheet -> world -y */
+const QWALL = new THREE.Quaternion().setFromRotationMatrix(new THREE.Matrix4().makeBasis(new THREE.Vector3(0, 0, 1), new THREE.Vector3(-1, 0, 0), new THREE.Vector3(0, -1, 0)));
+/** the group position that puts a tube (a = 0) centre at P for a rotation q */
+const tubeAt = (P: V3, q: THREE.Quaternion, pose: SheetK["pose"]): SheetK => {
+  const o = new THREE.Vector3(0, R0, -SL / 2).applyQuaternion(q);
+  return { p: [P[0] - o.x, P[1] - o.y, P[2] - o.z], q, pose: { ...pose, a: 0 } };
 };
-const spot = (out: Stage, p: V3, h = 2.4) => card(out, "spot", 300, 600, (pp) => art.spotCone(pp), p[0], p[1], p[2], h * 0.45, h, { soft: true });
-const tagFx = (out: Stage, s: string, p: V3, w: number, rot = 0) => card(out, `ptag|${s}`, 300, 140, (pp) => art2.priceTag(pp, s), p[0], p[1], p[2], w, w * 0.467, { rot });
-const SEAT_CHAIR = 0.9; // seat 0.46 m in head-heights
-
-/** the auctioneer at the rostrum; the gavel strikes at GAVEL1 in the hook */
-const auctioneer = (out: Stage, cam: CamInfo, f: number, id: number) => {
-  const pa = mark("saleroom", "auctioneer", STAGE_Y);
-  let g = 1;
-  if (id === 1) { if (f < GAVEL1) g = 0; else if (f < GAVEL1 + 6) g = 1 - 0.3 * Math.sin((Math.PI * (f - GAVEL1)) / 6); }
-  const expr = id === 1 && f >= GAVEL1 && f < 120 ? "grin" : id === 4 && f > PADDLES4 ? "smile" : "stern";
-  front(out, cam, "auctioneer", ...pa, { mode: "stand", expr, facing: 1, look: 1, prop: ["gavel", q(g, 20)] }, f, [GAVEL1]);
-  if (id === 1) burst(out, f, GAVEL1, ...Sa(-1.7, 1.48, -4.6), 0.4, 7);
+/** a sheet-local point through a group transform */
+const sheetPt = (k: SheetK, x: number, y: number, z: number): V3 => { const v = new THREE.Vector3(x, y, z).applyQuaternion(k.q ?? QI); return [k.p[0] + v.x, k.p[1] + v.y, k.p[2] + v.z]; };
+const TUBE_REST: V3 = v3a(H.tube);
+const loftTube = (wreck: boolean, dust: number, band: boolean) => tubeAt(TUBE_REST, QI, { a: 0, wreck, dust, band });
+const web = (out: Stage, k: number, p: V3, s: number) => { if (k <= 0.02) return; const kk = q(k, 20); card(out, `web${kk}`, 400, 400, (pp) => art.cobweb(pp, kk), p[0], p[1], p[2], s, s, { face: 0, soft: true }); };
+const motes = (out: Stage, f: number, f0: number, n: number, seam: (i: number) => V3, life = 70) => {
+  const t = (f - f0) / FPS; if (t < 0 || f > f0 + life) return;
+  for (let i = 0; i < n; i++) { const s = seam(i), d = t * (0.6 + 0.5 * hh(i, 3)); const y = s[1] - (0.12 * d + 0.35 * d * d); if (y < 0.05) continue;
+    card(out, "mote", 64, 64, (pp) => art2.mote(pp), s[0] + 0.05 * Math.sin(t * 3 + i), y, s[2] + 0.04 * Math.cos(t * 2 + i), 0.035, 0.035, { soft: true }); }
 };
-/** the 70 small lots on the two tiers (real scans in mini slabs, facing the room = -x) */
-const LOT_IMGS = ["ds_metagross_star", "ds_latias", "ds_mewtwo", "pika_rain", "zard_base", "blastoise", "venusaur", "ds_latias", "ds_mewtwo", "ds_metagross_star"];
-const lots70 = (out: Stage) => {
-  for (let i = 0; i < 70; i++) {
-    const tier = i < 35 ? 0 : 1, j = i % 35, z = -0.8 + (j + 0.5) * (6.4 / 35);
-    const x = tier ? 5.5 : 5.15, y = (tier ? 0.98 : 0.8) + 0.075;
-    slabFx(out, LOT_IMGS[(i * 7) % LOT_IMGS.length], Sa(x, y, z), { h: 0.14, yaw: -Math.PI / 2 });
-  }
-};
-/** the seated gentlemen with their paddles (Minh's seat handled by the caller when he jumps up) */
-const gentlemen = (out: Stage, cam: CamInfo, f: number, id: number, skip = -1) => {
-  SEATS.forEach(([x, z], i) => {
-    if (i === skip) return;
-    const who = GENTS[i], P = Sa(x, 0, z), up = id === 4 ? smooth((f - PADDLES4 - (i % 3)) / 3) : 0;
-    const turn = id === 7 && Math.abs(i - MINH_SEAT) === 1 ? (i < MINH_SEAT ? 1 : -1) : 0;
-    const fo: FrontOpts = { mode: "sit", chair: SEAT_CHAIR, expr: id === 7 && turn ? "shock" : id === 4 && f > PADDLES4 + 10 && i % 5 === 1 ? "grin" : "stern", facing: turn as -1 | 0 | 1, look: turn, armOff: 1 };
-    front(out, cam, who, ...P, fo, f, id === 7 && turn ? [LEAP7 + 2] : []);
-    const S = shoulderAt(cam, who, P, fo, 1), lap = holdHand(cam, who, P, fo, 1, 0.1);
-    const hand: V3 = lerp3(lap, [S[0] + 0.05, S[1] + 0.42, S[2]], up);
-    const H = arm3d(out, cam, who, P, fo, 1, hand, f);
-    card(out, `paddle${(i * 13 + 7) % 90}`, 300, 480, (pp) => art.paddle(pp, (i * 13 + 7) % 90), H[0], H[1] + 0.06 + 0.04 * up, H[2] + 0.02, 0.14, 0.22);
-  });
-};
-/** where the hero box is (set-local), before/after the scenes that move it */
-const BOXT: V3 = [0.25, TABLE_Y, -4.55], VITB: V3 = [1.4, PLINTH_Y, -4.6], CROWN_PED: V3 = [0.9, 1.45, -4.62], CROWN_TOP: V3 = [1.4, PLINTH_Y + 0.4 + 0.012, -4.6];
+const hatchSeam = (i: number): V3 => { const u = hh(i, 1), side = i % 4, [x0, x1] = H.hatch_x, [z0, z1] = H.hatch_z;
+  return side === 0 ? [x0 + (x1 - x0) * u, CEIL - 0.01, z0] : side === 1 ? [x0 + (x1 - x0) * u, CEIL - 0.01, z1] : side === 2 ? [x0, CEIL - 0.01, z0 + (z1 - z0) * u] : [x1, CEIL - 0.01, z0 + (z1 - z0) * u]; };
+/** a head popping up through the hatch: feet y from below the boards to just high enough for the head and shoulders */
+const popY = (f: number, f0: number, len = 12) => { const u = f - f0; if (u < 0 || u > len) return -1; return 0.85 + 0.6 * (u < 4 ? smooth(u / 4) : u < len - 3 ? 1 : 1 - smooth((u - len + 3) / 3)); };
 
 export const stage = (id: number, f: number, cam: CamInfo): Stage => {
   const out: Stage = { places: [], fx: [], props: {} };
   LNAME = SHOTS[id - 1].light; SUN = cam.sun.clone();
-  const place = SHOTS[id - 1].place, P = out.props;
-  // ---- saleroom defaults (the quay shots see in through the windows) ----
-  if (place === "saleroom" || place === "quay") {
-    P.hero = { p: id > 5 || (id === 5 && f >= PLACE5) ? VITB : BOXT };
-    P.crown = { p: id > 5 ? CROWN_TOP : CROWN_PED };
-    P.chair = { p: [SEATS[MINH_SEAT][0], 0, SEATS[MINH_SEAT][1] + 0.22], rx: id > 7 ? Math.PI / 2 : 0 };
-    P.yacht = { p: [PLAN_OBJ("yacht")[0], TABLE_Y, PLAN_OBJ("yacht")[2]], rz: id === 1 ? 0.07 * Math.sin((f - GAVEL1) * 0.5) * Math.exp(-(f - GAVEL1) / 18) * (f >= GAVEL1 ? 1 : 0) : 0 };
-    const hp = id === 1 ? hop(f, THUMP1, 0.25) : 0;
-    P.diamond = { p: [PLAN_OBJ("diamond")[0], TABLE_Y + hp, PLAN_OBJ("diamond")[2]] }; P.watch = { p: [PLAN_OBJ("watch")[0], TABLE_Y + hop(f, THUMP1 + 1, 0.2) * (id === 1 ? 1 : 0), PLAN_OBJ("watch")[2]] };
-    auctioneer(out, cam, f, id);
-    slabFx(out, "pika_poncho_ray", Sa(2.4, PLINTH_Y + 0.03 + SLAB_H / 2, -4.6), { gleam: id === 9 ? (f - GLEAM9) / 18 : -1 });
-    if (id > 5 || (id === 5 && f >= SPOT5)) spot(out, Sa(1.4, 2.9, -4.6));
-    if (id > 9 || (id === 9 && f >= SPOT9)) spot(out, Sa(2.4, 2.9, -4.6));
-    if (id <= 4 || id >= 9) lots70(out);
-    if (id >= 3 && id !== 7 && id <= 11) gentlemen(out, cam, f, id);
-    if (id >= 10) SCOOT.forEach(([x, z], i) => tagFx(out, "€1,900", Sa(x + 0.27, 1.0, z - 0.58), 0.13, 0.15 * Math.sin(f * 0.18 + i) * Math.exp(-Math.max(0, f - 1462 - 4 * i) / 30)));
-  }
+  const P = out.props;
   switch (id) {
-    case 1: { // the porter carries the box in behind the table and thumps it down
-      const m = mark("saleroom", "porter", STAGE_Y), start = Sa(1.8, STAGE_Y, -4.9);
-      if (f < WALK1[1]) {
-        const u = clamp01((f - WALK1[0]) / (WALK1[1] - WALK1[0])), x = start[0] + (m[0] - start[0]) * u;
-        if (f >= WALK1[0] - 40) {
-          side(out, cam, "porter", x, STAGE_Y, m[2], -1, 0, { mode: f < WALK1[0] ? "stand" : "march", phase: walkPhase(f, 1.0), stride: 0.55, reach: 1, expr: "smile" }, f);
-          P.hero = { p: toLocal(SALE, [x - 0.3, STAGE_Y + 1.05, m[2] + 0.05]) };
-        } else P.hero = { p: BOXT, vis: false };
-      } else {
-        const cr = 0.35 * smooth((f - WALK1[1]) / 10), fo: FrontOpts = { mode: "stand", expr: f >= THUMP1 ? "grin" : "smile", facing: 0, armOff: 2, crouch: cr };
-        front(out, cam, "porter", ...m, fo, f, [THUMP1]);
-        const carry: V3 = Sa(m[0] - 0.05, STAGE_Y + 1.05, m[2] + 0.2), down: V3 = Sa(BOXT[0], BOXT[1], BOXT[2]);
-        const k = f < 240 ? 0 : f < THUMP1 ? ((f - 240) / (THUMP1 - 240)) ** 2 : 1, B = lerp3(carry, down, k);
-        P.hero = { p: toLocal(SALE, B) };
-        for (const sd of [-1, 1] as const) arm3d(out, cam, "porter", m, fo, sd, [B[0] + sd * 0.1, B[1] + 0.14, B[2]], f);
-        if (f >= THUMP1 && f < THUMP1 + 10) { const u = q((f - THUMP1) / 10, 10); card(out, `puff${u}`, 400, 400, (pp) => fxPuff(pp, u), down[0], down[1] + 0.03, down[2] + 0.08, 0.3, 0.3); }
-        if (f >= 80 && f < 94) sparkle(out, f, 80, ...Sa(-0.45, TABLE_Y + 0.1, -4.4), 0.12, 14);
+    case 1: { // 1999: band, shove, cord, slam
+      const m = Ho(...(H.rel as V3)), expr = f < BAND1[1] ? "stern" : f < SHOVE1 ? "grin" : f < SLAM1 ? "smile" : f < 150 ? "pained" : "smile_closed";
+      const fo: FrontOpts = { mode: "stand", expr, armOff: 2, look: f >= CORD1[0] - 4 && f < SLAM1 ? -1 : 0, headTilt: f >= CORD1[0] && f < SLAM1 ? -0.1 : 0 };
+      front(out, cam, "relative", ...m, fo, f, [BAND1[1], SLAM1]);
+      const chest = chestAt(cam, "relative", m, fo, 0.42, 0.2), over: V3 = [0, 2.42, -0.95];
+      let T: V3, rx = 0;
+      if (f < 58) T = chest;
+      else if (f < SHOVE1) T = lerp3(chest, over, smooth((f - 58) / (SHOVE1 - 58)));
+      else { const t = (f - SHOVE1) / FPS, tl = 0.408; if (t < tl) T = [0, 2.42 + 2.6 * t - 4.9 * t * t, -0.95 - 1.16 * t]; else { const u = easeOut((f - SHOVE1 - 12) / 17), z = -1.423 + (TUBE_REST[2] + 1.423) * u; T = [0, TUBE_REST[1], z]; rx = -(z + 1.423) / R0; } }
+      out.sheet = tubeAt(T, new THREE.Quaternion().setFromEuler(new THREE.Euler(rx, 0, 0)), { a: 0, band: f >= BAND1[1] });
+      const rest = [restHand(cam, "relative", m, fo, -1), restHand(cam, "relative", m, fo, 1)];
+      for (const sd of [-1, 1] as const) {
+        let hand: V3 = rest[sd < 0 ? 0 : 1];
+        if (f < SHOVE1 + 2) hand = [T[0] + sd * 0.2, T[1] - 0.02, T[2] + 0.03];
+        else if (f < CORD1[0] - 6) hand = lerp3([over[0] + sd * 0.2, over[1], over[2]], rest[sd < 0 ? 0 : 1], smooth((f - SHOVE1 - 2) / 10));
+        if (sd < 0 && f >= CORD1[0] - 6 && f < CORD1[1] + 4) { const grab: V3 = [H.hatch_x[0] + 0.02, 2.42, -1.0], pull: V3 = [H.hatch_x[0] + 0.02, 2.24, -1.0];
+          hand = f < CORD1[0] ? lerp3(rest[0], grab, smooth((f - CORD1[0] + 6) / 6)) : lerp3(grab, pull, smooth((f - CORD1[0]) / (CORD1[1] - CORD1[0]))); out.cordEnd = hand; }
+        arm3d(out, cam, "relative", m, fo, sd, hand, f);
+      }
+      if (f >= BAND1[1] && f < BAND1[1] + 6) { const u = q((f - BAND1[1]) / 6, 10); card(out, `twang${u}`, 200, 120, (pp) => art2.twang(pp, u), T[0] + 0.12, T[1] + 0.08, T[2] + 0.06, 0.18, 0.11); }
+      motes(out, f, SLAM1, 40, hatchSeam, 80);
+      if (f >= SLAM1 && f < SLAM1 + 10) { const u = q((f - SLAM1) / 10, 10); card(out, `puff${u}`, 400, 400, (pp) => fxPuff(pp, u), 0, CEIL - 0.08, -0.62, 0.5, 0.3); }
+      break;
+    }
+    case 2: case 3: case 4: case 5: case 6: { // the loft, 1999 -> 2026
+      const d = dustAt(f, id), wreck = id >= 2;
+      out.sheet = loftTube(wreck, d, true);
+      const wk = id === 2 ? 0.15 + 0.35 * clamp01((f - 212) / 38) : id === 3 ? 0.5 : id === 4 ? 0.5 + 0.5 * clamp01((f - 456) / 34) : 1;
+      if (!(id === 6 && f >= PULL6[0] + 2)) web(out, wk, [TUBE_REST[0] + 0.05, TUBE_REST[1] + 0.09, TUBE_REST[2] + 0.07], 0.42);
+      web(out, Math.min(1, wk + 0.3), [0.25, 3.0, -1.93], 0.38);
+      if (id >= 3 && id <= 5) { const yb = id === 3 ? (f < SPIDER3[0] ? 3.95 : 3.95 - 0.85 * smooth((f - SPIDER3[0]) / (SPIDER3[1] - SPIDER3[0]))) : 3.1;
+        const sway = 0.015 * Math.sin(f * 0.15); card(out, "spider", 120, 400, (pp) => art.spider(pp), 0.18 + sway, yb + 0.21, -1.75, 0.13, 0.45, { face: 0 }); }
+      if (id === 3 && f >= DUST3 && f < DUST3 + 18) { const u = q((f - DUST3) / 18, 12); card(out, `puff${u}`, 400, 400, (pp) => fxPuff(pp, u), TUBE_REST[0] - 0.2 + 0.4 * u, TUBE_REST[1] + 0.12, TUBE_REST[2] + 0.1, 0.35, 0.25, { soft: true }); }
+      if (id === 3) POPS3.forEach((p0, i) => { const y = popY(f, p0); if (y < 0) return; const who = (["head1", "head2", "head3"] as Who[])[i];
+        front(out, cam, who, H.pop[0], y, H.pop[2], { mode: "stand", expr: "nervous", facing: 1, look: 1 }, f); });
+      if (id === 5 && f >= HEAD5) { const y = 0.85 + 0.55 * smooth((f - HEAD5) / 6); front(out, cam, "partner", H.pop[0], y, H.pop[2], { mode: "stand", expr: f >= HEAD5 + 8 ? "shock" : "neutral", facing: 1, look: 1 }, f, [HEAD5 + 8]); }
+      if (id === 5 && f >= OPEN5 + 3) glowAt(out, "torch", [0.08, 2.85, -1.35], 0.6, "255,240,200");
+      if (id === 6) { // he rises a rung, reaches over the rim, drags the tube to him and ducks down with it (side view, facing -z)
+        const z0 = f < PULL6[1] ? -1.25 : -1.25 + 0.27 * smooth((f - PULL6[1]) / 6), y0 = f < RISE6[1] ? 1.4 + 0.05 * smooth((f - RISE6[0]) / 12) : f < DUCK6[0] ? 1.45 : 1.45 - 0.9 * smooth((f - DUCK6[0]) / (DUCK6[1] - DUCK6[0]));
+        side(out, cam, "partner", 0, y0, z0, 0, -1, { mode: "stand", reach: 1, expr: f >= PULL6[1] ? "grin" : "stern" }, f);
+        const hold: V3 = [0, y0 + 1.22, z0 - 0.24];
+        if (f >= PULL6[0]) { const k = smooth((f - PULL6[0]) / (PULL6[1] - PULL6[0])), T = lerp3(TUBE_REST, hold, k); out.sheet = tubeAt(T, QI, { a: 0, wreck: true, dust: 1, band: true }); }
+        if (f >= PULL6[0] && f < PULL6[0] + 14) { const u = q((f - PULL6[0]) / 14, 10); card(out, `puff${u}`, 400, 400, (pp) => fxPuff(pp, u), TUBE_REST[0], TUBE_REST[1] + 0.05, TUBE_REST[2], 0.4, 0.3, { soft: true }); }
       }
       break;
     }
-    case 2: case 3: break;
-    case 4: break;
-    case 5: { // lift, carry, place, shut the door, then the crown
-      const m0 = mark("saleroom", "porter", STAGE_Y), mv = mark("saleroom", "porter_v", STAGE_Y);
-      const walking = f >= CARRY5[0] && f < CARRY5[1];
-      const u = clamp01((f - CARRY5[0]) / (CARRY5[1] - CARRY5[0])), pos: V3 = lerp3(m0, mv, u);
-      if (walking) {
-        side(out, cam, "porter", ...pos, mv[0] - m0[0], mv[2] - m0[2], { mode: "march", phase: walkPhase(f, 1.0), stride: 0.5, reach: 1, expr: "neutral" }, f);
-        P.hero = { p: toLocal(SALE, [pos[0] + 0.3, STAGE_Y + 1.05, pos[2] + 0.05]) };
-      } else {
-        const here = f < CARRY5[0] ? m0 : mv, cr = f < CARRY5[0] ? 0.35 * (1 - smooth((f - LIFT5) / 10)) : f >= 890 && f < CROWN5 + 4 ? 0.15 : 0;
-        const fo: FrontOpts = { mode: "stand", expr: f >= CROWN5 ? "grin" : "neutral", facing: f < CARRY5[0] ? 0 : 1, look: f < CARRY5[0] ? 0 : 1, armOff: 2, crouch: cr };
-        front(out, cam, "porter", ...here, fo, f, [CARRY5[1], CROWN5]);
-        const rest = [restHand(cam, "porter", here, fo, -1), restHand(cam, "porter", here, fo, 1)];
-        if (f < CARRY5[0]) { // lift from the table to the chest
-          const B = lerp3(Sa(...BOXT), Sa(m0[0] - 0.05, STAGE_Y + 1.05, m0[2] + 0.2), smooth((f - LIFT5) / 12)); P.hero = { p: toLocal(SALE, B) };
-          for (const sd of [-1, 1] as const) arm3d(out, cam, "porter", here, fo, sd, [B[0] + sd * 0.1, B[1] + 0.14, B[2]], f);
-        } else if (f < PLACE5 + 6) { // into the vitrine
-          const B = lerp3(Sa(mv[0] + 0.15, STAGE_Y + 1.15, mv[2] - 0.05), Sa(...VITB), smooth((f - CARRY5[1]) / (PLACE5 - CARRY5[1]))); P.hero = { p: toLocal(SALE, B) };
-          for (const sd of [-1, 1] as const) arm3d(out, cam, "porter", here, fo, sd, [B[0] + sd * 0.1, B[1] + 0.14, B[2] + 0.02], f);
-        } else if (f < DOOR5 + 8) { // swing the door shut with the right hand
-          const k = smooth((f - DOOR5 + 8) / 8), a = -1.9 * (1 - k), hx = 1.24 + 0.3 * Math.cos(a), hz = -4.48 - 0.3 * Math.sin(a);
-          arm3d(out, cam, "porter", here, fo, 1, Sa(hx, 1.5, hz + 0.02), f); arm3d(out, cam, "porter", here, fo, -1, rest[0], f);
-        } else if (f >= 880 && f < CROWN5 + 10) { // crown: pedestal -> vitrine top
-          const C0 = Sa(...CROWN_PED), C1 = Sa(...CROWN_TOP), mid: V3 = [(C0[0] + C1[0]) / 2, C1[1] + 0.12, (C0[2] + C1[2]) / 2];
-          const k = clamp01((f - 895) / (CROWN5 - 895)), Cp = f < 895 ? C0 : k < 0.5 ? lerp3(C0, mid, smooth(k * 2)) : lerp3(mid, C1, smooth(k * 2 - 1));
-          if (f >= 895) P.crown = { p: toLocal(SALE, f >= CROWN5 ? C1 : Cp) };
-          const tgt: V3 = f < 895 ? lerp3(rest[1], [C0[0], C0[1] + 0.04, C0[2]], smooth((f - 880) / 12)) : f < CROWN5 + 2 ? [Cp[0], Cp[1] + 0.04, Cp[2]] : lerp3([C1[0], C1[1] + 0.04, C1[2]], rest[1], smooth((f - CROWN5 - 2) / 8));
-          arm3d(out, cam, "porter", here, fo, 1, tgt, f); arm3d(out, cam, "porter", here, fo, -1, rest[0], f);
-        } else for (const sd of [-1, 1] as const) arm3d(out, cam, "porter", here, fo, sd, rest[sd < 0 ? 0 : 1], f);
+    case 7: case 8: { // the landing floor: unroll, the tin, the damage, the torn corner
+      const om = Ho(H.owner_floor[0], 0, H.owner_floor[1]);
+      const fo: FrontOpts = { mode: "sit", chair: 0.06, expr: id === 7 ? "neutral" : "pained", armOff: 2, look: 1 };
+      front(out, cam, "owner", ...om, fo, f, id === 8 ? [653, 687, 716, 767] : []);
+      const a = id === 8 || f >= ROLLED7 ? SL : f < PUSH7 ? 0 : SL * easeOut((f - PUSH7) / (ROLLED7 - PUSH7));
+      const curl = id === 7 && f >= ROLLED7 && f < TINLAND7 ? smooth((f - ROLLED7) / 4) : 0;
+      const fold = id === 8 ? (f < LIFT8[0] ? 0 : f < LIFT8[1] ? 2.1 * smooth((f - LIFT8[0]) / (LIFT8[1] - LIFT8[0])) : f < DROP8 ? 2.1 : 2.1 * (1 - clamp01((f - DROP8) / 6) ** 2)) : 0;
+      out.sheet = { p: v3a(H.floor_sheet), q: QI, pose: { a, curl, fold, wreck: true } };
+      const rest = [restHand(cam, "owner", om, fo, -1), restHand(cam, "owner", om, fo, 1)];
+      let rh = rest[1];
+      if (id === 7 && f >= PUSH7 - 8 && f < PUSH7 + 6) rh = lerp3(rest[1], Ho(-0.28, 0.06, 0.04), smooth((f - PUSH7 + 8) / 6) * (1 - smooth((f - PUSH7) / 6)));
+      if (id === 8 && f >= LIFT8[0] - 6 && f < DROP8) { const w = 0.1414, k = Math.SQRT1_2, X = -0.36 + w * k - w * Math.cos(fold) * k, Z = -0.51 + w * k - w * Math.cos(fold) * k, Y = w * Math.sin(fold);
+        const tip = Ho(H.floor_sheet[0] + X, Y + 0.01, H.floor_sheet[2] + Z); rh = f < LIFT8[0] ? lerp3(rest[1], tip, smooth((f - LIFT8[0] + 6) / 6)) : tip; }
+      arm3d(out, cam, "owner", om, fo, -1, rest[0], f); arm3d(out, cam, "owner", om, fo, 1, rh, f);
+      // the partner with the paint tin
+      const pm = Ho(H.partner[0], 0, H.partner[1]), pf: FrontOpts = { mode: "stand", expr: "neutral", armOff: -1, look: -1 };
+      front(out, cam, "partner", ...pm, pf, f);
+      const ph = holdHand(cam, "partner", pm, pf, -1, 0.05), land = v3a(H.tin_land);
+      let tp: V3 = [ph[0], ph[1] - 0.14, ph[2]], rz = 0;
+      if (id === 8 || f >= TINLAND7) { tp = [land[0], 0.004, land[2]]; rz = id === 7 ? 0.1 * Math.sin((f - TINLAND7) * 1.6) * Math.exp(-(f - TINLAND7) / 3) : 0; }
+      else if (f >= TIN7) { const u = (f - TIN7) / (TINLAND7 - TIN7); tp = [ph[0] + (land[0] - ph[0]) * u, (ph[1] - 0.14) * (1 - u * u) + 0.004 * u * u, ph[2] + (land[2] - ph[2]) * u]; rz = 0.5 * u; }
+      arm3d(out, cam, "partner", pm, pf, -1, id === 7 && f < TIN7 ? [tp[0], tp[1] + 0.14, tp[2]] : restHand(cam, "partner", pm, pf, -1), f);
+      P.tin = { p: tp, rz };
+      break;
+    }
+    case 9: { // press to the wall: it matches; peel, roll, toss into the bag
+      const pm = Ho(H.partner_wall[0], 0, H.partner_wall[1]);
+      const fo: FrontOpts = { mode: "stand", expr: f < 818 ? "neutral" : f < PEEL9 ? "smile_closed" : "stern", armOff: 2, look: -1, crouch: f < WALL9[0] + 6 ? 0.2 : 0 };
+      front(out, cam, "partner", ...pm, fo, f, [818, PEEL9]);
+      const floor: SheetK = { p: v3a(H.floor_sheet), q: QI, pose: { a: SL, wreck: true } }, wallK: SheetK = { p: v3a(H.wall_sheet), q: QWALL, pose: { a: SL, wreck: true } };
+      let K: SheetK;
+      if (f < WALL9[1]) { const k = smooth((f - WALL9[0]) / (WALL9[1] - WALL9[0])); K = { p: lerp3(floor.p, wallK.p, k), q: lerpQ(QI, QWALL, k), pose: { a: SL, wreck: true } }; }
+      else if (f < ROLLUP9[0]) K = wallK;
+      else if (f < TOSS9[0]) K = { ...wallK, pose: { a: SL * (1 - smooth((f - ROLLUP9[0]) / (ROLLUP9[1] - ROLLUP9[0]))), wreck: true } };
+      else {
+        const S0 = sheetPt(wallK, 0, R0, -SL / 2), E: V3 = [H.bag[0], 0.74, H.bag[2]], u = clamp01((f - TOSS9[0]) / (TOSS9[1] - TOSS9[0]));
+        const T: V3 = f < TOSS9[1] ? [S0[0] + (E[0] - S0[0]) * u, S0[1] + (E[1] - S0[1]) * u + 0.45 * Math.sin(Math.PI * u), S0[2] + (E[2] - S0[2]) * u] : E;
+        const wob = f >= TOSS9[1] ? 0.12 * Math.sin((f - TOSS9[1]) * 1.3) * Math.exp(-(f - TOSS9[1]) / 5) : 0;
+        K = tubeAt(T, lerpQ(QWALL, QUP, u).multiply(new THREE.Quaternion().setFromEuler(new THREE.Euler(wob, 0, 0))), { a: 0, wreck: true });
       }
-      if (id === 5 && f >= CROWN5) P.crown = { p: CROWN_TOP };
-      if (f >= SPOT5 && f < SPOT5 + 14) sparkle(out, f, SPOT5, ...Sa(1.52, 1.82, -4.55), 0.14, 14);
+      out.sheet = K;
+      const rest = [restHand(cam, "partner", pm, fo, -1), restHand(cam, "partner", pm, fo, 1)];
+      const e1 = sheetPt(K, SW / 2, 0, -0.22), e2 = sheetPt(K, SW / 2, 0, 0.22);
+      let hl = rest[0], hr = rest[1];
+      if (f >= WALL9[0] - 4 && f < ROLLUP9[0]) { hl = e1; hr = e2; }
+      else if (f >= ROLLUP9[0] && f < TOSS9[0] + 3) { const c = sheetPt(K, SW / 2 - 0.02, R0, K.pose.a - SL / 2); hl = c; hr = [c[0], c[1] - 0.12, c[2]]; }
+      arm3d(out, cam, "partner", pm, fo, -1, hl, f); arm3d(out, cam, "partner", pm, fo, 1, hr, f);
+      front(out, cam, "owner", -0.5, 0, 1.8, { mode: "stand", expr: f >= PEEL9 ? "shock" : "neutral", look: 1 }, f, [PEEL9]);
+      P.tin = { p: [0.45, 0.004, 1.3] };
       break;
     }
-    case 6: break;
-    case 7: { // Minh leaps up; his chair tips back
-      gentlemen(out, cam, f, id, MINH_SEAT);
-      const [x, z] = SEATS[MINH_SEAT], Pm = Sa(x, 0, z), up = smooth((f - LEAP7) / 4);
-      const fo: FrontOpts = up < 0.5 ? { mode: "sit", chair: SEAT_CHAIR, expr: "nervous", armOff: 2 } : { mode: "stand", expr: "shock", gape: 0.7 * smooth((f - LEAP7 - 2) / 5), armOff: 2, look: 0 };
-      front(out, cam, "minh", ...Pm, fo, f, [LEAP7]);
-      for (const sd of [-1, 1] as const) { const S = shoulderAt(cam, "minh", Pm, fo, sd); arm3d(out, cam, "minh", Pm, fo, sd, lerp3(restHand(cam, "minh", Pm, fo, sd), [S[0] + sd * 0.4, S[1] + 0.18, S[2] + 0.05], up), f); }
-      const t = (f - CHAIR7[0]) / (CHAIR7[1] - CHAIR7[0]), rx = f < CHAIR7[0] ? 0 : f < CHAIR7[1] ? (Math.PI / 2) * t * t : Math.PI / 2 - 0.1 * Math.abs(Math.sin((f - CHAIR7[1]) * 0.7)) * Math.exp(-(f - CHAIR7[1]) / 5);
-      P.chair = { p: [x, 0, z + 0.22], rx };
-      if (f >= CHAIR7[1] && f < CHAIR7[1] + 10) { const u = q((f - CHAIR7[1]) / 10, 10); card(out, `puff${u}`, 400, 400, (pp) => fxPuff(pp, u), ...Sa(x, 0.1, z + 0.7), 0.35, 0.35); }
-      break;
-    }
-    case 9: break;
-    case 10: break;
-    case 11: { // the waiter walks in and presents a bottle beside the vitrine
-      const m = mark("saleroom", "waiter", STAGE_Y);
-      if (f < WALK11[1]) {
-        const u = clamp01((f - WALK11[0]) / (WALK11[1] - WALK11[0])), x = m[0] + 1.1 * (1 - u);
-        if (f >= WALK11[0]) side(out, cam, "waiter", x, STAGE_Y, m[2], -1, 0, { mode: "march", phase: walkPhase(f, 1.0), stride: 0.5, expr: "stern" }, f);
+    case 10: { // she dashes, yanks it out of the bag, the TV, the hug
+      const m0 = Ho(-0.5, 0, 1.8), m1 = Ho(H.owner_bag[0], 0, H.owner_bag[1]);
+      const inBag: SheetK = tubeAt([H.bag[0], 0.74, H.bag[2]], QUP, { a: 0, wreck: true });
+      if (f < DASH10[1]) { const u = clamp01((f - DASH10[0]) / (DASH10[1] - DASH10[0])), a = lerp3(m0, m1, u);
+        if (f < DASH10[0]) front(out, cam, "owner", ...m0, { mode: "stand", expr: "shock", look: 1 }, f);
+        else side(out, cam, "owner", ...a, m1[0] - m0[0], m1[2] - m0[2], { mode: "march", phase: walkPhase(f, 2.0), stride: 0.8, reach: 1, expr: "shock" }, f);
+        out.sheet = inBag;
       } else {
-        const fo: FrontOpts = { mode: "stand", expr: f >= 1600 ? "stern" : "neutral", facing: -1, look: -1, armOff: 2, headTilt: f >= 1600 ? -0.06 : 0 };
-        front(out, cam, "waiter", ...m, fo, f, [1600]);
-        const S = shoulderAt(cam, "waiter", m, fo, -1), rest = restHand(cam, "waiter", m, fo, -1);
-        const hold: V3 = [S[0] - 0.3, S[1] - 0.12, S[2] + 0.12], H = arm3d(out, cam, "waiter", m, fo, -1, lerp3(rest, hold, smooth((f - BOTTLE11) / 10)), f);
-        arm3d(out, cam, "waiter", m, fo, 1, restHand(cam, "waiter", m, fo, 1), f);
-        card(out, "bottle1", 120, 420, (pp) => art2.bottle(pp), H[0] - 0.02, H[1] + 0.1, H[2] + 0.02, 0.085, 0.3, { rot: f >= BOTTLE11 ? 0.25 : 0 });
-        if (f >= 1600) card(out, "napkin", 128, 128, (pp) => { pp.poly([[10, 10], [118, 10], [90, 118], [38, 118]], "#fbf7ec", 5); }, H[0] + 0.02, H[1] - 0.02, H[2] + 0.03, 0.09, 0.09);
+        const hug = f >= HUG10, fo: FrontOpts = { mode: "stand", expr: f < 925 ? "stern" : f < HUG10 ? "neutral" : "stern", armOff: 2, look: f >= 925 && f < 1010 ? -1 : 0, facing: f >= 925 && f < 1010 ? -1 : 0 };
+        front(out, cam, "owner", ...m1, fo, f, [925, 1010, HUG10]);
+        const chest = chestAt(cam, "owner", m1, fo, 0.5, hug ? 0.1 : 0.2);
+        const top = sheetPt(inBag, SW / 2, R0, -SL / 2);
+        let K: SheetK;
+        if (f < YANK10) K = inBag;
+        else { const k = smooth((f - YANK10) / 10); K = tubeAt(lerp3([H.bag[0], 0.74, H.bag[2]], chest, k), lerpQ(QUP, QI, k), { a: 0, wreck: true }); }
+        out.sheet = K;
+        const rest = [restHand(cam, "owner", m1, fo, -1), restHand(cam, "owner", m1, fo, 1)];
+        const T = f < YANK10 ? top : sheetPt(K, 0, R0, -SL / 2);
+        const hr: V3 = f < YANK10 - 4 ? rest[1] : f < YANK10 ? lerp3(rest[1], top, smooth((f - YANK10 + 4) / 4)) : [T[0] + 0.15, T[1], T[2] + 0.04];
+        const hl: V3 = f < YANK10 + 8 ? rest[0] : [T[0] - 0.15, T[1], T[2] + 0.04];
+        arm3d(out, cam, "owner", m1, fo, -1, hl, f); arm3d(out, cam, "owner", m1, fo, 1, hr, f);
       }
+      P.tin = { p: [0.45, 0.004, 1.3] };
       break;
     }
-    case 12: case 13: case 14: case 15: case 16: { // the cellar
-      const m = mark("cellar", "somm");
-      const fo: FrontOpts = { mode: "stand", expr: id === 13 && f >= POP13 ? "grin" : "smile_closed", facing: 1, look: 1, armOff: id === 13 ? 1 : undefined };
-      if (id <= 13) front(out, cam, "waiter", ...m, fo, f, [POP13]);
-      const slot: V3 = (() => { const [x, y] = bottleCubby(PULLED[0], PULLED[1]); return [x - 0.075, y + 0.07, -2.66]; })();
-      const glassP: V3 = Ce(-0.55, 0.95 + 0.065, -1.75);
+    case 11: case 12: case 14: { // the valuation counter
+      const om = Au(AU.owner[0], 0, AU.owner[1]), vm = Au(AU.valuer[0], 0, AU.valuer[1]);
+      const oexpr = id === 11 ? (f >= PEEK11 - 10 ? "pained" : "nervous") : id === 14 ? (f >= GLEAM14 ? "shock" : "nervous") : "nervous";
+      front(out, cam, "owner", ...om, { mode: "stand", expr: oexpr, look: 1, gape: id === 14 && f >= GLEAM14 ? 0.4 : 0 }, f, [PEEK11 - 10, GLEAM14]);
+      if (id === 11) { card(out, "lottery", 200, 110, (pp) => art2.lottery(pp), ...Au(AU.owner[0] + 0.1, 1.08, AU.owner[1] + 0.06), 0.11, 0.06, { rot: 0.3 });
+        if (f >= PEEK11) card(out, "sweat", 64, 96, (pp) => art2.sweat(pp), ...Au(AU.owner[0] + 0.22, 1.75 - 0.002 * (f - PEEK11), AU.owner[1] + 0.05), 0.05, 0.075); }
+      const vexpr = id === 12 ? (f >= FREEZE12 + 35 ? "stern" : f >= FREEZE12 ? "shock" : "neutral") : id === 14 ? (f >= GLEAM14 ? "grin" : "neutral") : "neutral";
+      const crouch = id === 14 && f < LAMP14 + 6 ? 0.35 : id === 12 ? 0.12 * smooth((f - 1160) / 40) : 0;
+      const vfo: FrontOpts = { mode: "stand", expr: vexpr, armOff: 2, crouch, gape: id === 12 && f >= FREEZE12 && f < FREEZE12 + 35 ? 0.35 : 0 };
+      front(out, cam, "valuer", ...vm, vfo, f, [FREEZE12, FREEZE12 + 35, GLEAM14]);
+      const a = id < 14 || f < UNROLL14[0] ? 0 : SL * easeOut((f - UNROLL14[0]) / (UNROLL14[1] - UNROLL14[0]));
+      const K: SheetK = { p: Au(...(AU.sheet as V3)), q: QI, pose: { a, wreck: true, gleam: id === 14 ? (f - GLEAM14) / 34 : -1 } };
+      out.sheet = K;
+      const rest = [restHand(cam, "valuer", vm, vfo, -1), restHand(cam, "valuer", vm, vfo, 1)];
+      let hr = rest[1], hl = rest[0];
+      if (id === 14 && f >= UNROLL14[0] - 6 && f < UNROLL14[0] + 8) hr = lerp3(rest[1], sheetPt(K, 0.05, R0 * 1.6, a - SL / 2), smooth((f - UNROLL14[0] + 6) / 6) * (1 - smooth((f - UNROLL14[0] - 2) / 6)));
+      if (id === 14 && f >= LAMP14 - 8 && f < LAMP14 + 6) hl = lerp3(rest[0], Au(AU.lamp[0] + 0.01, AU.top + 0.25, AU.lamp[2] + 0.02), smooth((f - LAMP14 + 8) / 6) * (1 - smooth((f - LAMP14) / 6)));
+      if (id === 12) { hr = lerp3(rest[1], Au(AU.valuer[0] + 0.3, AU.top + 0.03, AU.valuer[1] + 0.35), f < FREEZE12 ? smooth((f - 1135) / 5) : 1); card(out, "loupe", 200, 200, (pp) => art.loupeGlass(pp), hr[0], hr[1] + 0.02, hr[2], 0.06, 0.06); }
+      arm3d(out, cam, "valuer", vm, vfo, -1, hl, f); arm3d(out, cam, "valuer", vm, vfo, 1, hr, f);
+      if (id === 14 && f >= LAMP14) glowAt(out, "lamp", Au(AU.lamp[0] + 0.15, AU.top + 0.1, AU.lamp[2] + 0.2), 0.9, "255,214,140");
+      if (id === 14 && f >= GLEAM14 && f < GLEAM14 + 16) sparkle(out, f, GLEAM14, ...Au(AU.sheet[0] + 0.3, AU.top + 0.08, AU.sheet[2] + 0.4), 0.12, 16);
+      break;
+    }
+    case 13: case 16: { // KB Toys, 1999
       if (id === 13) {
-        const rest = restHand(cam, "waiter", m, fo, 1), neck = Ce(slot[0], slot[1], -2.48), chest = holdHand(cam, "waiter", m, fo, 1, 0.12), pour: V3 = [glassP[0] - 0.05, glassP[1] + 0.22, glassP[2]];
-        const hand: V3 = f < PULL13[0] ? lerp3(rest, neck, smooth((f - 1698) / 4)) : f < PULL13[1] ? lerp3(neck, chest, smooth((f - PULL13[0]) / (PULL13[1] - PULL13[0]))) : f < POUR13[0] - 4 ? chest : f < POUR13[1] + 8 ? lerp3(chest, pour, smooth((f - POUR13[0] + 4) / 6)) : lerp3(pour, chest, smooth((f - POUR13[1] - 8) / 8));
-        const H = arm3d(out, cam, "waiter", m, fo, 1, hand, f);
-        // the bottle: in its slot until pulled, then in his hand (upright, tipped over the glass while pouring)
-        const tilt = f >= POUR13[0] - 2 && f < POUR13[1] + 6 ? 1.9 : 0;
-        P.bottle = f < PULL13[0] ? { p: slot } : { p: toLocal(CELLAR, [H[0], H[1] + 0.05, H[2]]), rx: -Math.PI / 2, rz: -tilt };
-        if (f >= POUR13[0] && f < POUR13[1]) card(out, "stream", 40, 200, (pp) => art2.stream(pp), glassP[0] + 0.01, glassP[1] + 0.1, glassP[2] + 0.01, 0.012, 0.16);
-        // the cork: out of the neck on POP13, two bounces, stays on the floor
-        if (f >= POP13) {
-          const t = (f - POP13) / FPS, c0: V3 = [chest[0], chest[1] + 0.2, chest[2]], vx = 0.9, vy = 2.6, g = 9.8;
-          let y = c0[1] + vy * t - 0.5 * g * t * t, x = c0[0] + vx * t; const z = c0[2] + 0.4 * t;
-          if (y <= 0.01) { y = 0.01 + Math.abs(0.25 * Math.sin((t - 0.68) * 9)) * Math.exp(-(t - 0.68) * 4); x = Math.min(x, c0[0] + vx * 0.9); }
-          card(out, "cork", 64, 100, (pp) => art2.cork(pp), x, y + 0.02, Math.min(z, c0[2] + 0.36), 0.025, 0.04, { rot: t * 14 });
-          if (f < POP13 + 7) burst(out, f, POP13, c0[0], c0[1] + 0.05, c0[2], 0.25, 7, "#ffffff");
-        }
-      }
-      const fill = id < 13 ? 0 : id > 13 ? 0.7 : clamp01((f - POUR13[0]) / (POUR13[1] - POUR13[0])) * 0.7;
-      card(out, `glass${q(fill, 20)}`, 160, 260, (pp) => art2.wineGlass(pp, fill), glassP[0], glassP[1], glassP[2], 0.08, 0.13);
-      if (id >= 14) P.bottle = { p: toLocal(CELLAR, Ce(-0.4, 0.95 + 0.12, -1.85)), rx: -Math.PI / 2 };
-      // shreds of torn wrap: burst from each box as it opens, flutter down, rest on the floor
-      if (id >= 15) OPEN_ORDER.forEach((bi, n) => {
-        const t0 = OPEN_AT[n], bc = boxCubby(bi);
-        for (let s = 0; s < 4; s++) {
-          const seed = bi * 7 + s, x0 = bc[0] + (hh(seed) - 0.5) * 0.18, y0 = bc[1] + BH * (0.4 + 0.5 * hh(seed, 2)), t = id > 15 ? 99 : (f - t0) / FPS;
-          if (t < 0) continue;
-          const fall = Math.min(y0 - 0.012, 0.65 * t + 0.4 * t * t), y = y0 - fall, landed = y <= 0.013;
-          const x = x0 + 0.06 * Math.sin(t * 7 + seed) * (landed ? 0 : 1) + (hh(seed, 3) - 0.5) * 0.3 * Math.min(1, t), z = -2.36 + 0.35 * hh(seed, 4) * Math.min(1, t * 1.5);
-          card(out, `shred${s % 3}`, 64, 64, (pp) => art2.shred(pp, s % 3), ...Ce(x, landed ? 0.013 : y, z), 0.06, 0.06, landed ? { flat: true, rot: seed } : { rot: t * 6 + seed });
-        }
-        if (id === 15 && f >= t0 && f < t0 + 6) burst(out, f, t0, ...Ce(bc[0], bc[1] + BH * 0.6, -2.42), 0.22, 6, "#ffffff");
-      });
-      if (id === 16) { // paddles crowd in around the last box from below the frame
-        for (let i = 0; i < 12; i++) {
-          const t0 = JAB16[0] + i * 2, a = smooth((f - t0) / 4), all = f >= JAB16[1] ? 0.06 * Math.sin((f - JAB16[1]) * 1.4) * Math.exp(-(f - JAB16[1]) / 6) : 0;
-          if (a <= 0) continue;
-          const sd = i % 2 ? 1 : -1, x = 0.65 + sd * (0.15 + 0.17 * hh(i, 5)), z = -1.95 + 0.2 * hh(i, 6), y = 0.45 + (0.3 + 0.32 * hh(i, 7)) * a + all + 0.02 * Math.sin(f * 0.6 + i);
-          if (Math.abs(x - 0.65) < 0.16 && y > 0.72) continue; // never in front of the box itself
-          card(out, `paddle${(i * 17 + 3) % 90}`, 300, 480, (pp) => art.paddle(pp, (i * 17 + 3) % 90), ...Ce(x, y, z), 0.13, 0.21, { rot: 0.25 * (hh(i, 8) - 0.5) });
-        }
+        const m = St(STO.rel[0], 0, STO.rel[1]), fo: FrontOpts = { mode: "stand", expr: "whistle", armOff: 2, facing: -1, look: -1 };
+        front(out, cam, "relative", ...m, fo, f);
+        const chest = chestAt(cam, "relative", m, fo, 0.45, 0.18), shelf = St(STO.shelf_top[0] - 0.08, STO.shelf_top[1] + 0.12, STO.shelf_top[2] - 0.07);
+        const k = smooth((f - STACK13[0] - 10) / (STACK13[1] - STACK13[0] - 10)), B = f < STACK13[1] ? lerp3(chest, shelf, k) : shelf;
+        P.toy = { p: [B[0] - STORE[0], B[1] - 0.12 - STORE[1], B[2] - STORE[2]] };
+        const rest = [restHand(cam, "relative", m, fo, -1), restHand(cam, "relative", m, fo, 1)];
+        for (const sd of [-1, 1] as const) arm3d(out, cam, "relative", m, fo, sd, f < STACK13[1] + 4 ? [B[0] + sd * 0.15, B[1], B[2] + 0.05] : lerp3([B[0] + sd * 0.15, B[1], B[2] + 0.05], rest[sd < 0 ? 0 : 1], smooth((f - STACK13[1] - 4) / 8)), f);
+      } else {
+        P.toy = { p: [STO.shelf_top[0] - 0.08, STO.shelf_top[1], STO.shelf_top[2] - 0.07] };
+        STO.kids.forEach(([x, z], i) => { const who: Who = i ? "kid2" : "kid1", m = St(x, 0, z), pt = i === 0 ? smooth((f - POINT16) / 6) : 0;
+          const fo: FrontOpts = { mode: "stand", expr: i === 0 ? (f >= POINT16 ? "shock" : "neutral") : f >= POINT16 + 10 ? "grin" : "smile", armOff: i === 0 ? 1 : undefined, look: i ? -1 : 1, headTilt: -0.15 };
+          front(out, cam, who, ...m, fo, f, [POINT16]);
+          if (i === 0) { const S = shoulderAt(cam, who, m, fo, 1); arm3d(out, cam, who, m, fo, 1, lerp3(restHand(cam, who, m, fo, 1), [S[0] + 0.05, S[1] + 0.32, S[2] - 0.25], pt), f); } });
+        const rm = St(STO.rel15[0], 0, STO.rel15[1]), fo: FrontOpts = { mode: "stand", expr: "grin", armOff: 1, facing: 1, look: 1 };
+        front(out, cam, "relative", ...rm, fo, f);
+        const tap = f >= TAP16 - 8 && f < TAP16 + 10 ? smooth((f - TAP16 + 8) / 6) * (1 - smooth((f - TAP16 - 4) / 6)) : 0;
+        arm3d(out, cam, "relative", rm, fo, 1, lerp3(restHand(cam, "relative", rm, fo, 1), St(0.0, 1.55, -3.92), tap), f);
       }
       break;
     }
-    case 8: case 17: case 18: { // the kitchen
-      const kidAt = Ki(KIT.kid[0], 0, KIT.kid[1]), boxT: V3 = [KIT.box[0], 0.75, KIT.box[2]], shelf: V3 = KIT.shelf as V3;
-      const bowl0: V3 = [KIT.bowl[0], 0.75, KIT.bowl[2]];
-      P.bowl = { p: id === 8 ? lerp3([bowl0[0] + 0.32, 0.75, bowl0[2]], bowl0, smooth((f - PUSH8) / 12)) : bowl0 };
-      if (id === 8 || id === 17) {
-        const sulk = id === 17 && f >= SNATCH17;
-        const fo: FrontOpts = { mode: "sit", chair: 0.95, expr: id === 8 ? (f >= HUG8 ? "grin" : "smile") : sulk ? "pained" : "grin", armOff: 2, headTilt: sulk ? 0.12 : 0 };
-        front(out, cam, "kid", ...kidAt, fo, f, id === 8 ? [HUG8] : [SNATCH17 + 2]);
-        const B = Ki(...boxT), rest = [restHand(cam, "kid", kidAt, fo, -1), restHand(cam, "kid", kidAt, fo, 1)];
-        for (const sd of [-1, 1] as const) {
-          let h = rest[sd < 0 ? 0 : 1];
-          if (id === 8) {
-            if (sd < 0 && f >= PUSH8 - 6 && f < PUSH8 + 14) h = lerp3(h, Ki(bowl0[0] + 0.35, 0.82, bowl0[2] - 0.02), smooth((f - PUSH8 + 6) / 6) * (1 - smooth((f - PUSH8 - 8) / 6)));
-            if (f >= HUG8) h = lerp3(h, [B[0] + sd * (BW / 2 + 0.01), B[1] + 0.12, B[2]], smooth((f - HUG8) / 6));
-          } else if (f >= REACH17 && f < SNATCH17) h = sd > 0 ? lerp3(h, [B[0] + 0.04, B[1] + BH - 0.02, B[2] + 0.04], smooth((f - REACH17) / 10)) : h;
-          arm3d(out, cam, "kid", kidAt, fo, sd, h, f);
-        }
-        if (id === 8 && f >= 1150) { // a coin rolls off the table and spins out on the floor
-          const t = (f - 1150) / FPS, x = KIT.table[0] + 0.55 + 0.25 * t, y = Math.max(0.012, 0.76 - 4.9 * Math.max(0, t - 0.2) ** 2);
-          card(out, "coin", 64, 64, (pp) => art2.coin(pp), ...Ki(x, y, -0.3), 0.025, 0.025, y <= 0.013 ? { flat: true } : { rot: t * 20 });
-        }
-      }
-      if (id === 8) { // mum at the stove, stirring
-        const mm = Ki(KIT.stove[0], 0, -1.75), fo: FrontOpts = { mode: "stand", expr: "smile_closed", facing: 1, look: 1, armOff: 1 };
-        front(out, cam, "mom", ...mm, fo, f);
-        arm3d(out, cam, "mom", mm, fo, 1, Ki(KIT.stove[0] + 0.22 + 0.04 * Math.sin(f * 0.4), 1.02, KIT.stove[1] + 0.04 * Math.cos(f * 0.4)), f);
-        P.kitBox = { p: boxT };
-      }
-      if (id === 17) {
-        const m0 = Ki(KIT.mom[0], 0, KIT.mom[1]), way = Ki(0.3, 0, -1.55), m1 = Ki(KIT.momshelf[0], 0, KIT.momshelf[1]);
-        if (f >= WALK17[0] && f < WALK17[1]) {
-          const u = clamp01((f - WALK17[0]) / (WALK17[1] - WALK17[0])), a = u < 0.4 ? lerp3(m0, way, u / 0.4) : lerp3(way, m1, (u - 0.4) / 0.6), d = u < 0.4 ? [way[0] - m0[0], way[2] - m0[2]] : [m1[0] - way[0], m1[2] - way[2]];
-          side(out, cam, "mom", ...a, d[0], d[1], { mode: "march", phase: walkPhase(f, 1.1), stride: 0.5, reach: 1, expr: "stern" }, f);
-          P.kitBox = { p: toLocal(KITCH, [a[0] + 0.28 * Math.sign(d[0] || 1), 1.0, a[2] + 0.05]) };
-        } else {
-          const here = f < WALK17[0] ? m0 : m1, after = f >= WALK17[1];
-          const fo: FrontOpts = { mode: "stand", expr: f < SNATCH17 - 4 ? "neutral" : after && f > SHELF17 + 4 ? "smile_closed" : "stern", facing: after ? 1 : -1, look: after ? 1 : -1, armOff: 2, crouch: !after && f >= SNATCH17 - 6 && f < SNATCH17 + 6 ? 0.2 : 0 };
-          front(out, cam, "mom", ...here, fo, f, [SNATCH17, SHELF17 + 4]);
-          const rest = [restHand(cam, "mom", here, fo, -1), restHand(cam, "mom", here, fo, 1)];
-          let B: V3;
-          if (!after) {
-            const chest = chestAt(cam, "mom", here, fo, 0.45, 0.18);
-            B = f < SNATCH17 ? Ki(...boxT) : lerp3(Ki(...boxT), [chest[0], chest[1] - BH / 2, chest[2]], smooth((f - SNATCH17) / 6));
-            const grab = f >= SNATCH17 - 6;
-            for (const sd of [-1, 1] as const) arm3d(out, cam, "mom", here, fo, sd, grab ? [B[0] + sd * (BW / 2 + 0.005), B[1] + BH * 0.6, B[2]] : rest[sd < 0 ? 0 : 1], f);
-          } else {
-            const top = Ki(shelf[0], shelf[1], shelf[2]), lift: V3 = [top[0] - 0.12, 1.25, top[2] + 0.2];
-            B = f < SHELF17 - 4 ? lerp3(lift, [top[0] - 0.05, top[1] + 0.05, top[2]], smooth((f - WALK17[1]) / (SHELF17 - 4 - WALK17[1]))) : f < SHELF17 ? lerp3([top[0] - 0.05, top[1] + 0.05, top[2]], top, (f - SHELF17 + 4) / 4) : top;
-            for (const sd of [-1, 1] as const) arm3d(out, cam, "mom", here, fo, sd, f < SHELF17 + 3 ? [B[0] + sd * (BW / 2 + 0.005), B[1] + BH * 0.5, B[2]] : lerp3([B[0] + sd * 0.1, B[1] + 0.1, B[2]], rest[sd < 0 ? 0 : 1], smooth((f - SHELF17 - 3) / 8)), f);
-          }
-          P.kitBox = { p: toLocal(KITCH, B) };
-        }
-      }
-      if (id === 18) {
-        P.kitBox = { p: shelf };
-        const mm = Ki(KIT.mom26[0], 0, KIT.mom26[1]), pt = f >= POINT18 ? smooth((f - POINT18) / 8) : 0;
-        const fo: FrontOpts = { mode: "stand", expr: f >= BOW18[0] + 6 ? "smile" : "neutral", facing: 1, look: 1, armOff: 1 };
-        front(out, cam, "momOld", ...mm, fo, f, [BOW18[0] + 6]);
-        const S = shoulderAt(cam, "momOld", mm, fo, 1);
-        arm3d(out, cam, "momOld", mm, fo, 1, lerp3(restHand(cam, "momOld", mm, fo, 1), [S[0] + 0.22, S[1] + 0.38, S[2] - 0.1], pt), f);
-        const m0 = Ki(2.4, 0, -0.4), m1 = mark("kitchen", "minh");
-        if (f < WALK18[1]) {
-          const u = clamp01((f - WALK18[0]) / (WALK18[1] - WALK18[0])), a = lerp3(m0, m1, u);
-          if (f >= WALK18[0]) { side(out, cam, "minh", ...a, m1[0] - m0[0], m1[2] - m0[2], { mode: "march", phase: walkPhase(f, 1.0), stride: 0.5, reach: 1, expr: "nervous" }, f); card(out, "flowers", 300, 420, (pp) => art2.flowers(pp), a[0] - 0.3, 1.1, a[2] + 0.05, 0.2, 0.28); }
-        } else {
-          const bow = f >= BOW18[0] ? smooth((f - BOW18[0]) / 6) * (1 - smooth((f - BOW18[1]) / 8)) : 0;
-          const fo2: FrontOpts = { mode: "stand", expr: f >= BOW18[1] ? "smile" : "nervous", facing: -1, look: -1, armOff: -1, crouch: 0.25 * bow, headTilt: 0.25 * bow };
-          front(out, cam, "minh", ...m1, fo2, f, [BOW18[1]]);
-          const S2 = shoulderAt(cam, "minh", m1, fo2, -1), hold: V3 = [S2[0] - 0.28, S2[1] - 0.15 - 0.1 * bow, S2[2] + 0.1];
-          const H = arm3d(out, cam, "minh", m1, fo2, -1, hold, f);
-          card(out, "flowers", 300, 420, (pp) => art2.flowers(pp), H[0] - 0.04, H[1] + 0.06, H[2] + 0.03, 0.2, 0.28, { rot: 0.3 });
-        }
-      }
+    case 15: { // the press: cards in the tray (skid after the chop)
+      for (let i = 0; i < 9; i++) { const sk = f >= CHOP15 + 3 ? easeOut((f - CHOP15 - 3) / 14) : 0;
+        const x = PR.tray[0] - 0.36 + 0.09 * i + (hh(i, 5) - 0.5) * 0.05 + sk * (hh(i, 6) - 0.5) * 0.08, z = PR.tray[2] + (hh(i, 7) - 0.5) * 0.18 + sk * 0.04 * hh(i, 8);
+        card(out, `tc|tray${i}`, 260, 360, (pp) => art.tcard(pp, 0 as art.Kind, 10, 10, 250, 350, { img: ["fs_gengar", "fs_zapdos", "fs_moltres", "fs_dragonite", "fs_articuno", "fs_raichu", "fs_lapras", "fs_haunter", "fs_ditto"][i] }),
+          ...at(PRESS, x, PR.tray[1] + 0.003 + 0.0006 * i, z), 0.063, 0.088, { flat: true, rot: (hh(i, 9) - 0.5) * 1.2 + sk * 0.3 }); }
+      if (f >= CHOP15 && f < CHOP15 + 8) burst(out, f, CHOP15, ...at(PRESS, PR.bed[0], PR.bed[1] + 0.05, PR.blade_z + 0.02), 0.4, 8, "#ffffff");
+      break;
+    }
+    case 17: { // the photo shoot
+      const pm = Au(AU.photog[0], 0, AU.photog[1]), fo: FrontOpts = { mode: "stand", expr: "stern", armOff: 2, crouch: 0.2, facing: -1, look: -1 };
+      front(out, cam, "photog", ...pm, fo, f);
+      const camBody = Au(AU.tripod[0] + 0.08, 1.15, AU.tripod[1]);
+      arm3d(out, cam, "photog", pm, fo, -1, camBody, f); arm3d(out, cam, "photog", pm, fo, 1, [camBody[0] + 0.02, camBody[1] + 0.05, camBody[2] + 0.04], f);
+      FLASHES.forEach((ff) => AU.soft.forEach(([sx, sz]) => burst(out, f, ff, ...Au(sx, 1.9, sz + 0.1), 0.7, 4, "#ffffff")));
+      const vm = Au(AU.valuer_rep[0], 0, AU.valuer_rep[1]), vfo: FrontOpts = { mode: "stand", expr: f >= STAMP17 ? "grin" : "neutral", armOff: 1, facing: -1, look: -1 };
+      front(out, cam, "valuer", ...vm, vfo, f, [STAMP17]);
+      const hi = Au(AU.report[0] + 0.02, AU.report[1] + 0.12, AU.report[2] + 0.18), lo = Au(AU.report[0] + 0.02, AU.report[1] - 0.04, AU.report[2] + 0.06);
+      const k = f < STAMP17 - 2 ? 0 : f < STAMP17 ? (f - STAMP17 + 2) / 2 : 1 - clamp01((f - STAMP17) / 4);
+      const H2 = f >= 1898 ? lerp3(hi, lo, k) : restHand(cam, "valuer", vm, vfo, 1);
+      arm3d(out, cam, "valuer", vm, vfo, 1, H2, f);
+      if (f >= 1898) card(out, "stamp", 200, 220, (pp) => art.rubberStamp(pp), H2[0], H2[1] - 0.03, H2[2] + 0.01, 0.07, 0.08);
+      break;
+    }
+    case 18: case 19: { // the saleroom
+      const seats = AU.seats as number[][], who: Who[] = ["bid1", "bid2", "head2", "bid3", "head1", "head3", "owner", "bid2"];
+      seats.forEach(([x, z], i) => { const w = who[i], gape = w === "owner" && id === 18 ? 0.6 * smooth((f - GAPE18) / 6) : 0;
+        front(out, cam, w, ...Au(x, 0, z), { mode: "sit", chair: 0.9, expr: w === "owner" && (id > 18 || f >= GAPE18) ? "shock" : "neutral", gape }, f, w === "owner" ? [GAPE18] : []); });
+      const am = Au(AU.auctioneer[0], 0, AU.auctioneer[1]);
+      const g = id === 19 ? 1 - smooth((f - RAISE19[0]) / (RAISE19[1] - RAISE19[0])) : 1;
+      front(out, cam, "auctioneer", ...am, { mode: "stand", expr: "stern", prop: ["gavel", q(g, 20)], headTilt: id === 19 && f > RAISE19[1] ? -0.05 : 0 }, f, [RAISE19[1]]);
+      break;
+    }
+    case 20: { // the loft, 2026: the fan
+      out.sheet = { p: [0, -50, 0], pose: { a: 0 }, vis: false };
+      web(out, 1, [0.25, 3.0, -1.93], 0.38);
+      if (f >= DOOR20 + 2) { const y = 0.85 + 0.55 * smooth((f - DOOR20 - 2) / 8);
+        front(out, cam, "partner", H.pop[0], y, H.pop[2], { mode: "stand", expr: f >= SQUINT20 + 16 ? "grin" : f >= SQUINT20 ? "stern" : "neutral", facing: 1, look: 1, headTilt: f >= SQUINT20 ? 0.08 : 0 }, f, [SQUINT20]); }
       break;
     }
   }

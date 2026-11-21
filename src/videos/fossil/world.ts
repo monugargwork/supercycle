@@ -1,4 +1,4 @@
-// The Monaco auction reel as one three.js scene: painted sky, camera-relative sun frozen per shot, the sets (sets.ts) and
+// The Fossil sheet reel as one three.js scene: painted sky, camera-relative sun frozen per shot, the sets (sets.ts) and
 // the cast (cast.ts). update(id, f, camera) poses everything for shot `id` at frame f (a pure function of id + f).
 import * as THREE from "three";
 import { ctex, cloudHD } from "../../engine/paint";
@@ -7,9 +7,9 @@ import { LIGHTS, LOOK, LightPreset } from "../../engine/lights";
 import { TONE, CHAR, untone } from "../../engine/shade";
 import { NOINK } from "../../engine/ink";
 import { Pool, Actor, Fx, stage, Stage } from "./cast";
-import { buildSets, Sets, drawWrap, BoxRig } from "./sets";
-import { lotBoard, yearPlate } from "./art2";
-import { SHOTS, ShotDef, camAt, smooth, clamp01, boardAt, yearAt, SHOWN, DOOR5, PLACE5, OPEN_ORDER, OPEN_AT, LAST_BOX, GLEAM5, LASTGLEAM, GLEAM18, SCOOT } from "./story";
+import { buildSets, Sets, poseSheet, SL } from "./sets";
+import { lotBoard, calendar, tvNews, report } from "./art2";
+import { SHOTS, ShotDef, camAt, smooth, clamp01, boardAt, yearAt, SHOWN, H, PR, PRESS, LOFT, CEIL, CORD1, SLAM1, POPS3, OPEN5, CREAK3, LAMP14, NEXT15, BLADEUP15, CHOP15, FLASHES, STAMP17, DOOR20, BLADE20 } from "./story";
 
 const V = (x: number, y: number, z: number) => new THREE.Vector3(x, y, z);
 const discTex = () => ctex("sunDisc", 128, 128, (g) => {
@@ -222,37 +222,79 @@ export class World {
       if (key === c.key) return;
       c.key = key; c.g.setTransform(1, 0, 0, 1, 0, 0); c.g.clearRect(0, 0, c.g.canvas.width, c.g.canvas.height); draw(new Pen(c.g)); c.tex.needsUpdate = true;
     };
-    if (place === "saleroom" || place === "quay") {
+    if (place === "landing" || place === "loft") {
+      const y = yearAt(f, id); redraw(S.cal, String(y), (p) => calendar(p, y));
+      if (id === 10) redraw(S.tv, "tv" + f, (p) => tvNews(p, f)); else redraw(S.tv, "tv0", (p) => tvNews(p, 0));
+      // the hatch door angle (rad about its hinge; pi/2 = standing up, a touch past it rests on its stop)
+      const OPEN = 1.62;
+      let a = 0;
+      if (id === 1) a = f < CORD1[0] ? OPEN : f < CORD1[1] ? OPEN - 0.17 * smooth((f - CORD1[0]) / (CORD1[1] - CORD1[0])) : f < SLAM1 ? (OPEN - 0.17) * (1 - ((f - CORD1[1]) / (SLAM1 - CORD1[1])) ** 2) : 0.05 * Math.abs(Math.sin((f - SLAM1) * 0.9)) * Math.exp(-(f - SLAM1) / 3);
+      else if (id === 3) { for (const p0 of POPS3) { const u = f - p0 + 3; if (u >= 0 && u < 17) a = Math.max(a, u < 4 ? OPEN * smooth(u / 4) : u < 13 ? OPEN : OPEN * (1 - smooth((u - 13) / 3))); } }
+      else if (id === 5) a = f < OPEN5 - 7 ? 0 : f < OPEN5 ? OPEN * smooth((f - OPEN5 + 7) / 7) : OPEN + 0.05 * Math.sin((f - OPEN5) * 1.3) * Math.exp(-(f - OPEN5) / 4);
+      else if (id >= 6 && id <= 10) a = OPEN;
+      else if (id === 20) a = f < DOOR20 - 4 ? 0 : OPEN * smooth((f - DOOR20 + 4) / 6);
+      S.door.rotation.z = a;
+      // the pull cord: from the door's free edge, hanging (or in his hand in S01)
+      const at0 = new THREE.Vector3(H.hatch_x[0] + 0.8 * Math.cos(a), LOFT + 0.8 * Math.sin(a) - 0.012, (H.hatch_z[0] + H.hatch_z[1]) / 2);
+      const end = this.cordEnd ? new THREE.Vector3(...this.cordEnd) : at0.clone().add(new THREE.Vector3(0, -1.0, 0));
+      const L = at0.distanceTo(end); S.cord.position.copy(at0).add(end).multiplyScalar(0.5); S.cord.scale.set(1, Math.max(0.01, L), 1);
+      S.cord.quaternion.setFromUnitVectors(V(0, 1, 0), end.clone().sub(at0).normalize());
+      // dust on the boards; the clean stripe after the tube is taken (S06 on)
+      const d = id < 2 ? 0 : id === 2 ? 0.6 * clamp01((f - 212) / 38) : 0.75;
+      (S.dust.material as THREE.MeshBasicMaterial).opacity = id >= 6 && !(id === 6 && f < 586) ? 0 : d; (S.dustClean.material as THREE.MeshBasicMaterial).opacity = id >= 6 && !(id === 6 && f < 586) ? 0.75 : 0;
+      // the loose fan blade: a pendulum that creaks, twitches at each head, and drops in S20
+      let sw = 0.12 * Math.sin(f * 0.05);
+      if (id === 3) { sw += f >= CREAK3 ? 0.32 * Math.sin((f - CREAK3) * 0.5) * Math.exp(-(f - CREAK3) / 20) : 0; for (const p0 of POPS3) if (f >= p0 + 4) sw += 0.15 * Math.sin((f - p0 - 4) * 0.9) * Math.exp(-(f - p0 - 4) / 6); }
+      S.fanBlade.visible = true; S.fanBlade.rotation.set(0, 0, sw); S.fanBlade.position.set(H.fan[0], H.fan_cage[1], H.fan[2] + 0.02);
+      if (id === 20 && f >= BLADE20) { const t = (f - BLADE20) / 30, y0 = H.fan_cage[1] - 0.1, rest = H.blade_rest;
+        let y = y0 - 4.9 * t * t, x = H.fan[0] + (rest[0] - H.fan[0]) * Math.min(1, t / 0.4); const z = H.fan[2] + (rest[2] - H.fan[2]) * Math.min(1, t / 0.4);
+        const tl = Math.sqrt((y0 - rest[1]) / 4.9); if (t > tl) { const u = t - tl; y = rest[1] + Math.abs(0.12 * Math.sin(u * 14)) * Math.exp(-u * 9); x = rest[0]; }
+        S.fanBlade.position.set(x, y + 0.1, z); S.fanBlade.rotation.set(t > tl ? -Math.PI / 2 * Math.min(1, (t - tl) * 6) : t * 8, 0, t * 5); }
+      S.ladder.visible = true;
+      S.tin.visible = id >= 7 && id <= 10;
+    }
+    if (place === "auction") {
       const bd = boardAt(f, id); redraw(S.board, `${bd.a}${bd.b}`, (p) => lotBoard(p, bd.a, bd.b));
-      // the vitrine door: open (swung out 110 deg) until the porter shuts it in S05
-      const shut = id > 5 || (id === 5 && f >= DOOR5);
-      const k = id === 5 && f >= DOOR5 - 8 && f < DOOR5 + 6 ? (f < DOOR5 ? smooth((f - DOOR5 + 8) / 8) : 1 + 0.04 * Math.sin((f - DOOR5) * 1.2) * Math.exp(-(f - DOOR5) / 3)) : shut ? 1 : 0;
-      S.door.rotation.y = -1.9 * (1 - Math.min(1, k)) + (k > 1 ? 0.04 * (k - 1) : 0);
-      S.scooters.visible = id >= 10;
-      S.yachts.forEach((y, i) => { y.position.y = -0.4 + 0.03 * Math.sin(f * 0.07 + i * 1.7); y.rotation.z = 0.01 * Math.sin(f * 0.05 + i); });
-      const g = id === 5 ? (f - GLEAM5) / 16 : -1;
-      drawWrap(S.hero, "sealed", g);
-      void PLACE5; void SCOOT;
+      const st = id > 17 || (id === 17 && f >= STAMP17) ? 1 : 0; redraw(S.report, "r" + st, (p) => report(p, st));
+      S.lampOn.visible = id > 14 || (id === 14 && f >= LAMP14);
+      const fl = id === 17 && FLASHES.some((ff) => f >= ff && f < ff + 3);
+      S.flashes.forEach((m) => ((m.material as THREE.Material[])[4] as THREE.MeshBasicMaterial).color.setRGB(fl ? 4 : 1.2, fl ? 4 : 1.2, fl ? 3.8 : 1.15));
     }
-    if (place === "cellar") {
-      const y = yearAt(f, id); redraw(S.year, String(y), (p) => yearPlate(p, y));
-      S.cellar.forEach((r, i) => {
-        const n = OPEN_ORDER.indexOf(i), t0 = n >= 0 ? OPEN_AT[n] : 1e9, open = id > 15 || (id === 15 && f >= t0);
-        const k = id > 15 ? 1 : id === 15 ? clamp01((f - t0) / 5) : 0;
-        r.lid.rotation.x = -1.65 * (k < 1 ? k * k : 1) + (k >= 1 && id === 15 ? 0.08 * Math.sin((f - t0 - 5) * 1.3) * Math.exp(-(f - t0 - 5) / 4) : 0);
-        drawWrap(r, open ? "torn" : "sealed", i === LAST_BOX && id === 15 ? (f - LASTGLEAM) / 14 : i === LAST_BOX && id === 16 ? (f - 2030) / 14 : -1);
-      });
+    if (place === "press") {
+      S.rollers.forEach((r, i) => { r.rotation.y = (i ? -1 : 1) * f * 0.25; });
+      const by = f < BLADEUP15[0] ? 1.55 : f < BLADEUP15[1] ? 1.55 + 0.1 * smooth((f - BLADEUP15[0]) / (BLADEUP15[1] - BLADEUP15[0])) : f < CHOP15 ? 1.65 : f < CHOP15 + 3 ? 1.01 : 1.01 + 0.54 * smooth((f - CHOP15 - 3) / 12);
+      S.blade.position.y = by;
+      const cut = f >= CHOP15;
+      // the sheet on the bed loses its last row at the chop (clipped at the blade line)
+      const cz = PRESS[2] + PR.blade_z;
+      for (const m of [S.press.front, S.press.back]) { const mm = m.material as THREE.Material; mm.clippingPlanes = cut ? [new THREE.Plane(V(0, 0, -1), cz)] : null; }
+      // the next sheet slides out of the rollers
+      const e = f < NEXT15 ? 0 : 0.6 * clamp01((f - NEXT15) / 60);
+      S.press2.g.position.set(PRESS[0] + PR.rollers_x - SL / 2 - 0.02 + e, PRESS[1] + 1.07, PRESS[2] + PR.press[1]);
+      // the cut strip: slides off the front edge and tips into the tray
+      S.strip.visible = cut;
+      if (cut) { const t = clamp01((f - CHOP15) / 14), zEdge = PR.bed[2] + 0.6;
+        const z = PR.blade_z + 0.044 + (zEdge + 0.08 - PR.blade_z) * Math.min(1, t * 1.6), y = t < 0.6 ? PR.bed[1] + 0.004 : PR.bed[1] + 0.004 - (PR.bed[1] - PR.tray[1]) * smooth((t - 0.6) / 0.4);
+        S.strip.position.set(PR.bed[0], y, z); S.strip.rotation.set(-Math.PI / 2 + (t > 0.55 ? 0.5 * Math.sin(Math.PI * clamp01((t - 0.55) / 0.45)) : 0), 0, 0); }
     }
-    if (place === "kitchen") drawWrap(S.kitBox, "sealed", id === 18 ? (f - GLEAM18) / 14 : -1);
   }
+  private cordEnd: number[] | null = null;
   /** props the cast moves (stage() returns where they are this frame) */
   private placeProps(id: number, f: number, st: Stage) {
     const S = this.S, P = st.props;
+    const had = this.cordEnd; this.cordEnd = st.cordEnd ?? null;
+    if (had || this.cordEnd) this.pose(id, f);
     const put = (o: THREE.Object3D, k?: { p: number[]; ry?: number; rx?: number; rz?: number; vis?: boolean }) => {
       if (!k) return; o.visible = k.vis !== false; o.position.set(k.p[0], k.p[1], k.p[2]); o.rotation.set(k.rx ?? 0, k.ry ?? 0, k.rz ?? 0);
     };
-    put(S.hero.g, P.hero); put(S.crown, P.crown); put(S.chair, P.chair); put(S.yacht, P.yacht); put(S.diamond, P.diamond); put(S.watch, P.watch);
-    put(S.kitBox.g, P.kitBox); put(S.bottle, P.bottle); put(S.bowl, P.bowl);
-    void id; void f; void (null as unknown as BoxRig);
+    put(S.tin, P.tin); put(S.toy, P.toy);
+    const h = st.sheet;
+    S.hero.g.visible = !!h && h.vis !== false;
+    if (h && h.vis !== false) {
+      S.hero.g.position.set(...h.p);
+      if (h.q) S.hero.g.quaternion.copy(h.q); else S.hero.g.rotation.set(...(h.r ?? [0, 0, 0]));
+      poseSheet(S.hero, h.pose);
+    }
+    void CEIL; void SL;
   }
 }

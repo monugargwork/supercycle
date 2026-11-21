@@ -1,7 +1,7 @@
-// Timeline of the Monaco auction reel, timed to the Vietnamese voice (public/fossil/words.json, 75.5 s).
+// Timeline of the Fossil sheet in the loft reel, timed to the Vietnamese voice (public/fossil/words.json, 75.8 s).
 // Everything a camera needs (keys, glides, pushes, kicks, depth of field, dissolves) is read from plan.json, the direction's
 // source of truth (videos/fossil-sheet-loft/plan.json, written by mkplan.py): numbers are never retyped here.
-// Sets: SALEROOM + QUAY (one frame, the quay is outside the harbour wall), CELLAR, KITCHEN.
+// Sets: LANDING + LOFT (one frame, the hatch joins them), AUCTION (counter, photo corner, saleroom), STORE (1999), PRESS (1999).
 import plan from "../../../videos/fossil-sheet-loft/plan.json";
 export const FPS = 30;
 export const TOTAL = plan.frames;
@@ -19,36 +19,48 @@ export const pop = (f: number, f0: number, n = 8) => {
 export const at = (o: V3, x: number, y: number, z: number): V3 => [o[0] + x, o[1] + y, o[2] + z];
 type SetName = keyof typeof plan.sets;
 export const ORIGIN = Object.fromEntries(Object.entries(plan.sets).map(([k, s]) => [k, s.origin as V3])) as Record<SetName, V3>;
-export const SALE = ORIGIN.saleroom, QUAY = ORIGIN.quay, CELLAR = ORIGIN.cellar, KITCH = ORIGIN.kitchen;
+export const HOUSE = ORIGIN.landing, AUC = ORIGIN.auction, STORE = ORIGIN.store, PRESS = ORIGIN.press;
 /** a mark from the plan: the character's feet in the world */
 export const mark = (set: SetName, who: string, y = 0): V3 => { const m = (plan.sets[set].marks as Record<string, number[]>)[who]; return at(ORIGIN[set], m[0], y, m[1]); };
 /** an object's centre from the plan, in the world */
 export const obj = (set: SetName, id: string): { p: V3; s: V3 } => { const o = plan.sets[set].objects.find((x) => x.id === id)!; return { p: at(ORIGIN[set], o.pos[0], o.pos[1], o.pos[2]), s: o.size as V3 }; };
+export const H = plan.house as unknown as Record<string, number[]> & { hatch_x: number[]; hatch_z: number[] };
+export const AU = plan.auction as unknown as Record<string, number[]> & { seats: number[][]; soft: number[][]; rope: number[][]; owner_seat: number; top: number; table_size: number[] };
+export const STO = plan.store as unknown as Record<string, number[]> & { kids: number[][] };
+export const PR = plan.press as unknown as Record<string, number[]> & { rollers_x: number; blade_z: number };
+export const SHEET = plan.sheet as { size: number[]; cols: number; rows: number; card: number[]; margin: number[]; tube_r: number; holos: string[] };
+export const DMG = plan.damage as Record<string, number[]>;
+export const ZOOM = plan.zoom as number[];
+export const CEIL = 2.5, LOFT = 2.62;
+/** a cell's centre on the sheet, sheet-local (x across, z down the sheet, top row at -z) */
+export const cellAt = (r: number, c: number): V3 => [-0.3465 + (c + 0.5) * 0.063, 0, -0.484 + (r + 0.5) * 0.088];
 
 // ---------------- beats (frames; the plan's scene cards give the same numbers in words) ----------------
-export const GAVEL1 = 3;                       // S01 the gavel on "Monaco"
-export const WALK1 = [185, 236], THUMP1 = 257;  // S01 the porter walks in, thumps the box down
-export const PADDLES4 = 630;                   // S04 all paddles up
-export const LIFT5 = 663, CARRY5 = [676, 700], PLACE5 = 702, DOOR5 = 716, GLEAM5 = 866, CROWN5 = 935, SPOT5 = 941;
-export const BOARD6 = [989, 1032];
-export const LEAP7 = 1084, CHAIR7 = [1086, 1096];
-export const PUSH8 = 1125, HUG8 = 1145;
-export const SPOT9 = 1219, GLEAM9 = 1300;
-export const WALK11 = [1528, 1552], BOTTLE11 = 1592;
-export const PULL13 = [1700, 1716], POP13 = 1733, POUR13 = [1746, 1768];
-export const YEAR15 = [1840, 1985], LASTGLEAM = 1988;
-export const OPEN_ORDER = plan.open_order as number[], OPEN_AT = plan.open_at as number[];
-export const CUBBY = plan.cubbies as number[][], LAST_BOX = plan.last_box as number;
-export const JAB16 = [2024, 2049];
-export const REACH17 = 2112, SNATCH17 = 2134, WALK17 = [2150, 2170], SHELF17 = 2176;
-export const WALK18 = [2200, 2232], BOW18 = [2240, 2262], POINT18 = 2250, GLEAM18 = 2266;
-export const SEATS = plan.seats as number[][], MINH_SEAT = plan.minh_seat as number, SCOOT = plan.scooters as number[][];
-export const KIT = plan.kitchen as Record<string, number[]>;
-export const BOXS = plan.box.size as V3;
-/** the year on the cellar plate (S12-S16) */
-export const yearAt = (f: number, id: number) => id < 15 ? 2006 : id > 15 ? 2026 : 2006 + Math.round(20 * clamp01((f - YEAR15[0]) / (YEAR15[1] - YEAR15[0])));
-/** the lot board's text (S05-S16) */
-export const boardAt = (f: number, id: number) => ({ a: id > 6 || (id === 6 && f >= BOARD6[0]), b: id > 6 || (id === 6 && f >= BOARD6[1]) });
+export const BAND1 = [40, 55], SHOVE1 = 67, CORD1 = [100, 108], SLAM1 = 122;           // S01
+export const CAL2 = [212, 250];                                                         // S02 calendar 1999 -> 2026
+export const DUST3 = 285, SPIDER3 = [305, 330], CREAK3 = 339, POPS3 = [344, 356, 368];   // S03
+export const OPEN5 = 533, HEAD5 = 540;                                                  // S05
+export const RISE6 = [562, 574], PULL6 = [576, 586], DUCK6 = [588, 598];                 // S06
+export const PUSH7 = 620, ROLLED7 = 638, TIN7 = 641, TINLAND7 = 645;                    // S07
+export const LIFT8 = [752, 764], DROP8 = 788;                                           // S08 torn corner
+export const WALL9 = [795, 811], PEEL9 = 834, ROLLUP9 = [836, 846], TOSS9 = [848, 860];  // S09
+export const DASH10 = [881, 897], YANK10 = 900, HUG10 = 1028;                           // S10
+export const SETDOWN11 = [1052, 1072], PEEK11 = 1110;                                   // S11
+export const FREEZE12 = 1140;                                                           // S12
+export const STACK13 = [1250, 1300];                                                    // S13
+export const UNROLL14 = [1395, 1418], LAMP14 = 1420, GLEAM14 = 1498;                    // S14
+export const NEXT15 = 1585, BLADEUP15 = [1606, 1614], CHOP15 = 1617;                    // S15
+export const POINT16 = 1700, TAP16 = 1746;                                              // S16
+export const FLASHES = [1842, 1859, 1873, 1886], STAMP17 = 1923;                        // S17
+export const EST18 = [2036, 2056], GAPE18 = 2062;                                       // S18
+export const RAISE19 = [2140, 2150];                                                    // S19
+export const DOOR20 = 2180, BLADE20 = 2240, SQUINT20 = 2252;                            // S20
+/** the calendar's year (S02 onward) */
+export const yearAt = (f: number, id: number) => id < 2 ? 1999 : id > 2 ? 2026 : 1999 + Math.round(27 * clamp01((f - CAL2[0]) / (CAL2[1] - CAL2[0])));
+/** dust on the tube and boards, 0 (1999) .. 1 (2026) */
+export const dustAt = (f: number, id: number) => id < 2 ? 0 : id > 5 ? 1 : id === 2 ? clamp01((f - CAL2[0]) / (CAL2[1] - CAL2[0])) * 0.85 : 0.9 + 0.1 * clamp01((f - 256) / 200);
+/** the lot board's lines (S18-S19) */
+export const boardAt = (f: number, id: number) => ({ a: id > 18 || (id === 18 && f >= EST18[0]), b: id > 18 || (id === 18 && f >= EST18[1]) });
 /** a hop after an impact: launched at v0 m/s at f0, falls under gravity, two small rattles */
 export const hop = (f: number, f0: number, v0: number) => {
   let t = (f - f0) / FPS, v = v0;
@@ -62,8 +74,8 @@ export type Place = SetName;
 export type ShotDef = { id: number; a: number; b: number; light: Light; place: Place; sunAz?: number; sunEl?: number };
 export const SHOTS: ShotDef[] = plan.scenes.map((s, i) => ({ id: i + 1, a: s.f[0], b: s.f[1], light: s.light as Light, place: s.set as Place,
   sunAz: (plan.sets[s.set as SetName].sun as number[])[0], sunEl: (plan.sets[s.set as SetName].sun as number[])[1] }));
-/** sets built and shown per place (the saleroom and the quay share a wall: both are up so the camera can pass the window) */
-export const SHOWN: Record<string, string[]> = { saleroom: ["saleroom", "quay"], quay: ["saleroom", "quay"], cellar: ["cellar"], kitchen: ["kitchen"] };
+/** sets built and shown per place (the landing and the loft share the hatch: both are up) */
+export const SHOWN: Record<string, string[]> = { landing: ["landing", "loft"], loft: ["landing", "loft"], auction: ["auction"], store: ["store"], press: ["press"] };
 /** dissolves between scenes (the plan's In): time jumps dissolve, the screen-to-card match is a through-object dissolve */
 export const XFADE: Record<number, number> = Object.fromEntries(plan.scenes.map((s, i) => [i + 1, (s.in as { n?: number }).n ?? 0]).filter(([, n]) => n > 0));
 export const FLASH_AT = -100;

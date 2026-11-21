@@ -23,21 +23,21 @@ DMG = {"scratch": [-0.12, 0, -0.26], "glue": [0.19, 0, 0.088], "crease": [-0.15,
 CEIL, LOFT = 2.5, 2.62
 H = dict(hatch=[0.0, -1.0], hatch_x=[-0.42, 0.42], hatch_z=[-1.35, -0.65], ladder=[0.0, -0.75], rel=[0.0, 0.7, -0.92],
          tube=[0.0, 2.665, -1.655], lights=[-0.05, 2.73, -1.84], fan=[0.45, LOFT, -2.0], fan_cage=[0.45, 3.48, -2.0], post=[-0.25, -2.25],
-         calendar=[-0.25, 3.22, -2.2], scissors=[-0.25, 2.95, -2.2], frame=[-0.45, LOFT, -1.95], blade_rest=[0.52, LOFT + 0.01, -1.82],
-         pop=[0.0, 1.25, -1.05], partner_pull=[0.0, 1.6, -1.22],
-         floor_sheet=[0.05, 0.004, 0.55], owner_floor=[-0.55, 0.1], partner=[0.75, 1.3], tin_land=[0.2, 0.0, 0.95],
-         wall_sheet=[1.288, 1.35, 0.6], partner_wall=[1.0, 1.28], bag=[0.95, 0.0, -0.2], owner_bag=[0.58, -0.05], tv=[-4.62, 1.05, 1.6])
+         calendar=[-0.25, 3.22, -2.2], scissors=[-0.25, 2.95, -2.2], frame=[-0.62, LOFT, -2.22], blade_rest=[0.52, LOFT + 0.01, -1.82],
+         pop=[0.0, 1.25, -1.05], partner_pull=[0.0, 1.45, -1.25],
+         floor_sheet=[0.05, 0.004, 0.55], owner_floor=[-0.68, 0.12], partner=[0.95, 0.75], tin_land=[0.25, 0.0, 0.95],
+         wall_sheet=[1.288, 1.35, 0.6], partner_wall=[1.0, 1.15], bag=[0.95, 0.0, -0.2], owner_bag=[0.58, -0.05], tv=[-4.62, 1.4, 1.6])
 WD = {k2: A(H["floor_sheet"], v) for k2, v in DMG.items()}           # damage spots on the landing floor sheet (world)
 # ---- auction house (Cullens)
 AU = dict(table=[-2.6, -2.4], table_size=[1.6, 1.2], top=0.9, sheet=[-2.6, 0.906, -2.4], valuer=[-2.6, -3.15], owner=[-3.55, -1.95],
-          lamp=[-3.25, 0.9, -2.85], easel=[2.4, 1.35, -3.75], photog=[3.05, -1.95], tripod=[2.4, -1.9], soft=[[1.35, -3.0], [3.45, -3.0]],
+          lamp=[-3.05, 0.9, -2.95], easel=[2.4, 1.35, -3.75], photog=[2.85, -1.95], valuer_rep=[3.75, -3.7], tripod=[2.4, -1.9], soft=[[1.35, -3.0], [3.45, -3.0]],
           rope=[[1.95, -3.15], [2.85, -3.15]], report=[3.25, 1.12, -3.6], rostrum=[0.0, -4.35], auctioneer=[0.0, -4.65],
-          board=[0.0, 2.35, -4.95], seats=[[x, z] for z in (-2.6, -1.8) for x in (-0.9, -0.3, 0.3, 0.9)], owner_seat=2)
+          board=[0.0, 2.35, -4.95], seats=[[x, z] for z in (-2.6, -1.8) for x in (-0.9, -0.3, 0.3, 0.9)], owner_seat=6)
 ZOOMW = A(AU["sheet"], cell(*ZOOM))
 EZ = lambda d: [round(AU["easel"][0] + d[0], 4), round(AU["easel"][1] - d[2], 4), -3.74]   # a sheet point on the easel (upright)
 # ---- KB Toys store, 1999
-ST = dict(board=[0.5, 1.6, -3.96], sheet=[0.5, 1.55, -3.93], sign=[0.0, 2.55, -2.2], rel=[-2.15, -1.6], shelf_top=[-2.62, 1.5, -1.6],
-          kids=[[0.15, -3.0], [0.85, -3.05]], rel15=[-0.4, -3.15], till=[1.9, -0.8])
+ST = dict(board=[0.5, 1.6, -3.96], sheet=[0.5, 1.55, -3.93], sign=[0.0, 2.55, -2.2], rel=[-2.25, -1.6], shelf_top=[-2.62, 1.5, -1.6],
+          kids=[[0.15, -3.0], [0.85, -3.05]], rel15=[-0.05, -3.55], till=[1.9, -0.8])
 # ---- print shop, 1999
 PR = dict(press=[-1.3, -2.0], rollers_x=-0.05, bed=[0.75, 1.0, -2.0], sheet=[0.75, 1.006, -2.0], blade_z=-1.58, tray=[0.75, 0.75, -1.15], gantry=[0.15, 1.35])
 ZOOMP = A(PR["sheet"], cell(*ZOOM))
@@ -85,7 +85,7 @@ P = {
     {"id": "rostrum", "build": "new: oak rostrum (top 1.2), gavel block", "pos": [AU["rostrum"][0], 0.6, AU["rostrum"][1]], "size": [0.9, 1.2, 0.5]},
     {"id": "lot_board", "build": "new: dark lot board, cream lettering: CULLENS OF SURREY / LOT 1 / UNCUT FOSSIL HOLO SHEET 1999 / ESTIMATE £6,000 - £10,000 (lines flip on)", "pos": AU["board"], "size": [2.2, 0.95, 0.04]},
     {"id": "chairs", "build": "new: two rows of four bentwood chairs", "pos": [0, 0.45, -2.2], "size": [2.4, 0.9, 1.4]}],
-   "marks": {"valuer": AU["valuer"], "owner": AU["owner"], "photog": AU["photog"], "auctioneer": AU["auctioneer"]}},
+   "marks": {"valuer": AU["valuer"], "valuer_rep": AU["valuer_rep"], "owner": AU["owner"], "photog": AU["photog"], "auctioneer": AU["auctioneer"]}},
   "store": {"origin": [80, 0, 0], "axes": "the back wall z -4 (promotion board) faces +z, shelves along the left wall, the counter on the right",
    "light": "golden", "sun": [120, 35], "open_sides": "+z",
    "objects": [
@@ -94,7 +94,7 @@ P = {
     {"id": "promo", "build": "new: cork promotion board 1.0 x 1.5 m on the back wall, a red header strip PROMOTION, the pristine sheet pinned at its corners", "pos": ST["board"], "size": [1.0, 1.5, 0.03]},
     {"id": "sign", "build": "new: hanging sign KB TOYS (plain red block lettering on white, 1.6 x 0.4 m) on two chains", "pos": ST["sign"], "size": [1.6, 0.4, 0.04]},
     {"id": "counter", "build": "new: shop counter 1.4 x 0.6 (top 1.0) with a till", "pos": [ST["till"][0], 0.5, ST["till"][1]], "size": [1.4, 1.0, 0.6]}],
-   "marks": {"relative": ST["rel"], "relative15": ST["rel15"], "kid1": ST["kids"][0], "kid2": ST["kids"][1]}},
+   "marks": {"relative": ST["rel"], "relative15": ST["rel15"], "valuer_rep": AU["valuer_rep"], "kid1": ST["kids"][0], "kid2": ST["kids"][1]}},
   "press": {"origin": [120, 0, 0], "axes": "the press on the left feeds +x onto the guillotine bed; the back wall z -4",
    "light": "golden", "sun": [100, 40], "open_sides": "+z",
    "objects": [
@@ -116,8 +116,8 @@ P = {
 
 S = P["scenes"]
 def scene(**kw): S.append(kw)
-LOFTW = [-0.05, 3.12, -0.3]                           # the locked loft frame (S02-S05, S19)
-LOFTL = [0.1, 2.85, -2.0]
+LOFTW = [-0.15, 3.4, 0.95]                           # the locked loft frame (S02-S05, S19)
+LOFTL = [0.1, 2.98, -1.9]
 
 scene(id="S01", hero=True, f=[0, 206], set="landing", light="golden",
   vo="Có người cuộn một tờ thẻ Pokémon chưa cắt, nhét lên gác mái, rồi bỏ quên nó lâu hơn tuổi đời của nhiều người đang xem video này.",
@@ -129,7 +129,7 @@ scene(id="S01", hero=True, f=[0, 206], set="landing", light="golden",
   action="f0-40 tube at his chest; f40-54 he stretches the rubber band over it; f55 SNAP (band on 'cắt'). f58-66 lifts it overhead, f67 shoves it up through the hatch ('nhét'): it flies 25 cm up and drops out of sight onto the boards; roll f70-96 heard, a clank on the fan f97. f100-108 he reaches up for the pull cord and yanks it; the door tips past vertical and falls shut f108-122 (gravity, accelerating), SLAM f122 ('quên'): dust sifts down from the seams onto his cap, he squeezes his eyes and coughs f126-150. f130-206 the camera rises past him to the shut hatch.",
   acting="determined -> squeeze (dust) -> satisfied smile f160.",
   cams=[k(0, [0.85, 1.05, 1.45], [0.0, 1.95, -0.95], 50, push=0.0015, blur=6, focus=[0.0, 1.9, -0.92], why="low on the ladder, the hatch above"),
-        k(130, [0.3, 1.7, 0.15], [0.0, 2.48, -1.0], 44, glide=60, push=0.003, blur=8, focus=[0.0, 2.5, -1.0], why="rise toward the shut hatch")],
+        k(130, [0.75, 1.95, -0.25], [0.12, 2.49, -1.0], 44, glide=60, push=0.003, blur=8, focus=[0.0, 2.5, -1.0], why="rise toward the shut hatch")],
   kicks=[[122, 1.0]], marks=[{"who": "relative", "at": [0.0, -0.92], "view": "front", "pose": "band, shove, cord yank", "expr": "stern -> squeeze -> smile"}],
   subjects=[{"n": "relative head", "p": [0.0, 2.3, -0.92], "f": [0, 120]}, {"n": "tube", "p": [0.0, 1.85, -0.85], "f": [0, 60]}, {"n": "hatch", "p": [0.0, 2.5, -1.0], "f": [100, 205]}],
   physics="tube toss: launched up at 2.2 m/s at f67, lands on the boards (unseen). Door: hinged at x -0.42, falls from 95 deg with gravity (angular, I = m L^2/3), slam f122, one 3 deg rebound. Dust: 40 motes fall from the seams, drift, settle by f190.",
@@ -178,10 +178,10 @@ scene(id="S05", f=[510, 560], set="loft", light="day", vo="Rồi nhà dọn kho.
 
 scene(id="S06", f=[560, 600], set="loft", light="day", vo="Có người kéo nó ra,", gloss="Someone pulls it out,",
   spine=2, viewer="He takes the tube down.", **{"in": {"type": "locked", "from": "S05"}, "out": {"type": "cut", "to": "S07", "note": "match on the tube going down the hole"}},
-  build="same.", blocking="The partner climbs a rung higher (feet y 1.6, at [0, -1.22]), crouched over the rim.",
+  build="same.", blocking="The partner climbs a rung higher (feet y 1.45, at [0, -1.25]), side view facing the tube (-z), crouched over the rim.",
   action="f562-574 he rises a rung; f576-586 ('kéo' f580) his arm reaches the tube and drags it off the boards, the web tearing in strands; f588-598 he ducks down through the hatch with it ('ra' f594).",
   acting="effort -> grin.", cams=[k(560, LOFTW, LOFTL, 54, push=0.002, blur=4, focus=[0.0, 2.8, -1.4]),
-        k(562, [0.35, 3.05, -0.35], [0.0, 2.85, -1.45], 46, glide=20, push=0.002, blur=8, focus=[0.0, 2.75, -1.45], why="in on the pull")],
+        k(562, [1.95, 3.15, -1.3], [-0.1, 2.85, -1.45], 44, glide=20, push=0.002, blur=8, focus=[0.0, 2.75, -1.45], why="in on the pull")],
   kicks=[], marks=[{"who": "partner", "at": [H["partner_pull"][0], H["partner_pull"][2]], "view": "front", "pose": "reach, drag, duck", "expr": "effort -> grin"}],
   subjects=[{"n": "tube", "p": H["tube"], "f": [560, 586]}],
   physics="web strands snap and hang; dust cloud where the tube lay, a clean stripe left on the boards.", light_mood="same.", sound="web snaps, a scrape.", after="A clean stripe on the boards where the tube lay (stays in S19).")
@@ -190,7 +190,7 @@ scene(id="S07", f=[600, 645], set="landing", light="day", vo="mở cuộn,", glo
   spine=2, viewer="On the landing floor, the sheet rolls out.", **{"in": {"type": "cut", "from": "S06"}, "out": {"type": "push", "to": "S08"}},
   build="the landing in 2026: the stepladder under the hatch, the clear-out bag; the paint tin.", blocking="The owner sits on the carpet at [-0.55, 0.1] beside the far end of the sheet; the partner stands at [0.75, 1.3] with the paint tin.",
   action="f600-612 the tube is already on the carpet at the far end; f616-620 she gives it a push ('cuộn' f620): it rolls toward the lens, unrolling, to full length by f638; the near end springs back up into a 15 cm curl f638-642; f641 the partner drops the paint tin on the curl: it lands f645 and flattens it.",
-  acting="owner curious; partner bored.", cams=[k(600, [0.85, 1.85, 2.4], [0.05, 0.25, 0.5], 50, push=0.0015, blur=5, focus=[0.05, 0.0, 0.55], why="high over the landing floor")],
+  acting="owner curious; partner bored.", cams=[k(600, [0.25, 2.0, 2.25], [-0.05, 0.15, 0.45], 54, push=0.0015, blur=5, focus=[0.05, 0.0, 0.55], why="high over the landing floor")],
   kicks=[[645, 0.4]], marks=[{"who": "owner", "at": H["owner_floor"], "view": "front", "pose": "sit on the floor, push the roll", "expr": "neutral"},
                             {"who": "partner", "at": H["partner"], "view": "front", "pose": "hold the tin, drop it", "expr": "neutral"}],
   subjects=[{"n": "sheet", "p": H["floor_sheet"], "f": [620, 644]}, {"n": "owner head", "p": [-0.55, 0.85, 0.1], "f": [600, 644]}],
@@ -207,7 +207,7 @@ scene(id="S08", hero=True, f=[645, 795], set="landing", light="day", vo="và nh�
   cams=[k(645, A(WD["scratch"], [0.15, 0.42, 0.32]), WD["scratch"], 34, push=0.002, blur=12, focus=WD["scratch"], why="the scratch"),
         k(676, A(WD["glue"], [0.12, 0.38, 0.3]), WD["glue"], 34, glide=26, push=0.002, blur=12, focus=WD["glue"], why="the glue"),
         k(706, A(WD["crease"], [0.1, 0.4, 0.3]), WD["crease"], 34, glide=26, push=0.002, blur=12, focus=WD["crease"], why="the crease"),
-        k(740, [-0.05, 0.75, 0.75], A(WD["corner"], [0.0, 0.12, 0.05]), 38, glide=22, push=0.002, blur=10, focus=A(WD["corner"], [0.0, 0.1, 0.05]), why="the torn back")],
+        k(740, [-0.05, 0.75, 0.85], A(WD["corner"], [0.0, 0.12, 0.05]), 40, glide=22, push=0.002, blur=10, focus=A(WD["corner"], [0.0, 0.1, 0.05]), why="the torn back")],
   kicks=[], marks=[{"who": "owner", "at": H["owner_floor"], "view": "front", "pose": "lift the corner", "expr": "pained"}],
   subjects=[{"n": "scratch", "p": WD["scratch"], "f": [655, 672]}, {"n": "glue", "p": WD["glue"], "f": [702, 705]}, {"n": "crease", "p": WD["crease"], "f": [732, 739]}, {"n": "corner", "p": A(WD["corner"], [0, 0.1, 0.05]), "f": [764, 794]}],
   physics="the corner: a fold along the diagonal 18 cm in, lifted to 120 deg and let fall (paper flutter, settles 6 f).", light_mood="same.", sound="a sad violin sting under the list (Meme Violin Sad Violin, low).", after="The sheet as it was, damage showing.")
@@ -217,8 +217,8 @@ scene(id="S09", hero=True, f=[795, 880], set="landing", light="day", vo="\"Giấ
   **{"in": {"type": "glide", "from": "S08"}, "out": {"type": "glide", "to": "S10"}},
   build="the right wall's wallpaper (same faded grid); the bin bag.", blocking="The partner at [1.0, 1.28], beside the sheet's right edge; the owner gets up and stands at [-0.4, 0.3].",
   action="f795-811 he lifts the sheet off the floor and presses it flat to the right wall: it matches the wallpaper ('Giấy dán tường' f799-815); he looks from it to the lens, shrugs ('hả' f821). f834 ('Vứt đi') he peels it off; it rolls up loosely in his hands f836-846; f848 he tosses it: it arcs across and drops upright into the bin bag f860 ('chỗ').",
-  acting="partner: deadpan, shrug, toss.", cams=[k(795, [-0.65, 1.45, 2.3], [1.15, 1.2, 0.55], 46, glide=24, push=0.002, blur=6, focus=[1.2, 1.3, 0.65], why="the sheet on the wall"),
-        k(840, [-0.45, 1.4, 2.1], [1.0, 0.85, 0.2], 46, glide=20, push=0.002, blur=6, focus=[0.95, 0.6, -0.2], why="follow the toss to the bag")],
+  acting="partner: deadpan, shrug, toss.", cams=[k(795, [-1.1, 1.45, 0.8], [1.29, 1.3, 0.78], 46, glide=24, push=0.002, blur=6, focus=[1.2, 1.3, 0.65], why="the sheet on the wall"),
+        k(840, [-0.9, 1.45, 1.25], [0.95, 0.8, -0.2], 46, glide=20, push=0.002, blur=6, focus=[0.95, 0.6, -0.2], why="follow the toss to the bag")],
   kicks=[[860, 0.3]], marks=[{"who": "partner", "at": H["partner_wall"], "view": "front", "pose": "press to the wall, shrug, toss", "expr": "neutral -> smirk"}],
   subjects=[{"n": "wall sheet", "p": H["wall_sheet"], "f": [812, 833]}, {"n": "bag", "p": A(H["bag"], [0, 0.55, 0]), "f": [856, 879]}],
   physics="the toss: a tube of 0.25 kg thrown at (−1.3, 2.0, −1.8) m/s, lands upright in the bag neck, wobbles.", light_mood="same.", sound="paper slap on the wall f811; HUH? no: a flat 'bruh' beat f821 (BRUH meme); toss whoosh f848, rustle in the bag f860.", after="The tube sticks up out of the bin bag.")
@@ -229,8 +229,8 @@ scene(id="S10", f=[880, 1050], set="landing", light="day", vo="May thay, ngườ
   build="the doorway and the living-room TV.", blocking="The owner dashes from [-0.4, 0.3] to [0.58, -0.05] f885-897, pulls the tube out of the bag; then turns to the TV.",
   action="f885-897 ('May thay') she dashes and yanks the tube out of the bag f900; f925-955 the camera swings to the doorway: the TV news shows a crowd shoving at a card-shop shelf, cards flying ('phát điên' f972-985); f1000-1020 back to her: she hugs the tube to her chest ('ôm' f1028).",
   acting="owner: alarm -> stare at the TV -> tight hug, determined.",
-  cams=[k(880, [-0.45, 1.4, 2.1], [0.75, 1.0, -0.1], 46, push=0.002, blur=6, focus=[0.6, 1.0, -0.1], why="she grabs it"),
-        k(925, [0.3, 1.45, 2.5], [-3.6, 1.1, 1.6], 40, glide=40, push=0.002, blur=6, focus=[-4.6, 1.05, 1.6], why="through the doorway to the TV"),
+  cams=[k(880, [-0.9, 1.45, 1.25], [0.75, 1.0, -0.1], 46, push=0.002, blur=6, focus=[0.6, 1.0, -0.1], why="she grabs it"),
+        k(925, [0.4, 1.45, 1.95], [-4.6, 1.4, 1.6], 40, glide=40, push=0.002, blur=6, focus=[-4.6, 1.05, 1.6], why="through the doorway to the TV"),
         k(1000, [-0.2, 1.5, 1.9], [0.58, 1.15, -0.05], 40, glide=24, push=0.003, blur=10, focus=[0.58, 1.2, -0.05], why="the hug")],
   kicks=[], marks=[{"who": "owner", "at": H["owner_bag"], "view": "front", "pose": "dash, yank, stare, hug", "expr": "shock -> stern"}],
   subjects=[{"n": "owner head", "p": [0.58, 1.6, -0.05], "f": [890, 920]}, {"n": "tv", "p": H["tv"], "f": [956, 995]}, {"n": "owner head", "p": [0.58, 1.6, -0.05], "f": [1025, 1049]}],
@@ -272,7 +272,7 @@ scene(id="S14", hero=True, f=[1390, 1578], set="auction", light="day", vo="Và �
   action="f1395-1418 ('không phải giấy dán tường') he rolls the tube out across the mat toward the lens; f1420 he switches the lamp on; f1498 ('hologram') a gleam sweeps the foil across all 121 cards; title FOSSIL f1525; f1540-1575 the camera dives into one Gengar.",
   acting="valuer: careful -> delighted; owner: one eye open -> both.", cams=[
         k(1390, [-1.75, 1.6, -0.85], [-2.6, 0.95, -2.45], 42, push=0.0015, blur=6, focus=AU["sheet"], why="the unroll on the mat"),
-        k(1470, [-2.6, 1.75, -1.2], [-2.6, 0.9, -2.45], 40, glide=26, push=0.002, blur=6, focus=AU["sheet"], why="over the whole sheet for the gleam"),
+        k(1470, [-2.6, 2.1, -1.45], [-2.6, 0.9, -2.5], 40, glide=26, push=0.002, blur=6, focus=AU["sheet"], why="over the whole sheet for the gleam"),
         k(1540, A(ZOOMW, [0.0, 0.165, 0.1]), ZOOMW, 28, glide=34, push=0.004, blur=10, focus=ZOOMW, why="into the Gengar")],
   kicks=[], marks=[{"who": "valuer", "at": AU["valuer"], "view": "front", "pose": "unroll, lamp", "expr": "neutral -> grin"}, {"who": "owner", "at": AU["owner"], "view": "front", "pose": "watch", "expr": "nervous -> shock"}],
   subjects=[{"n": "sheet", "p": AU["sheet"], "f": [1420, 1540]}, {"n": "gengar", "p": ZOOMW, "f": [1560, 1577]}],
@@ -284,7 +284,7 @@ scene(id="S15", hero=True, f=[1578, 1650], set="press", light="golden", vo="y nh
   build="the press, rollers turning, the guillotine, the tray of cut cards.", blocking="nobody (the machines).",
   action="f1578-1600 pull back from the same Gengar on a perfect sheet lying on the guillotine bed; the rollers turn and the next sheet slides out ('máy in' f1585); f1606-1614 the blade rises; f1617 ('chặt') it drops: the last row is cut off and the strip of 11 cards slides off the bed into the tray, knocking loose cards that skid and settle by f1640.",
   acting="none", cams=[k(1578, A(ZOOMP, [0.0, 0.165, 0.1]), ZOOMP, 28, push=0, blur=10, focus=ZOOMP),
-        k(1580, [1.9, 1.55, -0.15], [0.6, 0.95, -1.7], 44, glide=34, push=0.002, blur=6, focus=[0.75, 1.0, -1.7], why="the press and the guillotine")],
+        k(1580, [1.9, 1.95, -0.15], [0.65, 0.92, -1.68], 48, glide=34, push=0.002, blur=6, focus=[0.75, 1.0, -1.7], why="the press and the guillotine")],
   kicks=[[1617, 0.9]], marks=[], subjects=[{"n": "bed", "p": PR["bed"], "f": [1606, 1649]}, {"n": "tray", "p": PR["tray"], "f": [1620, 1649]}],
   physics="blade: 1 f drop from y 1.55 to 1.01, 2 f rebound; strip: slides 22 cm and tips into the tray; 9 loose cards skid (mu 0.35) and rest.", light_mood="golden 1999, skylight.", sound="press clatter loop, roller hiss, CHOP f1617 (Punch Hit), cards slapping.", after="Cut cards in the tray.")
 
@@ -293,7 +293,7 @@ scene(id="S16", f=[1650, 1775], set="store", light="golden", vo="Những tờ nh
   **{"in": {"type": "dissolve", "n": 6, "from": "S15"}, "out": {"type": "dissolve", "n": 6, "to": "S17"}},
   build="the promo board with the pristine sheet pinned.", blocking="Two kids at their marks look up at the board; the relative beside it.",
   action="f1660-1700 push up to the board; kids point at it f1700 ('khuyến mãi' f1728); the relative taps the PROMOTION header f1746 ('KB Toys').",
-  acting="kids: shock -> grin; relative proud.", cams=[k(1650, [0.4, 1.3, -0.3], [0.45, 1.6, -3.9], 46, push=0.002, blur=6, focus=ST["sheet"], why="the promo board")],
+  acting="kids: shock -> grin; relative proud.", cams=[k(1650, [0.45, 1.75, -0.6], [0.45, 1.55, -3.9], 46, push=0.002, blur=6, focus=ST["sheet"], why="the promo board")],
   kicks=[], marks=[{"who": "kid1", "at": ST["kids"][0], "view": "front", "pose": "point up", "expr": "shock"}, {"who": "kid2", "at": ST["kids"][1], "view": "front", "pose": "look up", "expr": "grin"},
                    {"who": "relative", "at": ST["rel15"], "view": "front", "pose": "tap the header", "expr": "grin"}],
   subjects=[{"n": "promo sheet", "p": ST["sheet"], "f": [1650, 1774]}], physics="none.", light_mood="golden 1999.", sound="kids 'ooh' (Kids Cheering, short) f1700.", after="—")
@@ -319,7 +319,7 @@ scene(id="S18", f=[1950, 2085], set="auction", light="day", vo="Nhà đấu giá
   build="the lot board, the chairs.", blocking="The owner seated in the front row (seat 2).",
   action="f1955-1990 travel across to the lot board: CULLENS OF SURREY / LOT 1 / UNCUT FOSSIL HOLO SHEET 1999 lit; f2036 ('sáu') ESTIMATE £6,000 flips on; f2056 ('mười') - £10,000 flips on; f2062 the owner's jaw drops.",
   acting="owner: gape 0.6.", cams=[k(1950, [3.0, 1.45, -2.35], AU["report"], 38, push=0, blur=6),
-        k(1955, [0.75, 1.25, 0.2], [0.0, 1.95, -4.9], 44, glide=44, push=0.002, punch=[0.006, 12], blur=6, focus=AU["board"], why="the lot board over the owner")],
+        k(1955, [0.9, 1.6, 1.6], [0.0, 1.9, -4.9], 40, glide=44, push=0.002, punch=[0.006, 12], blur=6, focus=AU["board"], why="the lot board over the owner")],
   kicks=[[2036, 0.3], [2056, 0.5]], marks=[{"who": "owner", "at": AU["seats"][AU["owner_seat"]], "view": "front, seated", "pose": "sit", "expr": "neutral -> shock (gape)"}],
   subjects=[{"n": "board", "p": AU["board"], "f": [2000, 2084]}, {"n": "owner head", "p": [0.3, 1.25, -2.6], "f": [2050, 2084]}],
   physics="none.", light_mood="same.", sound="board flap f2036, f2056 + Kaching f2056.", after="Board shows the estimate.")
@@ -329,8 +329,8 @@ scene(id="S19", f=[2085, 2175], set="auction", light="day", vo="Chủ nhật, ha
   **{"in": {"type": "glide", "from": "S18"}, "out": {"type": "dissolve", "n": 8, "to": "S20", "note": "back to the loft"}},
   build="rostrum, gavel.", blocking="The auctioneer behind the rostrum.",
   action="f2090-2120 glide to the auctioneer; title 29 · 11 · 2026 f2098; f2140-2150 he raises the gavel and holds it at the top ('búa sẽ gõ' f2147-2164): a beat of stillness, it does not fall.",
-  acting="auctioneer: stern, eyebrows up.", cams=[k(2085, [0.75, 1.25, 0.2], [0.0, 1.95, -4.9], 44, push=0, blur=6),
-        k(2090, [0.45, 1.5, -2.85], [0.0, 1.85, -4.6], 38, glide=30, push=0.002, punch=[0.005, 14], blur=10, focus=[0.0, 1.8, -4.65], why="the auctioneer, gavel up")],
+  acting="auctioneer: stern, eyebrows up.", cams=[k(2085, [0.9, 1.6, 1.6], [0.0, 1.9, -4.9], 40, push=0, blur=6),
+        k(2090, [0.55, 1.55, -1.9], [0.0, 1.75, -4.6], 40, glide=30, push=0.002, blur=10, focus=[0.0, 1.8, -4.65], why="the auctioneer, gavel up")],
   kicks=[], marks=[{"who": "auctioneer", "at": AU["auctioneer"], "view": "front", "pose": "gavel up, hold", "expr": "stern"}],
   subjects=[{"n": "auctioneer head", "p": [0.0, 1.95, -4.65], "f": [2125, 2174]}], physics="none.", light_mood="same.", sound="room hush; one held note; a heartbeat thump f2164.", after="Gavel held up.")
 
@@ -339,7 +339,7 @@ scene(id="S20", f=[2175, 2290], set="loft", light="day", vo="Còn cái quạt h�
   **{"in": {"type": "dissolve", "n": 8, "from": "S19"}, "out": {"type": "end"}},
   build="the loft, 2026: the clean stripe where the tube lay, the fan.", blocking="The partner's head up through the hatch at [0, -1.05] from f2185.",
   action="f2180-2200 the hatch door swings up, the partner's head rises, eyes on the fan ('quạt hỏng' f2201); f2240 ('gác') the loose blade finally drops off: it hits the boards, bounces twice and rests; f2252 ('Biết đâu') he squints at it; push to the end.",
-  acting="partner: suspicious squint, then a small grin f2268.", cams=[k(2175, [0.05, 3.05, -0.3], [0.3, 2.95, -1.95], 50, push=0.0025, punch=[0.005, 14], blur=6, focus=[0.4, 3.1, -1.9], why="the fan and his head")],
+  acting="partner: suspicious squint, then a small grin f2268.", cams=[k(2175, [-0.15, 3.4, 0.95], [0.3, 3.05, -1.95], 46, push=0.003, punch=[0.005, 14], blur=6, focus=[0.4, 3.1, -1.9], why="the fan and his head")],
   kicks=[[2240, 0.4]], marks=[{"who": "partner", "at": [H["pop"][0], H["pop"][2]], "view": "front", "pose": "head up, eyes on the fan", "expr": "stern -> grin"}],
   subjects=[{"n": "fan cage", "p": H["fan_cage"], "f": [2180, 2289]}, {"n": "blade rest", "p": H["blade_rest"], "f": [2245, 2289]}],
   physics="blade (60 g): falls 0.8 m from the cage, bounces twice (restitution 0.3), rests flat.", light_mood="grey day.", sound="door bang f2182; blade clank f2242 + rattle; Suspicious Sound meme f2252.", after="End on the fan.")

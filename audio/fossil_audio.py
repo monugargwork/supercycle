@@ -1,9 +1,9 @@
-# Sound for the Monaco auction reel: an original synthesized score (a stately saleroom waltz-pizz under the hook and the lots ->
-# a golden harbour pad -> the bidding pizz -> a music-box flashback for 2006 -> a warm low cellar pad that thins as the boxes rip
-# -> the music box again for mum, ending on a warm chord), SFX on the picture's event frames (mirrors src/videos/fossil/story.ts and
-# plan.json), and a few of the user's meme sounds (public/fossil/memes/*.mp3), all under the untouched voice: music ducked under
-# speech, -14 LUFS, true peak < -1 dBTP.
-# Output: public/fossil/mix.wav (48 kHz stereo, exact length) + stems.   python3 fossil_audio.py ../public/fossil/voice.wav ../public/fossil/mix.wav
+# Sound for the Fossil sheet in the loft reel: an original synthesized score (a music box for 1999, a hollow low pad for the loft
+# years, a light pizz for the clear-out, a suspense pizz at the counter, a rising pad + vibes for the holo reveal, the press pizz,
+# the music box again for the KB Toys promo, the saleroom pizz with brass stabs for the estimate, a hush for the gavel, and the music
+# box for the fan), SFX on the plan's event frames (mirrors src/videos/fossil/story.ts and plan.json), and a few of the user's meme
+# sounds (public/fossil/memes/*.mp3), all under the untouched voice: music ducked under speech, -14 LUFS, true peak < -1 dBTP.
+# Output: public/fossil/mix.wav (48 kHz stereo, exact length).   python3 fossil_audio.py ../public/fossil/voice.wav ../public/fossil/mix.wav
 import os, subprocess, sys
 import numpy as np
 from dsp import (SR, TAU, ns, tt, rng, lp, hp, bp, colored, fades, place, pan, widen, make_ir, convolve_st, integrated,
@@ -12,7 +12,7 @@ from instruments import m2f, pluck, vibes, glock, musicbox, snare, brush, cymbal
 from sfx_gen import whoosh, clink, rattle, wood_crack, creak
 
 FPS = 30
-TOTAL = 2280
+TOTAL = 2290
 DUR = TOTAL / FPS
 fr = lambda f: f / FPS
 R = rng(7)
@@ -61,7 +61,7 @@ def meme(name, secs=None, fade=0.05):
     return y / (np.sqrt(np.mean(y ** 2)) + 1e-9) * 0.1  # roughly level-matched; the mix sets the bus level
 
 # ================================================================ score
-B = 60.0 / 96
+B = 60.0 / 100
 
 def score():
     mus = np.zeros((2, N)); r = rng(11)
@@ -83,25 +83,27 @@ def score():
             ch = C[(k // 8) % 4]; place(mus, pan(musicbox(m2f(ch[1:][k % 3] + up), 0.35, r, 1.0), 0.3 * np.sin(k)), t, 0.32 * g / 0.6)
             if k % 8 == 0: place(mus, pad([m2f(m) for m in ch[1:]], min(8 * B / 2, t1 - t), 0.25, r, att=0.4, rel=0.6, warm=800), t, g)
             t += B / 2; k += 1
-    # the hook: timpani + cymbal on the gavel, then the saleroom pizz; a timpani under the box thump
-    place(mus, pan(timpani(m2f(33), 0.9, r, 2.0), 0), fr(3), 0.8); place(mus, widen(cymbal(0.7, r, 2.2), r), fr(3), 0.3)
-    pizz(fr(10), fr(270), 0, 0.6)
-    place(mus, pan(timpani(m2f(33), 0.9, r, 2.0), 0), fr(257), 0.7)
-    padrun(fr(276), fr(400), 0.6, 900)                             # the harbour, golden
-    pizz(fr(396), fr(660), 2, 0.6, half=True)                      # 70 lots, the gentlemen
-    for i, m in enumerate([69, 72, 76, 81]): place(mus, pan(brass(m2f(m), 0.5, 0.7, r, kind="stab"), 0.1), fr(630) + 0.05 * i, 0.4)
-    padrun(fr(661), fr(960), 0.55, 700)                            # the box, under glass
-    for i, m in enumerate([60, 64, 67, 72]): place(mus, pan(brass(m2f(m), 0.8, 0.8, r, kind="stab"), 0.0), fr(941) + 0.08 * i, 0.55)   # fanfare for the crown
-    pizz(fr(964), fr(1080), 0, 0.6, sn=True)
-    box(fr(1118), fr(1190), 0.6)                                   # 2006 flashback
-    padrun(fr(1187), fr(1519), 0.5, 800); pizz(fr(1390), fr(1515), 0, 0.5, half=True)
-    padrun(fr(1519), fr(1636), 0.45, 500, -12)                     # wait...
-    padrun(fr(1633), fr(1840), 0.55, 600)                          # the cellar
-    padrun(fr(1836), fr(1996), 0.5, 400, -12)                      # the boxes rip: hollow
-    pizz(fr(1996), fr(2060), 0, 0.6, half=True, sn=True)           # the scramble
-    box(fr(2063), fr(2196), 0.6)                                   # mum
-    padrun(fr(2196), fr(2280), 0.6, 900)
-    for i, m in enumerate([57, 64, 69, 72, 76]): place(mus, pan(vibes(m2f(m), 0.5, r, 2.0, damp=0.2), 0.1), fr(2262) + 0.06 * i, 0.5)
+    box(fr(0), fr(206), 0.55)                                      # 1999: the relative and the hatch
+    place(mus, pan(timpani(m2f(33), 0.9, r, 2.0), 0), fr(122), 0.8) # the slam
+    padrun(fr(206), fr(510), 0.5, 400, -12)                        # the loft years: hollow
+    padrun(fr(510), fr(600), 0.5, 700)                             # 2026, the hatch opens
+    pizz(fr(600), fr(645), 0, 0.5, half=True)
+    padrun(fr(645), fr(795), 0.45, 450, -12)                       # the damage list
+    pizz(fr(795), fr(1050), 2, 0.55, half=True)                    # wallpaper, the save, the TV
+    pizz(fr(1050), fr(1245), 0, 0.5, sn=True)                      # the counter, suspense
+    box(fr(1245), fr(1390), 0.55)                                  # 1999 store
+    padrun(fr(1390), fr(1578), 0.55, 900)                          # the reveal
+    for i, m in enumerate([69, 72, 76, 81, 84]): place(mus, pan(vibes(m2f(m), 0.5, r, 2.0, damp=0.2), 0.1), fr(1498) + 0.07 * i, 0.55)
+    for i, m in enumerate([60, 64, 67, 72]): place(mus, pan(brass(m2f(m), 0.7, 0.8, r, kind="stab"), 0.0), fr(1525) + 0.06 * i, 0.45)
+    pizz(fr(1578), fr(1650), 0, 0.55, half=True, sn=True)          # the press
+    place(mus, pan(timpani(m2f(33), 0.9, r, 2.0), 0), fr(1617), 0.7)
+    box(fr(1650), fr(1775), 0.55)                                  # the promo board
+    pizz(fr(1775), fr(2085), 2, 0.5, half=True)                    # the shoot, the estimate
+    for f0, ms in ((2036, [60, 64, 67]), (2056, [62, 67, 71, 74])):
+        for i, m in enumerate(ms): place(mus, pan(brass(m2f(m), 0.6, 0.8, r, kind="stab"), 0.0), fr(f0) + 0.05 * i, 0.5)
+    padrun(fr(2085), fr(2175), 0.45, 500, -12)                     # the gavel hush
+    box(fr(2175), fr(2290), 0.5)                                   # the fan
+    for i, m in enumerate([57, 64, 69, 72, 76]): place(mus, pan(vibes(m2f(m), 0.5, r, 2.0, damp=0.2), 0.1), fr(2252) + 0.06 * i, 0.45)
     wet = convolve_st(mus, make_ir(1.6, 3, hf=0.6))[:, :N]
     return mus * 0.85 + wet * 0.3
 
@@ -110,64 +112,72 @@ def sfx():
     out = np.zeros((2, N)); r = rng(23)
     P = lambda x, t, g=1.0, p=0.0: place(out, pan(x, p) if np.ndim(x) == 1 else x, t, g)
     W = lambda t, g=0.35, d=0.6: P(widen(whoosh(d, r, peak=d * 0.45), r), t - d * 0.45, g)
-    gavel = lambda f0, g=1.0: P(S(thud(140, 0.3, r, 1.0), clink(r, 900, 0.2), wood_crack(r) * 0.6), fr(f0), g)
     steps = lambda a, n, gap=8, g=0.3, p=0.2: [P(thud(200, 0.08, r, 0.4), fr(a + gap * k), g, p) for k in range(n)]
+    rasp = lambda a, b, g=0.35: P(fades(bp(colored(ns(fr(b - a)), r, 0.3), 1500, 7000) * 0.3 * (1 + 0.4 * np.sin(TAU * 14 * tt(fr(b - a)))), 0.02, 0.1), fr(a), g)
     room = lambda a, b, g=0.25: P(widen(crowd(fr(b - a), r), r), fr(a), g)
-    # S01 the gavel, the murmur, the diamond, the watch tick, footsteps, the thump
-    gavel(3, 1.0); room(0, 276, 0.18); P(chime([m2f(96), m2f(100)], r, 0.05), fr(80), 0.3)
-    for k in range(10): P(clink(r, 3600, 0.01) * 0.4, fr(105 + 4 * k), 0.2, 0.2)
-    steps(185, 6, 9, 0.3, 0.3); P(S(thud(70, 0.5, r, 1.0), noise_burst(0.2, 300, 2500, r, 0.005, 0.08)), fr(257), 1.0)
-    # S02-S03 out the window: gulls, water, a horn; back in
-    W(fr(290), 0.35, 1.0); P(widen(fades(bp(colored(ns(fr(120)), r, 0.6), 200, 1200) * 0.25, 0.3, 0.4), r), fr(280), 0.3)
-    for f0 in [300, 330, 352]: P(pan(fades(np.sin(TAU * (1800 + 400 * np.sin(TAU * 7 * tt(0.25))) * tt(0.25)) * np.exp(-tt(0.25) / 0.1), 0.01, 0.05), 0.4), fr(f0), 0.08)
-    P(fades(np.sin(TAU * 110 * tt(1.2)) * 0.4 + np.sin(TAU * 165 * tt(1.2)) * 0.2, 0.15, 0.4), fr(360), 0.12)
-    W(fr(420), 0.35, 0.9)
-    # S04 paddles up in unison
-    W(fr(630), 0.4, 0.3); P(S(*[click(r) for _ in range(3)]), fr(631), 0.5)
-    # S05 footsteps, the door click, the gleam, the crown, the spot
-    steps(676, 3, 8, 0.25); P(S(click(r), clink(r, 2200, 0.03)), fr(716), 0.6); P(chime([m2f(91), m2f(96), m2f(100)], r, 0.06), fr(866), 0.3)
-    P(clink(r, 1500, 0.05), fr(935), 0.4); P(S(thud(400, 0.06, r, 0.6), click(r)), fr(941), 0.6)
-    # S06 flaps
-    for f0 in (989, 1032):
+    # S01 the band, the shove, the roll, the fan clank, the cord, the slam, the cough
+    P(fades(np.sin(TAU * (180 + 260 * np.exp(-tt(0.3) / 0.05)) * tt(0.3)) * np.exp(-tt(0.3) / 0.08), 0.001, 0.05), fr(55), 0.4)
+    W(fr(66), 0.35, 0.5); P(thud(120, 0.2, r, 0.6), fr(80), 0.5); rasp(80, 96, 0.25); P(clink(r, 700, 0.15), fr(97), 0.35, 0.3)
+    P(creak(0.3, r, 500, 380), fr(104), 0.3); P(S(thud(60, 0.6, r, 1.0), wood_crack(r) * 0.6, noise_burst(0.3, 200, 2000, r, 0.004, 0.1)), fr(122), 1.0)
+    P(noise_burst(0.18, 300, 1800, r, 0.01, 0.06), fr(128), 0.3); P(noise_burst(0.15, 300, 1800, r, 0.01, 0.05), fr(140), 0.25)
+    # S02 the calendar flutter; a sped-up clock
+    for k in range(27): P(flick(r), fr(212 + 1.4 * k), 0.18, 0.3)
+    for k in range(16): P(clink(r, 3200, 0.01) * 0.4, fr(210 + 3 * k), 0.12, -0.2)
+    # S03 dust, the spider, the fan creak, three door clunks
+    P(noise_burst(0.6, 2000, 8000, r, 0.1, 0.3), fr(285), 0.12); P(fades(np.sin(TAU * (900 - 500 * tt(0.4) / 0.4) * tt(0.4)) * 0.3, 0.01, 0.05), fr(305), 0.15)
+    P(creak(0.6, r, 600, 420), fr(339), 0.35, 0.3)
+    for p0 in (344, 356, 368): P(thud(220, 0.1, r, 0.5), fr(p0 - 3), 0.3); P(thud(180, 0.12, r, 0.6), fr(p0 + 12), 0.35)
+    # S05 the hatch from below, the bang, the torch
+    P(thud(140, 0.15, r, 0.6), fr(526), 0.4); P(S(thud(110, 0.3, r, 0.9), wood_crack(r) * 0.4), fr(533), 0.7); P(click(r), fr(536), 0.4)
+    # S06 web snaps, the scrape
+    for k in range(4): P(clink(r, 4000 + 300 * k, 0.005) * 0.3, fr(578 + 2 * k), 0.2); rasp(578, 590, 0.3)
+    # S07 the unroll, the tin
+    rasp(620, 638, 0.45); P(S(clink(r, 600, 0.15), thud(250, 0.1, r, 0.5)), fr(645), 0.55)
+    # S08 the corner lift and flop
+    P(noise_burst(0.25, 1500, 6000, r, 0.02, 0.1), fr(752), 0.2); P(noise_burst(0.2, 800, 4000, r, 0.005, 0.06), fr(792), 0.25)
+    # S09 paper slap on the wall, the roll up, the toss, the bag
+    P(noise_burst(0.12, 600, 5000, r, 0.002, 0.04), fr(811), 0.5); rasp(836, 846, 0.35); W(fr(850), 0.3, 0.5); P(noise_burst(0.4, 400, 3000, r, 0.01, 0.15), fr(860), 0.45)
+    # S10 the dash, the yank, the TV crowd, the hug
+    steps(882, 5, 3.5, 0.3, 0.2); P(noise_burst(0.35, 400, 3000, r, 0.01, 0.12), fr(900), 0.45); room(940, 1000, 0.35); P(noise_burst(0.2, 300, 1500, r, 0.02, 0.08), fr(1028), 0.25)
+    # S11-S12 the counter: room tone, the freeze
+    room(1050, 1245, 0.1); P(S(thud(300, 0.05, r, 0.5), noise_burst(0.15, 2000, 8000, r, 0.002, 0.05)), fr(1140), 0.5)
+    # S13 the store: chatter, a till ding
+    room(1245, 1390, 0.16); P(chime([m2f(88), m2f(93)], r, 0.08), fr(1300), 0.3)
+    # S14 the unroll, the lamp, the shimmer
+    rasp(1395, 1418, 0.4); P(click(r), fr(1420), 0.5); P(chime([m2f(91), m2f(96), m2f(100), m2f(103)], r, 0.05), fr(1498), 0.35)
+    # S15 the press: clatter loop, roller hiss, the chop, cards slapping
+    for k in range(18): P(S(thud(260, 0.05, r, 0.4), click(r) * 0.5), fr(1580 + 4 * k), 0.2, -0.2)
+    P(widen(fades(bp(colored(ns(fr(70)), r, 0.4), 800, 4000) * 0.15, 0.1, 0.2), r), fr(1580), 0.3)
+    P(S(thud(90, 0.4, r, 1.0), clink(r, 500, 0.1), noise_burst(0.15, 1000, 6000, r, 0.002, 0.05)), fr(1617), 0.9)
+    for k in range(6): P(noise_burst(0.05, 2000, 7000, r, 0.002, 0.015), fr(1621 + 2.5 * k), 0.25, 0.1)
+    # S16 store chatter
+    room(1650, 1775, 0.14)
+    # S17 the stamp
+    P(S(thud(220, 0.1, r, 0.8), click(r)), fr(1923), 0.55)
+    # S18 the board flaps, the room
+    room(1950, 2175, 0.15)
+    for f0 in (2036, 2056):
         for k in range(6): P(click(r), fr(f0) + 0.03 * k, 0.35, -0.1)
-    # S07 chair scrape + clatter
-    P(noise_burst(0.25, 400, 3000, r, 0.01, 0.1), fr(1084), 0.5); P(S(thud(160, 0.2, r, 0.8), wood_crack(r) * 0.5), fr(1096), 0.8)
-    # S08 kitchen: sizzle, bowl slide, coin roll
-    P(widen(fades(bp(colored(ns(fr(68)), r, 0.2), 2000, 8000) * 0.12, 0.1, 0.2), r), fr(1118), 0.25)
-    P(noise_burst(0.35, 500, 3000, r, 0.02, 0.15), fr(1125), 0.3); P(fades(bp(colored(ns(0.9), r, 0.4), 3000, 7000) * 0.2 * (1 + np.sin(TAU * 18 * tt(0.9))), 0.01, 0.2), fr(1150), 0.3)
-    # S09 the spot clunk, the gleam
-    P(S(thud(400, 0.06, r, 0.6), click(r)), fr(1219), 0.6); P(chime([m2f(93), m2f(98)], r, 0.06), fr(1300), 0.3)
-    # S10 ten little ticks as the scooters pass
-    for k in range(10): P(clink(r, 2000 + 120 * k, 0.03), fr(1462 + 3.6 * k), 0.25, 0.1)
-    # S11 footsteps, bottle clink
-    steps(1528, 3, 8, 0.25, 0.3); P(clink(r, 1800, 0.08), fr(1600), 0.45)
-    # S13 the cork squeak, POP, two cork bounces, the pour
-    P(creak(0.25, r, 900, 700), fr(1722), 0.3); P(S(thud(600, 0.05, r, 1.0), noise_burst(0.08, 1000, 6000, r, 0.001, 0.03)), fr(1733), 0.9)
-    for f0 in (1754, 1760): P(clink(r, 1300, 0.02), fr(f0), 0.3)
-    P(fades(bp(colored(ns(fr(22)), r, 0.3), 300, 1500) * 0.35 * (1 + 0.5 * np.sin(TAU * 9 * tt(fr(22)))), 0.03, 0.08), fr(1746), 0.5)
-    # S15 seventeen rips, accelerating, and the year ticks
-    open_at = [1866 + round(6.6 * n) for n in range(17)]
-    for f0 in open_at: P(fades(bp(colored(ns(0.22), r, 0.2), 1500, 9000) * np.exp(-tt(0.22) / 0.08), 0.002, 0.04), fr(f0), 0.45, 0.3 * np.sin(f0))
-    for k in range(20): P(click(r), fr(1840 + 7.25 * k), 0.15)
-    P(chime([m2f(96), m2f(100), m2f(103)], r, 0.06), fr(1988), 0.35)
-    # S16 the scramble: a bidding hubbub, paddle whooshes
-    P(widen(crowd(fr(40), r, cheer=True), r), fr(2022), 0.4)
-    for k in range(12): W(fr(2024 + 2 * k), 0.12, 0.2)
-    # S17 wrap crinkle, the snatch, footsteps, the thunk on the cupboard
-    P(noise_burst(0.3, 3000, 9000, r, 0.01, 0.1), fr(2122), 0.3); W(fr(2134), 0.35, 0.3); steps(2150, 3, 7, 0.25, -0.2); P(thud(180, 0.15, r, 0.6), fr(2176), 0.5)
-    # S18 door creak, footsteps
-    P(creak(0.5, r, 300, 200), fr(2198), 0.35); steps(2202, 4, 8, 0.25, 0.3)
+    # S19 the heartbeat under the held gavel
+    for f0 in (2150, 2164): P(thud(55, 0.3, r, 0.2), fr(f0), 0.5)
+    # S20 the hatch, the blade drops and rattles
+    P(S(thud(110, 0.3, r, 0.8), wood_crack(r) * 0.3), fr(2182), 0.5); P(S(clink(r, 1100, 0.12), clink(r, 1600, 0.08)), fr(2244), 0.6)
+    for k, f0 in enumerate((2251, 2256)): P(clink(r, 1300 - 100 * k, 0.04), fr(f0), 0.3)
     return out
 
 # ================================================================ meme sounds (the user's folder), only where they are the joke
 MEME_CUES = [  # (frame, file, trim seconds or None, gain)
-    (257, "Instagram Thud.mp3", None, 0.7),
-    (1084, "Huh5544.mp3", None, 0.9),
-    (1494, "Wowwwwwwwwwwwwwwwww.mp3", 1.8, 0.5),
-    (1525, "Suspicious Sound.mp3", 2.0, 0.7),
-    (1733, "Kaching Sound FX.mp3", None, 0.0),
-    (1985, "Meme Violin Sad Violin.mp3", 2.2, 0.45),
-    (2244, "Romantic.mp3", 2.5, 0.5),
+    (122, "Instagram Thud.mp3", None, 0.6),
+    (356, "Suspicious Sound.mp3", 1.6, 0.5),
+    (653, "Meme Violin Sad Violin.mp3", 2.6, 0.35),
+    (821, "BRUH.mp3", None, 0.8),
+    (1142, "Huh5544.mp3", None, 0.9),
+    (1498, "Wowwwwwwwwwwwwwwwww.mp3", 1.8, 0.5),
+    (1617, "Punch Hit.mp3", None, 0.5),
+    (1700, "Kids Cheering.mp3", 1.4, 0.35),
+    (1842, "Camera shutter.mp3", 0.5, 0.6), (1859, "Camera shutter.mp3", 0.5, 0.55), (1873, "Camera shutter.mp3", 0.5, 0.55), (1886, "Camera shutter.mp3", 0.5, 0.6),
+    (2056, "Kaching Sound FX.mp3", None, 0.6),
+    (2252, "Suspicious Sound.mp3", 2.0, 0.6),
 ]
 
 def memes():
