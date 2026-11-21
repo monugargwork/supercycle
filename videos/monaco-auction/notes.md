@@ -20,3 +20,17 @@ Composition `MonacoReel` · code `src/videos/monaco/` · assets `public/monaco/`
 
 | Time | Note | Scene | What changed |
 |---|---|---|---|
+
+## Round 1 (Frame.io `Monaco_v1.csv`, 21 Nov 2026): "a lot of glitch in the whole video"
+| Time | Comment | Scene | What changed and why |
+|---|---|---|---|
+| 0:26.17 (f797) | "too much glitch here please fix" | S05 macro on the box | The plinth's gold rim and its white top shared the plane y 1.30 (z-fighting band); the box lid overhung by only 2 mm (its outline broke into flickering dashes); the shrink-wrap shell 3 mm off the box drew ink and cast a shadow onto it. Fixed: audited per-box inset (no shared planes), lid overhang 6 mm, wrap and glass on NOINK with no shadows. |
+| 0:56.09 (f1689) | "here glitch as well" | S12 cellar pull-back | The rack's back board and the stone wall shared z -2.8, and every shelf and divider met them face to face: whole cubbies flipped light/dark frame to frame. The cellar also had no ceiling (sky showing). Fixed: per-box inset, a ceiling at 2.84 m. |
+| (whole reel) | "a lot of glitch in whole video" | all sets | Same cause everywhere: boxes built face to face (window frames in the wall openings, table tops on their drapes, chairs, stage). The set builder now records every box and floor quad, insets each by its own 0.5-4.6 mm chosen so no face lands in another's plane, and prints `[coplanar] N`: N = 0. Camera near plane 0.12 m (was 0.05) for depth precision. The shadow frustum is now frozen per shot and texel-snapped (tested: not the cause here, kept as hardening). |
+
+**Why it got through:** the checks were single stills (sweep sheets). Flicker only exists between frames, so a still can't show it.
+**Measured:** `scripts/flicker.py` (pixels that pop away and back in solid patches while the frames either side agree). Monaco v1: 12 runs, the cellar alone 250 frames at up to 15 % of the frame. Attic v2 (approved): 4 tiny runs. Fixed Monaco, five-frame runs every 30 frames: 0 at both notes; 3 short runs left at fast camera moves (window fly-in f435, glide past the porter f735, dolly-out f915), checked frame by frame and passed as motion (ink-line crawl, in every reel).
+**Prevention, now in the workflow:** `scripts/flickcheck.command` before every render (kickoff and feedback skills, production flow, rules §6); every render ends with a flicker report on the video; `new_reel.sh` now scaffolds from `monaco/` so new reels get the audited `box()`. And `render.command` refuses to reuse cached chunks made from older code without a REDO: Monaco v2 would otherwise have reused v1's glitchy chunks.
+**Also affected (not fixed yet):** Chocobo and Fanatics drafts score high on the meter for the same reason (their sets predate the audit).
+Taste: glitches read as broken, whatever the story; a reel must be flicker-free before it is sent.
+

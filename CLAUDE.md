@@ -42,7 +42,7 @@ Account skills they call: `vn-news-script` (the script), `story-reel-director` (
 |---|---|
 | `src/index.ts`, `src/Root.tsx` | Register the compositions: `MonacoReel`, `ChocoboReel`, `FanaticsReel`, `MudkipReel`, `AtticReel`, `GpsReel`, `PsaReel` (each with a `…Captions` comp), `BridgeShort`, `CharTest` |
 | `src/engine/` | The shared engine (toon characters, ink, shading, paint, lights, grade, lens blur, geometry). New reels import it; changes must be additive |
-| `src/videos/<reel>/` | One folder per reel: that reel's story, sets, cast, art, captions and `Reel.tsx` (see `library/INDEX.md`). The newest base is `fanatics/` (it carries the channel logo; older reels stay without it). Attic, GPS, PSA and Bridge still hold their own engine copies |
+| `src/videos/<reel>/` | One folder per reel: that reel's story, sets, cast, art, captions and `Reel.tsx` (see `library/INDEX.md`). The newest base is `monaco/` (channel logo, anti-flicker `box()` helper, near plane 0.12; `new_reel.sh` copies it). Attic, GPS, PSA and Bridge still hold their own engine copies |
 | `src/enzo/` | Enzo's `Title2` titles and the Bolota font loader |
 | `public/<reel>/` | Each reel's assets: `voice.wav`, `words.json`, `mix.wav`, `cards/` (real scans), `memes/` |
 | `public/fonts/` | Fonts |
@@ -65,11 +65,12 @@ Account skills they call: `vn-news-script` (the script), `story-reel-director` (
 
 ## Commands
 - New reel: `scripts/new_reel.sh <slug> <Name>` (story folder at once; the build once `plan.json` exists). Cards: `python3 scripts/card.py find|add|use …`.
+- Flicker (glitch) check before every render: `scripts/flickcheck.command MonacoReel` (stills can't show flicker; `[coplanar]` must be 0). Every render ends with a flicker report on the video.
 - Check a reel: `scripts/sweep.command MudkipReel 60 333,1501` (every 60 frames plus beats → `out/MudkipReel/sweep/sheet_*.jpg`, frames listed in `sheets.txt`); only some frames: `scripts/sweep.command MudkipReel 0 333,1501`. Single stills: on the Mac `scripts/stills.command MudkipReel 120,640,1500` (→ `out/MudkipReel/chk_<f>.jpg`); in the cloud `COMP=MudkipReel node scripts/stills.mjs out/mudkip/x_ 120,640,1500`. Contact sheet: `python3 scripts/sheet.py out.jpg 3 files…`.
 - Preview on the Mac: double-click `scripts/Open Studio.command` (it pulls first).
 - Render on the Mac (the user runs it; Claude gives the exact line; `out/` and the render folders are never committed):
   `cd ~/Movies/"Story Reels"/story-reels && scripts/render.command <Composition> <Name>_v<n>`
-  - After a fix: `REDO=7,8 scripts/render.command …` re-renders only chunks 7-8 (60-80 s); `REDO=all` starts fresh.
+  - After a fix: `REDO=7,8 scripts/render.command …` re-renders only chunks 7-8 (60-80 s); `REDO=all` starts fresh. After a code change the render refuses to reuse cached chunks until REDO says which to redo.
   - A transparent overlay of only the changed frames: `PATCH=1 scripts/render.command <Composition> <Name>_patch`, which writes a `.mov`.
   - A name ending in `_final` goes to `Final Render/`, otherwise to `Drafts/`.
 - Type check: `npm run tsc`. Reel.tsx has known R3F typing errors; ignore those.

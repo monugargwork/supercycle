@@ -26,9 +26,10 @@ Read first: `CLAUDE.md`, `docs/rules.md`, `docs/production-flow.md`, `docs/sourc
 
 ## 4. Check, then hand over
 1. Sweep as contact sheets: `scripts/sweep.command <Reel>Reel 60 <beat frames>` on the Mac (every 60 frames plus every beat, 9 per sheet in `out/<Reel>Reel/sweep/`). Look at the sheets, and open a single still only for a detail. In the cloud: `scripts/stills.mjs` with `every:60`, then `scripts/sheet.py`.
-2. Fix what breaks the rules, and log what changed in `videos/<slug>/notes.md`.
-3. Commit and push. Then give him the render line:
+2. Flicker check: `scripts/flickcheck.command <Reel>Reel` (the `[coplanar]` count must be 0; look at every run it lists). Stills can't show flicker.
+3. Fix what breaks the rules, and log what changed in `videos/<slug>/notes.md`.
+4. Commit and push. Then give him the render line (it ends with a flicker report on the video; read it):
    ```
    cd ~/Movies/"Story Reels"/story-reels && scripts/render.command <Reel>Reel <Name>_v1
    ```
-4. Add the reel's row to the table in `CLAUDE.md`.
+5. Add the reel's row to the table in `CLAUDE.md`.

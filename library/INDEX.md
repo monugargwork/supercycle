@@ -10,7 +10,7 @@ The shared engine lives once in `src/engine/` and new reels import it (`../../en
 | `lights.ts`, `grade.ts` | Light presets (day, golden and more) and the colour grade per preset |
 | `ink.ts`, `shade.ts`, `cardshade.ts`, `lensblur.ts`, `geo.ts` | Ink outlines, two-tone shading, card shading, depth-of-field blur, geometry batching |
 
-## Per reel (`src/videos/<reel>/`, copied from the newest reel and rewritten)
+## Per reel (`src/videos/<reel>/`, copied from the newest reel and rewritten; the base is now `monaco/`, whose `sets.ts` carries the audited `box()` helper: per-box inset + `[coplanar]` report)
 | Module | What |
 |---|---|
 | `cast.ts` | Staging per scene (`stage()` cases), 3D arms with a fixed length (`arm3d`, which warns when short), held props, the doubters chorus (`doubters()`) |
@@ -51,6 +51,7 @@ The shared engine lives once in `src/engine/` and new reels import it (`../../en
 | `scripts/plan_check.py`, `plan_view.py`, `plan_md.py`, `plan_lib.py` | Safe-area check, top-down blocking sheet, direction.md, the camera maths shared with story.ts |
 | `scripts/new_reel.sh` | Scaffolds a reel: story folder, assets folder, per-reel code from the newest reel with exports and paths renamed, sound script, compositions registered. Safe to re-run |
 | `scripts/card.py` | The card library (`library/cards/`, `CATALOG.md`): `find`, `add` (fetch and store), `use` (copy into a reel and write `SOURCES.txt`) |
+| `scripts/flickcheck.command`, `scripts/flicker.py` | Flicker check: five frames in a row every 30 frames before a render; `flicker.py` meters a finished video (render.command runs it). Catches z-fighting and popping shadows that stills can't show |
 | `scripts/sweep.command` | Still sweep as 3x3 contact sheets (`out/<Comp>/sweep/sheet_*.jpg` + `sheets.txt`); the default way to check |
 | `scripts/stills.mjs`, `sheet.py`, `sbs_sheet.py`, `short_qa.py` | Check stills (`COMP=<Comp>`), contact sheets, side-by-side sheets, frame QA |
 | `audio/*_audio.py`, `dsp.py`, `instruments.py`, `sfx_gen.py` | Synthesized score and SFX, plus the mix with ducking and loudness |

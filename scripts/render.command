@@ -44,7 +44,17 @@ if [ -n "${PATCH:-}" ]; then
     --image-format=png --scale=$SCALE --concurrency="$CONC" --gl="$GL" --timeout=120000 --muted \
     --props='{"captions":true,"patch":true,"audio":false}' --log=warn || fail "Patch render failed. Tell Claude what this window says."
   echo "✅ Done in $(( ($(date +%s) - START) / 60 )) min → $OUT. Put it on the track above the previous version, starting at 0:00."
-  command -v open >/dev/null && open "$OUTDIR"; exit 0
+  # Flicker report on the finished video (single stills can't show flicker): look at every run it lists before sending.
+PY_BIN=python3; [ -x ../.venv/bin/python ] && PY_BIN=../.venv/bin/python
+CUTS=$("$PY_BIN" - "$REEL" <<'PY' 2>/dev/null
+import sys, re, json
+st = open(f"src/videos/{sys.argv[1]}/story.ts").read()
+plan = json.load(open(re.search(r'import plan from "\.\./\.\./\.\./(videos/[^"]+)"', st).group(1)))
+print(",".join(str(s["f"][0]) for s in plan["scenes"] if s["in"]["type"] in ("cut", "dissolve")))
+PY
+)
+echo "▶ Flicker check…"; "$PY_BIN" scripts/flicker.py "$OUT" ${CUTS:+--cuts "$CUTS"} --report "$OUTDIR/$NAME.flicker.txt" || echo "⚠️  Flicker found (listed above, saved next to the video). Tell Claude before sending this version."
+command -v open >/dev/null && open "$OUTDIR"; exit 0
 fi
 
 PROPS='{"captions":true}'
@@ -102,5 +112,15 @@ npx remotion ffmpeg -y -loglevel error -f concat -safe 0 -i "$WORK/parts.txt" -i
 [ -s "$OUT" ] || fail "The video was not created."
 rm -rf "$WORK"
 echo "✅ Done in $(( ($(date +%s) - START) / 60 )) min ($DONE of $N chunks rendered, the rest reused) → $OUT ($(du -h "$OUT" | cut -f1))"
+# Flicker report on the finished video (single stills can't show flicker): look at every run it lists before sending.
+PY_BIN=python3; [ -x ../.venv/bin/python ] && PY_BIN=../.venv/bin/python
+CUTS=$("$PY_BIN" - "$REEL" <<'PY' 2>/dev/null
+import sys, re, json
+st = open(f"src/videos/{sys.argv[1]}/story.ts").read()
+plan = json.load(open(re.search(r'import plan from "\.\./\.\./\.\./(videos/[^"]+)"', st).group(1)))
+print(",".join(str(s["f"][0]) for s in plan["scenes"] if s["in"]["type"] in ("cut", "dissolve")))
+PY
+)
+echo "▶ Flicker check…"; "$PY_BIN" scripts/flicker.py "$OUT" ${CUTS:+--cuts "$CUTS"} --report "$OUTDIR/$NAME.flicker.txt" || echo "⚠️  Flicker found (listed above, saved next to the video). Tell Claude before sending this version."
 command -v open >/dev/null && open "$OUTDIR"
 echo "You can close this window."

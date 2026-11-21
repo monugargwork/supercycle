@@ -43,6 +43,11 @@ One page of rules every reel follows. Where an older note disagrees, this page w
 - Stay on three.js + Remotion (Blender was considered and parked).
 - Shadows are light or absent; characters cast no shadows. Interiors get ceilings that cast no shadow, so no sky shows through.
 - A camera never sits inside geometry, and coplanar surfaces never flicker (raise one plane).
+- **No flicker (the Monaco v1 "glitch", 21 Nov 2026).** Two faces in one plane (a panel on a wall, a rim on a plinth top, a shelf against a back board) z-fight: the GPU can't tell which is in front, and the winner changes frame to frame as the camera moves. Stills can't show it. So:
+  - Sets build boxes with the audited `box()` helper (the Monaco `sets.ts`): every box is pulled in by its own 0.5-4.6 mm, chosen so no face lands in the plane of another, and the build prints `[coplanar] N coplanar overlaps`. N must be 0.
+  - Transparent shells (glass, shrink-wrap) draw no ink and cast no shadow; a lid or trim overhangs by at least 5 mm, never 1-2 mm.
+  - Camera near plane 0.12 m (not 0.05) for depth precision; interiors have a ceiling.
+  - Check before rendering with `scripts/flickcheck.command <Comp>`, and read the flicker report every render prints. Fast camera moves can register as short runs: look at those frames and pass them only if they are motion.
 - 30 fps. The composition is 1080x1920; renders come out at exactly 4/3 of that, 1440x2560.
 
 ## 7. Working with the user

@@ -40,15 +40,17 @@ Each reel runs in one session; the user sets model and effort by hand. To save c
 ## 5. Check
 1. Sweep as contact sheets: `scripts/sweep.command <Reel>Reel 60 <beat frames>` renders one still every 60 frames plus every beat and hero moment on the Mac GPU (about a second each) and tiles them 3x3 into `out/<Reel>Reel/sweep/sheet_*.jpg`; `sheets.txt` lists the frames on each sheet. Look at the sheets; open a single still (`f_<frame>.jpg` in the same folder) only to inspect a detail.
 2. In a cloud session there is no GPU: `COMP=<Reel>Reel node scripts/stills.mjs out/<reel>/<prefix>_ every:60,<f1>,…` (about 20 s each), then `python3 scripts/sheet.py out.jpg 3 files…`.
-3. Fix anything that breaks the rules on the sheets. Fix anything that breaks the rules, and log what changed in `notes.md`.
-4. Full-resolution video renders in the cloud are far too slow (about 2.5 min per frame with no GPU). Renders go to the Mac.
+3. **Flicker check** (stills can't show it): `scripts/flickcheck.command <Reel>Reel` renders five frames in a row every 30 frames and measures pixels that pop away and back (z-fighting, popping shadows); it also prints the set's `[coplanar]` count, which must be 0. Look at every run it lists. Fast camera moves can show up as short runs; pass them only after looking at the frames. Feedback rounds: `scripts/flickcheck.command <Reel>Reel 0 <frames>`.
+4. Fix anything that breaks the rules on the sheets. Fix anything that breaks the rules, and log what changed in `notes.md`.
+5. Full-resolution video renders in the cloud are far too slow (about 2.5 min per frame with no GPU). Renders go to the Mac.
 
 ## 6. Render (Mac)
 1. Push, then give the user the command:
    ```
    cd ~/Movies/"Story Reels"/story-reels && scripts/render.command <Comp> <Name>_v<n>
    ```
-2. The output lands in `Story Reels/Drafts/`, or in `Final Render/` for a name ending `_final`.
+2. The output lands in `Story Reels/Drafts/`, or in `Final Render/` for a name ending `_final`. Every render ends with a flicker report on the finished video (`<Name>.flicker.txt` next to it): read it before sending.
+   - Cached 10 s chunks are reused only on purpose: after any code change the render refuses to start until `REDO=<chunks>` or `REDO=all` says which chunks to redo, so a new version can't silently keep old frames.
 3. Lambda is parked until the user's AWS access is fixed (an explicit deny on IAM user `remotion-user`). Enzo's `.github/workflows/lambda-render.yml` and `scripts/lambda/` are the model when it comes back.
 
 ## 7. Review and fixes

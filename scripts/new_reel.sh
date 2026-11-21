@@ -12,7 +12,7 @@
 set -e
 cd "$(dirname "$0")/.."
 SLUG="${1:?Usage: scripts/new_reel.sh <slug> <Name>}"; NAME="${2:?Usage: scripts/new_reel.sh <slug> <Name>}"
-BASE="${BASE:-fanatics}"; BASE_NAME="${BASE_NAME:-Fanatics}"; BASE_SLUG="${BASE_SLUG:-fanatics-unpaid-pikachu}"
+BASE="${BASE:-monaco}"; BASE_NAME="${BASE_NAME:-Monaco}"; BASE_SLUG="${BASE_SLUG:-monaco-auction}"   # monaco: the anti-flicker box() helper and near plane
 LOW=$(echo "$NAME" | tr '[:upper:]' '[:lower:]'); UP=$(echo "$NAME" | tr '[:lower:]' '[:upper:]')
 BLOW=$(echo "$BASE_NAME" | tr '[:upper:]' '[:lower:]'); BUP=$(echo "$BASE_NAME" | tr '[:lower:]' '[:upper:]')
 [[ "$NAME" =~ ^[A-Z][A-Za-z0-9]*$ ]] || { echo "Name must be one word starting with a capital, e.g. Gengar"; exit 1; }
@@ -38,7 +38,7 @@ fi
 S="src/videos/$LOW"
 if [ ! -d "$S" ]; then
   mkdir -p "$S"
-  for f in Reel.tsx story.ts sets.ts cast.ts world.ts art.ts captions.ts; do cp "src/videos/$BASE/$f" "$S/$f"; done
+  for f in Reel.tsx story.ts sets.ts cast.ts world.ts art.ts art2.ts captions.ts; do cp "src/videos/$BASE/$f" "$S/$f"; done
   sed -i '' -E \
     -e "s/${BASE_NAME}Reel/${NAME}Reel/g; s/${BASE_NAME}Captions/${NAME}Captions/g; s/${BUP}_FRAMES/${UP}_FRAMES/g" \
     -e "s#staticFile\(\"${BLOW}/#staticFile(\"${LOW}/#g; s#staticFile\(\`${BLOW}/#staticFile(\`${LOW}/#g" \
