@@ -316,7 +316,7 @@ One hard cut (into S07, the shout). Place changes in the saleroom travel (out th
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1390 | open | [3.2, 1.35, -2] | [2.4, 0.85, -3.6] | 40 | 0.15 | 8 | scooter and slab |
+| 1390 | open | [3.55, 1.6, -1.55] | [2.4, 0.85, -3.4] | 40 | 0.15 | 8 | scooter and slab |
 | 1456 | glide 46 f | [2.6, 3.5, -4.9] | [2.3, 0.5, 1.4] | 46 | 0.1 | 2 | crane: ten in a row |
 
 - Kicks (7 f): none.
