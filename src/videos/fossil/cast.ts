@@ -345,7 +345,7 @@ export const stage = (id: number, f: number, cam: CamInfo): Stage => {
       front(out, cam, "owner", ...om, fo, f, id === 8 ? [653, 687, 716, 767] : []);
       const a = id === 8 || f >= ROLLED7 ? SL : f < PUSH7 ? 0 : SL * easeOut((f - PUSH7) / (ROLLED7 - PUSH7));
       const curl = id === 7 && f >= ROLLED7 && f < TINLAND7 ? smooth((f - ROLLED7) / 4) : 0;
-      const fold = id === 8 ? (f < LIFT8[0] ? 0 : f < LIFT8[1] ? 2.1 * smooth((f - LIFT8[0]) / (LIFT8[1] - LIFT8[0])) : f < DROP8 ? 2.1 : 2.1 * (1 - clamp01((f - DROP8) / 6) ** 2)) : 0;
+      const fold = id === 8 ? (f < LIFT8[0] ? 0 : f < LIFT8[1] ? 2.45 * smooth((f - LIFT8[0]) / (LIFT8[1] - LIFT8[0])) : f < DROP8 ? 2.45 : 2.45 * (1 - clamp01((f - DROP8) / 6) ** 2)) : 0;
       out.sheet = { p: v3a(H.floor_sheet), q: QI, pose: { a, curl, fold, wreck: true } };
       const rest = [restHand(cam, "owner", om, fo, -1), restHand(cam, "owner", om, fo, 1)];
       let rh = rest[1];

@@ -40,7 +40,7 @@ Account skills they call: `vn-news-script` (the script), `story-reel-director` (
 ## Layout
 | Path | What |
 |---|---|
-| `src/index.ts`, `src/Root.tsx` | Register the compositions: `MonacoReel`, `ChocoboReel`, `FanaticsReel`, `MudkipReel`, `AtticReel`, `GpsReel`, `PsaReel` (each with a `…Captions` comp), `BridgeShort`, `CharTest` |
+| `src/index.ts`, `src/Root.tsx` | Register the compositions: `FossilReel`, `MonacoReel`, `ChocoboReel`, `FanaticsReel`, `MudkipReel`, `AtticReel`, `GpsReel`, `PsaReel` (each with a `…Captions` comp), `BridgeShort`, `CharTest` |
 | `src/engine/` | The shared engine (toon characters, ink, shading, paint, lights, grade, lens blur, geometry). New reels import it; changes must be additive |
 | `src/videos/<reel>/` | One folder per reel: that reel's story, sets, cast, art, captions and `Reel.tsx` (see `library/INDEX.md`). The newest base is `monaco/` (channel logo, anti-flicker `box()` helper, near plane 0.12; `new_reel.sh` copies it). Attic, GPS, PSA and Bridge still hold their own engine copies |
 | `src/enzo/` | Enzo's `Title2` titles and the Bolota font loader |
@@ -55,7 +55,7 @@ Account skills they call: `vn-news-script` (the script), `story-reel-director` (
 
 | Reel | Composition | Video folder | Status |
 |---|---|---|---|
-| Fossil sheet in the loft (uncut 1999 holo sheet) | `FossilReel` (2290 f) | `videos/fossil-sheet-loft/` | beats written, waiting for OK (21 Nov 2026) |
+| Fossil sheet in the loft (uncut 1999 holo sheet) | `FossilReel` (2290 f) | `videos/fossil-sheet-loft/` | v1 built, ready to render (21 Nov 2026) |
 | Monaco auction (sealed Delta Species box) | `MonacoReel` (2280 f) | `videos/monaco-auction/` | v1 built and rendered on the Mac (20 Nov 2026) |
 | Golden Chocobo private sale | `ChocoboReel` (2275 f) | `videos/golden-chocobo/` | v1 built, ready to render (19 Nov 2026) |
 | Fanatics unpaid Pikachu | `FanaticsReel` (2325 f) | `videos/fanatics-unpaid-pikachu/` | v1 built, ready to render (19 Nov 2026) |

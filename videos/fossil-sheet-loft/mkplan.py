@@ -25,7 +25,7 @@ H = dict(hatch=[0.0, -1.0], hatch_x=[-0.42, 0.42], hatch_z=[-1.35, -0.65], ladde
          tube=[0.0, 2.665, -1.655], lights=[-0.05, 2.73, -1.84], fan=[0.45, LOFT, -2.0], fan_cage=[0.45, 3.48, -2.0], post=[-0.25, -2.25],
          calendar=[-0.25, 3.22, -2.2], scissors=[-0.25, 2.95, -2.2], frame=[-0.62, LOFT, -2.22], blade_rest=[0.52, LOFT + 0.01, -1.82],
          pop=[0.0, 1.25, -1.05], partner_pull=[0.0, 1.45, -1.25],
-         floor_sheet=[0.05, 0.004, 0.55], owner_floor=[-0.68, 0.12], partner=[0.95, 0.75], tin_land=[0.25, 0.0, 0.95],
+         floor_sheet=[0.05, 0.004, 0.55], owner_floor=[-0.45, 0.05], partner=[0.95, 0.75], tin_land=[0.25, 0.0, 0.95],
          wall_sheet=[1.288, 1.35, 0.6], partner_wall=[1.0, 1.15], bag=[0.95, 0.0, -0.2], owner_bag=[0.58, -0.05], tv=[-4.62, 1.4, 1.6])
 WD = {k2: A(H["floor_sheet"], v) for k2, v in DMG.items()}           # damage spots on the landing floor sheet (world)
 # ---- auction house (Cullens)
@@ -207,7 +207,7 @@ scene(id="S08", hero=True, f=[645, 795], set="landing", light="day", vo="v√† nh√
   cams=[k(645, A(WD["scratch"], [0.15, 0.42, 0.32]), WD["scratch"], 34, push=0.002, blur=12, focus=WD["scratch"], why="the scratch"),
         k(676, A(WD["glue"], [0.12, 0.38, 0.3]), WD["glue"], 34, glide=26, push=0.002, blur=12, focus=WD["glue"], why="the glue"),
         k(706, A(WD["crease"], [0.1, 0.4, 0.3]), WD["crease"], 34, glide=26, push=0.002, blur=12, focus=WD["crease"], why="the crease"),
-        k(740, [-0.05, 0.75, 0.85], A(WD["corner"], [0.0, 0.12, 0.05]), 40, glide=22, push=0.002, blur=10, focus=A(WD["corner"], [0.0, 0.1, 0.05]), why="the torn back")],
+        k(740, [-0.1, 0.95, 0.5], A(WD["corner"], [0.05, 0.06, 0.12]), 40, glide=22, push=0.002, blur=10, focus=A(WD["corner"], [0.0, 0.1, 0.05]), why="the torn back")],
   kicks=[], marks=[{"who": "owner", "at": H["owner_floor"], "view": "front", "pose": "lift the corner", "expr": "pained"}],
   subjects=[{"n": "scratch", "p": WD["scratch"], "f": [655, 672]}, {"n": "glue", "p": WD["glue"], "f": [702, 705]}, {"n": "crease", "p": WD["crease"], "f": [732, 739]}, {"n": "corner", "p": A(WD["corner"], [0, 0.1, 0.05]), "f": [764, 794]}],
   physics="the corner: a fold along the diagonal 18 cm in, lifted to 120 deg and let fall (paper flutter, settles 6 f).", light_mood="same.", sound="a sad violin sting under the list (Meme Violin Sad Violin, low).", after="The sheet as it was, damage showing.")
