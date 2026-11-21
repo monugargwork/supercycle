@@ -391,6 +391,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
     box(sb, chrome, x - 0.02, 0.9, z - 0.6, x + 0.02, 1.12, z - 0.56); box(sb, chrome, x - 0.3, 1.1, z - 0.6, x + 0.3, 1.13, z - 0.56); box(sb, C("#fff3b0"), x - 0.06, 0.8, z - 0.63, x + 0.06, 0.88, z - 0.62);
   }
   sb.build(scooters);
+  scooters.userData.noShadow = true; // close-up crane in S10: shadow acne crawled on the seats
 
   // ===== QUAY (outside the harbour wall) =====
   const quay = G("quay", SALE);
@@ -499,7 +500,8 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   for (const g of [sale, quay, cel, kit]) g.traverse((o) => { if ((o as THREE.Mesh).isMesh) { o.castShadow = true; o.receiveShadow = true; } });
   // transparent glass and shrink-wrap draw no ink and cast no shadow (a shell 3 mm off a surface shadows and outlines itself
   // unstably: it flickers); the brass edges and the box carry the outlines
-  for (const g of [sale, quay, cel, kit]) g.traverse((o) => { const m = o as THREE.Mesh; if (!m.isMesh) return; const ms = Array.isArray(m.material) ? m.material : [m.material]; if (ms.every((x) => x.transparent)) { m.layers.set(NOINK); m.castShadow = false; m.receiveShadow = false; } });
+  scooters.traverse((o) => { o.userData.noShadow = true; });
+  for (const g of [sale, quay, cel, kit]) g.traverse((o) => { const m = o as THREE.Mesh; if (!m.isMesh) return; const ms = Array.isArray(m.material) ? m.material : [m.material]; if (m.userData.noShadow) { m.castShadow = false; m.receiveShadow = false; } if (ms.every((x) => x.transparent)) { m.layers.set(NOINK); m.castShadow = false; m.receiveShadow = false; } });
   for (const [g, x0, x1, z0, z1, y, col] of [[sale, -6, 5.8, -6, 6, 4.48, "#f3ead6"], [kit, -2.2, 2.2, -2.5, 2.1, 2.68, "#efe4c6"], [cel, -3, 3, -2.8, 4.6, 2.84, "#3a2a22"]] as const) {
     const c = new THREE.Mesh(new THREE.PlaneGeometry(x1 - x0, z1 - z0), lamC(col)); c.rotation.x = Math.PI / 2; c.position.set((x0 + x1) / 2, y, (z0 + z1) / 2); c.castShadow = false; c.receiveShadow = false; g.add(c);
   }

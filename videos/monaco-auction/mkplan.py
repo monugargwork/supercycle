@@ -14,7 +14,7 @@ BOX = [0.25, 1.08 + 0.14, -4.55]              # the box on the lot table (centre
 VIT = [1.4, 1.44, -4.6]                      # the box inside the vitrine (centre)
 SLAB = [2.4, 1.47, -4.6]                     # the Poncho Pikachu slab on its stand
 SEATS = [[x, z] for z in (-2.2, -1.2, -0.2) for x in (-3.3, -2.5, -1.7, -0.9, -0.1, 0.7)]   # 18 gentlemen; Minh = seat 3 (x -0.9, row 1)
-SCOOT = [[2.3, -3.4 + 0.8 * i] for i in range(10)]
+SCOOT = [[2.3, -3.15 + 0.8 * i] for i in range(10)]   # scooter 1's front shield clears the stage edge (z -3.8)
 CUBBY = [[0.25 + 0.4 * c, 0.3 + 0.37 * r] for r in range(6) for c in range(3)]   # box cubbies (x, y of the box base), 18
 LAST = 7                                     # the box left sealed (col 1, row 2)
 OPEN_ORDER = [i for i in [12, 3, 16, 0, 9, 5, 14, 1, 11, 17, 4, 8, 2, 15, 6, 10, 13] if i != LAST]
@@ -220,7 +220,7 @@ scene(id="S10", f=[1390, 1519], set="saleroom", light="day", vo="Một chú chu�
   build="new: ten scooters down the aisle with €1,900 tags.", blocking="Gentlemen seated; those by the aisle turn their heads.",
   action="f1390-1460 scooter 1 parked below the slab stand, its tag swinging; f1462-1500 the camera cranes up and back over the stage: nine more scooters in a row down the aisle; their tags swing as the camera passes; f1494 ('mười lần') the last one comes into frame. Title X10.",
   acting="aisle gentlemen glance at the scooters.",
-  cams=[k(1390, [3.2, 1.35, -2.0], [2.4, 0.85, -3.6], 40, glide=30, push=0.0015, blur=8, focus=[2.3, 0.8, -3.4], why="scooter and slab"),
+  cams=[k(1390, [3.55, 1.6, -1.55], [2.4, 0.85, -3.4], 40, glide=30, push=0.0015, blur=8, focus=[2.3, 0.8, -3.4], why="scooter and slab"),
         k(1456, [2.6, 3.5, -4.9], [2.3, 0.5, 1.4], 46, glide=46, push=0.001, blur=2, focus=[2.3, 0.6, 0.4], why="crane: ten in a row")],
   kicks=[], marks=[{"who": "gentlemen", "at": [0.7, -2.2], "view": "front", "pose": "all 18 seats (plan.seats): seated", "expr": "neutral/smile"}],
   subjects=[{"n": "scooter 1", "p": [2.3, 0.7, -3.4], "f": [1400, 1455]}, {"n": "scooter 10", "p": [2.3, 0.7, 3.8], "f": [1496, 1518]}],
