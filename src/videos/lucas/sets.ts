@@ -262,7 +262,7 @@ const skyPanel = (key: string, top: string, bot: string, blinds = false) => ctex
 });
 type Canvas = { tex: THREE.CanvasTexture; g: CanvasRenderingContext2D; key: string };
 export type Sets = {
-  groups: Record<string, THREE.Group>;
+  groups: Record<string, THREE.Group>; lampG: THREE.Group; scaleG: THREE.Group;
   door: THREE.Group; clock: Canvas; cal: Canvas; lcd: Canvas; panPack: THREE.Mesh; packs: THREE.Mesh[]; heroPacks: THREE.Mesh[]; tubPacks: THREE.Group; lids: THREE.Mesh[];
   chairDealer: THREE.Group; chairsPair: THREE.Group; phone: THREE.Group; phoneCv: Canvas; laptop: THREE.Group; laptopCv: Canvas; pizza: THREE.Group; candies: THREE.Group[];
   lampBulb: THREE.Mesh; hallClock: Canvas; hallPhone: THREE.Group; hallPhoneCv: Canvas; truck: THREE.Group;
@@ -300,7 +300,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   const packFrontTex = [0, 1, 2, 3].map((k) => ctex("packFront" + k, 220, 360, (g) => A2.packFront(new Pen(g), k)));
   const packSide = (k: number) => C(A2.PACK_SETS[k % 4].col);
   /** a pack lying flat (front up) */
-  const flatPack = (k: number) => new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.008, 0.12), [packSide(k), packSide(k), new THREE.MeshLambertMaterial({ map: packFrontTex[k % 4] }), packSide(k), packSide(k), packSide(k)]);
+  const flatPack = (k: number) => new THREE.Mesh(new THREE.BoxGeometry(0.098, 0.011, 0.168), [packSide(k), packSide(k), new THREE.MeshLambertMaterial({ map: packFrontTex[k % 4] }), packSide(k), packSide(k), packSide(k)]);
   /** a pack standing (front +z) */
   const standPack = (k: number, s = 1) => new THREE.Mesh(new THREE.BoxGeometry(0.07 * s, 0.12 * s, 0.008), [packSide(k), packSide(k), packSide(k), packSide(k), new THREE.MeshLambertMaterial({ map: packFrontTex[k % 4] }), packSide(k)]);
 
@@ -340,7 +340,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   const clockFaceM = mesh(new THREE.CircleGeometry(CR, 32), new THREE.MeshLambertMaterial({ map: clock.tex }), home, ckx, cky, ckz + 0.0395); void clockFaceM;
   // calendar
   const cal = canvasMat(300, 420), [kx, ky, kz] = HOME.calendar as V3;
-  canvasPlane(cal, 0.3, 0.42, home, kx, ky, kz + 0.006, false);
+  { const cm = canvasPlane(cal, 0.3, 0.42, home, kx, ky, kz + 0.006, true); (cm.material as THREE.MeshBasicMaterial).color.setScalar(0.88); }
   // the dealer's chair (x 0.45) and the couple's two chairs (x 0.0 and 0.72)
   const chairAt = (parent: THREE.Group, x: number, z: number) => {
     const cb = new Batch(), m = C("#7a5030");
@@ -352,20 +352,21 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   const chairsPair = new THREE.Group(); home.add(chairsPair); chairAt(chairsPair, HOME.lucas_seat[0], HOME.lucas_seat[1] - 0.02); chairAt(chairsPair, HOME.fiance_seat[0], HOME.fiance_seat[1] - 0.02);
   // the jewellery scale: base, steel pan, open lid, LCD on the front
   const [scx, , scz] = HOME.scale, lcd = canvasMat(240, 90);
-  { const sg = new THREE.Group(); sg.position.set(scx, TY, scz); home.add(sg);
+  const scaleG = new THREE.Group();
+  { const sg = scaleG; sg.position.set(scx, TY, scz); sg.scale.setScalar(1.6); home.add(sg); // drawn at 1.6x real size so it reads beside the big cartoon heads
     mesh(new THREE.BoxGeometry(0.12, 0.022, 0.12), C("#3a3d46"), sg, 0, 0.011, 0);
     mesh(new THREE.CylinderGeometry(0.048, 0.048, 0.005, 24), steel, sg, 0, 0.0245, -0.008);
     const lid = mesh(new THREE.BoxGeometry(0.12, 0.004, 0.12), C("#4a4d56"), sg, 0, 0.082, -0.066); lid.rotation.x = -1.45;
     canvasPlane(lcd, 0.07, 0.026, sg, 0, 0.011, 0.0612); }
-  const panPack = flatPack(0); panPack.position.set(scx, TY + 0.031, scz - 0.008); home.add(panPack);
+  const panPack = flatPack(0); panPack.position.set(scx, TY + 0.0465, scz - 0.013); home.add(panPack);
   // desk lamp
   const [lx, , lz] = HOME.lamp, [hx2, hy2, hz2] = HOME.lamp_head;
-  let lampBulb: THREE.Mesh;
-  { const lb = new Batch(); cyl(lb, ink, lx, TY, lz, 0.07, 0.07, 0.02, 20); lb.build(home);
-    const arm = (a: V3, c: V3) => { const v = V(c[0] - a[0], c[1] - a[1], c[2] - a[2]), L = v.length(); const m = mesh(new THREE.CylinderGeometry(0.008, 0.008, L, 8), ink, home, (a[0] + c[0]) / 2, (a[1] + c[1]) / 2, (a[2] + c[2]) / 2); m.quaternion.setFromUnitVectors(V(0, 1, 0), v.normalize()); };
+  let lampBulb: THREE.Mesh; const lampG = new THREE.Group(); home.add(lampG);
+  { const lb = new Batch(); cyl(lb, ink, lx, TY, lz, 0.07, 0.07, 0.02, 20); lb.build(lampG);
+    const arm = (a: V3, c: V3) => { const v = V(c[0] - a[0], c[1] - a[1], c[2] - a[2]), L = v.length(); const m = mesh(new THREE.CylinderGeometry(0.008, 0.008, L, 8), ink, lampG, (a[0] + c[0]) / 2, (a[1] + c[1]) / 2, (a[2] + c[2]) / 2); m.quaternion.setFromUnitVectors(V(0, 1, 0), v.normalize()); };
     const elbow: V3 = [lx - 0.05, TY + 0.32, lz - 0.02]; arm([lx, TY + 0.02, lz], elbow); arm(elbow, [hx2, hy2 + 0.05, hz2]);
-    const shade = mesh(new THREE.CylinderGeometry(0.035, 0.09, 0.11, 20, 1, true), lam("lampShade", () => ({ color: "#c23a32", side: THREE.DoubleSide })), home, hx2, hy2, hz2); shade.rotation.z = 0.35;
-    lampBulb = mesh(new THREE.SphereGeometry(0.03, 12, 10), new THREE.MeshBasicMaterial({ color: new THREE.Color(3.0, 2.5, 1.6) }), home, hx2 + 0.01, hy2 - 0.04, hz2); lampBulb.castShadow = false; }
+    const shade = mesh(new THREE.CylinderGeometry(0.035, 0.09, 0.11, 20, 1, true), lam("lampShade", () => ({ color: "#c23a32", side: THREE.DoubleSide })), lampG, hx2, hy2, hz2); shade.rotation.z = 0.35;
+    lampBulb = mesh(new THREE.SphereGeometry(0.03, 12, 10), new THREE.MeshBasicMaterial({ color: new THREE.Color(3.0, 2.5, 1.6) }), lampG, hx2 + 0.01, hy2 - 0.04, hz2); lampBulb.castShadow = false; }
   // the 24 packs (positions per frame: world.ts)
   const packs = Array.from({ length: PACK_N }, (_, i) => { const m = flatPack(i); home.add(m); return m; });
   // three clear-blue tubs, their lids, the packs filed inside (S03), the four hero packs that rise out of tub 2
@@ -373,17 +374,20 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   const [bw, bh, bd] = HOME.bin_size;
   b = new Batch();
   for (const [bx, bz] of HOME.bins) {
-    box(b, tubD, bx - bw / 2, 0, bz - bd / 2, bx + bw / 2, 0.02, bz + bd / 2);
-    box(b, tubM, bx - bw / 2, 0, bz - bd / 2, bx + bw / 2, bh, bz - bd / 2 + 0.012); box(b, tubM, bx - bw / 2, 0, bz + bd / 2 - 0.012, bx + bw / 2, bh, bz + bd / 2);
-    box(b, tubM, bx - bw / 2, 0, bz - bd / 2 + 0.012, bx - bw / 2 + 0.012, bh, bz + bd / 2 - 0.012); box(b, tubM, bx + bw / 2 - 0.012, 0, bz - bd / 2 + 0.012, bx + bw / 2, bh, bz + bd / 2 - 0.012);
-    box(b, tubD, bx - bw / 2 - 0.012, bh - 0.03, bz - bd / 2 - 0.012, bx + bw / 2 + 0.012, bh - 0.012, bz + bd / 2 + 0.012);
+    const t = 0.012, X0 = bx - bw / 2, X1 = bx + bw / 2, Z0 = bz - bd / 2, Z1 = bz + bd / 2, L = 0.016; // walls, an inner floor, a lip ring 16 mm proud
+    box(b, tubD, X0 + t + 0.002, 0, Z0 + t + 0.002, X1 - t - 0.002, 0.02, Z1 - t - 0.002);
+    box(b, tubM, X0, 0, Z0, X1, bh, Z0 + t); box(b, tubM, X0, 0, Z1 - t, X1, bh, Z1);
+    box(b, tubM, X0 - 0.0015, 0, Z0 + t + 0.003, X0 + t, bh - 0.004, Z1 - t - 0.003); box(b, tubM, X1 - t, 0, Z0 + t + 0.003, X1 + 0.0015, bh - 0.004, Z1 - t - 0.003);
+    box(b, tubD, X0 - L, bh - 0.032, Z0 - L, X1 + L, bh - 0.014, Z0 - 0.001); box(b, tubD, X0 - L, bh - 0.031, Z1 + 0.001, X1 + L, bh - 0.013, Z1 + L);
+    box(b, tubD, X0 - L - 0.002, bh - 0.0335, Z0 - 0.0005, X0 - 0.0012, bh - 0.0155, Z1 + 0.0005); box(b, tubD, X1 + 0.0012, bh - 0.0325, Z0 - 0.0005, X1 + L + 0.002, bh - 0.0145, Z1 + 0.0005);
   }
   b.build(home);
   const lids = HOME.bins.map(() => mesh(new THREE.BoxGeometry(bw + 0.03, 0.025, bd + 0.03), lam("tubLid", () => ({ color: "#3f7fc9" })), home));
   const tubPacks = new THREE.Group(); home.add(tubPacks);
-  HOME.bins.forEach(([bx, bz], ti) => { for (let r = 0; r < 3; r++) for (let c = 0; c < 9; c++) {
-    const m = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.12, 0.008), [packSide(c + ti), packSide(c + ti), packSide(c + ti), packSide(c + ti), new THREE.MeshLambertMaterial({ map: packFrontTex[(c + r + ti) % 4] }), packSide(c + ti)]);
-    m.position.set(bx - 0.13 + r * 0.13, 0.22, bz - 0.23 + c * 0.055); m.rotation.set(-0.35, 0, 0.06 * Math.sin(c * 2.1 + r)); tubPacks.add(m); } });
+  HOME.bins.forEach(([bx, bz], ti) => { for (let L2 = 0; L2 < 2; L2++) for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) {
+    const m = flatPack(c + r * 2 + ti + L2); m.scale.setScalar(0.92);
+    m.position.set(bx - 0.135 + r * 0.09 + (L2 ? 0.04 : 0), 0.24 + L2 * 0.03 + 0.004 * ((c + r) % 3), bz - 0.2 + c * 0.13 + (L2 ? 0.05 : 0));
+    m.rotation.set(0.12 * Math.sin(c * 2.1 + r + ti), 0.35 * Math.sin(c * 1.7 + r * 2.3 + ti), 0.1 * Math.cos(r * 1.9 + c)); tubPacks.add(m); } });
   const heroPacks = [0, 1, 2, 3].map((k) => { const m = standPack(k, 1.35); home.add(m); return m; });
   // phone (lies on the table / held for the POV), laptop, pizza box, rock-candy bowl
   const phoneCv = canvasMat(300, 620), phone = new THREE.Group(); home.add(phone);
@@ -429,8 +433,8 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   mesh(new THREE.CircleGeometry(HR, 32), new THREE.MeshLambertMaterial({ map: hallClock.tex }), hall, hcx, hcy, hcz + 0.0525);
   // Lucas's hand truck with the three tubs (moves with him)
   const truck = new THREE.Group(); hall.add(truck);
-  { const tb = new Batch(); box(tb, ink, -0.03, 0, -0.25, 0.03, 1.25, -0.22); box(tb, ink, -0.03, 0, 0.22, 0.03, 1.25, 0.25); box(tb, ink, -0.2, 0, -0.25, 0.03, 0.03, 0.25);
-    for (let i = 0; i < 3; i++) { box(tb, tubM, -0.4, 0.03 + i * 0.35, -0.29, 0.0, 0.36 + i * 0.35, 0.29); box(tb, lam("tubLid", () => ({ color: "#3f7fc9" })), -0.41, 0.36 + i * 0.35, -0.3, 0.01, 0.38 + i * 0.35, 0.3); }
+  { const tb = new Batch(); box(tb, ink, 0.016, 0, -0.27, 0.056, 1.25, -0.235); box(tb, ink, 0.016, 0, 0.235, 0.056, 1.25, 0.27); box(tb, ink, -0.2, 0, -0.25, 0.058, 0.028, 0.25);
+    for (let i = 0; i < 3; i++) { box(tb, tubM, -0.4, 0.031 + i * 0.35, -0.29, 0.0, 0.36 + i * 0.35, 0.29); box(tb, lam("tubLid", () => ({ color: "#3f7fc9" })), -0.41, 0.36 + i * 0.35, -0.3, 0.01, 0.38 + i * 0.35, 0.3); }
     cyl(tb, C("#26242b"), 0.02, 0.1, -0.3, 0.1, 0.1, 0.05, 14, new THREE.Euler(Math.PI / 2, 0, 0)); cyl(tb, C("#26242b"), 0.02, 0.1, 0.25, 0.1, 0.1, 0.05, 14, new THREE.Euler(Math.PI / 2, 0, 0));
     tb.build(truck); }
   const hallPhoneCv = canvasMat(300, 620), hallPhone = new THREE.Group(); hall.add(hallPhone);
@@ -527,7 +531,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   for (const o of [door, ...packs, panPack, ...heroPacks, ...lids, phone, laptop, carL, carD, lotBox, shopBox]) o.traverse((c) => { const m = c as THREE.Mesh; if (m.isMesh && !(m.material as THREE.Material).transparent) { m.castShadow = true; m.receiveShadow = true; } });
   void quad; void tri; void boxGeo; void untone; void glassM; void sign; void local; void bush; void car; void wheels; void slab; void clockFace; void SH;
   { const rep2 = coplanarReport(); console.warn(`[coplanar] ${rep2.length} coplanar overlaps`); for (const l of rep2.slice(0, 40)) console.warn(l); }
-  return { groups, door, clock, cal, lcd, panPack, packs, heroPacks, tubPacks, lids, chairDealer, chairsPair, phone, phoneCv, laptop, laptopCv, pizza, candies, lampBulb,
+  return { groups, lampG, scaleG, door, clock, cal, lcd, panPack, packs, heroPacks, tubPacks, lids, chairDealer, chairsPair, phone, phoneCv, laptop, laptopCv, pizza, candies, lampBulb,
     hallClock, hallPhone, hallPhoneCv, truck, carL, carD, lotBox, shopBox, scanWin, checkCv, checkMesh };
 };
 /** redraw a live canvas only when its key changes */

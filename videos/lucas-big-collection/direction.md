@@ -25,7 +25,7 @@ Comedy of frustration; memes only where the sound is the joke. Screens only from
 ### home
 - Origin in the shared world: [0, 0, 0]. Axes: back wall z -2.6 (door at its right, clock, calendar); the dining table in the middle; the sofa along the -x wall; open side +z.
 - Light: golden; sun az/el [35, 30]. Open camera sides: +z.
-- Marks [x, z]: dealer [0.45, -1.55]; lucas [-0.55, -0.5]; lucas_bins [1.5, -0.45]; fiance [1.45, 0.55]; lucas_seat [0, -1.55]; fiance_seat [0.72, -1.55].
+- Marks [x, z]: dealer [0.45, -1.55]; lucas [-0.55, -0.5]; lucas_bins [1.5, -0.45]; fiance [1.25, -1.5]; lucas_seat [0, -1.55]; fiance_seat [0.72, -1.55].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
@@ -42,7 +42,7 @@ Comedy of frustration; memes only where the sound is the joke. Screens only from
 | phone | new: Lucas's phone 7.5 x 15.5 cm (live canvas screen), lies on the table or is held | [-0.12, 0.75, -0.82] | [0.075, 0.008, 0.155] |
 | laptop | new: laptop 32 x 22 cm, screen tilted back 105 deg facing Lucas's seat (live canvas: the post) | [0, 0.75, -1.12] | [0.32, 0.22, 0.22] |
 | pizza | new: open pizza box 40 x 40 cm, a pizza with two slices gone | [0.36, 0.75, -1] | [0.4, 0.05, 0.4] |
-| candy | new: glass bowl of rock-candy sticks (blue crystal clusters on wooden sticks) | [-0.28, 0.75, -0.98] | [0.16, 0.16, 0.16] |
+| candy | new: glass bowl of rock-candy sticks (blue crystal clusters on wooden sticks) | [-0.3, 0.75, -1.25] | [0.16, 0.16, 0.16] |
 
 ### hall
 - Origin in the shared world: [40, 0, 0]. Axes: a convention hall; vendor tables along the back wall z -3.6; the queue runs along z 0.5 toward the WE BUY booth at x -5 (people face -x).
@@ -59,14 +59,14 @@ Comedy of frustration; memes only where the sound is the joke. Screens only from
 | truck | new: hand truck with the three tubs strapped on it | [1.95, 0.55, 0.5] | [0.5, 1.1, 0.6] |
 
 ### street
-- Origin in the shared world: [80, 0, 0]. Axes: a Los Angeles boulevard along x (lanes z -4..4), a sign gantry LOS ANGELES at x 0, the parking lot x 37..60 at its end.
+- Origin in the shared world: [80, 0, 0]. Axes: a Los Angeles boulevard along x (lanes z -4..4), a LOS ANGELES billboard at x 0 on the far sidewalk, the parking lot x 37..60 at its end.
 - Light: golden; sun az/el [-70, 12]. Open camera sides: +z.
-- Marks [x, z]: lucas [44.6, 1.4]; dealer [47.4, 1.4].
+- Marks [x, z]: lucas [44.95, 1.4]; dealer [47.05, 1.4].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
 | road | new: asphalt road x -70..60, lane lines, kerbs, sidewalks z +-4..+-7, palms, street lamps, stucco shop fronts | [0, 0, 0] | [130, 0.1, 14] |
-| gantry | new: steel sign gantry over the road at x 0 with a green sign LOS ANGELES / 10 W | [0, 5.6, 0] | [0.4, 1.4, 8] |
+| billboard | new: roadside welcome billboard on two steel posts on the far sidewalk at x 0, panel 7 x 2 m facing the road: LOS ANGELES | [0, 4.2, -6.5] | [7, 2, 0.2] |
 | car_l | new: Lucas's blue hatchback (box body, glass, four wheels), drives +x, then parks | [41, 0.7, 0] | [4.2, 1.5, 1.8] |
 | car_d | new: the dealer's black SUV parked facing -x, headlights on | [51, 0.8, 0] | [4.6, 1.7, 1.9] |
 | lamp | new: one sodium lamp post over the lot (emissive head) | [46, 3, -3.4] | [0.3, 6, 0.3] |
@@ -76,14 +76,14 @@ Comedy of frustration; memes only where the sound is the joke. Screens only from
 ### shop
 - Origin in the shared world: [160, 0, 0]. Axes: a card shop: the counter along x at z -0.95, the clerk behind it facing +z, shelves of sealed product behind him.
 - Light: day; sun az/el [40, 45]. Open camera sides: +z.
-- Marks [x, z]: clerk [-0.25, -1.55]; lucas [0.75, -0.25].
+- Marks [x, z]: clerk [-0.15, -1.4]; lucas [0.55, -0.42].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
 | room | new: shop x -3..3, z -3..3, 2.8 m, cream walls, tiled floor, ceiling with panels, sign WE BUY CARDS | [0, 1.4, 0] | [6, 2.8, 6] |
 | counter | new: glass-front counter 3.0 x 0.6 m, top y 0.95, cards in the case | [0, 0.475, -0.95] | [3, 0.95, 0.6] |
-| scanner | new: ID scanner 12 x 8 x 6 cm with a red glass window (laser line on a scan) | [-0.28, 0.95, -0.9] | [0.12, 0.06, 0.08] |
-| check | new: a check 18 x 8 cm on the counter (live canvas: the misspelt name written in) | [-0.02, 0.952, -0.88] | [0.18, 0.002, 0.08] |
+| scanner | new: ID scanner 12 x 8 x 6 cm with a red glass window (laser line on a scan) | [-0.2, 0.95, -1.08] | [0.12, 0.06, 0.08] |
+| check | new: a check 18 x 8 cm on the counter (live canvas: the misspelt name written in) | [0.02, 0.952, -1.1] | [0.18, 0.002, 0.08] |
 | shelves | new: wall shelves of sealed booster boxes behind the counter | [0, 1.4, -2.8] | [4, 1.8, 0.35] |
 
 ## Cast
@@ -112,9 +112,9 @@ Comedy of frustration; memes only where the sound is the joke. Screens only from
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 0 | open | [0.7, 1.45, 2.1] | [1.05, 1.3, -1.9] | 44 | 0.12 | 4 | the door bursts open under the clock |
-| 46 | glide 30 f | [0.55, 1.38, 1.65] | [0.8, 1.18, -1.5] | 40 | 0.15 | 6 | he sits, the clock spins two hours |
-| 108 | glide 28 f | [0.55, 1.12, 0.62] | [0.5, 0.98, -1.3] | 32 | 0.15 | 10 | weighing, pack by pack |
-| 204 | glide 24 f | [0.32, 1.18, 0.55] | [0.35, 1.2, -1.4] | 30 | 0 | 10 | the alchemist at the lamp |
+| 46 | glide 30 f | [0.6, 1.42, 2.25] | [0.82, 1.22, -1.5] | 44 | 0.15 | 6 | he sits, the clock spins two hours |
+| 108 | glide 28 f | [0.6, 1.12, 1.05] | [0.5, 1.08, -1.3] | 36 | 0.15 | 10 | weighing, pack by pack |
+| 204 | glide 24 f | [0.36, 1.25, 0.95] | [0.36, 1.22, -1.4] | 34 | 0 | 10 | the alchemist at the lamp |
 
 - Kicks (7 f): f16 strength 0.9.
 - Physics & FX: Door: swings 0 -> 100 deg in 5 f, hits the stop, bounces back 12 deg and settles 95 deg by f30 (damped spring). Packs: carried, set down flat; the stacks grow / shrink by one each cycle.
@@ -136,8 +136,8 @@ Comedy of frustration; memes only where the sound is the joke. Screens only from
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 268 | open | [0.32, 1.18, 0.55] | [0.35, 1.2, -1.4] | 30 | 0 | 10 | hold on the dealer |
-| 272 | glide 36 f | [0.15, 1.5, 2] | [-0.3, 1.3, -0.8] | 38 | 0.18 | 8 | to Lucas watching |
+| 268 | open | [0.36, 1.25, 0.95] | [0.36, 1.22, -1.4] | 34 | 0 | 10 | hold on the dealer |
+| 272 | glide 36 f | [0.2, 1.5, 2.45] | [-0.25, 1.3, -0.8] | 40 | 0.18 | 8 | to Lucas watching |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -153,15 +153,15 @@ Comedy of frustration; memes only where the sound is the joke. Screens only from
 - Build: new: three clear-blue tubs with lids, packs inside, four hero packs with real card art (Base Charizard, Jungle Scyther, Fossil Aerodactyl, Rocket Dark Charizard).
 - Blocking: Lucas walks (side view, +x) from his mark to beside the tubs f346-378; his fiancée stands by the tubs at her mark, front view.
   - lucas at [1.5, -0.45], side walking -> front; walks f346-378, stands by the tubs; smile -> shock.
-  - fiance at [1.45, 0.55], front; standing, pats tub 3 f400-418; grin.
-- Action, against the words: f359, f367, f374 the three lids snap off one after another and land leaning on the tubs; f398-420 on 'bà vợ sắp cưới' she grins and pats tub 3; f430-490 the camera rises over the open tubs: rows of sealed packs; on each set name one pack rises out of the middle tub and stands on its rim: BASE SET f495, JUNGLE f522, FOSSIL f545, ROCKET f566; f612-645 the four packs glint once each on 'mười sáu nghìn đô' (title $16,000).
+  - fiance at [1.25, -1.5], front; standing, points at the tubs f400-418; grin.
+- Action, against the words: f359, f367, f374 the over-stuffed tubs burst their lids one after another: each lid pops up 6 cm, tips back and slides down to lean against the wall behind its tub; f398-420 on 'bà vợ sắp cưới' she grins and points at her tubs; f430-490 the camera rises over the open tubs: rows of sealed packs; on each set name one pack springs out of the stuffed middle tub, arcs and lands standing on its front rim: BASE SET f495, JUNGLE f522, FOSSIL f545, ROCKET f566; f612-645 the four packs glint once each on 'mười sáu nghìn đô' (title $16,000).
 - Acting: Fiancée proud and happy; Lucas amazed.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 342 | open | [0.15, 1.5, 2] | [-0.3, 1.3, -0.8] | 38 | 0 | 8 | hold |
-| 346 | glide 44 f | [0.95, 1.45, 2.3] | [1.65, 0.95, -0.5] | 40 | 0.15 | 6 | Lucas to the tubs, the fiancée |
+| 342 | open | [0.2, 1.5, 2.45] | [-0.25, 1.3, -0.8] | 40 | 0 | 8 | hold |
+| 346 | glide 44 f | [1, 1.45, 2.7] | [1.68, 0.95, -0.6] | 42 | 0.15 | 6 | Lucas to the tubs, the fiancée |
 | 428 | glide 40 f | [1.85, 1.95, 0.65] | [2.08, 0.42, -0.6] | 36 | 0.15 | 6 | over the open tubs: the packs |
 | 600 | glide 28 f | [1.65, 1.75, 1] | [2, 0.6, -0.55] | 40 | 0.2 | 6 | the value |
 
@@ -185,7 +185,7 @@ Comedy of frustration; memes only where the sound is the joke. Screens only from
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 654 | open | [0.2, 1.2, 1.9] | [-2, 0.95, 0.6] | 40 | 0.2 | 6 | the chorus, low and close |
+| 654 | open | [0.75, 1.25, 2.1] | [-2, 1, 0.6] | 40 | 0.2 | 6 | the chorus, low and close |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -229,8 +229,8 @@ Comedy of frustration; memes only where the sound is the joke. Screens only from
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 882 | open | [1.5, 1.73, 0.6] | [1, 1.2, 0.5] | 26 | 0.12 | 6 | his phone, from his eyes |
-| 960 | glide 24 f | [1.43, 1.65, 0.57] | [1, 1.2, 0.5] | 22 | 0.15 | 6 | closer on the ghosts |
+| 882 | open | [1.5, 1.73, 0.6] | [1, 1.2, 0.5] | 19 | 0.12 | 6 | his phone, from his eyes |
+| 960 | glide 24 f | [1.42, 1.64, 0.57] | [1, 1.2, 0.5] | 17 | 0.15 | 6 | closer on the ghosts |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -252,7 +252,7 @@ Comedy of frustration; memes only where the sound is the joke. Screens only from
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 1024 | open | [-0.3, 1.55, -0.4] | [-0.35, 1.6, -2.585] | 34 | 0.15 | 6 | the calendar |
-| 1076 | glide 48 f | [-0.05, 1.22, -0.4] | [-0.12, 0.76, -0.82] | 30 | 0.18 | 8 | the phone lights up |
+| 1076 | glide 48 f | [-0.08, 1.12, -0.42] | [-0.12, 0.76, -0.82] | 26 | 0.18 | 8 | the phone lights up |
 
 - Kicks (7 f): none.
 - Physics & FX: Calendar pages (paper, 3 g): peel from the top, flutter down out of frame.
@@ -276,7 +276,7 @@ Comedy of frustration; memes only where the sound is the joke. Screens only from
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 1150 | open | [-0.05, 1.45, 2.5] | [-0.1, 1.1, -1.1] | 42 | 0.15 | 6 | both men and the table |
-| 1198 | glide 22 f | [-0.1, 1.25, 0.45] | [-0.25, 1, -0.75] | 34 | 0.2 | 8 | the money lands |
+| 1198 | glide 22 f | [0.25, 1.35, 1.25] | [-0.35, 1.12, -0.7] | 38 | 0.2 | 8 | the money lands |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -298,7 +298,7 @@ Comedy of frustration; memes only where the sound is the joke. Screens only from
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1247 | open | [-0.2, 1.5, 1.6] | [-0.5, 1.4, -0.6] | 36 | 0.2 (punch 0.6 for 20 f) | 8 | push on the shock |
+| 1247 | open | [-0.2, 1.5, 1.95] | [-0.5, 1.35, -0.6] | 38 | 0.2 (punch 0.6 for 20 f) | 8 | push on the shock |
 
 - Kicks (7 f): f1295 strength 0.5.
 - Physics & FX: none.
@@ -341,8 +341,8 @@ Comedy of frustration; memes only where the sound is the joke. Screens only from
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1415 | open | [0.55, 1.38, 1.65] | [0.8, 1.18, -1.5] | 40 | 0.2 | 6 | the same frame as the hook |
-| 1472 | glide 34 f | [0.4, 1.32, 0.35] | [0.4, 1.3, -1.45] | 30 | 0.3 | 10 | push on the squint |
+| 1415 | open | [0.6, 1.42, 2.25] | [0.82, 1.22, -1.5] | 40 | 0.2 | 6 | the same frame as the hook |
+| 1472 | glide 34 f | [0.4, 1.32, 0.75] | [0.4, 1.28, -1.45] | 32 | 0.3 | 10 | push on the squint |
 
 - Kicks (7 f): f1415 strength 0.6.
 - Physics & FX: none.
@@ -355,10 +355,10 @@ Comedy of frustration; memes only where the sound is the joke. Screens only from
 - Spine link: 6. Viewer must get: He drives across LA at dusk with the cash.
 - In: dissolve 8 f. Out: dissolve 6 f.
 - Set: street. Light: golden.
-- Build: new: the boulevard: road, palms, lamps, shop fronts, the LOS ANGELES gantry; Lucas's hatchback with Lucas at the wheel.
+- Build: new: the boulevard: road, palms, lamps, shop fronts, the LOS ANGELES billboard; Lucas's hatchback with Lucas at the wheel.
 - Blocking: Lucas seated in the driver's seat (front view through the side window).
   - lucas at [-30, -1.6], front seated in the car; driving; stern.
-- Action, against the words: f1530-1658 the hatchback drives from x -30 to x +30 (smootherstep: pulls away, cruises, slows), passing under the LOS ANGELES sign at f1594 ('Los Angeles' f1581); the camera tracks alongside, low, palms sweeping past in the foreground; title $3,500 f1636.
+- Action, against the words: f1530-1658 the hatchback drives from x -30 to x +30 (smootherstep: pulls away, cruises, slows), passing the LOS ANGELES billboard at f1594 ('Los Angeles' f1581); the camera tracks alongside, low, palms sweeping past in the foreground; title $3,500 f1636.
 - Acting: Lucas grim, both hands on the wheel.
 - Camera keys:
 
@@ -388,9 +388,9 @@ Comedy of frustration; memes only where the sound is the joke. Screens only from
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1662 | open | [46, 0.55, 7.2] | [46, 1.3, 0.6] | 38 | 0.15 | 4 | low wide: two cars, two men, one lamp |
+| 1662 | open | [46, 0.6, 9.8] | [46, 1.5, 0.6] | 48 | 0.15 | 4 | low wide: two cars, two men, one lamp |
 | 1730 | glide 28 f | [46, 1.1, 5.4] | [46, 1.2, 1.4] | 36 | 0.2 | 10 | the exchange |
-| 1784 | glide 24 f | [45.6, 1.3, 3.9] | [45.7, 1.3, 1.4] | 32 | 0.2 | 10 | Lucas with his own cards |
+| 1784 | glide 24 f | [45.6, 1.3, 4.6] | [45.7, 1.3, 1.4] | 34 | 0.2 | 10 | Lucas with his own cards |
 
 - Kicks (7 f): f1751 strength 0.4.
 - Physics & FX: Envelope (0.1 kg) and box (2 kg) are carried; nothing falls.
@@ -405,8 +405,8 @@ Comedy of frustration; memes only where the sound is the joke. Screens only from
 - Set: shop. Light: day.
 - Build: new: the card shop: counter with glass case, ID scanner, shelves, WE BUY CARDS sign, the check.
 - Blocking: Lucas walks in (side view, -x) carrying the box f1816-1846, sets it on the counter f1847; the clerk stands behind the counter.
-  - lucas at [0.75, -0.25], side walking -> front; box on the counter f1847, ID across f1859; neutral -> nervous.
-  - clerk at [-0.25, -1.55], front; scans ID f1874, stares f1894, writes f1947; neutral -> stern.
+  - lucas at [0.55, -0.42], side walking -> front; box on the counter f1847, ID across f1859; neutral -> nervous.
+  - clerk at [-0.15, -1.4], front; scans ID f1874, stares f1894, writes f1947; neutral -> stern.
 - Action, against the words: f1859 Lucas slides his ID card across; f1874-1886 the clerk passes it over the scanner: a red laser line sweeps, beep ('quét căn cước'); f1894 on 'nghi' the clerk narrows his eyes at Lucas, then at the box (f1914) and back (f1926); Lucas sweats; f1940 top-down on the check: the clerk's pen writes 'Lukas DeRiter' f1947-1980 on 'viết sai tên anh'.
 - Acting: Clerk suspicious, stern; Lucas nervous.
 - Camera keys:
@@ -414,9 +414,9 @@ Comedy of frustration; memes only where the sound is the joke. Screens only from
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 1814 | open | [1.7, 1.55, 2.3] | [0.5, 1.15, -0.8] | 40 | 0.15 | 4 | Lucas brings the box in |
-| 1862 | glide 20 f | [0.35, 1.3, 0.65] | [-0.15, 1.05, -0.95] | 32 | 0.2 | 8 | the ID under the scanner |
-| 1886 | glide 22 f | [0.2, 1.5, 1.7] | [0.1, 1.35, -0.8] | 36 | 0.2 | 8 | suspicion: both faces |
-| 1936 | glide 26 f | [0, 1.32, -0.42] | [-0.02, 0.952, -0.88] | 32 | 0.2 | 8 | the misspelt name |
+| 1862 | glide 20 f | [-0.6, 1.32, 0.85] | [-0.12, 1.12, -1.1] | 34 | 0.2 | 8 | the ID under the scanner |
+| 1886 | glide 22 f | [0.25, 1.5, 2.1] | [0.15, 1.3, -0.8] | 38 | 0.2 | 8 | suspicion: both faces |
+| 1936 | glide 26 f | [0.04, 1.4, -0.58] | [0.02, 0.952, -1.1] | 32 | 0.2 | 8 | the misspelt name |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -460,8 +460,8 @@ Comedy of frustration; memes only where the sound is the joke. Screens only from
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 2052 | open | [0.36, 1.32, 1.7] | [0.36, 1.05, -1.3] | 38 | 0.15 | 6 | the two of them over pizza |
-| 2112 | glide 30 f | [0.7, 1.3, 0.55] | [0.62, 1.22, -1.5] | 32 | 0.15 | 10 | her line |
+| 2052 | open | [0.36, 1.32, 2] | [0.36, 1.08, -1.3] | 40 | 0.15 | 6 | the two of them over pizza |
+| 2112 | glide 30 f | [0.55, 1.3, 1] | [0.5, 1.18, -1.5] | 34 | 0.15 | 10 | her line |
 
 - Kicks (7 f): none.
 - Physics & FX: The slice droops (cheese sag).
@@ -505,8 +505,8 @@ Comedy of frustration; memes only where the sound is the joke. Screens only from
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 2326 | open | [0.36, 1.32, 1.5] | [0.36, 1.15, -1.4] | 36 | 0.15 | 6 | both at the table |
-| 2362 | glide 16 f | [0.05, 1.36, 0.45] | [0.05, 1.32, -1.5] | 30 | 0.2 (punch 0.8 for 16 f) | 10 | push on the bite |
+| 2326 | open | [0.36, 1.32, 1.9] | [0.36, 1.12, -1.4] | 38 | 0.15 | 6 | both at the table |
+| 2362 | glide 16 f | [0.2, 1.34, 0.85] | [0.2, 1.24, -1.5] | 32 | 0.2 (punch 0.8 for 16 f) | 10 | push on the bite |
 
 - Kicks (7 f): f2381 strength 1.
 - Physics & FX: The crystal chip (2 g): pops off up-left at 1.2 m/s, falls to the table, bounces once, rests.

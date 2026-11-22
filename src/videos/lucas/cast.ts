@@ -313,9 +313,10 @@ export const weighAt = (id: number, f: number): Weigh => {
   return w;
 };
 /** set-local spots on the table */
-const TODO_TOP = (n: number): V3 => [HOME.todo[0], HOME.table_y + 0.004 + 0.0085 * n, HOME.todo[2]];
-const DONE_TOP = (n: number): V3 => [HOME.done[0], HOME.table_y + 0.004 + 0.0085 * n, HOME.done[2]];
-const PAN: V3 = [HOME.scale[0], HOME.table_y + 0.031, HOME.scale[2] - 0.008];
+export const PACK_T = 0.0115;
+const TODO_TOP = (n: number): V3 => [HOME.todo[0], HOME.table_y + 0.004 + PACK_T * n, HOME.todo[2]];
+const DONE_TOP = (n: number): V3 => [HOME.done[0], HOME.table_y + 0.004 + PACK_T * n, HOME.done[2]];
+const PAN: V3 = [HOME.scale[0], HOME.table_y + 0.053, HOME.scale[2] - 0.013];
 const LAMP_PT: V3 = [0.26, 1.24, -1.36];
 const spot = (s: string, w: Weigh, dealerP: V3, cam: CamInfo, fo: FrontOpts, side: number): V3 => {
   if (s === "todo") return Hw(...TODO_TOP(PACKS - w.done)); if (s === "done") return Hw(...DONE_TOP(w.done)); if (s === "pan") return Hw(...PAN);
@@ -338,7 +339,7 @@ const dealerSeated = (out: Stage, cam: CamInfo, f: number, id: number) => {
   let hR: V3 | null = null, hL: V3 | null = null;
   if (!(id === 8 && f >= 1172)) hR = armTo(w.armR, 1);
   hL = armTo(w.armL, -1);
-  if (w.held) { const hh2 = w.held.to === "done" || w.held.p === "pan" ? hL : hR; if (hh2) packFx(out, w.held.k, [hh2[0], hh2[1] + 0.045, hh2[2] + 0.01], w.held.to === "lamp" || w.held.p === "lamp" ? 0.15 : 0.11, 0.1); }
+  if (w.held) { const hh2 = w.held.to === "done" || w.held.p === "pan" ? hL : hR; if (hh2) packFx(out, w.held.k, [hh2[0], hh2[1] + 0.045, hh2[2] + 0.01], w.held.to === "lamp" || w.held.p === "lamp" ? 0.17 : 0.15, 0.1); }
   if (w.loupe > 0 && hL) card(out, "loupe", 200, 200, (pp) => art2.loupe(pp), hL[0] + 0.02, hL[1] + 0.05, hL[2] + 0.02, 0.11, 0.11);
   if (w.lamp > 0.05) { const lp = Hw(...LAMP_PT); glowAt(out, "alch", [lp[0], lp[1], lp[2] + 0.02], 0.34 * w.lamp, "255,214,90"); if (id === 1) sparkle(out, f, S.GOLD1, lp[0] + 0.1, lp[1] + 0.12, lp[2] + 0.04, 0.09, 18); }
   if (id === 8 && f >= S.TAP8 - 3 && f < S.TAP8 + 4) burst(out, f, S.TAP8, P[0] - 0.1, 1.25, P[2] + 0.2, 0.08, 5, "#ffffff");

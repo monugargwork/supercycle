@@ -6,7 +6,7 @@ import { Pen } from "../../engine/toon";
 import { LIGHTS, LOOK, LightPreset } from "../../engine/lights";
 import { TONE, CHAR, untone } from "../../engine/shade";
 import { NOINK } from "../../engine/ink";
-import { Pool, Actor, Fx, stage, Stage, weighAt, PACKS, queueShift, carX } from "./cast";
+import { Pool, Actor, Fx, stage, Stage, weighAt, PACKS, PACK_T, queueShift, carX } from "./cast";
 import { buildSets, Sets, redraw } from "./sets";
 import * as A2 from "./art2";
 import { clockFace } from "./art";
@@ -233,14 +233,14 @@ export class World {
       // the weighing
       const weigh = id === 1 || id === 2 || id === 8 || id === 11;
       const w = weighAt(id, f);
-      Sx.chairDealer.visible = weigh; Sx.chairsPair.visible = id >= 16;
+      Sx.chairDealer.visible = weigh; Sx.scaleG.visible = weigh; Sx.chairsPair.visible = id >= 16;
       Sx.packs.forEach((m, i) => {
         m.visible = weigh;
         if (!weigh) return;
         const inHand = w.held && w.held.k === i, onPan = w.pan === i;
         if (inHand || onPan) { m.visible = false; return; }
-        if (i < w.done) m.position.set(HOME.done[0], HOME.table_y + 0.004 + 0.0085 * i + 0.004, HOME.done[2]);
-        else m.position.set(HOME.todo[0], HOME.table_y + 0.004 + 0.0085 * (PACKS - 1 - i) + 0.004, HOME.todo[2]);
+        if (i < w.done) m.position.set(HOME.done[0], HOME.table_y + 0.004 + PACK_T * i + 0.0055, HOME.done[2]);
+        else m.position.set(HOME.todo[0], HOME.table_y + 0.004 + PACK_T * (PACKS - 1 - i) + 0.0055, HOME.todo[2]);
         m.rotation.set(0, 0.05 * Math.sin(i * 2.3), 0);
       });
       Sx.panPack.visible = weigh && w.pan !== null;
@@ -280,6 +280,7 @@ export class World {
         const n = Math.round(30 * k(S.TYPE10[0], S.TYPE10[1]));
         redraw(Sx.phoneCv, `s${n}`, (p) => A2.chatOne(p, "LA DEALER", [{ t: "about the packs" }, { t: "", photo: "zard_base" }, { t: "Thought these were SHADOWLESS. Refund.", n: n ? n + 9 : 0, red: "SHADOWLESS" }]));
       }
+      Sx.lampG.visible = id < 16;
       Sx.laptop.visible = id === 17;
       if (id === 17) { const n = Math.round(A2.POST17.length * k(S.TYPE17[0], S.TYPE17[1])), pr = f >= S.POST17 && f < S.POST17 + 4 ? 1 : 0; redraw(Sx.laptopCv, `${n}|${pr}|${f >= S.POST17 + 4}`, (p) => A2.laptopPost(p, n, pr, f >= S.POST17 + 4)); }
       Sx.pizza.visible = id >= 16;
