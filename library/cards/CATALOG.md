@@ -3,6 +3,11 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 
 | name | card | set | no | source | used in |
 |---|---|---|---|---|---|
+| c30_cherubi | 2026 30th Celebration Cherubi 6 | 30c | 6 | https://den-cards.pokellector.com/434/Cherubi.30C.6.62047.png |  |
+| c30_tropius | 2026 30th Celebration Tropius 5 | 30c | 5 | https://den-cards.pokellector.com/434/Tropius.30C.5.62046.png |  |
+| c30_volbeat | 2026 30th Celebration Volbeat 3 | 30c | 3 | https://den-cards.pokellector.com/434/Volbeat.30C.3.62044.png |  |
+| c30_vulpix | 2026 30th Celebration Vulpix 9 | 30c | 9 | https://den-cards.pokellector.com/434/Vulpix.30C.9.62050.png |  |
+| jirachi_sir | 2026 30th Celebration Jirachi ex Special Illustration Rare (Akira Egawa) 155/128 | 30c | 155 | https://den-cards.pokellector.com/434/Jirachi-ex.30C.155.62175.png |  |
 | abra | Base Set Abra 43 | base1 | 43 | https://images.pokemontcg.io/base1/43.png | attic |
 | blastoise | Base Set Blastoise 2 | base1 | 2 | https://images.pokemontcg.io/base1/2_hires.png | attic, fanatics, monaco |
 | bulbasaur | Base Set Bulbasaur 44 | base1 | 44 | https://images.pokemontcg.io/base1/44.png | attic |
