@@ -320,8 +320,8 @@
    -0.15
   ],
   "mgr_tin": [
-   -1.0,
-   -0.38
+   -1.4,
+   -0.35
   ],
   "mgr_scale": [
    -0.68,
@@ -2442,18 +2442,18 @@
     {
      "f": 1422,
      "pos": [
-      1.6,
+      -2.0,
       2.5,
-      4.0
+      4.2
      ],
      "look": [
-      -0.3,
+      -0.4,
       0.95,
       -0.85
      ],
-     "fov": 46,
+     "fov": 52,
      "roll": 0,
-     "push": 0.0012,
+     "push": 0.0008,
      "blur": 3,
      "why": "the calm market, high",
      "focus": [
@@ -2465,18 +2465,18 @@
     {
      "f": 1600,
      "pos": [
-      2.0,
-      2.4,
-      4.0
+      -1.4,
+      2.5,
+      4.3
      ],
      "look": [
-      0.1,
+      -0.12,
       0.95,
       -0.85
      ],
-     "fov": 46,
+     "fov": 56,
      "roll": 0,
-     "push": 0.0015,
+     "push": 0.0008,
      "blur": 3,
      "why": "room for the twin stall",
      "glide": 40,
@@ -2507,8 +2507,8 @@
     {
      "who": "rob",
      "at": [
-      -1.0,
-      -0.38
+      -1.4,
+      -0.35
      ],
      "view": "front",
      "pose": "bag held; takes the scale f1550; pushes the twin stall",

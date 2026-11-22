@@ -23,7 +23,7 @@ HQ = dict(board=[-0.4, 2.0, -2.94], board_size=[1.4, 1.0], lever=[0.42, 1.4, -2.
 SYR = dict(wall_z=-1.0, door=[-1.4, 1.4, 2.8], benches=[-0.95, 0.0, 0.95], bench_z=-2.9, bench_y=0.86,
            workers_in=[[-0.95, -2.45], [0.0, -2.45], [0.95, -2.45]], workers_out=[[-0.85, 0.7], [0.05, 0.95], [0.9, 0.7]], sign=[0.0, 3.35, -0.98])
 MARKET = dict(stall=[-1.4, -0.2, -1.25, -0.6], stall_y=0.8, seller=[-0.8, -1.55], tin=[-1.05, 0.8, -0.95], scale=[-0.7, 0.8, -0.78],
-              twin_from=[3.4, -0.92], twin_to=[0.6, -0.92], twin_w=1.2, mgr_in=[-3.6, -0.15], mgr_tin=[-1.0, -0.38], mgr_scale=[-0.68, -0.36],
+              twin_from=[3.4, -0.92], twin_to=[0.6, -0.92], twin_w=1.2, mgr_in=[-3.6, -0.15], mgr_tin=[-1.4, -0.35], mgr_scale=[-0.68, -0.36],
               mgr_push=[1.45, -0.6], buyer_a=[0.12, -0.2], buyer_b=[0.75, -0.1], bag_h=1.0)
 SHOP = dict(counter=[-1.0, 1.0, -1.0, -0.5], counter_y=1.0, owner=[0.0, -1.4], phone=[0.0, 1.22, -1.12], sign=[0.0, 2.05, -2.38])
 BOARD = dict(table=[-0.6, 0.6, -2.6, 0.4], table_y=0.75, ron=[0.0, -3.0], board=[0.0, 2.05, -3.44],
@@ -317,8 +317,8 @@ scene(id="S13", hero=True, f=[1422, 1702], set="market", light="day",
   blocking="Seller seated behind his stall. Buyer at buyer_a. The manager (Rob, armband) walks in from mgr_in (f1486-1508) to mgr_tin, then mgr_scale (f1542-1550), carries the scale off right (f1576-1592), comes back pushing the twin stall from mgr_push (f1596-1646).",
   action="f1422-1480 calm market: the buyer browses his cards; f1517-1532 three coins hop from his tin into the manager's bag on 'thu phí sạp' (f1517, f1522, f1527); f1552 the manager lifts the brass scale off the stall on 'cấm' (f1548) and carries it off screen right; f1600-1646 the twin stall rolls in from the right on castors and bumps against the end of his stall on 'cạnh' (f1646): the scale-less stall shudders; f1657-1685 the twin's cards are the same cards; the buyer steps from buyer_a to buyer_b on 'bạn bán' (f1681-1695).",
   acting="Seller: smile -> nervous -> stern. Manager: polite smile throughout. Buyer: neutral.",
-  cams=[k(1422, [1.6, 2.5, 4.0], [-0.3, 0.95, -0.85], 46, push=0.0012, blur=3, focus=[-0.4, 0.9, -0.8], why="the calm market, high"),
-        k(1600, [2.0, 2.4, 4.0], [0.1, 0.95, -0.85], 46, glide=40, push=0.0015, blur=3, focus=[0.1, 0.9, -0.8], why="room for the twin stall")],
+  cams=[k(1422, [-2.0, 2.5, 4.2], [-0.4, 0.95, -0.85], 52, push=0.0008, blur=3, focus=[-0.4, 0.9, -0.8], why="the calm market, high"),
+        k(1600, [-1.4, 2.5, 4.3], [-0.12, 0.95, -0.85], 56, glide=40, push=0.0008, blur=3, focus=[0.1, 0.9, -0.8], why="room for the twin stall")],
   kicks=[[1646, 0.6]],
   marks=[{"who": "seller", "at": M0["seller"], "view": "front", "pose": "seated behind his stall", "expr": "smile -> nervous -> stern"},
          {"who": "rob", "at": M0["mgr_tin"], "view": "front", "pose": "bag held; takes the scale f1550; pushes the twin stall", "expr": "smile"},
