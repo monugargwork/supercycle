@@ -1,0 +1,9 @@
+Real card scans for the Tcgplayer reel (from library/cards, see CATALOG.md).
+zard_base.png     Base Set Charizard 4                              https://images.pokemontcg.io/base1/4_hires.png
+pikachu.png       Base Set Pikachu 58                               https://images.pokemontcg.io/base1/58.png
+blastoise.png     Base Set Blastoise 2                              https://images.pokemontcg.io/base1/2_hires.png
+venusaur.png      Base Set Venusaur 15                              https://images.pokemontcg.io/base1/15_hires.png
+mtg_bolt.png      Magic Alpha Lightning Bolt                        https://cards.scryfall.io/png/front/d/5/d573ef03-4730-45aa-93dd-e45ac1dbaf4a.png?1783948684
+mtg_serra.png     Magic Alpha Serra Angel                           https://cards.scryfall.io/png/front/f/8/f8ac5006-91bd-4803-93da-f87cf196dd2f.png?1783948710
+mtg_solring.png   Magic Alpha Sol Ring                              https://cards.scryfall.io/png/front/c/4/c4300d24-1cae-4dd5-be7e-38cc677cf5bd.png?1783948661
+mtg_llanowar.png  Magic Alpha Llanowar Elves                        https://cards.scryfall.io/png/front/d/4/d4f1cc9e-4f99-4c26-ac1b-8ef069fa8ceb.png?1783948674
