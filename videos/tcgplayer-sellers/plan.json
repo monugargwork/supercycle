@@ -1,0 +1,2974 @@
+{
+ "fps": 30,
+ "frames": 2360,
+ "voice_end": 2330,
+ "coords": "metres, y up, ground y=0; cams/marks/objects are SET-LOCAL, world = set origin + local",
+ "titles": [
+  {
+   "f": 354,
+   "out": 412,
+   "text": "10 · 2026",
+   "style": 3,
+   "from": "top"
+  },
+  {
+   "f": 904,
+   "out": 962,
+   "text": "05 · 2025",
+   "style": 3,
+   "from": "top"
+  },
+  {
+   "f": 1006,
+   "out": 1060,
+   "text": "200+",
+   "style": 3,
+   "from": "top"
+  },
+  {
+   "f": 1704,
+   "out": 1764,
+   "text": "11 · 2026",
+   "style": 3,
+   "from": "top"
+  },
+  {
+   "f": 1832,
+   "out": 1886,
+   "text": "RON JAIVEN",
+   "style": 3,
+   "from": "top"
+  },
+  {
+   "f": 2050,
+   "out": 2100,
+   "text": "SOUTH DAKOTA",
+   "style": 3,
+   "from": "top"
+  },
+  {
+   "f": 2113,
+   "out": 2160,
+   "text": "50",
+   "style": 3,
+   "from": "top"
+  }
+ ],
+ "cards": {
+  "listing": "zard_base (Base Set Charizard 4): his listing and the Direct copy",
+  "page": [
+   "mtg_bolt",
+   "mtg_serra",
+   "mtg_solring",
+   "mtg_llanowar",
+   "zard_base",
+   "pikachu",
+   "blastoise",
+   "venusaur"
+  ],
+  "stall": [
+   "zard_base",
+   "pikachu",
+   "mtg_bolt",
+   "mtg_serra",
+   "blastoise",
+   "mtg_solring"
+  ]
+ },
+ "home": {
+  "seller": [
+   0.0,
+   -1.5
+  ],
+  "table": [
+   -0.9,
+   0.9,
+   -1.22,
+   -0.52
+  ],
+  "table_y": 0.76,
+  "laptop": [
+   0.12,
+   0.76,
+   -0.85
+  ],
+  "screen": [
+   0.12,
+   0.885,
+   -0.7
+  ],
+  "screen_size": [
+   0.34,
+   0.215
+  ],
+  "screen_tilt": 0.26,
+  "envelope": [
+   -0.22,
+   0.76,
+   -1.06
+  ],
+  "coins": [
+   0.27,
+   0.76,
+   -1.08
+  ],
+  "jar": [
+   0.6,
+   0.76,
+   -0.98
+  ],
+  "bot": [
+   -0.55,
+   0.76,
+   -0.98
+  ],
+  "plate": [
+   -0.02,
+   0.76,
+   -1.05
+  ],
+  "cakebox": [
+   -0.5,
+   0.76,
+   -0.78
+  ],
+  "tv": [
+   0.0,
+   1.78,
+   -2.37
+  ],
+  "tv_size": [
+   1.1,
+   0.62
+  ],
+  "window": [
+   -2.4,
+   1.55,
+   -0.6
+  ],
+  "window_w": 1.1
+ },
+ "hq": {
+  "board": [
+   -0.4,
+   2.0,
+   -2.94
+  ],
+  "board_size": [
+   1.4,
+   1.0
+  ],
+  "lever": [
+   0.42,
+   1.4,
+   -2.88
+  ],
+  "ebay": [
+   -0.4,
+   2.98,
+   -2.95
+  ],
+  "plate": [
+   -0.4,
+   2.66,
+   -2.9
+  ],
+  "window": [
+   1.45,
+   1.8,
+   -3.0
+  ],
+  "window_size": [
+   1.2,
+   1.5
+  ],
+  "desk": [
+   -1.1,
+   0.3,
+   -2.15,
+   -1.55
+  ],
+  "desk_y": 0.76,
+  "rob_desk": [
+   -0.4,
+   -2.42
+  ],
+  "nameplate": [
+   -0.4,
+   0.76,
+   -1.6
+  ],
+  "letters": [
+   -0.55,
+   0.76,
+   -2.0
+  ],
+  "doc": [
+   -0.2,
+   0.76,
+   -2.0
+  ],
+  "rob_lever": [
+   0.72,
+   -2.5
+  ],
+  "side": [
+   1.25,
+   -2.5
+  ],
+  "side_y": 0.8,
+  "cake": [
+   1.25,
+   0.8,
+   -2.5
+  ],
+  "rob_cake": [
+   0.98,
+   -2.45
+  ],
+  "ron_in": [
+   -2.2,
+   -2.42
+  ],
+  "rob_out": [
+   2.4,
+   -2.42
+  ]
+ },
+ "syr": {
+  "wall_z": -1.0,
+  "door": [
+   -1.4,
+   1.4,
+   2.8
+  ],
+  "benches": [
+   -0.95,
+   0.0,
+   0.95
+  ],
+  "bench_z": -2.9,
+  "bench_y": 0.86,
+  "workers_in": [
+   [
+    -0.95,
+    -2.45
+   ],
+   [
+    0.0,
+    -2.45
+   ],
+   [
+    0.95,
+    -2.45
+   ]
+  ],
+  "workers_out": [
+   [
+    -1.15,
+    0.7
+   ],
+   [
+    0.05,
+    0.95
+   ],
+   [
+    1.2,
+    0.7
+   ]
+  ],
+  "sign": [
+   0.0,
+   3.35,
+   -0.98
+  ]
+ },
+ "market": {
+  "stall": [
+   -1.4,
+   -0.2,
+   -1.25,
+   -0.6
+  ],
+  "stall_y": 0.8,
+  "seller": [
+   -0.8,
+   -1.55
+  ],
+  "tin": [
+   -1.05,
+   0.8,
+   -0.95
+  ],
+  "scale": [
+   -0.45,
+   0.8,
+   -0.78
+  ],
+  "twin_from": [
+   3.4,
+   -0.92
+  ],
+  "twin_to": [
+   0.6,
+   -0.92
+  ],
+  "twin_w": 1.2,
+  "mgr_in": [
+   -3.2,
+   -0.15
+  ],
+  "mgr_tin": [
+   -1.0,
+   -0.38
+  ],
+  "mgr_scale": [
+   -0.42,
+   -0.36
+  ],
+  "mgr_push": [
+   1.45,
+   -0.6
+  ],
+  "buyer_a": [
+   -0.65,
+   -0.05
+  ],
+  "buyer_b": [
+   0.55,
+   -0.05
+  ],
+  "bag_h": 1.0
+ },
+ "shop": {
+  "counter": [
+   -1.0,
+   1.0,
+   -1.0,
+   -0.5
+  ],
+  "counter_y": 1.0,
+  "owner": [
+   0.0,
+   -1.4
+  ],
+  "phone": [
+   0.0,
+   1.22,
+   -1.12
+  ],
+  "sign": [
+   0.0,
+   2.05,
+   -2.38
+  ]
+ },
+ "board": {
+  "table": [
+   -0.6,
+   0.6,
+   -2.6,
+   0.4
+  ],
+  "table_y": 0.75,
+  "ron": [
+   0.0,
+   -3.0
+  ],
+  "board": [
+   0.0,
+   2.05,
+   -3.44
+  ],
+  "vips": [
+   [
+    -0.95,
+    -2.0
+   ],
+   [
+    -0.95,
+    -0.9
+   ],
+   [
+    0.95,
+    -2.0
+   ],
+   [
+    0.95,
+    -0.9
+   ]
+  ],
+  "seller": [
+   0.05,
+   1.15
+  ],
+  "sack": [
+   0.0,
+   0.75,
+   -1.3
+  ]
+ },
+ "sets": {
+  "home": {
+   "origin": [
+    0,
+    0,
+    0
+   ],
+   "axes": "the seller sits behind his packing table facing +z (the lens); the wall TV on the back wall z -2.4 behind him",
+   "light": "day",
+   "sun": [
+    -40,
+    35
+   ],
+   "open_sides": "+z",
+   "objects": [
+    {
+     "id": "room",
+     "build": "new: workroom x -2.4..2.4, z -2.4..2.4, 2.6 m, sage walls, wood floor, ceiling (no shadows), window in the -x wall",
+     "pos": [
+      0,
+      1.3,
+      0
+     ],
+     "size": [
+      4.8,
+      2.6,
+      4.8
+     ]
+    },
+    {
+     "id": "table",
+     "build": "new: packing table, birch top y 0.76 on four legs, x -0.9..0.9, z -1.22..-0.52; bubble mailers and top loaders on it",
+     "pos": [
+      0,
+      0.38,
+      -0.87
+     ],
+     "size": [
+      1.8,
+      0.76,
+      0.7
+     ]
+    },
+    {
+     "id": "laptop",
+     "build": "new: laptop 34 x 24 cm base, screen 34 x 21.5 cm (canvas: the TCGplayer page) facing the seller, tilted back 15 deg",
+     "pos": [
+      0.12,
+      0.76,
+      -0.85
+     ],
+     "size": [
+      0.34,
+      0.24,
+      0.24
+     ]
+    },
+    {
+     "id": "tv",
+     "build": "new: wall TV 110 x 62 cm (canvas: business news, the GMV counter), black bezel",
+     "pos": [
+      0.0,
+      1.78,
+      -2.37
+     ],
+     "size": [
+      1.1,
+      0.62,
+      0.04
+     ]
+    },
+    {
+     "id": "envelope",
+     "build": "new: kraft envelope 22 x 11 cm addressed CO QUAN LIEN BANG; rubber stamp (wood knob, red rubber) beside it; the stamp prints XIN ĐIỀU TRA",
+     "pos": [
+      -0.22,
+      0.76,
+      -1.06
+     ],
+     "size": [
+      0.22,
+      0.004,
+      0.11
+     ]
+    },
+    {
+     "id": "coins",
+     "build": "new: a stack of 10 gold coins (r 1.6 cm, 3 mm) = a sale's takings",
+     "pos": [
+      0.27,
+      0.76,
+      -1.08
+     ],
+     "size": [
+      0.032,
+      0.03,
+      0.032
+     ]
+    },
+    {
+     "id": "jar",
+     "build": "new: glass jar r 6 cm, 13 cm, paper label PHÍ, coins drop in",
+     "pos": [
+      0.6,
+      0.76,
+      -0.98
+     ],
+     "size": [
+      0.12,
+      0.13,
+      0.12
+     ]
+    },
+    {
+     "id": "bot",
+     "build": "new: his third-party price scanner: grey box 14 x 6 x 10 cm with a tilted top screen (canvas: PRICE BOT, then BỊ CHẶN in red)",
+     "pos": [
+      -0.55,
+      0.76,
+      -0.98
+     ],
+     "size": [
+      0.14,
+      0.06,
+      0.1
+     ]
+    },
+    {
+     "id": "cake",
+     "build": "new: (S05) an open white cake box labelled eBay and a slice of sponge cake on a paper plate in front of him",
+     "pos": [
+      -0.02,
+      0.76,
+      -1.05
+     ],
+     "size": [
+      0.16,
+      0.06,
+      0.16
+     ]
+    },
+    {
+     "id": "shelves",
+     "build": "new: shelves of card boxes and binders on the back wall (x 1.0..2.3)",
+     "pos": [
+      1.65,
+      1.3,
+      -2.25
+     ],
+     "size": [
+      1.3,
+      1.8,
+      0.3
+     ]
+    }
+   ],
+   "marks": {
+    "seller": [
+     0.0,
+     -1.5
+    ]
+   }
+  },
+  "hq": {
+   "origin": [
+    40,
+    0,
+    0
+   ],
+   "axes": "the GMV board on the back wall z -3.0 under an eBay sign; the boss's desk in front of it; the window on the night city at +x",
+   "light": "day",
+   "sun": [
+    30,
+    40
+   ],
+   "open_sides": "+z",
+   "objects": [
+    {
+     "id": "room",
+     "build": "new: glass-and-oak office x -3..3, z -3..3, 3.4 m, slate walls, grey carpet, ceiling with light panels",
+     "pos": [
+      0,
+      1.7,
+      0
+     ],
+     "size": [
+      6,
+      3.4,
+      6
+     ]
+    },
+    {
+     "id": "board",
+     "build": "new: split-flap counter board 140 x 100 cm (canvas: GMV 12 THÁNG and a 10-digit dollar count), steel frame; a red-knob lever on its right side that pulls down",
+     "pos": [
+      -0.4,
+      2.0,
+      -2.94
+     ],
+     "size": [
+      1.4,
+      1.0,
+      0.06
+     ]
+    },
+    {
+     "id": "ebay",
+     "build": "new: big letter sign eBay (plain lettering, four colours) above the board; a smaller plate TCGplayer hangs from it on two chains",
+     "pos": [
+      -0.4,
+      2.98,
+      -2.95
+     ],
+     "size": [
+      1.0,
+      0.32,
+      0.04
+     ]
+    },
+    {
+     "id": "window",
+     "build": "new: window 140 x 160 cm on the night city (canvas: skyline, a white dome = the federal building, fireworks, paper planes)",
+     "pos": [
+      1.45,
+      1.8,
+      -3.0
+     ],
+     "size": [
+      1.4,
+      1.6,
+      0.02
+     ]
+    },
+    {
+     "id": "desk",
+     "build": "new: oak desk top y 0.76, x -1.1..0.3, z -2.15..-1.55; nameplate (canvas) at the front; letter stack, stamp pad, a program document",
+     "pos": [
+      -0.4,
+      0.38,
+      -1.85
+     ],
+     "size": [
+      1.4,
+      0.76,
+      0.6
+     ]
+    },
+    {
+     "id": "chair",
+     "build": "new: black executive chair behind the desk",
+     "pos": [
+      -0.4,
+      0.5,
+      -2.5
+     ],
+     "size": [
+      0.6,
+      1.1,
+      0.6
+     ]
+    },
+    {
+     "id": "cake",
+     "build": "new: side table with a two-tier party cake (white icing, red trim) and a cake knife (S03-S04 only)",
+     "pos": [
+      1.25,
+      0.8,
+      -2.5
+     ],
+     "size": [
+      0.34,
+      0.24,
+      0.34
+     ]
+    }
+   ],
+   "marks": {
+    "rob_desk": [
+     -0.4,
+     -2.42
+    ],
+    "rob_lever": [
+     0.72,
+     -2.5
+    ],
+    "rob_cake": [
+     0.98,
+     -2.45
+    ]
+   }
+  },
+  "syr": {
+   "origin": [
+    80,
+    0,
+    0
+   ],
+   "axes": "the building front at z -1.0 faces +z (the street); the grading room behind it; the lens on the street",
+   "light": "day",
+   "sun": [
+    35,
+    30
+   ],
+   "open_sides": "+z",
+   "objects": [
+    {
+     "id": "front",
+     "build": "new: brick front 8 m wide x 4.5 m, door opening x -1.4..1.4 up to 2.8 m; sign SYRACUSE · AUTHENTICATION CENTER above it; UNION poster on the left",
+     "pos": [
+      0,
+      2.25,
+      -1.05
+     ],
+     "size": [
+      8,
+      4.5,
+      0.2
+     ]
+    },
+    {
+     "id": "shutter",
+     "build": "new: ribbed steel roller shutter in the opening, rolls down f972-994 from its drum above the door",
+     "pos": [
+      0,
+      1.4,
+      -0.92
+     ],
+     "size": [
+      2.8,
+      2.8,
+      0.04
+     ]
+    },
+    {
+     "id": "grading",
+     "build": "new: grading room z -1..-5: three benches top y 0.86 with lamps, loupes and card trays; lit ceiling panels; a ceiling",
+     "pos": [
+      0,
+      1.4,
+      -3.0
+     ],
+     "size": [
+      6,
+      2.8,
+      4
+     ]
+    },
+    {
+     "id": "street",
+     "build": "new: pavement and asphalt in front, a kerb, a lamp post",
+     "pos": [
+      0,
+      0,
+      3
+     ],
+     "size": [
+      12,
+      0.1,
+      8
+     ]
+    }
+   ],
+   "marks": {
+    "w1": [
+     -0.95,
+     -2.45
+    ],
+    "w2": [
+     0.0,
+     -2.45
+    ],
+    "w3": [
+     0.95,
+     -2.45
+    ]
+   }
+  },
+  "market": {
+   "origin": [
+    120,
+    0,
+    0
+   ],
+   "axes": "two stalls along x facing +z; the seller sits behind his stall; buyers walk in front (z ~ 0)",
+   "light": "golden",
+   "sun": [
+    -35,
+    30
+   ],
+   "open_sides": "+z",
+   "objects": [
+    {
+     "id": "hall",
+     "build": "new: covered market hall x -4..4, z -3..3, 3.6 m, cream walls, tiled floor, ceiling with warm lamps, bunting",
+     "pos": [
+      0,
+      1.8,
+      0
+     ],
+     "size": [
+      8,
+      3.6,
+      6
+     ]
+    },
+    {
+     "id": "stall",
+     "build": "new: his stall: table x -1.4..-0.2, z -1.25..-0.6, top y 0.8, striped awning on two posts, sign SẠP CỦA BẠN; cards on tilted stands; a coin tin; his small brass pack scale",
+     "pos": [
+      -0.8,
+      0.4,
+      -0.92
+     ],
+     "size": [
+      1.2,
+      0.8,
+      0.65
+     ]
+    },
+    {
+     "id": "twin",
+     "build": "new: the twin stall (identical, sign BAN QUẢN LÝ, same cards) on four castors, rolls in from x 3.4 to 0.6",
+     "pos": [
+      0.6,
+      0.4,
+      -0.92
+     ],
+     "size": [
+      1.2,
+      0.8,
+      0.65
+     ]
+    }
+   ],
+   "marks": {
+    "seller": [
+     -0.8,
+     -1.55
+    ],
+    "buyer": [
+     -0.65,
+     -0.05
+    ]
+   }
+  },
+  "shop": {
+   "origin": [
+    160,
+    0,
+    0
+   ],
+   "axes": "the counter faces +z; the owner stands behind it",
+   "light": "golden",
+   "sun": [
+    -30,
+    30
+   ],
+   "open_sides": "+z",
+   "objects": [
+    {
+     "id": "room",
+     "build": "new: small card shop x -2.4..2.4, z -2.4..2.4, 2.7 m, warm walls, shelves of sealed product, sign CARD SHOP · SOUTH DAKOTA",
+     "pos": [
+      0,
+      1.35,
+      0
+     ],
+     "size": [
+      4.8,
+      2.7,
+      4.8
+     ]
+    },
+    {
+     "id": "counter",
+     "build": "new: glass-top counter x -1..1, z -1..-0.5, top y 1.0, cards in the case",
+     "pos": [
+      0,
+      0.5,
+      -0.75
+     ],
+     "size": [
+      2,
+      1,
+      0.5
+     ]
+    },
+    {
+     "id": "phone",
+     "build": "new: his phone 7.5 x 15.5 cm (canvas: a chat message typed and sent), seen only from his side",
+     "pos": [
+      0.0,
+      1.22,
+      -1.12
+     ],
+     "size": [
+      0.075,
+      0.155,
+      0.01
+     ]
+    }
+   ],
+   "marks": {
+    "owner": [
+     0.0,
+     -1.4
+    ]
+   }
+  },
+  "board": {
+   "origin": [
+    200,
+    0,
+    0
+   ],
+   "axes": "the long table runs along z; the boss at the head (far end, z -3.0) facing +z; the seller at the near end",
+   "light": "day",
+   "sun": [
+    25,
+    40
+   ],
+   "open_sides": "+z",
+   "objects": [
+    {
+     "id": "room",
+     "build": "new: boardroom x -2.5..2.5, z -3.5..3, 3 m, dark wood panels, ceiling, the GMV board on the back wall",
+     "pos": [
+      0,
+      1.5,
+      0
+     ],
+     "size": [
+      5,
+      3,
+      6.5
+     ]
+    },
+    {
+     "id": "table",
+     "build": "new: long table x -0.6..0.6, z -2.6..0.4, top y 0.75; five leather chairs, every one taken",
+     "pos": [
+      0,
+      0.375,
+      -1.1
+     ],
+     "size": [
+      1.2,
+      0.75,
+      3.0
+     ]
+    },
+    {
+     "id": "sack",
+     "build": "new: a canvas money sack 40 x 45 cm with a $ print, drops onto the table",
+     "pos": [
+      0.0,
+      0.75,
+      -1.3
+     ],
+     "size": [
+      0.4,
+      0.45,
+      0.35
+     ]
+    }
+   ],
+   "marks": {
+    "ron": [
+     0.0,
+     -3.0
+    ],
+    "seller": [
+     0.05,
+     1.15
+    ]
+   }
+  }
+ },
+ "cast": {
+  "seller": {
+   "look": [
+    "mustard sweater",
+    "brown hair",
+    "glasses"
+   ],
+   "items": [
+    "party popper",
+    "stamp",
+    "paper planes"
+   ],
+   "views": [
+    "front, seated",
+    "front, standing (S16)"
+   ]
+  },
+  "rob": {
+   "look": [
+    "navy suit",
+    "red tie",
+    "grey hair"
+   ],
+   "items": [
+    "stamp",
+    "cake knife",
+    "bag (market)",
+    "brass scale (market)"
+   ],
+   "views": [
+    "front",
+    "side walking"
+   ]
+  },
+  "ron": {
+   "look": [
+    "charcoal suit",
+    "blue tie",
+    "dark hair"
+   ],
+   "items": [],
+   "views": [
+    "front",
+    "side walking"
+   ]
+  },
+  "grader": {
+   "look": [
+    "blue work shirt with UNION on the chest",
+    "dark trousers"
+   ],
+   "items": [
+    "cardboard box"
+   ],
+   "views": [
+    "front"
+   ]
+  },
+  "buyer": {
+   "look": [
+    "purple jacket",
+    "cap"
+   ],
+   "items": [],
+   "views": [
+    "front"
+   ]
+  },
+  "owner": {
+   "look": [
+    "red flannel",
+    "cap"
+   ],
+   "items": [
+    "phone"
+   ],
+   "views": [
+    "front"
+   ]
+  },
+  "vip": {
+   "look": [
+    "stout",
+    "dark suit",
+    "gold tie",
+    "VIP on the chest"
+   ],
+   "items": [],
+   "views": [
+    "front, seated"
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "S01",
+   "hero": true,
+   "f": [
+    0,
+    177
+   ],
+   "set": "home",
+   "light": "day",
+   "vo": "Một sàn thẻ bài vừa kiếm được một tỷ đô, và người bán trên đó ăn mừng bằng cách nhờ chính phủ điều tra nó.",
+   "gloss": "A card marketplace just made a billion dollars, and its sellers celebrate by asking the government to investigate it.",
+   "spine": 1,
+   "viewer": "Big money upstairs; down here a seller 'celebrates' with an investigation request.",
+   "in": {
+    "type": "open on the act"
+   },
+   "out": {
+    "type": "glide",
+    "to": "S02",
+    "note": "the camera drops from the envelope over his shoulder onto the laptop"
+   },
+   "build": "new: the workroom, packing table, wall TV with the counter, envelope and rubber stamp, party popper.",
+   "blocking": "Seller seated at his mark facing +z, the stamp raised in his right hand (screen left) from f0; the popper in his left hand.",
+   "action": "f0-46 the TV counter rolls $999,999,9xx -> $1,000,000,000, landing on 'một tỷ đô' (f46); f96-101 he lifts the popper and pulls it on 'ăn mừng' (f101): a burst and 40 confetti bits fall over the table by f135 and stay; f136-142 wind-up of the stamp (held f139-142); f144 the stamp slams on the envelope 2 f before 'điều tra' (f146): XIN ĐIỀU TRA in red appears on it; he lifts the stamp f150-160.",
+   "acting": "Deadpan party: a flat smile on the popper, a stern face on the stamp.",
+   "cams": [
+    {
+     "f": 0,
+     "pos": [
+      0.3,
+      1.32,
+      1.05
+     ],
+     "look": [
+      -0.02,
+      1.2,
+      -1.6
+     ],
+     "fov": 40,
+     "roll": 0,
+     "push": 0.0018,
+     "blur": 6,
+     "why": "the seller under the TV",
+     "focus": [
+      0.0,
+      1.42,
+      -1.5
+     ]
+    },
+    {
+     "f": 114,
+     "pos": [
+      -0.05,
+      1.18,
+      -0.28
+     ],
+     "look": [
+      -0.2,
+      0.84,
+      -1.06
+     ],
+     "fov": 32,
+     "roll": 0,
+     "push": 0.003,
+     "blur": 10,
+     "why": "push onto the stamp",
+     "glide": 30,
+     "punch": [
+      0.008,
+      14
+     ],
+     "focus": [
+      -0.22,
+      0.78,
+      -1.06
+     ]
+    }
+   ],
+   "kicks": [
+    [
+     144,
+     1.0
+    ]
+   ],
+   "marks": [
+    {
+     "who": "seller",
+     "at": [
+      0.0,
+      -1.5
+     ],
+     "view": "front",
+     "pose": "seated; popper f101, stamp slam f144",
+     "expr": "smile -> stern"
+    }
+   ],
+   "subjects": [
+    {
+     "n": "seller head",
+     "p": [
+      0.0,
+      1.42,
+      -1.5
+     ],
+     "f": [
+      0,
+      110
+     ]
+    },
+    {
+     "n": "tv",
+     "p": [
+      0.0,
+      1.78,
+      -2.37
+     ],
+     "f": [
+      0,
+      60
+     ]
+    },
+    {
+     "n": "envelope",
+     "p": [
+      -0.22,
+      0.78,
+      -1.06
+     ],
+     "f": [
+      140,
+      176
+     ]
+    }
+   ],
+   "physics": "confetti: 40 paper bits (0.3 g) launched in a cone from the popper, drift down with air drag and side flutter, lie flat on the table and floor and stay. Stamp: 4 f wind-up, held, 1 f strike, 2 f squash.",
+   "light_mood": "warm day from the window (-x); the TV glow.",
+   "sound": "TV news sting under the counter f0-46, a ka-ching f46; popper bang f101, confetti rustle; stamp thump f144; light comedic pizzicato underscore.",
+   "after": "Confetti on the table; the stamped envelope lies there."
+  },
+  {
+   "id": "S02",
+   "f": [
+    177,
+    352
+   ],
+   "set": "home",
+   "light": "day",
+   "vo": "Sàn đó là TCGplayer, chợ mua bán thẻ Magic và Pokémon, con cưng của eBay.",
+   "gloss": "That marketplace is TCGplayer, the market for Magic and Pokémon cards, eBay's darling.",
+   "spine": 1,
+   "viewer": "What TCGplayer is: a big online card market, owned by eBay.",
+   "in": {
+    "type": "glide",
+    "from": "S01"
+   },
+   "out": {
+    "type": "dissolve",
+    "to": "S03",
+    "n": 8,
+    "note": "push into the 'an eBay company' badge, dissolve to the eBay sign at HQ"
+   },
+   "build": "reuse the laptop: the TCGplayer page: header TCGplayer, a grid of 8 real card tiles (4 Magic Alpha, 4 Pokémon Base Set) with prices; a badge 'an eBay company ♥'.",
+   "blocking": "Seller off frame (POV over his shoulder).",
+   "action": "f205 the page header TCGplayer lights on the name; f273 the four Magic tiles pop in on 'Magic' (one every 3 f); f292 the four Pokémon tiles on 'Pokémon'; f312 the badge 'an eBay company ♥' slides in on 'con cưng'; f330-352 push into the badge.",
+   "acting": "none.",
+   "cams": [
+    {
+     "f": 177,
+     "pos": [
+      0.1,
+      1.24,
+      -1.42
+     ],
+     "look": [
+      0.12,
+      0.885,
+      -0.72
+     ],
+     "fov": 26,
+     "roll": 0,
+     "push": 0.0015,
+     "blur": 8,
+     "why": "his laptop, from his eyes",
+     "glide": 28,
+     "focus": [
+      0.12,
+      0.885,
+      -0.7
+     ]
+    },
+    {
+     "f": 318,
+     "pos": [
+      0.11,
+      1.1,
+      -1.18
+     ],
+     "look": [
+      0.12,
+      0.92,
+      -0.72
+     ],
+     "fov": 22,
+     "roll": 0,
+     "push": 0.004,
+     "blur": 8,
+     "why": "push into the eBay badge",
+     "glide": 34,
+     "focus": [
+      0.12,
+      0.885,
+      -0.7
+     ]
+    }
+   ],
+   "kicks": [],
+   "marks": [],
+   "subjects": [
+    {
+     "n": "screen",
+     "p": [
+      0.12,
+      0.885,
+      -0.7
+     ],
+     "f": [
+      200,
+      351
+     ]
+    }
+   ],
+   "physics": "none.",
+   "light_mood": "day; the screen glow.",
+   "sound": "soft clicks per tile pop f273-302; a little 'aww' chime on 'con cưng' f312.",
+   "after": "The page is full."
+  },
+  {
+   "id": "S03",
+   "f": [
+    352,
+    508
+   ],
+   "set": "hq",
+   "light": "day",
+   "vo": "Tháng mười, eBay khoe: tổng giao dịch mười hai tháng qua lần đầu vượt một tỷ đô.",
+   "gloss": "In October eBay bragged: total transactions over the past twelve months passed one billion dollars for the first time.",
+   "spine": 1,
+   "viewer": "The boss pulls the lever and the board lands on a billion.",
+   "in": {
+    "type": "dissolve",
+    "n": 8,
+    "from": "S02"
+   },
+   "out": {
+    "type": "glide",
+    "to": "S04"
+   },
+   "build": "new: the HQ office: GMV board with lever, eBay sign and TCGplayer plate, desk, chair, cake table, window on the night city.",
+   "blocking": "Rob stands at rob_lever facing +z, his right arm (screen left) on the lever knob.",
+   "action": "f352-385 the board reads $987,000,000 (GMV 12 THÁNG); f386-392 he grips and pulls the lever down on 'khoe' (f389): the lever swings 50 deg; f392-479 the flaps spin, the count climbs; f480 they land on $1,000,000,000 on 'một tỷ đô' (f479-493): every flap snaps, a small dust puff off the board top; he grins and spreads his free arm.",
+   "acting": "Proud grin, chin up.",
+   "cams": [
+    {
+     "f": 352,
+     "pos": [
+      0.5,
+      1.6,
+      1.6
+     ],
+     "look": [
+      0.0,
+      1.85,
+      -2.7
+     ],
+     "fov": 46,
+     "roll": 0,
+     "push": 0.0015,
+     "blur": 4,
+     "why": "the board, the boss",
+     "focus": [
+      -0.4,
+      2.0,
+      -2.94
+     ]
+    },
+    {
+     "f": 440,
+     "pos": [
+      0.25,
+      1.55,
+      0.6
+     ],
+     "look": [
+      -0.2,
+      1.85,
+      -2.8
+     ],
+     "fov": 42,
+     "roll": 0,
+     "push": 0.003,
+     "blur": 6,
+     "why": "push on the count",
+     "glide": 40,
+     "punch": [
+      0.007,
+      16
+     ],
+     "focus": [
+      -0.4,
+      2.0,
+      -2.94
+     ]
+    }
+   ],
+   "kicks": [
+    [
+     480,
+     0.6
+    ]
+   ],
+   "marks": [
+    {
+     "who": "rob",
+     "at": [
+      0.72,
+      -2.5
+     ],
+     "view": "front",
+     "pose": "standing; pulls the lever f386-392; arm spreads f482",
+     "expr": "grin"
+    }
+   ],
+   "subjects": [
+    {
+     "n": "board",
+     "p": [
+      -0.4,
+      2.0,
+      -2.94
+     ],
+     "f": [
+      352,
+      507
+     ]
+    },
+    {
+     "n": "rob head",
+     "p": [
+      0.72,
+      1.6,
+      -2.5
+     ],
+     "f": [
+      352,
+      430
+     ]
+    }
+   ],
+   "physics": "the lever: a damped swing to its stop (3 deg overshoot, settles in 8 f).",
+   "light_mood": "night office, cool panels, warm board glow.",
+   "sound": "lever clunk f389; split-flap clatter f392-479; ka-ching f480.",
+   "after": "The board reads $1,000,000,000."
+  },
+  {
+   "id": "S04",
+   "f": [
+    508,
+    560
+   ],
+   "set": "hq",
+   "light": "day",
+   "vo": "Pháo hoa. Bánh kem.",
+   "gloss": "Fireworks. Cake.",
+   "spine": 2,
+   "viewer": "They party.",
+   "in": {
+    "type": "glide",
+    "from": "S03"
+   },
+   "out": {
+    "type": "cut",
+    "to": "S05"
+   },
+   "build": "reuse the HQ window (fireworks drawn on the night sky) and the cake table.",
+   "blocking": "Rob steps from rob_lever to rob_cake (f510-524), knife in his left arm (screen right).",
+   "action": "f508-534 three fireworks bloom in the window on 'Pháo hoa' (f508, f515, f522); f536-542 he raises the knife and cuts into the cake on 'Bánh kem' (f540): the knife goes in, a slice wedge tips out 2 cm.",
+   "acting": "Grin.",
+   "cams": [
+    {
+     "f": 508,
+     "pos": [
+      1.25,
+      1.6,
+      0.9
+     ],
+     "look": [
+      1.35,
+      1.55,
+      -2.7
+     ],
+     "fov": 44,
+     "roll": 0,
+     "push": 0.002,
+     "blur": 4,
+     "why": "the window, the cake",
+     "glide": 26,
+     "focus": [
+      1.25,
+      1.2,
+      -2.5
+     ]
+    }
+   ],
+   "kicks": [],
+   "marks": [
+    {
+     "who": "rob",
+     "at": [
+      0.98,
+      -2.45
+     ],
+     "view": "front",
+     "pose": "steps to the cake, cuts it f540",
+     "expr": "grin"
+    }
+   ],
+   "subjects": [
+    {
+     "n": "cake",
+     "p": [
+      1.25,
+      0.8,
+      -2.5
+     ],
+     "f": [
+      530,
+      559
+     ]
+    },
+    {
+     "n": "window",
+     "p": [
+      1.45,
+      1.8,
+      -3.0
+     ],
+     "f": [
+      508,
+      534
+     ]
+    }
+   ],
+   "physics": "the slice wedge tips 8 deg and stops.",
+   "light_mood": "the firework colours flash on the room (window glow).",
+   "sound": "three firework pops and crackles f508-534; a party horn f540.",
+   "after": "The cake is cut."
+  },
+  {
+   "id": "S05",
+   "f": [
+    560,
+    616
+   ],
+   "set": "home",
+   "light": "day",
+   "vo": "Người bán thì không ai ăn bánh.",
+   "gloss": "The sellers? Not one of them eats the cake.",
+   "spine": 2,
+   "viewer": "He pushes the slice away.",
+   "in": {
+    "type": "cut",
+    "from": "S04"
+   },
+   "out": {
+    "type": "glide",
+    "to": "S06"
+   },
+   "build": "reuse the workroom: an open cake box (eBay on the lid) and a slice on a paper plate in front of him.",
+   "blocking": "Seller seated at his mark, arms down.",
+   "action": "Hard cut on 'Người bán' (f560); f596-606 his right arm pushes the plate 18 cm away from him on 'ăn bánh' (f604-608); the plate skids and stops; his arm returns.",
+   "acting": "Stern, unimpressed.",
+   "cams": [
+    {
+     "f": 560,
+     "pos": [
+      0.25,
+      1.22,
+      0.55
+     ],
+     "look": [
+      0.0,
+      1.05,
+      -1.3
+     ],
+     "fov": 36,
+     "roll": 0,
+     "push": 0.002,
+     "blur": 8,
+     "why": "the seller and the slice",
+     "cut": true,
+     "focus": [
+      0.0,
+      1.42,
+      -1.5
+     ]
+    }
+   ],
+   "kicks": [],
+   "marks": [
+    {
+     "who": "seller",
+     "at": [
+      0.0,
+      -1.5
+     ],
+     "view": "front",
+     "pose": "seated; pushes the plate f596-606",
+     "expr": "stern"
+    }
+   ],
+   "subjects": [
+    {
+     "n": "seller head",
+     "p": [
+      0.0,
+      1.42,
+      -1.5
+     ],
+     "f": [
+      560,
+      615
+     ]
+    },
+    {
+     "n": "plate",
+     "p": [
+      -0.02,
+      0.76,
+      -1.05
+     ],
+     "f": [
+      560,
+      615
+     ]
+    }
+   ],
+   "physics": "the plate: kinematic slide 18 cm, decelerating (friction), stops dead.",
+   "light_mood": "day.",
+   "sound": "music cuts out on the cut; a plate scrape f600; a 'bruh' f610.",
+   "after": "The plate sits pushed away, untouched."
+  },
+  {
+   "id": "S06",
+   "f": [
+    616,
+    715
+   ],
+   "set": "home",
+   "light": "day",
+   "vo": "Họ kêu phí cao. Kêu bị hạn chế công cụ bên thứ ba.",
+   "gloss": "They complain about high fees. About being restricted from third-party tools.",
+   "spine": 2,
+   "viewer": "Fees take his coins; his own tool gets blocked.",
+   "in": {
+    "type": "glide",
+    "from": "S05"
+   },
+   "out": {
+    "type": "glide",
+    "to": "S07"
+   },
+   "build": "reuse the coin stack, the PHÍ jar and the price scanner.",
+   "blocking": "Seller seated at his mark.",
+   "action": "f630-650 three coins hop one by one off the top of his stack into the PHÍ jar on 'phí cao' (f636, f641, f646): each arcs 25 cm, clinks in; f680-704 the scanner screen flips from PRICE BOT (green) to BỊ CHẶN (red) on 'hạn chế' (f672) with a red flash; it powers down on 'thứ ba' (f700).",
+   "acting": "Eyes follow the coins; a pained look at the scanner.",
+   "cams": [
+    {
+     "f": 616,
+     "pos": [
+      0.45,
+      1.5,
+      0.65
+     ],
+     "look": [
+      0.4,
+      0.84,
+      -1.02
+     ],
+     "fov": 40,
+     "roll": 0,
+     "push": 0.0015,
+     "blur": 6,
+     "why": "the table from above his eye line",
+     "glide": 30,
+     "focus": [
+      0.27,
+      0.8,
+      -1.06
+     ]
+    },
+    {
+     "f": 662,
+     "pos": [
+      -0.3,
+      1.45,
+      0.5
+     ],
+     "look": [
+      -0.45,
+      0.86,
+      -1.0
+     ],
+     "fov": 38,
+     "roll": 0,
+     "push": 0.002,
+     "blur": 8,
+     "why": "to the scanner",
+     "glide": 36,
+     "focus": [
+      -0.55,
+      0.82,
+      -0.98
+     ]
+    }
+   ],
+   "kicks": [],
+   "marks": [
+    {
+     "who": "seller",
+     "at": [
+      0.0,
+      -1.5
+     ],
+     "view": "front",
+     "pose": "seated",
+     "expr": "stern -> pained"
+    }
+   ],
+   "subjects": [
+    {
+     "n": "coins",
+     "p": [
+      0.27,
+      0.8,
+      -1.08
+     ],
+     "f": [
+      626,
+      655
+     ]
+    },
+    {
+     "n": "jar",
+     "p": [
+      0.6,
+      0.83,
+      -0.98
+     ],
+     "f": [
+      626,
+      655
+     ]
+    },
+    {
+     "n": "scanner",
+     "p": [
+      -0.55,
+      0.82,
+      -0.98
+     ],
+     "f": [
+      690,
+      714
+     ]
+    }
+   ],
+   "physics": "coins: three ballistic hops (12 f each, 0.25 m apex), land in the jar and stay; the stack is 3 coins shorter.",
+   "light_mood": "day.",
+   "sound": "three coin clinks f636, f641, f646; an error buzz f672; power-down blip f700.",
+   "after": "Seven coins left; three in the jar; the scanner dark."
+  },
+  {
+   "id": "S07",
+   "hero": true,
+   "f": [
+    715,
+    900
+   ],
+   "set": "home",
+   "light": "day",
+   "vo": "Và kêu một chuyện nghe như phim hài: chính TCGplayer mở gian hàng riêng, bán đè lên họ.",
+   "gloss": "And complain about something that sounds like a comedy: TCGplayer itself opened its own shop, selling right on top of them.",
+   "spine": 2,
+   "viewer": "The platform's own listing lands on top of his.",
+   "in": {
+    "type": "glide",
+    "from": "S06"
+   },
+   "out": {
+    "type": "dissolve",
+    "to": "S08",
+    "n": 8
+   },
+   "build": "hard cut to his face for the reaction (cut 3 of 3). reuse the laptop page: his listing (the real Base Set Charizard, $350, seller thecardnook); the Direct listing (same card, $339, a blue TCGplayer Direct seal).",
+   "blocking": "Seller seated (POV over his shoulder, then the front for his reaction).",
+   "action": "f730-800 his listing on the page, ranked #1; f820-844 the Direct listing appears above the page top on 'mở gian hàng riêng' and starts dropping; f866 it slams onto his listing on 'đè' (f866): his tile is shoved down and greys (#2); a dust puff from the tile edges; f872 hard cut to the front: his jaw drops (gape 0.6).",
+   "acting": "Disbelief.",
+   "cams": [
+    {
+     "f": 715,
+     "pos": [
+      0.1,
+      1.24,
+      -1.42
+     ],
+     "look": [
+      0.12,
+      0.885,
+      -0.72
+     ],
+     "fov": 24,
+     "roll": 0,
+     "push": 0.0015,
+     "blur": 8,
+     "why": "his listing",
+     "glide": 40,
+     "focus": [
+      0.12,
+      0.885,
+      -0.7
+     ]
+    },
+    {
+     "f": 872,
+     "pos": [
+      0.2,
+      1.4,
+      -0.15
+     ],
+     "look": [
+      0.0,
+      1.38,
+      -1.5
+     ],
+     "fov": 34,
+     "roll": 0,
+     "push": 0.003,
+     "blur": 10,
+     "why": "his face",
+     "cut": true,
+     "focus": [
+      0.0,
+      1.42,
+      -1.5
+     ]
+    }
+   ],
+   "kicks": [
+    [
+     866,
+     1.0
+    ]
+   ],
+   "marks": [
+    {
+     "who": "seller",
+     "at": [
+      0.0,
+      -1.5
+     ],
+     "view": "front",
+     "pose": "seated",
+     "expr": "neutral -> shock (gape)"
+    }
+   ],
+   "subjects": [
+    {
+     "n": "screen",
+     "p": [
+      0.12,
+      0.885,
+      -0.7
+     ],
+     "f": [
+      720,
+      866
+     ]
+    },
+    {
+     "n": "seller head",
+     "p": [
+      0.0,
+      1.42,
+      -1.5
+     ],
+     "f": [
+      886,
+      899
+     ]
+    }
+   ],
+   "physics": "the Direct tile: drops with gravity (accelerating) and stops dead with 2 f of squash; his tile is shoved 40 % down and stays.",
+   "light_mood": "day.",
+   "sound": "a sitcom laugh track on 'phim hài' f765; a falling whistle f844-864; a slam f866.",
+   "after": "His listing sits under the Direct listing."
+  },
+  {
+   "id": "S08",
+   "f": [
+    900,
+    1069
+   ],
+   "set": "syr",
+   "light": "day",
+   "vo": "Tháng năm năm ngoái, trung tâm kiểm định ở Syracuse đóng cửa, hơn hai trăm công nhân có công đoàn mất việc.",
+   "gloss": "In May last year the authentication center in Syracuse closed, and more than two hundred unionized workers lost their jobs.",
+   "spine": 3,
+   "viewer": "A grading center shuts; the workers walk out with their boxes.",
+   "in": {
+    "type": "dissolve",
+    "n": 8,
+    "from": "S07"
+   },
+   "out": {
+    "type": "dissolve",
+    "to": "S09",
+    "n": 8
+   },
+   "build": "new: the Syracuse building front with the open roller door onto the lit grading room.",
+   "blocking": "Three graders at their benches (w1-w3) at f900; they walk out (front stroll, toward the lens) to workers_out f936-968, each carrying a cardboard box.",
+   "action": "f900-930 they work at the benches under the lamps; f932 they pick up their boxes; f936-968 they walk out through the door; f972-994 the shutter rolls down behind them on 'đóng cửa' (f976); the room light is gone; f1050 they look down on 'mất việc'.",
+   "acting": "Neutral at work, sad outside.",
+   "cams": [
+    {
+     "f": 900,
+     "pos": [
+      0.1,
+      1.65,
+      5.6
+     ],
+     "look": [
+      0.0,
+      1.55,
+      -1.6
+     ],
+     "fov": 46,
+     "roll": 0,
+     "push": 0.0015,
+     "blur": 3,
+     "why": "the building, the open door",
+     "focus": [
+      0,
+      1.4,
+      -1.0
+     ]
+    }
+   ],
+   "kicks": [
+    [
+     994,
+     0.4
+    ]
+   ],
+   "marks": [
+    {
+     "who": "grader",
+     "at": [
+      -0.95,
+      -2.45
+     ],
+     "view": "front",
+     "pose": "at the bench, then walks out with a box",
+     "expr": "neutral -> sad"
+    },
+    {
+     "who": "grader",
+     "at": [
+      0.0,
+      -2.45
+     ],
+     "view": "front",
+     "pose": "at the bench, then walks out with a box",
+     "expr": "neutral -> sad"
+    },
+    {
+     "who": "grader",
+     "at": [
+      0.95,
+      -2.45
+     ],
+     "view": "front",
+     "pose": "at the bench, then walks out with a box",
+     "expr": "neutral -> sad"
+    }
+   ],
+   "subjects": [
+    {
+     "n": "sign",
+     "p": [
+      0.0,
+      3.35,
+      -0.98
+     ],
+     "f": [
+      970,
+      1000
+     ]
+    },
+    {
+     "n": "door",
+     "p": [
+      0,
+      1.4,
+      -1.0
+     ],
+     "f": [
+      900,
+      1068
+     ]
+    },
+    {
+     "n": "w2 head",
+     "p": [
+      0.05,
+      1.6,
+      0.95
+     ],
+     "f": [
+      970,
+      1068
+     ]
+    }
+   ],
+   "physics": "shutter: rolls down at 0.13 m/f, the bottom bar hits the ground f994 and bounces 1 cm.",
+   "light_mood": "overcast day outside; the room lit warm until the shutter closes.",
+   "sound": "street ambience; the shutter rattles down f972-994 and clangs; a sad low note f1050.",
+   "after": "The shutter is down; three people with boxes outside."
+  },
+  {
+   "id": "S09",
+   "f": [
+    1069,
+    1100
+   ],
+   "set": "home",
+   "light": "day",
+   "vo": "Người bán gửi thư",
+   "gloss": "The sellers sent letters",
+   "spine": 3,
+   "viewer": "He sends a letter flying.",
+   "in": {
+    "type": "dissolve",
+    "n": 8,
+    "from": "S08"
+   },
+   "out": {
+    "type": "dissolve",
+    "to": "S10",
+    "n": 6,
+    "note": "follow the plane out of the window into the HQ window"
+   },
+   "build": "reuse the workroom: a paper plane folded from his letter.",
+   "blocking": "Seller seated at his mark.",
+   "action": "f1069-1084 he holds the paper plane up (right arm); f1087 throws it on 'gửi' (f1089): it flies off toward the window (-x) and out.",
+   "acting": "Determined.",
+   "cams": [
+    {
+     "f": 1069,
+     "pos": [
+      0.55,
+      1.35,
+      0.95
+     ],
+     "look": [
+      -0.25,
+      1.3,
+      -1.4
+     ],
+     "fov": 40,
+     "roll": 0,
+     "push": 0.002,
+     "blur": 6,
+     "why": "the throw",
+     "focus": [
+      0.0,
+      1.42,
+      -1.5
+     ]
+    }
+   ],
+   "kicks": [],
+   "marks": [
+    {
+     "who": "seller",
+     "at": [
+      0.0,
+      -1.5
+     ],
+     "view": "front",
+     "pose": "throws the plane f1087",
+     "expr": "stern"
+    }
+   ],
+   "subjects": [
+    {
+     "n": "seller head",
+     "p": [
+      0.0,
+      1.42,
+      -1.5
+     ],
+     "f": [
+      1069,
+      1099
+     ]
+    }
+   ],
+   "physics": "the plane: a glide path, 2.4 m/s, slight climb and roll.",
+   "light_mood": "day.",
+   "sound": "paper whoosh f1087.",
+   "after": "The plane is gone."
+  },
+  {
+   "id": "S10",
+   "f": [
+    1100,
+    1183
+   ],
+   "set": "hq",
+   "light": "day",
+   "vo": "lên tổng giám đốc, rồi lên tận cơ quan liên bang.",
+   "gloss": "up to the CEO, then all the way to the federal agency.",
+   "spine": 3,
+   "viewer": "One letter lands on the boss's desk; another flies on to the federal building.",
+   "in": {
+    "type": "dissolve",
+    "n": 6,
+    "from": "S09"
+   },
+   "out": {
+    "type": "glide",
+    "to": "S11"
+   },
+   "build": "reuse the HQ office; the window now open (the lower pane tilted in); the window canvas draws plane 2 flying to the dome.",
+   "blocking": "Rob seated at his desk (rob_desk).",
+   "action": "f1100-1117 plane 1 glides in from the window and lands on his desk on 'đốc' (f1117), skids to the letter stack; f1124-1140 plane 2 flies past the window outside; f1140-1166 on the canvas it shrinks toward the white dome on 'liên bang' (f1156).",
+   "acting": "Rob: surprised, then annoyed.",
+   "cams": [
+    {
+     "f": 1100,
+     "pos": [
+      0.5,
+      1.6,
+      2.3
+     ],
+     "look": [
+      0.45,
+      1.45,
+      -2.6
+     ],
+     "fov": 46,
+     "roll": 0,
+     "push": 0.0006,
+     "blur": 4,
+     "why": "desk and window",
+     "focus": [
+      0.2,
+      1.0,
+      -2.2
+     ]
+    }
+   ],
+   "kicks": [],
+   "marks": [
+    {
+     "who": "rob",
+     "at": [
+      -0.4,
+      -2.42
+     ],
+     "view": "front",
+     "pose": "seated",
+     "expr": "shock -> stern"
+    }
+   ],
+   "subjects": [
+    {
+     "n": "rob head",
+     "p": [
+      -0.4,
+      1.42,
+      -2.42
+     ],
+     "f": [
+      1100,
+      1182
+     ]
+    },
+    {
+     "n": "window",
+     "p": [
+      1.45,
+      1.8,
+      -3.0
+     ],
+     "f": [
+      1124,
+      1166
+     ]
+    }
+   ],
+   "physics": "plane 1: glides down at 2 m/s, touches the desk, skids 20 cm and stops.",
+   "light_mood": "night office.",
+   "sound": "paper swish f1110; a soft tap on the desk f1117; distant whoosh f1140.",
+   "after": "A paper plane lies on his desk."
+  },
+  {
+   "id": "S11",
+   "f": [
+    1183,
+    1297
+   ],
+   "set": "hq",
+   "light": "day",
+   "vo": "TCGplayer bác bỏ nhiều cáo buộc, và đã sửa vài chương trình.",
+   "gloss": "TCGplayer rejected many of the allegations, and fixed a few programs.",
+   "spine": 3,
+   "viewer": "Stamped: rejected, rejected; one program: fixed.",
+   "in": {
+    "type": "glide",
+    "from": "S10"
+   },
+   "out": {
+    "type": "cut",
+    "to": "S12"
+   },
+   "build": "reuse the desk: the letter stack (top letter shows a growing red BÁC BỎ), the program sheet DIRECT that gets a green ĐÃ SỬA.",
+   "blocking": "Rob seated at his desk, the stamp in his right arm (screen left).",
+   "action": "f1200 slam BÁC BỎ on the top letter on 'bác bỏ' (f1205); f1226 a second slam on 'cáo buộc' (f1231): two red stamps; f1255 he swaps to the green stamp and slams ĐÃ SỬA on the program sheet on 'sửa' (f1259); a small shrug at f1280.",
+   "acting": "Bored efficiency; a self-satisfied smile on the green stamp.",
+   "cams": [
+    {
+     "f": 1183,
+     "pos": [
+      0.15,
+      1.55,
+      -0.1
+     ],
+     "look": [
+      -0.38,
+      1.0,
+      -2.1
+     ],
+     "fov": 40,
+     "roll": 0,
+     "push": 0.002,
+     "blur": 8,
+     "why": "the desk top and the boss",
+     "glide": 30,
+     "focus": [
+      -0.38,
+      0.8,
+      -2.0
+     ]
+    }
+   ],
+   "kicks": [
+    [
+     1200,
+     0.6
+    ],
+    [
+     1226,
+     0.6
+    ],
+    [
+     1255,
+     0.5
+    ]
+   ],
+   "marks": [
+    {
+     "who": "rob",
+     "at": [
+      -0.4,
+      -2.42
+     ],
+     "view": "front",
+     "pose": "seated; stamps f1200, f1226, f1255",
+     "expr": "neutral -> smile"
+    }
+   ],
+   "subjects": [
+    {
+     "n": "letters",
+     "p": [
+      -0.55,
+      0.8,
+      -2.0
+     ],
+     "f": [
+      1195,
+      1240
+     ]
+    },
+    {
+     "n": "doc",
+     "p": [
+      -0.2,
+      0.8,
+      -2.0
+     ],
+     "f": [
+      1250,
+      1296
+     ]
+    },
+    {
+     "n": "rob head",
+     "p": [
+      -0.4,
+      1.42,
+      -2.42
+     ],
+     "f": [
+      1183,
+      1296
+     ]
+    }
+   ],
+   "physics": "stamp strikes: 4 f wind-up, 1 f strike, 2 f squash.",
+   "light_mood": "night office.",
+   "sound": "two heavy stamp thumps f1200, f1226; a lighter one f1255 with a little 'ding'.",
+   "after": "Two BÁC BỎ on the letters, one ĐÃ SỬA on the program sheet."
+  },
+  {
+   "id": "S12",
+   "f": [
+    1297,
+    1422
+   ],
+   "set": "home",
+   "light": "day",
+   "vo": "Khoan, sàn giàu hơn bao giờ hết, sao người bán lại cáu hơn bao giờ hết?",
+   "gloss": "Wait: the marketplace is richer than ever, so why are the sellers angrier than ever?",
+   "spine": 3,
+   "viewer": "The counter climbs, and so does his temper.",
+   "in": {
+    "type": "cut",
+    "from": "S11"
+   },
+   "out": {
+    "type": "dissolve",
+    "to": "S13",
+    "n": 10
+   },
+   "build": "reuse the workroom TV (the counter climbing past $1,000,000,000).",
+   "blocking": "Seller seated at his mark, under the TV.",
+   "action": "Hard cut on 'Khoan' (f1297). f1312-1356 the TV count climbs on 'giàu hơn'; f1370-1410 his face goes stern -> angry; steam puffs from both sides of his head on 'cáu' (f1386), two more f1396, f1404.",
+   "acting": "Stern, then fuming.",
+   "cams": [
+    {
+     "f": 1297,
+     "pos": [
+      0.2,
+      0.95,
+      1.2
+     ],
+     "look": [
+      0.0,
+      1.55,
+      -1.8
+     ],
+     "fov": 40,
+     "roll": 0,
+     "push": 0.003,
+     "blur": 4,
+     "why": "low angle: him and the TV",
+     "cut": true,
+     "focus": [
+      0.0,
+      1.42,
+      -1.5
+     ]
+    }
+   ],
+   "kicks": [],
+   "marks": [
+    {
+     "who": "seller",
+     "at": [
+      0.0,
+      -1.5
+     ],
+     "view": "front",
+     "pose": "seated",
+     "expr": "stern -> pained"
+    }
+   ],
+   "subjects": [
+    {
+     "n": "seller head",
+     "p": [
+      0.0,
+      1.42,
+      -1.5
+     ],
+     "f": [
+      1297,
+      1421
+     ]
+    },
+    {
+     "n": "tv",
+     "p": [
+      0.0,
+      1.78,
+      -2.37
+     ],
+     "f": [
+      1297,
+      1421
+     ]
+    }
+   ],
+   "physics": "steam puffs rise 0.3 m and fade.",
+   "light_mood": "day.",
+   "sound": "a 'huh?' on 'Khoan' f1297; counter ticks; kettle hiss f1386-1410.",
+   "after": "He's fuming."
+  },
+  {
+   "id": "S13",
+   "hero": true,
+   "f": [
+    1422,
+    1702
+   ],
+   "set": "market",
+   "light": "golden",
+   "vo": "Bạn thấy đấy, cứ hình dung một khu chợ. Ban quản lý thu phí sạp của bạn, cấm bạn mang cân riêng, rồi tự dựng một sạp y hệt ngay bên cạnh, bán đúng món bạn bán.",
+   "gloss": "You see, just imagine a market. The management charges your stall fee, bans you from bringing your own scale, then builds an identical stall right next to yours, selling exactly what you sell.",
+   "spine": 4,
+   "viewer": "Fee, banned scale, a copycat stall right beside his.",
+   "in": {
+    "type": "dissolve",
+    "n": 10,
+    "from": "S12"
+   },
+   "out": {
+    "type": "dissolve",
+    "to": "S14",
+    "n": 8
+   },
+   "build": "new: the market hall, his stall and the twin stall.",
+   "blocking": "Seller seated behind his stall. Buyer at buyer_a. The manager (Rob, armband) walks in from mgr_in (f1486-1508) to mgr_tin, then mgr_scale (f1542-1550), carries the scale off right (f1576-1592), comes back pushing the twin stall from mgr_push (f1596-1646).",
+   "action": "f1422-1480 calm market: the buyer browses his cards; f1517-1532 three coins hop from his tin into the manager's bag on 'thu phí sạp' (f1517, f1522, f1527); f1552 the manager lifts the brass scale off the stall on 'cấm' (f1548) and carries it off screen right; f1600-1646 the twin stall rolls in from the right on castors and bumps against the end of his stall on 'cạnh' (f1646): the scale-less stall shudders; f1657-1685 the twin's cards are the same cards; the buyer steps from buyer_a to buyer_b on 'bạn bán' (f1681-1695).",
+   "acting": "Seller: smile -> nervous -> stern. Manager: polite smile throughout. Buyer: neutral.",
+   "cams": [
+    {
+     "f": 1422,
+     "pos": [
+      1.8,
+      2.4,
+      3.4
+     ],
+     "look": [
+      -0.45,
+      0.95,
+      -0.85
+     ],
+     "fov": 46,
+     "roll": 0,
+     "push": 0.0012,
+     "blur": 3,
+     "why": "the calm market, high",
+     "focus": [
+      -0.4,
+      0.9,
+      -0.8
+     ]
+    },
+    {
+     "f": 1600,
+     "pos": [
+      2.2,
+      2.3,
+      3.2
+     ],
+     "look": [
+      0.0,
+      0.95,
+      -0.85
+     ],
+     "fov": 46,
+     "roll": 0,
+     "push": 0.0015,
+     "blur": 3,
+     "why": "room for the twin stall",
+     "glide": 40,
+     "focus": [
+      0.1,
+      0.9,
+      -0.8
+     ]
+    }
+   ],
+   "kicks": [
+    [
+     1646,
+     0.6
+    ]
+   ],
+   "marks": [
+    {
+     "who": "seller",
+     "at": [
+      -0.8,
+      -1.55
+     ],
+     "view": "front",
+     "pose": "seated behind his stall",
+     "expr": "smile -> nervous -> stern"
+    },
+    {
+     "who": "rob",
+     "at": [
+      -1.0,
+      -0.38
+     ],
+     "view": "front",
+     "pose": "bag held; takes the scale f1550; pushes the twin stall",
+     "expr": "smile"
+    },
+    {
+     "who": "buyer",
+     "at": [
+      -0.65,
+      -0.05
+     ],
+     "view": "front",
+     "pose": "browses, then steps to the twin f1681",
+     "expr": "neutral"
+    }
+   ],
+   "subjects": [
+    {
+     "n": "seller head",
+     "p": [
+      -0.8,
+      1.42,
+      -1.55
+     ],
+     "f": [
+      1422,
+      1701
+     ]
+    },
+    {
+     "n": "tin",
+     "p": [
+      -1.05,
+      0.8,
+      -0.95
+     ],
+     "f": [
+      1510,
+      1535
+     ]
+    },
+    {
+     "n": "twin",
+     "p": [
+      0.6,
+      1.0,
+      -0.92
+     ],
+     "f": [
+      1646,
+      1701
+     ]
+    },
+    {
+     "n": "buyer head",
+     "p": [
+      0.55,
+      1.6,
+      -0.05
+     ],
+     "f": [
+      1690,
+      1701
+     ]
+    }
+   ],
+   "physics": "coins: three ballistic hops into the bag; twin stall: 60 kg on castors, eases in at 0.06 m/f, bumps (0.6 kick) and stops; his stall shudders 1 cm.",
+   "light_mood": "golden, warm lamps: the calm 'you see' place.",
+   "sound": "market murmur; coin clinks f1517-1527; castors rolling f1600-1646, a wooden knock f1646; a cash-register ding f1690.",
+   "after": "Two identical stalls side by side; the buyer at the twin; his scale gone."
+  },
+  {
+   "id": "S14",
+   "f": [
+    1702,
+    1994
+   ],
+   "set": "hq",
+   "light": "day",
+   "vo": "Tháng mười một, chợ thay người quản lý. Rob Bigler rời ghế, Ron Jaiven về làm tổng quản lý và nói điều làm TCGplayer đặc biệt là đam mê của cộng đồng.",
+   "gloss": "In November the market changed its manager. Rob Bigler left the chair, Ron Jaiven came in as general manager and said what makes TCGplayer special is the community's passion.",
+   "spine": 5,
+   "viewer": "One boss out of the chair, the next one in; he praises the community.",
+   "in": {
+    "type": "dissolve",
+    "n": 8,
+    "from": "S13"
+   },
+   "out": {
+    "type": "dissolve",
+    "to": "S15",
+    "n": 8
+   },
+   "build": "reuse the HQ office (the cake table gone); the nameplate flips ROB BIGLER -> RON JAIVEN.",
+   "blocking": "Rob seated at rob_desk until f1795, stands and walks out right (side view) f1800-1830; Ron walks in from the left f1816-1842 (side), sits f1844, front view from then on.",
+   "action": "f1795 Rob stands on 'rời ghế' (f1800); f1800-1830 walks off right; f1816-1842 Ron walks in on 'Ron Jaiven'; f1844 sits; f1848 the nameplate flips to RON JAIVEN; f1885-1988 he speaks to the lens on 'đam mê của cộng đồng' (mouth alternates), one arm open.",
+   "acting": "Rob: neutral; Ron: a wide salesman smile.",
+   "cams": [
+    {
+     "f": 1702,
+     "pos": [
+      -0.2,
+      1.55,
+      2.0
+     ],
+     "look": [
+      -0.4,
+      1.5,
+      -2.4
+     ],
+     "fov": 44,
+     "roll": 0,
+     "push": 0.0012,
+     "blur": 4,
+     "why": "the chair, the board",
+     "focus": [
+      -0.4,
+      1.42,
+      -2.42
+     ]
+    },
+    {
+     "f": 1860,
+     "pos": [
+      -0.35,
+      1.38,
+      -0.2
+     ],
+     "look": [
+      -0.4,
+      1.38,
+      -2.42
+     ],
+     "fov": 36,
+     "roll": 0,
+     "push": 0.0025,
+     "blur": 10,
+     "why": "Ron's pitch, low and close",
+     "glide": 40,
+     "focus": [
+      -0.4,
+      1.42,
+      -2.42
+     ]
+    }
+   ],
+   "kicks": [],
+   "marks": [
+    {
+     "who": "rob",
+     "at": [
+      -0.4,
+      -2.42
+     ],
+     "view": "front -> side",
+     "pose": "stands f1795, walks out",
+     "expr": "neutral"
+    },
+    {
+     "who": "ron",
+     "at": [
+      -0.4,
+      -2.42
+     ],
+     "view": "side -> front",
+     "pose": "walks in, sits f1844, talks",
+     "expr": "smile"
+    }
+   ],
+   "subjects": [
+    {
+     "n": "chair head",
+     "p": [
+      -0.4,
+      1.42,
+      -2.42
+     ],
+     "f": [
+      1702,
+      1993
+     ]
+    },
+    {
+     "n": "nameplate",
+     "p": [
+      -0.4,
+      0.82,
+      -1.6
+     ],
+     "f": [
+      1840,
+      1870
+     ]
+    }
+   ],
+   "physics": "the nameplate: a 180 deg flip on its hinge in 6 f.",
+   "light_mood": "night office.",
+   "sound": "chair creak f1795; footsteps out f1800-1830, in f1816-1842; chair creak f1844; nameplate flip f1848; a corporate synth pad under Ron's line.",
+   "after": "Ron in the chair."
+  },
+  {
+   "id": "S15",
+   "f": [
+    1994,
+    2209
+   ],
+   "set": "shop",
+   "light": "golden",
+   "vo": "Lập tức, chủ một cửa hàng nhỏ ở South Dakota nhắn: vậy thì gặp năm mươi người bán nhỏ đi, đừng chỉ gặp mấy tài khoản to nhất.",
+   "gloss": "Right away, the owner of a small shop in South Dakota messaged: then go meet fifty small sellers, don't just meet the biggest accounts.",
+   "spine": 5,
+   "viewer": "A small shop owner answers with a message: meet fifty of us.",
+   "in": {
+    "type": "dissolve",
+    "n": 8,
+    "from": "S14"
+   },
+   "out": {
+    "type": "dissolve",
+    "to": "S16",
+    "n": 8
+   },
+   "build": "new: the shop: counter, shelves, the sign; the owner's phone with a chat (a message typed and sent).",
+   "blocking": "Owner stands behind the counter at his mark, phone in both arms at his chest.",
+   "action": "f1994-2060 he takes out his phone and starts typing on 'nhắn' (f2071); f2075-2140 line 1 'Vậy thì gặp 50 người bán nhỏ đi,' types; f2145-2190 line 2 'đừng chỉ gặp mấy tài khoản to nhất.'; f2196 SEND, the bubble flies up.",
+   "acting": "Determined frown.",
+   "cams": [
+    {
+     "f": 1994,
+     "pos": [
+      0.35,
+      1.6,
+      2.1
+     ],
+     "look": [
+      0.0,
+      1.35,
+      -1.4
+     ],
+     "fov": 42,
+     "roll": 0,
+     "push": 0.0015,
+     "blur": 5,
+     "why": "the small shop, the owner",
+     "focus": [
+      0.0,
+      1.5,
+      -1.4
+     ]
+    },
+    {
+     "f": 2066,
+     "pos": [
+      0.0,
+      1.66,
+      -1.4
+     ],
+     "look": [
+      0.0,
+      1.22,
+      -1.12
+     ],
+     "fov": 34,
+     "roll": 0,
+     "push": 0.0015,
+     "blur": 6,
+     "why": "his screen from his eyes",
+     "glide": 34,
+     "focus": [
+      0.0,
+      1.22,
+      -1.12
+     ]
+    }
+   ],
+   "kicks": [],
+   "marks": [
+    {
+     "who": "owner",
+     "at": [
+      0.0,
+      -1.4
+     ],
+     "view": "front",
+     "pose": "standing, phone at the chest",
+     "expr": "stern"
+    }
+   ],
+   "subjects": [
+    {
+     "n": "owner head",
+     "p": [
+      0.0,
+      1.6,
+      -1.4
+     ],
+     "f": [
+      1994,
+      2060
+     ]
+    },
+    {
+     "n": "phone",
+     "p": [
+      0.0,
+      1.22,
+      -1.12
+     ],
+     "f": [
+      2090,
+      2208
+     ]
+    }
+   ],
+   "physics": "none.",
+   "light_mood": "warm shop light.",
+   "sound": "key taps; send whoosh f2196.",
+   "after": "Message sent."
+  },
+  {
+   "id": "S16",
+   "hero": true,
+   "f": [
+    2209,
+    2360
+   ],
+   "set": "board",
+   "light": "day",
+   "vo": "Một tỷ đô đã về. Còn cái ghế cho người bán thì vẫn đang tìm.",
+   "gloss": "The billion dollars has arrived. The chair for the sellers is still being searched for.",
+   "spine": 6,
+   "viewer": "Money on the table, every chair taken, the small seller standing.",
+   "in": {
+    "type": "dissolve",
+    "n": 8,
+    "from": "S15"
+   },
+   "out": {
+    "type": "end"
+   },
+   "build": "new: the boardroom: long table, four big-account sellers in four chairs, Ron at the head, the GMV board behind him, the money sack.",
+   "blocking": "Ron seated at the head; the four VIPs seated; the seller stands at the near end (BOARD seller), turning his look left and right.",
+   "action": "f2222-2237 the money sack drops from above onto the table on 'về' (f2237): a thump, it slumps and stays; f2250-2330 glide to the seller at the table end: he looks left (f2263), right (f2285), at the lens (f2310) on 'vẫn đang tìm' — no chair for him; end on his shrug.",
+   "acting": "VIPs and Ron grin; the seller nervous, then a shrug.",
+   "cams": [
+    {
+     "f": 2209,
+     "pos": [
+      0.0,
+      2.45,
+      3.4
+     ],
+     "look": [
+      0.0,
+      0.95,
+      -1.3
+     ],
+     "fov": 44,
+     "roll": 0,
+     "push": 0.0012,
+     "blur": 3,
+     "why": "the whole table",
+     "focus": [
+      0,
+      0.95,
+      -1.3
+     ]
+    },
+    {
+     "f": 2252,
+     "pos": [
+      0.75,
+      1.5,
+      3.3
+     ],
+     "look": [
+      0.05,
+      1.3,
+      0.9
+     ],
+     "fov": 36,
+     "roll": 0,
+     "push": 0.0018,
+     "blur": 10,
+     "why": "the seller with no chair",
+     "glide": 40,
+     "focus": [
+      0.05,
+      1.6,
+      1.15
+     ]
+    }
+   ],
+   "kicks": [
+    [
+     2237,
+     0.8
+    ]
+   ],
+   "marks": [
+    {
+     "who": "ron",
+     "at": [
+      0.0,
+      -3.0
+     ],
+     "view": "front",
+     "pose": "seated at the head",
+     "expr": "grin"
+    },
+    {
+     "who": "vip",
+     "at": [
+      -0.95,
+      -2.0
+     ],
+     "view": "front",
+     "pose": "seated x4",
+     "expr": "grin"
+    },
+    {
+     "who": "seller",
+     "at": [
+      0.05,
+      1.15
+     ],
+     "view": "front",
+     "pose": "standing, looks left f2263, right f2285, shrugs f2315",
+     "expr": "nervous"
+    }
+   ],
+   "subjects": [
+    {
+     "n": "sack",
+     "p": [
+      0.0,
+      0.75,
+      -1.3
+     ],
+     "f": [
+      2238,
+      2255
+     ]
+    },
+    {
+     "n": "seller head",
+     "p": [
+      0.05,
+      1.6,
+      1.15
+     ],
+     "f": [
+      2290,
+      2359
+     ]
+    }
+   ],
+   "physics": "the sack: falls 0.9 m, slumps (squash 12 %), stays.",
+   "light_mood": "cool boardroom; the board glow.",
+   "sound": "a heavy money thud f2237 (coins jingle); silence; a sad violin f2290-2350.",
+   "after": "End on the seller with no chair."
+  }
+ ]
+}
