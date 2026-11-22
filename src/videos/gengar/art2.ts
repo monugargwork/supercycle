@@ -236,7 +236,7 @@ type Row = { img: string; name: string; price: number; date: string };
 export const ROWS: Row[] = [
   { img: "zard_base", name: "Charizard · Base Set", price: 336000, date: "09/10" },
   { img: "ds_metagross_star", name: "Metagross ★ · Delta Species", price: 108000, date: "06/10" },
-  { img: "sky_h3", name: "Celebi · Skyridge", price: 192000, date: "03/10" },
+  { img: "sky_h3", name: "Articuno · Skyridge", price: 192000, date: "03/10" },
   { img: "mewtwo", name: "Mewtwo · Base Set", price: 64000, date: "28/09" },
   { img: "zard_lc", name: "Charizard · Legendary Col.", price: 1250000, date: "21/09" },
   { img: "ds_rayquaza", name: "Rayquaza · Delta Species", price: 846000, date: "14/09" },

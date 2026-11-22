@@ -14,11 +14,11 @@ SY = 0.3   # stage top
 HALL = dict(room=[-4.2, 4.2, -4.0, 5.5], h=4.2, stage=[-3.2, 3.2, -4.0, -2.0], stage_y=SY,
             rostrum=[-1.7, -1.0, -2.9, -2.5], rostrum_y=1.4, auct=[-1.35, -3.05], block=[-1.35, 1.42, -2.8],
             plinth=[-0.6, -0.1, -3.0, -2.5], plinth_y=1.22, slab=[-0.35, 1.43, -2.76], slab_size=[0.2, 0.32], slab_tilt=0.2,
-            tag_top=[-0.2, 1.72, -2.72], tag_len=0.15, tag_size=[0.24, 0.135],
+            tag_top=[-0.02, 1.72, -2.72], tag_len=0.15, tag_size=[0.24, 0.135],
             board=[-0.85, 2.85, -3.94], board_size=[1.7, 0.645], bids=[0.75, 2.8, -3.94], bids_size=[0.7, 0.45],
             letters=[-0.85, 3.62, -3.94], calendar=[-2.6, 2.2, -3.94],
             pole=[1.7, -2.65], pole_top=3.5, mark_k=250000.0, old=408000, new=576000, clerk_pole=[1.38, -2.4],
-            clerk_in=[1.05, -2.4], clerk_tag=[0.3, -2.45],
+            clerk_in=[1.05, -2.4], clerk_tag=[0.45, -2.45],
             bidders=[[-1.55, -1.2], [-0.2, -1.2], [-0.88, -0.5]],
             table=[1.3, 3.8, 1.15, 1.65], table_y=1.0, coll=[[1.8, 0.75], [2.3, 0.75], [2.8, 0.75], [3.3, 0.75]],
             tower=[2.55, 1.0, 1.4], waiter_in=[4.0, 2.3], waiter=[3.72, 1.95], bill=[3.45, 1.0, 1.42], c1_late=[2.0, 0.75])
@@ -39,7 +39,7 @@ COLL_HEAD = [[x, 1.55, z] for x, z in H["coll"]]
 SCREEN = DESK["screen"]
 CAM_POV = dict(pos=[0.19, 1.17, -1.21], look=SCREEN)
 PHONE = [2.06, 1.28, 1.02]; EYE14 = [2.0, 1.66, 0.75]
-WIDE = dict(pos=[-0.75, 1.8, 1.9], look=[-0.75, 1.95, -3.0])   # the stage: the board over the rostrum and the lot plinth (S01, S06)
+WIDE = dict(pos=[-0.6, 1.8, 1.9], look=[-0.6, 1.95, -3.0])   # the stage: the board over the rostrum and the lot plinth (S01, S06)
 
 P = {
  "fps": 30, "frames": 2420, "voice_end": 2389,
@@ -134,8 +134,8 @@ scene(id="S02", hero=True, f=[100, 298], set="hall", light="day", dim=0.86,
   blocking="Clerk enters from the stage right (clerk_in) f104-140 to the clerk mark beside the plinth, faces +z.",
   action="f104-140 the clerk walks in; f150-156 his left arm (screen right) reaches the tag's edge, f156 a flick (2 f before 'chưa' f158): the tag spins on its string 1.5 turns, slowing, and stops on its back, CHƯA THANH TOÁN in red, by f182; f196-236 'hệ ma': the tag shivers (2 mm jitter) and fades to a purple see-through ghost, its corners curling like a sheet; f243 'có đó' it hangs; f262 it slips off the string and floats up with a slow S-wobble (0.6 m/s); f278-292 'biến mất' it fades out at y 2.6; the empty string sways. The clerk looks up, shocked.",
   acting="Clerk: neutral -> shock on the lift (f262).",
-  cams=[k(100, [-0.25, 1.6, -0.6], [-0.12, 1.55, -2.72], 34, push=0.0015, blur=8, focus=TAG, why="the plinth next day; the clerk comes in"),
-        k(254, [-0.2, 1.72, -0.6], [-0.15, 2.35, -2.72], 38, glide=30, push=0.001, blur=6, focus=[TAG[0], 2.3, TAG[2]], why="tilt up with the ghost")],
+  cams=[k(100, [-0.12, 1.6, -0.6], [0.0, 1.55, -2.72], 34, push=0.0015, blur=8, focus=TAG, why="the plinth next day; the clerk comes in"),
+        k(254, [0.12, 1.72, -0.6], [0.12, 2.3, -2.72], 38, glide=30, push=0.001, blur=6, focus=[TAG[0], 2.3, TAG[2]], why="tilt up with the ghost")],
   kicks=[], marks=[{"who": "clerk", "at": H["clerk_tag"], "view": "front", "pose": "walks in f104-140; flicks the tag f156; looks up f262", "expr": "neutral -> shock"}],
   subjects=[{"n": "tag", "p": TAG, "f": [100, 250]}],
   physics="tag spin: torsion pendulum, 1.5 turns decaying to rest on its back. Ghost: no gravity, rises 0.6 m/s with a sine side-wobble (amplitude 4 cm, 1.2 Hz), fades over 14 f.",
@@ -248,7 +248,7 @@ scene(id="S09", f=[1283, 1412], set="hall", light="day",
   action="f1285 'Khoan đã': the music cuts; everyone freezes mid-laugh (the one stillness, 10 f); f1336-1356 the waiter slides the folder onto the table's right end (bill mark), opens it; f1360-1385 collectors' eyes go to the bill; f1391 'ai trả?' (f1393): all four point at another collector with their right arm (c1 -> c2, c2 -> c3, c3 -> c4, c4 -> c1).",
   acting="Collectors: laugh -> frozen -> nervous; the waiter: polite smile.",
   cams=[k(1283, [2.55, 2.05, 5.2], [2.55, 1.25, 1.0], 54, glide=10, push=0.001, blur=4, focus=COLL_HEAD[1], why="the freeze"),
-        k(1330, [3.3, 2.0, 2.3], [3.42, 1.02, 1.42], 30, glide=30, push=0.002, blur=10, focus=H["bill"], why="the bill"),
+        k(1330, [3.35, 2.2, 2.1], [3.48, 1.0, 1.45], 28, glide=30, push=0.002, blur=10, focus=H["bill"], why="the bill"),
         k(1376, [2.55, 2.0, 5.0], [2.55, 1.25, 1.0], 54, glide=18, push=0.002, blur=4, focus=COLL_HEAD[1], why="everyone points")],
   kicks=[], marks=[{"who": "waiter", "at": H["waiter"], "view": "front", "pose": "walks in, slides the bill f1336-1356", "expr": "smile"}],
   subjects=[{"n": "bill", "p": H["bill"], "f": [1350, 1375]}] + [{"n": f"c{i+1} head", "p": COLL_HEAD[i], "f": [1395, 1411]} for i in range(4)],
