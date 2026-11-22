@@ -71,7 +71,11 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | chikorita | Neo Genesis Chikorita 53 | neo1 | 53 | https://images.pokemontcg.io/neo1/53.png | attic, fanatics |
 | cyndaquil | Neo Genesis Cyndaquil 56 | neo1 | 56 | https://images.pokemontcg.io/neo1/56.png | attic, fanatics |
 | mantine | Neo Genesis Mantine 64 | neo1 | 64 | https://images.pokemontcg.io/neo1/64.png | attic, fanatics |
+| neo_lugia | Neo Genesis Lugia 9 | neo1 | 9 | https://images.pokemontcg.io/neo1/9_hires.png |  |
+| neo_pichu | Neo Genesis Pichu 12 | neo1 | 12 | https://images.pokemontcg.io/neo1/12_hires.png |  |
+| neo_typhlosion | Neo Genesis Typhlosion 17 | neo1 | 17 | https://images.pokemontcg.io/neo1/17_hires.png |  |
 | totodile | Neo Genesis Totodile 80 | neo1 | 80 | https://images.pokemontcg.io/neo1/80.png | attic, fanatics |
+| neo_hooh | Neo Revelation Ho-Oh 7 | neo3 | 7 | https://images.pokemontcg.io/neo3/7_hires.png |  |
 | fidough | Scarlet & Violet Fidough 97 | sv1 | 97 | https://images.pokemontcg.io/sv1/97.png | mudkip |
 | fuecoco | Scarlet & Violet Fuecoco 36 | sv1 | 36 | https://images.pokemontcg.io/sv1/36.png | mudkip |
 | lechonk | Scarlet & Violet Lechonk 154 | sv1 | 154 | https://images.pokemontcg.io/sv1/154.png | mudkip |

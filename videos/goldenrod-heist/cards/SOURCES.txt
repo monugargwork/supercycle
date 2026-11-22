@@ -1,0 +1,1 @@
+Real card scans for the Goldenrod reel (from library/cards, see CATALOG.md).
