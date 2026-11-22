@@ -177,10 +177,10 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 - Set: shop. Light: night.
 - Build: reuse the four cases (glass tops intact until struck).
 - Blocking: A, B, C, D at the four cases (thief_x, the case z), front view, tools raised.
-  - A at [-2.95, -3.2], front; strike its case; effort -> grin.
-  - B at [-2.95, -4.6], front; strike its case; effort -> grin.
-  - C at [-2.95, -6], front; strike its case; effort -> grin.
-  - D at [-2.95, -7.4], front; strike its case; effort -> grin.
+  - A at [-2.85, -3.2], front; strike its case; effort -> grin.
+  - B at [-2.85, -4.6], front; strike its case; effort -> grin.
+  - C at [-2.85, -6], front; strike its case; effort -> grin.
+  - D at [-2.85, -7.4], front; strike its case; effort -> grin.
 - Action, against the words: wind-ups 6 f before each strike; strikes f350 (A, 'Bốn' f352), f363 (B, 'tủ' f365), f369 (C, 'kính' f371), f377 (D, 'vỡ' f379): each glass top bursts into ~14 rigid-body shards that fall onto the cards and the floor; the LED strips flicker once.
 - Acting: each: effort, then a grin.
 - Camera keys:
@@ -463,7 +463,7 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1573 | open | [0.36, 1.5, 2.8] | [0.36, 1.58, -2.44] | 50 | 0.06 | 6 | the board |
+| 1573 | open | [0.36, 1.3, 2.8] | [0.36, 1.32, -2.44] | 50 | 0.06 | 6 | the board |
 
 - Kicks (7 f): none.
 - Physics & FX: each sheet: 6 f from his chest to the slot, a 1 cm flutter on the pin.
@@ -485,8 +485,8 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1736 | open | [0.75, 1.5, 0.5] | [0.85, 1.4, -2.44] | 44 | 0.2 | 8 | string to the map |
-| 1772 | glide 28 f | [1.13, 1.2, -1.6] | [1.13, 1.17, -2.44] | 30 | 0.4 | 10 | into the pin |
+| 1736 | open | [0.75, 1.25, 0.5] | [0.85, 1.15, -2.44] | 44 | 0.2 | 8 | string to the map |
+| 1772 | glide 28 f | [1.12, 0.95, -1.6] | [1.122, 0.885, -2.44] | 30 | 0.4 | 10 | into the pin |
 
 - Kicks (7 f): f1764 strength 0.3.
 - Physics & FX: the string pulls straight.
@@ -633,14 +633,14 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 - Set: rent. Light: day.
 - Build: reuse the archive wall (drawers 1999..2026).
 - Blocking: Clerk at clerk_arch facing the wall (front view).
-  - clerk at [-2.35, 0.35], front; files the folder, shuts the drawer f2300; smile.
+  - clerk at [-2.5, 2.1], front; files the folder, shuts the drawer f2300; smile.
 - Action, against the words: f2262-2290 the clerk slides the agreement folder into the open 2026 drawer; f2300 he shuts it (thunk, 'lưu' f2304); f2306-2370 the camera pulls back over the whole wall of years.
 - Acting: Clerk: tidy, satisfied.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 2258 | open | [-1.7, 1.6, -1.15] | [-2.84, 1.43, -0.25] | 36 | 0.2 | 10 | the 2026 drawer |
+| 2258 | open | [-1.7, 1.6, -1.15] | [-2.84, 1.43, 1.75] | 36 | 0.2 | 10 | the 2026 drawer |
 | 2306 | glide 56 f | [1.6, 1.7, 2.9] | [-3.2, 1.25, -0.1] | 46 | 0.1 | 4 | the wall of years |
 
 - Kicks (7 f): f2300 strength 0.3.

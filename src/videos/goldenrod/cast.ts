@@ -295,7 +295,7 @@ const hookCrew = (out: Stage, cam: CamInfo, f: number, id: number) => {
       else if (f < WIND1[1]) { const k = smooth(ramp(f, WIND1[0], WIND1[1])); hand = lerp3(rest, add3(sh, [0, 0.32, 0.12]), k); dir = norm3(lerp3([0, -1, 0.15], [0.05, 1, 0.6], k)); }
       else if (f < SMASH1 - 3) { hand = add3(sh, [0, 0.32, 0.12]); dir = [0.05, 1, 0.6]; }
       else { const k = f < SMASH1 ? (f - (SMASH1 - 3)) / 3 : 1, hit = add3(sh, norm3(sub3(G, sh)), 0.4); hand = lerp3(add3(sh, [0, 0.32, 0.12]), hit, k); dir = norm3(lerp3([0.05, 1, 0.6], sub3(G, hit), k)); if (f > SMASH1 + 6) { const k2 = smooth(ramp(f, SMASH1 + 6, SMASH1 + 16)); hand = lerp3(hit, rest, k2); dir = norm3(lerp3(sub3(G, hit), [0, -1, 0.15], k2)); } }
-      const Hd = arm3d(out, cam, "A", P, fo, 1, hand, f); arm3d(out, cam, "A", P, fo, -1, add3(Hd, norm3(dir), 0.18), f);
+      const Hd = arm3d(out, cam, "A", P, fo, 1, hand, f); const swing = strike && f >= WIND1[0] && f < SMASH1 + 14; arm3d(out, cam, "A", P, fo, -1, swing ? Hd : restHand(cam, "A", P, fo, -1), f);
       tool(out, "sledge", 500, 124, sledgeDraw, Hd, dir, 0.78, 0.19);
     }
     if (w === "B" && id === 2) { // bolt cutters, both hands at the grips, jaws up; they snap shut at SNAP2
@@ -314,7 +314,8 @@ const caseCrew = (out: Stage, cam: CamInfo, f: number, id: number) => {
     let mx = S.thief_x, mz = S.case_z[i], moving = false;
     if (id === 5 && w === "D") { const p = walkPath([[S.thief_x, S.case_z[3]], [S.thief_x, -6.7], [1.95, -6.7], [S.till[0], S.till[1]]], f, WALK5[0], WALK5[1]); mx = p.x; mz = p.z; moving = p.moving; }
     const P: V3 = Sm(mx, 0, mz), T = STRIKE4[i], target = Sm(S.case_x, S.case_top, S.case_z[i]);
-    const fo: FrontOpts = { mode: moving ? "march" : "stand", phase: moving ? walkPhase(f, STEP_RATE) : 0, expr: id === 4 ? (f < T ? "pained" : "grin") : w === "D" && f >= TILL5 ? "laugh" : "stern", armOff: 2 };
+    const tw = (TAKE5 as Record<string, number[]>)[w], reaching = id === 5 && !!tw && f >= tw[0] && f < tw[1] + 4;
+    const fo: FrontOpts = { mode: moving ? "march" : "stand", phase: moving ? walkPhase(f, STEP_RATE) : 0, expr: id === 4 ? (f < T ? "pained" : "grin") : w === "D" && f >= TILL5 ? "laugh" : "stern", armOff: 2, crouch: reaching ? 0.15 : 0 };
     front(out, cam, w, ...P, fo, f, id === 4 ? [T] : []);
     const sh = shoulderAt(cam, w, P, fo, 1), rest = restHand(cam, w, P, fo, 1), restL = restHand(cam, w, P, fo, -1), [cw, chh, draw, len, thick] = TOOLS[w];
     if (id === 4) {
@@ -333,7 +334,7 @@ const caseCrew = (out: Stage, cam: CamInfo, f: number, id: number) => {
     const bag = add3(cardWorld(cam, P[0], P[1], P[2], [300, 700]), cam.right.toArray() as V3, 0.18), win = (TAKE5 as Record<string, number[]>)[w];
     let fill = 0;
     if (win) {
-      const [t0, t1] = win, mid = (t0 + t1) / 2, inCase = Sm(S.case_x + 0.12, S.case_base + 0.06, S.case_z[i]);
+      const [t0, t1] = win, mid = (t0 + t1) / 2, inCase = Sm(S.case_x - 0.2, S.case_base + 0.12, S.case_z[i]);
       fill = f < mid ? 0 : 0.8;
       let hand = rest;
       if (f >= t0 && f < mid) hand = lerp3(rest, inCase, smooth(ramp(f, t0, t0 + 6)));
@@ -454,13 +455,13 @@ const board = (out: Stage, cam: CamInfo, f: number, id: number) => {
     const sx = (n: number) => slots[SLOT_ORDER[n]][0] + 0.4, prevX = i ? sx(i - 1) : sx(0) - 0.3, t0 = PINS16[i], k = smooth(ramp(f, t0 - 16, t0 - 8));
     const P: V3 = Pm(lerpN(prevX, sx(i), k), 0, PO.det_z), fo: FrontOpts = { mode: k > 0 && k < 1 ? "march" : "stand", phase: walkPhase(f, STEP_RATE), expr: "stern", armOff: 2 };
     front(out, cam, "det", ...P, fo, f, PINS16);
-    const chest = chestAt(cam, "det", P, fo, 0.45, 0.15); arm3d(out, cam, "det", P, fo, -1, add3(chest, cam.right.toArray() as V3, -0.12), f);
-    fxc(out, "stack" + (5 - i), 400, 300, (p) => { p.g.fillStyle = "#f4f1ea"; p.g.fillRect(0, 0, 400, 300); p.g.strokeStyle = "#9aa0aa"; p.g.lineWidth = 6; for (let j = 0; j < 5 - i; j++) p.g.strokeRect(6 + j * 6, 6 + j * 6, 380, 280); }, add3(chest, cam.right.toArray() as V3, -0.14), 0.22, 0.16);
+    const chest = chestAt(cam, "det", P, fo, 0.45, 0.15); arm3d(out, cam, "det", P, fo, 1, add3(chest, cam.right.toArray() as V3, 0.12), f);
+    fxc(out, "stack" + (5 - i), 400, 300, (p) => { p.g.fillStyle = "#f4f1ea"; p.g.fillRect(0, 0, 400, 300); p.g.strokeStyle = "#9aa0aa"; p.g.lineWidth = 6; for (let j = 0; j < 5 - i; j++) p.g.strokeRect(6 + j * 6, 6 + j * 6, 380, 280); }, add3(chest, cam.right.toArray() as V3, 0.14), 0.22, 0.16);
     const slot: V3 = Pm(slots[SLOT_ORDER[i]][0], slots[SLOT_ORDER[i]][1], BZ + 0.03);
-    let hand = add3(chest, cam.right.toArray() as V3, 0.05), show = f < t0;
+    let hand = add3(chest, cam.right.toArray() as V3, -0.05), show = f < t0;
     if (f >= t0 - 8 && f < t0) hand = lerp3(hand, slot, smooth(ramp(f, t0 - 8, t0)));
-    else if (f >= t0) { hand = lerp3(slot, add3(chest, cam.right.toArray() as V3, 0.05), smooth(ramp(f, t0 + 2, t0 + 10))); show = false; }
-    const H2 = arm3d(out, cam, "det", P, fo, 1, hand, f);
+    else if (f >= t0) { hand = lerp3(slot, add3(chest, cam.right.toArray() as V3, -0.05), smooth(ramp(f, t0 + 2, t0 + 10))); show = false; }
+    const H2 = arm3d(out, cam, "det", P, fo, -1, hand, f);
     if (show && f >= t0 - 14) fxc(out, "ev" + i, 400, 300, (p) => ITEM_ART[i](p), add3(H2, [0, 0.0, 0.02]), 0.4, 0.3, { face: 0 });
     return;
   }

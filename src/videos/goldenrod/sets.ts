@@ -479,7 +479,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   const ax = RN.archive_x, aface = ax + 0.36, [az0, az1] = RN.archive_z, [nc, nr] = RN.drawers, dw = RN.drawer_w, dh = RN.drawer_h;
   box(b, C("#8a9098"), ax, 0, az0 - 0.06, aface - 0.02, 0.1 + nr * dh + 0.06, az1 + 0.06);
   b.build(rent);
-  const years = (c: number, r: number) => 1995 + (nr - 1 - r) * nc + c;
+  const years = (c: number, r: number) => (r === 0 ? 1987 + c : 2026 - (nc - 1 - c) - (r - 1) * nc); // 2026 sits at column 8, row 2 (the drawer the clerk files into)
   let drawer26 = new THREE.Group();
   for (let c = 0; c < nc; c++) for (let r = 0; r < nr; r++) {
     const g = new THREE.Group(), zc = az0 + (c + 0.5) * dw, yc = 0.1 + (r + 0.5) * dh; g.position.set(aface, yc, zc); rent.add(g);
@@ -528,7 +528,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   box(b, C("#6a3a2a"), J.door_x - 0.48, 0, hz1, J.door_x + 0.48, 2.1, hz1 + 0.06);
   for (const wx of [-6.4, -1.0]) { box(b, white, wx - 0.75, 0.85, hz1, wx + 0.75, 2.05, hz1 + 0.05); box(b, C("#2a3a5a"), wx - 0.68, 0.92, hz1 + 0.01, wx + 0.68, 1.98, hz1 + 0.06); }
   const [gx0, gx1, gz0, gz1] = J.garage, GH = J.garage_h, [go0, go1] = J.gdoor, GOH = J.gdoor_h;
-  box(b, sid, gx0, 0, gz0, gx0 + 0.15, GH, gz1); box(b, sid, gx1 - 0.15, 0, gz0, gx1, GH, gz1); box(b, sid, gx0, 0, gz0, gx1, GH, gz0 + 0.15);
+  box(b, sid, gx0, 0, gz0, gx0 + 0.15, GH, gz1); box(b, sid, gx1 - 0.15, 0, gz0, gx1, GH, gz1); box(b, sid, gx0 + 0.15, 0, gz0, gx1 - 0.15, GH - 0.01, gz0 + 0.15);
   box(b, sid, gx0 + 0.15, 0, gz1 - 0.15, go0, GH, gz1); box(b, sid, go1, 0, gz1 - 0.15, gx1 - 0.15, GH, gz1); box(b, sid, go0, GOH, gz1 - 0.15, go1, GH, gz1);
   box(b, C("#4a3a3a"), gx0 - 0.1, GH, gz0 - 0.1, gx1 + 0.1, GH + 0.15, gz1 + 0.15);
   up(b, C("#9a9a96"), gx0 + 0.15, gx1 - 0.15, gz0 + 0.15, gz1 - 0.15, 0.02, 2);
