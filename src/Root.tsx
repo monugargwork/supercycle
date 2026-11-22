@@ -14,6 +14,7 @@ import { JirachiReel, JirachiCaptions, JIRACHI_FRAMES } from "./videos/jirachi/R
 import { LucasReel, LucasCaptions, LUCAS_FRAMES } from "./videos/lucas/Reel";
 import { TcgplayerReel, TcgplayerCaptions, TCGPLAYER_FRAMES } from "./videos/tcgplayer/Reel";
 import { GengarReel, GengarCaptions, GENGAR_FRAMES } from "./videos/gengar/Reel";
+import { GoldenrodReel, GoldenrodCaptions, GOLDENROD_FRAMES } from "./videos/goldenrod/Reel";
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -43,5 +44,7 @@ export const RemotionRoot: React.FC = () => (
     <Composition id="TcgplayerCaptions" component={TcgplayerCaptions} durationInFrames={TCGPLAYER_FRAMES} fps={30} width={1440} height={2560} />
     <Composition id="GengarReel" component={GengarReel} durationInFrames={GENGAR_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="GengarCaptions" component={GengarCaptions} durationInFrames={GENGAR_FRAMES} fps={30} width={1440} height={2560} />
+    <Composition id="GoldenrodReel" component={GoldenrodReel} durationInFrames={GOLDENROD_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="GoldenrodCaptions" component={GoldenrodCaptions} durationInFrames={GOLDENROD_FRAMES} fps={30} width={1440} height={2560} />
   </>
 );

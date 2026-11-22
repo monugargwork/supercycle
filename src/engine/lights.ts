@@ -12,7 +12,8 @@ export type LightPreset = {
   sunCol: string; sunI: number; sky: string; ground: string; hemiI: number;         // three lights (unpatched mats only)
   bias: number; normalBias: number;
 };
-export const LIGHTS: Record<"day" | "golden", LightPreset> = {
+export type LightName = "day" | "golden" | "night";
+export const LIGHTS: Record<LightName, LightPreset> = {
   day: {
     az: 75, el: 48,
     lit: [1.58, 1.5, 1.33], shade: [0.3, 0.29, 0.36], lift: [0.05, 0.06, 0.11], lambert: 0.35, sideK: 0.84, term: 0.2,
@@ -31,6 +32,16 @@ export const LIGHTS: Record<"day" | "golden", LightPreset> = {
     sunCol: "#ffab5e", sunI: 5.5, sky: "#d8b0b8", ground: "#8a6a60", hemiI: 0.5,
     bias: -0.0006, normalBias: 0.03,
   },
+  // night (added for the Goldenrod reel; additive): cool moonlight key, deep blue sky, characters slightly blue but readable
+  night: {
+    az: -30, el: 30,
+    lit: [0.52, 0.6, 0.9], shade: [0.13, 0.15, 0.27], lift: [0.04, 0.05, 0.1], lambert: 0.35, sideK: 0.84, term: 0.18,
+    charTint: [0.72, 0.78, 0.98], charShade: 0.84, charGrad: 0.08, bodyGrad: 0.22, sideTint: [0.78, 0.82, 0.98],
+    blob: [0.4, 0.42, 0.55], actorShadow: false,
+    top: "#0b1430", hor: "#2a3a66", skyCurve: [0.0, 0.5, 0.6], fog: "#1e2a4e", fogNear: 30, fogFar: 260, sunDisc: "#000000",
+    sunCol: "#b8c8ff", sunI: 1.2, sky: "#3a4a7a", ground: "#2a2a3a", hemiI: 0.35,
+    bias: -0.00025, normalBias: 0.015,
+  },
 };
 
 /** world-only look per light (sky stops by elevation in degrees, river colours, cloud palette). All colours are
@@ -42,7 +53,7 @@ export type WorldLook = {
   sat: number;                                                // shade.ts uSat: world albedo saturation (1 = as painted)
   cloud: { lit: string; mid: string; shade: string };
 };
-export const LOOK: Record<"day" | "golden", WorldLook> = {
+export const LOOK: Record<LightName, WorldLook> = {
   day: {
     // depth.md 2.2: horizon #9fb6e6 just above the skyline, upper sky #5e93d9 at ~20 deg (grade: frame top #5997e2)
     sky: { c: ["#b8d0ec", "#9cbfea", "#6a9fe0", "#4f8cdb", "#3373cc"], e: [0, 3, 8, 16, 40] },
@@ -59,5 +70,12 @@ export const LOOK: Record<"day" | "golden", WorldLook> = {
     cloud: { lit: "#ffd2a8", mid: "#f2a08f", shade: "#a98fc4" },
     bounce: [0.04, 0.02, 0.0],
     sat: 1.1,
+  },
+  night: {
+    sky: { c: ["#2c3c6a", "#22305a", "#18234a", "#111a3a", "#0a1028"], e: [0, 3, 8, 16, 40] },
+    water: { near: "#1a2a4e", mid: "#14223f", far: "#2a3a66", crest: "#4a6aa0", trough: "#0a1430", glint: "#c8d8ff", shade: [0.4, 0.45, 0.65] },
+    cloud: { lit: "#56648e", mid: "#3e4a72", shade: "#2a3458" },
+    bounce: [0, 0, 0.01],
+    sat: 0.95,
   },
 };

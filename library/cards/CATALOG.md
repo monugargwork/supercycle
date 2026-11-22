@@ -9,7 +9,7 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | c30_vulpix | 2026 30th Celebration Vulpix 9 | 30c | 9 | https://den-cards.pokellector.com/434/Vulpix.30C.9.62050.png | jirachi |
 | jirachi_sir | 2026 30th Celebration Jirachi ex Special Illustration Rare (Akira Egawa) 155/128 | 30c | 155 | https://den-cards.pokellector.com/434/Jirachi-ex.30C.155.62175.png | jirachi |
 | abra | Base Set Abra 43 | base1 | 43 | https://images.pokemontcg.io/base1/43.png | attic |
-| blastoise | Base Set Blastoise 2 | base1 | 2 | https://images.pokemontcg.io/base1/2_hires.png | attic, fanatics, monaco, tcgplayer, gengar |
+| blastoise | Base Set Blastoise 2 | base1 | 2 | https://images.pokemontcg.io/base1/2_hires.png | attic, fanatics, monaco, tcgplayer, gengar, goldenrod |
 | bulbasaur | Base Set Bulbasaur 44 | base1 | 44 | https://images.pokemontcg.io/base1/44.png | attic |
 | charmander | Base Set Charmander 46 | base1 | 46 | https://images.pokemontcg.io/base1/46.png | attic, fanatics |
 | diglett | Base Set Diglett 47 | base1 | 47 | https://images.pokemontcg.io/base1/47.png | attic |
@@ -18,12 +18,12 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | magikarp | Base Set Magikarp 35 | base1 | 35 | https://images.pokemontcg.io/base1/35.png | attic |
 | mewtwo | Base Set Mewtwo 10 | base1 | 10 | https://images.pokemontcg.io/base1/10_hires.png | attic, fanatics, gengar |
 | onix | Base Set Onix 56 | base1 | 56 | https://images.pokemontcg.io/base1/56.png | attic, fanatics |
-| pikachu | Base Set Pikachu 58 | base1 | 58 | https://images.pokemontcg.io/base1/58.png | attic, fanatics, lucas, tcgplayer, gengar |
+| pikachu | Base Set Pikachu 58 | base1 | 58 | https://images.pokemontcg.io/base1/58.png | attic, fanatics, lucas, tcgplayer, gengar, goldenrod |
 | ponyta | Base Set Ponyta 60 | base1 | 60 | https://images.pokemontcg.io/base1/60.png | attic |
 | squirtle | Base Set Squirtle 63 | base1 | 63 | https://images.pokemontcg.io/base1/63.png | attic, fanatics |
-| venusaur | Base Set Venusaur 15 | base1 | 15 | https://images.pokemontcg.io/base1/15_hires.png | attic, fanatics, monaco, tcgplayer |
+| venusaur | Base Set Venusaur 15 | base1 | 15 | https://images.pokemontcg.io/base1/15_hires.png | attic, fanatics, monaco, tcgplayer, goldenrod |
 | vulpix | Base Set Vulpix 68 | base1 | 68 | https://images.pokemontcg.io/base1/68.png | attic, fanatics |
-| zard_base | Base Set Charizard 4 | base1 | 4 | https://images.pokemontcg.io/base1/4_hires.png | attic, mudkip (as zard), fanatics, monaco, lucas, tcgplayer, gengar |
+| zard_base | Base Set Charizard 4 | base1 | 4 | https://images.pokemontcg.io/base1/4_hires.png | attic, mudkip (as zard), fanatics, monaco, lucas, tcgplayer, gengar, goldenrod |
 | eevee | Jungle Eevee 51 | base2 | 51 | https://images.pokemontcg.io/base2/51.png | attic, fanatics |
 | jg_scyther | Jungle Scyther 10 | base2 | 10 | https://images.pokemontcg.io/base2/10_hires.png | lucas |
 | jigglypuff | Jungle Jigglypuff 54 | base2 | 54 | https://images.pokemontcg.io/base2/54.png | attic, fanatics |
@@ -31,7 +31,7 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | fs_aerodactyl | Fossil Fs 1 | base3 | 1 | https://images.pokemontcg.io/base3/1_hires.png | fossil, lucas |
 | fs_articuno | Fossil Fs 2 | base3 | 2 | https://images.pokemontcg.io/base3/2_hires.png | fossil |
 | fs_ditto | Fossil Fs 3 | base3 | 3 | https://images.pokemontcg.io/base3/3_hires.png | fossil |
-| fs_dragonite | Fossil Fs 4 | base3 | 4 | https://images.pokemontcg.io/base3/4_hires.png | fossil |
+| fs_dragonite | Fossil Fs 4 | base3 | 4 | https://images.pokemontcg.io/base3/4_hires.png | fossil, goldenrod |
 | fs_gengar | Fossil Fs 5 | base3 | 5 | https://images.pokemontcg.io/base3/5_hires.png | fossil |
 | fs_haunter | Fossil Fs 6 | base3 | 6 | https://images.pokemontcg.io/base3/6_hires.png | fossil |
 | fs_hitmonlee | Fossil Fs 7 | base3 | 7 | https://images.pokemontcg.io/base3/7_hires.png | fossil |
@@ -42,10 +42,10 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | fs_moltres | Fossil Fs 12 | base3 | 12 | https://images.pokemontcg.io/base3/12_hires.png | fossil |
 | fs_muk | Fossil Fs 13 | base3 | 13 | https://images.pokemontcg.io/base3/13_hires.png | fossil |
 | fs_raichu | Fossil Fs 14 | base3 | 14 | https://images.pokemontcg.io/base3/14_hires.png | fossil |
-| fs_zapdos | Fossil Fs 15 | base3 | 15 | https://images.pokemontcg.io/base3/15_hires.png | fossil |
+| fs_zapdos | Fossil Fs 15 | base3 | 15 | https://images.pokemontcg.io/base3/15_hires.png | fossil, goldenrod |
 | psyduck | Fossil Psyduck 53 | base3 | 53 | https://images.pokemontcg.io/base3/53.png | attic |
 | tr_dark_zard | Team Rocket Dark Charizard 4 | base5 | 4 | https://images.pokemontcg.io/base5/4_hires.png | lucas |
-| lc_gengar | Legendary Collection Gengar 11 (holo; the sold copy is the reverse holo) | base6 | 11 | https://images.pokemontcg.io/base6/11_hires.png | gengar |
+| lc_gengar | Legendary Collection Gengar 11 (holo; the sold copy is the reverse holo) | base6 | 11 | https://images.pokemontcg.io/base6/11_hires.png | gengar, goldenrod |
 | zard_lc | Legendary Collection Charizard 3 | base6 | 3 | https://images.pokemontcg.io/base6/3_hires.png | attic, fanatics, gengar |
 | sky_h1 | Skyridge Holo H1 | ecard3 | H1 | https://images.pokemontcg.io/ecard3/H1.png | attic, fanatics |
 | sky_h2 | Skyridge Holo H2 | ecard3 | H2 | https://images.pokemontcg.io/ecard3/H2.png | attic, fanatics |
@@ -60,7 +60,7 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | ds_metagross_star | EX Delta Species Metagross ★ (Gold Star) | ex11 | 113 | https://images.pokemontcg.io/ex11/113_hires.png | monaco, gengar |
 | ds_mewtwo | EX Delta Species Mewtwo δ (holo) | ex11 | 12 | https://images.pokemontcg.io/ex11/12_hires.png | monaco |
 | ds_rayquaza | EX Delta Species Rayquaza δ (holo) | ex11 | 13 | https://images.pokemontcg.io/ex11/13_hires.png | monaco, gengar |
-| dx_latios_star | EX Deoxys Latios ★ (Gold Star) 106 | ex8 | 106 | https://images.pokemontcg.io/ex8/106_hires.png | gengar |
+| dx_latios_star | EX Deoxys Latios ★ (Gold Star) 106 | ex8 | 106 | https://images.pokemontcg.io/ex8/106_hires.png | gengar, goldenrod |
 | chocobo_gold | MTG Final Fantasy Traveling Chocobo (Golden Chocobo, serialized /77) | fin | 551f | https://cards.scryfall.io/png/front/6/c/6ce8744a-ede3-4662-968a-360eb6639f08.png?1783906436 | chocobo |
 | chocobo_plain | MTG Final Fantasy Traveling Chocobo (regular) | fin | 210 | https://cards.scryfall.io/png/front/2/4/2462df62-fc35-47ed-9571-40452074dc6d.png?1783906576 | chocobo |
 | pika_trophy | 1997 No.1 Trainer, Official Tournament (trophy Pikachu) | jp-promo | U011 | https://cdn6966.templcdn.com/wp-content/uploads/2021/03/JP_U011Unnumbered.jpg | mudkip |
@@ -71,11 +71,11 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | chikorita | Neo Genesis Chikorita 53 | neo1 | 53 | https://images.pokemontcg.io/neo1/53.png | attic, fanatics |
 | cyndaquil | Neo Genesis Cyndaquil 56 | neo1 | 56 | https://images.pokemontcg.io/neo1/56.png | attic, fanatics |
 | mantine | Neo Genesis Mantine 64 | neo1 | 64 | https://images.pokemontcg.io/neo1/64.png | attic, fanatics |
-| neo_lugia | Neo Genesis Lugia 9 | neo1 | 9 | https://images.pokemontcg.io/neo1/9_hires.png |  |
-| neo_pichu | Neo Genesis Pichu 12 | neo1 | 12 | https://images.pokemontcg.io/neo1/12_hires.png |  |
-| neo_typhlosion | Neo Genesis Typhlosion 17 | neo1 | 17 | https://images.pokemontcg.io/neo1/17_hires.png |  |
+| neo_lugia | Neo Genesis Lugia 9 | neo1 | 9 | https://images.pokemontcg.io/neo1/9_hires.png | goldenrod |
+| neo_pichu | Neo Genesis Pichu 12 | neo1 | 12 | https://images.pokemontcg.io/neo1/12_hires.png | goldenrod |
+| neo_typhlosion | Neo Genesis Typhlosion 17 | neo1 | 17 | https://images.pokemontcg.io/neo1/17_hires.png | goldenrod |
 | totodile | Neo Genesis Totodile 80 | neo1 | 80 | https://images.pokemontcg.io/neo1/80.png | attic, fanatics |
-| neo_hooh | Neo Revelation Ho-Oh 7 | neo3 | 7 | https://images.pokemontcg.io/neo3/7_hires.png |  |
+| neo_hooh | Neo Revelation Ho-Oh 7 | neo3 | 7 | https://images.pokemontcg.io/neo3/7_hires.png | goldenrod |
 | fidough | Scarlet & Violet Fidough 97 | sv1 | 97 | https://images.pokemontcg.io/sv1/97.png | mudkip |
 | fuecoco | Scarlet & Violet Fuecoco 36 | sv1 | 36 | https://images.pokemontcg.io/sv1/36.png | mudkip |
 | lechonk | Scarlet & Violet Lechonk 154 | sv1 | 154 | https://images.pokemontcg.io/sv1/154.png | mudkip |

@@ -1,1 +1,13 @@
 Real card scans for the Goldenrod reel (from library/cards, see CATALOG.md).
+neo_lugia.png     Neo Genesis Lugia 9                               https://images.pokemontcg.io/neo1/9_hires.png
+neo_typhlosion.pngNeo Genesis Typhlosion 17                         https://images.pokemontcg.io/neo1/17_hires.png
+neo_hooh.png      Neo Revelation Ho-Oh 7                            https://images.pokemontcg.io/neo3/7_hires.png
+neo_pichu.png     Neo Genesis Pichu 12                              https://images.pokemontcg.io/neo1/12_hires.png
+zard_base.png     Base Set Charizard 4                              https://images.pokemontcg.io/base1/4_hires.png
+blastoise.png     Base Set Blastoise 2                              https://images.pokemontcg.io/base1/2_hires.png
+venusaur.png      Base Set Venusaur 15                              https://images.pokemontcg.io/base1/15_hires.png
+pikachu.png       Base Set Pikachu 58                               https://images.pokemontcg.io/base1/58.png
+fs_dragonite.png  Fossil Fs 4                                       https://images.pokemontcg.io/base3/4_hires.png
+fs_zapdos.png     Fossil Fs 15                                      https://images.pokemontcg.io/base3/15_hires.png
+lc_gengar.png     Legendary Collection Gengar 11 (holo; the sold copy is the reverse holo)https://images.pokemontcg.io/base6/11_hires.png
+dx_latios_star.pngEX Deoxys Latios ★ (Gold Star) 106                https://images.pokemontcg.io/ex8/106_hires.png

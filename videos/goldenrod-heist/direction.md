@@ -33,7 +33,7 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 |---|---|---|---|
 | front | new: brick storefront x -6..6, 4.6 m, door 1.1 x 2.2 (glass pane, aluminium frame), two shop windows; neighbours either side | [0, 2.3, -0.12] | [12, 4.6, 0.25] |
 | sign | new: lit sign band 5.2 x 1.5 m: GOLDENROD CITY / COLLECTIBLES (plain bold lettering), POKÉMON · TCG · GRADED CARDS | [0, 3.55, 0.07] | [5.2, 1.5, 0.1] |
-| town | new: green road sign 1.6 x 0.8 on two posts: TWIN LAKES / WISCONSIN (the rooster perches on it at dawn) | [2.9, 2.05, 3.5] | [1.6, 0.8, 0.05] |
+| town | new: green road sign 1.6 x 0.8 on two posts: TWIN LAKES / WISCONSIN (the rooster perches on it at dawn) | [2.4, 2.05, 3.5] | [1.6, 0.8, 0.05] |
 | cases | new: four glass display cases in a row down the left aisle (1.5 m long, 0.6 deep, wood base to 0.82, glass box to 1.12, LED strip); real scans and slabs inside; the glass tops shatter (rigid-body shards) | [-2.4, 0.56, -4.4] | [0.6, 1.12, 7] |
 | counter | new: counter along the right aisle with a cash register (drawer slides out); booster boxes on the shelves behind | [2.5, 0.5, -4.9] | [0.6, 1, 2.6] |
 | trailer | new: white enclosed cargo trailer 2.2 x 4.2 x 2.2 on two axles, rear barn doors with a hasp and a brass padlock (bolt cutters snap it: rigid-body fall); stacked boxes inside | [-1.5, 1.6, -12.7] | [2.2, 2.2, 4.2] |
@@ -65,7 +65,7 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 ### pol
 - Origin in the shared world: [1200, 0, 0]. Axes: the evidence board on the back wall z -2.44; the booking desk in the front (z 0.5..1.0) facing +z.
 - Light: day; sun az/el [-30, 45]. Open camera sides: +z.
-- Marks [x, z]: det [-0.44, -2.16]; sarge [0, 0.28].
+- Marks [x, z]: det [-0.44, -2.16]; sarge [0, 0.1].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
@@ -75,7 +75,7 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 ### jus
 - Origin in the shared world: [1600, 0, 0]. Axes: the street along x at z 6..13; the ranch house and garage face +z; the van in the driveway.
 - Light: golden; sun az/el [-50, 14]. Open camera sides: +z.
-- Marks [x, z]: hider [-5, -0.4]; seeker [-7.15, 3.35].
+- Marks [x, z]: hider [-5, -0.4]; seeker [-6.55, 2.75].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
@@ -139,8 +139,8 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 120 | open | [-0.1, 1.45, -3.6] | [-1, 1.35, -1.5] | 38 | 0.2 | 10 | B and the bolt cutters |
-| 150 | glide 54 f | [1.9, 1.5, 9.6] | [-3.2, 1.05, 5.4] | 40 | 0.3 | 6 | out the door to the van |
+| 120 | open | [-0.35, 1.45, -3.6] | [-1, 1.35, -1.5] | 38 | 0.2 | 10 | B and the bolt cutters |
+| 150 | glide 54 f | [3.4, 1.9, 15.5] | [-3.8, 1, 5.6] | 46 | 0.2 | 4 | out the door to the van |
 
 - Kicks (7 f): f150 strength 0.4.
 - Physics & FX: the cutter jaws: 3 f close, a 1 f rebound.
@@ -162,7 +162,7 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 205 | open | [1.3, 2.4, 13.6] | [0.6, 2.6, 0] | 56 | 0.15 | 3 | the sign |
-| 282 | glide 56 f | [1, 7.5, 16.5] | [0.6, 2, 0] | 50 | 0.1 | 2 | up over the street |
+| 300 | glide 45 f | [-1.15, 2.45, 3.4] | [-2, 1.35, -2.6] | 50 | 0.1 | 4 | down to the window: the cases inside |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -187,7 +187,7 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 345 | open | [-1.55, 2.9, -0.45] | [-3, 0.8, -5.3] | 52 | 0.2 | 4 | the row of four cases |
+| 345 | open | [-1.3, 2.4, -0.5] | [-3, 0.8, -5.3] | 52 | 0.2 | 4 | the row of four cases |
 
 - Kicks (7 f): f350 strength 0.6; f363 strength 0.6; f369 strength 0.6; f377 strength 0.8.
 - Physics & FX: case shards: 14 per case, 2-8 cm, from the top at the strike point, down and outward 0.5-2 m/s; collide with the case base and the floor; rest by +40 f.
@@ -209,7 +209,7 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 398 | open | [-1.5, 2.85, -0.6] | [-3, 0.82, -5.3] | 50 | 0.18 | 4 | the sweep down the row |
+| 398 | open | [-1.3, 2.4, -0.6] | [-3, 0.82, -5.3] | 50 | 0.18 | 4 | the sweep down the row |
 | 470 | glide 30 f | [-0.4, 2, -1.6] | [2.3, 1.05, -4.6] | 44 | 0.2 | 6 | D at the till |
 
 - Kicks (7 f): f493 strength 0.4.
@@ -225,15 +225,15 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 - Set: shop. Light: night.
 - Build: new: the back lot (gravel, a lamp over the back door), the cargo trailer with its padlock.
 - Blocking: B at cutter_b facing the doors (front view), cutters on the shackle.
-  - B at [-1.15, -9.95], front; cutters on the lock, squeeze f530-552, opens the doors f562; strain -> grin.
+  - B at [-2, -12.05], front; cutters on the lock, squeeze f530-552, opens the doors f562; strain -> grin.
 - Action, against the words: f530-548 B squeezes the handles; f552 ('vét' f552) the shackle snaps: the lock drops, bounces twice on the gravel and stays; f562-590 B swings both doors open (100 deg, heavy, a small bounce at the stop) on the boxes stacked inside.
 - Acting: B: strain -> grin.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 512 | open | [0.9, 1.55, -8.9] | [-1.35, 1.2, -10.4] | 40 | 0.2 | 8 | the padlock |
-| 556 | glide 18 f | [0.9, 1.5, -8.9] | [-1.4, 0.75, -10.4] | 40 | 0.15 | 8 | follow the lock down |
+| 512 | open | [0.9, 1.6, -8.6] | [-1.6, 1.15, -12.4] | 40 | 0.2 | 8 | the padlock |
+| 556 | glide 18 f | [0.9, 1.55, -8.6] | [-1.6, 0.6, -12.3] | 40 | 0.15 | 8 | follow the lock down |
 
 - Kicks (7 f): f552 strength 0.5.
 - Physics & FX: padlock (0.35 kg) + shackle halves: cannon-es from f552, falling 1.35 m to the gravel, restitution 0.3; doors: hinged, eased 100 deg with a 3 deg bounce.
@@ -248,15 +248,15 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 - Set: shop. Light: night.
 - Build: new: two big round white plates (60 cm); booster boxes piled on A's.
 - Blocking: A walks from plateA[0] to plateA[1] carrying the full plate in both arms; C walks from plateC[0] (the back door) to plateC[1] holding the empty plate up.
-  - A at [-1.5, -10.3], front; walks with the full plate; smile.
-  - C at [1.2, -8.6], front; walks, plate up f643; grin.
+  - A at [-1.5, -12.3], front; walks with the full plate; smile.
+  - C at [0.8, -8.6], front; walks, plate up f643; grin.
 - Action, against the words: f600-650 A crosses toward camera-right with four booster boxes piled on his plate; f612-660 C crosses the other way, lifts his empty plate up beside his face on 'đĩa thứ hai' (f643), a napkin tucked into his collar.
 - Acting: A: satisfied; C: eager.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 600 | open | [1.6, 1.5, -8.6] | [-0.4, 1.2, -10.5] | 42 | 0.2 | 6 | the two plates cross |
+| 600 | open | [3.4, 1.6, -8.7] | [-0.15, 1.15, -11] | 44 | 0.2 | 6 | the two plates cross |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -277,7 +277,7 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 674 | open | [10.5, 1.3, 10.5] | [-0.8, 1.4, 3.6] | 46 | 0.15 | 3 | the van leaves the broken shop |
+| 674 | open | [10.5, 1.3, 10.5] | [-1.4, 1.4, 3.6] | 46 | 0.15 | 3 | the van leaves the broken shop |
 
 - Kicks (7 f): none.
 - Physics & FX: van: kinematic, x = x0 + 2.5 t^2.
@@ -292,14 +292,14 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 - Set: shop. Light: golden.
 - Build: new: a rooster (side view card) perched on the town sign.
 - Blocking: The rooster on the sign top, facing -x.
-  - rooster at [2.9, 3.5], side; crows f738-752; -.
+  - rooster at [2.4, 3.5], side; crows f738-752; -.
 - Action, against the words: f738-752 the rooster stretches up, beak open, crowing on 'gáy' (f749); the camera pushes in.
 - Acting: the rooster: chest out.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 728 | open | [10.5, 1.3, 10.5] | [2.2, 1.9, 3.3] | 46 | 0.4 | 4 | the rooster at dawn |
+| 728 | open | [10.5, 1.3, 10.5] | [2.4, 2.3, 3.5] | 36 | 0.7 | 4 | the rooster at dawn |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -321,8 +321,8 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 761 | open | [-111.094, 1.5, -1.988] | [-111.094, 1.45, 0.412] | 44 | 0 | 6 | tracking beside the driver |
-| 761 | glide 139 f | [-46.125, 1.5, -1.797] | [-46.125, 1.45, 0.603] | 44 | 0 | 6 | same offset at the stop |
+| 761 | open | [-111.094, 1.55, -3.588] | [-111.094, 1.45, 0.412] | 40 | 0 | 6 | tracking beside the driver |
+| 761 | glide 139 f | [-46.125, 1.55, -3.397] | [-46.125, 1.45, 0.603] | 40 | 0 | 6 | same offset at the stop |
 
 - Kicks (7 f): f870 strength 0.3.
 - Physics & FX: van: kinematic on the route (the same smootherstep as the camera).
@@ -343,7 +343,7 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 900 | open | [-46.125, 1.5, -1.797] | [-46.125, 1.45, 0.603] | 44 | 0.1 | 6 | the stop |
+| 900 | open | [-46.125, 1.55, -3.397] | [-46.125, 1.45, 0.603] | 40 | 0.1 | 6 | the stop |
 | 936 | glide 50 f | [-55.025, 1.7, -3.697] | [-47.625, 1, 1.603] | 50 | 0.15 | 4 | the whole van |
 | 1016 | glide 26 f | [-51.625, 1.45, 0.853] | [-49.645, 1.32, 1.603] | 30 | 0.4 | 10 | the RENTAL sticker |
 
@@ -368,7 +368,7 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1052 | open | [-0.55, 1.78, -0.38] | [-1.14, 1.05, -0.72] | 40 | 0.25 | 10 | the contract |
+| 1052 | open | [-0.55, 2.15, -0.35] | [-1.14, 1.05, -0.72] | 32 | 0.25 | 10 | the contract |
 
 - Kicks (7 f): f1088 strength 0.5.
 - Physics & FX: the stamp: 4 f down, 2 f squash.
@@ -413,7 +413,7 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1206 | open | [-46.125, 1.5, -1.797] | [-46.125, 1.45, 0.603] | 44 | 0.15 | 6 | the mask |
+| 1206 | open | [-46.125, 1.55, -3.397] | [-46.125, 1.45, 0.603] | 40 | 0.15 | 6 | the mask |
 | 1272 | glide 100 f | [-64, 86, -15] | [-22, 0, 12] | 54 | 0 | 0 | crane up: the trail and the towers |
 
 - Kicks (7 f): none.
@@ -430,14 +430,14 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 - Build: new: the front yard in Justice at night (hedge, maple, porch light).
 - Blocking: Seeker (cop) at the tree facing it (side view), counting; A crouched behind the hedge, megaphone at his mouth.
   - A at [-5, -0.4], front; crouched, megaphone; nervous -> shock.
-  - cop at [-7.15, 3.35], side -> front; counting, turns f1556; neutral.
+  - cop at [-6.55, 2.75], side -> front; counting, turns f1556; neutral.
 - Action, against the words: f1463-1530 the seeker counts, face to the trunk; f1529 ('trốn tìm') A ducks lower; f1550 ('cầm loa') the megaphone rings: rings of sound burst out, leaves on the hedge shiver; f1556 the seeker turns to front view and stares straight at the hedge.
 - Acting: A: wide eyes; seeker: deadpan.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1463 | open | [-4, 1.55, 10.8] | [-6.3, 1, 1.4] | 44 | 0.08 | 6 | hedge and tree |
+| 1463 | open | [-3.9, 1.5, 9] | [-6.1, 1, 1.2] | 44 | 0.08 | 6 | hedge and tree |
 
 - Kicks (7 f): f1550 strength 0.5.
 - Physics & FX: hedge leaves: a 2 cm shiver 12 f.
@@ -507,7 +507,7 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1800 | open | [11, 2.6, 16] | [3, 1.2, 1] | 50 | 0.15 | 3 | house, van, police |
+| 1800 | open | [14, 4, 21] | [2, 1, 1] | 46 | 0.15 | 3 | house, van, police |
 
 - Kicks (7 f): none.
 - Physics & FX: cars: kinematic, ease-out stops.
@@ -551,7 +551,7 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 1921 | open | [8.4, 1.7, 5.2] | [5, 1.15, -2.3] | 42 | 0.15 | 6 | the garage opens |
-| 1974 | glide 18 f | [5.5, 1.42, 0.1] | [5.25, 1.3, -1.72] | 30 | 0.3 | 12 | the sticker |
+| 1974 | glide 18 f | [5.45, 1.3, 0.05] | [5.25, 1.15, -1.72] | 30 | 0.3 | 12 | the sticker |
 
 - Kicks (7 f): none.
 - Physics & FX: door: segments roll up and back along the ceiling.
@@ -566,14 +566,14 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 - Set: pol. Light: day.
 - Build: reuse the squad room; the booking counter with five folders (mugshots of generic faces, a red CHARGED band).
 - Blocking: Sergeant behind the counter (sarge mark), side-stepping.
-  - sarge at [0, 0.28], front; slams f2053, stamps f2086-2140; stern.
+  - sarge at [0, 0.1], front; slams f2053, stamps f2086-2140; stern.
 - Action, against the words: f2020-2053 he slaps the last of five CHARGED folders onto the row on 'buộc tội' (f2053); f2086, f2092 two ARRESTED stamps (folders 1-2) on 'bị bắt'; f2128, f2134, f2140 three WANTED stamps (folders 3-5) on 'truy nã'.
 - Acting: Sergeant: brisk, stern.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 2016 | open | [0, 2.4, 3.2] | [0, 1.08, 0.72] | 44 | 0.06 | 6 | the five folders |
+| 2016 | open | [0, 2.5, 2.45] | [0, 1, 0.45] | 50 | 0.06 | 6 | the five folders |
 
 - Kicks (7 f): f2053 strength 0.5; f2086 strength 0.3; f2092 strength 0.3; f2128 strength 0.3; f2134 strength 0.3; f2140 strength 0.3.
 - Physics & FX: each folder: lands flat, slides 1 cm; stamps: 3 f down.
@@ -633,14 +633,14 @@ Hard cuts: S13 (the masked customer), S19 (the JUSTICE sign), S22 (on foot). Pla
 - Set: rent. Light: day.
 - Build: reuse the archive wall (drawers 1999..2026).
 - Blocking: Clerk at clerk_arch facing the wall (front view).
-  - clerk at [-2.45, -0.25], front; files the folder, shuts the drawer f2300; smile.
+  - clerk at [-2.35, 0.35], front; files the folder, shuts the drawer f2300; smile.
 - Action, against the words: f2262-2290 the clerk slides the agreement folder into the open 2026 drawer; f2300 he shuts it (thunk, 'lưu' f2304); f2306-2370 the camera pulls back over the whole wall of years.
 - Acting: Clerk: tidy, satisfied.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 2258 | open | [-2, 1.55, 1.15] | [-3.15, 1.4, -0.25] | 34 | 0.2 | 10 | the 2026 drawer |
+| 2258 | open | [-1.7, 1.6, -1.15] | [-2.84, 1.43, -0.25] | 36 | 0.2 | 10 | the 2026 drawer |
 | 2306 | glide 56 f | [1.6, 1.7, 2.9] | [-3.2, 1.25, -0.1] | 46 | 0.1 | 4 | the wall of years |
 
 - Kicks (7 f): f2300 strength 0.3.
