@@ -11,6 +11,8 @@ import { ChocoboReel, ChocoboCaptions, CHOCOBO_FRAMES } from "./videos/chocobo/R
 import { MonacoReel, MonacoCaptions, MONACO_FRAMES } from "./videos/monaco/Reel";
 import { FossilReel, FossilCaptions, FOSSIL_FRAMES } from "./videos/fossil/Reel";
 import { JirachiReel, JirachiCaptions, JIRACHI_FRAMES } from "./videos/jirachi/Reel";
+import { LucasReel, LucasCaptions, LUCAS_FRAMES } from "./videos/lucas/Reel";
+import { TcgplayerReel, TcgplayerCaptions, TCGPLAYER_FRAMES } from "./videos/tcgplayer/Reel";
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -34,5 +36,9 @@ export const RemotionRoot: React.FC = () => (
     <Composition id="FossilCaptions" component={FossilCaptions} durationInFrames={FOSSIL_FRAMES} fps={30} width={1440} height={2560} />
     <Composition id="JirachiReel" component={JirachiReel} durationInFrames={JIRACHI_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="JirachiCaptions" component={JirachiCaptions} durationInFrames={JIRACHI_FRAMES} fps={30} width={1440} height={2560} />
+    <Composition id="LucasReel" component={LucasReel} durationInFrames={LUCAS_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="LucasCaptions" component={LucasCaptions} durationInFrames={LUCAS_FRAMES} fps={30} width={1440} height={2560} />
+    <Composition id="TcgplayerReel" component={TcgplayerReel} durationInFrames={TCGPLAYER_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="TcgplayerCaptions" component={TcgplayerCaptions} durationInFrames={TCGPLAYER_FRAMES} fps={30} width={1440} height={2560} />
   </>
 );

@@ -160,9 +160,9 @@
    -1.12
   ],
   "candy": [
-   -0.28,
+   -0.3,
    0.75,
-   -0.98
+   -1.25
   ],
   "door": [
    1.15,
@@ -365,36 +365,36 @@
   ],
   "counter_y": 0.95,
   "clerk": [
-   -0.25,
-   -1.55
+   -0.15,
+   -1.4
   ],
   "lucas": [
-   0.75,
-   -0.25
+   0.55,
+   -0.42
   ],
   "lucas_in": [
    2.3,
-   0.2
+   0.1
   ],
   "scanner": [
-   -0.28,
+   -0.2,
    0.95,
-   -0.9
+   -1.08
   ],
   "box": [
-   0.55,
+   0.5,
    0.95,
-   -0.86
+   -0.78
   ],
   "check": [
-   -0.02,
+   0.02,
    0.952,
-   -0.88
+   -1.1
   ],
   "idcard": [
-   0.18,
-   0.95,
-   -0.82
+   0.26,
+   0.952,
+   -0.7
   ]
  },
  "sets": {
@@ -598,9 +598,9 @@
      "id": "candy",
      "build": "new: glass bowl of rock-candy sticks (blue crystal clusters on wooden sticks)",
      "pos": [
-      -0.28,
+      -0.3,
       0.75,
-      -0.98
+      -1.25
      ],
      "size": [
       0.16,
@@ -748,7 +748,7 @@
     0,
     0
    ],
-   "axes": "a Los Angeles boulevard along x (lanes z -4..4), a sign gantry LOS ANGELES at x 0, the parking lot x 37..60 at its end",
+   "axes": "a Los Angeles boulevard along x (lanes z -4..4), a LOS ANGELES billboard at x 0 on the far sidewalk, the parking lot x 37..60 at its end",
    "light": "golden",
    "sun": [
     -70,
@@ -771,17 +771,17 @@
      ]
     },
     {
-     "id": "gantry",
-     "build": "new: steel sign gantry over the road at x 0 with a green sign LOS ANGELES / 10 W",
+     "id": "billboard",
+     "build": "new: roadside welcome billboard on two steel posts on the far sidewalk at x 0, panel 7 x 2 m facing the road: LOS ANGELES",
      "pos": [
       0,
-      5.6,
-      0
+      4.2,
+      -6.5
      ],
      "size": [
-      0.4,
-      1.4,
-      8.0
+      7.0,
+      2.0,
+      0.2
      ]
     },
     {
@@ -912,9 +912,9 @@
      "id": "scanner",
      "build": "new: ID scanner 12 x 8 x 6 cm with a red glass window (laser line on a scan)",
      "pos": [
-      -0.28,
+      -0.2,
       0.95,
-      -0.9
+      -1.08
      ],
      "size": [
       0.12,
@@ -926,9 +926,9 @@
      "id": "check",
      "build": "new: a check 18 x 8 cm on the counter (live canvas: the misspelt name written in)",
      "pos": [
-      -0.02,
+      0.02,
       0.952,
-      -0.88
+      -1.1
      ],
      "size": [
       0.18,
@@ -953,12 +953,12 @@
    ],
    "marks": {
     "clerk": [
-     -0.25,
-     -1.55
+     -0.15,
+     -1.4
     ],
     "lucas": [
-     0.75,
-     -0.25
+     0.55,
+     -0.42
     ]
    }
   }
@@ -1371,7 +1371,7 @@
    },
    "build": "new: three clear-blue tubs with lids, packs inside, four hero packs with real card art (Base Charizard, Jungle Scyther, Fossil Aerodactyl, Rocket Dark Charizard).",
    "blocking": "Lucas walks (side view, +x) from his mark to beside the tubs f346-378; his fiancée stands by the tubs at her mark, front view.",
-   "action": "f359, f367, f374 the three lids snap off one after another and land leaning on the tubs; f398-420 on 'bà vợ sắp cưới' she grins and pats tub 3; f430-490 the camera rises over the open tubs: rows of sealed packs; on each set name one pack rises out of the middle tub and stands on its rim: BASE SET f495, JUNGLE f522, FOSSIL f545, ROCKET f566; f612-645 the four packs glint once each on 'mười sáu nghìn đô' (title $16,000).",
+   "action": "f359, f367, f374 the over-stuffed tubs burst their lids one after another: each lid pops up 6 cm, tips back and slides down to lean against the wall behind its tub; f398-420 on 'bà vợ sắp cưới' she grins and points at her tubs; f430-490 the camera rises over the open tubs: rows of sealed packs; on each set name one pack springs out of the stuffed middle tub, arcs and lands standing on its front rim: BASE SET f495, JUNGLE f522, FOSSIL f545, ROCKET f566; f612-645 the four packs glint once each on 'mười sáu nghìn đô' (title $16,000).",
    "acting": "Fiancée proud and happy; Lucas amazed.",
    "cams": [
     {
@@ -1494,7 +1494,7 @@
       0.55
      ],
      "view": "front",
-     "pose": "standing, pats tub 3 f400-418",
+     "pose": "standing, points at the tubs f400-418",
      "expr": "grin"
     }
    ],
@@ -2376,9 +2376,9 @@
     "to": "S13",
     "n": 6
    },
-   "build": "new: the boulevard: road, palms, lamps, shop fronts, the LOS ANGELES gantry; Lucas's hatchback with Lucas at the wheel.",
+   "build": "new: the boulevard: road, palms, lamps, shop fronts, the LOS ANGELES billboard; Lucas's hatchback with Lucas at the wheel.",
    "blocking": "Lucas seated in the driver's seat (front view through the side window).",
-   "action": "f1530-1658 the hatchback drives from x -30 to x +30 (smootherstep: pulls away, cruises, slows), passing under the LOS ANGELES sign at f1594 ('Los Angeles' f1581); the camera tracks alongside, low, palms sweeping past in the foreground; title $3,500 f1636.",
+   "action": "f1530-1658 the hatchback drives from x -30 to x +30 (smootherstep: pulls away, cruises, slows), passing the LOS ANGELES billboard at f1594 ('Los Angeles' f1581); the camera tracks alongside, low, palms sweeping past in the foreground; title $3,500 f1636.",
    "acting": "Lucas grim, both hands on the wheel.",
    "cams": [
     {
@@ -2459,8 +2459,8 @@
      "n": "sign",
      "p": [
       0.0,
-      5.6,
-      -1.0
+      4.2,
+      -6.5
      ],
      "f": [
       1590,
@@ -2702,9 +2702,9 @@
      "why": "the ID under the scanner",
      "glide": 20,
      "focus": [
-      -0.28,
+      -0.2,
       0.95,
-      -0.9
+      -1.08
      ]
     },
     {
@@ -2726,22 +2726,22 @@
      "why": "suspicion: both faces",
      "glide": 22,
      "focus": [
-      -0.25,
+      -0.15,
       1.6,
-      -1.55
+      -1.4
      ]
     },
     {
      "f": 1936,
      "pos": [
-      0.0,
-      1.32,
-      -0.42
+      0.04,
+      1.4,
+      -0.58
      ],
      "look": [
-      -0.02,
+      0.02,
       0.952,
-      -0.88
+      -1.1
      ],
      "fov": 32,
      "roll": 0,
@@ -2750,9 +2750,9 @@
      "why": "the misspelt name",
      "glide": 26,
      "focus": [
-      -0.02,
+      0.02,
       0.952,
-      -0.88
+      -1.1
      ]
     }
    ],
@@ -2761,8 +2761,8 @@
     {
      "who": "lucas",
      "at": [
-      0.75,
-      -0.25
+      0.55,
+      -0.42
      ],
      "view": "side walking -> front",
      "pose": "box on the counter f1847, ID across f1859",
@@ -2771,8 +2771,8 @@
     {
      "who": "clerk",
      "at": [
-      -0.25,
-      -1.55
+      -0.15,
+      -1.4
      ],
      "view": "front",
      "pose": "scans ID f1874, stares f1894, writes f1947",
@@ -2783,9 +2783,9 @@
     {
      "n": "clerk head",
      "p": [
-      -0.25,
+      -0.15,
       1.6,
-      -1.55
+      -1.4
      ],
      "f": [
       1906,
@@ -2795,9 +2795,9 @@
     {
      "n": "check",
      "p": [
-      -0.02,
+      0.02,
       0.952,
-      -0.88
+      -1.1
      ],
      "f": [
       1950,
