@@ -323,8 +323,8 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   box(b, brass, px0 - 0.01, Hh.plinth_y, pz0 - 0.01, px1 + 0.01, Hh.plinth_y + 0.012, pz1 + 0.01);
   // the tag arm: a brass post at the plinth's right back corner and a crossbar to the string's knot
   const [tgx, tgy, tgz] = Hh.tag_top;
-  cyl(b, brass, -0.13, Hh.plinth_y + 0.012, tgz, 0.006, 0.006, tgy + 0.03 - Hh.plinth_y - 0.012, 8);
-  box(b, brass, -0.135, tgy + 0.018, tgz - 0.005, tgx + 0.012, tgy + 0.03, tgz + 0.005);
+  cyl(b, brass, -0.13, Hh.plinth_y + 0.012, -2.9, 0.007, 0.007, tgy + 0.03 - Hh.plinth_y - 0.012, 8);
+  box(b, brass, -0.137, tgy + 0.018, -2.9, -0.123, tgy + 0.032, tgz + 0.006); box(b, brass, tgx - 0.008, tgy + 0.018, tgz - 0.006, -0.123, tgy + 0.032, tgz + 0.006);
   // the price board and the bid counter housings, the FANATICS COLLECT letters
   const [bcx, bcy, bcz] = Hh.board, [bw, bh] = Hh.board_size;
   box(b, ink, bcx - bw / 2 - 0.05, bcy - bh / 2 - 0.05, -4.0, bcx + bw / 2 + 0.05, bcy + bh / 2 + 0.05, bcz - 0.012);
@@ -372,8 +372,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   const tagString = mesh(new THREE.CylinderGeometry(0.0012, 0.0012, L, 6), C("#f4ead0"), tagG, 0, -L / 2, 0);
   const tagFront = canvasMat2(320, 180), tagBack = canvasMat2(320, 180);
   const tagMats = [new THREE.MeshBasicMaterial({ map: tagFront.tex, transparent: true, alphaTest: 0.02, side: THREE.FrontSide }), new THREE.MeshBasicMaterial({ map: tagBack.tex, transparent: true, alphaTest: 0.02, side: THREE.FrontSide })];
-  const tf = plane(tw, th, tagMats[0], tagG, tw / 2 - 0.022, -L - th / 2, 0.0008), tb = plane(tw, th, tagMats[1], tagG, tw / 2 - 0.022, -L - th / 2, -0.0008, Math.PI);
-  tb.position.x = tw / 2 - 0.022; // the back is mirrored about the hole
+  const tf = plane(tw, th, tagMats[0], tagG, tw * 0.36, -L - th / 2, 0.0008), tb = plane(tw, th, tagMats[1], tagG, tw * 0.36, -L - th / 2, -0.0008, Math.PI); // the back is mirrored about the hole
   tf.castShadow = tb.castShadow = false;
   // the new record marker (ghost) on the pole, and the cord knot that pulls it
   const markerMat = new THREE.MeshBasicMaterial({ map: ctex("markerNew", 420, 150, (g) => markerPlate(new Pen(g), "$576,000", "NẾU TIỀN VỀ", true)), transparent: true, opacity: 0.82, depthWrite: false, side: THREE.DoubleSide });

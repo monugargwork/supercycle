@@ -287,7 +287,7 @@ const spokesman = (out: Stage, cam: CamInfo, f: number) => {
 };
 
 // ---------------- the clerk (S02 the tag, S05 the pole) ----------------
-const TAG_EDGE = (): V3 => Hm(H.tag_top[0] + 0.135, H.tag_top[1] - H.tag_len - 0.05, H.tag_top[2] + 0.004);
+const TAG_EDGE = (): V3 => Hm(H.tag_top[0] + H.tag_size[0] * 0.84, H.tag_top[1] - H.tag_len - H.tag_size[1] * 0.55, H.tag_top[2] + 0.004);
 const clerkTag = (out: Stage, cam: CamInfo, f: number) => {
   const A = Hm(H.clerk_in[0], SY, H.clerk_in[1]), B = Hm(H.clerk_tag[0], SY, H.clerk_tag[1]);
   if (f < WALK2[0]) return;
@@ -326,7 +326,7 @@ const clerkPole = (out: Stage, cam: CamInfo, f: number) => {
 // ---------------- S03 fireworks around the slab (never over the card) ----------------
 const fireworks = (out: Stage, f: number) => {
   const S = Hm(H.slab[0], H.slab[1], H.slab[2]), spots: [number, number, number, string][] = [[-0.16, 0.07, -0.12, "#ffd23a"], [0.15, 0.13, -0.14, "#ff6bd5"], [0.17, -0.05, -0.12, "#6bd5ff"]];
-  FW3.forEach((t, i) => { const [dx, dy, dz, col] = spots[i]; burst(out, f, t, S[0] + dx, S[1] + dy, S[2] + dz, 0.13, 12, col); sparkle(out, f, t + 4, S[0] + dx * 1.1, S[1] + dy * 1.1, S[2] + dz, 0.08, 12); });
+  FW3.forEach((t, i) => { const [dx, dy, dz, col] = spots[i]; burst(out, f, t, S[0] + dx * 1.4, S[1] + dy * 1.3, S[2] + dz, 0.26, 14, col); burst(out, f, t + 3, S[0] + dx * 1.4, S[1] + dy * 1.3, S[2] + dz - 0.01, 0.16, 10, "#ffffff"); sparkle(out, f, t + 5, S[0] + dx * 1.6, S[1] + dy * 1.5, S[2] + dz, 0.14, 14); });
 };
 
 // ---------------- S04 the bidders ----------------
@@ -359,15 +359,15 @@ const corkFly = (out: Stage, f: number, t0: number, tip: V3, i: number) => {
   let p: V3;
   if (t < T1) p = [tip[0] + vx * t * (1.15 / T1) * 0.85, tip[1] + vy * t - 4.9 * t * t, tip[2] + vz * t * (1.15 / T1) * 0.85];
   else { const g = (t - T1); const land: V3 = [tip[0] + vx * 1.15 * 0.85, 0.012, tip[2] + vz * 1.15 * 0.85], u = clamp01(g / 0.6); p = [lerpN(land[0], R[0], easeOut(u)), 0.012 + Math.max(0, hop(f, t0 + Math.round(T1 * FPS), 1.2)), lerpN(land[2], R[2], easeOut(u))]; }
-  if (t >= T1 + 0.6 && p[1] < 0.02) { flat(out, `corkF${i}`, draw, R, 0.035, i * 1.3, 64, 64); return; }
-  card(out, "cork", 64, 64, draw, p[0], p[1], p[2], 0.035, 0.035, { rot: t * 14 + i });
+  if (t >= T1 + 0.6 && p[1] < 0.02) { flat(out, `corkF${i}`, draw, R, 0.05, i * 1.3, 64, 64); return; }
+  card(out, "cork", 64, 64, draw, p[0], p[1], p[2], 0.05, 0.05, { rot: t * 14 + i });
 };
 /** corks lying where they landed (after S08; the fifth after the S14 pop) */
-const corksDown = (out: Stage, n: number) => { for (let i = 0; i < n; i++) flat(out, `corkF${i}`, (pp) => art2.cork(pp), corkRest(i), 0.035, i * 1.3, 64, 64); };
+const corksDown = (out: Stage, n: number) => { for (let i = 0; i < n; i++) flat(out, `corkF${i}`, (pp) => art2.cork(pp), corkRest(i), 0.05, i * 1.3, 64, 64); };
 const bottleAt = (out: Stage, cam: CamInfo, hand: V3, rot: number, popped: boolean, key: string): V3 => {
   const u = cardUp(cam, rot), c: V3 = [hand[0] + u[0] * 0.05, hand[1] + u[1] * 0.05, hand[2] + u[2] * 0.05];
-  fxc(out, `bottle${key}|${popped}`, 120, 420, (pp) => art2.bottle(pp, popped), c, 0.075, 0.26, { rot });
-  return [c[0] + u[0] * 0.13, c[1] + u[1] * 0.13, c[2] + u[2] * 0.13];
+  fxc(out, `bottle${key}|${popped}`, 120, 420, (pp) => art2.bottle(pp, popped), c, 0.1, 0.35, { rot });
+  return [c[0] + u[0] * 0.17, c[1] + u[1] * 0.17, c[2] + u[2] * 0.17];
 };
 const party = (out: Stage, cam: CamInfo, f: number, id: number) => {
   COLL.forEach((who, i) => {
@@ -468,7 +468,7 @@ const cafe = (out: Stage, cam: CamInfo, f: number, id: number) => {
     const hd = arm3d(out, cam, "borrower", P, fo, -1, lerp3(chest, hi, k), f);
     if (f < TUCK10[1]) fxc(out, "cashfan", 300, 200, (pp) => art2.cashFan(pp), [hd[0], hd[1] + 0.06 * k, hd[2] + 0.02], 0.2 * Math.max(0.3, k), 0.133 * Math.max(0.3, k), { rot: 0.15 * Math.sin(f * 0.15) * k });
   } else {
-    const mouth = cardWorld(cam, P[0], P[1], P[2], [300, 205]), mp: V3 = [mouth[0] + cam.right.x * 0.06 - cam.fwd.x * 0.08, mouth[1] - 0.02, mouth[2] + cam.right.z * 0.06 - cam.fwd.z * 0.08];
+    const shR = shoulderAt(cam, "borrower", P, fo, 1), mp: V3 = [shR[0] - cam.right.x * 0.04 - cam.fwd.x * 0.12, shR[1] + 0.12, shR[2] - cam.right.z * 0.04 - cam.fwd.z * 0.12];
     const tbl = Fm(-0.22, CTY + 0.02, -0.64), tup: V3 = [tbl[0], tbl[1] + 0.2, tbl[2]], rest = restHand(cam, "borrower", P, fo, -1);
     let hand: V3;
     if (f < MEGA11[0]) hand = rest; else if (f < MEGA11[0] + 5) hand = lerp3(rest, mp, smooth((f - MEGA11[0]) / 5)); else if (f < MEGA11[1]) hand = mp;
@@ -476,7 +476,7 @@ const cafe = (out: Stage, cam: CamInfo, f: number, id: number) => {
     else if (f < THUMP11 + 4) hand = tbl; else hand = lerp3(tbl, rest, smooth((f - THUMP11 - 4) / 10));
     const hd = arm3d(out, cam, "borrower", P, fo, -1, hand, f);
     if (f >= MEGA11[0] && f < MEGA11[1] + 2) {
-      fxc(out, "mega", 260, 160, (pp) => art2.megaphone(pp), [hd[0] + cam.right.x * 0.08, hd[1] + 0.02, hd[2] + cam.right.z * 0.08], 0.17, 0.105, { rot: -0.1 });
+      fxc(out, "mega", 260, 160, (pp) => art2.megaphone(pp), [hd[0] + cam.right.x * 0.1 - cam.fwd.x * 0.02, hd[1] + 0.03, hd[2] + cam.right.z * 0.1 - cam.fwd.z * 0.02], 0.2, 0.123, { rot: 0.08 });
       for (let n = 0; n < 5; n++) { const t0 = MEGA11[0] + 6 + n * 6, u = (f - t0) / 10; if (u < 0 || u >= 1) continue; fxc(out, `ring${Math.round(u * 10)}`, 300, 300, (pp) => fxRing(pp, u), [hd[0] + cam.right.x * (0.2 + 0.25 * u), hd[1] + 0.03, hd[2] + cam.right.z * (0.2 + 0.25 * u)], 0.12 + 0.3 * u, 0.12 + 0.3 * u, { soft: true }); }
     }
     if (f >= THUMP11 && f < THUMP11 + 6) burst(out, f, THUMP11, tbl[0], tbl[1] + 0.03, tbl[2], 0.18, 6, "#fff3b0");
@@ -502,7 +502,7 @@ const cafe = (out: Stage, cam: CamInfo, f: number, id: number) => {
 // ---------------- the writer (S12) ----------------
 const writer = (out: Stage, cam: CamInfo, f: number) => {
   const P = Dm(DK.seller[0], 0, DK.seller[1]);
-  if (near(cam, P, 0.5)) return;
+  if (near(cam, P, 0.9)) return;
   front(out, cam, "writer", ...P, { mode: "sit", chair: SEAT_STOOL, expr: f >= SHOCK12 ? "shock" : "neutral", tilt: f > 1760 ? 0.05 : 0 }, f, [SHOCK12]);
 };
 

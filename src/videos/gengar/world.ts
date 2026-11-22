@@ -254,7 +254,7 @@ export class World {
     const S = this.S, [tf, tb] = S.tagPlanes;
     const show = id <= 2 || (id >= 6 && id <= 14);
     tf.visible = tb.visible = show;
-    S.tagG.rotation.set(0, 0, 0); tf.position.y = tb.position.y = -HALLP.tag_len - HALLP.tag_size[1] / 2; tf.position.x = tb.position.x = HALLP.tag_size[0] / 2 - 0.022;
+    S.tagG.rotation.set(0, 0, 0); tf.position.y = tb.position.y = -HALLP.tag_len - HALLP.tag_size[1] / 2; tf.position.x = tb.position.x = HALLP.tag_size[0] * 0.36;
     S.tagMats.forEach((m) => { m.opacity = 1; });
     if (!show) return;
     const lot = id >= 6 ? "LOT 24" : "LOT 11", price = id >= 6 ? 504000 : 576000, T = id >= 6 ? SLAM6 : SLAM1;

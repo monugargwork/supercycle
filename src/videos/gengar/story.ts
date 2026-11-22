@@ -98,6 +98,9 @@ const keyCam = (o: V3, k: PKey, f: number): Cam => {
 const run = (id: number, f: number): Cam => {
   const sc = plan.scenes[id - 1], o = ORIGIN[sc.set as SetName], keys = sc.cams as PKey[];
   let cur = keyCam(o, keys[0], f);
+  // a scene that comes in by a glide, tilt or hold starts from where the previous scene's camera ended
+  const inT = (sc.in as { type?: string }).type ?? "";
+  if (id > 1 && keys[0].glide && ["glide", "tilt", "hold"].includes(inT) && f < keys[0].f + keys[0].glide) cur = mixC(run(id - 1, sc.f[0] - 1), cur, glide((f - keys[0].f) / keys[0].glide));
   for (let i = 1; i < keys.length; i++) {
     const k = keys[i];
     if (f < k.f) break;
