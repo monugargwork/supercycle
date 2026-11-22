@@ -9,21 +9,21 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | c30_vulpix | 2026 30th Celebration Vulpix 9 | 30c | 9 | https://den-cards.pokellector.com/434/Vulpix.30C.9.62050.png | jirachi |
 | jirachi_sir | 2026 30th Celebration Jirachi ex Special Illustration Rare (Akira Egawa) 155/128 | 30c | 155 | https://den-cards.pokellector.com/434/Jirachi-ex.30C.155.62175.png | jirachi |
 | abra | Base Set Abra 43 | base1 | 43 | https://images.pokemontcg.io/base1/43.png | attic |
-| blastoise | Base Set Blastoise 2 | base1 | 2 | https://images.pokemontcg.io/base1/2_hires.png | attic, fanatics, monaco, tcgplayer |
+| blastoise | Base Set Blastoise 2 | base1 | 2 | https://images.pokemontcg.io/base1/2_hires.png | attic, fanatics, monaco, tcgplayer, gengar |
 | bulbasaur | Base Set Bulbasaur 44 | base1 | 44 | https://images.pokemontcg.io/base1/44.png | attic |
 | charmander | Base Set Charmander 46 | base1 | 46 | https://images.pokemontcg.io/base1/46.png | attic, fanatics |
 | diglett | Base Set Diglett 47 | base1 | 47 | https://images.pokemontcg.io/base1/47.png | attic |
 | gastly | Base Set Gastly 50 | base1 | 50 | https://images.pokemontcg.io/base1/50.png | attic, fanatics |
 | machop | Base Set Machop 52 | base1 | 52 | https://images.pokemontcg.io/base1/52.png | attic |
 | magikarp | Base Set Magikarp 35 | base1 | 35 | https://images.pokemontcg.io/base1/35.png | attic |
-| mewtwo | Base Set Mewtwo 10 | base1 | 10 | https://images.pokemontcg.io/base1/10_hires.png | attic, fanatics |
+| mewtwo | Base Set Mewtwo 10 | base1 | 10 | https://images.pokemontcg.io/base1/10_hires.png | attic, fanatics, gengar |
 | onix | Base Set Onix 56 | base1 | 56 | https://images.pokemontcg.io/base1/56.png | attic, fanatics |
-| pikachu | Base Set Pikachu 58 | base1 | 58 | https://images.pokemontcg.io/base1/58.png | attic, fanatics, lucas, tcgplayer |
+| pikachu | Base Set Pikachu 58 | base1 | 58 | https://images.pokemontcg.io/base1/58.png | attic, fanatics, lucas, tcgplayer, gengar |
 | ponyta | Base Set Ponyta 60 | base1 | 60 | https://images.pokemontcg.io/base1/60.png | attic |
 | squirtle | Base Set Squirtle 63 | base1 | 63 | https://images.pokemontcg.io/base1/63.png | attic, fanatics |
 | venusaur | Base Set Venusaur 15 | base1 | 15 | https://images.pokemontcg.io/base1/15_hires.png | attic, fanatics, monaco, tcgplayer |
 | vulpix | Base Set Vulpix 68 | base1 | 68 | https://images.pokemontcg.io/base1/68.png | attic, fanatics |
-| zard_base | Base Set Charizard 4 | base1 | 4 | https://images.pokemontcg.io/base1/4_hires.png | attic, mudkip (as zard), fanatics, monaco, lucas, tcgplayer |
+| zard_base | Base Set Charizard 4 | base1 | 4 | https://images.pokemontcg.io/base1/4_hires.png | attic, mudkip (as zard), fanatics, monaco, lucas, tcgplayer, gengar |
 | eevee | Jungle Eevee 51 | base2 | 51 | https://images.pokemontcg.io/base2/51.png | attic, fanatics |
 | jg_scyther | Jungle Scyther 10 | base2 | 10 | https://images.pokemontcg.io/base2/10_hires.png | lucas |
 | jigglypuff | Jungle Jigglypuff 54 | base2 | 54 | https://images.pokemontcg.io/base2/54.png | attic, fanatics |
@@ -45,10 +45,11 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | fs_zapdos | Fossil Fs 15 | base3 | 15 | https://images.pokemontcg.io/base3/15_hires.png | fossil |
 | psyduck | Fossil Psyduck 53 | base3 | 53 | https://images.pokemontcg.io/base3/53.png | attic |
 | tr_dark_zard | Team Rocket Dark Charizard 4 | base5 | 4 | https://images.pokemontcg.io/base5/4_hires.png | lucas |
-| zard_lc | Legendary Collection Charizard 3 | base6 | 3 | https://images.pokemontcg.io/base6/3_hires.png | attic, fanatics |
+| lc_gengar | Legendary Collection Gengar 11 (holo; the sold copy is the reverse holo) | base6 | 11 | https://images.pokemontcg.io/base6/11_hires.png | gengar |
+| zard_lc | Legendary Collection Charizard 3 | base6 | 3 | https://images.pokemontcg.io/base6/3_hires.png | attic, fanatics, gengar |
 | sky_h1 | Skyridge Holo H1 | ecard3 | H1 | https://images.pokemontcg.io/ecard3/H1.png | attic, fanatics |
 | sky_h2 | Skyridge Holo H2 | ecard3 | H2 | https://images.pokemontcg.io/ecard3/H2.png | attic, fanatics |
-| sky_h3 | Skyridge Holo H3 | ecard3 | H3 | https://images.pokemontcg.io/ecard3/H3.png | attic, fanatics |
+| sky_h3 | Skyridge Holo H3 | ecard3 | H3 | https://images.pokemontcg.io/ecard3/H3.png | attic, fanatics, gengar |
 | sky_h4 | Skyridge Holo H4 | ecard3 | H4 | https://images.pokemontcg.io/ecard3/H4.png | attic, fanatics |
 | sky_h5 | Skyridge Holo H5 | ecard3 | H5 | https://images.pokemontcg.io/ecard3/H5.png | attic |
 | sky_h6 | Skyridge Holo H6 | ecard3 | H6 | https://images.pokemontcg.io/ecard3/H6.png | attic, fanatics |
@@ -56,9 +57,10 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | sky_h8 | Skyridge Holo H8 | ecard3 | H8 | https://images.pokemontcg.io/ecard3/H8.png | attic, fanatics |
 | sky_h9 | Skyridge Holo H9 | ecard3 | H9 | https://images.pokemontcg.io/ecard3/H9.png | attic, fanatics |
 | ds_latias | EX Delta Species Latias δ (holo) | ex11 | 8 | https://images.pokemontcg.io/ex11/8_hires.png | monaco |
-| ds_metagross_star | EX Delta Species Metagross ★ (Gold Star) | ex11 | 113 | https://images.pokemontcg.io/ex11/113_hires.png | monaco |
+| ds_metagross_star | EX Delta Species Metagross ★ (Gold Star) | ex11 | 113 | https://images.pokemontcg.io/ex11/113_hires.png | monaco, gengar |
 | ds_mewtwo | EX Delta Species Mewtwo δ (holo) | ex11 | 12 | https://images.pokemontcg.io/ex11/12_hires.png | monaco |
-| ds_rayquaza | EX Delta Species Rayquaza δ (holo) | ex11 | 13 | https://images.pokemontcg.io/ex11/13_hires.png | monaco |
+| ds_rayquaza | EX Delta Species Rayquaza δ (holo) | ex11 | 13 | https://images.pokemontcg.io/ex11/13_hires.png | monaco, gengar |
+| dx_latios_star | EX Deoxys Latios ★ (Gold Star) 106 | ex8 | 106 | https://images.pokemontcg.io/ex8/106_hires.png | gengar |
 | chocobo_gold | MTG Final Fantasy Traveling Chocobo (Golden Chocobo, serialized /77) | fin | 551f | https://cards.scryfall.io/png/front/6/c/6ce8744a-ede3-4662-968a-360eb6639f08.png?1783906436 | chocobo |
 | chocobo_plain | MTG Final Fantasy Traveling Chocobo (regular) | fin | 210 | https://cards.scryfall.io/png/front/2/4/2462df62-fc35-47ed-9571-40452074dc6d.png?1783906576 | chocobo |
 | pika_trophy | 1997 No.1 Trainer, Official Tournament (trophy Pikachu) | jp-promo | U011 | https://cdn6966.templcdn.com/wp-content/uploads/2021/03/JP_U011Unnumbered.jpg | mudkip |

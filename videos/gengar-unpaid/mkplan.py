@@ -1,0 +1,360 @@
+"""Generator of plan.json for the Gengar reel. The plan is the source of truth: change it here, then
+python3 videos/gengar-unpaid/mkplan.py && python3 scripts/plan_check.py videos/gengar-unpaid/plan.json"""
+import json, os
+def k(f, pos, look, fov, glide=None, cut=False, push=0.002, punch=None, blur=6, focus=None, why=""):
+    d = dict(f=f, pos=pos, look=look, fov=fov, roll=0, push=push, blur=blur, why=why)
+    if glide: d["glide"] = glide
+    if cut: d["cut"] = True
+    if punch: d["punch"] = punch
+    if focus: d["focus"] = focus
+    return d
+
+# ---------------- layout (set-local metres; the build reads these) ----------------
+SY = 0.3   # stage top
+HALL = dict(room=[-4.2, 4.2, -4.0, 5.5], h=4.2, stage=[-3.2, 3.2, -4.0, -2.0], stage_y=SY,
+            rostrum=[-1.7, -1.0, -2.9, -2.5], rostrum_y=1.4, auct=[-1.35, -3.15], block=[-1.35, 1.42, -2.7],
+            plinth=[-0.6, -0.1, -3.0, -2.5], plinth_y=1.22, slab=[-0.35, 1.40, -2.76], slab_size=[0.135, 0.215], slab_tilt=0.2,
+            tag_top=[-0.07, 1.64, -2.74], tag_len=0.13, tag_size=[0.16, 0.09],
+            board=[-0.85, 2.85, -3.94], board_size=[1.7, 0.645], bids=[0.75, 2.8, -3.94], bids_size=[0.7, 0.45],
+            letters=[-0.85, 3.62, -3.94], calendar=[-2.6, 2.2, -3.94],
+            pole=[1.7, -2.65], pole_top=3.5, mark_k=250000.0, old=408000, new=576000, clerk_pole=[1.38, -2.4],
+            clerk_in=[1.05, -2.4], clerk_tag=[0.22, -2.45],
+            bidders=[[-1.55, -1.2], [-0.2, -1.2], [-0.88, -0.5]],
+            table=[1.3, 3.8, 1.15, 1.65], table_y=1.0, coll=[[1.73, 0.75], [2.28, 0.75], [2.83, 0.75], [3.38, 0.75]],
+            tower=[2.55, 1.0, 1.4], waiter_in=[4.0, 2.3], waiter=[3.72, 1.95], bill=[3.45, 1.0, 1.42], c1_late=[2.0, 0.75])
+CENSUS = dict(wall=[0.0, 1.55, -2.97], wall_size=[3.4, 2.0], cols=17, rows=10, podium=[0.0, -0.9], podium_y=1.05, slab=[0.0, 1.22, -0.92])
+CAFE = dict(table=[0.0, -0.7], table_y=0.74, table_r=0.34, borrower=[-0.48, -0.95], lender=[0.48, -0.95],
+            iou=[0.0, 0.742, -0.6], cups=[[-0.17, -0.72], [0.17, -0.72]], env_from=[-0.2, -0.78], env_to=[0.2, -0.78], front=-2.4)
+TY = 0.76
+DESK = dict(seller=[0.0, -1.5], table=[-0.9, 0.9, -1.22, -0.52], table_y=TY,
+            laptop=[0.45, TY, -0.75], laptop_yaw=-2.62, screen=[0.532, 0.879, -0.608], screen_size=[0.34, 0.215], screen_tilt=0.4,
+            lamp=[-0.6, TY, -1.0], mug=[-0.25, TY, -0.8], window=[-2.4, 1.55, -0.6], window_w=1.1)
+
+H = HALL
+SLAB = H["slab"]; TAG = [H["tag_top"][0], H["tag_top"][1] - H["tag_len"] - H["tag_size"][1] / 2, H["tag_top"][2]]
+BOARD = H["board"]; AUCT_HEAD = [H["auct"][0], SY + 1.55, H["auct"][1]]
+MK_OLD = [H["pole"][0], SY + H["old"] / H["mark_k"], H["pole"][1]]; MK_NEW = [H["pole"][0], SY + H["new"] / H["mark_k"], H["pole"][1]]
+CLERK_POLE_HEAD = [H["clerk_pole"][0], SY + 1.55, H["clerk_pole"][1]]
+COLL_HEAD = [[x, 1.55, z] for x, z in H["coll"]]
+SCREEN = DESK["screen"]
+CAM_POV = dict(pos=[0.19, 1.17, -1.21], look=SCREEN)
+PHONE = [2.06, 1.28, 1.02]; EYE14 = [2.0, 1.66, 0.75]
+WIDE = dict(pos=[-0.85, 1.75, 1.0], look=[-0.85, 1.9, -3.0])   # the stage: the board over the rostrum and the lot plinth (S01, S06)
+
+P = {
+ "fps": 30, "frames": 2420, "voice_end": 2389,
+ "coords": "metres, y up, ground y=0; cams/marks/objects are SET-LOCAL, world = set origin + local",
+ "titles": [
+  {"f": 335, "out": 392, "text": "2002", "style": 3, "from": "top"},
+  {"f": 500, "out": 556, "text": "CGC PRISTINE 10", "style": 3, "from": "top"},
+  {"f": 568, "out": 624, "text": "11 · 10 · 2026", "style": 3, "from": "top"},
+  {"f": 940, "out": 994, "text": "25 · 10", "style": 3, "from": "top"},
+  {"f": 1118, "out": 1170, "text": "170+", "style": 3, "from": "top"}],
+ "cards": {"hero": "lc_gengar (Legendary Collection Gengar 11): the slab on the plinth",
+           "latios": "dx_latios_star (EX Deoxys Latios Gold Star 106): the second sale and the census wall",
+           "history": ["zard_base", "ds_metagross_star", "sky_h3", "mewtwo", "zard_lc", "ds_rayquaza", "pikachu", "blastoise", "lc_gengar"]},
+ "hall": HALL, "census": CENSUS, "cafe": CAFE, "desk": DESK,
+ "sets": {
+  "hall": {"origin": [0, 0, 0], "axes": "the stage along the back wall (z -4..-2); +z toward the champagne table and the lens",
+   "light": "day", "sun": [-30, 40], "open_sides": "+z",
+   "objects": [
+    {"id": "room", "build": "new: auction hall x -4.2..4.2, z -4..5.5, 4.2 m; cream walls, wine carpet, ceiling (no shadows), wall sconces", "pos": [0, 2.1, 0.75], "size": [8.4, 4.2, 9.5]},
+    {"id": "stage", "build": "new: oak stage x -3.2..3.2, z -4..-2, top y 0.3, a dark front skirt", "pos": [0, 0.15, -3.0], "size": [6.4, 0.3, 2.0]},
+    {"id": "rostrum", "build": "new: oak rostrum 70 x 40 cm, top y 1.4, a sound block and the gavel on top; FANATICS COLLECT plate on its front", "pos": [-1.35, 0.85, -2.7], "size": [0.7, 1.1, 0.4]},
+    {"id": "plinth", "build": "new: white lot plinth 50 x 50 cm, top y 1.22; a brass easel holds the slab tilted back 0.2 rad; a brass arm on its right with a tag holder (the tag drops from it on a string)", "pos": [-0.35, 0.76, -2.75], "size": [0.5, 0.92, 0.5]},
+    {"id": "slab", "build": "adapt:slabReal: a CGC-style case 13.5 x 21.5 cm (1.6x real, so it reads), gold label 'PRISTINE 10', the real Legendary Collection Gengar scan", "pos": SLAB, "size": [0.135, 0.215, 0.012]},
+    {"id": "tag", "build": "new: card tag 16 x 9 cm on a string (13 cm): front SOLD $576,000, back CHƯA THANH TOÁN in red; spins on its string; turns into a purple see-through ghost", "pos": TAG, "size": [0.16, 0.09, 0.003]},
+    {"id": "board", "build": "reuse:priceBoardW: the price board 170 x 64.5 cm on the back wall (canvas), amber digits, SOLD lamp; CHÍNH XÁC lamp added under it (S13)", "pos": BOARD, "size": [1.7, 0.645, 0.04]},
+    {"id": "bids", "build": "new: bid counter 70 x 45 cm: LƯỢT TRẢ GIÁ and a two-digit flap count", "pos": H["bids"], "size": [0.7, 0.45, 0.04]},
+    {"id": "pole", "build": "new: record pole 8 cm square, y 0.3..3.5, a painted scale every $100k; plate KỶ LỤC GENGAR on top; brass marker $408,000 · 06/2026; a pull cord over a pulley at the top raises the new marker", "pos": [1.7, 1.9, -2.65], "size": [0.08, 3.2, 0.08]},
+    {"id": "chairs", "build": "new: three folding chairs for the bidders (seat y 0.46)", "pos": [-0.88, 0.45, -0.95], "size": [1.6, 0.9, 0.8]},
+    {"id": "table", "build": "new: long champagne table x 1.3..3.8, z 1.15..1.65, top y 1.0, white cloth to the floor; a coupe tower and an ice bucket", "pos": [2.55, 0.5, 1.4], "size": [2.5, 1.0, 0.5]}],
+   "marks": {"auct": H["auct"], "clerk": H["clerk_tag"], "c1": H["coll"][0]}},
+  "census": {"origin": [40, 0, 0], "axes": "the slab wall on the back wall z -3; the podium in front of it; the lens at +z",
+   "light": "day", "sun": [20, 50], "open_sides": "+z",
+   "objects": [
+    {"id": "room", "build": "new: gallery x -3..3, z -3..3, 3.2 m, navy walls, dark floor, ceiling", "pos": [0, 1.6, 0], "size": [6, 3.2, 6]},
+    {"id": "wall", "build": "new: 170 Pristine 10 Latios slabs (17 x 10, real scan, canvas) on brass rails, 3.4 x 2.0 m; a plate '170+ · PRISTINE 10'", "pos": CENSUS["wall"], "size": [3.4, 2.0, 0.03]},
+    {"id": "podium", "build": "new: velvet podium 50 x 50 cm, top y 1.05, brass easel with the auction Latios slab (1.6x); a spotlight cone from above (lit on SPOT7)", "pos": [0, 0.525, -0.9], "size": [0.5, 1.05, 0.5]}],
+   "marks": {}},
+  "cafe": {"origin": [80, 0, 0], "axes": "the café front on z -2.4 faces +z; the round table in front; the lens on the street",
+   "light": "golden", "sun": [-40, 18], "open_sides": "+z",
+   "objects": [
+    {"id": "front", "build": "new: café front 7 m wide x 3.6 m, a striped awning, window, door, sign CÀ PHÊ; potted plants; paving", "pos": [0, 1.8, -2.5], "size": [7, 3.6, 0.2]},
+    {"id": "table", "build": "new: round café table r 34 cm, top y 0.74, iron foot; two cups of coffee; two chairs", "pos": [0, 0.37, -0.7], "size": [0.68, 0.74, 0.68]},
+    {"id": "iou", "build": "new: IOU note 20 x 12 cm 'MAI TAO TRẢ' (ghost purple, see-through; turns solid white on SOLID11, green stamp ĐÃ TRẢ on STAMP11)", "pos": CAFE["iou"], "size": [0.2, 0.002, 0.12]},
+    {"id": "envelope", "build": "new: fat cash envelope 20 x 10 x 3 cm, slides across the table from him to her", "pos": [-0.2, 0.755, -0.78], "size": [0.2, 0.03, 0.1]}],
+   "marks": {"borrower": CAFE["borrower"], "lender": CAFE["lender"]}},
+  "desk": {"origin": [120, 0, 0], "axes": "the writer sits behind his desk facing +z; the laptop faces him; a night window in the -x wall",
+   "light": "day", "sun": [-40, 35], "open_sides": "+z",
+   "objects": [
+    {"id": "room", "build": "new: small room x -2.4..2.4, z -2.4..2.4, 2.6 m, blue-grey walls, ceiling; a night window; shelves of binders", "pos": [0, 1.3, 0], "size": [4.8, 2.6, 4.8]},
+    {"id": "table", "build": "new: desk, top y 0.76, x -0.9..0.9, z -1.22..-0.52; a desk lamp, a mug, notes", "pos": [0, 0.38, -0.87], "size": [1.8, 0.76, 0.7]},
+    {"id": "laptop", "build": "adapt:laptop (TCGplayer reel): screen canvas = FANATICS COLLECT · LỊCH SỬ BÁN, facing the writer", "pos": DESK["laptop"], "size": [0.34, 0.24, 0.24]}],
+   "marks": {"writer": DESK["seller"]}}},
+ "cast": {
+  "auct": {"look": ["black suit", "red tie", "grey hair"], "items": ["gavel"], "views": ["front"]},
+  "clerk": {"look": ["black polo with STAFF on the chest", "dark trousers"], "items": [], "views": ["front", "side walking"]},
+  "spokes": {"look": ["charcoal suit", "blue tie", "glasses"], "items": [], "views": ["front"]},
+  "bidder": {"look": ["three looks: teal blazer, mustard sweater, plum jacket"], "items": ["paddle"], "views": ["front, seated"]},
+  "collector": {"look": ["green hoodie (c1)", "yellow jacket, purple beanie", "purple jacket", "red jacket"], "items": ["champagne bottle", "phone (c1, S14)"], "views": ["front"]},
+  "waiter": {"look": ["white shirt", "black vest", "black tie"], "items": ["bill folder"], "views": ["front"]},
+  "borrower": {"look": ["orange hoodie", "cap"], "items": ["cash fan", "megaphone", "envelope"], "views": ["front, seated"]},
+  "lender": {"look": ["blue shirt", "glasses", "dark hair"], "items": [], "views": ["front, seated"]},
+  "writer": {"look": ["red cardigan", "glasses", "dark hair"], "items": [], "views": ["front, seated"]}},
+ "scenes": []}
+
+S = P["scenes"]
+def scene(**kw): S.append(kw)
+LBL = [SLAB[0], SLAB[1] + 0.08, SLAB[2]]   # the slab's label (top band)
+
+scene(id="S01", hero=True, f=[0, 100], set="hall", light="day",
+  vo="Một lá Gengar được trả năm trăm bảy mươi sáu nghìn đô la,",
+  gloss="A Gengar card was bid to five hundred seventy-six thousand dollars,",
+  spine=1, viewer="The hammer falls: $576,000 on the Gengar.",
+  **{"in": {"type": "open on the act"}, "out": {"type": "dissolve", "to": "S02", "n": 8, "note": "next day, the same plinth"}},
+  build="new: the hall stage, rostrum with sound block, lot plinth with the Gengar slab and the tag arm, price board, bid counter, FANATICS COLLECT letters.",
+  blocking="Auctioneer behind the rostrum (auct mark, on the stage), gavel raised in his right arm (screen left) from f0.",
+  action="f0-70 the board counts the last steps up to $576,000 (in time with 'năm trăm bảy mươi sáu'); f70-76 wind-up of the gavel, held at the top f73-76; f79 the gavel slams the block (2 f before 'đô' f81): the board snaps to $576,000 with the red SOLD lamp; f80 the tag drops 15 cm out of its brass holder on its string and swings (damped pendulum, 4 swings) showing SOLD $576,000; f84-100 glide down to the slab and the swinging tag.",
+  acting="Auctioneer: a showman's grin; on the slam his eyes shut tight.",
+  cams=[k(0, WIDE["pos"], WIDE["look"], 46, push=0.002, blur=4, focus=AUCT_HEAD, why="the board over the rostrum and the lot"),
+        k(84, [-0.22, 1.5, -1.45], [-0.25, 1.46, -2.75], 34, glide=22, push=0.002, blur=10, focus=SLAB, why="push to the slab and the tag")],
+  kicks=[[79, 1.0]], marks=[{"who": "auct", "at": H["auct"], "view": "front", "pose": "standing; gavel wind-up f70-76, slam f79", "expr": "grin -> squeeze"}],
+  subjects=[{"n": "auctioneer head", "p": AUCT_HEAD, "f": [0, 82]}, {"n": "board", "p": BOARD, "f": [0, 82]}, {"n": "slab", "p": SLAB, "f": [0, 99]}],
+  physics="tag: pendulum on a 13 cm string, released at f80 from 15 cm up: drops, snaps taut, swings ±25 deg damped (settles by f130). Gavel: 1 f strike, 2 f squash of the block.",
+  light_mood="warm auction light, the board glow.", sound="crowd murmur; gavel crack f79; a ka-ching f81; the tag string snap f80; the score's first hit.",
+  after="The tag hangs from its string: SOLD $576,000.")
+
+scene(id="S02", hero=True, f=[100, 298], set="hall", light="day", dim=0.86,
+  vo="và hôm sau, nó bị đánh dấu là chưa thanh toán. Đúng chất Pokémon hệ ma: có đó, rồi biến mất.",
+  gloss="and the next day it was marked unpaid. Typical ghost-type Pokémon: there, then gone.",
+  spine=1, viewer="Next day the tag flips to CHƯA THANH TOÁN, then ghosts away.",
+  **{"in": {"type": "dissolve", "n": 8, "from": "S01"}, "out": {"type": "tilt", "to": "S03", "note": "the camera comes back down from the ceiling to the slab"}},
+  build="reuse the hall, empty, cooler light; the tag hanging.",
+  blocking="Clerk enters from the stage right (clerk_in) f104-140 to the clerk mark beside the plinth, faces +z.",
+  action="f104-140 the clerk walks in; f150-156 his left arm (screen right) reaches the tag's edge, f156 a flick (2 f before 'chưa' f158): the tag spins on its string 1.5 turns, slowing, and stops on its back, CHƯA THANH TOÁN in red, by f182; f196-236 'hệ ma': the tag shivers (2 mm jitter) and fades to a purple see-through ghost, its corners curling like a sheet; f243 'có đó' it hangs; f262 it slips off the string and floats up with a slow S-wobble (0.6 m/s); f278-292 'biến mất' it fades out at y 2.6; the empty string sways. The clerk looks up, shocked.",
+  acting="Clerk: neutral -> shock on the lift (f262).",
+  cams=[k(100, [0.06, 1.55, -0.55], [0.04, 1.52, -2.72], 42, push=0.0015, blur=8, focus=TAG, why="the plinth next day; the clerk comes in"),
+        k(254, [0.02, 1.66, -0.6], [-0.05, 2.35, -2.74], 44, glide=30, push=0.001, blur=6, focus=[TAG[0], 2.3, TAG[2]], why="tilt up with the ghost")],
+  kicks=[], marks=[{"who": "clerk", "at": H["clerk_tag"], "view": "front", "pose": "walks in f104-140; flicks the tag f156; looks up f262", "expr": "neutral -> shock"}],
+  subjects=[{"n": "tag", "p": TAG, "f": [100, 250]}, {"n": "clerk head", "p": [H["clerk_tag"][0], SY + 1.55, H["clerk_tag"][1]], "f": [142, 250]}],
+  physics="tag spin: torsion pendulum, 1.5 turns decaying to rest on its back. Ghost: no gravity, rises 0.6 m/s with a sine side-wobble (amplitude 4 cm, 1.2 Hz), fades over 14 f.",
+  light_mood="the next morning: cooler, dimmer (no crowd).", sound="footsteps f104-140; a flick tick f156, a spinning whirr; a ghostly theremin 'ooo' f196-290 rising; a soft pop of the string f262; silence after.",
+  after="The empty string hangs from the arm (it stays until S15).")
+
+scene(id="S03", f=[298, 562], set="hall", light="day", dim=0.86,
+  vo="Lá Gengar ấy in năm hai nghìn không trăm lẻ hai, bộ Legendary Collection, mặt bóng lấp lánh như pháo hoa, được CGC chấm Pristine mười.",
+  gloss="That Gengar was printed in 2002, Legendary Collection, its holo face sparkling like fireworks, graded Pristine 10 by CGC.",
+  spine=2, viewer="What the card is: 2002, the firework holo, CGC Pristine 10.",
+  **{"in": {"type": "tilt", "from": "S02"}, "out": {"type": "dissolve", "to": "S04", "n": 8, "note": "back to the auction day"}},
+  build="reuse the slab (CGC-style, gold PRISTINE 10 label).",
+  blocking="Clerk gone (walked out of frame during the tilt).",
+  action="f298-330 the camera comes down onto the slab; f440-470 a white gleam sweeps across the case; f474, f480, f486 three small firework bursts in the dark air beside and behind the slab (left, upper right, right), never over the card, on 'pháo hoa' f477; f515-540 push onto the label; f535 the PRISTINE 10 grade box lights gold on 'Pristine' (f535).",
+  acting="none.",
+  cams=[k(298, [-0.27, 1.47, -1.9], [-0.35, 1.43, -2.76], 30, glide=32, push=0.002, blur=12, focus=SLAB, why="the slab"),
+        k(512, [-0.34, 1.53, -2.28], [-0.35, 1.5, -2.77], 26, glide=26, push=0.003, punch=[0.006, 12], blur=12, focus=LBL, why="the label: PRISTINE 10")],
+  kicks=[], marks=[], subjects=[{"n": "slab", "p": SLAB, "f": [330, 510]}, {"n": "label", "p": LBL, "f": [540, 561]}],
+  physics="none.", light_mood="cool; the slab under the plinth light.", sound="a soft chime per gleam f440; three small firework pops and crackles f474-490; a gold 'ting' f535.",
+  after="Unchanged.")
+
+BIDS_N = 32
+scene(id="S04", f=[562, 757], set="hall", light="day",
+  vo="Ngày mười một tháng mười, trên sàn Fanatics Collect, ba mươi hai lượt trả giá đẩy nó lên năm trăm bảy mươi sáu nghìn.",
+  gloss="On October 11, on Fanatics Collect, thirty-two bids pushed it up to five hundred seventy-six thousand.",
+  spine=2, viewer="The auction: paddle after paddle, the counter to 32, the price to $576,000.",
+  **{"in": {"type": "dissolve", "n": 8, "from": "S03"}, "out": {"type": "glide", "to": "S05"}},
+  build="reuse the hall full: three seated bidders with paddles; the bid counter and the price board.",
+  blocking="Bidders seated on the bidder marks facing +z; auctioneer at the rostrum pointing.",
+  action="f640-750 32 bids, accelerating: each bid one paddle snaps up (3 f) and down, the counter flips +1 and the board steps up ($200,000 -> $576,000); the last paddle (bidder 2) at f744; f750 the board lands on $576,000 on 'nghìn'; the camera rises to the board f722-752.",
+  acting="Bidders: stern, then nervous as it climbs; bidder 2 grins on the last bid.",
+  cams=[k(562, [-0.85, 1.95, 3.3], [-0.85, 1.72, -2.6], 50, push=0.0015, blur=4, focus=[-0.88, 1.2, -0.9], why="the bidders under the boards"),
+        k(722, [-0.85, 2.45, 0.6], [-0.85, 2.7, -3.9], 34, glide=30, push=0.002, blur=6, focus=BOARD, why="the board lands on $576,000")],
+  kicks=[[750, 0.5]], marks=[{"who": "bidder", "at": b, "view": "front", "pose": "seated; paddle up per bid", "expr": "stern -> nervous"} for b in H["bidders"]],
+  subjects=[{"n": "board", "p": BOARD, "f": [562, 756]}] + [{"n": f"bidder{i+1} head", "p": [x, 1.3, z], "f": [562, 715]} for i, (x, z) in enumerate(H["bidders"])],
+  physics="paddles: 3 f snap up, 2 f hold, 4 f down.", light_mood="warm, full house.", sound="a rising pizzicato ostinato that speeds up with the bids; a paddle swish + a counter flap per bid; a ka-ching f750.",
+  after="The board reads $576,000.")
+
+scene(id="S05", f=[757, 933], set="hall", light="day",
+  vo="Nếu tiền về, đó là kỷ lục mới cho Gengar, vượt xa mức bốn trăm lẻ tám nghìn hồi tháng sáu.",
+  gloss="If the money arrives, that's a new record for Gengar, far above the four hundred and eight thousand of June.",
+  spine=2, viewer="The record pole: $408k (June); the new $576k marker hauled far above it, still a ghost.",
+  **{"in": {"type": "glide", "from": "S04"}, "out": {"type": "dissolve", "to": "S06", "n": 8, "note": "two weeks later"}},
+  build="new: the record pole with the old brass marker ($408,000 · 06/2026) and the new ghost marker ($576,000, purple see-through) on the pull cord.",
+  blocking="Clerk at clerk_pole beside the pole (on the stage), facing +z, both arms on the cord.",
+  action="f790-905 the clerk hauls the cord hand over hand (each pull 14 f): the ghost marker rises from y 1.0 past the old one at 'vượt xa' (f850) to its place, 67 cm above it, by f905; it wobbles once; he wipes his brow (looks up, satisfied).",
+  acting="Clerk: effort squint, then a proud smile.",
+  cams=[k(757, [1.1, 2.05, 0.4], [1.62, 2.05, -2.65], 46, glide=34, push=0.0015, blur=6, focus=MK_NEW, why="the record pole"),
+        k(880, [1.3, 2.2, -0.6], [1.68, 2.2, -2.65], 40, glide=30, push=0.002, blur=8, focus=MK_NEW, why="the two markers")],
+  kicks=[], marks=[{"who": "clerk", "at": H["clerk_pole"], "view": "front", "pose": "hauls the cord f790-905", "expr": "effort -> smile"}],
+  subjects=[{"n": "old marker", "p": MK_OLD, "f": [790, 932]}, {"n": "new marker", "p": MK_NEW, "f": [905, 932]}, {"n": "clerk head", "p": CLERK_POLE_HEAD, "f": [790, 870]}],
+  physics="marker: kinematic on the pole, eased per pull, a 1 cm overshoot at the top.", light_mood="warm.", sound="cord squeaks per pull; a pulley ratchet; a small 'whoa' brass rise f850.",
+  after="The ghost marker sits 67 cm above $408,000.")
+
+scene(id="S06", f=[933, 1106], set="hall", light="day",
+  vo="Hai tuần sau, một lá Latios Gold Star, cũng Pristine mười, bán năm trăm lẻ bốn nghìn.",
+  gloss="Two weeks later, a Latios Gold Star, also Pristine 10, sold for five hundred and four thousand.",
+  spine=3, viewer="Same stage, a new lot: the Latios hammers at $504,000.",
+  **{"in": {"type": "dissolve", "n": 8, "from": "S05"}, "out": {"type": "through-object", "to": "S07", "n": 8, "note": "push into the Latios slab, dissolve to the census wall"}},
+  build="reuse the S01 frame; the Latios slab (real EX Deoxys Latios Gold Star scan, gold PRISTINE 10 label) on the easel; a new SOLD tag in the holder.",
+  blocking="Auctioneer at the rostrum, gavel raised.",
+  action="f1062-1092 the board climbs $420,000 -> $504,000; f1084-1090 wind-up, f1094 slam (3 f before 'nghìn' f1097): board $504,000 + SOLD, the new tag drops and swings; f1096-1106 push into the slab.",
+  acting="Auctioneer grin, squeeze on the slam.",
+  cams=[k(933, WIDE["pos"], WIDE["look"], 46, push=0.0015, blur=4, focus=AUCT_HEAD, why="the same stage (locked frame)"),
+        k(1094, [-0.35, 1.42, -2.35], [-0.35, 1.42, -2.76], 22, glide=12, push=0.006, blur=10, focus=SLAB, why="into the Latios")],
+  kicks=[[1094, 0.9]], marks=[{"who": "auct", "at": H["auct"], "view": "front", "pose": "slam f1094", "expr": "grin -> squeeze"}],
+  subjects=[{"n": "board", "p": BOARD, "f": [933, 1094]}, {"n": "auctioneer head", "p": AUCT_HEAD, "f": [933, 1094]}, {"n": "slab", "p": SLAB, "f": [933, 1105]}],
+  physics="the tag as in S01.", light_mood="warm.", sound="gavel crack f1094; ka-ching f1097.", after="SOLD $504,000 tag on the Latios.")
+
+scene(id="S07", f=[1106, 1224], set="census", light="day",
+  vo="Trong hơn một trăm bảy mươi lá Latios như thế, nó là lá đẹp nhất.",
+  gloss="Of more than one hundred seventy Latios like that, it is the finest.",
+  spine=3, viewer="A wall of 170 identical slabs; one on the podium is the best.",
+  **{"in": {"type": "through-object", "n": 8, "from": "S06"}, "out": {"type": "cut", "to": "S08"}},
+  build="new: the census gallery: a wall of 170 Latios slabs, the podium with the auction copy, a spotlight.",
+  blocking="Nobody.",
+  action="f1106-1166 the camera trucks along the wall (the rows of slabs pass); f1168-1194 it pulls back to show the podium in front of the wall; f1204 the spotlight snaps on the podium slab on 'đẹp nhất' (f1208), the wall dims 30 %; a gleam crosses the slab f1208-1222.",
+  acting="none.",
+  cams=[k(1106, [-1.1, 1.52, -2.0], [-1.1, 1.52, -3.0], 38, push=0.0, blur=3, focus=[-1.1, 1.52, -2.97], why="slab after slab"),
+        k(1110, [0.9, 1.55, -2.0], [0.9, 1.55, -3.0], 38, glide=56, push=0.0, blur=3, focus=[0.9, 1.55, -2.97], why="truck along the wall"),
+        k(1166, [0.0, 1.45, 1.3], [0.0, 1.38, -1.6], 44, glide=28, push=0.001, blur=6, focus=CENSUS["slab"], why="the podium before the wall"),
+        k(1198, [0.0, 1.32, -0.12], [0.0, 1.23, -0.92], 32, glide=22, push=0.003, blur=12, focus=CENSUS["slab"], why="the best one")],
+  kicks=[], marks=[], subjects=[{"n": "podium slab", "p": CENSUS["slab"], "f": [1185, 1223]}, {"n": "wall", "p": CENSUS["wall"], "f": [1186, 1196]}],
+  physics="none.", light_mood="dark gallery; the spotlight on SPOT7.", sound="a soft whoosh per row passed; a spotlight 'clunk' f1204; a choir 'aah' f1208.",
+  after="Spotlight stays on.")
+
+scene(id="S08", hero=True, f=[1224, 1283], set="hall", light="day",
+  vo="Cả thị trường mở sâm panh.",
+  gloss="The whole market pops the champagne.",
+  spine=3, viewer="Everyone celebrates: four corks fly.",
+  **{"in": {"type": "cut", "from": "S07"}, "out": {"type": "hold", "to": "S09"}},
+  build="reuse the hall's champagne table: four collectors behind it, each with a bottle; a coupe tower.",
+  blocking="Collectors c1-c4 behind the table on their marks, facing +z, bottles raised at 45 deg in their right arms.",
+  action="Hard cut on 'Cả' (f1226); f1240-1250 thumbs-less push: the bottles tilt up; f1252 four corks pop together (1 f before 'mở' f1253): corks fly up and back (2-3 m), foam bursts from each neck (fxSplash) for 10 f; the corks hit the floor behind the table, bounce twice and stay; collectors laugh.",
+  acting="Collectors: grin -> laugh.",
+  cams=[k(1224, [2.55, 1.55, 5.2], [2.55, 1.38, 1.0], 50, cut=True, push=0.002, punch=[0.006, 10], blur=4, focus=COLL_HEAD[1], why="the champagne table")],
+  kicks=[[1252, 0.8]], marks=[{"who": f"c{i+1}", "at": H["coll"][i], "view": "front", "pose": "standing; bottle pop f1252", "expr": "grin -> laugh"} for i in range(4)],
+  subjects=[{"n": f"c{i+1} head", "p": COLL_HEAD[i], "f": [1224, 1282]} for i in range(4)],
+  physics="corks: 8 g, launched 4-5 m/s up and back from each neck, gravity, restitution 0.4 on the floor, friction 0.5; they rest and stay (seen in S09 and S14).",
+  light_mood="warm party light.", sound="four champagne pops f1252 + fizz; Kids Cheering (meme) f1254; the party theme.",
+  after="Four corks on the floor; foam on the table.")
+
+scene(id="S09", f=[1283, 1412], set="hall", light="day",
+  vo="Khoan đã, nếu người thắng chưa trả tiền, thì sâm panh này ai trả?",
+  gloss="Hold on, if the winner hasn't paid, then who pays for this champagne?",
+  spine=4, viewer="Freeze. The bill arrives. Everyone points at someone else.",
+  **{"in": {"type": "hold", "from": "S08"}, "out": {"type": "dissolve", "to": "S10", "n": 8, "note": "to the café, golden"}},
+  build="reuse the table; the waiter with a leather bill folder (HÓA ĐƠN · SÂM PANH x4).",
+  blocking="Waiter walks in from frame right (waiter_in) f1310-1336 to the waiter mark at the table's end.",
+  action="f1285 'Khoan đã': the music cuts; everyone freezes mid-laugh (the one stillness, 10 f); f1336-1356 the waiter slides the folder onto the table's right end (bill mark), opens it; f1360-1385 collectors' eyes go to the bill; f1391 'ai trả?' (f1393): all four point at another collector with their right arm (c1 -> c2, c2 -> c3, c3 -> c4, c4 -> c1).",
+  acting="Collectors: laugh -> frozen -> nervous; the waiter: polite smile.",
+  cams=[k(1283, [2.55, 1.55, 5.2], [2.55, 1.38, 1.0], 50, push=0.001, blur=4, focus=COLL_HEAD[1], why="the freeze"),
+        k(1330, [3.2, 1.72, 2.55], [3.42, 1.02, 1.42], 34, glide=30, push=0.002, blur=10, focus=H["bill"], why="the bill"),
+        k(1376, [2.55, 1.58, 4.9], [2.55, 1.4, 1.0], 50, glide=18, push=0.002, blur=4, focus=COLL_HEAD[1], why="everyone points")],
+  kicks=[], marks=[{"who": "waiter", "at": H["waiter"], "view": "front", "pose": "walks in, slides the bill f1336-1356", "expr": "smile"}],
+  subjects=[{"n": "bill", "p": H["bill"], "f": [1350, 1375]}] + [{"n": f"c{i+1} head", "p": COLL_HEAD[i], "f": [1395, 1411]} for i in range(4)],
+  physics="the folder: slides 30 cm, stops; opens on its spine.", light_mood="the party light stays; the music drops out.",
+  sound="music cut + record stop f1285; Huh (meme) f1287; a paper slide f1340; Suspicious Sound (meme) f1393.",
+  after="The bill lies open on the table; corks on the floor.")
+
+scene(id="S10", f=[1412, 1550], set="cafe", light="golden",
+  vo="Bạn thấy đấy, giá đấu giá giống câu \"mai tao trả\" của thằng bạn vay tiền.",
+  gloss="You see, an auction price is like 'I'll pay you tomorrow' from a friend who borrowed money.",
+  spine=5, viewer="A friend pockets borrowed cash and slides over a promise, a ghost note.",
+  **{"in": {"type": "dissolve", "n": 8, "from": "S09"}, "out": {"type": "hold", "to": "S11"}},
+  build="new: the café terrace, round table, two coffees; a fan of banknotes; the IOU note (ghost purple, see-through).",
+  blocking="Borrower seated at the borrower mark (screen left), lender at the lender mark; both face +z.",
+  action="f1412-1468 the borrower fans the cash and grins; f1470-1484 he tucks it into his hoodie; f1490-1508 his left arm slides the IOU 'MAI TAO TRẢ' across to the middle on 'mai tao trả' (f1495-1510): it is see-through purple and hovers 2 cm above the table, wobbling like a ghost; f1520-1550 push onto the note.",
+  acting="Borrower: big grin; lender: flat, unconvinced.",
+  cams=[k(1412, [0.0, 1.3, 2.7], [0.0, 1.0, -0.8], 46, push=0.0015, blur=4, focus=[0, 1.0, -0.8], why="two friends at the café"),
+        k(1500, [0.0, 1.75, 0.55], [0.0, 0.8, -0.65], 40, glide=30, push=0.002, blur=10, focus=CAFE["iou"], why="the ghost note")],
+  kicks=[], marks=[{"who": "borrower", "at": CAFE["borrower"], "view": "front", "pose": "seated; cash fan, tucks it, slides the IOU f1490-1508", "expr": "grin"},
+                   {"who": "lender", "at": CAFE["lender"], "view": "front", "pose": "seated", "expr": "stern"}],
+  subjects=[{"n": "borrower head", "p": [CAFE["borrower"][0], 1.25, CAFE["borrower"][1]], "f": [1412, 1495]}, {"n": "lender head", "p": [CAFE["lender"][0], 1.25, CAFE["lender"][1]], "f": [1412, 1495]}, {"n": "iou", "p": CAFE["iou"], "f": [1520, 1549]}],
+  physics="the note: kinematic slide, then a ghost hover (2 cm, 1 Hz bob).", light_mood="golden late afternoon, long warm light.",
+  sound="street ambience, a café clink; a calm guitar-like pluck theme; a paper slide f1490; a ghostly 'ooo' (soft) f1508.", after="The ghost note sits between them.")
+
+scene(id="S11", hero=True, f=[1550, 1728], set="cafe", light="golden",
+  vo="Nghe rất to, rất chắc, nhưng phải đến khi tiền thật sự chuyển đi, lời hứa mới thành giá thật.",
+  gloss="It sounds very loud, very sure, but only when the money actually moves does the promise become a real price.",
+  spine=5, viewer="Loud and sure means nothing; the money crosses the table and the promise turns real.",
+  **{"in": {"type": "hold", "from": "S10"}, "out": {"type": "dissolve", "to": "S12", "n": 8, "note": "to the writer at night"}},
+  build="new: a red megaphone (held), the cash envelope; the green ĐÃ TRẢ stamp.",
+  blocking="As S10.",
+  action="f1548-1553 he lifts the megaphone; f1555-1580 'rất to': he shouts into it: sound rings burst from the bell, the two cups hop 2 cm and rattle, the lender leans back; f1586-1590 'rất chắc': he slams the table with his right arm (contact f1590): cups hop again, the ghost note just wobbles (no weight); f1636-1668 'tiền thật sự chuyển đi': his left arm slides the fat cash envelope across the table to the lender's side (45 cm), it stops at her arm; f1675-1700 'lời hứa': the note settles flat onto the table and fills from see-through purple to solid white paper; f1707 the green stamp ĐÃ TRẢ thunks onto it on 'giá thật' (f1709); the lender smiles.",
+  acting="Borrower: loud grin -> earnest; lender: stern -> smile at the stamp.",
+  cams=[k(1550, [0.0, 1.32, 2.4], [0.0, 1.05, -0.8], 48, push=0.002, punch=[0.006, 10], blur=4, focus=[0, 1.05, -0.8], why="the megaphone, the thump"),
+        k(1628, [0.0, 1.9, 0.5], [0.0, 0.76, -0.68], 40, glide=22, push=0.002, blur=10, focus=[0, 0.76, -0.7], why="the envelope crosses the table"),
+        k(1680, [0.0, 1.42, -0.18], [0.0, 0.745, -0.6], 30, glide=22, push=0.003, blur=12, focus=CAFE["iou"], why="the promise turns real")],
+  kicks=[[1590, 0.7], [1707, 0.5]],
+  marks=[{"who": "borrower", "at": CAFE["borrower"], "view": "front", "pose": "megaphone f1553-1580, thump f1590, envelope f1636-1668", "expr": "grin -> earnest"},
+         {"who": "lender", "at": CAFE["lender"], "view": "front", "pose": "seated; leans back f1560; takes the envelope", "expr": "stern -> smile"}],
+  subjects=[{"n": "borrower head", "p": [CAFE["borrower"][0], 1.25, CAFE["borrower"][1]], "f": [1550, 1620]}, {"n": "envelope", "p": [0.15, 0.76, -0.78], "f": [1645, 1675]}, {"n": "iou", "p": CAFE["iou"], "f": [1700, 1727]}],
+  physics="cups: hop 2 cm (rattle) on each shout pulse and on the thump; the envelope: a kinematic slide with friction, stops dead.",
+  light_mood="golden.", sound="megaphone feedback + a distorted shout bed f1555-1580 (under the VO); a table thump f1590 with a cup rattle; an envelope slide f1640; a solid paper 'fwump' f1690; Kaching (meme) on the stamp f1707.",
+  after="The note is solid with ĐÃ TRẢ; the envelope is on her side.")
+
+scene(id="S12", f=[1728, 1957], set="desk", light="day", dim=0.72,
+  vo="Ngay trên sàn này, một trang tin vừa phát hiện hàng triệu đô kết quả Pokémon đã lặng lẽ biến khỏi lịch sử bán, vì không nhận được tiền.",
+  gloss="On this very platform, a news site just discovered millions of dollars of Pokémon results had quietly disappeared from the sales history, because the money never came.",
+  spine=6, viewer="A writer watches sale after sale ghost off the sales history; the missing total climbs into the millions.",
+  **{"in": {"type": "dissolve", "n": 8, "from": "S11"}, "out": {"type": "dissolve", "to": "S13", "n": 8, "note": "back to the hall"}},
+  build="new: the writer's desk at night (laptop, lamp, mug); the laptop page FANATICS COLLECT · LỊCH SỬ BÁN: 8 rows (real card thumbnails, price, date, ĐÃ BÁN), a counter 'ĐÃ BIẾN MẤT'.",
+  blocking="Writer seated at the writer mark facing +z, lit by the screen.",
+  action="f1728-1790 the writer leans in to the laptop; f1790-1818 into his POV; f1840-1945 'lặng lẽ biến khỏi lịch sử bán': rows 2, 5, 3, 7, 6 turn purple see-through and float up off the page one after another (every 16 f), each leaving a grey line KHÔNG NHẬN ĐƯỢC TIỀN on 'vì không nhận được tiền' (f1913); the counter at the bottom climbs $0 -> $3,4xx,xxx ('hàng triệu đô' f1804).",
+  acting="Writer: focused -> shock (f1810).",
+  cams=[k(1728, [0.12, 1.42, 1.9], [0.0, 1.08, -1.45], 40, push=0.0015, blur=6, focus=[0, 1.2, -1.5], why="the writer at night"),
+        k(1786, CAM_POV["pos"], CAM_POV["look"], 34, glide=36, push=0.0015, blur=8, focus=SCREEN, why="his laptop, from his eyes")],
+  kicks=[], marks=[{"who": "writer", "at": DESK["seller"], "view": "front", "pose": "seated at the desk", "expr": "neutral -> shock"}],
+  subjects=[{"n": "writer head", "p": [0, 1.42, -1.5], "f": [1728, 1780]}, {"n": "screen", "p": SCREEN, "f": [1818, 1956]}],
+  physics="none (screen content).", light_mood="night: the room dim, the screen glow.", sound="keyboard clicks; a soft 'whoosh' per ghosted row; Computer Error Sound (meme) on 'không nhận được tiền' f1913; a low drone.",
+  after="The page has five grey gaps.")
+
+scene(id="S13", f=[1957, 2048], set="hall", light="day",
+  vo="Fanatics nói làm vậy để thông tin thị trường được chính xác.",
+  gloss="Fanatics says it does this so the market information is accurate.",
+  spine=6, viewer="The spokesman blanks the price board: accurate.",
+  **{"in": {"type": "dissolve", "n": 8, "from": "S12"}, "out": {"type": "glide", "to": "S14"}},
+  build="reuse the rostrum and the price board; a big green button on the rostrum; a CHÍNH XÁC lamp under the board.",
+  blocking="Spokesman behind the rostrum (auct mark), facing +z.",
+  action="f1957-2020 the board shows $576,000 SOLD; the spokesman talks; f2026-2030 his right arm presses the button (contact f2030, 2 f before 'chính xác' f2032): the board clears to '—', the CHÍNH XÁC lamp lights green; he smiles.",
+  acting="Spokesman: practised smile.",
+  cams=[k(1957, [-1.05, 1.95, -0.25], [-1.08, 2.2, -3.5], 46, push=0.002, blur=6, focus=[-1.35, 1.85, -3.15], why="the spokesman under the board")],
+  kicks=[[2030, 0.4]], marks=[{"who": "spokes", "at": H["auct"], "view": "front", "pose": "talks; presses the button f2030", "expr": "smile"}],
+  subjects=[{"n": "spokes head", "p": AUCT_HEAD, "f": [1957, 2047]}, {"n": "board", "p": BOARD, "f": [1957, 2047]}],
+  physics="the button: 1 cm press.", light_mood="warm hall.", sound="a button clunk f2030, the board's clack and a clean 'ding' f2032.", after="The board is blank; CHÍNH XÁC lit.")
+
+scene(id="S14", f=[2048, 2326], set="hall", light="day",
+  vo="Nên bây giờ, mỗi khi thấy một con số khổng lồ, dân sưu tầm làm thêm một việc trước khi mở sâm panh: mở trang lịch sử bán, và tìm hai chữ, đã trả.",
+  gloss="So now, whenever they see a giant number, collectors do one more thing before popping the champagne: open the sales history page and look for two words: paid.",
+  spine=7, viewer="A collector sees a giant number, stops before popping, checks the sales history for ĐÃ TRẢ, then pops.",
+  **{"in": {"type": "glide", "from": "S13"}, "out": {"type": "cut", "to": "S15"}},
+  build="reuse the champagne table (the corks still on the floor, empty coupes); c1 (green hoodie) with a bottle and his phone (canvas: FANATICS COLLECT · LỊCH SỬ BÁN, a row with a green ĐÃ TRẢ badge).",
+  blocking="c1 behind the table at c1_late, facing +z.",
+  action="f2100 the price board (behind him, far) flips to $1,000,000 on 'con số khổng lồ' (f2107-2123); f2130-2150 he raises the bottle to pop; f2183-2200 'trước khi mở sâm panh' he stops and sets it on the table; f2206-2220 his left arm brings up his phone; f2222-2296 his POV: the sales history page, he scrolls to the $1,000,000 row and finds the green ĐÃ TRẢ badge stamping on at f2294 ('đã trả'); f2298-2310 back out; f2312 he pops the cork (contact f2312): it flies, foam, it lands by the old corks.",
+  acting="c1: excited -> thoughtful -> grin.",
+  cams=[k(2048, [2.9, 1.55, 4.7], [1.0, 2.0, -1.2], 50, glide=40, push=0.0015, blur=4, focus=[2.0, 1.55, 0.75], why="him and the big board"),
+        k(2134, [2.18, 1.5, 2.65], [2.0, 1.42, 0.75], 40, glide=24, push=0.002, blur=8, focus=[2.0, 1.55, 0.75], why="the bottle held"),
+        k(2210, [2.0, 1.6, 0.84], PHONE, 30, glide=20, push=0.001, blur=6, focus=PHONE, why="his phone, from his eyes"),
+        k(2298, [2.2, 1.55, 3.1], [2.0, 1.55, 0.75], 42, glide=12, push=0.002, blur=6, focus=[2.0, 1.55, 0.75], why="the pop")],
+  kicks=[[2312, 0.6]], marks=[{"who": "c1", "at": H["c1_late"], "view": "front", "pose": "bottle up f2130, down f2190, phone f2206, pop f2312", "expr": "grin -> neutral -> grin"}],
+  subjects=[{"n": "c1 head", "p": [2.0, 1.55, 0.75], "f": [2134, 2205]}, {"n": "board", "p": BOARD, "f": [2090, 2130]}, {"n": "phone", "p": PHONE, "f": [2226, 2294]}],
+  physics="the cork as in S08.", light_mood="warm, the party over.", sound="a ka-ching f2104 (the giant number); a hesitant pluck f2186; phone taps; Mobile Payment (meme) on ĐÃ TRẢ f2294; a pop + fizz f2312.",
+  after="Five corks on the floor.")
+
+scene(id="S15", f=[2326, 2420], set="hall", light="day", dim=0.6,
+  vo="Còn Gengar, vẫn đang cười.",
+  gloss="And Gengar is still grinning.",
+  spine=7, viewer="The Gengar slab alone at night, its printed grin; the ghost tag drifts by.",
+  **{"in": {"type": "cut", "from": "S14"}, "out": {"type": "end"}},
+  build="reuse the plinth: the Gengar slab back on the easel (it came back unpaid), the empty tag string; a spotlight; the ghost tag.",
+  blocking="Nobody.",
+  action="f2326-2420 slow push into the card's art (Gengar's grin); f2340-2405 the ghost tag drifts across behind the slab from left to right, fading; end on the grin.",
+  acting="none (the card's own grin).",
+  cams=[k(2326, [-0.32, 1.47, -1.95], [-0.35, 1.44, -2.76], 30, cut=True, push=0.004, blur=12, focus=SLAB, why="Gengar, still grinning")],
+  kicks=[], marks=[], subjects=[{"n": "slab", "p": SLAB, "f": [2326, 2419]}],
+  physics="the ghost: no gravity, sine drift.", light_mood="night: the hall dark, one spotlight on the plinth.", sound="Hehe Boiiiiiii (meme, soft) f2384; the theme's last note.",
+  after="End on the grin.")
+
+out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "plan.json")
+json.dump(P, open(out, "w"), ensure_ascii=False, indent=1)
+print("wrote", out, len(S), "scenes")

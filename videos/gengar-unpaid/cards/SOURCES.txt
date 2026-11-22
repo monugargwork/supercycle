@@ -1,0 +1,11 @@
+Real card scans for the Gengar reel (from library/cards, see CATALOG.md).
+lc_gengar.png     Legendary Collection Gengar 11 (holo; the sold copy is the reverse holo)https://images.pokemontcg.io/base6/11_hires.png
+dx_latios_star.pngEX Deoxys Latios ★ (Gold Star) 106                https://images.pokemontcg.io/ex8/106_hires.png
+zard_base.png     Base Set Charizard 4                              https://images.pokemontcg.io/base1/4_hires.png
+ds_metagross_star.pngEX Delta Species Metagross ★ (Gold Star)          https://images.pokemontcg.io/ex11/113_hires.png
+sky_h3.png        Skyridge Holo H3                                  https://images.pokemontcg.io/ecard3/H3.png
+mewtwo.png        Base Set Mewtwo 10                                https://images.pokemontcg.io/base1/10_hires.png
+zard_lc.png       Legendary Collection Charizard 3                  https://images.pokemontcg.io/base6/3_hires.png
+ds_rayquaza.png   EX Delta Species Rayquaza δ (holo)                https://images.pokemontcg.io/ex11/13_hires.png
+pikachu.png       Base Set Pikachu 58                               https://images.pokemontcg.io/base1/58.png
+blastoise.png     Base Set Blastoise 2                              https://images.pokemontcg.io/base1/2_hires.png
