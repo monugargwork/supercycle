@@ -1,1 +1,6 @@
 Real card scans for the Jirachi reel (from library/cards, see CATALOG.md).
+jirachi_sir.png   2026 30th Celebration Jirachi ex Special Illustration Rare (Akira Egawa) 155/128https://den-cards.pokellector.com/434/Jirachi-ex.30C.155.62175.png
+c30_vulpix.png    2026 30th Celebration Vulpix 9                    https://den-cards.pokellector.com/434/Vulpix.30C.9.62050.png
+c30_tropius.png   2026 30th Celebration Tropius 5                   https://den-cards.pokellector.com/434/Tropius.30C.5.62046.png
+c30_cherubi.png   2026 30th Celebration Cherubi 6                   https://den-cards.pokellector.com/434/Cherubi.30C.6.62047.png
+c30_volbeat.png   2026 30th Celebration Volbeat 3                   https://den-cards.pokellector.com/434/Volbeat.30C.3.62044.png
