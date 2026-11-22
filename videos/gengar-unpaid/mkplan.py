@@ -12,7 +12,7 @@ def k(f, pos, look, fov, glide=None, cut=False, push=0.002, punch=None, blur=6, 
 # ---------------- layout (set-local metres; the build reads these) ----------------
 SY = 0.3   # stage top
 HALL = dict(room=[-4.2, 4.2, -4.0, 5.5], h=4.2, stage=[-3.2, 3.2, -4.0, -2.0], stage_y=SY,
-            rostrum=[-1.7, -1.0, -2.9, -2.5], rostrum_y=1.4, auct=[-1.35, -3.15], block=[-1.35, 1.42, -2.7],
+            rostrum=[-1.7, -1.0, -2.9, -2.5], rostrum_y=1.4, auct=[-1.35, -3.05], block=[-1.35, 1.42, -2.8],
             plinth=[-0.6, -0.1, -3.0, -2.5], plinth_y=1.22, slab=[-0.35, 1.40, -2.76], slab_size=[0.135, 0.215], slab_tilt=0.2,
             tag_top=[-0.07, 1.64, -2.74], tag_len=0.13, tag_size=[0.16, 0.09],
             board=[-0.85, 2.85, -3.94], board_size=[1.7, 0.645], bids=[0.75, 2.8, -3.94], bids_size=[0.7, 0.45],
@@ -318,7 +318,7 @@ scene(id="S13", f=[1957, 2048], set="hall", light="day",
   blocking="Spokesman behind the rostrum (auct mark), facing +z.",
   action="f1957-2020 the board shows $576,000 SOLD; the spokesman talks; f2026-2030 his right arm presses the button (contact f2030, 2 f before 'chính xác' f2032): the board clears to '—', the CHÍNH XÁC lamp lights green; he smiles.",
   acting="Spokesman: practised smile.",
-  cams=[k(1957, [-1.05, 1.95, -0.25], [-1.08, 2.2, -3.5], 46, push=0.002, blur=6, focus=[-1.35, 1.85, -3.15], why="the spokesman under the board")],
+  cams=[k(1957, [-1.05, 1.95, -0.25], [-1.08, 2.2, -3.5], 46, push=0.002, blur=6, focus=[-1.35, 1.85, -3.05], why="the spokesman under the board")],
   kicks=[[2030, 0.4]], marks=[{"who": "spokes", "at": H["auct"], "view": "front", "pose": "talks; presses the button f2030", "expr": "smile"}],
   subjects=[{"n": "spokes head", "p": AUCT_HEAD, "f": [1957, 2047]}, {"n": "board", "p": BOARD, "f": [1957, 2047]}],
   physics="the button: 1 cm press.", light_mood="warm hall.", sound="a button clunk f2030, the board's clack and a clean 'ding' f2032.", after="The board is blank; CHÍNH XÁC lit.")
