@@ -33,7 +33,7 @@ One hard cut (into S09, "Khoan đã"). Dissolves for every change of place/time:
 | room | new: bedroom shell x -2.4..2.4, z -2.4..2.4, 2.6 m, grey-blue walls, wood floor, ceiling (no shadows), window with blinds in the -x wall | [0, 1.3, 0] | [4.8, 2.6, 4.8] |
 | desk | new: black desk top y 0.76 on two leg panels, x -1.0..1.2, z -2.35..-1.6 | [0.1, 0.38, -1.975] | [2.2, 0.76, 0.75] |
 | stand | new: small black photo easel (two legs, ledge) holding the Jirachi in a clear top loader (7.6 x 10.2 cm, card 6.3 x 8.8) | [-0.55, 0.76, -1.8] | [0.1, 0.12, 0.06] |
-| ring | new: ring light (white torus r 0.15, emissive) on a thin stand, aimed at the card | [-0.25, 1.06, -2.15] | [0.3, 0.3, 0.03] |
+| ring | new: ring light (white torus r 0.15, emissive) on a thin stand, aimed at the card | [-0.9, 1.06, -2.1] | [0.3, 0.3, 0.03] |
 | monitor | new: monitor 64 x 38 cm screen (canvas: the listing page), black bezel, stand on the desk, turned 13 deg toward the seller | [0.35, 1.08, -2.2] | [0.68, 0.42, 0.04] |
 | keyboard | new: keyboard 42 x 14 cm, mouse | [0.35, 0.77, -1.92] | [0.42, 0.02, 0.14] |
 | bundles | new: 10 stacks of 2 cash bundles (each 16 x 7 x 2.2 cm, green notes, paper band) = 20 x $1,000 | [0.34, 0.8, -1.715] | [0.84, 0.045, 0.17] |
@@ -58,7 +58,7 @@ One hard cut (into S09, "Khoan đã"). Dissolves for every change of place/time:
 ### home
 - Origin in the shared world: [80, 0, 0]. Axes: the table in the middle; the parents sit behind it facing +z; window on the back wall behind the father.
 - Light: golden; sun az/el [30, 25]. Open camera sides: +z.
-- Marks [x, z]: mum [-0.35, -1.62]; dad [0.35, -1.66]; dad_win [0.35, -2.05].
+- Marks [x, z]: mum [-0.25, -1.62]; dad [0.25, -1.66]; dad_win [0.35, -2.15].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
@@ -66,7 +66,7 @@ One hard cut (into S09, "Khoan đã"). Dissolves for every change of place/time:
 | table | new: wooden table 130 x 80 cm, top y 0.75; four chairs; a memorial candle in a glass | [0, 0.375, -1] | [1.3, 0.75, 0.8] |
 | chair_av | new: Avery's chair at the right end, his blue beanie folded on the seat | [0.95, 0.45, -1] | [0.42, 0.9, 0.42] |
 | shelf | new: wall shelf 80 cm: framed photo of Avery grinning with a card (drawn), his red binder, his phone mini tripod | [-1.45, 1.22, -2.33] | [0.8, 0.3, 0.25] |
-| phone | new: mum's phone 7.5 x 15.5 cm (canvas screen: a plain post), seen only from her side | [-0.35, 0.95, -1.3] | [0.075, 0.155, 0.01] |
+| phone | new: mum's phone 7.5 x 15.5 cm (canvas screen: a plain post), seen only from her side | [-0.25, 0.95, -1.3] | [0.075, 0.155, 0.01] |
 
 ### studio
 - Origin in the shared world: [120, 0, 0]. Axes: the drawing table faces +z under the back-wall window; the artist stands at its left.
@@ -102,9 +102,9 @@ One hard cut (into S09, "Khoan đã"). Dissolves for every change of place/time:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 0 | open | [-1.35, 1.3, -0.15] | [-0.32, 1, -1.7] | 44 | 0.2 | 6 | the slap: card and seller |
+| 0 | open | [-1.75, 1.4, 0.3] | [-0.35, 1, -1.7] | 38 | 0.2 | 6 | the slap: card and seller |
 | 60 | glide 40 f | [0.16, 1.18, -1.25] | [0.35, 1.07, -2.2] | 36 | 0.15 | 8 | to the listing as the price counts |
-| 150 | glide 46 f | [0.28, 1.1, -1.72] | [0.33, 1.1, -2.18] | 30 | 0.4 | 8 | push on the name being typed |
+| 150 | glide 46 f | [0.3, 1.16, -1.62] | [0.39, 1.15, -2.18] | 30 | 0.4 | 8 | push on the name being typed |
 
 - Kicks (7 f): f29 strength 0.8.
 - Physics & FX: Slap: the top loader drops 3 cm onto the ledge in 2 f and stops dead. Ring light: rocks 3 deg, damped spring 20 f. Two wrappers (paper, 4 g): flutter down 0.76 m in about 28 f with side drift, rest flat on the floor and stay.
@@ -126,8 +126,8 @@ One hard cut (into S09, "Khoan đã"). Dissolves for every change of place/time:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 206 | open | [0.4, 1.12, 1.25] | [0.1, 0.95, -1.4] | 40 | 0.15 | 6 | the boy in his room |
-| 250 | glide 70 f | [0.12, 1.02, 0.25] | [0, 0.98, -1.32] | 34 | 0.2 | 10 | closer for his name |
+| 206 | open | [0.35, 1.3, 2.1] | [0.05, 1, -1.4] | 40 | 0.15 | 6 | the boy in his room |
+| 250 | glide 70 f | [0.25, 1.2, 1.3] | [0, 1.06, -1.32] | 36 | 0.2 | 10 | closer for his name |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -149,7 +149,7 @@ One hard cut (into S09, "Khoan đã"). Dissolves for every change of place/time:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 384 | open | [0.5, 1.35, 1.9] | [0.4, 0.95, -1.6] | 46 | 0.08 | 3 | locked frame: same room, months pass |
+| 384 | open | [0.45, 1.45, 2.3] | [0.3, 1, -1.6] | 46 | 0.08 | 3 | locked frame: same room, months pass |
 
 - Kicks (7 f): none.
 - Physics & FX: wrappers: thrown arcs into the bin, they stay there.
@@ -171,9 +171,9 @@ One hard cut (into S09, "Khoan đã"). Dissolves for every change of place/time:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 493 | open | [0.3, 1.05, -0.25] | [0.02, 1, -1.3] | 34 | 0.2 | 10 | close, from beside his phone |
-| 566 | glide 20 f | [0.25, 1.04, -0.55] | [0.02, 1.02, -1.3] | 30 | 0.2 (punch 0.6 for 20 f) | 12 | push on the pull |
-| 600 | glide 24 f | [0.28, 1.06, -0.62] | [0.03, 1.1, -1.28] | 30 | 0.15 | 12 | the card held up to the phone |
+| 493 | open | [0.4, 1.15, 1.55] | [0.02, 0.96, -1.3] | 34 | 0.2 | 10 | close, from beside his phone |
+| 566 | glide 20 f | [0.36, 1.12, 1.2] | [0.02, 0.97, -1.3] | 32 | 0.2 (punch 0.6 for 20 f) | 12 | push on the pull |
+| 600 | glide 24 f | [0.34, 1.12, 1.05] | [0.03, 1, -1.28] | 32 | 0.15 | 12 | the card held up to the phone |
 
 - Kicks (7 f): none.
 - Physics & FX: tear strip: flies 20 cm, lands on the blanket and stays; empty wrapper dropped on the blanket f566 and stays.
@@ -194,7 +194,7 @@ One hard cut (into S09, "Khoan đã"). Dissolves for every change of place/time:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 657 | open | [0.5, 1.35, 1.9] | [0.4, 0.95, -1.6] | 46 | 0.06 | 3 | same frame, empty |
+| 657 | open | [0.45, 1.45, 2.3] | [0.3, 1, -1.6] | 46 | 0.06 | 3 | same frame, empty |
 | 700 | glide 64 f | [0.95, 1.2, -0.2] | [1.25, 0.92, -2.1] | 38 | 0.12 | 8 | to his card on the cabinet |
 
 - Kicks (7 f): none.
@@ -281,8 +281,8 @@ One hard cut (into S09, "Khoan đã"). Dissolves for every change of place/time:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1170 | open | [-1.4, 1.05, -0.45] | [-0.25, 0.95, -1.95] | 34 | 0.18 | 14 | the card |
-| 1262 | glide 20 f | [-1.4, 1.05, -0.45] | [-0.25, 0.95, -1.95] | 34 | 0.18 | 14 | rack focus to the name |
+| 1170 | open | [-1.35, 0.85, -1.3] | [-0.25, 0.94, -1.95] | 30 | 0.18 | 14 | the card |
+| 1262 | glide 20 f | [-1.35, 0.85, -1.3] | [-0.25, 0.94, -1.95] | 30 | 0.18 | 14 | rack focus to the name |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -297,15 +297,15 @@ One hard cut (into S09, "Khoan đã"). Dissolves for every change of place/time:
 - Set: home. Light: golden.
 - Build: new: the family room: table, candle, Avery's empty chair with his beanie, shelf, window with curtains.
 - Blocking: Mum seated at her mark holding her phone; dad seated at his mark, his left arm resting on her shoulder.
-  - mum at [-0.35, -1.62], front; seated, phone in both hands; pained.
-  - dad at [0.35, -1.66], front; seated, arm on her shoulder; pained.
+  - mum at [-0.25, -1.62], front; seated, phone in both hands; pained.
+  - dad at [0.25, -1.66], front; seated, arm on her shoulder; pained.
 - Action, against the words: f1320-1386 mum types; slow push in on the two of them.
 - Acting: Both sad (pained), quiet.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1312 | open | [0.2, 1.45, 1.7] | [0.15, 1.15, -1.5] | 42 | 0.25 | 5 | the family room |
+| 1312 | open | [0.15, 1.5, 2.2] | [0.1, 1.05, -1.5] | 42 | 0.25 | 5 | the family room |
 
 - Kicks (7 f): none.
 - Physics & FX: none; the candle flame flickers.
@@ -326,7 +326,7 @@ One hard cut (into S09, "Khoan đã"). Dissolves for every change of place/time:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1386 | open | [-0.35, 1.29, -1.62] | [-0.35, 0.95, -1.3] | 30 | 0.15 | 6 | her screen, from her eyes |
+| 1386 | open | [-0.25, 1.29, -1.62] | [-0.25, 0.925, -1.3] | 30 | 0.15 | 6 | her screen, from her eyes |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -348,7 +348,7 @@ One hard cut (into S09, "Khoan đã"). Dissolves for every change of place/time:
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 1610 | open | [-0.75, 1.38, -0.5] | [-1.5, 1.3, -2.3] | 38 | 0.15 | 8 | his shelf |
-| 1650 | glide 60 f | [-1.05, 1.36, -1.25] | [-1.62, 1.36, -2.3] | 32 | 0.2 | 10 | to his photo |
+| 1650 | glide 60 f | [-1.4, 1.37, -1.55] | [-1.62, 1.35, -2.33] | 26 | 0.2 | 10 | to his photo |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -363,15 +363,15 @@ One hard cut (into S09, "Khoan đã"). Dissolves for every change of place/time:
 - Set: home. Light: golden.
 - Build: reuse the family room; the curtains slide shut; the candle's glow grows as the room dims.
 - Blocking: Dad stands (f1728-1738), steps back to the window (dad_win, f1738-1752), turns front, draws both curtains closed (f1758-1790). Mum lays the phone face down on the table on 'yên' (f1796).
-  - dad at [0.35, -2.05], front; stands, steps back, draws the curtains; pained.
-  - mum at [-0.35, -1.62], front; lays the phone face down f1796; pained.
+  - dad at [0.35, -2.15], front; stands, steps back, draws the curtains; pained.
+  - mum at [-0.25, -1.62], front; lays the phone face down f1796; pained.
 - Action, against the words: as blocking; the room light drops to 55 % as the curtains close; the candle glow is the brightest thing.
 - Acting: Quiet, slow; dad's eyes down.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1720 | open | [0.15, 1.5, 1.2] | [0.05, 1.2, -1.7] | 46 | 0.15 | 5 | the family, the window |
+| 1720 | open | [0.15, 1.55, 2.2] | [0.1, 1.2, -1.8] | 46 | 0.15 | 5 | the family, the window |
 
 - Kicks (7 f): none.
 - Physics & FX: curtains: slide with ease-in-out, sway 2 cm and settle.
@@ -394,7 +394,7 @@ One hard cut (into S09, "Khoan đã"). Dissolves for every change of place/time:
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 1810 | open | [0.16, 1.18, -1.25] | [0.35, 1.07, -2.2] | 38 | 0.2 | 8 | the listings end |
-| 1846 | glide 40 f | [0.45, 1.25, -0.45] | [-0.12, 1.22, -1.45] | 36 | 0.2 | 10 | the seller |
+| 1846 | glide 40 f | [0.6, 1.3, 0.15] | [-0.12, 1.2, -1.45] | 36 | 0.2 | 10 | the seller |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -416,8 +416,8 @@ One hard cut (into S09, "Khoan đã"). Dissolves for every change of place/time:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1888 | open | [0.95, 1.45, 0.6] | [-0.2, 1.25, -1.4] | 40 | 0.15 | 6 | the artist and the painting |
-| 2030 | glide 28 f | [0.15, 1.45, 0.05] | [-0.06, 1.42, -1.05] | 34 | 0.2 | 8 | the painting in the light |
+| 1888 | open | [1.2, 1.55, 1.3] | [-0.2, 1.3, -1.4] | 42 | 0.15 | 6 | the artist and the painting |
+| 2030 | glide 28 f | [0.3, 1.45, 0.6] | [-0.1, 1.38, -1.05] | 34 | 0.2 | 8 | the painting in the light |
 | 2062 | glide 24 f | [-0.05, 1.43, -0.5] | [-0.05, 1.42, -1.05] | 26 | 0.6 | 6 | push into the art |
 
 - Kicks (7 f): none.
@@ -439,7 +439,7 @@ One hard cut (into S09, "Khoan đã"). Dissolves for every change of place/time:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 2087 | open | [0.3, 1.1, -1.72] | [0.33, 1.08, -2.2] | 30 | 0.3 | 8 | the price |
+| 2087 | open | [0.16, 1.18, -1.25] | [0.35, 1.07, -2.2] | 36 | 0.3 | 8 | the price |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -461,8 +461,8 @@ One hard cut (into S09, "Khoan đã"). Dissolves for every change of place/time:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 2145 | open | [0.3, 1, -0.58] | [0, 1, -1.32] | 32 | 0.18 | 10 | from his phone's spot |
-| 2205 | glide 30 f | [0.28, 1.02, -0.66] | [0.02, 1.07, -1.3] | 30 | 0.12 | 12 | his joy, the card |
+| 2145 | open | [0.4, 1.15, 1.5] | [0, 0.96, -1.32] | 34 | 0.18 | 10 | from his phone's spot |
+| 2205 | glide 30 f | [0.34, 1.12, 1.1] | [0.02, 1, -1.3] | 32 | 0.12 | 12 | his joy, the card |
 
 - Kicks (7 f): none.
 - Physics & FX: tear strip lands on the blanket.

@@ -11,26 +11,26 @@ def k(f, pos, look, fov, glide=None, cut=False, push=0.002, punch=None, blur=6, 
 
 # ---------------- layout (set-local metres; the build reads these) ----------------
 DESK_Y = 0.76
-ROOM = dict(desk=[-1.0, 1.2, -2.35, -1.6], seller=[-0.15, -1.45], stand=[-0.55, DESK_Y, -1.8], card=[-0.55, 0.835, -1.8],
-            ring=[-0.25, 1.06, -2.15], monitor=[0.35, 1.08, -2.2], screen=[0.64, 0.38], mon_yaw=-0.22, keyboard=[0.35, 0.77, -1.92],
+ROOM = dict(desk=[-1.0, 1.2, -2.35, -1.6], seller=[-0.15, -1.45], stand=[-0.55, DESK_Y, -1.8], card=[-0.55, 0.85, -1.8],
+            ring=[-0.9, 1.06, -2.1], monitor=[0.35, 1.08, -2.2], screen=[0.64, 0.38], mon_yaw=-0.22, keyboard=[0.35, 0.77, -1.92],
             box=[1.0, DESK_Y, -1.78], box_size=[0.26, 0.2, 0.18],
             bundles=[[0.0 + 0.17 * c, -1.765 + 0.1 * r] for r in range(2) for c in range(5)], bundle=[0.16, 0.07, 0.022], stack=2,
             keeper=4)                                    # the stack that ends in the box (col 4, row 0)
 MON = ROOM["monitor"]
-TITLE_PT = [MON[0] - 0.02, MON[1] + 0.02, MON[2] + 0.02]      # the listing title line on the screen
-PRICE_PT = [MON[0] + 0.12, MON[1] - 0.04, MON[2] + 0.02]
+TITLE_PT = [MON[0] + 0.07, MON[1] + 0.09, MON[2] + 0.02]      # the listing title line on the screen
+PRICE_PT = [MON[0] - 0.075, MON[1] - 0.03, MON[2] + 0.02]
 WARD = dict(bed=[-1.0, 1.0, -2.4, -1.45], mattress=0.55, avery=[0.0, -1.32], chair=1.05, stool=[0.35, -0.45], phone=[0.35, 0.86, -0.45],
             iv=[-1.3, -1.7], cabinet=[1.35, -2.1], cab_top=0.62, card_cab=[1.3, 0.62, -2.08], calendar=[1.15, 1.55, -2.47],
             bin=[0.62, -1.05], window=[2.5, -0.8])
-HOME = dict(table=[0.0, -1.0], table_size=[1.3, 0.8], table_y=0.75, mum=[-0.35, -1.62], dad=[0.35, -1.66], dad_win=[0.35, -2.05],
+HOME = dict(table=[0.0, -1.0], table_size=[1.3, 0.8], table_y=0.75, mum=[-0.25, -1.62], dad=[0.25, -1.66], dad_win=[0.35, -2.15],
             chair_av=[0.95, -1.0], candle=[0.6, 0.75, -0.85], window=[0.35, 1.55, -2.45], window_w=1.0, shelf=[-1.45, 1.22, -2.33],
-            phone=[-0.35, 0.95, -1.3])
+            phone=[-0.25, 0.95, -1.3])
 STUDIO = dict(board=[0.0, 1.1, -1.5], board_size=[0.7, 0.5], tilt=0.55, painting=[0.0, 1.11, -1.49], artist=[-0.36, -1.18],
               window=[0.7, 1.5, -2.45], pinboard=[-1.3, 1.5, -2.45], lifted=[-0.05, 1.42, -1.05])
 CAM_SCREEN = dict(pos=[0.16, 1.18, -1.25], look=[0.35, 1.07, -2.2])      # behind the seller's right shoulder: the screen seen from his side
 CAM_DESK_HI = dict(pos=[2.1, 1.6, -1.25], look=[0.5, 0.85, -1.75])     # the locked frame on the bundles (S07)
-CAM_WARD = dict(pos=[0.5, 1.35, 1.9], look=[0.4, 0.95, -1.6])             # the locked hospital-room frame (S03, S05)
-CAM_HOME = dict(pos=[0.2, 1.45, 1.7], look=[0.15, 1.15, -1.5])
+CAM_WARD = dict(pos=[0.45, 1.45, 2.3], look=[0.3, 1.0, -1.6])             # the locked hospital-room frame (S03, S05)
+CAM_HOME = dict(pos=[0.15, 1.5, 2.2], look=[0.1, 1.05, -1.5])
 
 P = {
  "fps": 30, "frames": 2250, "voice_end": 2221,
@@ -97,8 +97,8 @@ P = {
 S = P["scenes"]
 def scene(**kw): S.append(kw)
 R0, W0, H0, A0 = ROOM, WARD, HOME, STUDIO
-SELLER_HEAD = [R0["seller"][0], 1.35, R0["seller"][1]]
-AVERY_HEAD = [W0["avery"][0], 1.18, W0["avery"][1]]
+SELLER_HEAD = [R0["seller"][0], 1.6, R0["seller"][1]]
+AVERY_HEAD = [W0["avery"][0], 1.42, W0["avery"][1]]
 CARD = R0["card"]
 
 scene(id="S01", hero=True, f=[0, 206], set="room", light="golden",
@@ -110,9 +110,9 @@ scene(id="S01", hero=True, f=[0, 206], set="room", light="golden",
   blocking="Seller seated on a stool at his mark facing +z, the top-loaded Jirachi raised in his right hand (screen left) from f0.",
   action="f0-24 hand up with the card (wind-up, held f20-28); f29 slap: the top loader lands on the easel ledge 1 f before 'rao' (f31); the ring light rocks 3 deg on its stand (damped, 20 f); two torn wrappers on the desk edge flutter off and settle on the floor by f60. f60-100 glide to the monitor; f91-113 the price field counts $0 -> $20,000 on 'hai mươi nghìn đô la'; f134-199 the title types JIRACHI SIR · AVERY THE POKE KID letter by letter, the name landing on 'tên một cậu bé' (f155-172).",
   acting="Seller smug grin on the slap; satisfied while typing (seen only through the screen).",
-  cams=[k(0, [-1.35, 1.3, -0.15], [-0.32, 1.0, -1.7], 44, push=0.002, blur=6, focus=CARD, why="the slap: card and seller"),
+  cams=[k(0, [-1.75, 1.4, 0.3], [-0.35, 1.0, -1.7], 38, push=0.002, blur=6, focus=CARD, why="the slap: card and seller"),
         k(60, CAM_SCREEN["pos"], CAM_SCREEN["look"], 36, glide=40, push=0.0015, blur=8, focus=PRICE_PT, why="to the listing as the price counts"),
-        k(150, [0.28, 1.1, -1.72], [TITLE_PT[0], TITLE_PT[1], TITLE_PT[2]], 30, glide=46, push=0.004, blur=8, focus=TITLE_PT, why="push on the name being typed")],
+        k(150, [0.3, 1.16, -1.62], [TITLE_PT[0] - 0.03, TITLE_PT[1] - 0.02, TITLE_PT[2]], 30, glide=46, push=0.004, blur=8, focus=TITLE_PT, why="push on the name being typed")],
   kicks=[[29, 0.8]], marks=[{"who": "seller", "at": R0["seller"], "view": "front", "pose": "seated, right arm slaps the card onto the easel f29", "expr": "grin"}],
   subjects=[{"n": "seller head", "p": SELLER_HEAD, "f": [0, 40]}, {"n": "card", "p": CARD, "f": [0, 40]},
             {"n": "price", "p": PRICE_PT, "f": [95, 140]}, {"n": "title", "p": TITLE_PT, "f": [170, 205]}],
@@ -130,8 +130,8 @@ scene(id="S02", f=[206, 384], set="ward", light="day",
   blocking="Avery sits on the bed's front edge at his mark facing his phone (+z). A stack of three packs beside him on the blanket.",
   action="f212-240 he waves to his phone camera (wave cycle, 2 waves); f250 he picks up a pack and shows it to the phone (held at chest, f262-370).",
   acting="Big open smile; a blink on each change.",
-  cams=[k(206, [0.4, 1.12, 1.25], [0.1, 0.95, -1.4], 40, push=0.0015, blur=6, focus=AVERY_HEAD, why="the boy in his room"),
-        k(250, [0.12, 1.02, 0.25], [0.0, 0.98, -1.32], 34, glide=70, push=0.002, blur=10, focus=AVERY_HEAD, why="closer for his name")],
+  cams=[k(206, [0.35, 1.3, 2.1], [0.05, 1.0, -1.4], 40, push=0.0015, blur=6, focus=AVERY_HEAD, why="the boy in his room"),
+        k(250, [0.25, 1.2, 1.3], [0.0, 1.06, -1.32], 36, glide=70, push=0.002, blur=10, focus=AVERY_HEAD, why="closer for his name")],
   kicks=[], marks=[{"who": "avery", "at": W0["avery"], "view": "front", "pose": "seated on the bed edge; waves f212-240, holds up a pack f262-370", "expr": "smile_closed -> grin"}],
   subjects=[{"n": "avery head", "p": AVERY_HEAD, "f": [206, 383]}],
   physics="none.", light_mood="soft day light from the window (+x), cool white ceiling panels.",
@@ -162,11 +162,11 @@ scene(id="S04", hero=True, f=[493, 657], set="ward", light="day",
   blocking="Avery at his mark, the pack in both hands at chest height.",
   action="f530-546 he pinches the top; f548 tear on 'bóc': the strip flies off and lands on the blanket; f552-566 he slides the cards out and flips through the commons (one every 4 f); f569-575 the Jirachi comes up on 'Jirachi' (f571): a holo gleam sweeps it f578-592; f575-595 his jaw drops (gape 0.7) then a huge grin; f600-620 he raises it toward his phone and holds it there.",
   acting="Concentration, then disbelief, then pure joy.",
-  cams=[k(493, [0.3, 1.05, -0.25], [0.02, 1.0, -1.3], 34, glide=40, push=0.002, blur=10, focus=AVERY_HEAD, why="close, from beside his phone"),
-        k(566, [0.25, 1.04, -0.55], [0.02, 1.02, -1.3], 30, glide=20, push=0.002, punch=[0.006, 20], blur=12, focus=[0.02, 1.0, -1.25], why="push on the pull"),
-        k(600, [0.28, 1.06, -0.62], [0.03, 1.1, -1.28], 30, glide=24, push=0.0015, blur=12, focus=[0.03, 1.12, -1.22], why="the card held up to the phone")],
+  cams=[k(493, [0.4, 1.15, 1.55], [0.02, 0.96, -1.3], 34, glide=40, push=0.002, blur=10, focus=AVERY_HEAD, why="close, from beside his phone"),
+        k(566, [0.36, 1.12, 1.2], [0.02, 0.97, -1.3], 32, glide=20, push=0.002, punch=[0.006, 20], blur=12, focus=[0.02, 1.0, -1.25], why="push on the pull"),
+        k(600, [0.34, 1.12, 1.05], [0.03, 1.0, -1.28], 32, glide=24, push=0.0015, blur=12, focus=[0.03, 1.12, -1.22], why="the card held up to the phone")],
   kicks=[], marks=[{"who": "avery", "at": W0["avery"], "view": "front", "pose": "tears the pack f548, Jirachi out f571, holds it up f600", "expr": "neutral -> shock (gape) -> grin"}],
-  subjects=[{"n": "avery head", "p": AVERY_HEAD, "f": [493, 656]}, {"n": "card", "p": [0.03, 1.08, -1.22], "f": [575, 656]}],
+  subjects=[{"n": "avery head", "p": AVERY_HEAD, "f": [493, 656]}, {"n": "card", "p": [0.03, 1.2, -1.15], "f": [575, 656]}],
   physics="tear strip: flies 20 cm, lands on the blanket and stays; empty wrapper dropped on the blanket f566 and stays.",
   light_mood="day; the card's gleam is the only sparkle (never over the art: it sweeps as a band across the foil).",
   sound="foil crinkle f530; tear f548; card slides f552-566; a soft rising shimmer f571; a held warm chord.", after="Avery holds the Jirachi up to his phone.")
@@ -240,8 +240,8 @@ scene(id="S09", f=[1170, 1312], set="room", light="golden",
   blocking="Seller out of frame (right).",
   action="Hard cut on 'Khoan đã' (f1170). The card sharp in the ring light; f1262-1282 rack focus to the monitor title (AVERY THE POKE KID) on 'nỗi đau' (f1276); the card goes soft.",
   acting="none.",
-  cams=[k(1170, [-1.4, 1.05, -0.45], [-0.25, 0.95, -1.95], 34, cut=True, push=0.0018, blur=14, focus=CARD, why="the card"),
-        k(1262, [-1.4, 1.05, -0.45], [-0.25, 0.95, -1.95], 34, glide=20, push=0.0018, blur=14, focus=TITLE_PT, why="rack focus to the name")],
+  cams=[k(1170, [-1.35, 0.85, -1.3], [-0.25, 0.94, -1.95], 30, cut=True, push=0.0018, blur=14, focus=CARD, why="the card"),
+        k(1262, [-1.35, 0.85, -1.3], [-0.25, 0.94, -1.95], 30, glide=20, push=0.0018, blur=14, focus=TITLE_PT, why="rack focus to the name")],
   kicks=[], marks=[], subjects=[{"n": "card", "p": CARD, "f": [1170, 1311]}, {"n": "title", "p": TITLE_PT, "f": [1170, 1311]}],
   physics="none.", light_mood="golden; the ring light makes a white catchlight on the top loader.",
   sound="music drops out on the cut; a single low cello note f1276.", after="as before.")
@@ -258,7 +258,7 @@ scene(id="S10", f=[1312, 1386], set="home", light="golden",
   cams=[k(1312, CAM_HOME["pos"], CAM_HOME["look"], 42, push=0.0025, blur=5, focus=[0.0, 1.15, -1.6], why="the family room")],
   kicks=[], marks=[{"who": "mum", "at": H0["mum"], "view": "front", "pose": "seated, phone in both hands", "expr": "pained"},
                    {"who": "dad", "at": H0["dad"], "view": "front", "pose": "seated, arm on her shoulder", "expr": "pained"}],
-  subjects=[{"n": "mum head", "p": [H0["mum"][0], 1.32, H0["mum"][1]], "f": [1312, 1385]}, {"n": "dad head", "p": [H0["dad"][0], 1.32, H0["dad"][1]], "f": [1312, 1385]}],
+  subjects=[{"n": "mum head", "p": [H0["mum"][0], 1.4, H0["mum"][1]], "f": [1312, 1385]}, {"n": "dad head", "p": [H0["dad"][0], 1.4, H0["dad"][1]], "f": [1312, 1385]}],
   physics="none; the candle flame flickers.", light_mood="golden dusk, low and warm; candle glow.",
   sound="room tone, a clock ticking; strings, very soft.", after="Mum holds her phone.")
 
@@ -271,7 +271,7 @@ scene(id="S11", f=[1386, 1610], set="home", light="golden",
   blocking="Her POV (mum not drawn); her finger (a plain stick line from below frame) taps POST.",
   action="f1400-1450 line 1 types; f1455-1530 line 2; f1556-1580 line 3 on 'gỡ tin'; f1585 her stick finger taps POST on 'gỡ' (contact 1 f before); the button darkens, the post goes up (a soft slide).",
   acting="none.",
-  cams=[k(1386, [-0.35, 1.29, -1.62], [-0.35, 0.95, -1.3], 30, push=0.0015, blur=6, focus=H0["phone"], why="her screen, from her eyes")],
+  cams=[k(1386, [-0.25, 1.29, -1.62], [-0.25, 0.925, -1.3], 30, push=0.0015, blur=6, focus=H0["phone"], why="her screen, from her eyes")],
   kicks=[], marks=[], subjects=[{"n": "phone", "p": H0["phone"], "f": [1386, 1609]}],
   physics="none.", light_mood="the screen glow on a golden dusk.", sound="soft key taps; the post 'whoosh' f1586.", after="The post is up.")
 
@@ -285,7 +285,7 @@ scene(id="S12", f=[1610, 1720], set="home", light="golden",
   action="f1610-1720 slow glide along the shelf to the photo; it ends on his grin on 'Avery' (f1703).",
   acting="none.",
   cams=[k(1610, [-0.75, 1.38, -0.5], [-1.5, 1.3, -2.3], 38, push=0.0015, blur=8, focus=H0["shelf"], why="his shelf"),
-        k(1650, [-1.05, 1.36, -1.25], [-1.62, 1.36, -2.3], 32, glide=60, push=0.002, blur=10, focus=[-1.62, 1.36, -2.3], why="to his photo")],
+        k(1650, [-1.4, 1.37, -1.55], [-1.62, 1.35, -2.33], 26, glide=60, push=0.002, blur=10, focus=[-1.62, 1.36, -2.3], why="to his photo")],
   kicks=[], marks=[], subjects=[{"n": "photo", "p": [-1.62, 1.36, -2.3], "f": [1610, 1719]}],
   physics="none.", light_mood="golden dusk; the frame's glass catches the window light.", sound="strings continue, a gentle rise.", after="as before.")
 
@@ -298,10 +298,10 @@ scene(id="S13", f=[1720, 1810], set="home", light="golden", dim_ramp=[1730, 1790
   blocking="Dad stands (f1728-1738), steps back to the window (dad_win, f1738-1752), turns front, draws both curtains closed (f1758-1790). Mum lays the phone face down on the table on 'yên' (f1796).",
   action="as blocking; the room light drops to 55 % as the curtains close; the candle glow is the brightest thing.",
   acting="Quiet, slow; dad's eyes down.",
-  cams=[k(1720, [0.15, 1.5, 1.2], [0.05, 1.2, -1.7], 46, glide=40, push=0.0015, blur=5, focus=[0.1, 1.2, -1.8], why="the family, the window")],
+  cams=[k(1720, [0.15, 1.55, 2.2], [0.1, 1.2, -1.8], 46, glide=40, push=0.0015, blur=5, focus=[0.1, 1.2, -1.8], why="the family, the window")],
   kicks=[], marks=[{"who": "dad", "at": H0["dad_win"], "view": "front", "pose": "stands, steps back, draws the curtains", "expr": "pained"},
                    {"who": "mum", "at": H0["mum"], "view": "front", "pose": "lays the phone face down f1796", "expr": "pained"}],
-  subjects=[{"n": "mum head", "p": [H0["mum"][0], 1.32, H0["mum"][1]], "f": [1760, 1809]}, {"n": "dad head", "p": [H0["dad_win"][0], 1.65, H0["dad_win"][1]], "f": [1760, 1809]}],
+  subjects=[{"n": "mum head", "p": [H0["mum"][0], 1.4, H0["mum"][1]], "f": [1760, 1809]}, {"n": "dad head", "p": [H0["dad_win"][0], 1.75, H0["dad_win"][1]], "f": [1760, 1809]}],
   physics="curtains: slide with ease-in-out, sway 2 cm and settle.", light_mood="golden dims to 55 %; candle.",
   sound="curtain rings f1758-1790; the phone set down f1796; the music holds one chord.", after="Curtains closed, phone face down.")
 
@@ -315,7 +315,7 @@ scene(id="S14", f=[1810, 1888], set="room", light="golden",
   action="f1846-1880 tiles grey out ENDED one per 3 f, starting on 'gỡ' (f1850); f1856-1882 glide to the seller: his grin goes nervous, a sweat drop.",
   acting="smug -> nervous.",
   cams=[k(1810, CAM_SCREEN["pos"], CAM_SCREEN["look"], 38, push=0.002, blur=8, focus=MON, why="the listings end"),
-        k(1846, [0.45, 1.25, -0.45], [-0.12, 1.22, -1.45], 36, glide=40, push=0.002, blur=10, focus=SELLER_HEAD, why="the seller")],
+        k(1846, [0.6, 1.3, 0.15], [-0.12, 1.2, -1.45], 36, glide=40, push=0.002, blur=10, focus=SELLER_HEAD, why="the seller")],
   kicks=[], marks=[{"who": "seller", "at": R0["seller"], "view": "front", "pose": "seated", "expr": "nervous"}],
   subjects=[{"n": "monitor", "p": MON, "f": [1810, 1850]}, {"n": "seller head", "p": SELLER_HEAD, "f": [1878, 1887]}],
   physics="none.", light_mood="golden.", sound="error blips per tile f1846-1880.", after="ENDED tiles.")
@@ -329,11 +329,11 @@ scene(id="S15", f=[1888, 2087], set="studio", light="day",
   blocking="Artist stands at her mark, brush in her right hand (screen left) touching the painting's left edge.",
   action="f1900-2030 small brush strokes (the hand moves along the edge, 3 strokes); f2036-2060 she lifts the painting off the board up beside her into the window light on 'hạnh phúc' (f2053) and smiles at it.",
   acting="Calm focus, then a gentle smile.",
-  cams=[k(1888, [0.95, 1.45, 0.6], [-0.2, 1.25, -1.4], 40, push=0.0015, blur=6, focus=A0["painting"], why="the artist and the painting"),
-        k(2030, [0.15, 1.45, 0.05], [-0.06, 1.42, -1.05], 34, glide=28, push=0.002, blur=8, focus=A0["lifted"], why="the painting in the light"),
+  cams=[k(1888, [1.2, 1.55, 1.3], [-0.2, 1.3, -1.4], 42, push=0.0015, blur=6, focus=A0["painting"], why="the artist and the painting"),
+        k(2030, [0.3, 1.45, 0.6], [-0.1, 1.38, -1.05], 34, glide=28, push=0.002, blur=8, focus=A0["lifted"], why="the painting in the light"),
         k(2062, [-0.05, 1.43, -0.5], [-0.05, 1.42, -1.05], 26, glide=24, push=0.006, blur=6, focus=A0["lifted"], why="push into the art")],
   kicks=[], marks=[{"who": "artist", "at": A0["artist"], "view": "front", "pose": "painting, then lifts the painting f2036-2060", "expr": "neutral -> smile"}],
-  subjects=[{"n": "artist head", "p": [A0["artist"][0], 1.6, A0["artist"][1]], "f": [1888, 2020]}, {"n": "painting", "p": A0["painting"], "f": [1888, 2020]},
+  subjects=[{"n": "artist head", "p": [A0["artist"][0], 1.75, A0["artist"][1]], "f": [1888, 2020]}, {"n": "painting", "p": A0["painting"], "f": [1888, 2020]},
             {"n": "painting lifted", "p": A0["lifted"], "f": [2062, 2086]}],
   physics="none.", light_mood="bright day, sunlight from the window.", sound="brush strokes; a music-box phrase f2053.", after="She holds the painting up.")
 
@@ -346,7 +346,7 @@ scene(id="S16", f=[2087, 2145], set="room", light="golden",
   blocking="POV.",
   action="f2120-2140 the price $20,000 on 'hai mươi nghìn đô' pulses once.",
   acting="none.",
-  cams=[k(2087, [0.3, 1.1, -1.72], [0.33, 1.08, -2.2], 30, push=0.003, blur=8, focus=MON, why="the price")],
+  cams=[k(2087, CAM_SCREEN["pos"], CAM_SCREEN["look"], 36, push=0.003, blur=8, focus=MON, why="the price")],
   kicks=[], marks=[], subjects=[{"n": "monitor", "p": MON, "f": [2087, 2144]}],
   physics="none.", light_mood="golden, cold monitor light.", sound="the monitor hum; music thins to one note.", after="$20,000.")
 
@@ -359,8 +359,8 @@ scene(id="S17", hero=True, f=[2145, 2250], set="ward", light="golden",
   blocking="Avery at his mark, the pack in both hands; seen from his phone's spot.",
   action="f2170-2198 he pinches the top; f2201 tear on 'mở' (f2203); f2208-2216 the Jirachi slides up; f2216 his face lights up (grin), gleam on the card f2220-2234; holds it up toward the lens to the end.",
   acting="Anticipation, then joy.",
-  cams=[k(2145, [0.3, 1.0, -0.58], [0.0, 1.0, -1.32], 32, push=0.0018, blur=10, focus=AVERY_HEAD, why="from his phone's spot"),
-        k(2205, [0.28, 1.02, -0.66], [0.02, 1.07, -1.3], 30, glide=30, push=0.0012, blur=12, focus=[0.03, 1.12, -1.22], why="his joy, the card")],
+  cams=[k(2145, [0.4, 1.15, 1.5], [0.0, 0.96, -1.32], 34, push=0.0018, blur=10, focus=AVERY_HEAD, why="from his phone's spot"),
+        k(2205, [0.34, 1.12, 1.1], [0.02, 1.0, -1.3], 32, glide=30, push=0.0012, blur=12, focus=[0.03, 1.12, -1.22], why="his joy, the card")],
   kicks=[], marks=[{"who": "avery", "at": W0["avery"], "view": "front", "pose": "tears f2201, holds the card up", "expr": "smile_closed -> grin"}],
   subjects=[{"n": "avery head", "p": AVERY_HEAD, "f": [2145, 2249]}],
   physics="tear strip lands on the blanket.", light_mood="golden flashback light through the window.",

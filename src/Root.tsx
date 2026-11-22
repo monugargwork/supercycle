@@ -10,6 +10,7 @@ import { FanaticsReel, FanaticsCaptions, FANATICS_FRAMES } from "./videos/fanati
 import { ChocoboReel, ChocoboCaptions, CHOCOBO_FRAMES } from "./videos/chocobo/Reel";
 import { MonacoReel, MonacoCaptions, MONACO_FRAMES } from "./videos/monaco/Reel";
 import { FossilReel, FossilCaptions, FOSSIL_FRAMES } from "./videos/fossil/Reel";
+import { JirachiReel, JirachiCaptions, JIRACHI_FRAMES } from "./videos/jirachi/Reel";
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -31,5 +32,7 @@ export const RemotionRoot: React.FC = () => (
     <Composition id="MonacoCaptions" component={MonacoCaptions} durationInFrames={MONACO_FRAMES} fps={30} width={1440} height={2560} />
     <Composition id="FossilReel" component={FossilReel} durationInFrames={FOSSIL_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="FossilCaptions" component={FossilCaptions} durationInFrames={FOSSIL_FRAMES} fps={30} width={1440} height={2560} />
+    <Composition id="JirachiReel" component={JirachiReel} durationInFrames={JIRACHI_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="JirachiCaptions" component={JirachiCaptions} durationInFrames={JIRACHI_FRAMES} fps={30} width={1440} height={2560} />
   </>
 );
