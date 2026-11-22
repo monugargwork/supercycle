@@ -9,7 +9,7 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | c30_vulpix | 2026 30th Celebration Vulpix 9 | 30c | 9 | https://den-cards.pokellector.com/434/Vulpix.30C.9.62050.png | jirachi |
 | jirachi_sir | 2026 30th Celebration Jirachi ex Special Illustration Rare (Akira Egawa) 155/128 | 30c | 155 | https://den-cards.pokellector.com/434/Jirachi-ex.30C.155.62175.png | jirachi |
 | abra | Base Set Abra 43 | base1 | 43 | https://images.pokemontcg.io/base1/43.png | attic |
-| blastoise | Base Set Blastoise 2 | base1 | 2 | https://images.pokemontcg.io/base1/2_hires.png | attic, fanatics, monaco |
+| blastoise | Base Set Blastoise 2 | base1 | 2 | https://images.pokemontcg.io/base1/2_hires.png | attic, fanatics, monaco, tcgplayer |
 | bulbasaur | Base Set Bulbasaur 44 | base1 | 44 | https://images.pokemontcg.io/base1/44.png | attic |
 | charmander | Base Set Charmander 46 | base1 | 46 | https://images.pokemontcg.io/base1/46.png | attic, fanatics |
 | diglett | Base Set Diglett 47 | base1 | 47 | https://images.pokemontcg.io/base1/47.png | attic |
@@ -18,12 +18,12 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | magikarp | Base Set Magikarp 35 | base1 | 35 | https://images.pokemontcg.io/base1/35.png | attic |
 | mewtwo | Base Set Mewtwo 10 | base1 | 10 | https://images.pokemontcg.io/base1/10_hires.png | attic, fanatics |
 | onix | Base Set Onix 56 | base1 | 56 | https://images.pokemontcg.io/base1/56.png | attic, fanatics |
-| pikachu | Base Set Pikachu 58 | base1 | 58 | https://images.pokemontcg.io/base1/58.png | attic, fanatics, lucas |
+| pikachu | Base Set Pikachu 58 | base1 | 58 | https://images.pokemontcg.io/base1/58.png | attic, fanatics, lucas, tcgplayer |
 | ponyta | Base Set Ponyta 60 | base1 | 60 | https://images.pokemontcg.io/base1/60.png | attic |
 | squirtle | Base Set Squirtle 63 | base1 | 63 | https://images.pokemontcg.io/base1/63.png | attic, fanatics |
-| venusaur | Base Set Venusaur 15 | base1 | 15 | https://images.pokemontcg.io/base1/15_hires.png | attic, fanatics, monaco |
+| venusaur | Base Set Venusaur 15 | base1 | 15 | https://images.pokemontcg.io/base1/15_hires.png | attic, fanatics, monaco, tcgplayer |
 | vulpix | Base Set Vulpix 68 | base1 | 68 | https://images.pokemontcg.io/base1/68.png | attic, fanatics |
-| zard_base | Base Set Charizard 4 | base1 | 4 | https://images.pokemontcg.io/base1/4_hires.png | attic, mudkip (as zard), fanatics, monaco, lucas |
+| zard_base | Base Set Charizard 4 | base1 | 4 | https://images.pokemontcg.io/base1/4_hires.png | attic, mudkip (as zard), fanatics, monaco, lucas, tcgplayer |
 | eevee | Jungle Eevee 51 | base2 | 51 | https://images.pokemontcg.io/base2/51.png | attic, fanatics |
 | jg_scyther | Jungle Scyther 10 | base2 | 10 | https://images.pokemontcg.io/base2/10_hires.png | lucas |
 | jigglypuff | Jungle Jigglypuff 54 | base2 | 54 | https://images.pokemontcg.io/base2/54.png | attic, fanatics |
@@ -62,10 +62,10 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | chocobo_gold | MTG Final Fantasy Traveling Chocobo (Golden Chocobo, serialized /77) | fin | 551f | https://cards.scryfall.io/png/front/6/c/6ce8744a-ede3-4662-968a-360eb6639f08.png?1783906436 | chocobo |
 | chocobo_plain | MTG Final Fantasy Traveling Chocobo (regular) | fin | 210 | https://cards.scryfall.io/png/front/2/4/2462df62-fc35-47ed-9571-40452074dc6d.png?1783906576 | chocobo |
 | pika_trophy | 1997 No.1 Trainer, Official Tournament (trophy Pikachu) | jp-promo | U011 | https://cdn6966.templcdn.com/wp-content/uploads/2021/03/JP_U011Unnumbered.jpg | mudkip |
-| mtg_bolt | Magic Alpha Lightning Bolt | mtg-lea | 161 | https://cards.scryfall.io/png/front/d/5/d573ef03-4730-45aa-93dd-e45ac1dbaf4a.png?1783948684 |  |
-| mtg_llanowar | Magic Alpha Llanowar Elves | mtg-lea | 210 | https://cards.scryfall.io/png/front/d/4/d4f1cc9e-4f99-4c26-ac1b-8ef069fa8ceb.png?1783948674 |  |
-| mtg_serra | Magic Alpha Serra Angel | mtg-lea | 39 | https://cards.scryfall.io/png/front/f/8/f8ac5006-91bd-4803-93da-f87cf196dd2f.png?1783948710 |  |
-| mtg_solring | Magic Alpha Sol Ring | mtg-lea | 269 | https://cards.scryfall.io/png/front/c/4/c4300d24-1cae-4dd5-be7e-38cc677cf5bd.png?1783948661 |  |
+| mtg_bolt | Magic Alpha Lightning Bolt | mtg-lea | 161 | https://cards.scryfall.io/png/front/d/5/d573ef03-4730-45aa-93dd-e45ac1dbaf4a.png?1783948684 | tcgplayer |
+| mtg_llanowar | Magic Alpha Llanowar Elves | mtg-lea | 210 | https://cards.scryfall.io/png/front/d/4/d4f1cc9e-4f99-4c26-ac1b-8ef069fa8ceb.png?1783948674 | tcgplayer |
+| mtg_serra | Magic Alpha Serra Angel | mtg-lea | 39 | https://cards.scryfall.io/png/front/f/8/f8ac5006-91bd-4803-93da-f87cf196dd2f.png?1783948710 | tcgplayer |
+| mtg_solring | Magic Alpha Sol Ring | mtg-lea | 269 | https://cards.scryfall.io/png/front/c/4/c4300d24-1cae-4dd5-be7e-38cc677cf5bd.png?1783948661 | tcgplayer |
 | chikorita | Neo Genesis Chikorita 53 | neo1 | 53 | https://images.pokemontcg.io/neo1/53.png | attic, fanatics |
 | cyndaquil | Neo Genesis Cyndaquil 56 | neo1 | 56 | https://images.pokemontcg.io/neo1/56.png | attic, fanatics |
 | mantine | Neo Genesis Mantine 64 | neo1 | 64 | https://images.pokemontcg.io/neo1/64.png | attic, fanatics |
