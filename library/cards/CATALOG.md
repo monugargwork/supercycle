@@ -18,16 +18,17 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | magikarp | Base Set Magikarp 35 | base1 | 35 | https://images.pokemontcg.io/base1/35.png | attic |
 | mewtwo | Base Set Mewtwo 10 | base1 | 10 | https://images.pokemontcg.io/base1/10_hires.png | attic, fanatics |
 | onix | Base Set Onix 56 | base1 | 56 | https://images.pokemontcg.io/base1/56.png | attic, fanatics |
-| pikachu | Base Set Pikachu 58 | base1 | 58 | https://images.pokemontcg.io/base1/58.png | attic, fanatics |
+| pikachu | Base Set Pikachu 58 | base1 | 58 | https://images.pokemontcg.io/base1/58.png | attic, fanatics, lucas |
 | ponyta | Base Set Ponyta 60 | base1 | 60 | https://images.pokemontcg.io/base1/60.png | attic |
 | squirtle | Base Set Squirtle 63 | base1 | 63 | https://images.pokemontcg.io/base1/63.png | attic, fanatics |
 | venusaur | Base Set Venusaur 15 | base1 | 15 | https://images.pokemontcg.io/base1/15_hires.png | attic, fanatics, monaco |
 | vulpix | Base Set Vulpix 68 | base1 | 68 | https://images.pokemontcg.io/base1/68.png | attic, fanatics |
-| zard_base | Base Set Charizard 4 | base1 | 4 | https://images.pokemontcg.io/base1/4_hires.png | attic, mudkip (as zard), fanatics, monaco |
+| zard_base | Base Set Charizard 4 | base1 | 4 | https://images.pokemontcg.io/base1/4_hires.png | attic, mudkip (as zard), fanatics, monaco, lucas |
 | eevee | Jungle Eevee 51 | base2 | 51 | https://images.pokemontcg.io/base2/51.png | attic, fanatics |
+| jg_scyther | Jungle Scyther 10 | base2 | 10 | https://images.pokemontcg.io/base2/10_hires.png | lucas |
 | jigglypuff | Jungle Jigglypuff 54 | base2 | 54 | https://images.pokemontcg.io/base2/54.png | attic, fanatics |
 | meowth | Jungle Meowth 56 | base2 | 56 | https://images.pokemontcg.io/base2/56.png | attic |
-| fs_aerodactyl | Fossil Fs 1 | base3 | 1 | https://images.pokemontcg.io/base3/1_hires.png | fossil |
+| fs_aerodactyl | Fossil Fs 1 | base3 | 1 | https://images.pokemontcg.io/base3/1_hires.png | fossil, lucas |
 | fs_articuno | Fossil Fs 2 | base3 | 2 | https://images.pokemontcg.io/base3/2_hires.png | fossil |
 | fs_ditto | Fossil Fs 3 | base3 | 3 | https://images.pokemontcg.io/base3/3_hires.png | fossil |
 | fs_dragonite | Fossil Fs 4 | base3 | 4 | https://images.pokemontcg.io/base3/4_hires.png | fossil |
@@ -43,6 +44,7 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | fs_raichu | Fossil Fs 14 | base3 | 14 | https://images.pokemontcg.io/base3/14_hires.png | fossil |
 | fs_zapdos | Fossil Fs 15 | base3 | 15 | https://images.pokemontcg.io/base3/15_hires.png | fossil |
 | psyduck | Fossil Psyduck 53 | base3 | 53 | https://images.pokemontcg.io/base3/53.png | attic |
+| tr_dark_zard | Team Rocket Dark Charizard 4 | base5 | 4 | https://images.pokemontcg.io/base5/4_hires.png | lucas |
 | zard_lc | Legendary Collection Charizard 3 | base6 | 3 | https://images.pokemontcg.io/base6/3_hires.png | attic, fanatics |
 | sky_h1 | Skyridge Holo H1 | ecard3 | H1 | https://images.pokemontcg.io/ecard3/H1.png | attic, fanatics |
 | sky_h2 | Skyridge Holo H2 | ecard3 | H2 | https://images.pokemontcg.io/ecard3/H2.png | attic, fanatics |
@@ -60,6 +62,10 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | chocobo_gold | MTG Final Fantasy Traveling Chocobo (Golden Chocobo, serialized /77) | fin | 551f | https://cards.scryfall.io/png/front/6/c/6ce8744a-ede3-4662-968a-360eb6639f08.png?1783906436 | chocobo |
 | chocobo_plain | MTG Final Fantasy Traveling Chocobo (regular) | fin | 210 | https://cards.scryfall.io/png/front/2/4/2462df62-fc35-47ed-9571-40452074dc6d.png?1783906576 | chocobo |
 | pika_trophy | 1997 No.1 Trainer, Official Tournament (trophy Pikachu) | jp-promo | U011 | https://cdn6966.templcdn.com/wp-content/uploads/2021/03/JP_U011Unnumbered.jpg | mudkip |
+| mtg_bolt | Magic Alpha Lightning Bolt | mtg-lea | 161 | https://cards.scryfall.io/png/front/d/5/d573ef03-4730-45aa-93dd-e45ac1dbaf4a.png?1783948684 |  |
+| mtg_llanowar | Magic Alpha Llanowar Elves | mtg-lea | 210 | https://cards.scryfall.io/png/front/d/4/d4f1cc9e-4f99-4c26-ac1b-8ef069fa8ceb.png?1783948674 |  |
+| mtg_serra | Magic Alpha Serra Angel | mtg-lea | 39 | https://cards.scryfall.io/png/front/f/8/f8ac5006-91bd-4803-93da-f87cf196dd2f.png?1783948710 |  |
+| mtg_solring | Magic Alpha Sol Ring | mtg-lea | 269 | https://cards.scryfall.io/png/front/c/4/c4300d24-1cae-4dd5-be7e-38cc677cf5bd.png?1783948661 |  |
 | chikorita | Neo Genesis Chikorita 53 | neo1 | 53 | https://images.pokemontcg.io/neo1/53.png | attic, fanatics |
 | cyndaquil | Neo Genesis Cyndaquil 56 | neo1 | 56 | https://images.pokemontcg.io/neo1/56.png | attic, fanatics |
 | mantine | Neo Genesis Mantine 64 | neo1 | 64 | https://images.pokemontcg.io/neo1/64.png | attic, fanatics |
