@@ -18,3 +18,19 @@ Composition `TcgplayerReel` · code `src/videos/tcgplayer/` · assets `public/tc
 - S10: Rob sits at the left edge of the frame while plane 1 lands; the window is the subject there.
 - The market manager pushes the twin stall from its far end, mostly out of frame on the right.
 - Flicker check: `[coplanar] 0`; 2 short runs over 365 frames (f134-136 the push onto the stamp with confetti falling, f674-676 the glide to the scanner): both camera motion, passed after looking at the frames.
+
+## v2: re-edit to the 25 Nov quality bar (25 Nov 2026)
+The user asked to re-edit this reel to the new rules (`docs/rules.md` section 0).
+| Rule | What changed |
+|---|---|
+| No blur | Lens blur and DOF off in `Reel.tsx`; every plan key has `blur: 0` (`k()` forces it). |
+| No shadows | Sun casts no shadows; the contact blobs under the cast are gone. |
+| Bright reference palettes, no tinted grade | The colour grade is off; the shading's violet shade side is now a warm neutral and saturation is 1.3 (`BRIGHT` in `world.ts`). Workroom: cream striped wallpaper, warm wood floor, red rug. HQ: warm wood panelling, red carpet, rich-blue night window with warm lit windows. Boardroom: cream walls, green carpet, oxblood chairs, light wood table, two windows on a cloudy sky. Market and shop moved from the golden preset to daylight (the golden light turned cream walls purple). Suits brightened (Rob royal blue, Ron tan, VIPs red/blue/green/purple). Measured mean saturation of the sweep: 50.8 vs 45.7 for the Mirror reel (same measure). |
+| Blue skies with clouds | Every window now shows a blue sky with inked puffy clouds (`cloudSky`); the Syracuse street shows the day sky above the building. |
+| Dressed sets | Framed real cards on the walls (workroom, HQ, shop, boardroom), bookshelf of binders and plants in HQ, a plant, boxes, desk lamp and rug in the workroom, lit windows with flower boxes, trees and a cornice at Syracuse, goods on the back market stalls, coloured panels on the hall walls. |
+| Wider cameras | Cameras rebuilt medium-wide (full bodies with the set around them), wide at each new place; close-ups kept only for the stamp, the laptop/phone screens and the scanner. Every character subject is now head and feet in `plan.json`, so `plan_check.py` fails a shot that cuts a body (0 errors). |
+| Sharp, recognisable cards | The Base Set scans online top out at 600x825 (pokemontcg.io and pkmncards), so the Pokémon cards are now the 151 set's 733x1024 scans (Charizard ex SIR 199, Blastoise ex SIR 200, Venusaur ex SIR 198, Pikachu 25; new in the library under `sv3pt5`). On "Magic" and "Pokémon" the laptop shows one big card (Lightning Bolt, then Charizard ex) about 60 % of the frame width. The laptop canvas is drawn at 2.5x, card textures at 732x1024. |
+| Always vertical | The shop scene split into a wide (S15) and a phone POV (S16, through-object dissolve), because the camera glide into his eyes passed through his head; the market is shot from the left so the two stalls stack in depth. |
+- **Bug found (base reels):** in `world.ts` a comment swallowed `cam.updateProjectionMatrix()`, so the plan's fov never reached the camera (every shot rendered at the default 40 deg). Fixed here; the same line is in `fossil`, `gengar`, `goldenrod`, `jirachi`, `lucas` and `monaco` and should be fixed when each is re-edited.
+- Flicker check: `[coplanar] 0`; the same two motion runs as v1 (f134-136 the push onto the stamp with confetti, f674-676 the glide to the scanner), passed after looking at the frames.
+- Render as a new version: `scripts/render.command TcgplayerReel Tcgplayer_v2`.

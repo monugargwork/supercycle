@@ -32,19 +32,19 @@ Hard cuts: S05 (the cake refused) and S12 ("Khoan"); plus the S07 reaction cut i
 |---|---|---|---|
 | room | new: workroom x -2.4..2.4, z -2.4..2.4, 2.6 m, sage walls, wood floor, ceiling (no shadows), window in the -x wall | [0, 1.3, 0] | [4.8, 2.6, 4.8] |
 | table | new: packing table, birch top y 0.76 on four legs, x -0.9..0.9, z -1.22..-0.52; bubble mailers and top loaders on it | [0, 0.38, -0.87] | [1.8, 0.76, 0.7] |
-| laptop | new: laptop 34 x 24 cm base, screen 34 x 21.5 cm (canvas: the TCGplayer page) facing the seller, tilted back 15 deg | [0.12, 0.76, -0.85] | [0.34, 0.24, 0.24] |
+| laptop | new: laptop 34 x 24 cm base, screen 34 x 21.5 cm (canvas: the TCGplayer page) facing the seller, tilted back 15 deg | [0.45, 0.76, -0.75] | [0.34, 0.24, 0.24] |
 | tv | new: wall TV 110 x 62 cm (canvas: business news, the GMV counter), black bezel | [0, 1.78, -2.37] | [1.1, 0.62, 0.04] |
-| envelope | new: kraft envelope 22 x 11 cm addressed CO QUAN LIEN BANG; rubber stamp (wood knob, red rubber) beside it; the stamp prints XIN ĐIỀU TRA | [-0.22, 0.76, -1.06] | [0.22, 0.004, 0.11] |
-| coins | new: a stack of 10 gold coins (r 1.6 cm, 3 mm) = a sale's takings | [0.27, 0.76, -1.08] | [0.032, 0.03, 0.032] |
-| jar | new: glass jar r 6 cm, 13 cm, paper label PHÍ, coins drop in | [0.6, 0.76, -0.98] | [0.12, 0.13, 0.12] |
-| bot | new: his third-party price scanner: grey box 14 x 6 x 10 cm with a tilted top screen (canvas: PRICE BOT, then BỊ CHẶN in red) | [-0.55, 0.76, -0.98] | [0.14, 0.06, 0.1] |
-| cake | new: (S05) an open white cake box labelled eBay and a slice of sponge cake on a paper plate in front of him | [-0.02, 0.76, -1.05] | [0.16, 0.06, 0.16] |
+| envelope | new: kraft envelope 22 x 11 cm addressed CO QUAN LIEN BANG; rubber stamp (wood knob, red rubber) beside it; the stamp prints XIN ĐIỀU TRA | [-0.2, 0.76, -1.12] | [0.22, 0.004, 0.11] |
+| coins | new: a stack of 10 gold coins (r 1.6 cm, 3 mm) = a sale's takings | [0.15, 0.76, -1.15] | [0.032, 0.03, 0.032] |
+| jar | new: glass jar r 6 cm, 13 cm, paper label PHÍ, coins drop in | [0.82, 0.76, -1.05] | [0.12, 0.13, 0.12] |
+| bot | new: his third-party price scanner: grey box 14 x 6 x 10 cm with a tilted top screen (canvas: PRICE BOT, then BỊ CHẶN in red) | [-0.58, 0.76, -1] | [0.14, 0.06, 0.1] |
+| cake | new: (S05) an open white cake box labelled eBay and a slice of sponge cake on a paper plate in front of him | [-0.02, 0.76, -1.13] | [0.16, 0.06, 0.16] |
 | shelves | new: shelves of card boxes and binders on the back wall (x 1.0..2.3) | [1.65, 1.3, -2.25] | [1.3, 1.8, 0.3] |
 
 ### hq
 - Origin in the shared world: [40, 0, 0]. Axes: the GMV board on the back wall z -3.0 under an eBay sign; the boss's desk in front of it; the window on the night city at +x.
 - Light: day; sun az/el [30, 40]. Open camera sides: +z.
-- Marks [x, z]: rob_desk [-0.4, -2.42]; rob_lever [0.72, -2.5]; rob_cake [0.98, -2.45].
+- Marks [x, z]: rob_desk [-0.4, -2.42]; rob_lever [0.68, -2.6]; rob_cake [0.98, -2.45].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
@@ -70,18 +70,18 @@ Hard cuts: S05 (the cake refused) and S12 ("Khoan"); plus the S07 reaction cut i
 
 ### market
 - Origin in the shared world: [120, 0, 0]. Axes: two stalls along x facing +z; the seller sits behind his stall; buyers walk in front (z ~ 0).
-- Light: golden; sun az/el [-35, 30]. Open camera sides: +z.
-- Marks [x, z]: seller [-0.8, -1.55]; buyer [-0.65, -0.05].
+- Light: day; sun az/el [-35, 30]. Open camera sides: +z.
+- Marks [x, z]: seller [-0.8, -1.55]; buyer [0.12, -0.2].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
-| hall | new: covered market hall x -4..4, z -3..3, 3.6 m, cream walls, tiled floor, ceiling with warm lamps, bunting | [0, 1.8, 0] | [8, 3.6, 6] |
+| hall | new: covered market hall x -4..4, z -3..4.5, 3.6 m, cream walls, tiled floor, ceiling with warm lamps, bunting | [0, 1.8, 0] | [8, 3.6, 6] |
 | stall | new: his stall: table x -1.4..-0.2, z -1.25..-0.6, top y 0.8, striped awning on two posts, sign SẠP CỦA BẠN; cards on tilted stands; a coin tin; his small brass pack scale | [-0.8, 0.4, -0.92] | [1.2, 0.8, 0.65] |
 | twin | new: the twin stall (identical, sign BAN QUẢN LÝ, same cards) on four castors, rolls in from x 3.4 to 0.6 | [0.6, 0.4, -0.92] | [1.2, 0.8, 0.65] |
 
 ### shop
 - Origin in the shared world: [160, 0, 0]. Axes: the counter faces +z; the owner stands behind it.
-- Light: golden; sun az/el [-30, 30]. Open camera sides: +z.
+- Light: day; sun az/el [-30, 30]. Open camera sides: +z.
 - Marks [x, z]: owner [0, -1.4].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
@@ -93,7 +93,7 @@ Hard cuts: S05 (the cake refused) and S12 ("Khoan"); plus the S07 reaction cut i
 ### board
 - Origin in the shared world: [200, 0, 0]. Axes: the long table runs along z; the boss at the head (far end, z -3.0) facing +z; the seller at the near end.
 - Light: day; sun az/el [25, 40]. Open camera sides: +z.
-- Marks [x, z]: ron [0, -3]; seller [0.05, 1.15].
+- Marks [x, z]: ron [0, -3]; seller [0.95, 0.85].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
@@ -127,8 +127,8 @@ Hard cuts: S05 (the cake refused) and S12 ("Khoan"); plus the S07 reaction cut i
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 0 | open | [0.3, 1.32, 1.05] | [-0.02, 1.2, -1.6] | 40 | 0.18 | 6 | the seller under the TV |
-| 114 | glide 30 f | [-0.05, 1.18, -0.28] | [-0.2, 0.84, -1.06] | 32 | 0.3 (punch 0.8 for 14 f) | 10 | push onto the stamp |
+| 0 | open | [0.2, 1.3, 2.3] | [0, 1.05, -1.5] | 44 | 0.08 | 0 | the seller under the TV |
+| 114 | glide 30 f | [-0.1, 1.22, -0.25] | [-0.2, 0.8, -1.12] | 40 | 0.1 (punch 0.3 for 14 f) | 0 | push onto the stamp |
 
 - Kicks (7 f): f144 strength 1.
 - Physics & FX: confetti: 40 paper bits (0.3 g) launched in a cone from the popper, drift down with air drag and side flutter, lie flat on the table and floor and stay. Stamp: 4 f wind-up, held, 1 f strike, 2 f squash.
@@ -149,8 +149,8 @@ Hard cuts: S05 (the cake refused) and S12 ("Khoan"); plus the S07 reaction cut i
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 177 | open | [0.1, 1.24, -1.42] | [0.12, 0.885, -0.72] | 26 | 0.15 | 8 | his laptop, from his eyes |
-| 318 | glide 34 f | [0.11, 1.1, -1.18] | [0.12, 0.92, -0.72] | 22 | 0.4 | 8 | push into the eBay badge |
+| 177 | open | [0.19, 1.17, -1.21] | [0.532, 0.879, -0.608] | 34 | 0.15 | 0 | his laptop, from his eyes |
+| 318 | glide 34 f | [0.3, 1.08, -1.02] | [0.532, 0.86, -0.608] | 28 | 0.4 | 0 | push into the eBay badge |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -165,15 +165,15 @@ Hard cuts: S05 (the cake refused) and S12 ("Khoan"); plus the S07 reaction cut i
 - Set: hq. Light: day.
 - Build: new: the HQ office: GMV board with lever, eBay sign and TCGplayer plate, desk, chair, cake table, window on the night city.
 - Blocking: Rob stands at rob_lever facing +z, his right arm (screen left) on the lever knob.
-  - rob at [0.72, -2.5], front; standing; pulls the lever f386-392; arm spreads f482; grin.
+  - rob at [0.68, -2.6], front; standing; pulls the lever f386-392; arm spreads f482; grin.
 - Action, against the words: f352-385 the board reads $987,000,000 (GMV 12 THÁNG); f386-392 he grips and pulls the lever down on 'khoe' (f389): the lever swings 50 deg; f392-479 the flaps spin, the count climbs; f480 they land on $1,000,000,000 on 'một tỷ đô' (f479-493): every flap snaps, a small dust puff off the board top; he grins and spreads his free arm.
 - Acting: Proud grin, chin up.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 352 | open | [0.5, 1.6, 1.6] | [0, 1.85, -2.7] | 46 | 0.15 | 4 | the board, the boss |
-| 440 | glide 40 f | [0.25, 1.55, 0.6] | [-0.2, 1.85, -2.8] | 42 | 0.3 (punch 0.7 for 16 f) | 6 | push on the count |
+| 352 | open | [0.15, 1.5, 2.8] | [0.1, 1.6, -2.7] | 50 | 0.06 | 0 | the board, the boss |
+| 440 | glide 40 f | [0.05, 1.55, 2.2] | [-0.05, 1.45, -2.8] | 54 | 0 | 0 | push on the count |
 
 - Kicks (7 f): f480 strength 0.6.
 - Physics & FX: the lever: a damped swing to its stop (3 deg overshoot, settles in 8 f).
@@ -195,7 +195,7 @@ Hard cuts: S05 (the cake refused) and S12 ("Khoan"); plus the S07 reaction cut i
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 508 | open | [1.25, 1.6, 0.9] | [1.35, 1.55, -2.7] | 44 | 0.2 | 4 | the window, the cake |
+| 508 | open | [1.15, 1.5, 2.4] | [1.2, 1.4, -2.7] | 46 | 0.1 | 0 | the window, the cake |
 
 - Kicks (7 f): none.
 - Physics & FX: the slice wedge tips 8 deg and stops.
@@ -217,7 +217,7 @@ Hard cuts: S05 (the cake refused) and S12 ("Khoan"); plus the S07 reaction cut i
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 560 | open | [0.25, 1.22, 0.55] | [0, 1.05, -1.3] | 36 | 0.2 | 8 | the seller and the slice |
+| 560 | open | [0.15, 1.6, 1.6] | [0, 1, -1.25] | 42 | 0.1 | 0 | the seller and the slice |
 
 - Kicks (7 f): none.
 - Physics & FX: the plate: kinematic slide 18 cm, decelerating (friction), stops dead.
@@ -239,8 +239,8 @@ Hard cuts: S05 (the cake refused) and S12 ("Khoan"); plus the S07 reaction cut i
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 616 | open | [0.45, 1.5, 0.65] | [0.4, 0.84, -1.02] | 40 | 0.15 | 6 | the table from above his eye line |
-| 662 | glide 36 f | [-0.3, 1.45, 0.5] | [-0.45, 0.86, -1] | 38 | 0.2 | 8 | to the scanner |
+| 616 | open | [0.3, 1.55, 1.7] | [0.25, 0.95, -1.2] | 46 | 0.1 | 0 | the table from above his eye line |
+| 652 | glide 42 f | [-0.5, 1.35, -0.15] | [-0.58, 0.86, -1] | 36 | 0.2 | 0 | to the scanner |
 
 - Kicks (7 f): none.
 - Physics & FX: coins: three ballistic hops (12 f each, 0.25 m apex), land in the jar and stay; the stack is 3 coins shorter.
@@ -262,8 +262,8 @@ Hard cuts: S05 (the cake refused) and S12 ("Khoan"); plus the S07 reaction cut i
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 715 | open | [0.1, 1.24, -1.42] | [0.12, 0.885, -0.72] | 24 | 0.15 | 8 | his listing |
-| 872 | cut | [0.2, 1.4, -0.15] | [0, 1.38, -1.5] | 34 | 0.3 | 10 | his face |
+| 715 | open | [0.19, 1.17, -1.21] | [0.532, 0.879, -0.608] | 32 | 0.15 | 0 | his listing |
+| 872 | cut | [0.15, 1.4, 1.4] | [0, 1.15, -1.5] | 40 | 0.15 | 0 | his face |
 
 - Kicks (7 f): f866 strength 1.
 - Physics & FX: the Direct tile: drops with gravity (accelerating) and stops dead with 2 f of squash; his tile is shoved 40 % down and stays.
@@ -287,7 +287,7 @@ Hard cuts: S05 (the cake refused) and S12 ("Khoan"); plus the S07 reaction cut i
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 900 | open | [0.1, 1.65, 5.6] | [0, 1.55, -1.6] | 46 | 0.15 | 3 | the building, the open door |
+| 900 | open | [0, 1.9, 7.8] | [0, 1.8, -1] | 46 | 0.04 | 0 | the building, the open door |
 
 - Kicks (7 f): f994 strength 0.4.
 - Physics & FX: shutter: rolls down at 0.13 m/f, the bottom bar hits the ground f994 and bounces 1 cm.
@@ -309,7 +309,7 @@ Hard cuts: S05 (the cake refused) and S12 ("Khoan"); plus the S07 reaction cut i
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1069 | open | [0.55, 1.35, 0.95] | [-0.25, 1.3, -1.4] | 40 | 0.2 | 6 | the throw |
+| 1069 | open | [0.5, 1.35, 2.2] | [-0.4, 1.1, -1.3] | 46 | 0.1 | 0 | the throw |
 
 - Kicks (7 f): none.
 - Physics & FX: the plane: a glide path, 2.4 m/s, slight climb and roll.
@@ -331,7 +331,7 @@ Hard cuts: S05 (the cake refused) and S12 ("Khoan"); plus the S07 reaction cut i
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1100 | open | [0.5, 1.6, 2.3] | [0.45, 1.45, -2.6] | 46 | 0.06 | 4 | desk and window |
+| 1100 | open | [-1, 1.6, 2.6] | [0.25, 1.4, -2.6] | 52 | 0.06 | 0 | desk and window |
 
 - Kicks (7 f): none.
 - Physics & FX: plane 1: glides down at 2 m/s, touches the desk, skids 20 cm and stops.
@@ -353,7 +353,7 @@ Hard cuts: S05 (the cake refused) and S12 ("Khoan"); plus the S07 reaction cut i
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1183 | open | [0.15, 1.55, -0.1] | [-0.38, 1, -2.1] | 40 | 0.2 | 8 | the desk top and the boss |
+| 1183 | open | [0.1, 1.7, 1.6] | [-0.35, 1, -2.05] | 42 | 0.1 | 0 | the desk top and the boss |
 
 - Kicks (7 f): f1200 strength 0.6; f1226 strength 0.6; f1255 strength 0.5.
 - Physics & FX: stamp strikes: 4 f wind-up, 1 f strike, 2 f squash.
@@ -375,7 +375,7 @@ Hard cuts: S05 (the cake refused) and S12 ("Khoan"); plus the S07 reaction cut i
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1297 | open | [0.2, 0.95, 1.2] | [0, 1.55, -1.8] | 40 | 0.3 | 4 | low angle: him and the TV |
+| 1297 | open | [0.2, 1, 2.5] | [0, 1.2, -1.8] | 48 | 0.07 | 0 | low angle: him and the TV |
 
 - Kicks (7 f): none.
 - Physics & FX: steam puffs rise 0.3 m and fade.
@@ -387,20 +387,20 @@ Hard cuts: S05 (the cake refused) and S12 ("Khoan"); plus the S07 reaction cut i
 - Gloss: You see, just imagine a market. The management charges your stall fee, bans you from bringing your own scale, then builds an identical stall right next to yours, selling exactly what you sell.
 - Spine link: 4. Viewer must get: Fee, banned scale, a copycat stall right beside his.
 - In: dissolve 10 f. Out: dissolve 8 f.
-- Set: market. Light: golden.
+- Set: market. Light: day.
 - Build: new: the market hall, his stall and the twin stall.
 - Blocking: Seller seated behind his stall. Buyer at buyer_a. The manager (Rob, armband) walks in from mgr_in (f1486-1508) to mgr_tin, then mgr_scale (f1542-1550), carries the scale off right (f1576-1592), comes back pushing the twin stall from mgr_push (f1596-1646).
   - seller at [-0.8, -1.55], front; seated behind his stall; smile -> nervous -> stern.
-  - rob at [-1, -0.38], front; bag held; takes the scale f1550; pushes the twin stall; smile.
-  - buyer at [-0.65, -0.05], front; browses, then steps to the twin f1681; neutral.
+  - rob at [-1.4, -0.35], front; bag held; takes the scale f1550; pushes the twin stall; smile.
+  - buyer at [0.12, -0.2], front; browses, then steps to the twin f1681; neutral.
 - Action, against the words: f1422-1480 calm market: the buyer browses his cards; f1517-1532 three coins hop from his tin into the manager's bag on 'thu phí sạp' (f1517, f1522, f1527); f1552 the manager lifts the brass scale off the stall on 'cấm' (f1548) and carries it off screen right; f1600-1646 the twin stall rolls in from the right on castors and bumps against the end of his stall on 'cạnh' (f1646): the scale-less stall shudders; f1657-1685 the twin's cards are the same cards; the buyer steps from buyer_a to buyer_b on 'bạn bán' (f1681-1695).
 - Acting: Seller: smile -> nervous -> stern. Manager: polite smile throughout. Buyer: neutral.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1422 | open | [1.8, 2.4, 3.4] | [-0.45, 0.95, -0.85] | 46 | 0.12 | 3 | the calm market, high |
-| 1600 | glide 40 f | [2.2, 2.3, 3.2] | [0, 0.95, -0.85] | 46 | 0.15 | 3 | room for the twin stall |
+| 1422 | open | [-2, 2.5, 4.2] | [-0.3, 0.95, -0.85] | 58 | 0.08 | 0 | the calm market, high |
+| 1600 | glide 40 f | [-1.4, 2.5, 4.3] | [-0.05, 0.95, -0.85] | 60 | 0.08 | 0 | room for the twin stall |
 
 - Kicks (7 f): f1646 strength 0.6.
 - Physics & FX: coins: three ballistic hops into the bag; twin stall: 60 kg on castors, eases in at 0.06 m/f, bumps (0.6 kick) and stops; his stall shudders 1 cm.
@@ -423,8 +423,8 @@ Hard cuts: S05 (the cake refused) and S12 ("Khoan"); plus the S07 reaction cut i
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1702 | open | [-0.2, 1.55, 2] | [-0.4, 1.5, -2.4] | 44 | 0.12 | 4 | the chair, the board |
-| 1860 | glide 40 f | [-0.35, 1.38, -0.2] | [-0.4, 1.38, -2.42] | 36 | 0.25 | 10 | Ron's pitch, low and close |
+| 1702 | open | [-0.2, 1.5, 2.8] | [-0.4, 1.45, -2.4] | 48 | 0.06 | 0 | the chair, the board |
+| 1860 | glide 40 f | [-0.35, 1.4, 1.5] | [-0.4, 1.05, -2.42] | 44 | 0.12 | 0 | Ron's pitch, low and close |
 
 - Kicks (7 f): none.
 - Physics & FX: the nameplate: a 180 deg flip on its hinge in 6 f.
@@ -432,30 +432,50 @@ Hard cuts: S05 (the cake refused) and S12 ("Khoan"); plus the S07 reaction cut i
 - Sound: chair creak f1795; footsteps out f1800-1830, in f1816-1842; chair creak f1844; nameplate flip f1848; a corporate synth pad under Ron's line.
 - After-state: Ron in the chair.
 
-### S15 · 1:06.5-1:13.6 · f1994-f2209 · "Lập tức, chủ một cửa hàng nhỏ ở South Dakota nhắn: vậy thì gặp năm mươi người bán nhỏ đi, đừng chỉ gặp mấy tài khoản to nhất."
-- Gloss: Right away, the owner of a small shop in South Dakota messaged: then go meet fifty small sellers, don't just meet the biggest accounts.
-- Spine link: 5. Viewer must get: A small shop owner answers with a message: meet fifty of us.
-- In: dissolve 8 f. Out: dissolve 8 f.
-- Set: shop. Light: golden.
-- Build: new: the shop: counter, shelves, the sign; the owner's phone with a chat (a message typed and sent).
+### S15 · 1:06.5-1:08.9 · f1994-f2068 · "Lập tức, chủ một cửa hàng nhỏ ở South Dakota nhắn:"
+- Gloss: Right away, the owner of a small shop in South Dakota messaged:
+- Spine link: 5. Viewer must get: A small shop owner takes out his phone.
+- In: dissolve 8 f. Out: dissolve 6 f (through-object: into his phone screen, seen from his eyes).
+- Set: shop. Light: day.
+- Build: new: the shop: counter, shelves, the sign, framed cards on the walls.
 - Blocking: Owner stands behind the counter at his mark, phone in both arms at his chest.
   - owner at [0, -1.4], front; standing, phone at the chest; stern.
-- Action, against the words: f1994-2060 he takes out his phone and starts typing on 'nhắn' (f2071); f2075-2140 line 1 'Vậy thì gặp 50 người bán nhỏ đi,' types; f2145-2190 line 2 'đừng chỉ gặp mấy tài khoản to nhất.'; f2196 SEND, the bubble flies up.
+- Action, against the words: f1994-2068 he looks down at his phone and starts typing on 'nhắn' (f2071).
 - Acting: Determined frown.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1994 | open | [0.35, 1.6, 2.1] | [0, 1.35, -1.4] | 42 | 0.15 | 5 | the small shop, the owner |
-| 2066 | glide 34 f | [0, 1.66, -1.4] | [0, 1.22, -1.12] | 34 | 0.15 | 6 | his screen from his eyes |
+| 1994 | open | [0.3, 1.55, 2.25] | [0, 1.2, -1.4] | 54 | 0.06 | 0 | the small shop, the owner (wide) |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
 - Light & mood: warm shop light.
+- Sound: shop ambience; first key taps.
+- After-state: Phone in hand.
+
+### S16 · 1:08.9-1:13.6 · f2068-f2209 · "vậy thì gặp năm mươi người bán nhỏ đi, đừng chỉ gặp mấy tài khoản to nhất."
+- Gloss: then go meet fifty small sellers, don't just meet the biggest accounts.
+- Spine link: 5. Viewer must get: His message, typed and sent.
+- In: dissolve 6 f. Out: dissolve 8 f.
+- Set: shop. Light: day.
+- Build: reuse the shop; his phone with a chat (the message typed and sent), seen only from his side.
+- Blocking: POV: his eyes on his phone (he is not drawn).
+- Action, against the words: f2075-2140 line 1 'Vậy thì gặp 50 người bán nhỏ đi,' types; f2145-2190 line 2 'đừng chỉ gặp mấy tài khoản to nhất.'; f2196 SEND, the bubble flies up.
+- Acting: none.
+- Camera keys:
+
+| f | move | pos | look | fov | push %/f | blur px | why |
+|---|---|---|---|---|---|---|---|
+| 2068 | open | [0, 1.66, -1.4] | [0, 1.22, -1.12] | 23 | 0.08 | 0 | his screen from his eyes |
+
+- Kicks (7 f): none.
+- Physics & FX: none.
+- Light & mood: warm shop light; the screen glow.
 - Sound: key taps; send whoosh f2196.
 - After-state: Message sent.
 
-### S16 ★ · 1:13.6-1:18.7 · f2209-f2360 · "Một tỷ đô đã về. Còn cái ghế cho người bán thì vẫn đang tìm."
+### S17 ★ · 1:13.6-1:18.7 · f2209-f2360 · "Một tỷ đô đã về. Còn cái ghế cho người bán thì vẫn đang tìm."
 - Gloss: The billion dollars has arrived. The chair for the sellers is still being searched for.
 - Spine link: 6. Viewer must get: Money on the table, every chair taken, the small seller standing.
 - In: dissolve 8 f. Out: end.
@@ -464,15 +484,15 @@ Hard cuts: S05 (the cake refused) and S12 ("Khoan"); plus the S07 reaction cut i
 - Blocking: Ron seated at the head; the four VIPs seated; the seller stands at the near end (BOARD seller), turning his look left and right.
   - ron at [0, -3], front; seated at the head; grin.
   - vip at [-0.95, -2], front; seated x4; grin.
-  - seller at [0.05, 1.15], front; standing, looks left f2263, right f2285, shrugs f2315; nervous.
+  - seller at [0.95, 0.85], front; standing, looks left f2263, right f2285, shrugs f2315; nervous.
 - Action, against the words: f2222-2237 the money sack drops from above onto the table on 'về' (f2237): a thump, it slumps and stays; f2250-2330 glide to the seller at the table end: he looks left (f2263), right (f2285), at the lens (f2310) on 'vẫn đang tìm' — no chair for him; end on his shrug.
 - Acting: VIPs and Ron grin; the seller nervous, then a shrug.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 2209 | open | [0, 2.45, 3.4] | [0, 0.95, -1.3] | 44 | 0.12 | 3 | the whole table |
-| 2252 | glide 40 f | [0.75, 1.5, 3.3] | [0.05, 1.3, 0.9] | 36 | 0.18 | 10 | the seller with no chair |
+| 2209 | open | [0, 2.45, 3.4] | [0, 0.95, -1.3] | 44 | 0.12 | 0 | the whole table |
+| 2252 | glide 40 f | [1.6, 1.45, 3.3] | [0.75, 0.85, 0.6] | 48 | 0.06 | 0 | the seller with no chair |
 
 - Kicks (7 f): f2237 strength 0.8.
 - Physics & FX: the sack: falls 0.9 m, slumps (squash 12 %), stays.

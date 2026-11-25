@@ -59,7 +59,7 @@ Account skills they call: `vn-news-script` (the script), `story-reel-director` (
 | Goldenrod heist (masked burglars, a rented minivan, Justice IL) | `GoldenrodReel` (2370 f) | `videos/goldenrod-heist/` | v1 built, ready to render (22 Nov 2026) |
 | Gengar unpaid ($576k Pristine 10, marked unpaid) | `GengarReel` (2420 f) | `videos/gengar-unpaid/` | v1 built, ready to render (22 Nov 2026) |
 | Lucas DeRuyter's big collection ("easy as candy") | `LucasReel` (2430 f) | `videos/lucas-big-collection/` | v1 built, ready to render (22 Nov 2026) |
-| TCGplayer sellers (the billion and the missing chair) | `TcgplayerReel` (2360 f) | `videos/tcgplayer-sellers/` | v1 built, ready to render (22 Nov 2026) |
+| TCGplayer sellers (the billion and the missing chair) | `TcgplayerReel` (2360 f) | `videos/tcgplayer-sellers/` | v2 re-edited to the 25 Nov quality bar, ready to render (25 Nov 2026) |
 | Avery the Poke Kid's Jirachi (scalpers) | `JirachiReel` (2250 f) | `videos/avery-jirachi-scalpers/` | v1 built, ready to render (22 Nov 2026) |
 | Fossil sheet in the loft (uncut 1999 holo sheet) | `FossilReel` (2290 f) | `videos/fossil-sheet-loft/` | v1 built, ready to render (21 Nov 2026) |
 | Monaco auction (sealed Delta Species box) | `MonacoReel` (2280 f) | `videos/monaco-auction/` | v2 rendered (glitch fix: z-fighting) on the Mac (21 Nov 2026); Chocobo and Fanatics still need the same fix |
