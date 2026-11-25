@@ -18,6 +18,7 @@ Workflow skills in this repo (`.claude/skills/`, also typed as commands): `/stor
 Account skills they call: `vn-news-script` (the script), `story-reel-director` (beats, plan, direction), `cartoon-3d-short` (the look; the original kit is in `templates/`, `references/` and `SKILL.md`).
 
 ## Hard rules
+- **The quality bar (25 Nov 2026) comes first: `docs/rules.md` section 0.** The rules: the reference reels are the bar; always vertical; no blur; no shadows; bright reference palettes; blue skies with clouds; dressed sets; much wider cameras with no cut-off subjects; sharp large card scans; real slab photos (label edits via Grok); never Higgsfield. The characters are approved: keep them. Every built reel gets re-edited to this bar, Goldenrod first as the pilot.
 - **Logic and physics above everything**; pixel-perfect design second. Exaggeration stays physically possible.
 - **Characters** are the prebuilt 2D toon stick figures: plain line limbs, no hands or feet, fixed limb length.
 - **Real TCG card scans** in every reel, fetched fresh and relevant to the story. Never drawn stand-ins.

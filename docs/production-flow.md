@@ -41,8 +41,15 @@ Each reel runs in one session; the user sets model and effort by hand. To save c
 1. Sweep as contact sheets: `scripts/sweep.command <Reel>Reel 60 <beat frames>` renders one still every 60 frames plus every beat and hero moment on the Mac GPU (about a second each) and tiles them 3x3 into `out/<Reel>Reel/sweep/sheet_*.jpg`; `sheets.txt` lists the frames on each sheet. Look at the sheets; open a single still (`f_<frame>.jpg` in the same folder) only to inspect a detail.
 2. In a cloud session there is no GPU: `COMP=<Reel>Reel node scripts/stills.mjs out/<reel>/<prefix>_ every:60,<f1>,…` (about 20 s each), then `python3 scripts/sheet.py out.jpg 3 files…`.
 3. **Flicker check** (stills can't show it): `scripts/flickcheck.command <Reel>Reel` renders five frames in a row every 30 frames and measures pixels that pop away and back (z-fighting, popping shadows); it also prints the set's `[coplanar]` count, which must be 0. Look at every run it lists. Fast camera moves can show up as short runs; pass them only after looking at the frames. Feedback rounds: `scripts/flickcheck.command <Reel>Reel 0 <frames>`.
-4. Fix anything that breaks the rules on the sheets. Fix anything that breaks the rules, and log what changed in `notes.md`.
-5. Full-resolution video renders in the cloud are far too slow (about 2.5 min per frame with no GPU). Renders go to the Mac.
+4. **Quality bar** (`docs/rules.md` section 0), checked on every sheet next to a reference-reel frame:
+   - no blur and no shadows;
+   - bright reference palette, average saturation in the reference range of 25-39 (measure with the Enzo tools Python);
+   - blue sky with clouds outdoors;
+   - dressed sets;
+   - no subject, head or body cut by the frame edge;
+   - cards readable, slabs real.
+5. Fix anything on the sheets that breaks the rules, and log what changed in `notes.md`.
+6. Full-resolution video renders in the cloud are far too slow (about 2.5 min per frame with no GPU). Renders go to the Mac.
 
 ## 6. Render (Mac)
 1. Push, then give the user the command:

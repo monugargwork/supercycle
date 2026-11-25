@@ -2,6 +2,42 @@
 
 One page of rules every reel follows. Where an older note disagrees, this page wins. When the user repeats a reaction, it gets promoted here; when he rejects something, it goes in `taste/rejected.md`.
 
+## 0. The quality bar (client verdict, 25 Nov 2026)
+The client found the first nine reels unprofessional. Their four complaints:
+- colours dull;
+- very little detail;
+- TCG cards blurred and unrecognisable;
+- cameras so tight that characters and main subjects get cut off.
+
+The characters were explicitly approved: keep them exactly as they are. These rules come first, ahead of anything below:
+- **The four reference reels (`~/Downloads/reference`) are the bar.** Copy their look; don't invent our own. Every check sheet is judged next to a reference frame. Their average saturation is 25-39; ours was 20-26.
+- **Only what we can do perfectly.** Leave out anything that can't be done perfectly; no half measures.
+- **Always vertical (9:16).** Sets and layouts are designed for the tall frame: subjects stack top to bottom or front to back, never side by side as if for landscape. (Goldenrod S2 put the shop sign and the town sign side by side, and both got cut.)
+- **No blur of any kind.** No depth of field, no lens blur, no defocus: every frame sharp edge to edge. Remove DOF from the base reel and the plans.
+- **No shadows at all.** No cast shadows from characters, props or sets; they came out inaccurate. Ground things by contact: feet exactly on the floor, props resting on surfaces.
+- **Bright, aesthetic colours like the references.** The colour choices were bad, not only the saturation. Use sky blue, grass green, warm wood, cream, red-and-white stripes, strong primaries under bright sun.
+  - Build each set's palette from colours sampled from the reference reels. Greys, near-black navy and muddy or desaturated purples are banned (`taste/rejected.md`).
+  - Daylight or warm interiors by default. A night story is rich blue with warm practical lights, never grey-blue.
+  - The grade adds no blue tint.
+- **Blue skies with clouds** behind every outdoor shot: a blue gradient with puffy white inked clouds, built in code so every shot and reel matches.
+- **Detail everywhere.** No empty walls, bare floors or flat-colour backgrounds. Every set is dressed: shelves full of product, posters, signs, wood/tile/carpet textures, and distant buildings or landscape behind.
+- **Cameras much wider.** About 80% of shots were cropped too tight.
+  - Medium-wide is the default: characters full body, with the set around them.
+  - Every new location opens on a wide shot.
+  - Close-ups at most about 1 shot in 4, only where the moment needs one (a reaction, a card reveal).
+  - Every shot lists its main subjects in `plan.json`, and no subject, character head or body may be cut by the frame edge. The check must fail the shot, not rely on someone noticing.
+- **Cards sharp and recognisable.**
+  - Use the largest scan available (aim for 1000 px or more on the long side; the old scans were about 600x825). Draw it at at least twice its on-screen size, with mipmaps on, in a material that keeps its true colours.
+  - When the voiceover names a card, it fills at least 40% of the frame width for 1.5 s or more, sharp and brightly lit.
+- **Real slabs, never drawn ones.**
+  - Use a real photo of the exact slab (auction lot pages, PSA/CGC cert lookups, eBay listings), cut out cleanly and placed as a flat object with a glass shine.
+  - If only a label must change (grade, cert number, card name), edit the real photo with Grok Imagine. The CLI is signed in on the Mac: `~/.grok/bin/grok -p "…" --tools image_edit --always-approve --max-turns 4`.
+  - The prompt names exactly what may change and forbids everything else. Zoom in and check every letter against the real card and label; replace Grok's watermark corner with pixels from the original photo; redo if any text is smeared.
+  - Each Grok run uses the user's plan, so only run it for slabs that need it.
+- **Never use Higgsfield** in this project: it is expensive. Only the user asks for it.
+- **Python image tools:** `~/Downloads/Enzo Projects/.venv-tools/bin/python` (Pillow, OpenCV, numpy) for palette, saturation and resolution checks.
+- **Pilot first:** rework one reel (Goldenrod) to these rules, show before / after / reference side by side, and roll out to the other reels only after the user approves.
+
 ## 1. Logic and physics come first
 - Logic and physics beat everything else; pixel-perfect design comes second. What a character sees on a screen must make sense from where it faces.
 - Cartoon exaggeration must still be possible for the body and the world. A mouth can gape, but it stays on the face (no jaw past the chin, nothing reaching the floor).
@@ -23,14 +59,14 @@ One page of rules every reel follows. Where an older note disagrees, this page w
 - Sources go in `videos/<slug>/cards/SOURCES.txt`. Hosts that work from the cloud shell: `images.pokemontcg.io` and `cdn6966.templcdn.com` (pokumon.com).
 
 ## 4. Direction
-- Every detail of every scene is specified, camera positions included. `plan.json` is the source of truth; `story.ts` reads its camera keys, glides, pushes, kicks, depth of field, dissolves and titles. Numbers are never retyped in code.
+- Every detail of every scene is specified, camera positions included. `plan.json` is the source of truth; `story.ts` reads its camera keys, glides, pushes, kicks, dissolves and titles (no depth of field: section 0). Numbers are never retyped in code.
 - Act, don't illustrate: every line gets a verb, a cause, a consequence and weight.
 - The camera travels and rarely cuts. Time jumps dissolve (4-10 f); hard cuts are for punches (3 or fewer per reel).
 - 2-3 hero moments get the full treatment; everything else is clear and in motion.
 - The full grammar is in the `story-reel-director` skill.
 
 ## 5. Frame and text
-- 9:16 safe area: the subject inside it at all times (`scripts/plan_check.py`).
+- 9:16 safe area: every listed subject fully inside it at all times (`scripts/plan_check.py`); see section 0 for camera width.
 - House titles: Enzo `Title2`, Bolota Bold, red box, in the zone at 13-23 % of the frame height. Keep key action out of that zone while a title is up.
   - Bolota lacks Ơ Ư Ầ Ệ Ỉ Ớ, so titles use digits and plain Latin only.
   - Title2 exit animations linger about 20 f after `out`: end titles early enough that they don't ghost over a face or a plate.
@@ -41,7 +77,7 @@ One page of rules every reel follows. Where an older note disagrees, this page w
 
 ## 6. Look and build
 - Stay on three.js + Remotion (Blender was considered and parked).
-- Shadows are light or absent; characters cast no shadows. Interiors get ceilings that cast no shadow, so no sky shows through.
+- No shadows at all (section 0). Interiors still get ceilings, so no sky shows through.
 - A camera never sits inside geometry, and coplanar surfaces never flicker (raise one plane).
 - **No flicker (the Monaco v1 "glitch", 21 Nov 2026).** Two faces in one plane (a panel on a wall, a rim on a plinth top, a shelf against a back board) z-fight: the GPU can't tell which is in front, and the winner changes frame to frame as the camera moves. Stills can't show it. So:
   - Sets build boxes with the audited `box()` helper (the Monaco `sets.ts`): every box is pulled in by its own 0.5-4.6 mm, chosen so no face lands in the plane of another, and the build prints `[coplanar] N coplanar overlaps`. N must be 0.
