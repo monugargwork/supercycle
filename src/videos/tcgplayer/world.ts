@@ -70,7 +70,7 @@ export class World {
     for (const m of [this.sunDisc, this.sunHalo]) { m.frustumCulled = false; m.layers.set(NOINK); R.add(m); }
     this.hemi = new THREE.HemisphereLight("#cfe6ff", "#6c5c8c", 1.1);
     this.sun = new THREE.DirectionalLight("#fff0d6", 2.6);
-    this.sun.castShadow = true;
+    this.sun.castShadow = false; // quality bar: no shadows at all
     this.sun.shadow.mapSize.set(4096, 4096);
     R.add(this.hemi, this.sun, this.sun.target);
     this.cloudMaps = { day: [0, 1, 2, 3].map((k) => cloudHD(k, LOOK.day.cloud)), golden: [0, 1, 2, 3].map((k) => cloudHD(k, LOOK.golden.cloud)) };
@@ -122,7 +122,8 @@ export class World {
     const s = SHOTS[id - 1], L = LIGHTS[s.light], K = LOOK[s.light];
     const c = camAt(id, f);
     cam.position.set(...c.pos); cam.up.set(0, 1, 0); cam.lookAt(...c.look); cam.rotateZ(c.roll);
-    cam.fov = c.fov; cam.near = c.pos[1] > 20 ? 1.0 : 0.12; // 0.12 m (not 0.05): twice the depth precision, less z-fighting far away cam.far = 1500; cam.updateProjectionMatrix(); cam.updateMatrixWorld();
+    cam.fov = c.fov; cam.near = c.pos[1] > 20 ? 1.0 : 0.12; // 0.12 m (not 0.05): twice the depth precision, less z-fighting far away
+    cam.far = 1500; cam.updateProjectionMatrix(); cam.updateMatrixWorld(); // (was swallowed by the comment above in the base reels: the plan's fov never applied)
     const focus = V(...c.look), dist = cam.position.distanceTo(focus);
     cam.layers.enable(NOINK);
     // ---- light rig ----
@@ -138,8 +139,8 @@ export class World {
     const sc = this.sun.shadow.camera;
     sc.left = -Rr; sc.right = Rr; sc.top = Rr; sc.bottom = -Rr; sc.near = 20; sc.far = 480; sc.updateProjectionMatrix();
     this.sun.shadow.bias = L.bias; this.sun.shadow.normalBias = L.normalBias * (Rr / 12);
-    TONE.uLitCol.value.set(...L.lit); TONE.uShadeCol.value.set(...L.shade); TONE.uShadeLift.value.set(...L.lift);
-    TONE.uLambert.value = L.lambert; TONE.uSideK.value = L.sideK; TONE.uTerm.value = L.term; TONE.uBounce.value.set(...K.bounce); TONE.uSat.value = K.sat;
+    TONE.uLitCol.value.set(...L.lit); TONE.uShadeCol.value.set(...BRIGHT.shade); TONE.uShadeLift.value.set(...BRIGHT.lift); // warm, bright shading (no violet shade)
+    TONE.uLambert.value = L.lambert; TONE.uSideK.value = L.sideK; TONE.uTerm.value = L.term; TONE.uBounce.value.set(...K.bounce); TONE.uSat.value = BRIGHT.sat;
     CHAR.uCharTint.value.set(...L.charTint); CHAR.uCharShade.value = L.charShade; CHAR.uGrad.value = L.charGrad;
     CHAR.uBodyGrad.value = L.bodyGrad; CHAR.uSideTint.value.set(...L.sideTint);
     // ---- sky, fog, sun disc, clouds ----
@@ -220,7 +221,7 @@ export class World {
   private pose(id: number, f: number) {
     const S = this.S, place = SHOTS[id - 1].place, H = HOMEP, Q = HQP;
     if (place === "home") {
-      const pg = pageAt(id, f); redraw(S.laptop, JSON.stringify(pg), (p) => laptopPage(p, pg));
+      const pg = pageAt(id, f); redraw(S.laptop, JSON.stringify(pg), (p) => { p.g.scale(2.5, 2.5); laptopPage(p, pg); });
       const tvv = tvAt(id, f); redraw(S.tv, `${tvv.v}|${tvv.up}`, (p) => tvPage(p, tvv.v, tvv.up));
       const bs = id < 6 || (id === 6 && f < BLOCK6) ? 0 : id === 6 && f < OFF6 ? 1 : 2, fl = id === 6 && f >= BLOCK6 && f < BLOCK6 + 6 ? 1 : 0;
       redraw(S.bot, `${bs}|${fl}`, (p) => botScreen(p, bs, fl));
@@ -262,7 +263,7 @@ export class World {
     if (place === "market") { S.twin.position.set(twinX(id, f), 0, 0); }
     if (place === "shop") {
       const ph = S.phoneMesh;
-      if (f >= 2060) {
+      if (f >= 2068) {
         ph.visible = true; ph.position.set(...(SHP.phone as [number, number, number])); ph.up.set(0, 1, 0);
         ph.parent!.updateMatrixWorld(true); ph.lookAt(...OWNER_EYE());
         const typed = TYPE15.map(([a, b]) => clamp01((f - a) / (b - a))), sent = f >= SEND15 ? easeOut((f - SEND15) / 10) : 0;
@@ -284,12 +285,15 @@ export class World {
 }
 
 const SYRP_DH = 2.8;
+/** quality bar: warm neutral shade side and a richer saturation (the reference reels sit at 25-39 mean saturation) */
+const BRIGHT = { shade: [0.62, 0.58, 0.54] as [number, number, number], lift: [0.1, 0.08, 0.05] as [number, number, number], sat: 1.3 };
 const BDP_SACK = [0.0, 0.75, -1.3];
 const k01 = (f: number, a: number, b: number) => clamp01((f - a) / (b - a));
 /** the laptop page this frame */
 const pageAt = (id: number, f: number): Page => {
   if (id === 1) return { mode: "market", head: 1 };
-  if (id === 2) return { mode: "market", head: 0.4 + 0.6 * k01(f, HEAD2 - 6, HEAD2 + 4), magic: Math.min(4, Math.max(0, Math.floor((f - MAGIC2) / 3) + 1)), poke: Math.min(4, Math.max(0, Math.floor((f - POKE2) / 3) + 1)), badge: Math.round(easeOut(k01(f, BADGE2, BADGE2 + 10)) * 20) / 20 };
+  if (id === 2 && f >= MAGIC2 - 8 && f < BADGE2 + 10) return { mode: "market", hero: f < POKE2 ? "mtg_bolt" : "zard151" };
+  if (id === 2) return { mode: "market", head: 0.4 + 0.6 * k01(f, HEAD2 - 6, HEAD2 + 4), magic: Math.min(4, Math.max(0, Math.floor((f - MAGIC2) / 3) + 1)), poke: Math.min(4, Math.max(0, Math.floor((f - POKE2) / 3) + 1)), badge: Math.round(easeOut(k01(f, BADGE2 + 10, BADGE2 + 20)) * 20) / 20 };
   if (id === 7) { const fall = k01(f, DROP7[0], DROP7[1]); return { mode: "listing", drop: Math.round(Math.min(1, fall * fall) * 60) / 60, slam: f >= DROP7[1] ? Math.round(easeOut(k01(f, DROP7[1], DROP7[1] + 5)) * 20) / 20 : 0 }; }
   if (id > 7) return { mode: "listing", drop: 1, slam: 1 };
   return { mode: "listing" };

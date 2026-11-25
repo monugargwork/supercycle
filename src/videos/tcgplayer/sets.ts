@@ -279,7 +279,22 @@ const ribbed2 = () => ctex("rollup2", 256, 256, (g) => {
   g.fillStyle = "#b9bec6"; g.fillRect(0, 0, 256, 256);
   for (let y = 0; y < 256; y += 16) { g.fillStyle = "rgba(60,64,76,0.45)"; g.fillRect(0, y, 256, 3); g.fillStyle = "rgba(255,255,255,0.35)"; g.fillRect(0, y + 3, 256, 2); }
 });
-const cardTexture = (name: string) => ctex("card" + name, 360, 504, (g) => { g.clearRect(0, 0, 360, 504); scan(g, name, 0, 0, 360, 504); });
+const stripeWall = (key: string, a: string, b: string) => ctex("stripeW" + key, 512, 512, (g, r) => {
+  for (let i = 0; i < 16; i++) { g.fillStyle = i % 2 ? a : b; g.fillRect(i * 32, 0, 32, 512); }
+  blot(g, r, 512, 512, 10, "255,255,255", 0.05, 120);
+});
+/** blue sky with puffy white inked clouds (quality bar: every window and outdoor shot) */
+const cloudSky = (key: string, top = "#3f86e0", bot = "#bfe0fb") => ctex("cloudSky" + key, 512, 512, (g) => {
+  const gr = g.createLinearGradient(0, 0, 0, 512); gr.addColorStop(0, top); gr.addColorStop(1, bot); g.fillStyle = gr; g.fillRect(0, 0, 512, 512);
+  const puff = (cx: number, cy: number, s: number) => {
+    const bl = [[0, 0, 1], [-0.9, 0.25, 0.7], [0.9, 0.25, 0.75], [-0.4, -0.35, 0.75], [0.45, -0.3, 0.65]];
+    g.fillStyle = "#3a4a6a"; for (const [dx, dy, r] of bl) { g.beginPath(); g.arc(cx + dx * s, cy + dy * s, r * s + 4, 0, Math.PI * 2); g.fill(); }
+    g.fillStyle = "#ffffff"; for (const [dx, dy, r] of bl) { g.beginPath(); g.arc(cx + dx * s, cy + dy * s, r * s, 0, Math.PI * 2); g.fill(); }
+    g.fillStyle = "#e3ecf8"; g.fillRect(cx - 1.6 * s, cy + 0.45 * s, 3.2 * s, 0.5 * s);
+  };
+  puff(130, 150, 46); puff(380, 110, 38); puff(300, 330, 30);
+});
+const cardTexture = (name: string) => ctex("card" + name, 732, 1024, (g) => { g.clearRect(0, 0, 732, 1024); scan(g, name, 0, 0, 732, 1024); });
 
 export const buildSets = (root: THREE.Object3D): Sets => {
   const groups: Record<string, THREE.Group> = {};
@@ -315,7 +330,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   // ===== THE WORKROOM =====
   SETL = "home";
   const H = HOMEP, home = G("home", ORIGIN.home);
-  shell(home, 2.4, 2.4, 2.6, lam("homeFloor", () => ({ map: rep(woodTex("home", "#9a7450", "rgba(40,25,15,0.5)"), 3, 3) })), lam("homeWall", () => ({ map: paintWall("home", "#b9c9b0") })), "#eef0e8");
+  shell(home, 2.4, 2.4, 2.6, lam("homeFloor", () => ({ map: rep(woodTex("home", "#c98a4e", "rgba(90,50,20,0.45)"), 3, 3) })), lam("homeWall", () => ({ map: rep(stripeWall("home", "#f6e7bf", "#f0dcac"), 3, 2) })), "#fbf4e4");
   let b = new Batch();
   const [tx0, tx1, tz0, tz1] = H.table;
   box(b, birch, tx0, TY - 0.04, tz0, tx1, TY, tz1);
@@ -338,15 +353,29 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   for (const y of [0.9, 1.4, 1.9]) box(b, C("#e9e4d6"), 1.0, y - 0.02, -2.38, 2.3, y, -2.1);
   const stockCols = ["#2f5fb4", "#c23a32", "#e7a43a", "#2f9a55", "#7a3fb4", "#1d2a44"];
   for (let r = 0; r < 3; r++) for (let i = 0; i < 6; i++) { const x = 1.05 + i * 0.2, y = 0.9 + r * 0.5; box(b, C(stockCols[(i + r) % 6]), x, y, -2.33, x + 0.16, y + 0.24 + 0.04 * ((i + r) % 2), -2.14); }
-  windowOn(b, home, "x", -2.4, 1, H.window[2], 1.0, 2.1, H.window_w, skyPanel("homeDay", "#8cc0ee", "#e8f2f8"), white);
+  windowOn(b, home, "x", -2.4, 1, H.window[2], 1.0, 2.1, H.window_w, cloudSky("home"), white);
+  // dressing: a rug, a plant by the window, shipping boxes in the corner, a desk lamp, a wainscot rail
+  box(b, C("#c23a32"), -1.3, 0, -1.9, 1.3, 0.008, 0.2); box(b, C("#f2c84a"), -1.15, 0.008, -1.75, 1.15, 0.012, 0.05);
+  cyl(b, C("#c9744a"), -2.0, 0, 0.6, 0.16, 0.2, 0.36, 14); sph(b, C("#4fa548"), -2.0, 0.62, 0.6, 0.3); sph(b, C("#3d8f45"), -1.9, 0.86, 0.5, 0.2);
+  for (const [x, z, y0, w] of [[1.7, 1.6, 0, 0.5], [1.75, 1.6, 0.4, 0.4], [2.05, 1.1, 0, 0.45]]) box(b, C("#c99a62"), x - w / 2, y0, z - w / 2, x + w / 2, y0 + 0.4, z + w / 2);
+  cyl(b, C("#2f5fb4"), -0.75, TY, -0.62, 0.07, 0.07, 0.02, 14); cyl(b, C("#2f5fb4"), -0.75, TY + 0.02, -0.62, 0.01, 0.01, 0.32, 8); cyl(b, C("#f2c84a"), -0.75, TY + 0.3, -0.62, 0.1, 0.04, 0.12, 14);
+  for (const x of [-2.4, 2.4]) box(b, C("#a8703f"), x - (x < 0 ? 0 : 0.03), 0.95, -2.39, x + (x < 0 ? 0.03 : 0), 1.0, 2.39);
+  box(b, C("#a8703f"), -2.39, 0.95, -2.4, 2.39, 1.0, -2.37);
   b.build(home);
   // laptop lid + screen (faces the seller, -z; tilted back)
-  const laptop = canvasMat(1024, 648);
+  const laptop = canvasMat(2560, 1620); // drawn at 2.5x the page's design size: the cards stay sharp
   { const lap = new THREE.Group(); lap.position.set(lx, TY, lz); lap.rotation.y = H.laptop_yaw; home.add(lap); // local +z faces the seller
     mesh(new THREE.BoxGeometry(0.34, 0.015, 0.24), C("#9aa0aa"), lap, 0, 0.0075, 0); mesh(new THREE.BoxGeometry(0.3, 0.002, 0.12), C("#5a606c"), lap, 0, 0.016, 0.03);
     const lid = new THREE.Group(); lid.position.set(0, 0.015, -0.12); lid.rotation.x = -H.screen_tilt; lap.add(lid);
     mesh(new THREE.BoxGeometry(0.35, 0.225, 0.008), C("#9aa0aa"), lid, 0, 0.1125, -0.005);
     const sc = plane(H.screen_size[0], H.screen_size[1], basicC(laptop.tex), lid, 0, 0.1125, 0.0012); sc.castShadow = false; }
+  const frameCard = (parent: THREE.Object3D, nm: string, x: number, y: number, z: number, h: number, ry = 0) => {
+    const g2 = new THREE.Group(); g2.position.set(x, y, z); g2.rotation.y = ry; parent.add(g2);
+    mesh(new THREE.BoxGeometry(h * 0.716 + 0.06, h + 0.06, 0.02), C("#8a5a34"), g2, 0, 0, -0.012);
+    mesh(new THREE.PlaneGeometry(h * 0.716 + 0.03, h + 0.03), C("#fbf7ec"), g2, 0, 0, -0.0005);
+    const m = mesh(new THREE.PlaneGeometry(h * 0.716, h), new THREE.MeshBasicMaterial({ map: cardTexture(nm), transparent: true, alphaTest: 0.5 }), g2, 0, 0, 0.002); m.castShadow = false;
+  };
+  frameCard(home, "zard151", -1.2, 1.65, -2.38, 0.5); frameCard(home, "mtg_serra", 1.25, 2.15, -2.38, 0.36); frameCard(home, "blast151", 2.37, 1.7, -0.6, 0.5, -Math.PI / 2); frameCard(home, "venu151", 2.37, 1.7, 0.4, 0.5, -Math.PI / 2);
   const tv = canvasMat(1024, 576);
   plane(tvw, tvh, basicC(tv.tex), home, tvx, tvy, tvz + 0.018).castShadow = false;
   const bot = canvasMat(256, 160);
@@ -369,7 +398,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   // ===== HQ =====
   SETL = "hq";
   const Q = HQP, hq = G("hq", ORIGIN.hq);
-  shell(hq, 3.0, 3.0, 3.4, lam("hqFloor", () => ({ map: rep(carpetT("hq", "#5a5f6a"), 4, 4) })), lam("hqWall", () => ({ map: paintWall("hq", "#4a556b") })), "#3a4050");
+  shell(hq, 3.0, 3.0, 3.4, lam("hqFloor", () => ({ map: rep(carpetT("hq", "#b8322f"), 4, 4) })), lam("hqWall", () => ({ map: rep(woodTex("hqw", "#c98a4e", "rgba(90,50,20,0.4)"), 2, 2) })), "#f6ead2");
   b = new Batch();
   const [bcx, bcy, bcz] = Q.board, [bw, bh] = Q.board_size;
   box(b, steel, bcx - bw / 2 - 0.05, bcy - bh / 2 - 0.05, -3.0, bcx + bw / 2 + 0.05, bcy + bh / 2 + 0.05, bcz + 0.02);
@@ -384,6 +413,10 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   const [px0, py0, pz0] = Q.plate;
   box(b, C("#1d2a44"), px0 - 0.45, py0 - 0.08, pz0 - 0.02, px0 + 0.45, py0 + 0.08, pz0 + 0.02);
   for (const dx of [-0.35, 0.35]) box(b, steel, px0 + dx - 0.006, py0 + 0.08, pz0 - 0.006, px0 + dx + 0.006, Q.ebay[1] - 0.12, pz0 + 0.006);
+  // dressing: bookshelves of colourful binders on the left wall, plants, a cream wainscot
+  for (const y of [0.5, 1.0, 1.5, 2.0]) box(b, C("#7a4a28"), -2.99, y - 0.03, -2.6, -2.62, y, -0.6);
+  for (let r = 0; r < 4; r++) for (let i = 0; i < 9; i++) { const z = -2.55 + i * 0.21; box(b, C(["#e2433b", "#3f6fd8", "#f2b33a", "#5aa64a", "#d36ac9"][(i + r) % 5]), -2.97, 0.5 + r * 0.5, z, -2.66, 0.5 + r * 0.5 + 0.3 + 0.05 * ((i + r) % 2), z + 0.16); }
+  for (const [x, z] of [[-2.5, 0.6], [2.5, -1.2]]) { cyl(b, C("#c9744a"), x, 0, z, 0.2, 0.24, 0.44, 14); sph(b, C("#4fa548"), x, 0.8, z, 0.36); sph(b, C("#3d8f45"), x + 0.1, 1.1, z - 0.1, 0.24); }
   // ceiling light panels
   for (const x of [-1.5, 0, 1.5]) box(b, lam("hqPanel", () => ({ color: "#ffffff", emissive: "#8a93a8" })), x - 0.4, 3.36, -1.4, x + 0.4, 3.395, -0.6);
   b.build(hq);
@@ -398,6 +431,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   mesh(new THREE.BoxGeometry(0.07, 0.07, 0.05), ink, lever, 0, 0, -0.02);
   mesh(new THREE.BoxGeometry(0.02, 0.24, 0.02), steel, lever, 0, 0.12, 0.01); mesh(new THREE.SphereGeometry(0.035, 14, 10), C("#d12a2a"), lever, 0, 0.25, 0.01);
   // the nameplate (pivots on its bottom edge) and the desk papers
+  frameCard(hq, "zard151", 2.97, 1.8, -1.0, 0.5, -Math.PI / 2); frameCard(hq, "mtg_serra", 2.97, 1.8, 0.0, 0.5, -Math.PI / 2);
   const name = canvasMat(512, 136);
   const nameG = new THREE.Group(); nameG.position.set(Q.nameplate[0], TY, Q.nameplate[2]); hq.add(nameG);
   { const inner = new THREE.Group(); inner.position.y = 0.04; nameG.add(inner); mesh(new THREE.BoxGeometry(0.3, 0.08, 0.03), ink, inner, 0, 0, 0);
@@ -437,6 +471,10 @@ export const buildSets = (root: THREE.Object3D): Sets => {
     box(b, C("#2f5fb4"), x - 0.25, Y.bench_y, Y.bench_z - 0.15, x + 0.05, Y.bench_y + 0.03, Y.bench_z + 0.1);
   }
   for (const x of [-1.2, 0, 1.2]) box(b, lam("syrPanel", () => ({ color: "#ffffff", emissive: "#d8d2b8" })), x - 0.4, 2.9, -3.6, x + 0.4, 2.945, -2.2);
+  // dressing: lit windows beside the door, flower planters, two street trees, a cornice
+  for (const x of [-3.0, 2.2]) { box(b, white, x - 0.05, 1.1, wz, x + 0.85, 2.45, wz + 0.04); box(b, lam("syrWin", () => ({ color: "#ffe9a8", emissive: "#a8823a" })), x, 1.15, wz + 0.04, x + 0.8, 2.4, wz + 0.05); box(b, C("#5aa64a"), x - 0.05, 1.0, wz, x + 0.85, 1.12, wz + 0.25); for (let i = 0; i < 6; i++) sph(b, C(["#e2433b", "#f2c84a", "#d36ac9"][i % 3]), x + 0.06 + i * 0.14, 1.16, wz + 0.15, 0.06); }
+  box(b, C("#e9e4d6"), -4.5, 4.45, wz, 4.5, 4.62, wz + 0.15);
+  for (const x of [-3.6, 3.9]) { cyl(b, C("#8a5a34"), x, 0, 1.4, 0.09, 0.07, 2.2, 10); sph(b, C("#4fa548"), x, 2.6, 1.4, 0.75); sph(b, C("#3d8f45"), x + 0.4, 2.3, 1.2, 0.5); }
   // lamp post
   cyl(b, C("#3a3d46"), 3.2, 0, 1.9, 0.06, 0.05, 4.2, 10); box(b, C("#3a3d46"), 2.6, 4.1, 1.85, 3.25, 4.18, 1.95);
   b.build(syr);
@@ -471,13 +509,14 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   // the coin tin
   cyl(b, C("#8a93a8"), MK.tin[0], SY, MK.tin[2], 0.07, 0.07, 0.045, 20); cyl(b, C("#c99a2a"), MK.tin[0], SY + 0.04, MK.tin[2], 0.06, 0.06, 0.004, 20);
   // other stalls far off, lamps, bunting
-  for (const x of [-3.4, 3.0]) box(b, C("#9a6a40"), x - 0.5, 0, -2.9, x + 0.5, 0.8, -2.4);
+  for (const x of [-3.4, 3.0]) { box(b, C("#9a6a40"), x - 0.5, 0, -2.9, x + 0.5, 0.8, -2.4); for (let i = 0; i < 4; i++) box(b, C(["#e2433b", "#f2c84a", "#3f6fd8", "#5aa64a"][i]), x - 0.45 + i * 0.23, 0.8, -2.85, x - 0.27 + i * 0.23, 1.0 + 0.06 * (i % 2), -2.5); }
+  for (const z of [-1.8, 1.0, 3.2]) for (const x of [-3.98, 3.98]) { const s2 = Math.sign(x); box(b, C(["#e2433b", "#3f6fd8", "#f2c84a"][Math.abs(Math.round(z)) % 3]), x - (s2 > 0 ? 0.02 : 0), 1.3, z - 0.45, x + (s2 < 0 ? 0.02 : 0), 2.0, z + 0.45); }
   for (let i = 0; i < 12; i++) { const x = -3.6 + i * 0.65; box(b, C(["#e2433b", "#f2c84a", "#3f6fd8", "#5aa64a"][i % 4]), x, 2.9, -2.95 + 0.002 * i, x + 0.3, 3.1, -2.92 + 0.002 * i); }
   for (const x of [-2.0, 0, 2.0]) { cyl(b, ink, x, 3.0, -0.8, 0.006, 0.006, 0.6, 6); }
   b.build(market);
   for (const x of [-2.0, 0, 2.0]) mesh(new THREE.SphereGeometry(0.09, 14, 10), new THREE.MeshBasicMaterial({ color: new THREE.Color(2.4, 1.9, 1.1) }), market, x, 2.95, -0.8).castShadow = false;
   const cardFace = (parent: THREE.Object3D, nm: string, x: number, y: number, z: number) => { const m = mesh(new THREE.PlaneGeometry(0.1, 0.14), new THREE.MeshBasicMaterial({ map: cardTexture(nm), transparent: true, alphaTest: 0.5, color: new THREE.Color(0.95, 0.95, 0.95) }), parent, x, y, z); m.rotation.x = -0.35; return m; };
-  const STALL_CARDS = ["zard_base", "pikachu", "mtg_bolt", "mtg_serra"];
+  const STALL_CARDS = ["zard151", "pika151", "mtg_bolt", "mtg_serra"];
   STALL_CARDS.forEach((nm, i) => cardFace(market, nm, sx0 + 0.17 + i * 0.27, SY + 0.1, sz1 - 0.16));
   plane(0.9, 0.22, basicC(signTex("myStall", 900, 220, "SẠP CỦA BẠN", "#fbf7ec", "#c23a32", "", "#c23a32")), market, (sx0 + sx1) / 2, 1.95, sz0 + 0.075);
   // the twin stall (own group, rolls along x)
@@ -506,6 +545,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   b.build(shop);
   { const gl = mesh(new THREE.BoxGeometry(cx1 - cx0 - 0.06, 0.006, cz1 - cz0 - 0.02), glassMat(), shop, (cx0 + cx1) / 2, CY - 0.003, (cz0 + cz1) / 2); gl.renderOrder = 3; }
   plane(1.8, 0.4, basicC(signTex("shopSign", 1080, 240, "CARD SHOP", "#1d2a44", "#f2c84a", "SOUTH DAKOTA")), shop, SPp.sign[0], SPp.sign[1], SPp.sign[2]);
+  frameCard(shop, "pika151", -2.37, 1.85, -0.9, 0.46, Math.PI / 2); frameCard(shop, "mtg_bolt", -2.37, 1.85, 0.0, 0.46, Math.PI / 2); frameCard(shop, "zard151", 2.37, 1.85, -0.5, 0.46, -Math.PI / 2);
   const phone = canvasMat(300, 620);
   const phoneMesh = new THREE.Group(); shop.add(phoneMesh);
   mesh(new THREE.BoxGeometry(0.075, 0.155, 0.008), ink, phoneMesh);
@@ -514,20 +554,24 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   // ===== THE BOARDROOM =====
   SETL = "board";
   const BD = BDP, boardroom = G("board", ORIGIN.board);
-  shell(boardroom, 2.5, 3.5, 3.0, lam("bdFloor", () => ({ map: rep(carpetT("bd", "#4a3a3a"), 4, 4) })), lam("bdWall", () => ({ map: rep(woodTex("bdw", "#5a3b2a", "rgba(20,10,5,0.5)"), 2, 2) })), "#2a2420");
+  shell(boardroom, 2.5, 3.5, 3.0, lam("bdFloor", () => ({ map: rep(carpetT("bd", "#2f7a4a"), 4, 4) })), lam("bdWall", () => ({ map: paintWall("bd", "#f2e2bf") })), "#fbf4e4");
   b = new Batch();
   const [bx_0, bx_1, bz_0, bz_1] = BD.table, BY = BD.table_y;
-  box(b, C("#3a2418"), bx_0, BY - 0.05, bz_0, bx_1, BY, bz_1); box(b, C("#2a1a10"), bx_0 + 0.25, 0, bz_0 + 0.3, bx_1 - 0.25, BY - 0.05, bz_1 - 0.3);
-  const leather = C("#1d1b22");
+  box(b, C("#a8703f"), bx_0, BY - 0.05, bz_0, bx_1, BY, bz_1); box(b, C("#7a4a28"), bx_0 + 0.25, 0, bz_0 + 0.3, bx_1 - 0.25, BY - 0.05, bz_1 - 0.3);
+  const leather = C("#9a2a2a");
   const bchair = (x: number, z: number, bdx: number, bdz: number) => { // (bdx, bdz): the side the back stands on
     box(b, leather, x - 0.25, 0.44, z - 0.25, x + 0.25, 0.52, z + 0.25);
     if (bdz) box(b, leather, x - 0.25, 0.52, z + bdz * 0.3 - 0.04, x + 0.25, 1.3, z + bdz * 0.3 + 0.04); else box(b, leather, x + bdx * 0.3 - 0.04, 0.52, z - 0.25, x + bdx * 0.3 + 0.04, 1.3, z + 0.25);
     cyl(b, ink, x, 0, z, 0.03, 0.03, 0.44, 8); };
   bchair(BD.ron[0], BD.ron[1], 0, -1);
   for (const [vx, vz] of BD.vips) bchair(vx, vz, vx < 0 ? -1 : 1, 0);
+  box(b, C("#a8703f"), -2.5, 0, -3.5, 2.5, 1.0, -3.47); for (const x of [-2.5, 2.47]) box(b, C("#a8703f"), x, 0, -3.47, x + 0.03, 1.0, 3.0);
+  windowOn(b, boardroom, "x", 2.5, -1, -0.8, 1.0, 2.4, 1.6, cloudSky("bd"), white); windowOn(b, boardroom, "x", -2.5, 1, -0.8, 1.0, 2.4, 1.6, cloudSky("bd2"), white);
+  for (const [x, z] of [[-2.1, -3.1], [2.1, -3.1]]) { cyl(b, C("#c9744a"), x, 0, z, 0.2, 0.24, 0.44, 14); sph(b, C("#4fa548"), x, 0.8, z, 0.36); }
   for (const x of [-1.2, 0, 1.2]) box(b, lam("bdPanel", () => ({ color: "#ffffff", emissive: "#8a7a68" })), x - 0.35, 2.96, -2.2, x + 0.35, 2.995, -1.4);
   box(b, steel, BD.board[0] - 0.75, BD.board[1] - 0.55, -3.5, BD.board[0] + 0.75, BD.board[1] + 0.55, BD.board[2] + 0.02);
   b.build(boardroom);
+  frameCard(boardroom, "blast151", -1.6, 1.9, -3.46, 0.5); frameCard(boardroom, "venu151", 1.6, 1.9, -3.46, 0.5);
   const board2 = canvasMat(1024, 732);
   plane(1.4, 1.0, basicC(board2.tex), boardroom, BD.board[0], BD.board[1], BD.board[2] + 0.036).castShadow = false;
   const sack = new THREE.Group(); boardroom.add(sack);

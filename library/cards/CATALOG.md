@@ -84,6 +84,10 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | smoliv | Scarlet & Violet Smoliv 20 | sv1 | 20 | https://images.pokemontcg.io/sv1/20.png | mudkip |
 | sprigatito | Scarlet & Violet Sprigatito 13 | sv1 | 13 | https://images.pokemontcg.io/sv1/13.png | mudkip |
 | tandemaus | Scarlet & Violet Tandemaus 159 | sv1 | 159 | https://images.pokemontcg.io/sv1/159.png | mudkip |
+| blast151 | Scarlet & Violet 151 Blastoise ex SIR 200/165 | sv3pt5 | 200 | https://images.pokemontcg.io/sv3pt5/200_hires.png | tcgplayer |
+| pika151 | Scarlet & Violet 151 Pikachu 25/165 | sv3pt5 | 25 | https://images.pokemontcg.io/sv3pt5/25_hires.png | tcgplayer |
+| venu151 | Scarlet & Violet 151 Venusaur ex SIR 198/165 | sv3pt5 | 198 | https://images.pokemontcg.io/sv3pt5/198_hires.png | tcgplayer |
+| zard151 | Scarlet & Violet 151 Charizard ex SIR 199/165 | sv3pt5 | 199 | https://images.pokemontcg.io/sv3pt5/199_hires.png | tcgplayer |
 | bunnelby | XY Bunnelby 111 | xy1 | 111 | https://images.pokemontcg.io/xy1/111.png | mudkip |
 | chespin | XY Chespin 12 | xy1 | 12 | https://images.pokemontcg.io/xy1/12.png | mudkip |
 | fennekin | XY Fennekin 24 | xy1 | 24 | https://images.pokemontcg.io/xy1/24.png | mudkip |

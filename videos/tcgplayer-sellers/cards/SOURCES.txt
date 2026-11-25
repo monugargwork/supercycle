@@ -7,3 +7,7 @@ mtg_bolt.png      Magic Alpha Lightning Bolt                        https://card
 mtg_serra.png     Magic Alpha Serra Angel                           https://cards.scryfall.io/png/front/f/8/f8ac5006-91bd-4803-93da-f87cf196dd2f.png?1783948710
 mtg_solring.png   Magic Alpha Sol Ring                              https://cards.scryfall.io/png/front/c/4/c4300d24-1cae-4dd5-be7e-38cc677cf5bd.png?1783948661
 mtg_llanowar.png  Magic Alpha Llanowar Elves                        https://cards.scryfall.io/png/front/d/4/d4f1cc9e-4f99-4c26-ac1b-8ef069fa8ceb.png?1783948674
+zard151.png       Scarlet & Violet 151 Charizard ex SIR 199/165     https://images.pokemontcg.io/sv3pt5/199_hires.png
+pika151.png       Scarlet & Violet 151 Pikachu 25/165               https://images.pokemontcg.io/sv3pt5/25_hires.png
+blast151.png      Scarlet & Violet 151 Blastoise ex SIR 200/165     https://images.pokemontcg.io/sv3pt5/200_hires.png
+venu151.png       Scarlet & Violet 151 Venusaur ex SIR 198/165      https://images.pokemontcg.io/sv3pt5/198_hires.png

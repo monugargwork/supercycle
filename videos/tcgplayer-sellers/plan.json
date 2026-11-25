@@ -861,7 +861,7 @@
     0
    ],
    "axes": "the counter faces +z; the owner stands behind it",
-   "light": "golden",
+   "light": "day",
    "sun": [
     -30,
     30
@@ -1110,19 +1110,19 @@
     {
      "f": 0,
      "pos": [
-      0.1,
-      1.45,
-      2.0
+      0.2,
+      1.3,
+      2.3
      ],
      "look": [
-      -0.1,
-      1.28,
-      -1.6
+      0.0,
+      1.05,
+      -1.5
      ],
-     "fov": 40,
+     "fov": 44,
      "roll": 0,
-     "push": 0.0018,
-     "blur": 6,
+     "push": 0.0008,
+     "blur": 0,
      "why": "the seller under the TV",
      "focus": [
       0.0,
@@ -1133,23 +1133,23 @@
     {
      "f": 114,
      "pos": [
-      -0.05,
-      1.18,
-      -0.28
+      -0.1,
+      1.22,
+      -0.25
      ],
      "look": [
       -0.2,
-      0.84,
-      -1.06
+      0.8,
+      -1.12
      ],
-     "fov": 32,
+     "fov": 40,
      "roll": 0,
-     "push": 0.003,
-     "blur": 10,
+     "push": 0.001,
+     "blur": 0,
      "why": "push onto the stamp",
      "glide": 30,
      "punch": [
-      0.008,
+      0.003,
       14
      ],
      "focus": [
@@ -1213,6 +1213,18 @@
       140,
       176
      ]
+    },
+    {
+     "n": "seller feet",
+     "p": [
+      0.0,
+      0.02,
+      -1.5
+     ],
+     "f": [
+      0,
+      110
+     ]
     }
    ],
    "physics": "confetti: 40 paper bits (0.3 g) launched in a cone from the popper, drift down with air drag and side flutter, lie flat on the table and floor and stay. Stamp: 4 f wind-up, held, 1 f strike, 2 f squash.",
@@ -1262,7 +1274,7 @@
      "fov": 34,
      "roll": 0,
      "push": 0.0015,
-     "blur": 8,
+     "blur": 0,
      "why": "his laptop, from his eyes",
      "glide": 28,
      "focus": [
@@ -1286,7 +1298,7 @@
      "fov": 28,
      "roll": 0,
      "push": 0.004,
-     "blur": 8,
+     "blur": 0,
      "why": "push into the eBay badge",
      "glide": 34,
      "focus": [
@@ -1346,19 +1358,19 @@
     {
      "f": 352,
      "pos": [
-      0.3,
-      1.6,
-      2.6
+      0.15,
+      1.5,
+      2.8
      ],
      "look": [
-      0.05,
-      1.75,
+      0.1,
+      1.6,
       -2.7
      ],
-     "fov": 46,
+     "fov": 50,
      "roll": 0,
-     "push": 0.0015,
-     "blur": 4,
+     "push": 0.0006,
+     "blur": 0,
      "why": "the board, the boss",
      "focus": [
       -0.4,
@@ -1369,25 +1381,21 @@
     {
      "f": 440,
      "pos": [
-      0.0,
-      1.6,
-      1.6
+      0.05,
+      1.55,
+      2.2
      ],
      "look": [
-      -0.25,
-      1.8,
+      -0.05,
+      1.45,
       -2.8
      ],
-     "fov": 46,
+     "fov": 54,
      "roll": 0,
-     "push": 0.002,
-     "blur": 6,
+     "push": 0.0,
+     "blur": 0,
      "why": "push on the count",
      "glide": 40,
-     "punch": [
-      0.005,
-      16
-     ],
      "focus": [
       -0.4,
       2.0,
@@ -1435,7 +1443,19 @@
      ],
      "f": [
       352,
-      430
+      507
+     ]
+    },
+    {
+     "n": "rob feet",
+     "p": [
+      0.68,
+      0.02,
+      -2.6
+     ],
+     "f": [
+      352,
+      507
      ]
     }
    ],
@@ -1472,19 +1492,19 @@
     {
      "f": 508,
      "pos": [
-      1.2,
-      1.6,
-      1.5
+      1.15,
+      1.5,
+      2.4
      ],
      "look": [
-      1.3,
-      1.55,
+      1.2,
+      1.4,
       -2.7
      ],
-     "fov": 44,
+     "fov": 46,
      "roll": 0,
-     "push": 0.002,
-     "blur": 4,
+     "push": 0.001,
+     "blur": 0,
      "why": "the window, the cake",
      "glide": 26,
      "focus": [
@@ -1566,19 +1586,19 @@
     {
      "f": 560,
      "pos": [
-      0.2,
-      1.75,
-      1.0
+      0.15,
+      1.6,
+      1.6
      ],
      "look": [
       0.0,
       1.0,
       -1.25
      ],
-     "fov": 38,
+     "fov": 42,
      "roll": 0,
-     "push": 0.002,
-     "blur": 8,
+     "push": 0.001,
+     "blur": 0,
      "why": "the seller and the slice",
      "cut": true,
      "focus": [
@@ -1625,6 +1645,18 @@
       560,
       615
      ]
+    },
+    {
+     "n": "seller feet",
+     "p": [
+      0.0,
+      0.02,
+      -1.5
+     ],
+     "f": [
+      560,
+      615
+     ]
     }
    ],
    "physics": "the plate: kinematic slide 18 cm, decelerating (friction), stops dead.",
@@ -1660,19 +1692,19 @@
     {
      "f": 616,
      "pos": [
-      0.05,
-      2.0,
-      0.9
+      0.3,
+      1.55,
+      1.7
      ],
      "look": [
-      0.45,
-      0.8,
-      -1.1
+      0.25,
+      0.95,
+      -1.2
      ],
-     "fov": 38,
+     "fov": 46,
      "roll": 0,
-     "push": 0.0015,
-     "blur": 6,
+     "push": 0.001,
+     "blur": 0,
      "why": "the table from above his eye line",
      "glide": 30,
      "focus": [
@@ -1696,7 +1728,7 @@
      "fov": 36,
      "roll": 0,
      "push": 0.002,
-     "blur": 8,
+     "blur": 0,
      "why": "to the scanner",
      "glide": 42,
      "focus": [
@@ -1804,7 +1836,7 @@
      "fov": 32,
      "roll": 0,
      "push": 0.0015,
-     "blur": 8,
+     "blur": 0,
      "why": "his listing",
      "glide": 40,
      "focus": [
@@ -1817,18 +1849,18 @@
      "f": 872,
      "pos": [
       0.15,
-      1.45,
-      0.75
+      1.4,
+      1.4
      ],
      "look": [
       0.0,
-      1.35,
+      1.15,
       -1.5
      ],
-     "fov": 36,
+     "fov": 40,
      "roll": 0,
-     "push": 0.003,
-     "blur": 10,
+     "push": 0.0015,
+     "blur": 0,
      "why": "his face",
      "cut": true,
      "focus": [
@@ -1918,18 +1950,18 @@
      "f": 900,
      "pos": [
       0.0,
-      2.0,
-      7.5
+      1.9,
+      7.8
      ],
      "look": [
       0.0,
-      2.1,
+      1.8,
       -1.0
      ],
-     "fov": 44,
+     "fov": 46,
      "roll": 0,
-     "push": 0.001,
-     "blur": 3,
+     "push": 0.0004,
+     "blur": 0,
      "why": "the building, the open door",
      "focus": [
       0,
@@ -2012,6 +2044,18 @@
       970,
       1068
      ]
+    },
+    {
+     "n": "w2 feet",
+     "p": [
+      0.05,
+      0.02,
+      0.95
+     ],
+     "f": [
+      970,
+      1068
+     ]
     }
    ],
    "physics": "shutter: rolls down at 0.13 m/f, the bottom bar hits the ground f994 and bounces 1 cm.",
@@ -2050,19 +2094,19 @@
     {
      "f": 1069,
      "pos": [
-      0.6,
-      1.45,
-      1.6
+      0.5,
+      1.35,
+      2.2
      ],
      "look": [
-      -0.35,
-      1.35,
-      -1.4
+      -0.4,
+      1.1,
+      -1.3
      ],
-     "fov": 42,
+     "fov": 46,
      "roll": 0,
-     "push": 0.002,
-     "blur": 6,
+     "push": 0.001,
+     "blur": 0,
      "why": "the throw",
      "focus": [
       0.0,
@@ -2090,6 +2134,18 @@
      "p": [
       0.0,
       1.42,
+      -1.5
+     ],
+     "f": [
+      1069,
+      1099
+     ]
+    },
+    {
+     "n": "seller feet",
+     "p": [
+      0.0,
+      0.02,
       -1.5
      ],
      "f": [
@@ -2132,19 +2188,19 @@
     {
      "f": 1100,
      "pos": [
-      0.4,
+      -1.0,
       1.6,
       2.6
      ],
      "look": [
-      0.28,
-      1.45,
+      0.25,
+      1.4,
       -2.6
      ],
-     "fov": 50,
+     "fov": 52,
      "roll": 0,
      "push": 0.0006,
-     "blur": 4,
+     "blur": 0,
      "why": "desk and window",
      "focus": [
       0.2,
@@ -2190,6 +2246,18 @@
       1124,
       1166
      ]
+    },
+    {
+     "n": "rob feet",
+     "p": [
+      -0.4,
+      0.02,
+      -2.42
+     ],
+     "f": [
+      1100,
+      1182
+     ]
     }
    ],
    "physics": "plane 1: glides down at 2 m/s, touches the desk, skids 20 cm and stops.",
@@ -2225,19 +2293,19 @@
     {
      "f": 1183,
      "pos": [
-      0.15,
-      1.65,
-      0.9
+      0.1,
+      1.7,
+      1.6
      ],
      "look": [
       -0.35,
-      1.05,
+      1.0,
       -2.05
      ],
-     "fov": 40,
+     "fov": 42,
      "roll": 0,
-     "push": 0.002,
-     "blur": 8,
+     "push": 0.001,
+     "blur": 0,
      "why": "the desk top and the boss",
      "glide": 30,
      "focus": [
@@ -2309,6 +2377,18 @@
       1183,
       1296
      ]
+    },
+    {
+     "n": "rob feet",
+     "p": [
+      -0.4,
+      0.02,
+      -2.42
+     ],
+     "f": [
+      1183,
+      1296
+     ]
     }
    ],
    "physics": "stamp strikes: 4 f wind-up, 1 f strike, 2 f squash.",
@@ -2346,18 +2426,18 @@
      "f": 1297,
      "pos": [
       0.2,
-      0.95,
-      1.9
+      1.0,
+      2.5
      ],
      "look": [
       0.0,
-      1.55,
+      1.2,
       -1.8
      ],
-     "fov": 42,
+     "fov": 48,
      "roll": 0,
-     "push": 0.003,
-     "blur": 4,
+     "push": 0.0007,
+     "blur": 0,
      "why": "low angle: him and the TV",
      "cut": true,
      "focus": [
@@ -2399,6 +2479,18 @@
       0.0,
       1.78,
       -2.37
+     ],
+     "f": [
+      1297,
+      1421
+     ]
+    },
+    {
+     "n": "seller feet",
+     "p": [
+      0.0,
+      0.02,
+      -1.5
      ],
      "f": [
       1297,
@@ -2447,14 +2539,14 @@
       4.2
      ],
      "look": [
-      -0.4,
+      -0.3,
       0.95,
       -0.85
      ],
-     "fov": 52,
+     "fov": 58,
      "roll": 0,
      "push": 0.0008,
-     "blur": 3,
+     "blur": 0,
      "why": "the calm market, high",
      "focus": [
       -0.4,
@@ -2470,14 +2562,14 @@
       4.3
      ],
      "look": [
-      -0.12,
+      -0.05,
       0.95,
       -0.85
      ],
-     "fov": 56,
+     "fov": 60,
      "roll": 0,
      "push": 0.0008,
-     "blur": 3,
+     "blur": 0,
      "why": "room for the twin stall",
      "glide": 40,
      "focus": [
@@ -2565,8 +2657,56 @@
     {
      "n": "buyer head",
      "p": [
+      0.12,
+      1.6,
+      -0.2
+     ],
+     "f": [
+      1422,
+      1680
+     ]
+    },
+    {
+     "n": "buyer head",
+     "p": [
       0.75,
       1.6,
+      -0.1
+     ],
+     "f": [
+      1690,
+      1701
+     ]
+    },
+    {
+     "n": "seller feet",
+     "p": [
+      -0.8,
+      0.02,
+      -1.55
+     ],
+     "f": [
+      1422,
+      1701
+     ]
+    },
+    {
+     "n": "buyer feet",
+     "p": [
+      0.12,
+      0.02,
+      -0.2
+     ],
+     "f": [
+      1422,
+      1680
+     ]
+    },
+    {
+     "n": "buyer feet",
+     "p": [
+      0.75,
+      0.02,
       -0.1
      ],
      "f": [
@@ -2611,18 +2751,18 @@
      "f": 1702,
      "pos": [
       -0.2,
-      1.55,
-      2.0
+      1.5,
+      2.8
      ],
      "look": [
       -0.4,
-      1.5,
+      1.45,
       -2.4
      ],
-     "fov": 44,
+     "fov": 48,
      "roll": 0,
-     "push": 0.0012,
-     "blur": 4,
+     "push": 0.0006,
+     "blur": 0,
      "why": "the chair, the board",
      "focus": [
       -0.4,
@@ -2634,18 +2774,18 @@
      "f": 1860,
      "pos": [
       -0.35,
-      1.45,
-      0.7
+      1.4,
+      1.5
      ],
      "look": [
       -0.4,
-      1.4,
+      1.05,
       -2.42
      ],
-     "fov": 40,
+     "fov": 44,
      "roll": 0,
-     "push": 0.0025,
-     "blur": 10,
+     "push": 0.0012,
+     "blur": 0,
      "why": "Ron's pitch, low and close",
      "glide": 40,
      "focus": [
@@ -2702,6 +2842,18 @@
       1840,
       1870
      ]
+    },
+    {
+     "n": "chair feet",
+     "p": [
+      -0.4,
+      0.02,
+      -2.42
+     ],
+     "f": [
+      1702,
+      1993
+     ]
     }
    ],
    "physics": "the nameplate: a 180 deg flip on its hinge in 6 f.",
@@ -2713,14 +2865,14 @@
    "id": "S15",
    "f": [
     1994,
-    2209
+    2068
    ],
    "set": "shop",
-   "light": "golden",
-   "vo": "Lập tức, chủ một cửa hàng nhỏ ở South Dakota nhắn: vậy thì gặp năm mươi người bán nhỏ đi, đừng chỉ gặp mấy tài khoản to nhất.",
-   "gloss": "Right away, the owner of a small shop in South Dakota messaged: then go meet fifty small sellers, don't just meet the biggest accounts.",
+   "light": "day",
+   "vo": "Lập tức, chủ một cửa hàng nhỏ ở South Dakota nhắn:",
+   "gloss": "Right away, the owner of a small shop in South Dakota messaged:",
    "spine": 5,
-   "viewer": "A small shop owner answers with a message: meet fifty of us.",
+   "viewer": "A small shop owner takes out his phone.",
    "in": {
     "type": "dissolve",
     "n": 8,
@@ -2729,59 +2881,31 @@
    "out": {
     "type": "dissolve",
     "to": "S16",
-    "n": 8
+    "n": 6,
+    "note": "through-object: into his phone screen, seen from his eyes"
    },
-   "build": "new: the shop: counter, shelves, the sign; the owner's phone with a chat (a message typed and sent).",
+   "build": "new: the shop: counter, shelves, the sign, framed cards on the walls.",
    "blocking": "Owner stands behind the counter at his mark, phone in both arms at his chest.",
-   "action": "f1994-2060 he takes out his phone and starts typing on 'nhắn' (f2071); f2075-2140 line 1 'Vậy thì gặp 50 người bán nhỏ đi,' types; f2145-2190 line 2 'đừng chỉ gặp mấy tài khoản to nhất.'; f2196 SEND, the bubble flies up.",
+   "action": "f1994-2068 he looks down at his phone and starts typing on 'nhắn' (f2071).",
    "acting": "Determined frown.",
    "cams": [
     {
      "f": 1994,
      "pos": [
-      0.35,
-      1.65,
-      2.6
+      0.3,
+      1.55,
+      2.25
      ],
      "look": [
       0.0,
-      1.45,
+      1.2,
       -1.4
      ],
-     "fov": 42,
+     "fov": 54,
      "roll": 0,
-     "push": 0.0015,
-     "blur": 5,
-     "why": "the small shop, the owner",
-     "focus": [
-      0.0,
-      1.5,
-      -1.4
-     ]
-    },
-    {
-     "f": 2066,
-     "pos": [
-      0.0,
-      1.66,
-      -1.4
-     ],
-     "look": [
-      0.0,
-      1.22,
-      -1.12
-     ],
-     "fov": 21,
-     "roll": 0,
-     "push": 0.0015,
-     "blur": 6,
-     "why": "his screen from his eyes",
-     "glide": 46,
-     "focus": [
-      0.0,
-      1.22,
-      -1.12
-     ]
+     "push": 0.0006,
+     "blur": 0,
+     "why": "the small shop, the owner (wide)"
     }
    ],
    "kicks": [],
@@ -2811,6 +2935,73 @@
      ]
     },
     {
+     "n": "owner feet",
+     "p": [
+      0.0,
+      0.02,
+      -1.4
+     ],
+     "f": [
+      1994,
+      2060
+     ]
+    }
+   ],
+   "physics": "none.",
+   "light_mood": "warm shop light.",
+   "sound": "shop ambience; first key taps.",
+   "after": "Phone in hand."
+  },
+  {
+   "id": "S16",
+   "f": [
+    2068,
+    2209
+   ],
+   "set": "shop",
+   "light": "day",
+   "vo": "vậy thì gặp năm mươi người bán nhỏ đi, đừng chỉ gặp mấy tài khoản to nhất.",
+   "gloss": "then go meet fifty small sellers, don't just meet the biggest accounts.",
+   "spine": 5,
+   "viewer": "His message, typed and sent.",
+   "in": {
+    "type": "dissolve",
+    "n": 6,
+    "from": "S15"
+   },
+   "out": {
+    "type": "dissolve",
+    "to": "S17",
+    "n": 8
+   },
+   "build": "reuse the shop; his phone with a chat (the message typed and sent), seen only from his side.",
+   "blocking": "POV: his eyes on his phone (he is not drawn).",
+   "action": "f2075-2140 line 1 'Vậy thì gặp 50 người bán nhỏ đi,' types; f2145-2190 line 2 'đừng chỉ gặp mấy tài khoản to nhất.'; f2196 SEND, the bubble flies up.",
+   "acting": "none.",
+   "cams": [
+    {
+     "f": 2068,
+     "pos": [
+      0.0,
+      1.66,
+      -1.4
+     ],
+     "look": [
+      0.0,
+      1.22,
+      -1.12
+     ],
+     "fov": 23,
+     "roll": 0,
+     "push": 0.0008,
+     "blur": 0,
+     "why": "his screen from his eyes"
+    }
+   ],
+   "kicks": [],
+   "marks": [],
+   "subjects": [
+    {
      "n": "phone",
      "p": [
       0.0,
@@ -2818,18 +3009,18 @@
       -1.12
      ],
      "f": [
-      2090,
+      2075,
       2208
      ]
     }
    ],
    "physics": "none.",
-   "light_mood": "warm shop light.",
+   "light_mood": "warm shop light; the screen glow.",
    "sound": "key taps; send whoosh f2196.",
    "after": "Message sent."
   },
   {
-   "id": "S16",
+   "id": "S17",
    "hero": true,
    "f": [
     2209,
@@ -2844,7 +3035,7 @@
    "in": {
     "type": "dissolve",
     "n": 8,
-    "from": "S15"
+    "from": "S16"
    },
    "out": {
     "type": "end"
@@ -2869,7 +3060,7 @@
      "fov": 44,
      "roll": 0,
      "push": 0.0012,
-     "blur": 3,
+     "blur": 0,
      "why": "the whole table",
      "focus": [
       0,
@@ -2880,19 +3071,19 @@
     {
      "f": 2252,
      "pos": [
-      1.55,
-      1.55,
-      3.6
+      1.6,
+      1.45,
+      3.3
      ],
      "look": [
-      0.8,
-      1.3,
+      0.75,
+      0.85,
       0.6
      ],
-     "fov": 42,
+     "fov": 48,
      "roll": 0,
-     "push": 0.0012,
-     "blur": 10,
+     "push": 0.0006,
+     "blur": 0,
      "why": "the seller with no chair",
      "glide": 40,
      "focus": [
@@ -2958,6 +3149,18 @@
      "p": [
       0.95,
       1.6,
+      0.85
+     ],
+     "f": [
+      2290,
+      2359
+     ]
+    },
+    {
+     "n": "seller feet",
+     "p": [
+      0.95,
+      0.02,
       0.85
      ],
      "f": [

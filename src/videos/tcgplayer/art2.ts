@@ -21,8 +21,8 @@ const rrect = (g: CanvasRenderingContext2D, x: number, y: number, w: number, h: 
 };
 
 // ---------------- the laptop (1024 x 648), seen from his eyes ----------------
-export type Page = { mode: "market" | "listing"; head?: number; magic?: number; poke?: number; badge?: number; drop?: number; slam?: number };
-export const PAGE_MAGIC = ["mtg_bolt", "mtg_serra", "mtg_solring", "mtg_llanowar"], PAGE_POKE = ["zard_base", "pikachu", "blastoise", "venusaur"];
+export type Page = { mode: "market" | "listing"; head?: number; magic?: number; poke?: number; badge?: number; drop?: number; slam?: number; hero?: string };
+export const PAGE_MAGIC = ["mtg_bolt", "mtg_serra", "mtg_solring", "mtg_llanowar"], PAGE_POKE = ["zard151", "pika151", "blast151", "venu151"];
 const PRICES = ["$42", "$310", "$1,450", "$65", "$350", "$48", "$140", "$95"];
 const bar = (g: CanvasRenderingContext2D, head = 1) => {
   g.fillStyle = "#f3f4f7"; g.fillRect(0, 0, 1024, 648);
@@ -47,6 +47,11 @@ export const laptopPage = (p: Pen, s: Page) => {
   const g = p.g;
   bar(g, s.head ?? 1);
   // the camera (his eyes) sees the centre column x 200..824: the content lives there
+  if (s.mode === "market" && s.hero) { // one card big enough to read (the voice names its game): fills the column his eyes see
+    const H = 540, W = H * 0.716; g.fillStyle = "#e9ecf2"; g.fillRect(200, 84, 624, 564);
+    scan(g, s.hero, 512 - W / 2, 96, W, H);
+    return;
+  }
   if (s.mode === "market") {
     lt(g, "Best sellers", 512, 104, 22, "#2a2c33", 800, "center");
     const items = [...PAGE_MAGIC, ...PAGE_POKE], shown = [s.magic ?? 4, s.poke ?? 4];
@@ -67,10 +72,10 @@ export const laptopPage = (p: Pen, s: Page) => {
     return;
   }
   // his listing, and the Direct copy dropping onto it
-  lt(g, "Charizard · Base Set 4/102", 512, 106, 24, "#2a2c33", 800, "center");
+  lt(g, "Charizard ex · 151 · SIR 199/165", 512, 106, 24, "#2a2c33", 800, "center");
   const drop = s.drop ?? 0, slam = s.slam ?? 0, push = 250 * Math.min(1, slam);
-  tile(g, 206, 130 + push, 612, 236, "zard_base", "Charizard", "$350", "thecardnook", { rank: slam > 0 ? "#2" : "#1", grey: Math.min(1, slam) });
-  if (drop > 0) tile(g, 206, -260 + 390 * drop, 612, 236, "zard_base", "Charizard", "$339", "TCGplayer", { seal: true, rank: "#1" });
+  tile(g, 206, 130 + push, 612, 236, "zard151", "Charizard ex", "$350", "thecardnook", { rank: slam > 0 ? "#2" : "#1", grey: Math.min(1, slam) });
+  if (drop > 0) tile(g, 206, -260 + 390 * drop, 612, 236, "zard151", "Charizard ex", "$339", "TCGplayer", { seal: true, rank: "#1" });
 };
 
 // ---------------- the wall TV (1024 x 576): business news with the GMV counter ----------------
@@ -132,15 +137,15 @@ export const boardFace = (p: Pen, v: number, spin = 0, small = "GMV 12 THÁNG") 
 /** the HQ window on the night city (600 x 750): skyline, the federal dome; fireworks (list of [u 0..1, cx, cy, hue]); plane2 u 0..1 */
 export const hqWindow = (p: Pen, fw: [number, number, number, string][], plane = -1, open = 0) => {
   const g = p.g;
-  const gr = g.createLinearGradient(0, 0, 0, 750); gr.addColorStop(0, "#0b1630"); gr.addColorStop(1, "#2a3a6a"); g.fillStyle = gr; g.fillRect(0, 0, 600, 750);
+  const gr = g.createLinearGradient(0, 0, 0, 750); gr.addColorStop(0, "#1a3fa0"); gr.addColorStop(1, "#3f78d8"); g.fillStyle = gr; g.fillRect(0, 0, 600, 750);
   for (let i = 0; i < 40; i++) { g.fillStyle = "rgba(255,255,255,0.6)"; g.fillRect((i * 137) % 600, (i * 71) % 300, 2, 2); }
   // the dome (the federal building), far right
   g.fillStyle = "#d9dde6"; g.beginPath(); g.ellipse(470, 520, 70, 64, 0, Math.PI, 0); g.fill(); g.fillRect(392, 520, 156, 80); g.fillRect(462, 430, 16, 30);
   for (let i = 0; i < 6; i++) { g.fillStyle = "#b9bec9"; g.fillRect(398 + i * 26, 530, 10, 64); }
   // skyline
   const B = [[0, 470, 90], [80, 400, 70], [150, 520, 60], [205, 360, 80], [280, 450, 60], [335, 560, 50], [560, 480, 40]];
-  for (const [x, y, w] of B) { g.fillStyle = "#121a30"; g.fillRect(x, y, w, 750 - y); for (let yy = y + 14; yy < 740; yy += 26) for (let xx = x + 8; xx < x + w - 8; xx += 18) { g.fillStyle = (xx * yy) % 7 < 3 ? "#f2d27a" : "#24304f"; g.fillRect(xx, yy, 8, 12); } }
-  g.fillStyle = "#0d1426"; g.fillRect(0, 690, 600, 60);
+  for (const [x, y, w] of B) { g.fillStyle = "#2a3f7a"; g.fillRect(x, y, w, 750 - y); for (let yy = y + 14; yy < 740; yy += 26) for (let xx = x + 8; xx < x + w - 8; xx += 18) { g.fillStyle = (xx * yy) % 7 < 4 ? "#ffd86a" : "#3a5296"; g.fillRect(xx, yy, 8, 12); } }
+  g.fillStyle = "#24386e"; g.fillRect(0, 690, 600, 60);
   for (const [u, cx, cy, hue] of fw) {
     if (u <= 0 || u >= 1) continue;
     const R = 30 + 120 * Math.sqrt(u), a = u < 0.7 ? 1 : (1 - u) / 0.3;
@@ -210,13 +215,13 @@ export const chatPhone = (p: Pen, typed: number[], sent: number) => {
   g.fillStyle = "#ffffff"; g.fillRect(10, 40, 280, 54); lt(g, "Ron · TCGplayer", 150, 68, 19, "#15171c", 800, "center");
   const lines = [CHAT[0] + " " + CHAT[1], CHAT[2] + " " + CHAT[3]].map((_, i) => i);
   void lines;
-  const n1 = typed[0] ?? 0, n2 = typed[1] ?? 0, y0 = sent > 0 ? 300 - 130 * Math.min(1, sent) : 300;
+  const n1 = typed[0] ?? 0, n2 = typed[1] ?? 0, y0 = sent > 0 ? 260 - 120 * Math.min(1, sent) : 260;
   const L1a = CHAT[0], L1b = CHAT[1], L2a = CHAT[2], L2b = CHAT[3];
   const cut = (s: string, k: number) => s.slice(0, Math.round(k * s.length));
   const box = sent > 0;
   if (box) { rrect(g, 24, y0 - 14, 262, 200, 18, "#3f6fd8"); }
-  else { rrect(g, 18, 380, 264, 170, 14, "#ffffff", "#cfd3da"); }
-  const col = box ? "#ffffff" : "#15171c", yb = box ? y0 + 22 : 412;
+  else { rrect(g, 18, 250, 264, 170, 14, "#ffffff", "#cfd3da"); }
+  const col = box ? "#ffffff" : "#15171c", yb = box ? y0 + 22 : 282;
   const a1 = Math.min(1, n1 * 2), b1 = Math.max(0, n1 * 2 - 1), a2 = Math.min(1, n2 * 2), b2 = Math.max(0, n2 * 2 - 1);
   [[cut(L1a, a1), 0], [cut(L1b, b1), 1], [cut(L2a, a2), 2], [cut(L2b, b2), 3]].forEach(([t, i]) => { if (t) lt(g, t as string, box ? 36 : 30, yb + (i as number) * 42, 25, col, 800, "left", 240); });
   if (!box) { rrect(g, 210, 596 - 40, 60, 30, 15, "#3f6fd8"); lt(g, "Gửi", 240, 571, 15, "#fff", 800, "center"); }

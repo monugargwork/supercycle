@@ -67,7 +67,7 @@ export const CARD_IMG: { card2: HTMLImageElement | null } = { card2: null };
  *  the auction "A Decade of Masters 1999-2009"): Base Set, Jungle, Fossil, Neo Genesis, Legendary Collection, Skyridge.
  *  Loaded once before the world is built (Reel.tsx gates rendering on them), then drawn by tcard({ img }). */
 export const TCG = {
-  heroes: ["zard_base", "pikachu", "blastoise", "venusaur", "mtg_bolt", "mtg_serra", "mtg_solring", "mtg_llanowar"],
+  heroes: ["zard151", "pika151", "blast151", "venu151", "mtg_bolt", "mtg_serra", "mtg_solring", "mtg_llanowar"],
   press: [] as string[],
   packs: [] as string[],
 };
@@ -666,7 +666,7 @@ export const crtPage = (p: Pen, bought: number, cursor: number, press: boolean) 
   for (let i = 0; i < 3; i++) {
     const y = 58 + i * 110;
     g.fillStyle = "#e9eef6"; g.fillRect(22, y, 468, 96);
-    tcard(p, (i % NSLAB) as Kind, 30, y + 4, 95, y + 93, { img: ["zard_base", "jigglypuff", "psyduck"][i] }); // Base Set, Jungle, Fossil
+    tcard(p, (i % NSLAB) as Kind, 30, y + 4, 95, y + 93, { img: ["zard151", "jigglypuff", "psyduck"][i] }); // Base Set, Jungle, Fossil
     g.fillStyle = "#1d1b22"; g.font = "700 20px Arial, sans-serif"; g.fillText(["Base Set - complete", "Jungle - complete", "Fossil - complete"][i], 108, y + 24);
     g.fillStyle = "#c23a32"; g.font = "800 24px Arial, sans-serif"; g.fillText(["£95", "£60", "£70"][i], 108, y + 60);
     const bx = 330, by = y + 30, pressed = press && i === Math.min(2, Math.floor(cursor));
@@ -684,7 +684,7 @@ export const newspaper = (p: Pen) => {
   g.fillStyle = "#1d1b22"; g.font = "900 54px Georgia, serif"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText("THE DAILY POST", 420, 52);
   g.fillRect(30, 88, 780, 4); g.fillRect(30, 96, 780, 1.5);
   g.font = "900 62px Arial, sans-serif"; g.fillText("POKÉMON CARD", 420, 160); g.fillText("SELLS FOR £6,000", 420, 228);
-  tcard(p, 0 as Kind, 60, 274, 260, 549, { img: "zard_base" });
+  tcard(p, 0 as Kind, 60, 274, 260, 549, { img: "zard151" });
   g.textAlign = "left"; g.fillStyle = "#77706a";
   for (let i = 0; i < 9; i++) g.fillRect(300, 290 + i * 30, 480 - (i % 3) * 40, 12);
 };

@@ -165,6 +165,7 @@ const blob = (out: Stage, x: number, y: number, z: number, sc = 1) => {
     const len = Math.min(2.4, Math.max(0.5, 1.6 / Math.tan(el))) * sc, h = len + 0.55 * sc, c = 0.3 * h, tc = hexOf(TAIL, 1);
     out.fx.push({ key: `blob|shadow|${tc}`, cw: 128, ch: 256, draw: (p) => fxShadow(p, tc), x: x + ox * c, y: y + 0.018, z: z + oz * c, w: 0.72 * sc, h, flat: true, rot });
   }
+  return; // quality bar: no shadows, not even contact blobs (feet stand exactly on the floor)
   const cc = hexOf(CONTACT[LNAME], 1);
   out.fx.push({ key: `blob|contact|${cc}`, cw: 128, ch: 128, draw: (p) => fxContact(p, cc), x: x + ox * 0.03, y: y + 0.022, z: z + oz * 0.03, w: 0.52 * sc, h: 0.4 * sc, flat: true, rot });
 };
@@ -480,7 +481,7 @@ const market = (out: Stage, cam: CamInfo, f: number) => {
 // ---------------- the shop, the boardroom ----------------
 const shopOwner = (out: Stage, cam: CamInfo, f: number) => {
   const P = Sm(SP.owner[0], 0, SP.owner[1]);
-  if (near(cam, P, 0.6)) return;
+  if (near(cam, P, 1.0)) return; // the camera rounds his shoulder into his eyes: he is not drawn that close
   front(out, cam, "owner", ...P, { mode: "stand", expr: "stern", prop: ["hold", "phone"] }, f);
 };
 const boardroom = (out: Stage, cam: CamInfo, f: number) => {
@@ -488,10 +489,9 @@ const boardroom = (out: Stage, cam: CamInfo, f: number) => {
   (["vip1", "vip2", "vip3", "vip4"] as Who[]).forEach((w, i) => { const [x, z] = BD.vips[i]; front(out, cam, w, ...Bm(x, 0, z), { mode: "sit", chair: SEAT_CHAIR, expr: f > SACK16[1] + 4 && i % 2 ? "laugh" : "grin", facing: x < 0 ? 1 : -1, look: x < 0 ? 1 : -1 }, f, [SACK16[1] + 4]); });
   const P = Bm(BD.seller[0], 0, BD.seller[1]);
   const lk = f < LOOK16[0] ? 0 : f < LOOK16[1] ? -1 : f < LOOK16[2] ? 1 : 0;
-  const shrug = f >= LOOK16[2] + 4;
-  const fo: FrontOpts = { mode: "stand", expr: "nervous", look: lk, armOff: shrug ? 2 : undefined };
+  const fo: FrontOpts = { mode: "stand", expr: "nervous", look: lk };
   front(out, cam, "seller", ...P, fo, f, LOOK16);
-  if (shrug) { const k = smooth((f - LOOK16[2] - 4) / 8); for (const s of [-1, 1] as const) { const sh = shoulderAt(cam, "seller", P, fo, s); arm3d(out, cam, "seller", P, fo, s, [sh[0] + cam.right.x * s * (0.14 + 0.08 * k), sh[1] - 0.3 + 0.14 * k, sh[2] + cam.right.z * s * (0.14 + 0.08 * k) - cam.fwd.z * 0.06], f); } }
+  if (f >= LOOK16[2] + 4) { const hd = cardWorld(cam, P[0], P[1], P[2], [380, 300]); card(out, "sweat", 120, 160, (pp) => { pp.ell(60, 90, 26, 40, "#bfe6ff", 5); }, hd[0] - cam.fwd.x * 0.1, hd[1], hd[2] - cam.fwd.z * 0.1, 0.06, 0.08); }
 };
 /** the money sack's set-local y offset above the table and squash (S16) */
 export const sackPose = (f: number): { y: number; sq: number } => {
