@@ -6,11 +6,14 @@ All positions are set-local metres (y up); a set's world position is its origin 
 ## Tone
 A market fable with a ghost joke: Gengar is a ghost type, so an unpaid sale literally ghosts away. Dry sight gags, a few meme sounds where the sound is the joke. Generic cartoon people, no likenesses; the news site is not named. Screens only from their owner's side (the writer's laptop, the collector's phone); the price board is a wall screen.
 
+## Quality bar (25 Nov 2026)
+No blur or depth of field, no shadows, bright warm palettes, cloudy blue skies in every window and outdoor shot, dressed sets, medium-wide cameras with every character head-to-feet in frame, real slab photos (CGC's own photos of the two sold slabs).
+
 ## Visual law
 Unpaid = a purple see-through ghost (the tag, the pending record marker, the IOU, the erased sales rows). Paid = solid, with a green ĐÃ TRẢ stamp.
 
 ## Transitions
-Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every time jump or change of place; S06 → S07 is a push into the slab (through-object dissolve).
+Hard cuts: S08 (the champagne), the S12 cut into the laptop POV and the S14 cut into the phone POV. Dissolves for every time jump or change of place (S15 dissolves in); S06 → S07 is a push into the slab (through-object dissolve).
 
 ## Titles (house Title2, Bolota Bold, top of frame)
 
@@ -27,7 +30,7 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 ### hall
 - Origin in the shared world: [0, 0, 0]. Axes: the stage along the back wall (z -4..-2); +z toward the champagne table and the lens.
 - Light: day; sun az/el [-30, 40]. Open camera sides: +z.
-- Marks [x, z]: auct [-1.35, -3.05]; clerk [0.45, -2.45]; c1 [1.8, 0.75].
+- Marks [x, z]: auct [-1.35, -3.05]; clerk [0.4, -2.45]; c1 [1.8, 0.75].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
@@ -35,7 +38,7 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 | stage | new: oak stage x -3.2..3.2, z -4..-2, top y 0.3, a dark front skirt | [0, 0.15, -3] | [6.4, 0.3, 2] |
 | rostrum | new: oak rostrum 70 x 40 cm, top y 1.4, a sound block and the gavel on top; FANATICS COLLECT plate on its front | [-1.35, 0.85, -2.7] | [0.7, 1.1, 0.4] |
 | plinth | new: white lot plinth 50 x 50 cm, top y 1.22; a brass easel holds the slab tilted back 0.2 rad; a brass arm on its right with a tag holder (the tag drops from it on a string) | [-0.35, 0.76, -2.75] | [0.5, 0.92, 0.5] |
-| slab | adapt:slabReal: a CGC-style case 20 x 32 cm (2.4x real, so it reads next to the people), gold label 'PRISTINE 10', the real Legendary Collection Gengar scan | [-0.35, 1.43, -2.76] | [0.135, 0.215, 0.012] |
+| slab | real slab: CGC's own cut-out photo of the exact slab (cert 4288394001, library/slabs), 20 x 33.8 cm (2.4x real, so it reads next to the people) | [-0.35, 1.43, -2.76] | [0.135, 0.215, 0.012] |
 | tag | new: card tag 24 x 13.5 cm (oversized to read) on a string (15 cm): front SOLD $576,000, back CHƯA THANH TOÁN in red; spins on its string; turns into a purple see-through ghost | [-0.02, 1.5025, -2.72] | [0.16, 0.09, 0.003] |
 | board | reuse:priceBoardW: the price board 170 x 64.5 cm on the back wall (canvas), amber digits, SOLD lamp; CHÍNH XÁC lamp added under it (S13) | [-0.85, 2.85, -3.94] | [1.7, 0.645, 0.04] |
 | bids | new: bid counter 70 x 45 cm: LƯỢT TRẢ GIÁ and a two-digit flap count | [0.75, 2.8, -3.94] | [0.7, 0.45, 0.04] |
@@ -55,7 +58,7 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 
 ### cafe
 - Origin in the shared world: [80, 0, 0]. Axes: the café front on z -2.4 faces +z; the round table in front; the lens on the street.
-- Light: golden; sun az/el [-40, 18]. Open camera sides: +z.
+- Light: day; sun az/el [-40, 35]. Open camera sides: +z.
 - Marks [x, z]: borrower [-0.48, -0.95]; lender [0.48, -0.95].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
@@ -104,8 +107,8 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 0 | open | [-0.6, 1.8, 1.9] | [-0.6, 1.95, -3] | 46 | 0.2 | 4 | the board over the rostrum and the lot |
-| 84 | glide 22 f | [-0.3, 1.55, -0.9] | [-0.28, 1.5, -2.75] | 32 | 0.2 | 10 | push to the slab and the tag |
+| 0 | open | [-0.6, 1.7, 2.1] | [-0.6, 1.75, -3] | 46 | 0.08 | 0 | the board over the rostrum and the lot |
+| 84 | glide 22 f | [-0.2, 1.5, -0.4] | [-0.2, 1.45, -2.75] | 36 | 0.1 | 0 | to the slab and the tag |
 
 - Kicks (7 f): f79 strength 1.
 - Physics & FX: tag: pendulum on a 13 cm string, released at f80 from 15 cm up: drops, snaps taut, swings ±25 deg damped (settles by f130). Gavel: 1 f strike, 2 f squash of the block.
@@ -120,15 +123,16 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 - Set: hall. Light: day.
 - Build: reuse the hall, empty, cooler light; the tag hanging.
 - Blocking: Clerk enters from the stage right (clerk_in) f104-140 to the clerk mark beside the plinth, faces +z.
-  - clerk at [0.45, -2.45], front; walks in f104-140; flicks the tag f156; looks up f262; neutral -> shock.
+  - clerk at [0.4, -2.45], front; walks in f104-140; flicks the tag f156; looks up f262; neutral -> shock.
 - Action, against the words: f104-140 the clerk walks in; f150-156 his left arm (screen right) reaches the tag's edge, f156 a flick (2 f before 'chưa' f158): the tag spins on its string 1.5 turns, slowing, and stops on its back, CHƯA THANH TOÁN in red, by f182; f196-236 'hệ ma': the tag shivers (2 mm jitter) and fades to a purple see-through ghost, its corners curling like a sheet; f243 'có đó' it hangs; f262 it slips off the string and floats up with a slow S-wobble (0.6 m/s); f278-292 'biến mất' it fades out at y 2.6; the empty string sways. The clerk looks up, shocked.
 - Acting: Clerk: neutral -> shock on the lift (f262).
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 100 | open | [-0.12, 1.6, -0.6] | [0, 1.55, -2.72] | 34 | 0.15 | 8 | the plinth next day; the clerk comes in |
-| 254 | glide 30 f | [0.12, 1.72, -0.6] | [0.12, 2.3, -2.72] | 38 | 0.1 | 6 | tilt up with the ghost |
+| 100 | open | [0.15, 1.35, 1.25] | [0.12, 1.3, -2.72] | 46 | 0.06 | 0 | the plinth next day; the clerk comes in |
+| 166 | glide 22 f | [-0.15, 1.5, -0.5] | [-0.15, 1.47, -2.72] | 34 | 0.08 | 0 | the slab and the tag |
+| 254 | glide 30 f | [-0.1, 1.6, -0.5] | [-0.05, 2.2, -2.72] | 40 | 0 | 0 | tilt up with the ghost |
 
 - Kicks (7 f): none.
 - Physics & FX: tag spin: torsion pendulum, 1.5 turns decaying to rest on its back. Ghost: no gravity, rises 0.6 m/s with a sine side-wobble (amplitude 4 cm, 1.2 Hz), fades over 14 f.
@@ -149,8 +153,8 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 298 | open | [-0.27, 1.5, -1.55] | [-0.33, 1.46, -2.76] | 30 | 0.2 | 12 | the slab |
-| 512 | glide 26 f | [-0.35, 1.58, -2.08] | [-0.35, 1.55, -2.78] | 26 | 0.3 (punch 0.6 for 12 f) | 12 | the label: PRISTINE 10 |
+| 298 | open | [-0.34, 1.47, -1.36] | [-0.35, 1.43, -2.76] | 30 | 0.08 | 0 | the slab |
+| 512 | glide 26 f | [-0.35, 1.58, -1.87] | [-0.35, 1.55, -2.77] | 30 | 0.08 | 0 | the label: PRISTINE 10 |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -174,8 +178,8 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 562 | open | [-0.85, 2.55, 5.2] | [-0.85, 1.6, -2.2] | 46 | 0.15 | 4 | the bidders under the boards |
-| 722 | glide 30 f | [-0.85, 2.45, 0.6] | [-0.85, 2.7, -3.9] | 34 | 0.2 | 6 | the board lands on $576,000 |
+| 562 | open | [-0.6, 2.4, 5.2] | [-0.6, 1.3, -2.2] | 44 | 0.06 | 0 | the bidders under the boards |
+| 722 | glide 30 f | [-0.85, 2.6, 1.15] | [-0.85, 2.8, -3.94] | 40 | 0.06 | 0 | the board lands on $576,000 |
 
 - Kicks (7 f): f750 strength 0.5.
 - Physics & FX: paddles: 3 f snap up, 2 f hold, 4 f down.
@@ -197,8 +201,7 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 757 | open | [1.9, 2.3, 2.5] | [1.65, 2.1, -2.65] | 34 | 0.15 | 6 | the record pole |
-| 880 | glide 30 f | [1.8, 2.35, 0.2] | [1.82, 2.25, -2.65] | 30 | 0.2 | 8 | the two markers |
+| 757 | open | [1.9, 1.9, 3] | [1.65, 1.75, -2.65] | 44 | 0.08 | 0 | the clerk hauls the marker up the pole |
 
 - Kicks (7 f): none.
 - Physics & FX: marker: kinematic on the pole, eased per pull, a 1 cm overshoot at the top.
@@ -220,8 +223,10 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 933 | open | [-0.6, 1.8, 1.9] | [-0.6, 1.95, -3] | 46 | 0.15 | 4 | the same stage (locked frame) |
-| 1094 | glide 12 f | [-0.35, 1.45, -2.15] | [-0.35, 1.44, -2.76] | 22 | 0.6 | 10 | into the Latios |
+| 933 | open | [-0.6, 1.7, 2.1] | [-0.6, 1.75, -3] | 46 | 0.06 | 0 | the same stage (locked frame) |
+| 972 | glide 24 f | [-0.3, 1.47, -1.36] | [-0.35, 1.43, -2.76] | 30 | 0.06 | 0 | the Latios slab, named |
+| 1050 | glide 30 f | [-0.6, 1.7, 2.1] | [-0.6, 1.75, -3] | 46 | 0 | 0 | back to the stage for the gavel |
+| 1094 | glide 12 f | [-0.35, 1.45, -2.15] | [-0.35, 1.44, -2.76] | 22 | 0.4 | 0 | into the Latios |
 
 - Kicks (7 f): f1094 strength 0.9.
 - Physics & FX: the tag as in S01.
@@ -242,10 +247,9 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1106 | open | [-1.1, 1.52, -2] | [-1.1, 1.52, -3] | 38 | 0 | 3 | slab after slab |
-| 1110 | glide 56 f | [0.9, 1.55, -2] | [0.9, 1.55, -3] | 38 | 0 | 3 | truck along the wall |
-| 1166 | glide 28 f | [0, 1.45, 1.3] | [0, 1.38, -1.6] | 44 | 0.1 | 6 | the podium before the wall |
-| 1198 | glide 22 f | [0, 1.3, -0.3] | [0, 1.23, -0.92] | 30 | 0.3 | 12 | the best one |
+| 1106 | open | [0, 1.55, 2.7] | [0, 1.4, -2] | 46 | 0.08 | 0 | the gallery: the wall of 170 and the podium |
+| 1150 | glide 40 f | [0, 1.35, 1] | [0, 1.28, -1.2] | 40 | 0.06 | 0 | the podium before the wall |
+| 1196 | glide 22 f | [0, 1.27, -0.05] | [0, 1.22, -0.92] | 30 | 0.08 | 0 | the best one |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -270,7 +274,7 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1224 | open | [2.55, 2.05, 5.2] | [2.55, 1.25, 1] | 54 | 0.2 (punch 0.6 for 10 f) | 4 | the champagne table |
+| 1224 | open | [2.55, 2.05, 5.2] | [2.55, 1.25, 1] | 54 | 0.08 (punch 0.3 for 10 f) | 0 | the champagne table |
 
 - Kicks (7 f): f1252 strength 0.8.
 - Physics & FX: corks: 8 g, launched 4-5 m/s up and back from each neck, gravity, restitution 0.4 on the floor, friction 0.5; they rest and stay (seen in S09 and S14).
@@ -285,16 +289,16 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 - Set: hall. Light: day.
 - Build: reuse the table; the waiter with a leather bill folder (HÓA ĐƠN · SÂM PANH x4).
 - Blocking: Waiter walks in from frame right (waiter_in) f1310-1336 to the waiter mark at the table's end.
-  - waiter at [3.72, 1.95], front; walks in, slides the bill f1336-1356; smile.
+  - waiter at [3.45, 1.78], front; walks in, slides the bill f1336-1356; smile.
 - Action, against the words: f1285 'Khoan đã': the music cuts; everyone freezes mid-laugh (the one stillness, 10 f); f1336-1356 the waiter slides the folder onto the table's right end (bill mark), opens it; f1360-1385 collectors' eyes go to the bill; f1391 'ai trả?' (f1393): all four point at another collector with their right arm (c1 -> c2, c2 -> c3, c3 -> c4, c4 -> c1).
 - Acting: Collectors: laugh -> frozen -> nervous; the waiter: polite smile.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1283 | open | [2.55, 2.05, 5.2] | [2.55, 1.25, 1] | 54 | 0.1 | 4 | the freeze |
-| 1330 | glide 30 f | [3.35, 2.2, 2.1] | [3.48, 1, 1.45] | 28 | 0.2 | 10 | the bill |
-| 1376 | glide 18 f | [2.55, 2, 5] | [2.55, 1.25, 1] | 54 | 0.2 | 4 | everyone points |
+| 1283 | open | [2.55, 2.05, 5.2] | [2.55, 1.25, 1] | 54 | 0.05 | 0 | the freeze |
+| 1330 | glide 30 f | [3.35, 1.9, 4.7] | [3.35, 1.2, 1.3] | 46 | 0.06 | 0 | the waiter and the bill |
+| 1376 | glide 18 f | [2.55, 2, 5] | [2.55, 1.25, 1] | 54 | 0.06 | 0 | everyone points |
 
 - Kicks (7 f): none.
 - Physics & FX: the folder: slides 30 cm, stops; opens on its spine.
@@ -306,7 +310,7 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 - Gloss: You see, an auction price is like 'I'll pay you tomorrow' from a friend who borrowed money.
 - Spine link: 5. Viewer must get: A friend pockets borrowed cash and slides over a promise, a ghost note.
 - In: dissolve 8 f. Out: hold.
-- Set: cafe. Light: golden.
+- Set: cafe. Light: day.
 - Build: new: the café terrace, round table, two coffees; a fan of banknotes; the IOU note (ghost purple, see-through).
 - Blocking: Borrower seated at the borrower mark (screen left), lender at the lender mark; both face +z.
   - borrower at [-0.48, -0.95], front; seated; cash fan, tucks it, slides the IOU f1490-1508; grin.
@@ -317,8 +321,8 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1412 | open | [0, 1.3, 2.7] | [0, 1, -0.8] | 46 | 0.15 | 4 | two friends at the café |
-| 1500 | glide 30 f | [0, 1.75, 0.55] | [0, 0.8, -0.65] | 40 | 0.2 | 10 | the ghost note |
+| 1412 | open | [0, 1.6, 3.6] | [0, 1.4, -1] | 46 | 0.06 | 0 | the café, the two friends, the sky |
+| 1500 | glide 30 f | [0, 2.1, 1.5] | [0, 0.85, -0.7] | 44 | 0.06 | 0 | the ghost note between them |
 
 - Kicks (7 f): none.
 - Physics & FX: the note: kinematic slide, then a ghost hover (2 cm, 1 Hz bob).
@@ -330,7 +334,7 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 - Gloss: It sounds very loud, very sure, but only when the money actually moves does the promise become a real price.
 - Spine link: 5. Viewer must get: Loud and sure means nothing; the money crosses the table and the promise turns real.
 - In: hold. Out: dissolve 8 f (to the writer at night).
-- Set: cafe. Light: golden.
+- Set: cafe. Light: day.
 - Build: new: a red megaphone (held), the cash envelope; the green ĐÃ TRẢ stamp.
 - Blocking: As S10.
   - borrower at [-0.48, -0.95], front; megaphone f1553-1580, thump f1590, envelope f1636-1668; grin -> earnest.
@@ -341,9 +345,9 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1550 | open | [0, 1.32, 2.4] | [0, 1.05, -0.8] | 48 | 0.2 (punch 0.6 for 10 f) | 4 | the megaphone, the thump |
-| 1628 | glide 22 f | [0, 1.9, 0.5] | [0, 0.76, -0.68] | 40 | 0.2 | 10 | the envelope crosses the table |
-| 1680 | glide 22 f | [0, 1.42, -0.18] | [0, 0.745, -0.6] | 30 | 0.3 | 12 | the promise turns real |
+| 1550 | open | [0, 1.6, 3.2] | [0, 1.15, -0.9] | 44 | 0.08 (punch 0.3 for 10 f) | 0 | the megaphone, the thump |
+| 1628 | glide 22 f | [0, 2.2, 0.9] | [0, 0.76, -0.7] | 40 | 0.06 | 0 | the envelope crosses the table |
+| 1680 | glide 22 f | [0, 1.5, -0.1] | [0, 0.745, -0.6] | 30 | 0.08 | 0 | the promise turns real |
 
 - Kicks (7 f): f1590 strength 0.7; f1707 strength 0.5.
 - Physics & FX: cups: hop 2 cm (rattle) on each shout pulse and on the thump; the envelope: a kinematic slide with friction, stops dead.
@@ -359,14 +363,14 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 - Build: new: the writer's desk at night (laptop, lamp, mug); the laptop page FANATICS COLLECT · LỊCH SỬ BÁN: 8 rows (real card thumbnails, price, date, ĐÃ BÁN), a counter 'ĐÃ BIẾN MẤT'.
 - Blocking: Writer seated at the writer mark facing +z, lit by the screen.
   - writer at [0, -1.5], front; seated at the desk; neutral -> shock.
-- Action, against the words: f1728-1790 the writer leans in to the laptop; f1790-1818 into his POV; f1840-1945 'lặng lẽ biến khỏi lịch sử bán': rows 2, 5, 3, 7, 6 turn purple see-through and float up off the page one after another (every 16 f), each leaving a grey line KHÔNG NHẬN ĐƯỢC TIỀN on 'vì không nhận được tiền' (f1913); the counter at the bottom climbs $0 -> $3,4xx,xxx ('hàng triệu đô' f1804).
+- Action, against the words: f1728-1790 the writer leans in to the laptop; f1790 cut to his POV; f1840-1945 'lặng lẽ biến khỏi lịch sử bán': rows 2, 5, 3, 7, 6 turn purple see-through and float up off the page one after another (every 16 f), each leaving a grey line KHÔNG NHẬN ĐƯỢC TIỀN on 'vì không nhận được tiền' (f1913); the counter at the bottom climbs $0 -> $3,4xx,xxx ('hàng triệu đô' f1804).
 - Acting: Writer: focused -> shock (f1810).
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1728 | open | [0.12, 1.42, 1.9] | [0, 1.08, -1.45] | 40 | 0.15 | 6 | the writer at night |
-| 1786 | glide 36 f | [0.19, 1.17, -1.21] | [0.532, 0.879, -0.608] | 34 | 0.15 | 8 | his laptop, from his eyes |
+| 1728 | open | [0.15, 1.5, 2.3] | [0, 1, -1.5] | 46 | 0.06 | 0 | the writer at his desk, night window |
+| 1790 | cut | [0.19, 1.17, -1.21] | [0.532, 0.879, -0.608] | 34 | 0.06 | 0 | his laptop, from his eyes |
 
 - Kicks (7 f): none.
 - Physics & FX: none (screen content).
@@ -388,7 +392,7 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1957 | open | [-1.2, 1.9, 0.3] | [-1.1, 2.15, -3.5] | 46 | 0.2 | 6 | the spokesman under the board |
+| 1957 | open | [-0.9, 1.7, 1.6] | [-0.9, 1.7, -3.5] | 46 | 0.06 | 0 | the spokesman under the board |
 
 - Kicks (7 f): f2030 strength 0.4.
 - Physics & FX: the button: 1 cm press.
@@ -399,7 +403,7 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 ### S14 · 1:08.3-1:17.5 · f2048-f2326 · "Nên bây giờ, mỗi khi thấy một con số khổng lồ, dân sưu tầm làm thêm một việc trước khi mở sâm panh: mở trang lịch sử bán, và tìm hai chữ, đã trả."
 - Gloss: So now, whenever they see a giant number, collectors do one more thing before popping the champagne: open the sales history page and look for two words: paid.
 - Spine link: 7. Viewer must get: A collector sees a giant number, stops before popping, checks the sales history for ĐÃ TRẢ, then pops.
-- In: glide. Out: cut.
+- In: glide. Out: dissolve 8 f.
 - Set: hall. Light: day.
 - Build: reuse the champagne table (the corks still on the floor, empty coupes); c1 (green hoodie) with a bottle and his phone (canvas: FANATICS COLLECT · LỊCH SỬ BÁN, a row with a green ĐÃ TRẢ badge).
 - Blocking: c1 behind the table at c1_late, facing +z.
@@ -410,10 +414,10 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 2048 | open | [2.9, 1.55, 4.7] | [1, 2, -1.2] | 50 | 0.15 | 4 | him and the big board |
-| 2134 | glide 24 f | [2.3, 1.6, 3.6] | [2, 1.45, 0.75] | 40 | 0.2 | 8 | the bottle held |
-| 2210 | cut | [2, 1.6, 0.84] | [2.06, 1.28, 1.02] | 30 | 0.1 | 6 | his phone, from his eyes |
-| 2298 | glide 12 f | [2.2, 1.55, 3.1] | [2, 1.55, 0.75] | 42 | 0.2 | 6 | the pop |
+| 2048 | open | [2.9, 1.55, 4.7] | [1, 2, -1.2] | 50 | 0.06 | 0 | him and the big board |
+| 2134 | glide 24 f | [2.3, 1.6, 3.8] | [2, 1.3, 0.75] | 44 | 0.06 | 0 | the bottle held |
+| 2210 | cut | [2, 1.6, 0.84] | [2.06, 1.28, 1.02] | 30 | 0.06 | 0 | his phone, from his eyes |
+| 2298 | glide 12 f | [2.25, 1.6, 3.6] | [2, 1.35, 0.75] | 44 | 0.06 | 0 | the pop |
 
 - Kicks (7 f): f2312 strength 0.6.
 - Physics & FX: the cork as in S08.
@@ -424,7 +428,7 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 ### S15 · 1:17.5-1:20.7 · f2326-f2420 · "Còn Gengar, vẫn đang cười."
 - Gloss: And Gengar is still grinning.
 - Spine link: 7. Viewer must get: The Gengar slab alone at night, its printed grin; the ghost tag drifts by.
-- In: cut. Out: end.
+- In: dissolve 8 f (later: the hall after closing). Out: end.
 - Set: hall. Light: day.
 - Build: reuse the plinth: the Gengar slab back on the easel (it came back unpaid), the empty tag string; a spotlight; the ghost tag.
 - Blocking: Nobody.
@@ -434,7 +438,7 @@ Hard cuts: S08 (the champagne) and S15 (Gengar at night). Dissolves for every ti
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 2326 | open | [-0.32, 1.5, -1.6] | [-0.35, 1.47, -2.76] | 30 | 0.4 | 12 | Gengar, still grinning |
+| 2326 | open | [-0.33, 1.47, -1.8] | [-0.35, 1.45, -2.76] | 30 | 0.15 | 0 | Gengar, still grinning |
 
 - Kicks (7 f): none.
 - Physics & FX: the ghost: no gravity, sine drift.

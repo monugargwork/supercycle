@@ -46,33 +46,18 @@ export const SLAB_LINES: Record<string, string[]> = {
   lc_gengar: ["Pokémon (2002)", "Legendary Collection", "Gengar - Reverse Holo · 11/110"],
   dx_latios_star: ["Pokémon (2005)", "EX Deoxys", "Latios Gold Star · 106/107"],
 };
-/** clear case, gold PRISTINE 10 label (the card's own lines), the real scan in the well; gleam 0..1 = a shine crossing it,
- *  flash 0..1 = the grade box lit */
+/** the REAL slab: CGC's own cut-out photo of the exact slab (library/slabs, upscaled 3x), drawn W x H (aspect 0.592);
+ *  gleam 0..1 = a shine crossing the case, flash 0..1 = the grade box lit */
+export const SLAB_PHOTO: Record<string, string> = { lc_gengar: "slab_gengar", dx_latios_star: "slab_latios" };
+export const SLAB_ASPECT = 400 / 676;
 export const cgcSlab = (p: Pen, W: number, H: number, img: string, o: { gleam?: number; flash?: number } = {}) => {
-  const g = p.g, s = W / 100, x0 = 3 * s, x1 = W - 3 * s, y0 = 3 * s, y1 = H - 3 * s, L = SLAB_LINES[img] ?? SLAB_LINES.lc_gengar;
-  rrect(g, x0, y0, x1 - x0, y1 - y0, 6 * s, "rgba(214,232,244,0.98)", "#1d1b22", 2.2 * s);
-  rrect(g, x0 + 3.5 * s, y0 + 3.5 * s, x1 - x0 - 7 * s, y1 - y0 - 7 * s, 4.5 * s, "rgba(236,246,252,0.95)", "rgba(120,140,160,0.8)", 0.8 * s);
-  // the label: gold for a Pristine 10
-  const lx0 = x0 + 7 * s, lx1 = x1 - 7 * s, ly0 = y0 + 7 * s, ly1 = y0 + 0.245 * (y1 - y0);
-  const gr = g.createLinearGradient(lx0, ly0, lx1, ly1); gr.addColorStop(0, "#f6e3a1"); gr.addColorStop(0.5, "#e7c35c"); gr.addColorStop(1, "#c99a2a");
-  rrect(g, lx0, ly0, lx1 - lx0, ly1 - ly0, 1.6 * s, "#7a5a14", "#1d1b22", 1.2 * s);
-  g.fillStyle = gr; g.beginPath(); g.roundRect(lx0 + 1.4 * s, ly0 + 1.4 * s, lx1 - lx0 - 2.8 * s, ly1 - ly0 - 2.8 * s, 1.2 * s); g.fill();
-  lt(g, "CGC", lx0 + 4 * s, ly0 + 5.2 * s, 5.2 * s, "#3a2a08", 900);
-  L.forEach((t, i) => lt(g, t, lx0 + 4 * s, ly0 + 11 * s + i * 4.4 * s, 3.5 * s, "#2a1d06", i === 2 ? 800 : 700, "left", 56 * s));
-  const bx = lx1 - 25 * s, by = ly0 + 3 * s, bw = 22 * s, bh = ly1 - ly0 - 6 * s;
-  rrect(g, bx, by, bw, bh, 1.5 * s, o.flash ? `rgba(255,248,190,${0.5 + 0.5 * Math.min(1, o.flash)})` : "#fbf3d6", "#3a2a08", 0.8 * s);
-  lt(g, "PRISTINE", bx + bw / 2, by + 4.4 * s, 3.6 * s, "#3a2a08", 900, "center", bw - 2 * s);
-  lt(g, "10", bx + bw / 2, by + bh * 0.66, 11 * s, "#1d1306", 900, "center");
-  // the well and the card
-  const wy0 = ly1 + 3.5 * s, wy1 = y1 - 5 * s;
-  rrect(g, x0 + 8 * s, wy0, x1 - x0 - 16 * s, wy1 - wy0, 3 * s, "rgba(205,224,238,0.92)", "rgba(90,110,130,0.7)", 1 * s);
-  const cw = 70 * s, ch = cw / 0.716, cx0 = W / 2 - cw / 2, cy0 = (wy0 + wy1) / 2 - ch / 2;
-  scan(g, img, cx0, cy0, cw, ch);
-  g.save(); g.globalAlpha = 0.16; g.fillStyle = "#fff"; g.beginPath(); g.moveTo(x0 + 10 * s, y1 - 10 * s); g.lineTo(x0 + 26 * s, y1 - 10 * s); g.lineTo(x1 - 10 * s, y0 + 42 * s); g.lineTo(x1 - 10 * s, y0 + 28 * s); g.fill(); g.restore();
+  const g = p.g, im = TCG_IMG[SLAB_PHOTO[img] ?? img];
+  if (im) g.drawImage(im, 0, 0, W, H); else { g.fillStyle = "#c9a24a"; g.fillRect(0, 0, W, H); }
+  if (o.flash) { g.save(); g.globalAlpha = 0.45 * Math.min(1, o.flash); g.fillStyle = "#fff6b0"; g.beginPath(); g.roundRect(W * 0.655, H * 0.07, W * 0.235, H * 0.135, W * 0.02); g.fill(); g.restore(); }
   if (o.gleam !== undefined && o.gleam > 0 && o.gleam < 1) {
-    g.save(); g.beginPath(); g.roundRect(x0, y0, x1 - x0, y1 - y0, 6 * s); g.clip();
+    g.save(); g.beginPath(); g.roundRect(W * 0.03, H * 0.015, W * 0.94, H * 0.97, W * 0.06); g.clip();
     const x = -0.6 * W + 2.2 * W * o.gleam, gg = g.createLinearGradient(x - 0.25 * W, 0, x + 0.25 * W, 0.4 * H);
-    gg.addColorStop(0, "rgba(255,255,255,0)"); gg.addColorStop(0.5, "rgba(255,255,255,0.75)"); gg.addColorStop(1, "rgba(255,255,255,0)");
+    gg.addColorStop(0, "rgba(255,255,255,0)"); gg.addColorStop(0.5, "rgba(255,255,255,0.6)"); gg.addColorStop(1, "rgba(255,255,255,0)");
     g.fillStyle = gg; g.fillRect(0, 0, W, H); g.restore();
   }
 };
@@ -159,17 +144,17 @@ export const markerPlate = (p: Pen, price: string, sub: string, ghost: boolean) 
 
 // ---------------- the census wall (2048 x 1205: 17 x 10 Latios slabs on rails) ----------------
 export const censusWall = (p: Pen) => {
-  const g = p.g, W = 2048, H = 1205; g.fillStyle = "#14182a"; g.fillRect(0, 0, W, H);
-  const cols = 17, rows = 10, cw = 104, ch = 104 / 0.628, gx = (W - cols * cw) / (cols + 1), gy = (H - 60 - rows * ch) / (rows + 1);
+  const g = p.g, W = 2048, H = 1205; g.fillStyle = "#b8804a"; g.fillRect(0, 0, W, H); for (let i = 0; i < 12; i++) { g.fillStyle = i % 2 ? "rgba(255,230,190,0.12)" : "rgba(90,50,20,0.1)"; g.fillRect(0, i * 100, W, 100); }
+  const cols = 17, rows = 10, cw = 100, ch = 100 / SLAB_ASPECT, gx = (W - cols * cw) / (cols + 1), gy = (H - 60 - rows * ch) / (rows + 1);
   for (let r = 0; r < rows; r++) {
     const y = 60 + gy + r * (ch + gy);
-    g.fillStyle = "#8a6a2a"; g.fillRect(10, y + ch + 2, W - 20, 6);
+    g.fillStyle = "#e7c35c"; g.fillRect(10, y + ch + 2, W - 20, 8);
     for (let c = 0; c < cols; c++) {
       const x = gx + c * (cw + gx);
       g.save(); g.translate(x, y); cgcSlab(new Pen(g), cw, ch, "dx_latios_star"); g.restore();
     }
   }
-  lt(g, "LATIOS GOLD STAR · CGC PRISTINE 10 · 170+", W / 2, 32, 40, "#e7c35c", 800, "center");
+  g.fillStyle = "#c0323c"; g.fillRect(0, 0, W, 60); lt(g, "LATIOS GOLD STAR · CGC PRISTINE 10 · 170+", W / 2, 32, 40, "#fff3c4", 800, "center");
 };
 
 // ---------------- the café ----------------

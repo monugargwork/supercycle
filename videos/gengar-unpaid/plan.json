@@ -100,7 +100,7 @@
   ],
   "slab_size": [
    0.2,
-   0.32
+   0.338
   ],
   "slab_tilt": 0.2,
   "tag_top": [
@@ -158,7 +158,7 @@
    -2.4
   ],
   "clerk_tag": [
-   0.45,
+   0.4,
    -2.45
   ],
   "bidders": [
@@ -210,13 +210,13 @@
    2.3
   ],
   "waiter": [
-   3.72,
-   1.95
+   3.45,
+   1.78
   ],
   "bill": [
-   3.45,
+   3.05,
    1.0,
-   1.42
+   1.58
   ],
   "c1_late": [
    2.0,
@@ -404,7 +404,7 @@
     },
     {
      "id": "slab",
-     "build": "adapt:slabReal: a CGC-style case 20 x 32 cm (2.4x real, so it reads next to the people), gold label 'PRISTINE 10', the real Legendary Collection Gengar scan",
+     "build": "real slab: CGC's own cut-out photo of the exact slab (cert 4288394001, library/slabs), 20 x 33.8 cm (2.4x real, so it reads next to the people)",
      "pos": [
       -0.35,
       1.43,
@@ -507,7 +507,7 @@
      -3.05
     ],
     "clerk": [
-     0.45,
+     0.4,
      -2.45
     ],
     "c1": [
@@ -582,10 +582,10 @@
     0
    ],
    "axes": "the café front on z -2.4 faces +z; the round table in front; the lens on the street",
-   "light": "golden",
+   "light": "day",
    "sun": [
     -40,
-    18
+    35
    ],
    "open_sides": "+z",
    "objects": [
@@ -866,48 +866,38 @@
      "f": 0,
      "pos": [
       -0.6,
-      1.8,
-      1.9
+      1.7,
+      2.1
      ],
      "look": [
       -0.6,
-      1.95,
+      1.75,
       -3.0
      ],
      "fov": 46,
      "roll": 0,
-     "push": 0.002,
-     "blur": 4,
-     "why": "the board over the rostrum and the lot",
-     "focus": [
-      -1.35,
-      1.85,
-      -3.05
-     ]
+     "push": 0.0008,
+     "blur": 0,
+     "why": "the board over the rostrum and the lot"
     },
     {
      "f": 84,
      "pos": [
-      -0.3,
-      1.55,
-      -0.9
+      -0.2,
+      1.5,
+      -0.4
      ],
      "look": [
-      -0.28,
-      1.5,
+      -0.2,
+      1.45,
       -2.75
      ],
-     "fov": 32,
+     "fov": 36,
      "roll": 0,
-     "push": 0.002,
-     "blur": 10,
-     "why": "push to the slab and the tag",
-     "glide": 22,
-     "focus": [
-      -0.35,
-      1.43,
-      -2.76
-     ]
+     "push": 0.001,
+     "blur": 0,
+     "why": "to the slab and the tag",
+     "glide": 22
     }
    ],
    "kicks": [
@@ -964,6 +954,18 @@
       0,
       99
      ]
+    },
+    {
+     "n": "auctioneer feet",
+     "p": [
+      -1.35,
+      0.32,
+      -3.05
+     ],
+     "f": [
+      0,
+      82
+     ]
     }
    ],
    "physics": "tag: pendulum on a 13 cm string, released at f80 from 15 cm up: drops, snaps taut, swings ±25 deg damped (settles by f130). Gavel: 1 f strike, 2 f squash of the block.",
@@ -980,7 +982,6 @@
    ],
    "set": "hall",
    "light": "day",
-   "dim": 0.86,
    "vo": "và hôm sau, nó bị đánh dấu là chưa thanh toán. Đúng chất Pokémon hệ ma: có đó, rồi biến mất.",
    "gloss": "and the next day it was marked unpaid. Typical ghost-type Pokémon: there, then gone.",
    "spine": 1,
@@ -1003,49 +1004,58 @@
     {
      "f": 100,
      "pos": [
-      -0.12,
-      1.6,
-      -0.6
+      0.15,
+      1.35,
+      1.25
      ],
      "look": [
-      0.0,
-      1.55,
+      0.12,
+      1.3,
+      -2.72
+     ],
+     "fov": 46,
+     "roll": 0,
+     "push": 0.0006,
+     "blur": 0,
+     "why": "the plinth next day; the clerk comes in"
+    },
+    {
+     "f": 166,
+     "pos": [
+      -0.15,
+      1.5,
+      -0.5
+     ],
+     "look": [
+      -0.15,
+      1.47,
       -2.72
      ],
      "fov": 34,
      "roll": 0,
-     "push": 0.0015,
-     "blur": 8,
-     "why": "the plinth next day; the clerk comes in",
-     "focus": [
-      -0.02,
-      1.5025,
-      -2.72
-     ]
+     "push": 0.0008,
+     "blur": 0,
+     "why": "the slab and the tag",
+     "glide": 22
     },
     {
      "f": 254,
      "pos": [
-      0.12,
-      1.72,
-      -0.6
+      -0.1,
+      1.6,
+      -0.5
      ],
      "look": [
-      0.12,
-      2.3,
+      -0.05,
+      2.2,
       -2.72
      ],
-     "fov": 38,
+     "fov": 40,
      "roll": 0,
-     "push": 0.001,
-     "blur": 6,
+     "push": 0.0,
+     "blur": 0,
      "why": "tilt up with the ghost",
-     "glide": 30,
-     "focus": [
-      -0.02,
-      2.3,
-      -2.72
-     ]
+     "glide": 30
     }
    ],
    "kicks": [],
@@ -1053,7 +1063,7 @@
     {
      "who": "clerk",
      "at": [
-      0.45,
+      0.4,
       -2.45
      ],
      "view": "front",
@@ -1073,6 +1083,30 @@
       100,
       250
      ]
+    },
+    {
+     "n": "clerk head",
+     "p": [
+      0.4,
+      1.85,
+      -2.45
+     ],
+     "f": [
+      142,
+      162
+     ]
+    },
+    {
+     "n": "clerk feet",
+     "p": [
+      0.4,
+      0.32,
+      -2.45
+     ],
+     "f": [
+      142,
+      162
+     ]
     }
    ],
    "physics": "tag spin: torsion pendulum, 1.5 turns decaying to rest on its back. Ghost: no gravity, rises 0.6 m/s with a sine side-wobble (amplitude 4 cm, 1.2 Hz), fades over 14 f.",
@@ -1088,7 +1122,6 @@
    ],
    "set": "hall",
    "light": "day",
-   "dim": 0.86,
    "vo": "Lá Gengar ấy in năm hai nghìn không trăm lẻ hai, bộ Legendary Collection, mặt bóng lấp lánh như pháo hoa, được CGC chấm Pristine mười.",
    "gloss": "That Gengar was printed in 2002, Legendary Collection, its holo face sparkling like fireworks, graded Pristine 10 by CGC.",
    "spine": 2,
@@ -1111,54 +1144,40 @@
     {
      "f": 298,
      "pos": [
-      -0.27,
-      1.5,
-      -1.55
+      -0.34,
+      1.47,
+      -1.36
      ],
      "look": [
-      -0.33,
-      1.46,
+      -0.35,
+      1.43,
       -2.76
      ],
      "fov": 30,
      "roll": 0,
-     "push": 0.002,
-     "blur": 12,
+     "push": 0.0008,
+     "blur": 0,
      "why": "the slab",
-     "glide": 32,
-     "focus": [
-      -0.35,
-      1.43,
-      -2.76
-     ]
+     "glide": 32
     },
     {
      "f": 512,
      "pos": [
       -0.35,
       1.58,
-      -2.08
+      -1.87
      ],
      "look": [
       -0.35,
       1.55,
-      -2.78
+      -2.77
      ],
-     "fov": 26,
+     "fov": 30,
      "roll": 0,
-     "push": 0.003,
-     "blur": 12,
+     "push": 0.0008,
+     "blur": 0,
      "why": "the label: PRISTINE 10",
-     "glide": 26,
-     "punch": [
-      0.006,
-      12
-     ],
-     "focus": [
-      -0.35,
-      1.5499999999999998,
-      -2.76
-     ]
+     "glide": 26
     }
    ],
    "kicks": [],
@@ -1223,49 +1242,39 @@
     {
      "f": 562,
      "pos": [
-      -0.85,
-      2.55,
+      -0.6,
+      2.4,
       5.2
      ],
      "look": [
-      -0.85,
-      1.6,
+      -0.6,
+      1.3,
       -2.2
      ],
-     "fov": 46,
+     "fov": 44,
      "roll": 0,
-     "push": 0.0015,
-     "blur": 4,
-     "why": "the bidders under the boards",
-     "focus": [
-      -0.88,
-      1.2,
-      -0.9
-     ]
+     "push": 0.0006,
+     "blur": 0,
+     "why": "the bidders under the boards"
     },
     {
      "f": 722,
      "pos": [
       -0.85,
-      2.45,
-      0.6
+      2.6,
+      1.15
      ],
      "look": [
       -0.85,
-      2.7,
-      -3.9
-     ],
-     "fov": 34,
-     "roll": 0,
-     "push": 0.002,
-     "blur": 6,
-     "why": "the board lands on $576,000",
-     "glide": 30,
-     "focus": [
-      -0.85,
-      2.85,
+      2.8,
       -3.94
-     ]
+     ],
+     "fov": 40,
+     "roll": 0,
+     "push": 0.0006,
+     "blur": 0,
+     "why": "the board lands on $576,000",
+     "glide": 30
     }
    ],
    "kicks": [
@@ -1354,6 +1363,42 @@
       562,
       715
      ]
+    },
+    {
+     "n": "bidder1 feet",
+     "p": [
+      -1.55,
+      0.02,
+      -1.2
+     ],
+     "f": [
+      562,
+      715
+     ]
+    },
+    {
+     "n": "bidder2 feet",
+     "p": [
+      -0.2,
+      0.02,
+      -1.2
+     ],
+     "f": [
+      562,
+      715
+     ]
+    },
+    {
+     "n": "bidder3 feet",
+     "p": [
+      -0.88,
+      0.02,
+      -0.5
+     ],
+     "f": [
+      562,
+      715
+     ]
     }
    ],
    "physics": "paddles: 3 f snap up, 2 f hold, 4 f down.",
@@ -1392,49 +1437,20 @@
      "f": 757,
      "pos": [
       1.9,
-      2.3,
-      2.5
+      1.9,
+      3.0
      ],
      "look": [
       1.65,
-      2.1,
+      1.75,
       -2.65
      ],
-     "fov": 34,
+     "fov": 44,
      "roll": 0,
-     "push": 0.0015,
-     "blur": 6,
-     "why": "the record pole",
-     "glide": 34,
-     "focus": [
-      1.7,
-      2.6039999999999996,
-      -2.65
-     ]
-    },
-    {
-     "f": 880,
-     "pos": [
-      1.8,
-      2.35,
-      0.2
-     ],
-     "look": [
-      1.82,
-      2.25,
-      -2.65
-     ],
-     "fov": 30,
-     "roll": 0,
-     "push": 0.002,
-     "blur": 8,
-     "why": "the two markers",
-     "glide": 30,
-     "focus": [
-      1.7,
-      2.6039999999999996,
-      -2.65
-     ]
+     "push": 0.0008,
+     "blur": 0,
+     "why": "the clerk hauls the marker up the pole",
+     "glide": 34
     }
    ],
    "kicks": [],
@@ -1486,6 +1502,18 @@
       790,
       870
      ]
+    },
+    {
+     "n": "clerk feet",
+     "p": [
+      1.38,
+      0.32,
+      -2.4
+     ],
+     "f": [
+      790,
+      870
+     ]
     }
    ],
    "physics": "marker: kinematic on the pole, eased per pull, a 1 cm overshoot at the top.",
@@ -1525,24 +1553,57 @@
      "f": 933,
      "pos": [
       -0.6,
-      1.8,
-      1.9
+      1.7,
+      2.1
      ],
      "look": [
       -0.6,
-      1.95,
+      1.75,
       -3.0
      ],
      "fov": 46,
      "roll": 0,
-     "push": 0.0015,
-     "blur": 4,
-     "why": "the same stage (locked frame)",
-     "focus": [
-      -1.35,
-      1.85,
-      -3.05
-     ]
+     "push": 0.0006,
+     "blur": 0,
+     "why": "the same stage (locked frame)"
+    },
+    {
+     "f": 972,
+     "pos": [
+      -0.3,
+      1.47,
+      -1.36
+     ],
+     "look": [
+      -0.35,
+      1.43,
+      -2.76
+     ],
+     "fov": 30,
+     "roll": 0,
+     "push": 0.0006,
+     "blur": 0,
+     "why": "the Latios slab, named",
+     "glide": 24
+    },
+    {
+     "f": 1050,
+     "pos": [
+      -0.6,
+      1.7,
+      2.1
+     ],
+     "look": [
+      -0.6,
+      1.75,
+      -3.0
+     ],
+     "fov": 46,
+     "roll": 0,
+     "push": 0.0,
+     "blur": 0,
+     "why": "back to the stage for the gavel",
+     "glide": 30
     },
     {
      "f": 1094,
@@ -1558,15 +1619,10 @@
      ],
      "fov": 22,
      "roll": 0,
-     "push": 0.006,
-     "blur": 10,
+     "push": 0.004,
+     "blur": 0,
      "why": "into the Latios",
-     "glide": 12,
-     "focus": [
-      -0.35,
-      1.43,
-      -2.76
-     ]
+     "glide": 12
     }
    ],
    "kicks": [
@@ -1597,7 +1653,7 @@
      ],
      "f": [
       933,
-      1094
+      966
      ]
     },
     {
@@ -1609,6 +1665,30 @@
      ],
      "f": [
       933,
+      966
+     ]
+    },
+    {
+     "n": "board",
+     "p": [
+      -0.85,
+      2.85,
+      -3.94
+     ],
+     "f": [
+      1082,
+      1094
+     ]
+    },
+    {
+     "n": "auctioneer head",
+     "p": [
+      -1.35,
+      1.85,
+      -3.05
+     ],
+     "f": [
+      1082,
       1094
      ]
     },
@@ -1622,6 +1702,30 @@
      "f": [
       933,
       1105
+     ]
+    },
+    {
+     "n": "auctioneer feet",
+     "p": [
+      -1.35,
+      0.32,
+      -3.05
+     ],
+     "f": [
+      933,
+      966
+     ]
+    },
+    {
+     "n": "auctioneer feet",
+     "p": [
+      -1.35,
+      0.32,
+      -3.05
+     ],
+     "f": [
+      1082,
+      1094
      ]
     }
    ],
@@ -1659,97 +1763,58 @@
     {
      "f": 1106,
      "pos": [
-      -1.1,
-      1.52,
-      -2.0
-     ],
-     "look": [
-      -1.1,
-      1.52,
-      -3.0
-     ],
-     "fov": 38,
-     "roll": 0,
-     "push": 0.0,
-     "blur": 3,
-     "why": "slab after slab",
-     "focus": [
-      -1.1,
-      1.52,
-      -2.97
-     ]
-    },
-    {
-     "f": 1110,
-     "pos": [
-      0.9,
-      1.55,
-      -2.0
-     ],
-     "look": [
-      0.9,
-      1.55,
-      -3.0
-     ],
-     "fov": 38,
-     "roll": 0,
-     "push": 0.0,
-     "blur": 3,
-     "why": "truck along the wall",
-     "glide": 56,
-     "focus": [
-      0.9,
-      1.55,
-      -2.97
-     ]
-    },
-    {
-     "f": 1166,
-     "pos": [
       0.0,
-      1.45,
-      1.3
+      1.55,
+      2.7
      ],
      "look": [
       0.0,
-      1.38,
-      -1.6
+      1.4,
+      -2.0
      ],
-     "fov": 44,
+     "fov": 46,
      "roll": 0,
-     "push": 0.001,
-     "blur": 6,
+     "push": 0.0008,
+     "blur": 0,
+     "why": "the gallery: the wall of 170 and the podium"
+    },
+    {
+     "f": 1150,
+     "pos": [
+      0.0,
+      1.35,
+      1.0
+     ],
+     "look": [
+      0.0,
+      1.28,
+      -1.2
+     ],
+     "fov": 40,
+     "roll": 0,
+     "push": 0.0006,
+     "blur": 0,
      "why": "the podium before the wall",
-     "glide": 28,
-     "focus": [
+     "glide": 40
+    },
+    {
+     "f": 1196,
+     "pos": [
+      0.0,
+      1.27,
+      -0.05
+     ],
+     "look": [
       0.0,
       1.22,
-      -0.92
-     ]
-    },
-    {
-     "f": 1198,
-     "pos": [
-      0.0,
-      1.3,
-      -0.3
-     ],
-     "look": [
-      0.0,
-      1.23,
       -0.92
      ],
      "fov": 30,
      "roll": 0,
-     "push": 0.003,
-     "blur": 12,
+     "push": 0.0008,
+     "blur": 0,
      "why": "the best one",
-     "glide": 22,
-     "focus": [
-      0.0,
-      1.22,
-      -0.92
-     ]
+     "glide": 22
     }
    ],
    "kicks": [],
@@ -1825,18 +1890,13 @@
      ],
      "fov": 54,
      "roll": 0,
-     "push": 0.002,
-     "blur": 4,
+     "push": 0.0008,
+     "blur": 0,
      "why": "the champagne table",
      "cut": true,
      "punch": [
-      0.006,
+      0.003,
       10
-     ],
-     "focus": [
-      2.3,
-      1.55,
-      0.75
      ]
     }
    ],
@@ -1936,6 +1996,54 @@
       1224,
       1282
      ]
+    },
+    {
+     "n": "c1 feet",
+     "p": [
+      1.8,
+      0.02,
+      0.75
+     ],
+     "f": [
+      1224,
+      1282
+     ]
+    },
+    {
+     "n": "c2 feet",
+     "p": [
+      2.3,
+      0.02,
+      0.75
+     ],
+     "f": [
+      1224,
+      1282
+     ]
+    },
+    {
+     "n": "c3 feet",
+     "p": [
+      2.8,
+      0.02,
+      0.75
+     ],
+     "f": [
+      1224,
+      1282
+     ]
+    },
+    {
+     "n": "c4 feet",
+     "p": [
+      3.3,
+      0.02,
+      0.75
+     ],
+     "f": [
+      1224,
+      1282
+     ]
     }
    ],
    "physics": "corks: 8 g, launched 4-5 m/s up and back from each neck, gravity, restitution 0.4 on the floor, friction 0.5; they rest and stay (seen in S09 and S14).",
@@ -1984,39 +2092,29 @@
      ],
      "fov": 54,
      "roll": 0,
-     "push": 0.001,
-     "blur": 4,
+     "push": 0.0005,
+     "blur": 0,
      "why": "the freeze",
-     "glide": 10,
-     "focus": [
-      2.3,
-      1.55,
-      0.75
-     ]
+     "glide": 10
     },
     {
      "f": 1330,
      "pos": [
       3.35,
-      2.2,
-      2.1
+      1.9,
+      4.7
      ],
      "look": [
-      3.48,
-      1.0,
-      1.45
+      3.35,
+      1.2,
+      1.3
      ],
-     "fov": 28,
+     "fov": 46,
      "roll": 0,
-     "push": 0.002,
-     "blur": 10,
-     "why": "the bill",
-     "glide": 30,
-     "focus": [
-      3.45,
-      1.0,
-      1.42
-     ]
+     "push": 0.0006,
+     "blur": 0,
+     "why": "the waiter and the bill",
+     "glide": 30
     },
     {
      "f": 1376,
@@ -2032,15 +2130,10 @@
      ],
      "fov": 54,
      "roll": 0,
-     "push": 0.002,
-     "blur": 4,
+     "push": 0.0006,
+     "blur": 0,
      "why": "everyone points",
-     "glide": 18,
-     "focus": [
-      2.3,
-      1.55,
-      0.75
-     ]
+     "glide": 18
     }
    ],
    "kicks": [],
@@ -2048,8 +2141,8 @@
     {
      "who": "waiter",
      "at": [
-      3.72,
-      1.95
+      3.45,
+      1.78
      ],
      "view": "front",
      "pose": "walks in, slides the bill f1336-1356",
@@ -2060,9 +2153,9 @@
     {
      "n": "bill",
      "p": [
-      3.45,
+      3.05,
       1.0,
-      1.42
+      1.58
      ],
      "f": [
       1350,
@@ -2116,6 +2209,54 @@
       1395,
       1411
      ]
+    },
+    {
+     "n": "c1 feet",
+     "p": [
+      1.8,
+      0.02,
+      0.75
+     ],
+     "f": [
+      1395,
+      1411
+     ]
+    },
+    {
+     "n": "c2 feet",
+     "p": [
+      2.3,
+      0.02,
+      0.75
+     ],
+     "f": [
+      1395,
+      1411
+     ]
+    },
+    {
+     "n": "c3 feet",
+     "p": [
+      2.8,
+      0.02,
+      0.75
+     ],
+     "f": [
+      1395,
+      1411
+     ]
+    },
+    {
+     "n": "c4 feet",
+     "p": [
+      3.3,
+      0.02,
+      0.75
+     ],
+     "f": [
+      1395,
+      1411
+     ]
     }
    ],
    "physics": "the folder: slides 30 cm, stops; opens on its spine.",
@@ -2130,7 +2271,7 @@
     1550
    ],
    "set": "cafe",
-   "light": "golden",
+   "light": "day",
    "vo": "Bạn thấy đấy, giá đấu giá giống câu \"mai tao trả\" của thằng bạn vay tiền.",
    "gloss": "You see, an auction price is like 'I'll pay you tomorrow' from a friend who borrowed money.",
    "spine": 5,
@@ -2153,48 +2294,38 @@
      "f": 1412,
      "pos": [
       0.0,
-      1.3,
-      2.7
+      1.6,
+      3.6
      ],
      "look": [
       0.0,
-      1.0,
-      -0.8
+      1.4,
+      -1.0
      ],
      "fov": 46,
      "roll": 0,
-     "push": 0.0015,
-     "blur": 4,
-     "why": "two friends at the café",
-     "focus": [
-      0,
-      1.0,
-      -0.8
-     ]
+     "push": 0.0006,
+     "blur": 0,
+     "why": "the café, the two friends, the sky"
     },
     {
      "f": 1500,
      "pos": [
       0.0,
-      1.75,
-      0.55
+      2.1,
+      1.5
      ],
      "look": [
       0.0,
-      0.8,
-      -0.65
+      0.85,
+      -0.7
      ],
-     "fov": 40,
+     "fov": 44,
      "roll": 0,
-     "push": 0.002,
-     "blur": 10,
-     "why": "the ghost note",
-     "glide": 30,
-     "focus": [
-      0.0,
-      0.742,
-      -0.6
-     ]
+     "push": 0.0006,
+     "blur": 0,
+     "why": "the ghost note between them",
+     "glide": 30
     }
    ],
    "kicks": [],
@@ -2256,6 +2387,30 @@
       1520,
       1549
      ]
+    },
+    {
+     "n": "borrower feet",
+     "p": [
+      -0.48,
+      0.02,
+      -0.95
+     ],
+     "f": [
+      1412,
+      1495
+     ]
+    },
+    {
+     "n": "lender feet",
+     "p": [
+      0.48,
+      0.02,
+      -0.95
+     ],
+     "f": [
+      1412,
+      1495
+     ]
     }
    ],
    "physics": "the note: kinematic slide, then a ghost hover (2 cm, 1 Hz bob).",
@@ -2271,7 +2426,7 @@
     1728
    ],
    "set": "cafe",
-   "light": "golden",
+   "light": "day",
    "vo": "Nghe rất to, rất chắc, nhưng phải đến khi tiền thật sự chuyển đi, lời hứa mới thành giá thật.",
    "gloss": "It sounds very loud, very sure, but only when the money actually moves does the promise become a real price.",
    "spine": 5,
@@ -2295,60 +2450,50 @@
      "f": 1550,
      "pos": [
       0.0,
-      1.32,
-      2.4
+      1.6,
+      3.2
      ],
      "look": [
       0.0,
-      1.05,
-      -0.8
+      1.15,
+      -0.9
      ],
-     "fov": 48,
+     "fov": 44,
      "roll": 0,
-     "push": 0.002,
-     "blur": 4,
+     "push": 0.0008,
+     "blur": 0,
      "why": "the megaphone, the thump",
      "glide": 12,
      "punch": [
-      0.006,
+      0.003,
       10
-     ],
-     "focus": [
-      0,
-      1.05,
-      -0.8
      ]
     },
     {
      "f": 1628,
      "pos": [
       0.0,
-      1.9,
-      0.5
+      2.2,
+      0.9
      ],
      "look": [
       0.0,
       0.76,
-      -0.68
+      -0.7
      ],
      "fov": 40,
      "roll": 0,
-     "push": 0.002,
-     "blur": 10,
+     "push": 0.0006,
+     "blur": 0,
      "why": "the envelope crosses the table",
-     "glide": 22,
-     "focus": [
-      0,
-      0.76,
-      -0.7
-     ]
+     "glide": 22
     },
     {
      "f": 1680,
      "pos": [
       0.0,
-      1.42,
-      -0.18
+      1.5,
+      -0.1
      ],
      "look": [
       0.0,
@@ -2357,15 +2502,10 @@
      ],
      "fov": 30,
      "roll": 0,
-     "push": 0.003,
-     "blur": 12,
+     "push": 0.0008,
+     "blur": 0,
      "why": "the promise turns real",
-     "glide": 22,
-     "focus": [
-      0.0,
-      0.742,
-      -0.6
-     ]
+     "glide": 22
     }
    ],
    "kicks": [
@@ -2436,6 +2576,18 @@
       1700,
       1727
      ]
+    },
+    {
+     "n": "borrower feet",
+     "p": [
+      -0.48,
+      0.02,
+      -0.95
+     ],
+     "f": [
+      1550,
+      1620
+     ]
     }
    ],
    "physics": "cups: hop 2 cm (rattle) on each shout pulse and on the thump; the envelope: a kinematic slide with friction, stops dead.",
@@ -2451,7 +2603,6 @@
    ],
    "set": "desk",
    "light": "day",
-   "dim": 0.72,
    "vo": "Ngay trên sàn này, một trang tin vừa phát hiện hàng triệu đô kết quả Pokémon đã lặng lẽ biến khỏi lịch sử bán, vì không nhận được tiền.",
    "gloss": "On this very platform, a news site just discovered millions of dollars of Pokémon results had quietly disappeared from the sales history, because the money never came.",
    "spine": 6,
@@ -2469,34 +2620,29 @@
    },
    "build": "new: the writer's desk at night (laptop, lamp, mug); the laptop page FANATICS COLLECT · LỊCH SỬ BÁN: 8 rows (real card thumbnails, price, date, ĐÃ BÁN), a counter 'ĐÃ BIẾN MẤT'.",
    "blocking": "Writer seated at the writer mark facing +z, lit by the screen.",
-   "action": "f1728-1790 the writer leans in to the laptop; f1790-1818 into his POV; f1840-1945 'lặng lẽ biến khỏi lịch sử bán': rows 2, 5, 3, 7, 6 turn purple see-through and float up off the page one after another (every 16 f), each leaving a grey line KHÔNG NHẬN ĐƯỢC TIỀN on 'vì không nhận được tiền' (f1913); the counter at the bottom climbs $0 -> $3,4xx,xxx ('hàng triệu đô' f1804).",
+   "action": "f1728-1790 the writer leans in to the laptop; f1790 cut to his POV; f1840-1945 'lặng lẽ biến khỏi lịch sử bán': rows 2, 5, 3, 7, 6 turn purple see-through and float up off the page one after another (every 16 f), each leaving a grey line KHÔNG NHẬN ĐƯỢC TIỀN on 'vì không nhận được tiền' (f1913); the counter at the bottom climbs $0 -> $3,4xx,xxx ('hàng triệu đô' f1804).",
    "acting": "Writer: focused -> shock (f1810).",
    "cams": [
     {
      "f": 1728,
      "pos": [
-      0.12,
-      1.42,
-      1.9
+      0.15,
+      1.5,
+      2.3
      ],
      "look": [
       0.0,
-      1.08,
-      -1.45
-     ],
-     "fov": 40,
-     "roll": 0,
-     "push": 0.0015,
-     "blur": 6,
-     "why": "the writer at night",
-     "focus": [
-      0,
-      1.2,
+      1.0,
       -1.5
-     ]
+     ],
+     "fov": 46,
+     "roll": 0,
+     "push": 0.0006,
+     "blur": 0,
+     "why": "the writer at his desk, night window"
     },
     {
-     "f": 1786,
+     "f": 1790,
      "pos": [
       0.19,
       1.17,
@@ -2509,15 +2655,10 @@
      ],
      "fov": 34,
      "roll": 0,
-     "push": 0.0015,
-     "blur": 8,
+     "push": 0.0006,
+     "blur": 0,
      "why": "his laptop, from his eyes",
-     "glide": 36,
-     "focus": [
-      0.532,
-      0.879,
-      -0.608
-     ]
+     "cut": true
     }
    ],
    "kicks": [],
@@ -2557,6 +2698,18 @@
       1818,
       1956
      ]
+    },
+    {
+     "n": "writer feet",
+     "p": [
+      0,
+      0.02,
+      -1.5
+     ],
+     "f": [
+      1728,
+      1780
+     ]
     }
    ],
    "physics": "none (screen content).",
@@ -2593,25 +2746,20 @@
     {
      "f": 1957,
      "pos": [
-      -1.2,
-      1.9,
-      0.3
+      -0.9,
+      1.7,
+      1.6
      ],
      "look": [
-      -1.1,
-      2.15,
+      -0.9,
+      1.7,
       -3.5
      ],
      "fov": 46,
      "roll": 0,
-     "push": 0.002,
-     "blur": 6,
-     "why": "the spokesman under the board",
-     "focus": [
-      -1.35,
-      1.85,
-      -3.05
-     ]
+     "push": 0.0006,
+     "blur": 0,
+     "why": "the spokesman under the board"
     }
    ],
    "kicks": [
@@ -2656,6 +2804,18 @@
       1957,
       2047
      ]
+    },
+    {
+     "n": "spokes feet",
+     "p": [
+      -1.35,
+      0.32,
+      -3.05
+     ],
+     "f": [
+      1957,
+      2047
+     ]
     }
    ],
    "physics": "the button: 1 cm press.",
@@ -2680,8 +2840,9 @@
     "from": "S13"
    },
    "out": {
-    "type": "cut",
-    "to": "S15"
+    "type": "dissolve",
+    "to": "S15",
+    "n": 8
    },
    "build": "reuse the champagne table (the corks still on the floor, empty coupes); c1 (green hoodie) with a bottle and his phone (canvas: FANATICS COLLECT · LỊCH SỬ BÁN, a row with a green ĐÃ TRẢ badge).",
    "blocking": "c1 behind the table at c1_late, facing +z.",
@@ -2702,39 +2863,29 @@
      ],
      "fov": 50,
      "roll": 0,
-     "push": 0.0015,
-     "blur": 4,
+     "push": 0.0006,
+     "blur": 0,
      "why": "him and the big board",
-     "glide": 40,
-     "focus": [
-      2.0,
-      1.55,
-      0.75
-     ]
+     "glide": 40
     },
     {
      "f": 2134,
      "pos": [
       2.3,
       1.6,
-      3.6
+      3.8
      ],
      "look": [
       2.0,
-      1.45,
+      1.3,
       0.75
      ],
-     "fov": 40,
+     "fov": 44,
      "roll": 0,
-     "push": 0.002,
-     "blur": 8,
+     "push": 0.0006,
+     "blur": 0,
      "why": "the bottle held",
-     "glide": 24,
-     "focus": [
-      2.0,
-      1.55,
-      0.75
-     ]
+     "glide": 24
     },
     {
      "f": 2210,
@@ -2750,39 +2901,29 @@
      ],
      "fov": 30,
      "roll": 0,
-     "push": 0.001,
-     "blur": 6,
+     "push": 0.0006,
+     "blur": 0,
      "why": "his phone, from his eyes",
-     "cut": true,
-     "focus": [
-      2.06,
-      1.28,
-      1.02
-     ]
+     "cut": true
     },
     {
      "f": 2298,
      "pos": [
-      2.2,
-      1.55,
-      3.1
+      2.25,
+      1.6,
+      3.6
      ],
      "look": [
       2.0,
-      1.55,
+      1.35,
       0.75
      ],
-     "fov": 42,
+     "fov": 44,
      "roll": 0,
-     "push": 0.002,
-     "blur": 6,
+     "push": 0.0006,
+     "blur": 0,
      "why": "the pop",
-     "glide": 12,
-     "focus": [
-      2.0,
-      1.55,
-      0.75
-     ]
+     "glide": 12
     }
    ],
    "kicks": [
@@ -2805,11 +2946,23 @@
    ],
    "subjects": [
     {
-     "n": "c1 head",
+     "n": "c1 face (behind the table)",
      "p": [
       2.0,
       1.55,
       0.75
+     ],
+     "f": [
+      2134,
+      2205
+     ]
+    },
+    {
+     "n": "table front",
+     "p": [
+      2.0,
+      1.0,
+      1.65
      ],
      "f": [
       2134,
@@ -2854,14 +3007,15 @@
    ],
    "set": "hall",
    "light": "day",
-   "dim": 0.6,
    "vo": "Còn Gengar, vẫn đang cười.",
    "gloss": "And Gengar is still grinning.",
    "spine": 7,
    "viewer": "The Gengar slab alone at night, its printed grin; the ghost tag drifts by.",
    "in": {
-    "type": "cut",
-    "from": "S14"
+    "type": "dissolve",
+    "n": 8,
+    "from": "S14",
+    "note": "later: the hall after closing"
    },
    "out": {
     "type": "end"
@@ -2874,26 +3028,20 @@
     {
      "f": 2326,
      "pos": [
-      -0.32,
-      1.5,
-      -1.6
+      -0.33,
+      1.47,
+      -1.8
      ],
      "look": [
       -0.35,
-      1.47,
+      1.45,
       -2.76
      ],
      "fov": 30,
      "roll": 0,
-     "push": 0.004,
-     "blur": 12,
-     "why": "Gengar, still grinning",
-     "cut": true,
-     "focus": [
-      -0.35,
-      1.43,
-      -2.76
-     ]
+     "push": 0.0015,
+     "blur": 0,
+     "why": "Gengar, still grinning"
     }
    ],
    "kicks": [],

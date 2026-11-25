@@ -70,7 +70,7 @@ export class World {
     for (const m of [this.sunDisc, this.sunHalo]) { m.frustumCulled = false; m.layers.set(NOINK); R.add(m); }
     this.hemi = new THREE.HemisphereLight("#cfe6ff", "#6c5c8c", 1.1);
     this.sun = new THREE.DirectionalLight("#fff0d6", 2.6);
-    this.sun.castShadow = true;
+    this.sun.castShadow = false; // quality bar: no shadows at all
     this.sun.shadow.mapSize.set(4096, 4096);
     R.add(this.hemi, this.sun, this.sun.target);
     this.cloudMaps = { day: [0, 1, 2, 3].map((k) => cloudHD(k, LOOK.day.cloud)), golden: [0, 1, 2, 3].map((k) => cloudHD(k, LOOK.golden.cloud)) };
@@ -122,7 +122,8 @@ export class World {
     const s = SHOTS[id - 1], L = LIGHTS[s.light], K = LOOK[s.light];
     const c = camAt(id, f);
     cam.position.set(...c.pos); cam.up.set(0, 1, 0); cam.lookAt(...c.look); cam.rotateZ(c.roll);
-    cam.fov = c.fov; cam.near = c.pos[1] > 20 ? 1.0 : 0.12; // 0.12 m (not 0.05): twice the depth precision, less z-fighting far away cam.far = 1500; cam.updateProjectionMatrix(); cam.updateMatrixWorld();
+    cam.fov = c.fov; cam.near = c.pos[1] > 20 ? 1.0 : 0.12; // 0.12 m (not 0.05): twice the depth precision, less z-fighting far away
+    cam.far = 1500; cam.updateProjectionMatrix(); cam.updateMatrixWorld(); // (was swallowed by the comment above: the plan's fov never applied)
     const focus = V(...c.look), dist = cam.position.distanceTo(focus);
     cam.layers.enable(NOINK);
     // ---- light rig ----
@@ -138,8 +139,8 @@ export class World {
     const sc = this.sun.shadow.camera;
     sc.left = -Rr; sc.right = Rr; sc.top = Rr; sc.bottom = -Rr; sc.near = 20; sc.far = 480; sc.updateProjectionMatrix();
     this.sun.shadow.bias = L.bias; this.sun.shadow.normalBias = L.normalBias * (Rr / 12);
-    TONE.uLitCol.value.set(...L.lit); TONE.uShadeCol.value.set(...L.shade); TONE.uShadeLift.value.set(...L.lift);
-    TONE.uLambert.value = L.lambert; TONE.uSideK.value = L.sideK; TONE.uTerm.value = L.term; TONE.uBounce.value.set(...K.bounce); TONE.uSat.value = K.sat;
+    TONE.uLitCol.value.set(...L.lit); TONE.uShadeCol.value.set(...BRIGHT.shade); TONE.uShadeLift.value.set(...BRIGHT.lift); // warm, bright shading (no violet shade)
+    TONE.uLambert.value = L.lambert; TONE.uSideK.value = L.sideK; TONE.uTerm.value = L.term; TONE.uBounce.value.set(...K.bounce); TONE.uSat.value = BRIGHT.sat;
     CHAR.uCharTint.value.set(...L.charTint); CHAR.uCharShade.value = L.charShade; CHAR.uGrad.value = L.charGrad;
     CHAR.uBodyGrad.value = L.bodyGrad; CHAR.uSideTint.value.set(...L.sideTint);
     // ---- sky, fog, sun disc, clouds ----
@@ -226,14 +227,14 @@ export class World {
       // the slab on the plinth: Gengar (S01-S05, S15), Latios (S06-S14)
       const img = id >= 6 && id <= 14 ? "dx_latios_star" : "lc_gengar";
       const gl = id === 3 ? Math.round(k01(f, GLEAM3[0], GLEAM3[1]) * 30) / 30 : 0, fl = id === 3 && f >= GRADE3 ? Math.round(clamp01(1 - (f - GRADE3 - 10) / 20) * 10) / 10 : 0;
-      redraw(S.slabC, `${img}|${gl}|${fl}`, (p) => cgcSlab(p, 540, 860, img, { gleam: gl, flash: fl }));
+      redraw(S.slabC, `${img}|${gl}|${fl}`, (p) => cgcSlab(p, 1000, 1690, img, { gleam: gl, flash: fl }));
       this.poseTag(id, f);
       S.markerNew.position.y = markerY(id, f);
       S.cordKnot.position.y = 1.3 + (id === 5 ? 0.35 * (1 - ((markerY(id, f) - 1.0) * 8 / 1.604) % 1) : 0.2);
       S.button.position.y = H.rostrum_y + 0.01 - (id === 13 && f >= BTN13 && f < BTN13 + 6 ? 0.008 : 0);
       if (id === 14) { const sc = Math.round(smooth(k01(f, SCROLL14[0], SCROLL14[1])) * 60) / 60, pd = f >= PAID14 ? Math.round(easeOut(k01(f, PAID14, PAID14 + 6)) * 20) / 20 : 0; redraw(S.phone, `${sc}|${pd}`, (p) => phonePage(p, sc, pd)); }
     }
-    if (place === "census") { const gl = id === 7 ? Math.round(k01(f, GLEAM7[0], GLEAM7[1]) * 30) / 30 : 0; redraw(S.censusSlab, String(gl), (p) => cgcSlab(p, 540, 860, "dx_latios_star", { gleam: gl })); }
+    if (place === "census") { const gl = id === 7 ? Math.round(k01(f, GLEAM7[0], GLEAM7[1]) * 30) / 30 : 0; redraw(S.censusSlab, String(gl), (p) => cgcSlab(p, 1000, 1690, "dx_latios_star", { gleam: gl })); }
     if (place === "cafe") {
       const io = iouPose(id, f), solid = id === 11 ? Math.round(smooth(k01(f, SOLID11[0], SOLID11[1])) * 20) / 20 : 0, st = id === 11 && f >= STAMP11 ? Math.round(easeOut(k01(f, STAMP11, STAMP11 + 5)) * 20) / 20 : 0;
       S.iou.position.set(io.p[0] + (io.ghost > 0.5 ? 0.002 * Math.sin(f * 0.7) : 0), io.p[1], io.p[2]); S.iou.rotation.set(-Math.PI / 2, 0, io.ghost * 0.04 * Math.sin(f * 0.13));
@@ -288,6 +289,8 @@ export class World {
   }
 }
 
+/** quality bar: warm neutral shade side and a richer saturation (the reference reels sit at 25-39 mean saturation) */
+const BRIGHT = { shade: [0.62, 0.58, 0.54] as [number, number, number], lift: [0.1, 0.08, 0.05] as [number, number, number], sat: 1.3 };
 const k01 = (f: number, a: number, b: number) => clamp01((f - a) / (b - a));
 const hop = (f: number, f0: number, v0: number) => {
   let t = (f - f0) / 30, v = v0;

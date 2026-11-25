@@ -164,6 +164,7 @@ const blob = (out: Stage, x: number, y: number, z: number, sc = 1) => {
     const len = Math.min(2.4, Math.max(0.5, 1.6 / Math.tan(el))) * sc, h = len + 0.55 * sc, c = 0.3 * h, tc = hexOf(TAIL, 1);
     out.fx.push({ key: `blob|shadow|${tc}`, cw: 128, ch: 256, draw: (p) => fxShadow(p, tc), x: x + ox * c, y: y + 0.018, z: z + oz * c, w: 0.72 * sc, h, flat: true, rot });
   }
+  return; // quality bar: no shadows, not even contact blobs (feet stand exactly on the floor)
   const cc = hexOf(CONTACT[LNAME], 1);
   out.fx.push({ key: `blob|contact|${cc}`, cw: 128, ch: 128, draw: (p) => fxContact(p, cc), x: x + ox * 0.03, y: y + 0.022, z: z + oz * 0.03, w: 0.52 * sc, h: 0.4 * sc, flat: true, rot });
 };
@@ -292,9 +293,10 @@ const clerkTag = (out: Stage, cam: CamInfo, f: number) => {
   const A = Hm(H.clerk_in[0], SY, H.clerk_in[1]), B = Hm(H.clerk_tag[0], SY, H.clerk_tag[1]);
   if (f < WALK2[0]) return;
   if (f < WALK2[1]) { const u = ramp(f, WALK2[0], WALK2[1]); side(out, cam, "clerk", ...lerp3(A, B, u), -1, 0, { mode: "march", phase: walkPhase(f, 2), stride: 0.7, expr: "neutral" }, f); return; }
-  const shock = f >= LIFT2;
-  const fo: FrontOpts = { mode: "stand", expr: shock ? "shock" : "neutral", gape: shock ? Math.min(0.4, (f - LIFT2) / 8 * 0.4) : undefined, look: f < LIFT2 ? -1 : 0, headTilt: shock ? -0.12 : 0, armOff: 1 };
-  front(out, cam, "clerk", ...B, fo, f, [WALK2[1], LIFT2]);
+  const OUT = Hm(1.4, SY, H.clerk_tag[1]);
+  if (f >= FLICK2 + 10) { if (f < FLICK2 + 40) side(out, cam, "clerk", ...lerp3(B, OUT, ramp(f, FLICK2 + 10, FLICK2 + 40)), 1, 0, { mode: "march", phase: walkPhase(f, 2), stride: 0.7, expr: "neutral" }, f); return; } // done: he walks off right
+  const fo: FrontOpts = { mode: "stand", expr: "neutral", look: -1, armOff: 1 };
+  front(out, cam, "clerk", ...B, fo, f, [WALK2[1]]);
   const E = TAG_EDGE(), rest = restHand(cam, "clerk", B, fo, 1);
   const hand = f < REACH2 - 6 ? rest : f < REACH2 ? lerp3(rest, E, smooth((f - REACH2 + 6) / 6)) : f < FLICK2 ? E : f < FLICK2 + 3 ? lerp3(E, [E[0] - cam.right.x * 0.04, E[1], E[2] - cam.right.z * 0.04], (f - FLICK2) / 3) : lerp3(E, rest, smooth((f - FLICK2 - 3) / 10));
   arm3d(out, cam, "clerk", B, fo, 1, hand, f);
@@ -326,7 +328,7 @@ const clerkPole = (out: Stage, cam: CamInfo, f: number) => {
 // ---------------- S03 fireworks around the slab (never over the card) ----------------
 const fireworks = (out: Stage, f: number) => {
   const S = Hm(H.slab[0], H.slab[1], H.slab[2]), spots: [number, number, number, string][] = [[-0.16, 0.07, -0.12, "#ffd23a"], [0.15, 0.13, -0.14, "#ff6bd5"], [0.17, -0.05, -0.12, "#6bd5ff"]];
-  FW3.forEach((t, i) => { const [dx, dy, dz, col] = spots[i]; burst(out, f, t, S[0] + dx * 1.4, S[1] + dy * 1.3, S[2] + dz, 0.26, 14, col); burst(out, f, t + 3, S[0] + dx * 1.4, S[1] + dy * 1.3, S[2] + dz - 0.01, 0.16, 10, "#ffffff"); sparkle(out, f, t + 5, S[0] + dx * 1.6, S[1] + dy * 1.5, S[2] + dz, 0.14, 14); });
+  FW3.forEach((t, i) => { const [dx, dy, dz, col] = spots[i]; burst(out, f, t, S[0] + dx * 1.15, S[1] + dy * 1.3, S[2] + dz, 0.22, 14, col); burst(out, f, t + 3, S[0] + dx * 1.15, S[1] + dy * 1.3, S[2] + dz - 0.01, 0.13, 10, "#ffffff"); sparkle(out, f, t + 5, S[0] + dx * 1.25, S[1] + dy * 1.5, S[2] + dz, 0.12, 14); });
 };
 
 // ---------------- S04 the bidders ----------------
@@ -404,7 +406,8 @@ const party = (out: Stage, cam: CamInfo, f: number, id: number) => {
     const b0 = Hm(H.bill[0] + 0.22, H.table_y + 0.004, H.bill[2] + 0.1), b1 = Hm(H.bill[0], H.table_y + 0.004, H.bill[2]);
     const bu = smooth(ramp(f, BILL9[0], BILL9[1])), BP = lerp3(b0, b1, bu);
     if (f >= WALK9[0] && f < WALK9[1]) side(out, cam, "waiter", ...lerp3(A, B, ramp(f, WALK9[0], WALK9[1])), -1, -0.4, { mode: "march", phase: walkPhase(f, 2), stride: 0.7, expr: "smile" }, f);
-    else if (f >= WALK9[1]) {
+    else if (f >= BILL9[1] + 12 && f < BILL9[1] + 40) side(out, cam, "waiter", ...lerp3(B, A, ramp(f, BILL9[1] + 12, BILL9[1] + 40)), 1, 0.4, { mode: "march", phase: walkPhase(f, 2), stride: 0.7, expr: "smile" }, f); // he leaves the bill and walks off
+    else if (f >= WALK9[1] && f < BILL9[1] + 12) {
       const fo: FrontOpts = { mode: "stand", expr: "smile", armOff: -1 };
       front(out, cam, "waiter", ...B, fo, f);
       const hand: V3 = f < BILL9[1] + 2 ? [BP[0] + 0.06, BP[1] + 0.01, BP[2] + 0.04] : lerp3([b1[0] + 0.06, b1[1] + 0.01, b1[2] + 0.04], restHand(cam, "waiter", B, fo, -1), smooth((f - BILL9[1] - 2) / 10));

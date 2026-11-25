@@ -9,3 +9,5 @@ zard_lc.png       Legendary Collection Charizard 3                  https://imag
 ds_rayquaza.png   EX Delta Species Rayquaza δ (holo)                https://images.pokemontcg.io/ex11/13_hires.png
 pikachu.png       Base Set Pikachu 58                               https://images.pokemontcg.io/base1/58.png
 blastoise.png     Base Set Blastoise 2                              https://images.pokemontcg.io/base1/2_hires.png
+slab_gengar.png   real CGC photo, cert 4288394001 (library/slabs), upscaled 3x
+slab_latios.png   real CGC photo, cert 6209369001 (library/slabs), upscaled 3x

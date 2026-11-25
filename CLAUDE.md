@@ -57,7 +57,7 @@ Account skills they call: `vn-news-script` (the script), `story-reel-director` (
 | Reel | Composition | Video folder | Status |
 |---|---|---|---|
 | Goldenrod heist (masked burglars, a rented minivan, Justice IL) | `GoldenrodReel` (2370 f) | `videos/goldenrod-heist/` | v1 built, ready to render (22 Nov 2026) |
-| Gengar unpaid ($576k Pristine 10, marked unpaid) | `GengarReel` (2420 f) | `videos/gengar-unpaid/` | v1 built, ready to render (22 Nov 2026) |
+| Gengar unpaid ($576k Pristine 10, marked unpaid) | `GengarReel` (2420 f) | `videos/gengar-unpaid/` | v2 re-edited to the 25 Nov quality bar (real CGC slab photos), ready to render (25 Nov 2026) |
 | Lucas DeRuyter's big collection ("easy as candy") | `LucasReel` (2430 f) | `videos/lucas-big-collection/` | v1 built, ready to render (22 Nov 2026) |
 | TCGplayer sellers (the billion and the missing chair) | `TcgplayerReel` (2360 f) | `videos/tcgplayer-sellers/` | v2 re-edited to the 25 Nov quality bar, ready to render (25 Nov 2026) |
 | Avery the Poke Kid's Jirachi (scalpers) | `JirachiReel` (2250 f) | `videos/avery-jirachi-scalpers/` | v1 built, ready to render (22 Nov 2026) |

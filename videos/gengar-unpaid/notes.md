@@ -18,3 +18,18 @@ Composition `GengarReel` · code `src/videos/gengar/` · assets `public/gengar/`
 ### Open
 - Seen only as stills: check the tag's flip and swing, the spin, the ghost lift, the corks' flight and bounce, the cups hopping, the envelope slide and the phone scroll in motion.
 - S12: the glide into the writer's POV passes close to his head (he is hidden within 0.9 m of the lens); look at it in motion.
+
+## v2: re-edit to the 25 Nov quality bar (25 Nov 2026)
+The user asked to re-edit this reel to the new rules (`docs/rules.md` section 0), following the TCGplayer v2 recipe.
+| Rule | What changed |
+|---|---|
+| No blur | Lens blur and DOF off in `Reel.tsx`; every plan key has `blur: 0` (`k()` forces it). |
+| No shadows | The sun casts no shadows; no contact blobs under the cast. |
+| Bright palettes, no tinted grade | Grade off; warm neutral shade side, saturation 1.3 (`BRIGHT` in `world.ts`). The night and "next morning" dims are gone (S02, S12, S15). Hall: cream walls, red carpet, warm wood stage, red folding chairs with gold legs. Census gallery: cream walls, wood floor, a warm wood slab wall with gold rails and a red header (was navy). Café: daylight (was golden). Writer's room: warm cream walls, a rich-blue night window with warm lit windows (was grey-blue). Cast: auctioneer royal blue, clerk red polo, spokesman tan suit, waiter burgundy vest, bidder 3 sky blue (no black/grey/plum). Sample mean saturation 47 (TCGplayer v2 50.8, Mirror reel 45.7, same measure). |
+| Blue skies with clouds | Windows with inked cloudy skies on both hall side walls and in the gallery; the café front is one storey so the sky, clouds, trees and distant houses show above it. |
+| Dressed sets | Hall: LIVE / AUCTION banners, framed real cards (Charizard LC, Rayquaza, Metagross, Mewtwo, Charizard, Pikachu), potted palms, a brass stage rail; champagne table with red-and-gold bands; gallery: palms, a red runner; café: lamp post, trees, houses; writer's room: framed cards. |
+| Wider cameras | Every key rebuilt medium-wide (full bodies, set around them), a wide at each new place; closes kept for the card reveals (the slab in S03 at ~48% of the frame width, the Latios in S06 when it's named, the gallery's best one, Gengar's grin), the ghost tag, the IOU stamp and the two screen POVs. Character subjects are head AND feet in `plan.json` (0 check errors). |
+| Real slabs | The drawn CGC slab is gone: both slabs are CGC's own cut-out photos of the exact sold slabs (Gengar cert 4288394001, Latios cert 6209369001, from the CGC news article), kept in `library/slabs/` and upscaled 3x (Lanczos + light sharpen) into `public/gengar/cards/slab_*.png`; the census wall is 170 copies of the real Latios photo. No label edit was needed, so no Grok run. The originals are 400 px wide (the cert-lookup pages sit behind a bot check), so the closest slab shots are the softest frames of the reel. |
+| Always vertical | The POVs into the writer's laptop (S12) and the collector's phone (S14) are cuts (a glide passed through his head); S15 now dissolves in, keeping 3 cuts. The clerk walks off after the flick so the tag close has nothing cut at its edge; the waiter leaves after the bill. |
+- Bug fixed (from TCGplayer v2): `cam.updateProjectionMatrix()` was swallowed by a comment in `world.ts`, so v1 rendered every shot at 40 deg; the plan's fov now applies.
+- Render as a new version: `scripts/render.command GengarReel Gengar_v2`.

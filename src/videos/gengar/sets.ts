@@ -274,6 +274,29 @@ const paving = () => ctex("paving", 512, 512, (g, r) => {
   g.fillStyle = "rgba(90,70,50,0.45)"; for (let k = 0; k < 512; k += 64) { g.fillRect(k, 0, 2, 512); g.fillRect(0, k, 512, 2); }
 });
 const canvasMat2 = (w: number, h: number): Canvas => { const c = canvasMat(w, h); return c; };
+/** blue sky with puffy white inked clouds (quality bar: every window and outdoor shot) */
+const cloudSky = (key: string, top = "#3f86e0", bot = "#bfe0fb") => ctex("cloudSky" + key, 512, 512, (g) => {
+  const gr = g.createLinearGradient(0, 0, 0, 512); gr.addColorStop(0, top); gr.addColorStop(1, bot); g.fillStyle = gr; g.fillRect(0, 0, 512, 512);
+  const puff = (cx: number, cy: number, s: number) => {
+    const bl = [[0, 0, 1], [-0.9, 0.25, 0.7], [0.9, 0.25, 0.75], [-0.4, -0.35, 0.75], [0.45, -0.3, 0.65]];
+    g.fillStyle = "#3a4a6a"; for (const [dx, dy, r] of bl) { g.beginPath(); g.arc(cx + dx * s, cy + dy * s, r * s + 4, 0, Math.PI * 2); g.fill(); }
+    g.fillStyle = "#ffffff"; for (const [dx, dy, r] of bl) { g.beginPath(); g.arc(cx + dx * s, cy + dy * s, r * s, 0, Math.PI * 2); g.fill(); }
+    g.fillStyle = "#e3ecf8"; g.fillRect(cx - 1.6 * s, cy + 0.45 * s, 3.2 * s, 0.5 * s);
+  };
+  puff(130, 150, 46); puff(380, 110, 38); puff(300, 330, 30);
+});
+/** the night outside the writer's window: rich blue, a moon, a skyline with warm lit windows */
+const nightCity = () => ctex("nightCity", 512, 512, (g) => {
+  const gr = g.createLinearGradient(0, 0, 0, 512); gr.addColorStop(0, "#1a3fa0"); gr.addColorStop(1, "#3f78d8"); g.fillStyle = gr; g.fillRect(0, 0, 512, 512);
+  g.fillStyle = "#fff6d8"; g.beginPath(); g.arc(380, 90, 34, 0, 7); g.fill(); g.fillStyle = "rgba(255,255,255,0.8)"; for (let i = 0; i < 30; i++) g.fillRect((i * 97) % 512, (i * 53) % 200, 3, 3);
+  for (const [x, y, w] of [[0, 300, 90], [80, 250, 80], [170, 330, 70], [235, 220, 90], [330, 290, 80], [405, 260, 107]]) { g.fillStyle = "#2a4f9a"; g.fillRect(x, y, w, 512 - y); for (let yy = y + 14; yy < 500; yy += 26) for (let xx = x + 8; xx < x + w - 8; xx += 18) { g.fillStyle = (xx * yy) % 7 < 4 ? "#ffd86a" : "#3a62b0"; g.fillRect(xx, yy, 8, 12); } }
+});
+const cardTexture = (name: string) => ctex("card" + name, 600, 838, (g) => { g.clearRect(0, 0, 600, 838); scan(g, name, 0, 0, 600, 838); });
+const banner = (key: string, txt: string, bg: string, fg: string) => ctex("banner" + key, 240, 900, (g) => {
+  g.fillStyle = bg; g.beginPath(); g.moveTo(0, 0); g.lineTo(240, 0); g.lineTo(240, 830); g.lineTo(120, 900); g.lineTo(0, 830); g.closePath(); g.fill();
+  g.fillStyle = fg; g.fillRect(14, 14, 212, 10); g.fillRect(14, 790, 212, 10);
+  g.save(); g.translate(120, 420); g.rotate(-Math.PI / 2); g.font = "900 120px Arial Black, Arial, sans-serif"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(txt, 0, 0, 760); g.restore();
+});
 
 export const buildSets = (root: THREE.Object3D): Sets => {
   const groups: Record<string, THREE.Group> = {};
@@ -309,10 +332,10 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   SETL = "hall";
   const Hh = HALLP, hall = G("hall", ORIGIN.hall), SYv = Hh.stage_y;
   const [rx0, rx1, rz0, rz1] = Hh.room;
-  shellXZ(hall, rx0, rx1, rz0, rz1, Hh.h, lam("hallFloor", () => ({ map: rep(carpetT("hall", "#7a2632"), 5, 5) })), lam("hallWall", () => ({ map: paintWall("hall", "#e6dcc4") })), "#efe8d8");
+  shellXZ(hall, rx0, rx1, rz0, rz1, Hh.h, lam("hallFloor", () => ({ map: rep(carpetT("hall", "#c0323c"), 5, 5) })), lam("hallWall", () => ({ map: paintWall("hall", "#fff3d6") })), "#fbf3e2");
   let b = new Batch();
   const [sx0, sx1, sz0, sz1] = Hh.stage;
-  box(b, C("#3a2a24"), sx0, 0, sz0, sx1, SYv - 0.03, sz1); box(b, C("#9a6a3e"), sx0, SYv - 0.03, sz0, sx1, SYv, sz1);
+  box(b, C("#a8562e"), sx0, 0, sz0, sx1, SYv - 0.03, sz1); box(b, C("#c98a4e"), sx0, SYv - 0.03, sz0, sx1, SYv, sz1);
   // the rostrum: body, overhanging top, the sound block, the green button
   const [qx0, qx1, qz0, qz1] = Hh.rostrum;
   box(b, oak, qx0, SYv, qz0, qx1, Hh.rostrum_y - 0.03, qz1); box(b, C("#6e4428"), qx0 - 0.03, Hh.rostrum_y - 0.03, qz0 - 0.03, qx1 + 0.03, Hh.rostrum_y, qz1 + 0.03);
@@ -340,13 +363,15 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   box(b, C("#e9d7a8"), plx - 0.083, 1.2, plz - 0.003, plx - 0.077, Hh.pole_top - 0.04, plz + 0.003);
   // bidder chairs (folding: seat, back, legs)
   for (const [cx, cz] of Hh.bidders) {
-    box(b, C("#3a3d46"), cx - 0.21, 0.42, cz - 0.21, cx + 0.21, 0.46, cz + 0.17);
-    box(b, C("#3a3d46"), cx - 0.21, 0.46, cz - 0.24, cx + 0.21, 0.9, cz - 0.21);
-    for (const dx of [-0.19, 0.17]) for (const dz of [-0.2, 0.15]) box(b, C("#2a2c33"), cx + dx, 0, cz + dz, cx + dx + 0.02, 0.42, cz + dz + 0.02);
+    box(b, C("#c0323c"), cx - 0.21, 0.42, cz - 0.21, cx + 0.21, 0.46, cz + 0.17);
+    box(b, C("#c0323c"), cx - 0.21, 0.46, cz - 0.24, cx + 0.21, 0.9, cz - 0.21);
+    for (const dx of [-0.19, 0.17]) for (const dz of [-0.2, 0.15]) box(b, C("#c9a24a"), cx + dx, 0, cz + dz, cx + dx + 0.02, 0.42, cz + dz + 0.02);
   }
   // the champagne table: cloth to the floor, a coupe tower, an ice bucket with a bottle
   const [tx0, tx1, tz0, tz1] = Hh.table, TYh = Hh.table_y;
   box(b, C("#f6f4ee"), tx0, 0, tz0, tx1, TYh, tz1);
+  box(b, C("#c0323c"), tx0 - 0.01, TYh - 0.16, tz1, tx1 + 0.01, TYh - 0.04, tz1 + 0.012); box(b, C("#e7c35c"), tx0 - 0.01, TYh - 0.19, tz1 + 0.003, tx1 + 0.01, TYh - 0.16, tz1 + 0.015); // a red-and-gold skirt band
+  box(b, C("#c0323c"), tx0 - 0.01, 0.06, tz1 + 0.001, tx1 + 0.01, 0.14, tz1 + 0.013); box(b, C("#e7c35c"), tx0 - 0.01, 0.14, tz1 + 0.004, tx1 + 0.01, 0.17, tz1 + 0.016);
   const [twx, , twz] = Hh.tower, coupe = C("#cfe6f0");
   for (let r = 0; r < 4; r++) { const n = 4 - r, rr0 = 0.06 * n; for (let i = 0; i < n * 2; i++) { const a = (i / (n * 2)) * Math.PI * 2; cyl(b, coupe, twx + Math.cos(a) * rr0 * 0.55, TYh + r * 0.075, twz + Math.sin(a) * rr0 * 0.4, 0.008, 0.04, 0.07, 10); } }
   cyl(b, steel, 1.55, TYh, 1.4, 0.08, 0.1, 0.2, 18); cyl(b, C("#1f5a34"), 1.55, TYh + 0.12, 1.4, 0.04, 0.02, 0.22, 12);
@@ -354,6 +379,21 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   for (const x of [-3.0, 3.0]) for (const z of [-1.0, 2.5]) { box(b, brass, x < 0 ? rx0 : rx1 - 0.08, 2.5, z - 0.08, x < 0 ? rx0 + 0.08 : rx1, 2.7, z + 0.08); }
   b.build(hall);
   for (const x of [-3.0, 3.0]) for (const z of [-1.0, 2.5]) mesh(new THREE.SphereGeometry(0.07, 12, 10), new THREE.MeshBasicMaterial({ color: new THREE.Color(2.2, 1.9, 1.3) }), hall, x < 0 ? rx0 + 0.12 : rx1 - 0.12, 2.78, z);
+  // dressing: windows on the side walls (blue sky), banners either side of the board, framed real cards, palms at the stage corners, a gold rail along the stage
+  const frameCard = (parent: THREE.Object3D, nm: string, x: number, y: number, z: number, h: number, ry = 0) => {
+    const g2 = new THREE.Group(); g2.position.set(x, y, z); g2.rotation.y = ry; parent.add(g2);
+    mesh(new THREE.BoxGeometry(h * 0.716 + 0.08, h + 0.08, 0.02), C("#b8862a"), g2, 0, 0, -0.012);
+    mesh(new THREE.PlaneGeometry(h * 0.716 + 0.04, h + 0.04), C("#fbf7ec"), g2, 0, 0, -0.0005);
+    const m = mesh(new THREE.PlaneGeometry(h * 0.716, h), new THREE.MeshBasicMaterial({ map: cardTexture(nm), transparent: true, alphaTest: 0.5 }), g2, 0, 0, 0.002); m.castShadow = false;
+  };
+  { const wb = new Batch();
+    for (const z of [-1.2, 1.6]) { windowOn(wb, hall, "x", rx0, 1, z, 1.0, 3.2, 1.3, cloudSky("hallL" + z), white); windowOn(wb, hall, "x", rx1, -1, z, 1.0, 3.2, 1.3, cloudSky("hallR" + z), white); }
+    for (const x of [-3.0, 3.0]) { cyl(wb, C("#c9643a"), x, SYv, -3.6, 0.2, 0.26, 0.5, 16); sph(wb, C("#3fa048"), x, SYv + 0.95, -3.6, 0.42); sph(wb, C("#2f8a40"), x + 0.2, SYv + 1.25, -3.55, 0.3); sph(wb, C("#4fb050"), x - 0.15, SYv + 1.35, -3.65, 0.28); }
+    box(wb, brass, sx0, SYv + 0.002, sz1 - 0.04, sx1, SYv + 0.03, sz1 - 0.01);
+    wb.build(hall); }
+  for (const [x, t, bg] of [[-2.25, "LIVE", "#c0323c"], [0.95 + 0.62, "AUCTION", "#c0323c"]] as const) { const bn = plane(0.42, 1.55, basicC(banner(t, t, bg, "#f2c84a"), true), hall, x, 2.75, -3.97); bn.castShadow = false; }
+  frameCard(hall, "zard_lc", -3.2, 2.2, -3.975, 0.6); frameCard(hall, "ds_rayquaza", 2.55, 2.85, -3.975, 0.5);
+  frameCard(hall, "ds_metagross_star", rx0 + 0.02, 2.0, 0.25, 0.6, Math.PI / 2); frameCard(hall, "mewtwo", rx1 - 0.02, 2.0, 0.25, 0.6, -Math.PI / 2); frameCard(hall, "zard_base", rx1 - 0.02, 2.0, 3.2, 0.6, -Math.PI / 2); frameCard(hall, "pikachu", rx0 + 0.02, 2.0, 3.2, 0.6, Math.PI / 2);
   const board = canvasMat2(1160, 440); plane(bw, bh, basicC(board.tex), hall, bcx, bcy, bcz).castShadow = false;
   const bids = canvasMat2(700, 450); plane(dw, dh, basicC(bids.tex), hall, dcx, dcy, bcz).castShadow = false;
   plane(2.2, 0.28, basicC(letterTex("fc", 1600, 200, "FANATICS COLLECT", "#b8862a", 150), true), hall, Hh.letters[0], Hh.letters[1], -3.985).castShadow = false;
@@ -361,9 +401,9 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   const button = mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.02, 16), new THREE.MeshLambertMaterial({ color: "#2fae5a" }), hall, -1.15, Hh.rostrum_y + 0.01, -2.84);
   // the slab on its easel (tilted back)
   const slabG = new THREE.Group(); slabG.position.set(...(Hh.slab as V3)); slabG.rotation.x = -Hh.slab_tilt; hall.add(slabG);
-  const [sw, sh] = Hh.slab_size, slabC = canvasMat2(540, 860);
-  mesh(new THREE.BoxGeometry(sw, sh, 0.012), C("#b9d2e2"), slabG, 0, 0, 0);
-  plane(sw, sh, basicC(slabC.tex), slabG, 0, 0, 0.0065).castShadow = false;
+  const [sw, sh] = Hh.slab_size, slabC = canvasMat2(1000, 1690);
+  mesh(new THREE.BoxGeometry(sw * 0.9, sh * 0.95, 0.01), C("#eef3f6"), slabG, 0, 0, -0.001); // the case back (the photo's clear edges show it)
+  plane(sw, sh, basicC(slabC.tex, true), slabG, 0, 0, 0.0065).castShadow = false;
   mesh(new THREE.BoxGeometry(0.012, sh * 0.9, 0.012), brass, slabG, -sw * 0.32, -0.02, -0.02); mesh(new THREE.BoxGeometry(0.012, sh * 0.9, 0.012), brass, slabG, sw * 0.32, -0.02, -0.02);
   mesh(new THREE.BoxGeometry(sw * 1.1, 0.014, 0.03), brass, slabG, 0, -sh / 2 - 0.004, 0.008);
   // the tag: a group pivoting at the string's knot; the string and the two faces hang below
@@ -390,17 +430,20 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   // ===== THE CENSUS GALLERY =====
   SETL = "census";
   const Cn = CENP, census = G("census", ORIGIN.census);
-  shellXZ(census, -3, 3, -3, 3, 3.2, lam("cenFloor", () => ({ color: "#2a2730" })), lam("cenWall", () => ({ map: paintWall("cen", "#25304a") })), "#1d2232");
+  shellXZ(census, -3, 3, -3, 3, 3.2, lam("cenFloor", () => ({ map: rep(woodTex("cen", "#a8743e", "rgba(60,35,15,0.45)"), 3, 3) })), lam("cenWall", () => ({ map: paintWall("cen", "#f3e6c4") })), "#fbf3e2");
   b = new Batch();
   const [wcx, wcy] = Cn.wall, [ww, wh] = Cn.wall_size;
   box(b, brass, wcx - ww / 2 - 0.05, wcy - wh / 2 - 0.05, -3.0, wcx + ww / 2 + 0.05, wcy + wh / 2 + 0.05, -2.985);
   const [pdx, pdz] = Cn.podium;
-  box(b, C("#7a1f2c"), pdx - 0.25, 0, pdz - 0.25, pdx + 0.25, Cn.podium_y, pdz + 0.25); box(b, brass, pdx - 0.27, Cn.podium_y, pdz - 0.27, pdx + 0.27, Cn.podium_y + 0.02, pdz + 0.27);
+  box(b, C("#c0323c"), pdx - 0.25, 0, pdz - 0.25, pdx + 0.25, Cn.podium_y, pdz + 0.25); box(b, brass, pdx - 0.27, Cn.podium_y, pdz - 0.27, pdx + 0.27, Cn.podium_y + 0.02, pdz + 0.27);
+  for (const x of [-2.4, 2.4]) { cyl(b, C("#c9643a"), x, 0, -2.4, 0.2, 0.26, 0.5, 16); sph(b, C("#3fa048"), x, 0.95, -2.4, 0.42); sph(b, C("#2f8a40"), x + 0.2, 1.25, -2.35, 0.3); }
+  box(b, C("#c0323c"), -1.2, 0, 0.0, 1.2, 0.012, 1.8); // a red runner up to the podium
   b.build(census);
-  plane(ww, wh, lamC(ctex("censusWall", 2048, 1205, (g) => censusWall(new Pen(g)))), census, wcx, wcy, -2.975).castShadow = false;
-  const censusSlab = canvasMat2(540, 860);
+  { const cb = new Batch(); for (const z of [-1.0, 1.2]) windowOn(cb, census, "x", -3, 1, z, 1.0, 2.6, 1.0, cloudSky("cenL" + z), white); cb.build(census); }
+  plane(ww, wh, basicC(ctex("censusWall", 2048, 1205, (g) => censusWall(new Pen(g)))), census, wcx, wcy, -2.975).castShadow = false; // unlit: the slab photos keep their true colours
+  const censusSlab = canvasMat2(1000, 1690);
   { const g2 = new THREE.Group(); g2.position.set(...(Cn.slab as V3)); g2.rotation.x = -0.18; census.add(g2);
-    mesh(new THREE.BoxGeometry(sw, sh, 0.012), C("#b9d2e2"), g2, 0, 0, 0); plane(sw, sh, basicC(censusSlab.tex), g2, 0, 0, 0.0065).castShadow = false;
+    mesh(new THREE.BoxGeometry(sw * 0.9, sh * 0.95, 0.01), C("#eef3f6"), g2, 0, 0, -0.001); plane(sw, sh, basicC(censusSlab.tex, true), g2, 0, 0, 0.0065).castShadow = false;
     mesh(new THREE.BoxGeometry(sw * 1.1, 0.014, 0.03), brass, g2, 0, -sh / 2 - 0.004, 0.008); mesh(new THREE.BoxGeometry(0.012, sh * 0.9, 0.012), brass, g2, 0, -0.02, -0.02); }
 
   // ===== THE CAFÉ TERRACE =====
@@ -409,9 +452,12 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   b = new Batch();
   up(b, lam("paving", () => ({ map: rep(paving(), 1, 1) })), -8, 8, -6, 6, 0, 4);
   const fz = Cf.front;
-  box(b, lam("cafeWall", () => ({ map: paintWall("cafe", "#f0d9a8") })), -3.6, 0, fz - 0.2, 3.6, 3.6, fz, 2);
-  box(b, C("#3a5a3a"), -2.1, 0, fz, -1.1, 2.2, fz + 0.04); // the door
-  box(b, C("#3a5a3a"), 0.75, 0.75, fz, 2.55, 2.15, fz + 0.04); // the window frame
+  box(b, lam("cafeWall", () => ({ map: paintWall("cafe", "#f6e2b0") })), -3.6, 0, fz - 0.2, 3.6, 2.8, fz, 2); box(b, C("#c0323c"), -3.65, 2.8, fz - 0.25, 3.65, 2.95, fz + 0.04);
+  box(b, C("#2f8a55"), -2.1, 0, fz, -1.1, 2.0, fz + 0.04); // the door
+  box(b, C("#2f8a55"), 0.75, 0.7, fz, 2.55, 1.9, fz + 0.04); // the window frame
+  cyl(b, C("#2a2c33"), 2.9, 0, -1.4, 0.05, 0.04, 3.2, 10); sph(b, C("#fff3c4"), 2.9, 3.3, -1.4, 0.14);
+  for (const [x, z, r] of [[-5.0, -6.5, 1.4], [-1.5, -7.5, 1.7], [2.5, -6.8, 1.5], [5.5, -7.2, 1.6]]) { cyl(b, C("#8a5a34"), x, 0, z, 0.15, 0.12, 2.6, 10); sph(b, C("#3fa048"), x, 3.2, z, r); sph(b, C("#4fb050"), x + 0.6, 3.6, z + 0.3, r * 0.7); }
+  for (const [x, w, h, col] of [[-6.5, 2.6, 4.2, "#e8a050"], [-3.8, 2.4, 3.6, "#f0d0a0"], [3.6, 2.6, 4.4, "#a8c8e8"], [6.2, 2.4, 3.8, "#e88a7a"]] as [number, number, number, string][]) box(b, C(col), x - w / 2, 0, -5.2, x + w / 2, h, -4.2);
   // the round table, its foot; two bistro chairs
   const [ctx, ctz] = Cf.table, CTY = Cf.table_y;
   cyl(b, C("#d8d2c4"), ctx, CTY - 0.03, ctz, Cf.table_r, Cf.table_r, 0.03, 28); cyl(b, ink, ctx, 0.02, ctz, 0.025, 0.025, CTY - 0.05, 10); cyl(b, ink, ctx, 0, ctz, 0.2, 0.2, 0.02, 20);
@@ -419,9 +465,9 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   // potted plants
   for (const [x, z] of [[-3.0, -1.9], [3.0, -1.9]]) { cyl(b, C("#b8644a"), x, 0, z, 0.22, 0.28, 0.45, 16); sph(b, C("#4f9a48"), x, 0.75, z, 0.38); sph(b, C("#3d8f45"), x + 0.18, 0.95, z + 0.05, 0.26); }
   b.build(cafe);
-  plane(1.75, 1.35, basicC(skyPanel("cafeWin", "#5a4a3a", "#e2b06a")), cafe, 1.65, 1.45, fz + 0.045).castShadow = false;
-  plane(1.6, 0.36, lamC(signTex("cafe", 800, 180, "CÀ PHÊ", "#2f4a3a", "#f4ead0", "", "#c9a24a")), cafe, 0, 3.0, fz + 0.01);
-  { const aw = mesh(new THREE.BoxGeometry(7.0, 0.04, 1.1), lamC(rep(stripes("#c23a32", "#f4ead0"), 6, 1)), cafe, 0, 2.5, fz + 0.5); aw.rotation.x = 0.32; }
+  plane(1.75, 1.15, basicC(skyPanel("cafeWin", "#c98a4e", "#f6d28a")), cafe, 1.65, 1.3, fz + 0.045).castShadow = false;
+  plane(1.6, 0.36, lamC(signTex("cafe", 800, 180, "CÀ PHÊ", "#2f8a55", "#fbf3dc", "", "#f2c84a")), cafe, 0, 2.48, fz + 0.01);
+  { const aw = mesh(new THREE.BoxGeometry(7.0, 0.04, 1.0), lamC(rep(stripes("#d8322f", "#fbf3dc"), 6, 1)), cafe, 0, 2.12, fz + 0.48); aw.rotation.x = 0.32; }
   const cups = Cf.cups.map(([x, z]) => { const g2 = new THREE.Group(); g2.position.set(x, CTY, z); cafe.add(g2);
     mesh(new THREE.CylinderGeometry(0.065, 0.06, 0.008, 20), white, g2, 0, 0.004, 0); const c2 = mesh(new THREE.CylinderGeometry(0.042, 0.034, 0.07, 18), white, g2, 0, 0.043, 0); void c2;
     mesh(new THREE.CylinderGeometry(0.038, 0.038, 0.004, 18), C("#5a3420"), g2, 0, 0.074, 0); return g2; });
@@ -432,7 +478,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   // ===== THE WRITER'S DESK (night) =====
   SETL = "desk";
   const D = DESKP, desk = G("desk", ORIGIN.desk);
-  shellXZ(desk, -2.4, 2.4, -2.4, 2.4, 2.6, lam("deskFloor", () => ({ map: rep(woodTex("desk", "#7a5a40", "rgba(40,25,15,0.5)"), 3, 3) })), lam("deskWall", () => ({ map: paintWall("desk", "#8a98ac") })), "#d8dce4");
+  shellXZ(desk, -2.4, 2.4, -2.4, 2.4, 2.6, lam("deskFloor", () => ({ map: rep(woodTex("desk", "#7a5a40", "rgba(40,25,15,0.5)"), 3, 3) })), lam("deskWall", () => ({ map: paintWall("desk", "#f3dfae") })), "#fbf3e2");
   b = new Batch();
   const [dx0, dx1, dz0, dz1] = D.table;
   box(b, C("#b88a5a"), dx0, TY - 0.04, dz0, dx1, TY, dz1);
@@ -444,10 +490,11 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   for (const y of [0.9, 1.4, 1.9]) box(b, C("#e9e4d6"), 1.0, y - 0.02, -2.38, 2.3, y, -2.1);
   const stockCols = ["#2f5fb4", "#c23a32", "#e7a43a", "#2f9a55", "#7a3fb4", "#1d2a44"];
   for (let r = 0; r < 3; r++) for (let i = 0; i < 6; i++) { const x = 1.05 + i * 0.2, y = 0.9 + r * 0.5; box(b, C(stockCols[(i + r) % 6]), x, y, -2.33, x + 0.16, y + 0.24 + 0.04 * ((i + r) % 2), -2.14); }
-  windowOn(b, desk, "x", -2.4, 1, D.window[2], 1.0, 2.1, D.window_w, skyPanel("night", "#0d1430", "#2a3a6a", true), white);
+  windowOn(b, desk, "x", -2.4, 1, D.window[2], 1.0, 2.1, D.window_w, nightCity(), white);
   b.build(desk);
   { const sh2 = mesh(new THREE.ConeGeometry(0.09, 0.12, 16, 1, true), new THREE.MeshLambertMaterial({ color: "#2a2c33", side: THREE.DoubleSide }), desk, lmx + 0.08, TY + 0.4, lmz); sh2.rotation.z = 0.6;
     mesh(new THREE.SphereGeometry(0.03, 10, 8), new THREE.MeshBasicMaterial({ color: new THREE.Color(2.4, 2.0, 1.3) }), desk, lmx + 0.11, TY + 0.36, lmz); }
+  frameCard(desk, "zard_lc", -0.9, 1.75, -2.38, 0.45); frameCard(desk, "ds_rayquaza", 0.3, 1.75, -2.38, 0.45); frameCard(desk, "pikachu", 2.37, 1.6, 0.6, 0.45, -Math.PI / 2);
   const laptop = canvasMat2(1024, 648);
   { const [lx, , lz] = D.laptop; const lap = new THREE.Group(); lap.position.set(lx, TY, lz); lap.rotation.y = D.laptop_yaw; desk.add(lap);
     mesh(new THREE.BoxGeometry(0.34, 0.015, 0.24), C("#9aa0aa"), lap, 0, 0.0075, 0); mesh(new THREE.BoxGeometry(0.3, 0.002, 0.12), C("#5a606c"), lap, 0, 0.016, 0.03);
