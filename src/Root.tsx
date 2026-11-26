@@ -15,6 +15,8 @@ import { LucasReel, LucasCaptions, LUCAS_FRAMES } from "./videos/lucas/Reel";
 import { TcgplayerReel, TcgplayerCaptions, TCGPLAYER_FRAMES } from "./videos/tcgplayer/Reel";
 import { GengarReel, GengarCaptions, GENGAR_FRAMES } from "./videos/gengar/Reel";
 import { GoldenrodReel, GoldenrodCaptions, GOLDENROD_FRAMES } from "./videos/goldenrod/Reel";
+import { CaterpieReel, CaterpieCaptions, CATERPIE_FRAMES } from "./videos/caterpie/Reel";
+import { ChicagoReel, ChicagoCaptions, CHICAGO_FRAMES } from "./videos/chicago/Reel";
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -46,5 +48,9 @@ export const RemotionRoot: React.FC = () => (
     <Composition id="GengarCaptions" component={GengarCaptions} durationInFrames={GENGAR_FRAMES} fps={30} width={1440} height={2560} />
     <Composition id="GoldenrodReel" component={GoldenrodReel} durationInFrames={GOLDENROD_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="GoldenrodCaptions" component={GoldenrodCaptions} durationInFrames={GOLDENROD_FRAMES} fps={30} width={1440} height={2560} />
+    <Composition id="CaterpieReel" component={CaterpieReel} durationInFrames={CATERPIE_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="CaterpieCaptions" component={CaterpieCaptions} durationInFrames={CATERPIE_FRAMES} fps={30} width={1440} height={2560} />
+    <Composition id="ChicagoReel" component={ChicagoReel} durationInFrames={CHICAGO_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="ChicagoCaptions" component={ChicagoCaptions} durationInFrames={CHICAGO_FRAMES} fps={30} width={1440} height={2560} />
   </>
 );

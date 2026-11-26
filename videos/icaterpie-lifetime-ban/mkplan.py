@@ -17,33 +17,34 @@ PIAZZA = dict(
     tpc=[-1.0, 2.17, -2.955], tpc_size=[0.9, 0.58], ann=[-0.55, 1.02, -2.955], ann_size=[0.44, 0.58],
     bin=[-2.15, -2.65], bin_r=0.2, bin_h=0.74,
     tear=[-0.55, -2.68],            # his mark at the board (tears / pins)
-    staff=[2.85, -5.45], staff_in=[4.2, -5.0],
+    staff=[2.95, -5.45], staff_in=[4.2, -5.0],
     sit=[0.3, -2.55],               # him on his suitcase, the shut door behind (S09, S19)
-    sign=[2.65, -1.25],             # the signpost
+    sign=[5.9, -0.6],               # the signpost (café side)
     cafe=dict(z=-4.0, x=[3.2, 8.2], h=3.6, awning_out=1.5),
-    t1=[4.2, -2.45], t2=[5.35, -1.0], t3=[3.15, -0.35], table_y=0.74, table_r=0.38,
+    t1=[4.2, -2.45], t2=[5.45, -3.3], t3=[3.0, -3.35], table_y=0.74, table_r=0.38,
     him_t1=[3.78, -2.45], str_t1=[4.62, -2.45],
-    scale=[-3.2, 1.0], beam_y=1.5, arm=0.9, pan_drop=0.62,
+    scale=[-3.0, 1.5], beam_y=1.5, arm=0.9, pan_drop=0.9, w1_ground=[0.439, 1.309], w2_ground=[0.439, -0.491], near_team=[[0.153, 1.616], [0.725, 1.002], [-0.784, 1.741]], far_team=[[0.153, -0.184], [0.725, -0.798], [0.784, -1.741]],  # relative to the scale; lifters either side of their weight across the view
     houses_front=9.0, houses_left=-6.2, houses_right=8.6)
 WORLDS = dict(room=[-6, 6, -6, 6], h=6.0, window=[-5.5, 5.5, 0.6, 5.4], table=[0.0, -1.5], table_len=1.2, table_w=0.7, table_y=0.74,
               him=[-0.82, -1.5], opp=[0.82, -1.5], judge=[0.1, -2.25], back_tables=[[-2.6, -3.6], [2.6, -3.6]])
 
 P = PIAZZA
 SY = 0.0
-HIM_BOARD = [P["tear"][0], 1.55, P["tear"][1]]
+HEAD, SEATED = 1.85, 1.5   # head centres of these figures standing / seated (the check fails a cut head)
+HIM_BOARD = [P["tear"][0], HEAD, P["tear"][1]]
 SHUT = [1.5, 1.5, P["hall"]["z"]]
 CLOCK = [P["hall"]["clock"][0], P["hall"]["clock"][1], P["hall"]["z"] + 0.06]
-STAFF_HEAD = [P["staff"][0], 1.55, P["staff"][1]]
+STAFF_HEAD = [P["staff"][0], HEAD, P["staff"][1]]
 SIGNH = [P["hall"]["sign"][0], P["hall"]["sign"][1], P["hall"]["z"] + 0.05]
-HIM_T1 = [P["him_t1"][0], 1.25, P["him_t1"][1]]
+HIM_T1 = [P["him_t1"][0], SEATED, P["him_t1"][1]]
 CARD = [3.93, 1.42, -2.12]          # the Caterpie card held up toward the lens (S02)
 TROPH = [4.3, 0.95, -2.5]
-SITH = [P["sit"][0], 1.2, P["sit"][1]]
+SITH = [P["sit"][0], SEATED, P["sit"][1]]
 SC = P["scale"]
 NEAR_PAN = [SC[0], 0.9, SC[1] + P["arm"]]; FAR_PAN = [SC[0], 0.9, SC[1] - P["arm"]]
 MASTER = dict(pos=[0.4, 3.3, 7.0], look=[0.4, 3.1, -4.0], fov=50)
 W = WORLDS
-EYE11 = [-1.1, 1.62, -1.25]; PHONE11 = [-1.12, 1.43, -1.62]
+EYE11 = [-0.6, 1.62, -1.25]; PHONE11 = [-0.68, 1.43, -1.6]
 
 PLAN = {
  "fps": 30, "frames": 2360, "voice_end": 2330,
@@ -103,7 +104,7 @@ scene(id="S01", hero=True, f=[0, 148], set="piazza", light="day",
   blocking="Him at the tear mark (right of the sheet, facing +z); the staff at the staff mark beside the door, hook pole up at the shutter's bottom bar.",
   action="f0-12 he glances at the sheet; f12-17 his left arm (screen left) reaches the sheet's right edge; f17 the rip (2 f before 'xóa' f19): the sheet tears off under the pin, the top corner stays pinned; f18-30 he crumples it into a ball; f32-48 he tosses it left into the bin (arc, lands f48, the bin rocks); f92 the staff hooks the shutter's bar and pulls: the shutter rattles down f100-136 and slams on 'đời' f137 (dust puff at the sill); he turns his head to it, shocked.",
   acting="Him: stern -> shock on the slam. Staff: neutral.",
-  cams=[k(0, [-0.45, 1.7, 2.3], [-0.75, 1.25, -3.0], 44, push=0.0007, why="him tearing the post off the board"),
+  cams=[k(0, [-0.55, 1.9, 3.4], [-0.95, 1.45, -3.0], 46, push=0.0007, why="him tearing the post off the board"),
         k(80, [0.9, 2.9, 6.8], [1.0, 2.4, -4.5], 48, glide=44, push=0.0005, why="pull back: the board and the hall's shutter coming down")],
   kicks=[[17, 0.35], [137, 1.0]],
   marks=[{"who": "him", "at": P["tear"], "view": "front", "pose": "reach f12, rip f17, crumple, toss f32-48", "expr": "stern -> shock"},
@@ -145,7 +146,7 @@ scene(id="S03", f=[370, 535], set="piazza", light="day",
         k(488, [4.5, 3.1, 5.8], [4.3, 1.2, -1.8], 46, glide=44, why="pull back: the terrace full of players")],
   kicks=[], marks=[{"who": "him", "at": P["him_t1"], "view": "side walking -> front seated", "pose": "walks f372-446, sits f452, lays a card f458-474", "expr": "smile"},
                    {"who": "stranger", "at": P["str_t1"], "view": "front seated", "pose": "nods f480", "expr": "neutral -> smile"}],
-  subjects=[{"n": "him head", "p": [4.3, 1.55, -1.5], "f": [390, 430]}, {"n": "stranger head", "p": [P["str_t1"][0], 1.25, P["str_t1"][1]], "f": [455, 530]}],
+  subjects=[{"n": "him head", "p": [4.3, HEAD, -1.5], "f": [390, 430]}, {"n": "stranger head", "p": [P["str_t1"][0], SEATED, P["str_t1"][1]], "f": [455, 530]}],
   physics="suitcase wheels roll (spin = distance / r).", light_mood="sunny.", sound="suitcase wheels on cobbles; card snap f474; the community grows: more voices, laughter f500-535.",
   after="The terrace full.")
 
@@ -163,8 +164,8 @@ scene(id="S04", f=[535, 640], set="worlds", light="day",
   kicks=[], marks=[{"who": "him", "at": W["him"], "view": "front seated, head to +x", "pose": "plays; folds arms f600; hands up f625", "expr": "stern"},
                    {"who": "opp", "at": W["opp"], "view": "front seated, head to -x", "pose": "plays", "expr": "nervous"},
                    {"who": "judge", "at": W["judge"], "view": "front", "pose": "arm up f586-600, points f612", "expr": "stern"}],
-  subjects=[{"n": "him head", "p": [W["him"][0], 1.25, W["him"][1]], "f": [580, 639]}, {"n": "judge head", "p": [W["judge"][0], 1.55, W["judge"][1]], "f": [580, 639]},
-            {"n": "opp head", "p": [W["opp"][0], 1.25, W["opp"][1]], "f": [580, 639]}],
+  subjects=[{"n": "him head", "p": [W["him"][0], SEATED, W["him"][1]], "f": [580, 639]}, {"n": "judge head", "p": [W["judge"][0], HEAD, W["judge"][1]], "f": [580, 639]},
+            {"n": "opp head", "p": [W["opp"][0], SEATED, W["opp"][1]], "f": [580, 639]}],
   physics="card slide with friction.", light_mood="bright hall, sun through the window.", sound="hall hubbub, a card slide f560, a judge's whistle-free 'tsk'; shuffle sounds.",
   after="-")
 
@@ -191,11 +192,11 @@ scene(id="S06", f=[739, 799], set="piazza", light="day",
   **{"in": {"type": "glide", "from": "S05"}, "out": {"type": "dissolve", "to": "S07", "n": 6}},
   build="reuse the sheet: the name line at its bottom.",
   blocking="Him at the tear mark, his arm at the sheet.",
-  action="f745-768 his marker writes the name in big red letters (we never see it legibly: scribble shapes); f770 a black censor bar slams over it (2 f squash) on 'tên' (f774); he underlines it twice f778-790.",
+  action="f745-768 his marker writes the name in big red letters (we never see it legibly: scribble shapes); f766-772 he steps aside to the right; f772 a black censor bar slams over it (2 f squash) on 'tên' (f774); he looks at it, satisfied.",
   acting="Him: stern.",
-  cams=[k(739, [-1.05, 1.35, -1.2], [-1.2, 1.12, -2.95], 38, glide=20, why="the name on the sheet")],
+  cams=[k(739, [-0.85, 1.4, 0.7], [-0.95, 0.9, -2.95], 42, glide=20, why="the name on the sheet, him writing it")],
   kicks=[[770, 0.4]], marks=[{"who": "him", "at": P["tear"], "view": "front", "pose": "writes the name f745-768", "expr": "stern"}],
-  subjects=[{"n": "name", "p": [-1.25, 0.98, -2.95], "f": [760, 798]}],
+  subjects=[{"n": "name", "p": [-1.25, 1.0, -2.95], "f": [760, 798]}, {"n": "him head", "p": [-0.62, HEAD, -2.66], "f": [760, 798]}],
   physics="none.", light_mood="sunny.", sound="Censor Beep (meme) f772; marker squeaks.", after="The name under the censor bar.")
 
 scene(id="S07", f=[799, 859], set="piazza", light="day",
@@ -224,13 +225,14 @@ scene(id="S08", hero=True, f=[859, 1107], set="piazza", light="day",
   acting="Him: tired, sad. Staff: neutral, businesslike.",
   cams=[k(859, [1.1, 2.0, 4.6], [0.4, 1.6, -3.5], 46, why="him and the suitcase crossing to the board"),
         k(940, [0.0, 1.45, 0.9], [-0.3, 0.9, -2.6], 40, glide=22, why="the NICE tag, the announcement pinned"),
-        k(1004, [1.6, 2.5, 4.6], [2.0, 2.0, -5.5], 46, glide=26, why="the shutter slams, the padlock, the sign"),
+        k(1000, [1.6, 2.5, 4.6], [2.0, 2.0, -5.5], 46, glide=22, why="the shutter slams"),
+        k(1026, [1.25, 1.55, -2.0], [2.25, 1.0, -5.9], 40, glide=10, why="the padlock, the sign"),
         k(1060, [1.3, 2.9, 0.8], [1.5, 3.3, -6.0], 40, glide=30, why="the sign over the shut door")],
   kicks=[[1022, 1.0], [1036, 0.3]],
   marks=[{"who": "him", "at": P["tear"], "view": "side walking -> front", "pose": "wheels f862-930; pins f998", "expr": "sad"},
          {"who": "staff", "at": P["staff"], "view": "front", "pose": "pulls f1003-1020, padlock f1030-1036, sign f1044-1058", "expr": "neutral"}],
   subjects=[{"n": "him head", "p": HIM_BOARD, "f": [940, 1000]}, {"n": "ann", "p": P["ann"], "f": [1000, 1003]},
-            {"n": "shutter", "p": SHUT, "f": [1032, 1060]}, {"n": "staff head", "p": STAFF_HEAD, "f": [1032, 1058]}, {"n": "sign", "p": SIGNH, "f": [1080, 1106]}],
+            {"n": "padlock", "p": [2.47, 0.94, -5.94], "f": [1040, 1060]}, {"n": "staff head", "p": [1.95, HEAD, -5.7], "f": [1048, 1058]}, {"n": "sign", "p": SIGNH, "f": [1080, 1106]}],
   physics="the luggage tag: pendulum on its strap; the shutter as in S01; the padlock shackle snaps 1 cm.",
   light_mood="morning sun.", sound="suitcase wheels; a pin thunk f998; the shutter rattle and slam f1022 (bass hit); the padlock click f1036; the sign's chain jingle f1050.",
   after="The shutter stays down, padlocked, the sign on it, until the end.")
@@ -262,8 +264,8 @@ scene(id="S10", f=[1258, 1346], set="piazza", light="day",
   action="f1258 Huh; f1262-1290 the friend points back at the torn corner; f1300-1325 scratches his head; f1334 shrugs on 'phạt?'.",
   acting="Friend: puzzled.",
   cams=[k(1258, [-0.8, 1.6, 2.6], [-1.15, 0.92, -2.9], 42, why="the friend and the torn corner")],
-  kicks=[], marks=[{"who": "friend", "at": [-1.1, -1.3], "view": "front", "pose": "points f1262; scratches f1300; shrugs f1334", "expr": "nervous"}],
-  subjects=[{"n": "friend head", "p": [-1.1, 1.55, -1.3], "f": [1258, 1345]}, {"n": "corner", "p": P["corner"], "f": [1258, 1345]}],
+  kicks=[], marks=[{"who": "friend", "at": [-0.6, -1.3], "view": "front", "pose": "points f1262; scratches f1300; shrugs f1334", "expr": "nervous"}],
+  subjects=[{"n": "friend head", "p": [-0.6, HEAD, -1.3], "f": [1258, 1345]}, {"n": "corner", "p": P["corner"], "f": [1258, 1345]}],
   physics="none.", light_mood="sunny.", sound="Huh (meme) f1258.", after="-")
 
 scene(id="S11", f=[1346, 1476], set="piazza", light="day",
@@ -275,7 +277,7 @@ scene(id="S11", f=[1346, 1476], set="piazza", light="day",
   blocking="Camera at the friend's eyes; the phone in his hands in front.",
   action="f1350-1390 he swipes through three photos of the sheet (each a different angle: they're other people's shares); f1394 'nút xóa': the thumbnail strip shows 37 copies; f1440-1470 the phone tilts a little toward the board: the photo's sheet lines up with the torn corner.",
   acting="none (POV).",
-  cams=[k(1346, EYE11, [-1.15, 1.22, -3.0], 56, push=0.0003, why="the phone, the bare board behind")],
+  cams=[k(1346, EYE11, [-1.0, 1.22, -3.0], 56, push=0.0003, why="the phone, the bare board behind")],
   kicks=[], marks=[],
   subjects=[{"n": "phone", "p": PHONE11, "f": [1346, 1475]}, {"n": "corner", "p": P["corner"], "f": [1346, 1475]}],
   physics="none (screen content).", light_mood="sunny.", sound="swipe whooshes; a soft phone tap.", after="-")
@@ -287,15 +289,15 @@ scene(id="S12", hero=True, f=[1476, 1660], set="piazza", light="day",
   **{"in": {"type": "dissolve", "n": 8, "from": "S11"}, "out": {"type": "cut", "to": "S13"}},
   build="reuse the terrace T1/T2: a tall water glass, a napkin; the patrons at T2.",
   blocking="Him seated at T1; the friend walks across the terrace right to left; two patrons seated at T2.",
-  action="f1500-1506 his right arm gestures and knocks the glass ('ly nước' f1508); it tips off the near edge and falls (rigid body), hits the cobbles f1519 ('đổ' f1519): a splash, a puddle spreads to r 0.32 m by f1530; the glass rolls and rests; f1522-1546 the friend walks through the puddle (one step in it f1533); f1548-1556 he stands, f1558-1584 crouches and wipes with the napkin: the puddle shrinks to nothing ('lau' f1558); f1584-1650 the wet prints the friend left run across the cobbles to where he stands; the patrons look down at the prints, then point at his dripping legs ('nhìn thấy' f1627, 'giày ướt' f1641).",
+  action="f1500-1506 his right arm gestures and knocks the glass ('ly nước' f1508); it tips off the near edge and falls (rigid body), hits the cobbles f1519 ('đổ' f1519): a splash, a puddle spreads to r 0.32 m by f1530; the glass rolls and rests; f1522-1546 the friend walks in along the café front and steps in the puddle (f1533), then turns toward the lens; f1548-1556 he stands, f1558-1584 crouches and wipes with the napkin: the puddle shrinks to nothing ('lau' f1558); f1584-1650 the wet prints the friend left run from the puddle toward the lens to where he stands (a trail down the frame); the patrons look down at the prints, then point at his dripping legs ('nhìn thấy' f1627, 'giày ướt' f1641).",
   acting="Him: oops -> relieved (puddle gone) -> nervous. Friend: oblivious -> embarrassed. Patrons: grin, pointing.",
   cams=[k(1476, [4.15, 1.8, 1.9], [4.05, 1.0, -2.2], 46, why="the table, the glass, the terrace"),
-        k(1590, [3.4, 1.75, 2.1], [3.3, 0.85, -1.7], 48, glide=34, why="the wet prints to the friend, the patrons pointing")],
+        k(1590, [4.0, 1.75, 3.9], [3.8, 0.6, -1.4], 50, glide=34, why="the wet prints to the friend, the patrons pointing")],
   kicks=[[1519, 0.4]],
   marks=[{"who": "him", "at": P["him_t1"], "view": "front seated -> crouch", "pose": "knocks f1506; mops f1558-1584", "expr": "shock -> relief -> nervous"},
-         {"who": "friend", "at": [2.7, -1.7], "view": "side walking", "pose": "walks f1522-1580 through the puddle", "expr": "neutral -> nervous"},
-         {"who": "patrons", "at": P["t2"], "view": "front seated", "pose": "look down f1600; point f1627", "expr": "grin"}],
-  subjects=[{"n": "him head", "p": HIM_T1, "f": [1476, 1550]}, {"n": "puddle", "p": [3.95, 0.0, -1.95], "f": [1520, 1580]}],
+         {"who": "friend", "at": [3.7, 0.3], "view": "side walking", "pose": "walks f1522-1580 through the puddle", "expr": "neutral -> nervous"},
+         {"who": "patrons", "at": P["t3"], "view": "front seated", "pose": "look down f1600; point f1627", "expr": "grin"}],
+  subjects=[{"n": "him head", "p": HIM_T1, "f": [1476, 1550]}, {"n": "puddle", "p": [4.05, 0.0, -1.95], "f": [1520, 1580]}, {"n": "friend head", "p": [3.7, HEAD, 0.3], "f": [1630, 1659]}, {"n": "pat2 head", "p": [3.5, SEATED, -3.35], "f": [1630, 1659]}],
   physics="the glass: cannon-es cylinder, tipped from the table edge, 240 Hz bake; the splash a 6 f FX; the puddle a flat decal that grows then shrinks under the napkin; prints a fading decal per step.",
   light_mood="sunny terrace.", sound="glass knock f1506, a clink-splash f1519; footsteps; squeaky napkin f1558-1584; a wet squelch per step; patrons' giggle.",
   after="A dry spot where the puddle was; the wet prints fade by f1660.")
@@ -310,8 +312,8 @@ scene(id="S13", f=[1660, 1735], set="piazza", light="day",
   action="f1662-1700 they gather; flashes from their phones at f1702, f1712, f1718, f1723, f1729 ('chụp lại' f1723).",
   acting="Crowd: curious, gossiping.",
   cams=[k(1660, [-1.0, 1.75, -2.82], [-1.0, 0.95, 3.0], 56, cut=True, push=0.0008, why="the post's view: the crowd snapping it")],
-  kicks=[], marks=[{"who": "crowd", "at": [-1.0, 0.6], "view": "front", "pose": "phones up, flash", "expr": "grin / shock"}],
-  subjects=[{"n": "c1 head", "p": [-1.6, 1.55, 0.6], "f": [1680, 1734]}, {"n": "c5 head", "p": [-0.4, 1.55, 0.6], "f": [1680, 1734]}],
+  kicks=[], marks=[{"who": "crowd", "at": [-1.0, 1.4], "view": "front", "pose": "phones up, flash", "expr": "grin / shock"}],
+  subjects=[{"n": "c1 head", "p": [-1.8, HEAD, 1.3], "f": [1680, 1734]}, {"n": "c5 head", "p": [-0.2, HEAD, 1.3], "f": [1680, 1734]}],
   physics="none.", light_mood="sunny.", sound="Camera shutter (meme) on each flash.", after="-")
 
 scene(id="S14", hero=True, f=[1735, 1863], set="piazza", light="day",
@@ -323,11 +325,11 @@ scene(id="S14", hero=True, f=[1735, 1863], set="piazza", light="day",
   blocking="Six people in a group beside the scale; three walk to the near pan, three to the far pan.",
   action="f1740-1778 the group splits (three walk toward the lens, three away); f1800-1838 two of the near side lift the CẤM CẢ ĐỜI weight (both arms) and drop it on the near pan f1840; f1845 ('quá nặng') the pan slams to the ground, the beam tilts hard; the far pan rises; they throw up their arms.",
   acting="Near side: indignant. Far side: arms folded.",
-  cams=[k(1735, [-1.4, 2.5, 6.4], [-3.3, 1.2, 0.8], 48, why="the crowd by the scale"),
-        k(1795, [-2.7, 1.95, 5.4], [-3.5, 0.85, 1.6], 44, glide=30, why="the near pan and the heavy weight")],
+  cams=[k(1735, [SC[0] + 3.6, 2.7, SC[1] + 3.4], [SC[0], 0.95, SC[1]], 46, why="the crowd by the scale"),
+        k(1795, [SC[0] + 2.9, 1.9, SC[1] + 3.9], [SC[0] + 0.44, 0.8, SC[1] + 1.3], 44, glide=30, why="the near pan and the heavy weight")],
   kicks=[[1845, 0.8]],
   marks=[{"who": "crowd", "at": SC, "view": "side walking -> front", "pose": "split f1740-1778; lift f1800-1838", "expr": "stern"}],
-  subjects=[{"n": "near pan", "p": NEAR_PAN, "f": [1800, 1862]}, {"n": "n1 head", "p": [SC[0] - 0.6, 1.55, SC[1] + 1.25], "f": [1818, 1862]}],
+  subjects=[{"n": "near pan", "p": NEAR_PAN, "f": [1800, 1862]}, {"n": "n1 head", "p": [SC[0] + P["near_team"][0][0], HEAD, SC[1] + P["near_team"][0][1]], "f": [1818, 1862]}, {"n": "n2 head", "p": [SC[0] + P["near_team"][1][0], HEAD, SC[1] + P["near_team"][1][1]], "f": [1818, 1862]}],
   physics="the beam: a damped pendulum about the pivot; the weight lands with no bounce (iron), the pan hits the ground stop.",
   light_mood="sunny.", sound="footsteps; a grunt on the lift; a heavy CLANG f1845 (Instagram Thud under it).", after="The near pan on the ground.")
 
@@ -340,8 +342,8 @@ scene(id="S15", f=[1863, 1974], set="piazza", light="day",
   blocking="Far side at the far pan.",
   action="f1880-1922 two of the far side lift their weight; f1925 it lands on the far pan; f1928-1960 the beam swings back to level, overshoots once and settles; both sides glare at each other f1960-1974.",
   acting="Far side: stern. Near side: annoyed.",
-  cams=[k(1863, [-2.0, 2.3, 3.6], [-3.2, 1.3, -0.1], 44, glide=36, why="the far side and their weight"),
-        k(1932, [-1.0, 2.6, 6.6], [-3.1, 1.3, 0.8], 48, glide=26, why="the scale level, the two camps")],
+  cams=[k(1863, [SC[0] + 2.9, 2.2, SC[1] + 1.5], [SC[0] + 0.1, 1.0, SC[1] - 0.8], 44, glide=36, why="the far side and their weight"),
+        k(1932, [SC[0] + 3.8, 2.8, SC[1] + 3.6], [SC[0], 0.95, SC[1]], 48, glide=26, why="the scale level, the two camps")],
   kicks=[[1925, 0.4]],
   marks=[{"who": "crowd", "at": SC, "view": "front", "pose": "lift f1880-1922", "expr": "stern"}],
   subjects=[{"n": "far pan", "p": FAR_PAN, "f": [1890, 1973]}, {"n": "near pan", "p": NEAR_PAN, "f": [1950, 1973]}],
@@ -356,7 +358,7 @@ scene(id="S16", f=[1974, 2089], set="piazza", light="day",
   blocking="Nobody; a crow.",
   action="f1974-2040 slow push on the empty frame; f2030-2048 a crow flies in from the right and lands on the frame's top edge ('chưa nói' f2048); f2058 it caws; it cocks its head.",
   acting="Crow: deadpan.",
-  cams=[k(1974, [-0.85, 2.2, 0.6], [-1.0, 2.12, -3.0], 38, push=0.0009, why="the empty official frame")],
+  cams=[k(1974, [-0.85, 2.45, 0.6], [-1.0, 2.42, -3.0], 38, push=0.0009, why="the empty official frame")],
   kicks=[], marks=[], subjects=[{"n": "tpc frame", "p": P["tpc"], "f": [1974, 2088]}],
   physics="the crow: flap-glide in, a 2 f squash on landing.", light_mood="sunny.", sound="silence under the VO (the score drops out); Crow (meme) f2058.", after="The crow stays.")
 

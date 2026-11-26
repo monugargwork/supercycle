@@ -144,7 +144,7 @@
    -2.68
   ],
   "staff": [
-   2.85,
+   2.95,
    -5.45
   ],
   "staff_in": [
@@ -156,8 +156,8 @@
    -2.55
   ],
   "sign": [
-   2.65,
-   -1.25
+   5.9,
+   -0.6
   ],
   "cafe": {
    "z": -4.0,
@@ -173,12 +173,12 @@
    -2.45
   ],
   "t2": [
-   5.35,
-   -1.0
+   5.45,
+   -3.3
   ],
   "t3": [
-   3.15,
-   -0.35
+   3.0,
+   -3.35
   ],
   "table_y": 0.74,
   "table_r": 0.38,
@@ -191,12 +191,48 @@
    -2.45
   ],
   "scale": [
-   -3.2,
-   1.0
+   -3.0,
+   1.5
   ],
   "beam_y": 1.5,
   "arm": 0.9,
-  "pan_drop": 0.62,
+  "pan_drop": 0.9,
+  "w1_ground": [
+   0.439,
+   1.309
+  ],
+  "w2_ground": [
+   0.439,
+   -0.491
+  ],
+  "near_team": [
+   [
+    0.153,
+    1.616
+   ],
+   [
+    0.725,
+    1.002
+   ],
+   [
+    -0.784,
+    1.741
+   ]
+  ],
+  "far_team": [
+   [
+    0.153,
+    -0.184
+   ],
+   [
+    0.725,
+    -0.798
+   ],
+   [
+    0.784,
+    -1.741
+   ]
+  ],
   "houses_front": 9.0,
   "houses_left": -6.2,
   "houses_right": 8.6
@@ -390,9 +426,9 @@
      "id": "signpost",
      "build": "new: wooden signpost with arrows STAZIONE, NICE 300 km, ROMA, MILANO",
      "pos": [
-      2.65,
+      5.9,
       1.3,
-      -1.25
+      -0.6
      ],
      "size": [
       0.9,
@@ -404,9 +440,9 @@
      "id": "scale",
      "build": "adapt:balance (Mudkip S15): a brass public scale, pivot post 1.5 m at (-3.2, 1.0), beam 1.8 m along z, two pans on chains; iron weights CẤM CẢ ĐỜI and NÊU TÊN TRỌNG TÀI (S14 on)",
      "pos": [
-      -3.2,
+      -3.0,
       0.8,
-      1.0
+      1.5
      ],
      "size": [
       0.7,
@@ -435,7 +471,7 @@
      -2.68
     ],
     "staff": [
-     2.85,
+     2.95,
      -5.45
     ],
     "sit": [
@@ -659,16 +695,16 @@
     {
      "f": 0,
      "pos": [
-      -0.45,
-      1.7,
-      2.3
+      -0.55,
+      1.9,
+      3.4
      ],
      "look": [
-      -0.75,
-      1.25,
+      -0.95,
+      1.45,
       -3.0
      ],
-     "fov": 44,
+     "fov": 46,
      "roll": 0,
      "push": 0.0007,
      "blur": 0,
@@ -718,7 +754,7 @@
     {
      "who": "staff",
      "at": [
-      2.85,
+      2.95,
       -5.45
      ],
      "view": "front",
@@ -731,7 +767,7 @@
      "n": "him head",
      "p": [
       -0.55,
-      1.55,
+      1.85,
       -2.68
      ],
      "f": [
@@ -766,8 +802,8 @@
     {
      "n": "staff head",
      "p": [
-      2.85,
-      1.55,
+      2.95,
+      1.85,
       -5.45
      ],
      "f": [
@@ -790,7 +826,7 @@
     {
      "n": "staff feet",
      "p": [
-      2.85,
+      2.95,
       0.02,
       -5.45
      ],
@@ -907,7 +943,7 @@
      "n": "him head",
      "p": [
       3.78,
-      1.25,
+      1.5,
       -2.45
      ],
      "f": [
@@ -1069,7 +1105,7 @@
      "n": "him head",
      "p": [
       4.3,
-      1.55,
+      1.85,
       -1.5
      ],
      "f": [
@@ -1081,7 +1117,7 @@
      "n": "stranger head",
      "p": [
       4.62,
-      1.25,
+      1.5,
       -2.45
      ],
      "f": [
@@ -1223,7 +1259,7 @@
      "n": "him head",
      "p": [
       -0.82,
-      1.25,
+      1.5,
       -1.5
      ],
      "f": [
@@ -1235,7 +1271,7 @@
      "n": "judge head",
      "p": [
       0.1,
-      1.55,
+      1.85,
       -2.25
      ],
      "f": [
@@ -1247,7 +1283,7 @@
      "n": "opp head",
      "p": [
       0.82,
-      1.25,
+      1.5,
       -1.5
      ],
      "f": [
@@ -1379,7 +1415,7 @@
      "n": "him head",
      "p": [
       -0.55,
-      1.55,
+      1.85,
       -2.68
      ],
      "f": [
@@ -1440,26 +1476,26 @@
    },
    "build": "reuse the sheet: the name line at its bottom.",
    "blocking": "Him at the tear mark, his arm at the sheet.",
-   "action": "f745-768 his marker writes the name in big red letters (we never see it legibly: scribble shapes); f770 a black censor bar slams over it (2 f squash) on 'tên' (f774); he underlines it twice f778-790.",
+   "action": "f745-768 his marker writes the name in big red letters (we never see it legibly: scribble shapes); f766-772 he steps aside to the right; f772 a black censor bar slams over it (2 f squash) on 'tên' (f774); he looks at it, satisfied.",
    "acting": "Him: stern.",
    "cams": [
     {
      "f": 739,
      "pos": [
-      -1.05,
-      1.35,
-      -1.2
+      -0.85,
+      1.4,
+      0.7
      ],
      "look": [
-      -1.2,
-      1.12,
+      -0.95,
+      0.9,
       -2.95
      ],
-     "fov": 38,
+     "fov": 42,
      "roll": 0,
      "push": 0.0006,
      "blur": 0,
-     "why": "the name on the sheet",
+     "why": "the name on the sheet, him writing it",
      "glide": 20
     }
    ],
@@ -1486,8 +1522,32 @@
      "n": "name",
      "p": [
       -1.25,
-      0.98,
+      1.0,
       -2.95
+     ],
+     "f": [
+      760,
+      798
+     ]
+    },
+    {
+     "n": "him head",
+     "p": [
+      -0.62,
+      1.85,
+      -2.66
+     ],
+     "f": [
+      760,
+      798
+     ]
+    },
+    {
+     "n": "him feet",
+     "p": [
+      -0.62,
+      0.02,
+      -2.66
      ],
      "f": [
       760,
@@ -1661,7 +1721,7 @@
      "glide": 22
     },
     {
-     "f": 1004,
+     "f": 1000,
      "pos": [
       1.6,
       2.5,
@@ -1676,8 +1736,27 @@
      "roll": 0,
      "push": 0.0006,
      "blur": 0,
-     "why": "the shutter slams, the padlock, the sign",
-     "glide": 26
+     "why": "the shutter slams",
+     "glide": 22
+    },
+    {
+     "f": 1026,
+     "pos": [
+      1.25,
+      1.55,
+      -2.0
+     ],
+     "look": [
+      2.25,
+      1.0,
+      -5.9
+     ],
+     "fov": 40,
+     "roll": 0,
+     "push": 0.0006,
+     "blur": 0,
+     "why": "the padlock, the sign",
+     "glide": 10
     },
     {
      "f": 1060,
@@ -1723,7 +1802,7 @@
     {
      "who": "staff",
      "at": [
-      2.85,
+      2.95,
       -5.45
      ],
      "view": "front",
@@ -1736,7 +1815,7 @@
      "n": "him head",
      "p": [
       -0.55,
-      1.55,
+      1.85,
       -2.68
      ],
      "f": [
@@ -1757,26 +1836,26 @@
      ]
     },
     {
-     "n": "shutter",
+     "n": "padlock",
      "p": [
-      1.5,
-      1.5,
-      -6.0
+      2.47,
+      0.94,
+      -5.94
      ],
      "f": [
-      1032,
+      1040,
       1060
      ]
     },
     {
      "n": "staff head",
      "p": [
-      2.85,
-      1.55,
-      -5.45
+      1.95,
+      1.85,
+      -5.7
      ],
      "f": [
-      1032,
+      1048,
       1058
      ]
     },
@@ -1807,12 +1886,12 @@
     {
      "n": "staff feet",
      "p": [
-      2.85,
+      1.95,
       0.02,
-      -5.45
+      -5.7
      ],
      "f": [
-      1032,
+      1048,
       1058
      ]
     }
@@ -1924,7 +2003,7 @@
      "n": "him head",
      "p": [
       0.3,
-      1.2,
+      1.5,
       -2.55
      ],
      "f": [
@@ -1948,7 +2027,7 @@
      "n": "him face",
      "p": [
       0.3,
-      1.2,
+      1.5,
       -2.55
      ],
      "f": [
@@ -2023,7 +2102,7 @@
     {
      "who": "friend",
      "at": [
-      -1.1,
+      -0.6,
       -1.3
      ],
      "view": "front",
@@ -2035,8 +2114,8 @@
     {
      "n": "friend head",
      "p": [
-      -1.1,
-      1.55,
+      -0.6,
+      1.85,
       -1.3
      ],
      "f": [
@@ -2059,7 +2138,7 @@
     {
      "n": "friend feet",
      "p": [
-      -1.1,
+      -0.6,
       0.02,
       -1.3
      ],
@@ -2103,12 +2182,12 @@
     {
      "f": 1346,
      "pos": [
-      -1.1,
+      -0.6,
       1.62,
       -1.25
      ],
      "look": [
-      -1.15,
+      -1.0,
       1.22,
       -3.0
      ],
@@ -2125,9 +2204,9 @@
     {
      "n": "phone",
      "p": [
-      -1.12,
+      -0.68,
       1.43,
-      -1.62
+      -1.6
      ],
      "f": [
       1346,
@@ -2176,7 +2255,7 @@
    },
    "build": "reuse the terrace T1/T2: a tall water glass, a napkin; the patrons at T2.",
    "blocking": "Him seated at T1; the friend walks across the terrace right to left; two patrons seated at T2.",
-   "action": "f1500-1506 his right arm gestures and knocks the glass ('ly nước' f1508); it tips off the near edge and falls (rigid body), hits the cobbles f1519 ('đổ' f1519): a splash, a puddle spreads to r 0.32 m by f1530; the glass rolls and rests; f1522-1546 the friend walks through the puddle (one step in it f1533); f1548-1556 he stands, f1558-1584 crouches and wipes with the napkin: the puddle shrinks to nothing ('lau' f1558); f1584-1650 the wet prints the friend left run across the cobbles to where he stands; the patrons look down at the prints, then point at his dripping legs ('nhìn thấy' f1627, 'giày ướt' f1641).",
+   "action": "f1500-1506 his right arm gestures and knocks the glass ('ly nước' f1508); it tips off the near edge and falls (rigid body), hits the cobbles f1519 ('đổ' f1519): a splash, a puddle spreads to r 0.32 m by f1530; the glass rolls and rests; f1522-1546 the friend walks in along the café front and steps in the puddle (f1533), then turns toward the lens; f1548-1556 he stands, f1558-1584 crouches and wipes with the napkin: the puddle shrinks to nothing ('lau' f1558); f1584-1650 the wet prints the friend left run from the puddle toward the lens to where he stands (a trail down the frame); the patrons look down at the prints, then point at his dripping legs ('nhìn thấy' f1627, 'giày ướt' f1641).",
    "acting": "Him: oops -> relieved (puddle gone) -> nervous. Friend: oblivious -> embarrassed. Patrons: grin, pointing.",
    "cams": [
     {
@@ -2200,16 +2279,16 @@
     {
      "f": 1590,
      "pos": [
-      3.4,
+      4.0,
       1.75,
-      2.1
+      3.9
      ],
      "look": [
-      3.3,
-      0.85,
-      -1.7
+      3.8,
+      0.6,
+      -1.4
      ],
-     "fov": 48,
+     "fov": 50,
      "roll": 0,
      "push": 0.0006,
      "blur": 0,
@@ -2237,8 +2316,8 @@
     {
      "who": "friend",
      "at": [
-      2.7,
-      -1.7
+      3.7,
+      0.3
      ],
      "view": "side walking",
      "pose": "walks f1522-1580 through the puddle",
@@ -2247,8 +2326,8 @@
     {
      "who": "patrons",
      "at": [
-      5.35,
-      -1.0
+      3.0,
+      -3.35
      ],
      "view": "front seated",
      "pose": "look down f1600; point f1627",
@@ -2260,7 +2339,7 @@
      "n": "him head",
      "p": [
       3.78,
-      1.25,
+      1.5,
       -2.45
      ],
      "f": [
@@ -2271,13 +2350,37 @@
     {
      "n": "puddle",
      "p": [
-      3.95,
+      4.05,
       0.0,
       -1.95
      ],
      "f": [
       1520,
       1580
+     ]
+    },
+    {
+     "n": "friend head",
+     "p": [
+      3.7,
+      1.85,
+      0.3
+     ],
+     "f": [
+      1630,
+      1659
+     ]
+    },
+    {
+     "n": "pat2 head",
+     "p": [
+      3.5,
+      1.5,
+      -3.35
+     ],
+     "f": [
+      1630,
+      1659
      ]
     },
     {
@@ -2290,6 +2393,30 @@
      "f": [
       1476,
       1550
+     ]
+    },
+    {
+     "n": "friend feet",
+     "p": [
+      3.7,
+      0.02,
+      0.3
+     ],
+     "f": [
+      1630,
+      1659
+     ]
+    },
+    {
+     "n": "pat2 feet",
+     "p": [
+      3.5,
+      0.02,
+      -3.35
+     ],
+     "f": [
+      1630,
+      1659
      ]
     }
    ],
@@ -2350,7 +2477,7 @@
      "who": "crowd",
      "at": [
       -1.0,
-      0.6
+      1.4
      ],
      "view": "front",
      "pose": "phones up, flash",
@@ -2361,9 +2488,9 @@
     {
      "n": "c1 head",
      "p": [
-      -1.6,
-      1.55,
-      0.6
+      -1.8,
+      1.85,
+      1.3
      ],
      "f": [
       1680,
@@ -2373,9 +2500,9 @@
     {
      "n": "c5 head",
      "p": [
-      -0.4,
-      1.55,
-      0.6
+      -0.2,
+      1.85,
+      1.3
      ],
      "f": [
       1680,
@@ -2385,9 +2512,9 @@
     {
      "n": "c1 feet",
      "p": [
-      -1.6,
+      -1.8,
       0.02,
-      0.6
+      1.3
      ],
      "f": [
       1680,
@@ -2397,9 +2524,9 @@
     {
      "n": "c5 feet",
      "p": [
-      -0.4,
+      -0.2,
       0.02,
-      0.6
+      1.3
      ],
      "f": [
       1680,
@@ -2442,16 +2569,16 @@
     {
      "f": 1735,
      "pos": [
-      -1.4,
-      2.5,
-      6.4
+      0.6000000000000001,
+      2.7,
+      4.9
      ],
      "look": [
-      -3.3,
-      1.2,
-      0.8
+      -3.0,
+      0.95,
+      1.5
      ],
-     "fov": 48,
+     "fov": 46,
      "roll": 0,
      "push": 0.0006,
      "blur": 0,
@@ -2460,14 +2587,14 @@
     {
      "f": 1795,
      "pos": [
-      -2.7,
-      1.95,
+      -0.10000000000000009,
+      1.9,
       5.4
      ],
      "look": [
-      -3.5,
-      0.85,
-      1.6
+      -2.56,
+      0.8,
+      2.8
      ],
      "fov": 44,
      "roll": 0,
@@ -2487,8 +2614,8 @@
     {
      "who": "crowd",
      "at": [
-      -3.2,
-      1.0
+      -3.0,
+      1.5
      ],
      "view": "side walking -> front",
      "pose": "split f1740-1778; lift f1800-1838",
@@ -2499,9 +2626,9 @@
     {
      "n": "near pan",
      "p": [
-      -3.2,
+      -3.0,
       0.9,
-      1.9
+      2.4
      ],
      "f": [
       1800,
@@ -2511,9 +2638,21 @@
     {
      "n": "n1 head",
      "p": [
-      -3.8000000000000003,
-      1.55,
-      2.25
+      -2.847,
+      1.85,
+      3.116
+     ],
+     "f": [
+      1818,
+      1862
+     ]
+    },
+    {
+     "n": "n2 head",
+     "p": [
+      -2.275,
+      1.85,
+      2.502
      ],
      "f": [
       1818,
@@ -2523,9 +2662,21 @@
     {
      "n": "n1 feet",
      "p": [
-      -3.8000000000000003,
+      -2.847,
       0.02,
-      2.25
+      3.116
+     ],
+     "f": [
+      1818,
+      1862
+     ]
+    },
+    {
+     "n": "n2 feet",
+     "p": [
+      -2.275,
+      0.02,
+      2.502
      ],
      "f": [
       1818,
@@ -2567,14 +2718,14 @@
     {
      "f": 1863,
      "pos": [
-      -2.0,
-      2.3,
-      3.6
+      -0.10000000000000009,
+      2.2,
+      3.0
      ],
      "look": [
-      -3.2,
-      1.3,
-      -0.1
+      -2.9,
+      1.0,
+      0.7
      ],
      "fov": 44,
      "roll": 0,
@@ -2586,14 +2737,14 @@
     {
      "f": 1932,
      "pos": [
-      -1.0,
-      2.6,
-      6.6
+      0.7999999999999998,
+      2.8,
+      5.1
      ],
      "look": [
-      -3.1,
-      1.3,
-      0.8
+      -3.0,
+      0.95,
+      1.5
      ],
      "fov": 48,
      "roll": 0,
@@ -2613,8 +2764,8 @@
     {
      "who": "crowd",
      "at": [
-      -3.2,
-      1.0
+      -3.0,
+      1.5
      ],
      "view": "front",
      "pose": "lift f1880-1922",
@@ -2625,9 +2776,9 @@
     {
      "n": "far pan",
      "p": [
-      -3.2,
+      -3.0,
       0.9,
-      0.09999999999999998
+      0.6
      ],
      "f": [
       1890,
@@ -2637,9 +2788,9 @@
     {
      "n": "near pan",
      "p": [
-      -3.2,
+      -3.0,
       0.9,
-      1.9
+      2.4
      ],
      "f": [
       1950,
@@ -2682,12 +2833,12 @@
      "f": 1974,
      "pos": [
       -0.85,
-      2.2,
+      2.45,
       0.6
      ],
      "look": [
       -1.0,
-      2.12,
+      2.42,
       -3.0
      ],
      "fov": 38,
@@ -2943,7 +3094,7 @@
      "n": "him head",
      "p": [
       0.3,
-      1.2,
+      1.5,
       -2.55
      ],
      "f": [

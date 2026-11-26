@@ -20,6 +20,7 @@ export type Outfit = {
   build?: Build;
   /** burglar eye mask, sunglasses, round glasses, chest lettering (front view), necktie colour, badge colour */
   mask?: boolean; shades?: boolean; glasses?: boolean; chest?: string; chestCol?: string; tie?: string; badge?: string;
+  /** squeeze the chest lettering to the torso width (off by default: older reels render unchanged) */ chestFit?: boolean;
 };
 type P2 = [number, number];
 
@@ -634,8 +635,9 @@ export const bodyFront = (p: Pen, o: Outfit, opts: FrontOpts) => {
         const g = p.g, [lx, ly] = p.P(tcx, chin + 0.42 * HH);
         g.save(); g.translate(lx, ly); if (p.rot) g.rotate(p.rot[0]);
         g.font = `900 ${Math.round(0.3 * HH)}px Arial Black, Arial, sans-serif`; g.textAlign = "center"; g.textBaseline = "middle";
-        g.lineWidth = 2.4 * u; g.strokeStyle = INK; g.lineJoin = "round"; g.strokeText(o.chest, 0, 0);
-        g.fillStyle = o.chestCol ?? "#ffd23a"; g.fillText(o.chest, 0, 0); g.restore();
+        const mw = o.chestFit ? 1.45 * T.a : undefined;
+        g.lineWidth = 2.4 * u; g.strokeStyle = INK; g.lineJoin = "round"; g.strokeText(o.chest, 0, 0, mw);
+        g.fillStyle = o.chestCol ?? "#ffd23a"; g.fillText(o.chest, 0, 0, mw); g.restore();
       }
       if (o.badge) { const bx = tcx + 0.42 * T.a * (facing || 1), by = chin + 0.3 * HH; p.poly([[bx, by - 9 * u], [bx + 8 * u, by - 3 * u], [bx + 5 * u, by + 8 * u], [bx - 5 * u, by + 8 * u], [bx - 8 * u, by - 3 * u]], o.badge, 1.6 * u); }
       if (!o.tie && !o.chest) for (let i = 0; i < 4; i++) {

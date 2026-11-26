@@ -1,0 +1,13 @@
+Real card scans for the Caterpie reel (from library/cards, see CATALOG.md).
+caterpie151.png   Scarlet & Violet 151 Caterpie 010/165             https://images.pokemontcg.io/sv3pt5/10_hires.png
+pika151.png       Scarlet & Violet 151 Pikachu 25/165               https://images.pokemontcg.io/sv3pt5/25_hires.png
+sprigatito.png    Scarlet & Violet Sprigatito 13                    https://images.pokemontcg.io/sv1/13.png
+fuecoco.png       Scarlet & Violet Fuecoco 36                       https://images.pokemontcg.io/sv1/36.png
+quaxly.png        Scarlet & Violet Quaxly 52                        https://images.pokemontcg.io/sv1/52.png
+pawmi.png         Scarlet & Violet Pawmi 73                         https://images.pokemontcg.io/sv1/73.png
+zard151.png       Scarlet & Violet 151 Charizard ex SIR 199/165     https://images.pokemontcg.io/sv3pt5/199_hires.png
+eevee.png         Jungle Eevee 51                                   https://images.pokemontcg.io/base2/51.png
+pikachu.png       Base Set Pikachu 58                               https://images.pokemontcg.io/base1/58.png
+charmander.png    Base Set Charmander 46                            https://images.pokemontcg.io/base1/46.png
+squirtle.png      Base Set Squirtle 63                              https://images.pokemontcg.io/base1/63.png
+bulbasaur.png     Base Set Bulbasaur 44                             https://images.pokemontcg.io/base1/44.png
