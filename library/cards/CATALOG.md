@@ -8,9 +8,11 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | c30_volbeat | 2026 30th Celebration Volbeat 3 | 30c | 3 | https://den-cards.pokellector.com/434/Volbeat.30C.3.62044.png | jirachi |
 | c30_vulpix | 2026 30th Celebration Vulpix 9 | 30c | 9 | https://den-cards.pokellector.com/434/Vulpix.30C.9.62050.png | jirachi |
 | jirachi_sir | 2026 30th Celebration Jirachi ex Special Illustration Rare (Akira Egawa) 155/128 | 30c | 155 | https://den-cards.pokellector.com/434/Jirachi-ex.30C.155.62175.png | jirachi |
+| rgb_mew_r | 30th Celebration Mew R/RGB (Red) | 30th | R | https://tcgplayer-cdn.tcgplayer.com/product/717607_in_1000x1000.jpg |  |
 | abra | Base Set Abra 43 | base1 | 43 | https://images.pokemontcg.io/base1/43.png | attic |
 | blastoise | Base Set Blastoise 2 | base1 | 2 | https://images.pokemontcg.io/base1/2_hires.png | attic, fanatics, monaco, tcgplayer, gengar, goldenrod |
 | bulbasaur | Base Set Bulbasaur 44 | base1 | 44 | https://images.pokemontcg.io/base1/44.png | attic |
+| caterpie | Base Set Caterpie 45 | base1 | 45 | https://images.pokemontcg.io/base1/45_hires.png |  |
 | charmander | Base Set Charmander 46 | base1 | 46 | https://images.pokemontcg.io/base1/46.png | attic, fanatics |
 | diglett | Base Set Diglett 47 | base1 | 47 | https://images.pokemontcg.io/base1/47.png | attic |
 | gastly | Base Set Gastly 50 | base1 | 50 | https://images.pokemontcg.io/base1/50.png | attic, fanatics |
@@ -47,6 +49,8 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | tr_dark_zard | Team Rocket Dark Charizard 4 | base5 | 4 | https://images.pokemontcg.io/base5/4_hires.png | lucas |
 | lc_gengar | Legendary Collection Gengar 11 (holo; the sold copy is the reverse holo) | base6 | 11 | https://images.pokemontcg.io/base6/11_hires.png | gengar, goldenrod |
 | zard_lc | Legendary Collection Charizard 3 | base6 | 3 | https://images.pokemontcg.io/base6/3_hires.png | attic, fanatics, gengar |
+| cel_mew | Celebrations Mew 11/25 | cel25 | 11 | https://images.pokemontcg.io/cel25/11_hires.png |  |
+| cel_mew_gold | Celebrations Mew 25/25 (gold full art) | cel25 | 25 | https://images.pokemontcg.io/cel25/25_hires.png |  |
 | sky_h1 | Skyridge Holo H1 | ecard3 | H1 | https://images.pokemontcg.io/ecard3/H1.png | attic, fanatics |
 | sky_h2 | Skyridge Holo H2 | ecard3 | H2 | https://images.pokemontcg.io/ecard3/H2.png | attic, fanatics |
 | sky_h3 | Skyridge Holo H3 | ecard3 | H3 | https://images.pokemontcg.io/ecard3/H3.png | attic, fanatics, gengar |
@@ -85,6 +89,7 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | sprigatito | Scarlet & Violet Sprigatito 13 | sv1 | 13 | https://images.pokemontcg.io/sv1/13.png | mudkip |
 | tandemaus | Scarlet & Violet Tandemaus 159 | sv1 | 159 | https://images.pokemontcg.io/sv1/159.png | mudkip |
 | blast151 | Scarlet & Violet 151 Blastoise ex SIR 200/165 | sv3pt5 | 200 | https://images.pokemontcg.io/sv3pt5/200_hires.png | tcgplayer |
+| caterpie151 | Scarlet & Violet 151 Caterpie 010/165 | sv3pt5 | 10 | https://images.pokemontcg.io/sv3pt5/10_hires.png |  |
 | pika151 | Scarlet & Violet 151 Pikachu 25/165 | sv3pt5 | 25 | https://images.pokemontcg.io/sv3pt5/25_hires.png | tcgplayer |
 | venu151 | Scarlet & Violet 151 Venusaur ex SIR 198/165 | sv3pt5 | 198 | https://images.pokemontcg.io/sv3pt5/198_hires.png | tcgplayer |
 | zard151 | Scarlet & Violet 151 Charizard ex SIR 199/165 | sv3pt5 | 199 | https://images.pokemontcg.io/sv3pt5/199_hires.png | tcgplayer |
@@ -96,6 +101,7 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | pikachu_xy | XY Pikachu 42 | xy1 | 42 | https://images.pokemontcg.io/xy1/42.png | mudkip |
 | skiddo | XY Skiddo 18 | xy1 | 18 | https://images.pokemontcg.io/xy1/18.png | mudkip |
 | spritzee | XY Spritzee 92 | xy1 | 92 | https://images.pokemontcg.io/xy1/92.png | mudkip |
+| evo_mzard | XY Evolutions M Charizard-EX 13/108 | xy12 | 13 | https://images.pokemontcg.io/xy12/13_hires.png |  |
 | mudkip_aa | 2015 JP XY-P Art Academy Mudkip (Daisuke Ochiai) | xyp-jp | U067 | https://cdn6966.templcdn.com/wp-content/uploads/2022/06/JP_U067Daisuke-OchiaiXY-P.jpg | mudkip |
 | pika_poncho_ray | 2016 JP XY-P Poncho-wearing Pikachu (Mega Rayquaza poncho) | xyp-jp | 231 | https://images.scrydex.com/pokemon/xyp_ja-231/large | monaco |
 | pika_rain | 2015 JP XY-P Art Academy Pikachu, raincoat (Y. Fujishima) | xyp-jp | U072 | https://cdn6966.templcdn.com/wp-content/uploads/2022/06/JP_U072Y-FujishimaXY-P.jpg | mudkip, fanatics, monaco |
