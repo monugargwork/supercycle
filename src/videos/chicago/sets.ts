@@ -380,7 +380,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   box(b, oakD, rx0 + 0.1, 0, rz0, rx1 - 0.1, 2.5, rz0 + 0.33);          // the shelving carcass (its face is the canvas)
   const [cx0, cx1, cz0, cz1] = P.counter;
   box(b, oak, cx0, 0, cz0, cx1, 0.62, cz1, 0.5);                          // counter base
-  box(b, oakD, cx0, 0, cz1 - 0.02, cx1, 0.1, cz1 + 0.02);                // kick plate
+  box(b, oakD, cx0 + 0.012, 0, cz1 - 0.02, cx1 - 0.012, 0.1, cz1 + 0.02);                // kick plate
   box(b, oak, 0.25, 0.62, cz0, cx1, TOPY, cz1, 0.5);                       // the solid right part (the box, the register, the phone sit on it)
   box(b, brass, 0.25 - 0.01, TOPY - 0.012, cz0 - 0.01, cx1 + 0.01, TOPY + 0.004, cz1 + 0.01);
   // the glass display part (left): an oak frame, a red felt bed with real cards, glass front and top
@@ -397,7 +397,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   box(b, C("#f2e6cc"), phx - 0.1, TOPY, phz - 0.08, phx + 0.1, TOPY + 0.05, phz + 0.08);
   // the glass case: posts, top, base, glass shelves (transparent), the back panel
   const [kx0, kx1, kz0, kz1] = P.case, KH = P.case_h;
-  for (const z of [kz0, kz1 - 0.05]) for (const x of [kx0, kx1 - 0.05]) box(b, oak, x, 0.0, z, x + 0.05, KH, z + 0.05);
+  for (const z of [kz0, kz1 - 0.05]) for (const x of [kx0, kx1 - 0.05]) box(b, oak, x, 0.3, z, x + 0.05, KH, z + 0.05);   // the posts stand on the base
   box(b, oak, kx0, 0, kz0, kx1, 0.3, kz1); box(b, oak, kx0, KH, kz0 - 0.01, kx1 + 0.02, KH + 0.06, kz1 + 0.01); box(b, C("#a8282e"), kx0 + 0.01, 0.3, kz0 + 0.05, kx0 + 0.03, KH, kz1 - 0.05);
   // the play table and stools
   const [tbx0, tbx1, tbz0, tbz1] = P.table, TB = P.table_y;
@@ -539,7 +539,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   for (const [x, z] of [[0.15, -0.65], [0.7, -0.35]]) cyl(b, white, x, TYH, z, 0.1, 0.1, 0.01, 20);
   box(b, oak, -2.95, 0, 1.2, -2.5, 0.85, 2.6); box(b, C("#2f9a55"), -2.9, 0.85, 1.6, -2.6, 0.87, 2.2);
   cyl(b, C("#c9643a"), 2.5, 0, 2.6, 0.2, 0.26, 0.5, 16); sph(b, C("#3fa048"), 2.5, 0.95, 2.6, 0.42); sph(b, C("#2f8a40"), 2.7, 1.25, 2.65, 0.3);
-  box(b, white, 3.3, 0, -1.2, 3.9, 1.8, -0.6); box(b, oak, 3.3, 0, 0.2, 4.4, 0.9, 0.8); box(b, hw, hx1 + 0.1, 0, -1.6, 4.5, HH2, -1.5); box(b, hw, 4.4, 0, -1.6, 4.5, HH2, 1.0);
+  box(b, white, 3.3, 0, -1.2, 3.9, 1.8, -0.6); box(b, oak, 3.3, 0, 0.2, 4.4, 0.9, 0.8); box(b, hw, hx1 + 0.1, 0, -1.6, 4.5, HH2, -1.5); box(b, hw, 4.4, 0, -1.5, 4.48, HH2 - 0.012, 1.0);
   box(b, C("#2f5fb4"), -1.6, 0, 0.4, 1.8, 0.008, 2.2); // the rug
   { const [chx, chz] = HP.chair; box(b, oak, chx - 0.22, 0.42, chz - 0.2, chx + 0.22, 0.46, chz + 0.2); box(b, oak, chx - 0.22, 0.46, chz - 0.23, chx + 0.22, 1.0, chz - 0.19);
     for (const dx of [-0.2, 0.17]) for (const dz of [-0.18, 0.15]) box(b, oakD, chx + dx, 0, chz + dz, chx + dx + 0.03, 0.42, chz + dz + 0.03); }

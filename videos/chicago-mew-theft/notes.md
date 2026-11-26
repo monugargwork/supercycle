@@ -41,6 +41,11 @@ Composition `ChicagoReel` · code `src/videos/chicago/` · assets `public/chicag
   - raised the caller-ID screen out of the phone base and separated the handset's cradle from it;
   - made the pockets less milky; brought the vertical sign and the water tower into the street frame.
 
+- Flicker check: the first run found 7 coplanar pairs: the house's kitchen walls, the counter's kick plate against its base, the glass case's posts against its base. All fixed, so `[coplanar] 0`. Six short runs remain over 395 frames, all passed after looking at the frames:
+  - camera motion: f464-466 (the glide down to the phone), f496 (the glide toward the door), f1274-1276 (the climb to the ceiling camera), f1364-1366 (the glide after the freeze), f1454-1456 (the glide to the caller ID);
+  - deliberate animation: f2384-2385 (his phone's 2-frame buzz).
+- No `arm short` warnings anywhere: every reach is within the fixed arm length.
+
 ### Open
 - Seen only as stills: the bills slapping into his palm, the door swings, the case door and padlock, the walk to the shelves and to the case, the handshake pumps, the phone buzz, all still to be checked in motion.
 - The CGC slab photo reads GEM MINT 10; the stolen copy was a Pristine 10 (gold label). A Grok label edit was skipped because it would change the label colour, not just text.
