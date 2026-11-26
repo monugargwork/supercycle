@@ -17,3 +17,5 @@ Composition `CaterpieReel` · code `src/videos/caterpie/` · assets `public/cate
 ### Open
 - Seen only as stills: check in motion the rip and the paper ball's throw, the shutter's fall and bounce, the padlock, the glass's tip and roll, the friend's walk into the puddle, the scale's slam and the beam's damped swing back, the crow's landing, the clock spins.
 - S12 f1550-1575: the friend walks close past the lens while the camera pulls back; look at it in motion.
+- Flicker check: `[coplanar] 0`; 2 short runs over 370 frames: f1005-1006 (the S08 glide from the NICE tag to the shutter) and f2204-2206 (the S18 tilt from the torn corner to the clock). Both are the two fast glides the plan check warns about; I looked at the frames and they're plain camera motion, so both pass.
+- Render as v1: `scripts/render.command CaterpieReel Caterpie_v1`.
