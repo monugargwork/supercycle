@@ -1,0 +1,13 @@
+Real card scans for the Chicago reel (from library/cards, see CATALOG.md).
+rgb_mew_r.png     30th Celebration Mew R/RGB (Red)                  https://tcgplayer-cdn.tcgplayer.com/product/717607_in_1000x1000.jpg
+cel_mew_gold.png  Celebrations Mew 25/25 (gold full art)            https://images.pokemontcg.io/cel25/25_hires.png
+evo_mzard.png     XY Evolutions M Charizard-EX 13/108               https://images.pokemontcg.io/xy12/13_hires.png
+zard_base.png     Base Set Charizard 4                              https://images.pokemontcg.io/base1/4_hires.png
+pikachu.png       Base Set Pikachu 58                               https://images.pokemontcg.io/base1/58.png
+blastoise.png     Base Set Blastoise 2                              https://images.pokemontcg.io/base1/2_hires.png
+mewtwo.png        Base Set Mewtwo 10                                https://images.pokemontcg.io/base1/10_hires.png
+zard_lc.png       Legendary Collection Charizard 3                  https://images.pokemontcg.io/base6/3_hires.png
+ds_rayquaza.png   EX Delta Species Rayquaza δ (holo)                https://images.pokemontcg.io/ex11/13_hires.png
+slab_psyduck.png  PSA 8 Psyduck 286/SM-P (Munch), cert 159083058   library/slabs/psyduck_munch_psa8_159083058.png (eBay listing photos)
+slab_mew.png      PSA 10 Celebrations gold Mew 025/025, cert 118194158  library/slabs/mew_cel25_gold_psa10_118194158.png (ArizonaTCG eBay photo)
+slab_zard.png     CGC 10 Evolutions M Charizard EX 13/108, cert 4284504031  library/slabs/mcharizard_evo13_cgc10_4284504031.png (eBay listing photo)

@@ -21,15 +21,15 @@
  ],
  "cards": {
   "box": [
-   "zard_base",
    "rgb_mew_r",
-   "pikachu",
    "slab_psyduck",
+   "zard_base",
+   "pikachu",
    "blastoise",
-   "mewtwo",
    "slab_mew",
-   "zard_lc",
    "slab_zard",
+   "mewtwo",
+   "zard_lc",
    "ds_rayquaza"
   ],
   "stolen": "rgb_mew_r (30th Celebration Mew R/RGB, raw, $4,000), slab_psyduck (PSA 8 Scream Psyduck 286/SM-P, $1,800), slab_mew (PSA 10 Celebrations gold Mew 25/25, $150), slab_zard (CGC 10 Evolutions M Charizard EX 13/108, $750)",
@@ -55,29 +55,29 @@
   "tile": 0.5,
   "counter": [
    -1.0,
-   2.2,
+   2.5,
    -1.45,
    -0.95
   ],
   "counter_y": 0.98,
   "box": [
-   0.3,
-   0.8,
+   0.85,
+   1.35,
    -1.27,
    -1.03
   ],
-  "box_h": 0.11,
+  "box_h": 0.06,
   "riser": 0.045,
   "rows": {
    "front": -1.09,
    "back": -1.215
   },
   "slot_x": [
-   0.36,
-   0.455,
-   0.55,
-   0.645,
-   0.74
+   0.91,
+   1.005,
+   1.1,
+   1.195,
+   1.29
   ],
   "slab": [
    0.075,
@@ -86,19 +86,9 @@
   "lean": 0.12,
   "items": [
    [
-    "zard_base",
-    "top",
-    650
-   ],
-   [
     "rgb_mew_r",
     "case",
     4000
-   ],
-   [
-    "pikachu",
-    "top",
-    90
    ],
    [
     "slab_psyduck",
@@ -106,14 +96,19 @@
     1800
    ],
    [
+    "zard_base",
+    "top",
+    650
+   ],
+   [
+    "pikachu",
+    "top",
+    90
+   ],
+   [
     "blastoise",
     "top",
     380
-   ],
-   [
-    "mewtwo",
-    "top",
-    120
    ],
    [
     "slab_mew",
@@ -121,14 +116,19 @@
     150
    ],
    [
-    "zard_lc",
-    "top",
-    420
-   ],
-   [
     "slab_zard",
     "slab",
     750
+   ],
+   [
+    "mewtwo",
+    "top",
+    120
+   ],
+   [
+    "zard_lc",
+    "top",
+    420
    ],
    [
     "ds_rayquaza",
@@ -138,26 +138,26 @@
   ],
   "stolen": {
    "S06": [
-    1
+    0
    ],
    "S08": [
-    3,
-    6,
-    8
+    1,
+    5,
+    6
    ]
   },
   "register": [
-   1.55,
+   1.75,
    0.98,
    -1.3
   ],
   "phone": [
-   2.0,
+   2.15,
    0.98,
    -1.25
   ],
   "stack": [
-   1.2,
+   0.42,
    0.98,
    -1.2
   ],
@@ -176,19 +176,19 @@
    0.4
   ],
   "cctv_aim": [
-   0.75,
+   1.0,
    1.0,
    -1.1
   ],
   "clock": [
-   -0.6,
-   2.8,
-   -3.78
+   -1.4,
+   2.92,
+   -3.79
   ],
   "dayboard": [
-   -2.0,
+   -3.39,
    1.55,
-   -3.76
+   0.6
   ],
   "case": [
    -3.35,
@@ -198,6 +198,10 @@
   ],
   "case_h": 2.0,
   "case_shelf": 1.0,
+  "case_door": [
+   -2.1,
+   -1.3
+  ],
   "table": [
    -2.8,
    -1.6,
@@ -221,12 +225,12 @@
   "sign": [
    0.0,
    3.05,
-   5.66
+   5.72
   ],
   "blade": [
-   -3.25,
-   4.6,
-   6.15
+   -1.7,
+   4.85,
+   5.65
   ],
   "banner": [
    -1.0,
@@ -242,31 +246,31 @@
    18.0
   ],
   "owner_reg": [
-   1.55,
+   1.75,
    -1.62
   ],
   "owner_pay": [
-   1.2,
-   -1.58
+   1.4,
+   -1.5
   ],
   "owner_left": [
-   0.6,
-   -1.58
+   0.1,
+   -1.55
   ],
   "owner_phone": [
-   2.0,
+   2.15,
    -1.62
   ],
   "man": [
-   0.98,
-   -0.82
+   0.7,
+   -0.88
   ],
   "man_door": [
    1.9,
    5.1
   ],
   "man_walk": [
-   1.15,
+   1.6,
    6.8
   ],
   "kid": [
@@ -282,7 +286,7 @@
    1.9
   ],
   "woman_reg": [
-   1.9,
+   2.1,
    -0.78
   ],
   "teal": [
@@ -290,11 +294,11 @@
    -1.45
   ],
   "cop": [
-   1.75,
+   1.95,
    -0.8
   ],
   "case_stand": [
-   -2.52,
+   -2.6,
    -1.7
   ]
  },
@@ -322,13 +326,17 @@
   ],
   "table_y": 0.76,
   "tray": [
-   0.25,
+   0.3,
    0.765,
-   -0.32
+   -0.84
   ],
   "kitchen": [
    2.95,
    -0.6
+  ],
+  "chair": [
+   0.3,
+   -1.32
   ],
   "host_door": [
    -1.35,
@@ -343,12 +351,16 @@
    -2.25
   ],
   "guest_tbl": [
-   0.35,
-   -1.25
+   0.3,
+   -1.32
   ],
   "host_walk": [
    2.6,
    -1.3
+  ],
+  "host_mid": [
+   0.9,
+   -1.9
   ]
  },
  "jacket": {
@@ -432,7 +444,7 @@
      "id": "box",
      "build": "new: the box of new stock, cardboard 50 x 24 x 11 cm, open with the four flaps folded out; NEW ARRIVALS on a strip of tape; two rows of five items standing in it (front row real scans in toploaders and the Red RGB Mew in a magnetic case, the PSA 8 Psyduck slab; back row on a 4.5 cm riser with the PSA 10 gold Mew and the CGC M Charizard); a white shop price sticker on each",
      "pos": [
-      0.55,
+      1.1,
       1.04,
       -1.15
      ],
@@ -446,7 +458,7 @@
      "id": "register",
      "build": "new: cash register 36 x 32 cm: body, keypad, a screen on a stalk facing the owner, a cash drawer that slides out toward the owner",
      "pos": [
-      1.55,
+      1.75,
       0.98,
       -1.3
      ],
@@ -460,7 +472,7 @@
      "id": "phone",
      "build": "new: counter phone base with a corded handset and a caller-ID screen tilted toward the owner: INCOMING 3:12 PM (773) 555-0142",
      "pos": [
-      2.0,
+      2.15,
       0.98,
       -1.25
      ],
@@ -514,7 +526,7 @@
     },
     {
      "id": "case",
-     "build": "new: tall locked glass case on the left wall x -3.35..-2.9, z -2.6..-0.8, 2.0 m: oak frame, glass door hinged at z -2.6, four glass shelves with real cards on stands; brass padlock",
+     "build": "new: tall locked glass case on the left wall x -3.35..-2.9, z -2.6..-0.8, 2.0 m: oak frame, a glass door z -2.1..-1.3 hinged at z -2.1 (fixed glass either side), four glass shelves with real cards on stands; brass padlock",
      "pos": [
       -3.12,
       1.0,
@@ -570,7 +582,7 @@
     },
     {
      "id": "facade",
-     "build": "new: red-brick two-storey facade x -3.6..3.6, 7.4 m: sign board OLD SKOOL TCG over the window and door, a projecting blade sign OLD SKOOL / TCG, GRAND OPENING banner under the sign, upper windows, a cornice, a wooden water tower on the roof; neighbours a laundromat (blue awning) and a café (red-and-white striped awning); far skyline",
+     "build": "new: red-brick two-storey facade x -3.6..3.6, 7.4 m: sign board OLD SKOOL TCG over the window and door, a tall vertical sign OLD SKOOL / TCG on the upper storey, GRAND OPENING banner under the sign, upper windows, a cornice, a wooden water tower on the roof; neighbours a laundromat (blue awning) and a café (red-and-white striped awning); far skyline",
      "pos": [
       0,
       3.7,
@@ -599,31 +611,31 @@
    ],
    "marks": {
     "owner_reg": [
-     1.55,
+     1.75,
      -1.62
     ],
     "owner_pay": [
-     1.2,
-     -1.58
+     1.4,
+     -1.5
     ],
     "owner_left": [
-     0.6,
-     -1.58
+     0.1,
+     -1.55
     ],
     "owner_phone": [
-     2.0,
+     2.15,
      -1.62
     ],
     "man": [
-     0.98,
-     -0.82
+     0.7,
+     -0.88
     ],
     "man_door": [
      1.9,
      5.1
     ],
     "man_walk": [
-     1.15,
+     1.6,
      6.8
     ],
     "kid": [
@@ -639,7 +651,7 @@
      1.9
     ],
     "woman_reg": [
-     1.9,
+     2.1,
      -0.78
     ],
     "teal": [
@@ -647,11 +659,11 @@
      -1.45
     ],
     "cop": [
-     1.75,
+     1.95,
      -0.8
     ],
     "case_stand": [
-     -2.52,
+     -2.6,
      -1.7
     ]
    }
@@ -741,8 +753,8 @@
      -2.25
     ],
     "guest_tbl": [
-     0.35,
-     -1.25
+     0.3,
+     -1.32
     ],
     "host_walk": [
      2.6,
@@ -919,14 +931,14 @@
     {
      "f": 0,
      "pos": [
-      1.52,
-      1.383,
-      3.087
+      1.405,
+      1.599,
+      2.594
      ],
      "look": [
-      0.78,
-      0.477,
-      -1.108
+      1.012,
+      0.799,
+      -1.145
      ],
      "fov": 44,
      "roll": 0,
@@ -937,14 +949,14 @@
     {
      "f": 124,
      "pos": [
-      -0.556,
-      1.622,
-      3.255
+      1.437,
+      1.675,
+      2.217
      ],
      "look": [
-      0.656,
-      0.525,
-      -0.971
+      0.879,
+      0.875,
+      -0.943
      ],
      "fov": 40,
      "roll": 0,
@@ -957,12 +969,12 @@
      "f": 162,
      "pos": [
       0.25,
-      2.9,
+      3.3,
       18.0
      ],
      "look": [
       0.0,
-      3.6,
+      4.0,
       5.4
      ],
      "fov": 50,
@@ -991,8 +1003,8 @@
     {
      "who": "man",
      "at": [
-      0.98,
-      -0.82
+      0.7,
+      -0.88
      ],
      "view": "front",
      "pose": "right palm up f0-96, left arm into the box f128-157",
@@ -1001,8 +1013,8 @@
     {
      "who": "owner",
      "at": [
-      1.2,
-      -1.58
+      1.4,
+      -1.5
      ],
      "view": "front",
      "pose": "counts bills f0-92; steps to the register f100-122",
@@ -1013,9 +1025,9 @@
     {
      "n": "man head",
      "p": [
-      0.98,
+      0.7,
       1.82,
-      -0.82
+      -0.88
      ],
      "f": [
       0,
@@ -1025,9 +1037,9 @@
     {
      "n": "owner head",
      "p": [
-      1.2,
+      1.4,
       1.82,
-      -1.58
+      -1.5
      ],
      "f": [
       0,
@@ -1037,7 +1049,7 @@
     {
      "n": "box",
      "p": [
-      0.55,
+      1.1,
       1.04,
       -1.15
      ],
@@ -1051,7 +1063,7 @@
      "p": [
       0.0,
       3.05,
-      5.66
+      5.72
      ],
      "f": [
       205,
@@ -1061,9 +1073,9 @@
     {
      "n": "man feet",
      "p": [
-      0.98,
+      0.7,
       0.02,
-      -0.82
+      -0.88
      ],
      "f": [
       0,
@@ -1073,9 +1085,9 @@
     {
      "n": "owner feet",
      "p": [
-      1.2,
+      1.4,
       0.02,
-      -1.58
+      -1.5
      ],
      "f": [
       0,
@@ -1118,12 +1130,12 @@
      "f": 229,
      "pos": [
       0.25,
-      2.9,
+      3.3,
       18.0
      ],
      "look": [
       0.0,
-      3.6,
+      4.0,
       5.4
      ],
      "fov": 50,
@@ -1190,7 +1202,7 @@
      "p": [
       0.0,
       3.05,
-      5.66
+      5.72
      ],
      "f": [
       229,
@@ -1200,9 +1212,9 @@
     {
      "n": "water tower",
      "p": [
-      -1.6,
+      -1.5,
       8.6,
-      2.0
+      2.2
      ],
      "f": [
       229,
@@ -1256,14 +1268,14 @@
     {
      "f": 398,
      "pos": [
-      0.9,
-      1.724,
-      3.535
+      1.045,
+      2.153,
+      4.892
      ],
      "look": [
-      0.533,
-      0.798,
-      -1.704
+      0.607,
+      1.044,
+      -1.376
      ],
      "fov": 54,
      "roll": 0,
@@ -1318,7 +1330,7 @@
     {
      "who": "owner",
      "at": [
-      1.55,
+      1.75,
       -1.62
      ],
      "view": "front",
@@ -1330,7 +1342,7 @@
     {
      "n": "owner head",
      "p": [
-      1.55,
+      1.75,
       1.82,
       -1.62
      ],
@@ -1354,9 +1366,9 @@
     {
      "n": "clock",
      "p": [
-      -0.6,
-      2.8,
-      -3.78
+      -1.4,
+      2.92,
+      -3.79
      ],
      "f": [
       425,
@@ -1366,7 +1378,7 @@
     {
      "n": "owner feet",
      "p": [
-      1.55,
+      1.75,
       0.02,
       -1.62
      ],
@@ -1414,21 +1426,21 @@
     "to": "S05"
    },
    "build": "the counter phone (caller ID: INCOMING 3:12 PM, (773) 555-0142), the glass door with its bell.",
-   "blocking": "Owner at owner_phone, picks up the handset; the man comes in through the door (man_door) carrying three booster boxes against his chest and walks to the counter (arrives f590 in S05).",
-   "action": "f462 the phone rings (the screen lights, the handset rattles in its cradle, 2 rings); f484 the owner lifts the handset to his ear; f503 'hẹn' he nods; f512 the door opens (swings in 70 deg over 10 f), the bell jingles; f514-590 the man walks in toward the counter, boxes held at his chest.",
+   "blocking": "Owner at owner_phone, picks up the handset; the man comes in through the door (man_door) carrying three booster boxes against his chest and walks to the counter (arrives f612 in S05).",
+   "action": "f462 the phone rings (the screen lights, the handset rattles in its cradle, 2 rings); f484 the owner lifts the handset to his ear; f503 'hẹn' he nods; f512 the door opens (swings in 70 deg over 10 f), the bell jingles; f512-612 the man walks in toward the counter, boxes held at his chest.",
    "acting": "Owner: friendly on the phone, nods. Man: easy smile.",
    "cams": [
     {
      "f": 457,
      "pos": [
-      2.05,
-      1.36,
-      -1.66
+      2.15,
+      1.45,
+      -1.53
      ],
      "look": [
-      2.0,
-      0.95,
-      -1.29
+      2.15,
+      1.065,
+      -1.31
      ],
      "fov": 30,
      "roll": 0,
@@ -1440,14 +1452,14 @@
     {
      "f": 494,
      "pos": [
-      1.895,
-      1.209,
-      0.743
+      1.883,
+      1.466,
+      1.71
      ],
      "look": [
-      1.895,
-      0.735,
-      5.25
+      1.883,
+      1.102,
+      5.175
      ],
      "fov": 50,
      "roll": 0,
@@ -1462,7 +1474,7 @@
     {
      "who": "owner",
      "at": [
-      2.0,
+      2.15,
       -1.62
      ],
      "view": "front",
@@ -1484,7 +1496,7 @@
     {
      "n": "phone screen",
      "p": [
-      2.0,
+      2.15,
       1.03,
       -1.25
      ],
@@ -1532,19 +1544,19 @@
     "to": "S06"
    },
    "build": "the box of new stock with ten items and price stickers.",
-   "blocking": "Owner hangs up and goes back to the register; the man arrives at the man mark f590 and sets the stack of boxes on the counter (stack) f590-600.",
-   "action": "f552-600 the camera glides along the counter from the register to the box; f600-635 push in: two rows of real cards, each with its sticker ($4,000 on the Red RGB Mew); f592 the stack lands on the counter with a soft thud.",
+   "blocking": "Owner hangs up and goes back to the register; the man arrives at the man mark f612 and sets the stack of boxes on the counter (stack) f612-622.",
+   "action": "f552-600 the camera glides along the counter from the register to the box; f600-635 push in: two rows of real cards, each with its sticker ($4,000 on the Red RGB Mew); f620 the stack lands on the counter beside the box with a soft thud.",
    "acting": "none.",
    "cams": [
     {
      "f": 552,
      "pos": [
-      1.25,
-      1.42,
+      1.7,
+      1.45,
       -0.15
      ],
      "look": [
-      1.4,
+      1.75,
       1.08,
       -1.3
      ],
@@ -1558,13 +1570,13 @@
     {
      "f": 578,
      "pos": [
-      0.62,
-      1.36,
-      -0.3
+      1.18,
+      1.72,
+      -0.2
      ],
      "look": [
-      0.62,
-      1.08,
+      1.1,
+      1.04,
       -1.16
      ],
      "fov": 38,
@@ -1580,11 +1592,11 @@
     {
      "who": "man",
      "at": [
-      0.98,
-      -0.82
+      0.7,
+      -0.88
      ],
      "view": "front",
-     "pose": "sets the stack down f590-600",
+     "pose": "sets the stack down f612-622",
      "expr": "smile"
     }
    ],
@@ -1592,7 +1604,7 @@
     {
      "n": "box",
      "p": [
-      0.55,
+      1.1,
       1.04,
       -1.15
      ],
@@ -1604,7 +1616,7 @@
     {
      "n": "register",
      "p": [
-      1.55,
+      1.75,
       0.98,
       -1.3
      ],
@@ -1616,7 +1628,7 @@
    ],
    "physics": "the stack: set down, a 1 cm settle.",
    "light_mood": "warm.",
-   "sound": "handset hang-up click f556; a soft cardboard thud f592; a glassy shimmer on the push f605.",
+   "sound": "handset hang-up click f556; a soft cardboard thud f620; a glassy shimmer on the push f605.",
    "after": "The stack sits on the counter right of the box."
   },
   {
@@ -1647,21 +1659,40 @@
     {
      "f": 635,
      "pos": [
-      0.131,
-      1.523,
-      3.664
+      1.79,
+      1.877,
+      4.444
      ],
      "look": [
-      1.133,
-      0.499,
-      -1.05
+      1.404,
+      0.7,
+      -1.079
      ],
-     "fov": 44,
+     "fov": 46,
      "roll": 0,
      "push": 0.0008,
      "blur": 0,
      "why": "the man and the box, the owner busy with the woman",
      "glide": 26
+    },
+    {
+     "f": 660,
+     "pos": [
+      1.332,
+      1.559,
+      2.289
+     ],
+     "look": [
+      0.878,
+      0.866,
+      -0.943
+     ],
+     "fov": 40,
+     "roll": 0,
+     "push": 0.0006,
+     "blur": 0,
+     "why": "closer on the lift, the man still full body",
+     "glide": 14
     }
    ],
    "kicks": [
@@ -1674,8 +1705,8 @@
     {
      "who": "man",
      "at": [
-      0.98,
-      -0.82
+      0.7,
+      -0.88
      ],
      "view": "front",
      "pose": "left arm into the box f638-700",
@@ -1684,7 +1715,7 @@
     {
      "who": "owner",
      "at": [
-      1.55,
+      1.75,
       -1.62
      ],
      "view": "front",
@@ -1694,7 +1725,7 @@
     {
      "who": "woman",
      "at": [
-      1.9,
+      2.1,
       -0.78
      ],
      "view": "front",
@@ -1706,9 +1737,9 @@
     {
      "n": "man head",
      "p": [
-      0.98,
+      0.7,
       1.82,
-      -0.82
+      -0.88
      ],
      "f": [
       635,
@@ -1718,7 +1749,7 @@
     {
      "n": "box",
      "p": [
-      0.55,
+      1.1,
       1.04,
       -1.15
      ],
@@ -1730,9 +1761,9 @@
     {
      "n": "man feet",
      "p": [
-      0.98,
+      0.7,
       0.02,
-      -0.82
+      -0.88
      ],
      "f": [
       635,
@@ -1773,14 +1804,14 @@
     {
      "f": 723,
      "pos": [
-      2.437,
-      1.28,
-      3.049
+      2.22,
+      1.543,
+      2.911
      ],
      "look": [
-      1.211,
-      0.495,
-      -1.228
+      1.046,
+      0.792,
+      -1.182
      ],
      "fov": 42,
      "roll": 0,
@@ -1800,8 +1831,8 @@
     {
      "who": "owner",
      "at": [
-      1.2,
-      -1.58
+      1.4,
+      -1.5
      ],
      "view": "front",
      "pose": "drawer f748, bills f776-786",
@@ -1810,8 +1841,8 @@
     {
      "who": "man",
      "at": [
-      0.98,
-      -0.82
+      0.7,
+      -0.88
      ],
      "view": "front",
      "pose": "palm up f770-790",
@@ -1822,9 +1853,9 @@
     {
      "n": "man head",
      "p": [
-      0.98,
+      0.7,
       1.82,
-      -0.82
+      -0.88
      ],
      "f": [
       723,
@@ -1834,9 +1865,9 @@
     {
      "n": "owner head",
      "p": [
-      1.2,
+      1.4,
       1.82,
-      -1.58
+      -1.5
      ],
      "f": [
       723,
@@ -1846,9 +1877,9 @@
     {
      "n": "man feet",
      "p": [
-      0.98,
+      0.7,
       0.02,
-      -0.82
+      -0.88
      ],
      "f": [
       723,
@@ -1858,9 +1889,9 @@
     {
      "n": "owner feet",
      "p": [
-      1.2,
+      1.4,
       0.02,
-      -1.58
+      -1.5
      ],
      "f": [
       723,
@@ -1904,14 +1935,14 @@
     {
      "f": 800,
      "pos": [
-      0.181,
-      1.468,
-      3.478
+      1.332,
+      1.559,
+      2.289
      ],
      "look": [
-      0.648,
-      0.518,
-      -0.965
+      0.878,
+      0.866,
+      -0.943
      ],
      "fov": 40,
      "roll": 0,
@@ -1923,14 +1954,14 @@
     {
      "f": 882,
      "pos": [
-      0.92,
+      0.66,
       1.3,
-      -0.3
+      -0.36
      ],
      "look": [
-      0.94,
+      0.68,
       1.25,
-      -0.84
+      -0.9
      ],
      "fov": 34,
      "roll": 0,
@@ -1958,8 +1989,8 @@
     {
      "who": "man",
      "at": [
-      0.98,
-      -0.82
+      0.7,
+      -0.88
      ],
      "view": "front",
      "pose": "three lifts f846-885",
@@ -1968,7 +1999,7 @@
     {
      "who": "owner",
      "at": [
-      1.55,
+      1.75,
       -1.62
      ],
      "view": "side walking",
@@ -1980,9 +2011,9 @@
     {
      "n": "man head",
      "p": [
-      0.98,
+      0.7,
       1.82,
-      -0.82
+      -0.88
      ],
      "f": [
       800,
@@ -1992,7 +2023,7 @@
     {
      "n": "box",
      "p": [
-      0.55,
+      1.1,
       1.04,
       -1.15
      ],
@@ -2004,9 +2035,9 @@
     {
      "n": "man feet",
      "p": [
-      0.98,
+      0.7,
       0.02,
-      -0.82
+      -0.88
      ],
      "f": [
       800,
@@ -2273,16 +2304,16 @@
     {
      "f": 1188,
      "pos": [
-      2.099,
-      2.702,
-      2.159
+      2.019,
+      2.548,
+      2.67
      ],
      "look": [
-      1.257,
-      0.355,
-      -1.218
+      1.188,
+      0.768,
+      -1.242
      ],
-     "fov": 50,
+     "fov": 52,
      "roll": 0,
      "push": 0.0006,
      "blur": 0,
@@ -2332,8 +2363,8 @@
     {
      "who": "man",
      "at": [
-      0.98,
-      -0.82
+      0.7,
+      -0.88
      ],
      "view": "front",
      "pose": "standing at the box",
@@ -2342,7 +2373,7 @@
     {
      "who": "owner",
      "at": [
-      1.55,
+      1.75,
       -1.62
      ],
      "view": "front",
@@ -2354,9 +2385,9 @@
     {
      "n": "man head",
      "p": [
-      0.98,
+      0.7,
       1.82,
-      -0.82
+      -0.88
      ],
      "f": [
       1188,
@@ -2366,7 +2397,7 @@
     {
      "n": "owner head",
      "p": [
-      1.55,
+      1.75,
       1.82,
       -1.62
      ],
@@ -2402,9 +2433,9 @@
     {
      "n": "man feet",
      "p": [
-      0.98,
+      0.7,
       0.02,
-      -0.82
+      -0.88
      ],
      "f": [
       1188,
@@ -2414,7 +2445,7 @@
     {
      "n": "owner feet",
      "p": [
-      1.55,
+      1.75,
       0.02,
       -1.62
      ],
@@ -2451,7 +2482,7 @@
     "n": 8
    },
    "build": "as before.",
-   "blocking": "Man at the man mark; owner at owner_left, facing the man across the counter.",
+   "blocking": "Man at the man mark; owner at owner_pay, right behind the box, facing the man across the counter.",
    "action": "f1336 'Khoan': everything freezes (the customers stop mid-move), a record scratch; f1351-1397 'trước mặt chủ': the owner's face across the counter, a metre from the box; f1405-1428 'dưới ống kính': the view from right under the ceiling camera down onto the man and the box (the camera's hood in the top of frame); f1432-1484 'gọi điện hẹn hẳn hoi': the caller-ID screen, his number.",
    "acting": "Owner: friendly, oblivious. Man: frozen mid-smirk.",
    "cams": [
@@ -2476,14 +2507,14 @@
     {
      "f": 1350,
      "pos": [
-      1.237,
-      1.282,
-      3.288
+      1.427,
+      1.496,
+      2.784
      ],
      "look": [
-      0.62,
-      0.499,
-      -1.108
+      1.014,
+      0.8,
+      -1.145
      ],
      "fov": 42,
      "roll": 0,
@@ -2514,14 +2545,14 @@
     {
      "f": 1436,
      "pos": [
-      2.05,
-      1.36,
-      -1.66
+      2.15,
+      1.45,
+      -1.53
      ],
      "look": [
-      2.0,
-      0.95,
-      -1.29
+      2.15,
+      1.065,
+      -1.31
      ],
      "fov": 30,
      "roll": 0,
@@ -2541,8 +2572,8 @@
     {
      "who": "man",
      "at": [
-      0.98,
-      -0.82
+      0.7,
+      -0.88
      ],
      "view": "front",
      "pose": "frozen",
@@ -2551,11 +2582,11 @@
     {
      "who": "owner",
      "at": [
-      0.6,
-      -1.58
+      1.4,
+      -1.5
      ],
      "view": "front",
-     "pose": "standing",
+     "pose": "standing behind the box",
      "expr": "smile"
     }
    ],
@@ -2563,19 +2594,19 @@
     {
      "n": "owner head",
      "p": [
-      0.6,
+      1.4,
       1.82,
-      -1.58
+      -1.5
      ],
      "f": [
-      1380,
+      1386,
       1400
      ]
     },
     {
      "n": "box",
      "p": [
-      0.55,
+      1.1,
       1.04,
       -1.15
      ],
@@ -2587,7 +2618,7 @@
     {
      "n": "phone screen",
      "p": [
-      2.0,
+      2.15,
       1.03,
       -1.25
      ],
@@ -2599,12 +2630,12 @@
     {
      "n": "owner feet",
      "p": [
-      0.6,
+      1.4,
       0.02,
-      -1.58
+      -1.5
      ],
      "f": [
-      1380,
+      1386,
       1400
      ]
     }
@@ -2644,14 +2675,14 @@
     {
      "f": 1495,
      "pos": [
-      0.314,
-      1.04,
-      3.121
+      0.164,
+      1.393,
+      3.573
      ],
      "look": [
-      0.314,
-      0.455,
-      -1.04
+      0.164,
+      0.744,
+      -1.05
      ],
      "fov": 46,
      "roll": 0,
@@ -2665,8 +2696,8 @@
     {
      "who": "owner",
      "at": [
-      0.6,
-      -1.58
+      0.1,
+      -1.55
      ],
      "view": "front",
      "pose": "eyes on the kid f1500-1560, handshake f1590-1615",
@@ -2685,8 +2716,8 @@
     {
      "who": "man",
      "at": [
-      0.98,
-      -0.82
+      0.7,
+      -0.88
      ],
      "view": "front",
      "pose": "handshake",
@@ -2697,9 +2728,9 @@
     {
      "n": "owner head",
      "p": [
-      0.6,
+      0.1,
       1.82,
-      -1.58
+      -1.55
      ],
      "f": [
       1495,
@@ -2721,9 +2752,9 @@
     {
      "n": "man head",
      "p": [
-      0.98,
+      0.7,
       1.82,
-      -0.82
+      -0.88
      ],
      "f": [
       1495,
@@ -2733,9 +2764,9 @@
     {
      "n": "owner feet",
      "p": [
-      0.6,
+      0.1,
       0.02,
-      -1.58
+      -1.55
      ],
      "f": [
       1495,
@@ -2757,9 +2788,9 @@
     {
      "n": "man feet",
      "p": [
-      0.98,
+      0.7,
       0.02,
-      -0.82
+      -0.88
      ],
      "f": [
       1495,
@@ -2790,8 +2821,10 @@
     "from": "S13"
    },
    "out": {
-    "type": "glide",
-    "to": "S15"
+    "type": "dissolve",
+    "to": "S15",
+    "n": 6,
+    "note": "a moment later, at the table"
    },
    "build": "the house: the front door, the porch outside, the dining room; the gift (a booster box wrapped in red with a gold bow).",
    "blocking": "Host (the owner's look) by the door at host_door; guest (the man's look) on the porch at guest_door holding the gift.",
@@ -2801,14 +2834,14 @@
     {
      "f": 1624,
      "pos": [
-      -0.813,
-      1.071,
-      1.602
+      -0.995,
+      1.293,
+      1.112
      ],
      "look": [
-      -0.813,
-      0.597,
-      -2.917
+      -0.995,
+      0.872,
+      -2.893
      ],
      "fov": 46,
      "roll": 0,
@@ -2908,7 +2941,8 @@
    "spine": 6,
    "viewer": "The host turns his back; the spoon tray by the guest ends with one empty slot.",
    "in": {
-    "type": "glide",
+    "type": "dissolve",
+    "n": 6,
     "from": "S14"
    },
    "out": {
@@ -2917,28 +2951,46 @@
     "n": 8
    },
    "build": "the table with the cake, the plates and the spoon tray (six spoons).",
-   "blocking": "Guest at guest_tbl behind the table; host walks away to the kitchen doorway (side view, to the right) carrying the gift, f1708-1750.",
-   "action": "f1708-1750 the host walks off toward the kitchen, never looking back; f1736-1748 the guest's arm reaches the tray and lifts a spoon; f1750-1757 it goes into his jacket ('đếm thìa' f1750-1755); the tray keeps one empty slot.",
+   "blocking": "Guest seated on the chair behind the table (guest_tbl); host walks from host_mid to the kitchen doorway (side view, to the right) carrying the gift, f1708-1750.",
+   "action": "f1708-1750 the host walks off toward the kitchen, never looking back; f1736-1748 the guest's arm reaches the tray and lifts a spoon (the camera drops to the tray f1742-1754); f1750-1757 it goes into his jacket ('đếm thìa' f1750-1755); the tray keeps one empty slot.",
    "acting": "Guest: angelic smile. Host: humming, happy.",
    "cams": [
     {
      "f": 1708,
      "pos": [
-      0.035,
-      1.412,
-      2.998
+      0.085,
+      1.527,
+      1.732
      ],
      "look": [
-      0.31,
-      0.573,
-      -0.94
+      0.293,
+      0.891,
+      -1.252
      ],
      "fov": 42,
      "roll": 0,
-     "push": 0.0012,
+     "push": 0.0008,
      "blur": 0,
-     "why": "the guest and the spoon tray, the host walking away",
-     "glide": 26
+     "why": "the guest and the spoon tray, the host walking away"
+    },
+    {
+     "f": 1742,
+     "pos": [
+      0.32,
+      1.22,
+      -0.3
+     ],
+     "look": [
+      0.31,
+      0.79,
+      -0.86
+     ],
+     "fov": 40,
+     "roll": 0,
+     "push": 0.0008,
+     "blur": 0,
+     "why": "the spoon tray: one slot empty",
+     "glide": 12
     }
    ],
    "kicks": [
@@ -2951,10 +3003,10 @@
     {
      "who": "man",
      "at": [
-      0.35,
-      -1.25
+      0.3,
+      -1.32
      ],
-     "view": "front",
+     "view": "front, seated",
      "pose": "spoon f1736-1757",
      "expr": "smile"
     },
@@ -2973,37 +3025,37 @@
     {
      "n": "tray",
      "p": [
-      0.25,
+      0.3,
       0.765,
-      -0.32
+      -0.84
      ],
      "f": [
-      1708,
+      1758,
       1764
      ]
     },
     {
      "n": "guest head",
      "p": [
-      0.35,
+      0.3,
       1.82,
-      -1.25
+      -1.32
      ],
      "f": [
       1708,
-      1764
+      1740
      ]
     },
     {
      "n": "guest feet",
      "p": [
-      0.35,
+      0.3,
       0.02,
-      -1.25
+      -1.32
      ],
      "f": [
       1708,
-      1764
+      1740
      ]
     }
    ],
@@ -3035,21 +3087,21 @@
     "n": 8
    },
    "build": "the box with four gaps; the glass case with its hinged door and padlock.",
-   "blocking": "Owner at owner_left behind the box; then he walks with the box around the left end of the counter to case_stand.",
+   "blocking": "Owner at owner_pay behind the box; then he walks with the box behind the counter, around its left end, to case_stand.",
    "action": "f1765-1812 he looks down at the four gaps, scratches his head; f1830-1842 he lifts the box with both arms; f1842-1895 he walks left behind the counter, around its end and to the case (side view); f1896-1906 the case door swings open; f1906-1918 he sets the box on the shelf; f1920 the door shuts; f1926 the padlock snaps shut ('ngoài' f1928).",
    "acting": "Owner: sheepish, a sigh.",
    "cams": [
     {
      "f": 1765,
      "pos": [
-      0.45,
-      1.45,
-      0.25
+      1.12,
+      1.55,
+      -0.12
      ],
      "look": [
-      0.55,
-      1.15,
-      -1.25
+      1.18,
+      1.22,
+      -1.32
      ],
      "fov": 40,
      "roll": 0,
@@ -3060,16 +3112,16 @@
     {
      "f": 1832,
      "pos": [
-      2.673,
-      1.08,
-      -1.697
+      1.285,
+      1.44,
+      0.127
      ],
      "look": [
-      -1.948,
-      0.265,
-      -1.697
+      -1.814,
+      0.664,
+      -1.809
      ],
-     "fov": 58,
+     "fov": 54,
      "roll": 0,
      "push": 0.0006,
      "blur": 0,
@@ -3087,8 +3139,8 @@
     {
      "who": "owner",
      "at": [
-      0.6,
-      -1.58
+      1.4,
+      -1.5
      ],
      "view": "front then side walking",
      "pose": "head scratch, lifts the box, walks to the case",
@@ -3099,7 +3151,7 @@
     {
      "n": "box",
      "p": [
-      0.55,
+      1.1,
       1.04,
       -1.15
      ],
@@ -3111,7 +3163,7 @@
     {
      "n": "owner head",
      "p": [
-      -2.52,
+      -2.6,
       1.82,
       -1.7
      ],
@@ -3135,7 +3187,7 @@
     {
      "n": "owner feet",
      "p": [
-      -2.52,
+      -2.6,
       0.02,
       -1.7
      ],
@@ -3179,14 +3231,14 @@
     {
      "f": 1947,
      "pos": [
-      0.795,
-      1.007,
-      3.518
+      0.453,
+      1.2,
+      2.479
      ],
      "look": [
-      0.795,
-      0.511,
-      -1.2
+      0.453,
+      0.811,
+      -1.215
      ],
      "fov": 40,
      "roll": 0,
@@ -3224,8 +3276,8 @@
     {
      "who": "owner",
      "at": [
-      0.6,
-      -1.58
+      0.1,
+      -1.55
      ],
      "view": "front",
      "pose": "handshake",
@@ -3234,8 +3286,8 @@
     {
      "who": "man",
      "at": [
-      0.98,
-      -0.82
+      0.7,
+      -0.88
      ],
      "view": "front",
      "pose": "handshake",
@@ -3246,9 +3298,9 @@
     {
      "n": "owner head",
      "p": [
-      0.6,
+      0.1,
       1.82,
-      -1.58
+      -1.55
      ],
      "f": [
       1947,
@@ -3258,9 +3310,9 @@
     {
      "n": "man head",
      "p": [
-      0.98,
+      0.7,
       1.82,
-      -0.82
+      -0.88
      ],
      "f": [
       1947,
@@ -3282,9 +3334,9 @@
     {
      "n": "owner feet",
      "p": [
-      0.6,
+      0.1,
       0.02,
-      -1.58
+      -1.55
      ],
      "f": [
       1947,
@@ -3294,9 +3346,9 @@
     {
      "n": "man feet",
      "p": [
-      0.98,
+      0.7,
       0.02,
-      -0.82
+      -0.88
      ],
      "f": [
       1947,
@@ -3339,21 +3391,21 @@
     {
      "f": 2089,
      "pos": [
-      2.706,
-      1.263,
-      2.571
+      2.692,
+      1.414,
+      1.431
      ],
      "look": [
-      1.989,
-      0.535,
-      -1.495
+      2.163,
+      0.876,
+      -1.569
      ],
      "fov": 42,
      "roll": 0,
      "push": 0.0008,
      "blur": 0,
      "why": "the owner calls the police",
-     "glide": 26
+     "glide": 14
     }
    ],
    "kicks": [],
@@ -3361,7 +3413,7 @@
     {
      "who": "owner",
      "at": [
-      2.0,
+      2.15,
       -1.62
      ],
      "view": "front",
@@ -3373,7 +3425,7 @@
     {
      "n": "owner head",
      "p": [
-      2.0,
+      2.15,
       1.82,
       -1.62
      ],
@@ -3385,7 +3437,7 @@
     {
      "n": "owner feet",
      "p": [
-      2.0,
+      2.15,
       0.02,
       -1.62
      ],
@@ -3430,14 +3482,14 @@
     {
      "f": 2132,
      "pos": [
-      2.952,
-      1.281,
-      3.135
+      2.85,
+      1.414,
+      2.169
      ],
      "look": [
-      1.869,
-      0.491,
-      -1.21
+      2.009,
+      0.801,
+      -1.201
      ],
      "fov": 42,
      "roll": 0,
@@ -3448,14 +3500,14 @@
     {
      "f": 2178,
      "pos": [
-      1.72,
-      1.42,
-      -0.25
+      1.99,
+      1.45,
+      -0.08
      ],
      "look": [
-      1.78,
-      1.13,
-      -0.74
+      1.99,
+      1.19,
+      -0.68
      ],
      "fov": 32,
      "roll": 0,
@@ -3470,7 +3522,7 @@
     {
      "who": "cop",
      "at": [
-      1.75,
+      1.95,
       -0.8
      ],
      "view": "front",
@@ -3480,7 +3532,7 @@
     {
      "who": "owner",
      "at": [
-      2.0,
+      2.15,
       -1.62
      ],
      "view": "front",
@@ -3492,7 +3544,7 @@
     {
      "n": "cop head",
      "p": [
-      1.75,
+      1.95,
       1.82,
       -0.8
      ],
@@ -3504,7 +3556,7 @@
     {
      "n": "owner head",
      "p": [
-      2.0,
+      2.15,
       1.82,
       -1.62
      ],
@@ -3516,19 +3568,19 @@
     {
      "n": "notepad",
      "p": [
-      1.79,
+      1.99,
       1.2,
       -0.68
      ],
      "f": [
-      2194,
+      2200,
       2206
      ]
     },
     {
      "n": "cop feet",
      "p": [
-      1.75,
+      1.95,
       0.02,
       -0.8
      ],
@@ -3540,7 +3592,7 @@
     {
      "n": "owner feet",
      "p": [
-      2.0,
+      2.15,
       0.02,
       -1.62
      ],
@@ -3586,14 +3638,14 @@
     {
      "f": 2207,
      "pos": [
-      1.176,
-      1.101,
-      10.84
+      1.352,
+      1.234,
+      10.33
      ],
      "look": [
-      1.508,
-      0.768,
-      6.099
+      1.623,
+      0.962,
+      6.446
      ],
      "fov": 44,
      "roll": 0,
@@ -3607,7 +3659,7 @@
     {
      "who": "man",
      "at": [
-      1.15,
+      1.6,
       6.8
      ],
      "view": "front walking then standing",
@@ -3619,7 +3671,7 @@
     {
      "n": "man head",
      "p": [
-      1.15,
+      1.6,
       1.82,
       6.8
      ],
@@ -3643,7 +3695,7 @@
     {
      "n": "man feet",
      "p": [
-      1.15,
+      1.6,
       0.02,
       6.8
      ],
@@ -3705,13 +3757,13 @@
     {
      "f": 2350,
      "pos": [
-      0.845,
-      0.842,
-      11.16
+      1.366,
+      1.073,
+      10.129
      ],
      "look": [
-      1.15,
-      0.536,
+      1.598,
+      0.839,
       6.8
      ],
      "fov": 40,
@@ -3732,7 +3784,7 @@
     {
      "who": "man",
      "at": [
-      1.15,
+      1.6,
       6.8
      ],
      "view": "front",
@@ -3756,7 +3808,7 @@
     {
      "n": "man head",
      "p": [
-      1.15,
+      1.6,
       1.82,
       6.8
      ],
@@ -3768,7 +3820,7 @@
     {
      "n": "man feet",
      "p": [
-      1.15,
+      1.6,
       0.02,
       6.8
      ],

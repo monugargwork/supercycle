@@ -7,7 +7,8 @@ def kf(f, pts, az, el, fov, title=False, margin=5.0, **kw):
     """a camera key fitted to its subjects: the closest lens at this view direction that keeps them all in the safe area"""
     pos, look = fit(pts, az=az, el=el, fov=fov, title=title, margin=margin)
     return k(f, pos, look, fov, **kw)
-def body(m, crouch=0.0): return [[m[0], 1.82 - crouch, m[1]], [m[0], 0.02, m[1]]]
+def body(m, crouch=0.0):   # crown, feet, and the head's width (the cards are ~55 cm wide)
+    y = 1.6 - crouch; return [[m[0], 1.82 - crouch, m[1]], [m[0], 0.02, m[1]], [m[0] - 0.28, y, m[1]], [m[0] + 0.28, y, m[1]], [m[0], y, m[1] - 0.28], [m[0], y, m[1] + 0.28]]
 def k(f, pos, look, fov, glide=None, cut=False, push=0.0006, punch=None, why=""):
     d = dict(f=f, pos=pos, look=look, fov=fov, roll=0, push=push, blur=0, why=why)  # quality bar (25 Nov 2026): no blur of any kind
     if glide: d["glide"] = glide
@@ -21,29 +22,29 @@ def k(f, pos, look, fov, glide=None, cut=False, push=0.0006, punch=None, why="")
 TOP = 0.98   # counter top
 SHOP = dict(
     room=[-3.4, 3.4, -3.8, 5.4], h=3.4, tile=0.5,
-    counter=[-1.0, 2.2, -1.45, -0.95], counter_y=TOP,
-    box=[0.30, 0.80, -1.27, -1.03], box_h=0.11, riser=0.045,
-    rows={"front": -1.09, "back": -1.215}, slot_x=[0.36, 0.455, 0.55, 0.645, 0.74], slab=[0.075, 0.126], lean=0.12,
+    counter=[-1.0, 2.5, -1.45, -0.95], counter_y=TOP,
+    box=[0.85, 1.35, -1.27, -1.03], box_h=0.06, riser=0.045,
+    rows={"front": -1.09, "back": -1.215}, slot_x=[0.91, 1.005, 1.1, 1.195, 1.29], slab=[0.075, 0.126], lean=0.12,
     # the ten items in the box: front row then back row (name, kind, price); kind slab = a real slab photo, case/top = a real scan in a case
-    items=[["zard_base", "top", 650], ["rgb_mew_r", "case", 4000], ["pikachu", "top", 90], ["slab_psyduck", "slab", 1800], ["blastoise", "top", 380],
-           ["mewtwo", "top", 120], ["slab_mew", "slab", 150], ["zard_lc", "top", 420], ["slab_zard", "slab", 750], ["ds_rayquaza", "top", 260]],
-    stolen={"S06": [1], "S08": [3, 6, 8]},   # item indices taken in each scene (the S01 hook is S08's first one, seen earlier)
-    register=[1.55, TOP, -1.3], phone=[2.0, TOP, -1.25], stack=[1.2, TOP, -1.2],
-    monitor=[2.0, 2.3, -1.45], monitor_size=[0.52, 0.32], cctv=[3.05, 3.12, 0.4], cctv_aim=[0.75, 1.0, -1.1],
-    clock=[-0.6, 2.8, -3.78], dayboard=[-2.0, 1.55, -3.76],
-    case=[-3.35, -2.9, -2.6, -0.8], case_h=2.0, case_shelf=1.0,
+    items=[["rgb_mew_r", "case", 4000], ["slab_psyduck", "slab", 1800], ["zard_base", "top", 650], ["pikachu", "top", 90], ["blastoise", "top", 380],
+           ["slab_mew", "slab", 150], ["slab_zard", "slab", 750], ["mewtwo", "top", 120], ["zard_lc", "top", 420], ["ds_rayquaza", "top", 260]],
+    stolen={"S06": [0], "S08": [1, 5, 6]},   # the slots nearest his right hand   # item indices taken in each scene (the S01 hook is S08's first one, seen earlier)
+    register=[1.75, TOP, -1.3], phone=[2.15, TOP, -1.25], stack=[0.42, TOP, -1.2],
+    monitor=[2.0, 2.3, -1.45], monitor_size=[0.52, 0.32], cctv=[3.05, 3.12, 0.4], cctv_aim=[1.0, 1.0, -1.1],
+    clock=[-1.4, 2.92, -3.79], dayboard=[-3.39, 1.55, 0.6],
+    case=[-3.35, -2.9, -2.6, -0.8], case_h=2.0, case_shelf=1.0, case_door=[-2.1, -1.3],
     table=[-2.8, -1.6, 1.4, 2.4], table_y=0.75,
     window=[-2.9, 0.9, 0.6, 2.7], door=[1.4, 2.4, 0.0, 2.4], front_z=5.4,
-    sign=[0.0, 3.05, 5.66], blade=[-3.25, 4.6, 6.15], banner=[-1.0, 2.4, 5.64],
+    sign=[0.0, 3.05, 5.72], blade=[-1.7, 4.85, 5.65], banner=[-1.0, 2.4, 5.64],
     walk=[5.6, 8.8], street=[8.8, 18.0],
     # marks [x, z] at the feet
-    owner_reg=[1.55, -1.62], owner_pay=[1.2, -1.58], owner_left=[0.6, -1.58], owner_phone=[2.0, -1.62],
-    man=[0.98, -0.82], man_door=[1.9, 5.1], man_walk=[1.15, 6.8],
-    kid=[-0.35, -0.72], teen=[-2.2, 2.75], woman=[2.75, 1.9], woman_reg=[1.9, -0.78], teal=[-2.45, -1.45], cop=[1.75, -0.8],
-    case_stand=[-2.52, -1.7])
+    owner_reg=[1.75, -1.62], owner_pay=[1.4, -1.5], owner_left=[0.1, -1.55], owner_phone=[2.15, -1.62],
+    man=[0.7, -0.88], man_door=[1.9, 5.1], man_walk=[1.6, 6.8],
+    kid=[-0.35, -0.72], teen=[-2.2, 2.75], woman=[2.75, 1.9], woman_reg=[2.1, -0.78], teal=[-2.45, -1.45], cop=[1.95, -0.8],
+    case_stand=[-2.6, -1.7])
 HOUSE = dict(room=[-3.0, 3.0, -3.0, 4.5], h=2.9, door=[-1.25, -0.25], window=[0.8, 2.4],
-             table=[-0.2, 1.4, -0.95, -0.15], table_y=0.76, tray=[0.25, 0.765, -0.32], kitchen=[2.95, -0.6],
-             host_door=[-1.35, -2.35], guest_door=[-0.75, -3.4], guest_in=[-0.65, -2.25], guest_tbl=[0.35, -1.25], host_walk=[2.6, -1.3])
+             table=[-0.2, 1.4, -0.95, -0.15], table_y=0.76, tray=[0.3, 0.765, -0.84], kitchen=[2.95, -0.6], chair=[0.3, -1.32],
+             host_door=[-1.35, -2.35], guest_door=[-0.75, -3.4], guest_in=[-0.65, -2.25], guest_tbl=[0.3, -1.32], host_walk=[2.6, -1.3], host_mid=[0.9, -1.9])
 JACKET = dict(panel=[0.0, 1.3, 0.0], panel_size=[0.42, 0.62],
               pockets={"rgb_mew_r": [-0.055, 1.43], "slab_psyduck": [0.055, 1.43], "slab_mew": [-0.048, 1.255], "slab_zard": [0.048, 1.255]},
               cash=[0.0, 1.07], slab_h=0.136)
@@ -52,10 +53,10 @@ def item_pos(i):
     row = "front" if i < 5 else "back"
     x = S["slot_x"][i % 5]; z = S["rows"][row]; y = TOP + 0.005 + (S["riser"] if row == "back" else 0) + S["slab"][1] / 2
     return [x, round(y, 3), z]
-BOX = [0.55, TOP + 0.06, -1.15]
+BOX = [1.1, TOP + 0.06, -1.15]
 REG = S["register"]; PHONE = S["phone"]; MON = S["monitor"]; CCTV = S["cctv"]
 HEAD = lambda m: [m[0], 1.82, m[1]]   # the crown of the head (the check must see the whole head)
-BOXP = [[0.3, TOP + 0.13, -1.03], [0.8, TOP + 0.13, -1.03], [0.3, TOP, -1.03], [0.8, TOP, -1.03]]
+BOXP = [[0.85, TOP + 0.14, -1.03], [1.35, TOP + 0.14, -1.03], [0.85, TOP, -1.03], [1.35, TOP, -1.03]]
 J = JACKET["pockets"]
 
 P = {
@@ -80,11 +81,11 @@ P = {
     {"id": "monitor", "build": "new: customer monitor 52 x 32 cm hanging from the ceiling on a pole, facing +z: four live camera views (counter, box, door, aisle), REC dot and the time", "pos": MON, "size": [0.52, 0.32, 0.04]},
     {"id": "cctv", "build": "new: ceiling camera on a wall bracket: white bullet housing 26 cm, sun hood, black lens, a red REC lamp that blinks", "pos": CCTV, "size": [0.26, 0.1, 0.1]},
     {"id": "shelves", "build": "new: back wall shelving x -3.3..3.3, five shelves of sealed product (booster boxes, tins, collection boxes in bright colours), OLD SKOOL TCG letters above, framed real cards, wall clock at 4:00, chalkboard TODAY WED", "pos": [0, 1.35, -3.6], "size": [6.6, 2.4, 0.35]},
-    {"id": "case", "build": "new: tall locked glass case on the left wall x -3.35..-2.9, z -2.6..-0.8, 2.0 m: oak frame, glass door hinged at z -2.6, four glass shelves with real cards on stands; brass padlock", "pos": [-3.12, 1.0, -1.7], "size": [0.45, 2.0, 1.8]},
+    {"id": "case", "build": "new: tall locked glass case on the left wall x -3.35..-2.9, z -2.6..-0.8, 2.0 m: oak frame, a glass door z -2.1..-1.3 hinged at z -2.1 (fixed glass either side), four glass shelves with real cards on stands; brass padlock", "pos": [-3.12, 1.0, -1.7], "size": [0.45, 2.0, 1.8]},
     {"id": "table", "build": "new: play table x -2.8..-1.6, z 1.4..2.4, top 0.75, green play mats, binders, two stools", "pos": [-2.2, 0.375, 1.9], "size": [1.2, 0.75, 1.0]},
     {"id": "pegboard", "build": "new: pegboard on the right wall z 0.4..3.4 with hanging booster packs; sign SMILE! YOU ARE ON CAMERA by the camera", "pos": [3.38, 1.4, 1.9], "size": [0.04, 1.6, 3.0]},
     {"id": "front", "build": "new: front wall z 5.4..5.6: shop window x -2.9..0.9, y 0.6..2.7 (painted lettering SINGLES · SLABS · SEALED, an OPEN neon, the window calendar NOV with SEP and OCT torn off), glass door x 1.4..2.4 with a brass bell", "pos": [0, 1.7, 5.5], "size": [6.8, 3.4, 0.2]},
-    {"id": "facade", "build": "new: red-brick two-storey facade x -3.6..3.6, 7.4 m: sign board OLD SKOOL TCG over the window and door, a projecting blade sign OLD SKOOL / TCG, GRAND OPENING banner under the sign, upper windows, a cornice, a wooden water tower on the roof; neighbours a laundromat (blue awning) and a café (red-and-white striped awning); far skyline", "pos": [0, 3.7, 5.6], "size": [7.2, 7.4, 0.3]},
+    {"id": "facade", "build": "new: red-brick two-storey facade x -3.6..3.6, 7.4 m: sign board OLD SKOOL TCG over the window and door, a tall vertical sign OLD SKOOL / TCG on the upper storey, GRAND OPENING banner under the sign, upper windows, a cornice, a wooden water tower on the roof; neighbours a laundromat (blue awning) and a café (red-and-white striped awning); far skyline", "pos": [0, 3.7, 5.6], "size": [7.2, 7.4, 0.3]},
     {"id": "street", "build": "new: sidewalk z 5.6..8.8 (concrete slabs), curb, asphalt street z 8.8..18 with a yellow line, a lamp post, a red hydrant, a planter tree, a bike rack, a blue newspaper box, a parked yellow taxi", "pos": [0, 0, 11.8], "size": [24, 0.1, 12.4]}],
    "marks": {k: S[k] for k in ["owner_reg", "owner_pay", "owner_left", "owner_phone", "man", "man_door", "man_walk", "kid", "teen", "woman", "woman_reg", "teal", "cop", "case_stand"]}},
   "house": {"origin": [80, 0, 0], "axes": "the front door in the back wall z -3; the dining table in the middle; the kitchen doorway in the right wall; the lens at +z",
@@ -115,7 +116,7 @@ SC = P["scenes"]
 def scene(**kw): SC.append(kw)
 MAN = S["man"]; OWN = S["owner_reg"]
 WIDE_IN = dict(pos=[0.35, 1.95, 2.9], look=[0.2, 1.15, -2.3])
-STREET = dict(pos=[0.25, 2.9, 18.0], look=[0.0, 3.6, 5.4])
+STREET = dict(pos=[0.25, 3.3, 18.0], look=[0.0, 4.0, 5.4])
 
 scene(id="S01", hero=True, f=[0, 229], set="shop", light="day",
   vo="Một người đàn ông bán thẻ Pokémon cho chủ tiệm, nhận ba trăm đô, rồi đứng ngay đó, lấy trộm của chính cái tiệm vừa trả tiền cho mình.",
@@ -126,8 +127,8 @@ scene(id="S01", hero=True, f=[0, 229], set="shop", light="day",
   blocking="Man at the man mark in front of the counter facing it; owner across the counter at owner_pay, counting bills; from f100 the owner steps right to the register (owner_reg) and taps keys, eyes down.",
   action="f0 the owner's arm already over the counter with the bills; f80, f85, f89 three $100 bills slap down into the man's open palm (2 f before 'ba' f82, 'trăm' f87, 'đô' f91), each a small kick; f96-104 he closes his hand, grins; f100-122 the owner steps to the register; f121 'đứng ngay đó' his feet stay planted; f128-140 his far arm (screen left) drops into the box; f142 ('lấy') it grips the PSA 8 Psyduck by the top edge; f142-150 lifts it 15 cm clear; f150-157 it travels to his chest and slips behind the jacket on 'trộm' (f157); the box keeps the gap; f160-229 the camera pulls back and rises out through the window to the street: the OLD SKOOL TCG sign lands on 'tiệm' (f183).",
   acting="Man: polite smile -> sly grin, eyes sliding to the owner and back. Owner: friendly, busy, never looks up.",
-  cams=[kf(0, body(MAN) + body(S["owner_pay"]) + BOXP, az=10, el=-12, fov=44, push=0.0004, why="the cash and the box together, both men full body"),
-        kf(124, body(MAN) + BOXP, az=-16, el=-14, fov=40, glide=20, push=0.001, why="his far hand and the box, the man full body"),
+  cams=[kf(0, body(MAN) + body(S["owner_pay"]) + BOXP, az=6, el=-12, fov=44, push=0.0004, why="the cash and the box together, both men full body"),
+        kf(124, body(MAN) + BOXP, az=10, el=-14, fov=40, glide=20, push=0.001, why="his far hand and the box, the man full body"),
         k(162, STREET["pos"], STREET["look"], 50, glide=62, push=0.0, why="pull out through the window: the shop sign on 'tiệm'")],
   kicks=[[80, 0.35], [85, 0.35], [89, 0.5]],
   marks=[{"who": "man", "at": MAN, "view": "front", "pose": "right palm up f0-96, left arm into the box f128-157", "expr": "smile -> grin"},
@@ -151,7 +152,7 @@ scene(id="S02", f=[229, 398], set="shop", light="day",
         k(330, [-0.8, 1.75, 9.4], [-0.95, 1.85, 5.4], 44, glide=36, push=0.0008, why="the banner and the window calendar"),
         k(378, [-0.3, 1.65, 6.4], [-0.2, 1.4, 2.8], 50, glide=20, push=0.0, why="toward the window")],
   kicks=[], marks=[{"who": "woman", "at": [-3.5, 5.6], "view": "side", "pose": "walks by f240-330", "expr": "neutral"}],
-  subjects=[{"n": "sign", "p": S["sign"], "f": [229, 330]}, {"n": "water tower", "p": [-1.6, 8.6, 2.0], "f": [229, 296]}, {"n": "banner", "p": S["banner"], "f": [350, 376]}],
+  subjects=[{"n": "sign", "p": S["sign"], "f": [229, 330]}, {"n": "water tower", "p": [-1.5, 8.6, 2.2], "f": [229, 296]}, {"n": "banner", "p": S["banner"], "f": [350, 376]}],
   physics="the banner: a gentle sine sag (2 cm at 0.5 Hz).", light_mood="bright day, blue sky with clouds.", sound="street ambience, a passing car f260, a bus air brake far off f320; the score enters.",
   after="Unchanged.")
 
@@ -176,10 +177,10 @@ scene(id="S04", f=[457, 552], set="shop", light="day",
   spine=2, viewer="The phone rings with his number; then he walks in with sealed boxes.",
   **{"in": {"type": "glide", "from": "S03"}, "out": {"type": "glide", "to": "S05"}},
   build="the counter phone (caller ID: INCOMING 3:12 PM, (773) 555-0142), the glass door with its bell.",
-  blocking="Owner at owner_phone, picks up the handset; the man comes in through the door (man_door) carrying three booster boxes against his chest and walks to the counter (arrives f590 in S05).",
-  action="f462 the phone rings (the screen lights, the handset rattles in its cradle, 2 rings); f484 the owner lifts the handset to his ear; f503 'hẹn' he nods; f512 the door opens (swings in 70 deg over 10 f), the bell jingles; f514-590 the man walks in toward the counter, boxes held at his chest.",
+  blocking="Owner at owner_phone, picks up the handset; the man comes in through the door (man_door) carrying three booster boxes against his chest and walks to the counter (arrives f612 in S05).",
+  action="f462 the phone rings (the screen lights, the handset rattles in its cradle, 2 rings); f484 the owner lifts the handset to his ear; f503 'hẹn' he nods; f512 the door opens (swings in 70 deg over 10 f), the bell jingles; f512-612 the man walks in toward the counter, boxes held at his chest.",
   acting="Owner: friendly on the phone, nods. Man: easy smile.",
-  cams=[k(457, [2.05, 1.36, -1.66], [2.0, 0.95, -1.29], 30, glide=22, push=0.0006, why="the caller ID: his number"),
+  cams=[k(457, [2.15, 1.45, -1.53], [2.15, 1.065, -1.31], 30, glide=22, push=0.0006, why="the caller ID: his number"),
         kf(494, body(S["man_door"]) + [[1.4, 2.45, 5.4], [2.4, 0.02, 5.4]], az=180, el=-6, fov=50, glide=32, push=0.0006, why="from the counter: the door opens, he walks in with the boxes")],
   kicks=[], marks=[{"who": "owner", "at": S["owner_phone"], "view": "front", "pose": "handset to his ear f484-540", "expr": "smile"},
                    {"who": "man", "at": S["man_door"], "view": "front walking", "pose": "walks in with the boxes f514-590", "expr": "smile"}],
@@ -193,14 +194,14 @@ scene(id="S05", f=[552, 635], set="shop", light="day",
   spine=3, viewer="The open box of priced cards right beside the register.",
   **{"in": {"type": "glide", "from": "S04"}, "out": {"type": "glide", "to": "S06"}},
   build="the box of new stock with ten items and price stickers.",
-  blocking="Owner hangs up and goes back to the register; the man arrives at the man mark f590 and sets the stack of boxes on the counter (stack) f590-600.",
-  action="f552-600 the camera glides along the counter from the register to the box; f600-635 push in: two rows of real cards, each with its sticker ($4,000 on the Red RGB Mew); f592 the stack lands on the counter with a soft thud.",
+  blocking="Owner hangs up and goes back to the register; the man arrives at the man mark f612 and sets the stack of boxes on the counter (stack) f612-622.",
+  action="f552-600 the camera glides along the counter from the register to the box; f600-635 push in: two rows of real cards, each with its sticker ($4,000 on the Red RGB Mew); f620 the stack lands on the counter beside the box with a soft thud.",
   acting="none.",
-  cams=[k(552, [1.25, 1.42, -0.15], [1.4, 1.08, -1.3], 40, glide=24, push=0.0006, why="the register"),
-        k(578, [0.62, 1.36, -0.3], [0.62, 1.08, -1.16], 38, glide=40, push=0.0012, why="the box beside the register, the stickers")],
-  kicks=[], marks=[{"who": "man", "at": MAN, "view": "front", "pose": "sets the stack down f590-600", "expr": "smile"}],
+  cams=[k(552, [1.7, 1.45, -0.15], [1.75, 1.08, -1.3], 40, glide=24, push=0.0006, why="the register"),
+        k(578, [1.18, 1.72, -0.2], [1.1, 1.04, -1.16], 38, glide=40, push=0.0012, why="the box beside the register, the stickers")],
+  kicks=[], marks=[{"who": "man", "at": MAN, "view": "front", "pose": "sets the stack down f612-622", "expr": "smile"}],
   subjects=[{"n": "box", "p": BOX, "f": [614, 634]}, {"n": "register", "p": REG, "f": [552, 580]}],
-  physics="the stack: set down, a 1 cm settle.", light_mood="warm.", sound="handset hang-up click f556; a soft cardboard thud f592; a glassy shimmer on the push f605.",
+  physics="the stack: set down, a 1 cm settle.", light_mood="warm.", sound="handset hang-up click f556; a soft cardboard thud f620; a glassy shimmer on the push f605.",
   after="The stack sits on the counter right of the box.")
 
 scene(id="S06", f=[635, 723], set="shop", light="day",
@@ -212,7 +213,8 @@ scene(id="S06", f=[635, 723], set="shop", light="day",
   blocking="Man at the man mark, looking around the shop; owner at the register facing the woman.",
   action="f638-650 his far arm (screen left) slides over the box rim; f651 ('thò vào') it dips in; f672 grips the Red RGB Mew's case; f672-684 lifts it out; f684-700 to his chest and behind the jacket ('biến mất' f692-704); the slot is empty from f684.",
   acting="Man: whistling innocence, eyes up at the ceiling. Owner: chatting with the woman, eyes on her.",
-  cams=[kf(635, body(MAN) + body(OWN) + body(S["woman_reg"]) + BOXP, az=-12, el=-12, fov=44, glide=26, push=0.0008, why="the man and the box, the owner busy with the woman")],
+  cams=[kf(635, body(MAN) + body(OWN) + body(S["woman_reg"]) + BOXP, az=4, el=-12, fov=46, glide=26, push=0.0008, why="the man and the box, the owner busy with the woman"),
+        kf(660, body(MAN) + BOXP, az=8, el=-12, fov=40, glide=14, push=0.0006, why="closer on the lift, the man still full body")],
   kicks=[[651, 0.25]],
   marks=[{"who": "man", "at": MAN, "view": "front", "pose": "left arm into the box f638-700", "expr": "whistle"}, {"who": "owner", "at": OWN, "view": "front", "pose": "serving", "expr": "smile"},
          {"who": "woman", "at": S["woman_reg"], "view": "front", "pose": "paying", "expr": "smile"}],
@@ -245,8 +247,8 @@ scene(id="S08", hero=True, f=[800, 895], set="shop", light="day",
   blocking="Owner turns away to shelve the booster boxes (carries the stack to the back shelves, f805-890, side view walking); the man stays at the man mark.",
   action="f804-815 he tucks the cash into his jacket; f822 ('quay lại') turns his eyes to the box; f846-856 the Psyduck slab out, into the jacket; f863-873 the gold Mew; f875-885 the M Charizard ('thêm ba lá nữa': f849, f866, f878); each lift 12 cm, each into the jacket; f886-895 the camera pushes into his jacket.",
   acting="Man: quick and calm, a tiny smirk. Owner: back turned.",
-  cams=[kf(800, body(MAN) + BOXP, az=-6, el=-12, fov=40, glide=22, push=0.0012, why="him and the box, the owner going to the shelves"),
-        k(882, [0.92, 1.3, -0.3], [0.94, 1.25, -0.84], 34, glide=13, push=0.0, why="into his jacket")],
+  cams=[kf(800, body(MAN) + BOXP, az=8, el=-12, fov=40, glide=22, push=0.0012, why="him and the box, the owner going to the shelves"),
+        k(882, [0.66, 1.3, -0.36], [0.68, 1.25, -0.9], 34, glide=13, push=0.0, why="into his jacket")],
   kicks=[[849, 0.2], [866, 0.2], [878, 0.3]],
   marks=[{"who": "man", "at": MAN, "view": "front", "pose": "three lifts f846-885", "expr": "smirk"}, {"who": "owner", "at": OWN, "view": "side walking", "pose": "shelves the stack f805-890", "expr": "neutral"}],
   subjects=[{"n": "man head", "p": HEAD(MAN), "f": [800, 880]}, {"n": "box", "p": BOX, "f": [800, 880]}],
@@ -296,7 +298,7 @@ scene(id="S11", f=[1188, 1336], set="shop", light="day",
   blocking="Man at the man mark (the S08 moment, cards already gone); owner at the register.",
   action="f1188-1243 high wide: the owner at the register, the man at the box, the floor tiles between them ('vài bước' f1226-1236); f1246-1290 glide up to the ceiling camera: its REC lamp blinks (15 f on / 15 f off); f1295-1323 glide to the monitor: four views, the counter view shows the man and the box ('ai nhìn cũng thấy').",
   acting="Owner: busy at the register. Man: casual.",
-  cams=[kf(1188, body(MAN) + body(OWN), az=14, el=-34, fov=50, push=0.0006, why="a few steps apart, the floor tiles between them"),
+  cams=[kf(1188, body(MAN) + body(OWN), az=12, el=-24, fov=52, push=0.0006, why="a few steps apart, the floor tiles between them"),
         k(1248, [1.85, 2.3, 1.95], [3.02, 3.08, 0.38], 36, glide=42, push=0.0008, why="the ceiling camera, REC"),
         k(1294, [1.75, 2.1, 0.15], [2.0, 2.28, -1.45], 34, glide=26, push=0.0008, why="the monitor: anyone can see")],
   kicks=[],
@@ -311,16 +313,16 @@ scene(id="S12", f=[1336, 1495], set="shop", light="day",
   spine=5, viewer="Three reasons he should have been caught: the owner's face, the lens, his own number.",
   **{"in": {"type": "glide", "from": "S11"}, "out": {"type": "dissolve", "to": "S13", "n": 8}},
   build="as before.",
-  blocking="Man at the man mark; owner at owner_left, facing the man across the counter.",
+  blocking="Man at the man mark; owner at owner_pay, right behind the box, facing the man across the counter.",
   action="f1336 'Khoan': everything freezes (the customers stop mid-move), a record scratch; f1351-1397 'trước mặt chủ': the owner's face across the counter, a metre from the box; f1405-1428 'dưới ống kính': the view from right under the ceiling camera down onto the man and the box (the camera's hood in the top of frame); f1432-1484 'gọi điện hẹn hẳn hoi': the caller-ID screen, his number.",
   acting="Owner: friendly, oblivious. Man: frozen mid-smirk.",
   cams=[k(1336, [1.75, 2.1, 0.15], [2.0, 2.28, -1.45], 32, push=0.0, why="hold: the freeze"),
-        kf(1350, body(S["owner_left"]) + body(MAN) + BOXP, az=8, el=-10, fov=42, glide=38, push=0.001, why="right in front of the owner"),
+        kf(1350, body(S["owner_pay"]) + body(MAN) + BOXP, az=6, el=-10, fov=42, glide=38, push=0.001, why="right in front of the owner"),
         k(1402, [2.75, 2.95, 0.25], [0.85, 1.05, -1.0], 44, glide=24, push=0.0008, why="under the lens"),
-        k(1436, [2.05, 1.36, -1.66], [2.0, 0.95, -1.29], 30, glide=26, push=0.0008, why="his own number on the caller ID")],
+        k(1436, [2.15, 1.45, -1.53], [2.15, 1.065, -1.31], 30, glide=26, push=0.0008, why="his own number on the caller ID")],
   kicks=[[1336, 0.6]],
-  marks=[{"who": "man", "at": MAN, "view": "front", "pose": "frozen", "expr": "smirk"}, {"who": "owner", "at": S["owner_left"], "view": "front", "pose": "standing", "expr": "smile"}],
-  subjects=[{"n": "owner head", "p": HEAD(S["owner_left"]), "f": [1380, 1400]}, {"n": "box", "p": BOX, "f": [1424, 1434]}, {"n": "phone screen", "p": [PHONE[0], PHONE[1] + 0.05, PHONE[2]], "f": [1464, 1494]}],
+  marks=[{"who": "man", "at": MAN, "view": "front", "pose": "frozen", "expr": "smirk"}, {"who": "owner", "at": S["owner_pay"], "view": "front", "pose": "standing behind the box", "expr": "smile"}],
+  subjects=[{"n": "owner head", "p": HEAD(S["owner_pay"]), "f": [1386, 1400]}, {"n": "box", "p": BOX, "f": [1424, 1434]}, {"n": "phone screen", "p": [PHONE[0], PHONE[1] + 0.05, PHONE[2]], "f": [1464, 1494]}],
   physics="none.", light_mood="warm; the freeze holds.", sound="record scratch + Huh (meme) f1336; three soft hits on 'chủ' f1397, 'kính' f1422, 'hoi' f1478.",
   after="Unchanged.")
 
@@ -346,7 +348,7 @@ scene(id="S14", f=[1624, 1708], set="house", light="day",
   vo="Người đó giống như khách đến chơi nhà mang theo quà.",
   gloss="He's like a guest who comes to visit bringing a gift.",
   spine=6, viewer="A guest at the door with a gift, welcomed in.",
-  **{"in": {"type": "dissolve", "n": 8, "from": "S13"}, "out": {"type": "glide", "to": "S15"}},
+  **{"in": {"type": "dissolve", "n": 8, "from": "S13"}, "out": {"type": "dissolve", "to": "S15", "n": 6, "note": "a moment later, at the table"}},
   build="the house: the front door, the porch outside, the dining room; the gift (a booster box wrapped in red with a gold bow).",
   blocking="Host (the owner's look) by the door at host_door; guest (the man's look) on the porch at guest_door holding the gift.",
   action="f1628-1642 the host opens the door (it swings in 80 deg); the guest stands on the porch with the gift held out; f1650-1680 he steps in to guest_in; f1688-1698 the host takes the gift ('quà' f1694), beaming.",
@@ -363,15 +365,16 @@ scene(id="S15", f=[1708, 1765], set="house", light="day",
   vo="Chẳng ai đi theo khách để đếm thìa.",
   gloss="Nobody follows a guest around counting the spoons.",
   spine=6, viewer="The host turns his back; the spoon tray by the guest ends with one empty slot.",
-  **{"in": {"type": "glide", "from": "S14"}, "out": {"type": "dissolve", "to": "S16", "n": 8}},
+  **{"in": {"type": "dissolve", "n": 6, "from": "S14"}, "out": {"type": "dissolve", "to": "S16", "n": 8}},
   build="the table with the cake, the plates and the spoon tray (six spoons).",
-  blocking="Guest at guest_tbl behind the table; host walks away to the kitchen doorway (side view, to the right) carrying the gift, f1708-1750.",
-  action="f1708-1750 the host walks off toward the kitchen, never looking back; f1736-1748 the guest's arm reaches the tray and lifts a spoon; f1750-1757 it goes into his jacket ('đếm thìa' f1750-1755); the tray keeps one empty slot.",
+  blocking="Guest seated on the chair behind the table (guest_tbl); host walks from host_mid to the kitchen doorway (side view, to the right) carrying the gift, f1708-1750.",
+  action="f1708-1750 the host walks off toward the kitchen, never looking back; f1736-1748 the guest's arm reaches the tray and lifts a spoon (the camera drops to the tray f1742-1754); f1750-1757 it goes into his jacket ('đếm thìa' f1750-1755); the tray keeps one empty slot.",
   acting="Guest: angelic smile. Host: humming, happy.",
-  cams=[kf(1708, body(H2["guest_tbl"]) + [H2["tray"]], az=-4, el=-12, fov=42, glide=26, push=0.0012, why="the guest and the spoon tray, the host walking away")],
+  cams=[kf(1708, body(H2["guest_tbl"]) + [H2["tray"]], az=-4, el=-12, fov=42, push=0.0008, why="the guest and the spoon tray, the host walking away"),
+        k(1742, [0.32, 1.22, -0.3], [0.31, 0.79, -0.86], 40, glide=12, push=0.0008, why="the spoon tray: one slot empty")],
   kicks=[[1755, 0.2]],
-  marks=[{"who": "man", "at": H2["guest_tbl"], "view": "front", "pose": "spoon f1736-1757", "expr": "smile"}, {"who": "owner", "at": H2["host_walk"], "view": "side walking", "pose": "walks to the kitchen", "expr": "smile"}],
-  subjects=[{"n": "tray", "p": H2["tray"], "f": [1708, 1764]}, {"n": "guest head", "p": HEAD(H2["guest_tbl"]), "f": [1708, 1764]}],
+  marks=[{"who": "man", "at": H2["guest_tbl"], "view": "front, seated", "pose": "spoon f1736-1757", "expr": "smile"}, {"who": "owner", "at": H2["host_walk"], "view": "side walking", "pose": "walks to the kitchen", "expr": "smile"}],
+  subjects=[{"n": "tray", "p": H2["tray"], "f": [1758, 1764]}, {"n": "guest head", "p": HEAD(H2["guest_tbl"]), "f": [1708, 1740]}],
   physics="the spoon: kinematic.", light_mood="warm.", sound="a happy hum; a tiny spoon clink f1745; Hehe Boiiiiiii (meme, soft) f1756.",
   after="One empty slot in the spoon tray.")
 
@@ -381,13 +384,13 @@ scene(id="S16", f=[1765, 1947], set="shop", light="day",
   spine=6, viewer="The owner looks at the four gaps, then carries the box to the locked glass case where it belongs.",
   **{"in": {"type": "dissolve", "n": 8, "from": "S15"}, "out": {"type": "dissolve", "to": "S17", "n": 8}},
   build="the box with four gaps; the glass case with its hinged door and padlock.",
-  blocking="Owner at owner_left behind the box; then he walks with the box around the left end of the counter to case_stand.",
+  blocking="Owner at owner_pay behind the box; then he walks with the box behind the counter, around its left end, to case_stand.",
   action="f1765-1812 he looks down at the four gaps, scratches his head; f1830-1842 he lifts the box with both arms; f1842-1895 he walks left behind the counter, around its end and to the case (side view); f1896-1906 the case door swings open; f1906-1918 he sets the box on the shelf; f1920 the door shuts; f1926 the padlock snaps shut ('ngoài' f1928).",
   acting="Owner: sheepish, a sigh.",
-  cams=[k(1765, [0.45, 1.45, 0.25], [0.55, 1.15, -1.25], 40, push=0.0008, why="the four gaps, the owner behind"),
-        kf(1832, body([-0.2, -1.62]) + body(S["case_stand"]) + [[-3.35, 2.0, -2.6], [-2.9, 0.02, -0.8]], az=90, el=-10, fov=58, glide=40, push=0.0006, why="he carries the box to the case")],
+  cams=[k(1765, [1.12, 1.55, -0.12], [1.18, 1.22, -1.32], 40, push=0.0008, why="the four gaps, the owner behind"),
+        kf(1832, body([-0.8, -1.62]) + body(S["case_stand"]) + [[-3.35, 2.0, -2.1], [-2.9, 0.02, -1.3]], az=58, el=-12, fov=54, glide=40, push=0.0006, why="he carries the box to the case")],
   kicks=[[1926, 0.3]],
-  marks=[{"who": "owner", "at": S["owner_left"], "view": "front then side walking", "pose": "head scratch, lifts the box, walks to the case", "expr": "sad"}],
+  marks=[{"who": "owner", "at": S["owner_pay"], "view": "front then side walking", "pose": "head scratch, lifts the box, walks to the case", "expr": "sad"}],
   subjects=[{"n": "box", "p": BOX, "f": [1765, 1830]}, {"n": "owner head", "p": HEAD(S["case_stand"]), "f": [1900, 1946]}, {"n": "case", "p": [-3.12, 1.2, -1.7], "f": [1900, 1946]}],
   physics="the case door: hinged at its back edge, swings 100 deg and back; the padlock shackle snaps down 1 cm.", light_mood="warm.", sound="a sigh; footsteps; the case door squeak f1896, click f1920; padlock snap f1926.",
   after="The box is locked in the glass case (four gaps).")
@@ -418,7 +421,7 @@ scene(id="S18", f=[2089, 2132], set="shop", light="day",
   blocking="Owner at owner_phone, the handset at his ear.",
   action="f2092-2104 he lifts the handset and dials; f2113 'cảnh sát' he speaks, urgent.",
   acting="Owner: urgent, serious.",
-  cams=[kf(2089, body(S["owner_phone"]) + [PHONE], az=10, el=-10, fov=42, glide=26, push=0.0008, why="the owner calls the police")],
+  cams=[kf(2089, body(S["owner_phone"]) + [PHONE], az=10, el=-10, fov=42, glide=14, push=0.0008, why="the owner calls the police")],
   kicks=[], marks=[{"who": "owner", "at": S["owner_phone"], "view": "front", "pose": "handset to his ear", "expr": "stern"}],
   subjects=[{"n": "owner head", "p": HEAD(S["owner_phone"]), "f": [2105, 2131]}],
   physics="none.", light_mood="warm.", sound="three dial beeps f2096-2102; a ringing tone.",
@@ -434,10 +437,10 @@ scene(id="S19", f=[2132, 2207], set="shop", light="day",
   action="f2140-2160 the owner points at the caller-ID screen; f2160-2196 the officer writes (773) 555-0142 on her notepad ('số điện thoại' f2151-2162, 'gọi tới' f2186-2193); f2180-2207 glide to the notepad.",
   acting="Owner: firm. Officer: businesslike.",
   cams=[kf(2132, body(S["cop"]) + body(S["owner_phone"]) + [PHONE], az=14, el=-10, fov=42, push=0.0008, why="the owner points, the officer writes"),
-        k(2178, [1.72, 1.42, -0.25], [1.78, 1.13, -0.74], 32, glide=24, push=0.0008, why="the number on her notepad")],
+        k(2178, [1.99, 1.45, -0.08], [1.99, 1.19, -0.68], 32, glide=24, push=0.0008, why="the number on her notepad")],
   kicks=[],
   marks=[{"who": "cop", "at": S["cop"], "view": "front", "pose": "writes on the notepad f2160-2196", "expr": "neutral"}, {"who": "owner", "at": S["owner_phone"], "view": "front", "pose": "points at the phone", "expr": "stern"}],
-  subjects=[{"n": "cop head", "p": HEAD(S["cop"]), "f": [2132, 2175]}, {"n": "owner head", "p": HEAD(S["owner_phone"]), "f": [2132, 2175]}, {"n": "notepad", "p": [1.79, 1.2, -0.68], "f": [2194, 2206]}],
+  subjects=[{"n": "cop head", "p": HEAD(S["cop"]), "f": [2132, 2175]}, {"n": "owner head", "p": HEAD(S["owner_phone"]), "f": [2132, 2175]}, {"n": "notepad", "p": [1.99, 1.2, -0.68], "f": [2200, 2206]}],
   physics="none.", light_mood="warm.", sound="pen scratches f2160-2196; a firm low note.",
   after="The number is on the notepad.")
 

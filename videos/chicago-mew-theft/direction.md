@@ -30,29 +30,29 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 ### shop
 - Origin in the shared world: [0, 0, 0]. Axes: the counter crosses the room at z -1.45..-0.95; the back wall of shelves at z -3.8; the front wall (window, door) at z 5.4 faces the street (+z).
 - Light: day; sun az/el [-35, 45]. Open camera sides: +z.
-- Marks [x, z]: owner_reg [1.55, -1.62]; owner_pay [1.2, -1.58]; owner_left [0.6, -1.58]; owner_phone [2, -1.62]; man [0.98, -0.82]; man_door [1.9, 5.1]; man_walk [1.15, 6.8]; kid [-0.35, -0.72]; teen [-2.2, 2.75]; woman [2.75, 1.9]; woman_reg [1.9, -0.78]; teal [-2.45, -1.45]; cop [1.75, -0.8]; case_stand [-2.52, -1.7].
+- Marks [x, z]: owner_reg [1.75, -1.62]; owner_pay [1.4, -1.5]; owner_left [0.1, -1.55]; owner_phone [2.15, -1.62]; man [0.7, -0.88]; man_door [1.9, 5.1]; man_walk [1.6, 6.8]; kid [-0.35, -0.72]; teen [-2.2, 2.75]; woman [2.75, 1.9]; woman_reg [2.1, -0.78]; teal [-2.45, -1.45]; cop [1.95, -0.8]; case_stand [-2.6, -1.7].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
 | room | new: shop x -3.4..3.4, z -3.8..5.4, 3.4 m; checkered floor tiles 50 cm (cream / tomato red), cream walls with a red dado band, cream ceiling with two light panels | [0, 1.7, 0.8] | [6.8, 3.4, 9.2] |
 | counter | new: glass display counter x -1.0..2.2, z -1.45..-0.95, top y 0.98: warm oak base, a glass top section over cards and packs on red felt, brass trim | [0.6, 0.49, -1.2] | [3.2, 0.98, 0.5] |
-| box | new: the box of new stock, cardboard 50 x 24 x 11 cm, open with the four flaps folded out; NEW ARRIVALS on a strip of tape; two rows of five items standing in it (front row real scans in toploaders and the Red RGB Mew in a magnetic case, the PSA 8 Psyduck slab; back row on a 4.5 cm riser with the PSA 10 gold Mew and the CGC M Charizard); a white shop price sticker on each | [0.55, 1.04, -1.15] | [0.5, 0.11, 0.24] |
-| register | new: cash register 36 x 32 cm: body, keypad, a screen on a stalk facing the owner, a cash drawer that slides out toward the owner | [1.55, 0.98, -1.3] | [0.36, 0.2, 0.32] |
-| phone | new: counter phone base with a corded handset and a caller-ID screen tilted toward the owner: INCOMING 3:12 PM (773) 555-0142 | [2, 0.98, -1.25] | [0.2, 0.08, 0.18] |
+| box | new: the box of new stock, cardboard 50 x 24 x 11 cm, open with the four flaps folded out; NEW ARRIVALS on a strip of tape; two rows of five items standing in it (front row real scans in toploaders and the Red RGB Mew in a magnetic case, the PSA 8 Psyduck slab; back row on a 4.5 cm riser with the PSA 10 gold Mew and the CGC M Charizard); a white shop price sticker on each | [1.1, 1.04, -1.15] | [0.5, 0.11, 0.24] |
+| register | new: cash register 36 x 32 cm: body, keypad, a screen on a stalk facing the owner, a cash drawer that slides out toward the owner | [1.75, 0.98, -1.3] | [0.36, 0.2, 0.32] |
+| phone | new: counter phone base with a corded handset and a caller-ID screen tilted toward the owner: INCOMING 3:12 PM (773) 555-0142 | [2.15, 0.98, -1.25] | [0.2, 0.08, 0.18] |
 | monitor | new: customer monitor 52 x 32 cm hanging from the ceiling on a pole, facing +z: four live camera views (counter, box, door, aisle), REC dot and the time | [2, 2.3, -1.45] | [0.52, 0.32, 0.04] |
 | cctv | new: ceiling camera on a wall bracket: white bullet housing 26 cm, sun hood, black lens, a red REC lamp that blinks | [3.05, 3.12, 0.4] | [0.26, 0.1, 0.1] |
 | shelves | new: back wall shelving x -3.3..3.3, five shelves of sealed product (booster boxes, tins, collection boxes in bright colours), OLD SKOOL TCG letters above, framed real cards, wall clock at 4:00, chalkboard TODAY WED | [0, 1.35, -3.6] | [6.6, 2.4, 0.35] |
-| case | new: tall locked glass case on the left wall x -3.35..-2.9, z -2.6..-0.8, 2.0 m: oak frame, glass door hinged at z -2.6, four glass shelves with real cards on stands; brass padlock | [-3.12, 1, -1.7] | [0.45, 2, 1.8] |
+| case | new: tall locked glass case on the left wall x -3.35..-2.9, z -2.6..-0.8, 2.0 m: oak frame, a glass door z -2.1..-1.3 hinged at z -2.1 (fixed glass either side), four glass shelves with real cards on stands; brass padlock | [-3.12, 1, -1.7] | [0.45, 2, 1.8] |
 | table | new: play table x -2.8..-1.6, z 1.4..2.4, top 0.75, green play mats, binders, two stools | [-2.2, 0.375, 1.9] | [1.2, 0.75, 1] |
 | pegboard | new: pegboard on the right wall z 0.4..3.4 with hanging booster packs; sign SMILE! YOU ARE ON CAMERA by the camera | [3.38, 1.4, 1.9] | [0.04, 1.6, 3] |
 | front | new: front wall z 5.4..5.6: shop window x -2.9..0.9, y 0.6..2.7 (painted lettering SINGLES · SLABS · SEALED, an OPEN neon, the window calendar NOV with SEP and OCT torn off), glass door x 1.4..2.4 with a brass bell | [0, 1.7, 5.5] | [6.8, 3.4, 0.2] |
-| facade | new: red-brick two-storey facade x -3.6..3.6, 7.4 m: sign board OLD SKOOL TCG over the window and door, a projecting blade sign OLD SKOOL / TCG, GRAND OPENING banner under the sign, upper windows, a cornice, a wooden water tower on the roof; neighbours a laundromat (blue awning) and a café (red-and-white striped awning); far skyline | [0, 3.7, 5.6] | [7.2, 7.4, 0.3] |
+| facade | new: red-brick two-storey facade x -3.6..3.6, 7.4 m: sign board OLD SKOOL TCG over the window and door, a tall vertical sign OLD SKOOL / TCG on the upper storey, GRAND OPENING banner under the sign, upper windows, a cornice, a wooden water tower on the roof; neighbours a laundromat (blue awning) and a café (red-and-white striped awning); far skyline | [0, 3.7, 5.6] | [7.2, 7.4, 0.3] |
 | street | new: sidewalk z 5.6..8.8 (concrete slabs), curb, asphalt street z 8.8..18 with a yellow line, a lamp post, a red hydrant, a planter tree, a bike rack, a blue newspaper box, a parked yellow taxi | [0, 0, 11.8] | [24, 0.1, 12.4] |
 
 ### house
 - Origin in the shared world: [80, 0, 0]. Axes: the front door in the back wall z -3; the dining table in the middle; the kitchen doorway in the right wall; the lens at +z.
 - Light: day; sun az/el [30, 45]. Open camera sides: +z.
-- Marks [x, z]: host_door [-1.35, -2.35]; guest_door [-0.75, -3.4]; guest_in [-0.65, -2.25]; guest_tbl [0.35, -1.25]; host_walk [2.6, -1.3].
+- Marks [x, z]: host_door [-1.35, -2.35]; guest_door [-0.75, -3.4]; guest_in [-0.65, -2.25]; guest_tbl [0.3, -1.32]; host_walk [2.6, -1.3].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
@@ -89,17 +89,17 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 - Set: shop. Light: day.
 - Build: new: the counter, the box of new stock, the register, the three booster boxes he sold (stacked on the counter), $100 bills.
 - Blocking: Man at the man mark in front of the counter facing it; owner across the counter at owner_pay, counting bills; from f100 the owner steps right to the register (owner_reg) and taps keys, eyes down.
-  - man at [0.98, -0.82], front; right palm up f0-96, left arm into the box f128-157; smile -> grin.
-  - owner at [1.2, -1.58], front; counts bills f0-92; steps to the register f100-122; smile.
+  - man at [0.7, -0.88], front; right palm up f0-96, left arm into the box f128-157; smile -> grin.
+  - owner at [1.4, -1.5], front; counts bills f0-92; steps to the register f100-122; smile.
 - Action, against the words: f0 the owner's arm already over the counter with the bills; f80, f85, f89 three $100 bills slap down into the man's open palm (2 f before 'ba' f82, 'trăm' f87, 'đô' f91), each a small kick; f96-104 he closes his hand, grins; f100-122 the owner steps to the register; f121 'đứng ngay đó' his feet stay planted; f128-140 his far arm (screen left) drops into the box; f142 ('lấy') it grips the PSA 8 Psyduck by the top edge; f142-150 lifts it 15 cm clear; f150-157 it travels to his chest and slips behind the jacket on 'trộm' (f157); the box keeps the gap; f160-229 the camera pulls back and rises out through the window to the street: the OLD SKOOL TCG sign lands on 'tiệm' (f183).
 - Acting: Man: polite smile -> sly grin, eyes sliding to the owner and back. Owner: friendly, busy, never looks up.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 0 | open | [1.52, 1.383, 3.087] | [0.78, 0.477, -1.108] | 44 | 0.04 | 0 | the cash and the box together, both men full body |
-| 124 | glide 20 f | [-0.556, 1.622, 3.255] | [0.656, 0.525, -0.971] | 40 | 0.1 | 0 | his far hand and the box, the man full body |
-| 162 | glide 62 f | [0.25, 2.9, 18] | [0, 3.6, 5.4] | 50 | 0 | 0 | pull out through the window: the shop sign on 'tiệm' |
+| 0 | open | [1.405, 1.599, 2.594] | [1.012, 0.799, -1.145] | 44 | 0.04 | 0 | the cash and the box together, both men full body |
+| 124 | glide 20 f | [1.437, 1.675, 2.217] | [0.879, 0.875, -0.943] | 40 | 0.1 | 0 | his far hand and the box, the man full body |
+| 162 | glide 62 f | [0.25, 3.3, 18] | [0, 4, 5.4] | 50 | 0 | 0 | pull out through the window: the shop sign on 'tiệm' |
 
 - Kicks (7 f): f80 strength 0.35; f85 strength 0.35; f89 strength 0.5.
 - Physics & FX: bills: light, each lands with a 2-frame flutter and lies flat on the stack. The slab: kinematic in his hand.
@@ -121,7 +121,7 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 229 | open | [0.25, 2.9, 18] | [0, 3.6, 5.4] | 50 | 0.08 | 0 | the storefront, the sign and the water tower in one tall frame |
+| 229 | open | [0.25, 3.3, 18] | [0, 4, 5.4] | 50 | 0.08 | 0 | the storefront, the sign and the water tower in one tall frame |
 | 330 | glide 36 f | [-0.8, 1.75, 9.4] | [-0.95, 1.85, 5.4] | 44 | 0.08 | 0 | the banner and the window calendar |
 | 378 | glide 20 f | [-0.3, 1.65, 6.4] | [-0.2, 1.4, 2.8] | 50 | 0 | 0 | toward the window |
 
@@ -142,14 +142,14 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
   - teen at [-2.2, 2.75], front; browsing; neutral.
   - woman at [2.75, 1.9], front; browsing; neutral.
   - teal at [-2.45, -1.45], front; browsing; neutral.
-  - owner at [1.55, -1.62], front; at the register; smile.
+  - owner at [1.75, -1.62], front; at the register; smile.
 - Action, against the words: f398-430 the camera glides in over the window ledge into the room; the clock's minute hand on 12, hour on 4; the customers browse (the teen turns a binder page f420, the woman lifts a pack f430).
 - Acting: Customers: absorbed. Owner: busy, smiling.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 398 | open | [0.9, 1.724, 3.535] | [0.533, 0.798, -1.704] | 54 | 0.08 | 0 | the busy shop, the counter and the clock |
+| 398 | open | [1.045, 2.153, 4.892] | [0.607, 1.044, -1.376] | 54 | 0.08 | 0 | the busy shop, the counter and the clock |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -163,17 +163,17 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 - In: glide. Out: glide.
 - Set: shop. Light: day.
 - Build: the counter phone (caller ID: INCOMING 3:12 PM, (773) 555-0142), the glass door with its bell.
-- Blocking: Owner at owner_phone, picks up the handset; the man comes in through the door (man_door) carrying three booster boxes against his chest and walks to the counter (arrives f590 in S05).
-  - owner at [2, -1.62], front; handset to his ear f484-540; smile.
+- Blocking: Owner at owner_phone, picks up the handset; the man comes in through the door (man_door) carrying three booster boxes against his chest and walks to the counter (arrives f612 in S05).
+  - owner at [2.15, -1.62], front; handset to his ear f484-540; smile.
   - man at [1.9, 5.1], front walking; walks in with the boxes f514-590; smile.
-- Action, against the words: f462 the phone rings (the screen lights, the handset rattles in its cradle, 2 rings); f484 the owner lifts the handset to his ear; f503 'hẹn' he nods; f512 the door opens (swings in 70 deg over 10 f), the bell jingles; f514-590 the man walks in toward the counter, boxes held at his chest.
+- Action, against the words: f462 the phone rings (the screen lights, the handset rattles in its cradle, 2 rings); f484 the owner lifts the handset to his ear; f503 'hẹn' he nods; f512 the door opens (swings in 70 deg over 10 f), the bell jingles; f512-612 the man walks in toward the counter, boxes held at his chest.
 - Acting: Owner: friendly on the phone, nods. Man: easy smile.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 457 | open | [2.05, 1.36, -1.66] | [2, 0.95, -1.29] | 30 | 0.06 | 0 | the caller ID: his number |
-| 494 | glide 32 f | [1.895, 1.209, 0.743] | [1.895, 0.735, 5.25] | 50 | 0.06 | 0 | from the counter: the door opens, he walks in with the boxes |
+| 457 | open | [2.15, 1.45, -1.53] | [2.15, 1.065, -1.31] | 30 | 0.06 | 0 | the caller ID: his number |
+| 494 | glide 32 f | [1.883, 1.466, 1.71] | [1.883, 1.102, 5.175] | 50 | 0.06 | 0 | from the counter: the door opens, he walks in with the boxes |
 
 - Kicks (7 f): none.
 - Physics & FX: the handset: two rattles in the cradle per ring (1 mm).
@@ -187,21 +187,21 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 - In: glide. Out: glide.
 - Set: shop. Light: day.
 - Build: the box of new stock with ten items and price stickers.
-- Blocking: Owner hangs up and goes back to the register; the man arrives at the man mark f590 and sets the stack of boxes on the counter (stack) f590-600.
-  - man at [0.98, -0.82], front; sets the stack down f590-600; smile.
-- Action, against the words: f552-600 the camera glides along the counter from the register to the box; f600-635 push in: two rows of real cards, each with its sticker ($4,000 on the Red RGB Mew); f592 the stack lands on the counter with a soft thud.
+- Blocking: Owner hangs up and goes back to the register; the man arrives at the man mark f612 and sets the stack of boxes on the counter (stack) f612-622.
+  - man at [0.7, -0.88], front; sets the stack down f612-622; smile.
+- Action, against the words: f552-600 the camera glides along the counter from the register to the box; f600-635 push in: two rows of real cards, each with its sticker ($4,000 on the Red RGB Mew); f620 the stack lands on the counter beside the box with a soft thud.
 - Acting: none.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 552 | open | [1.25, 1.42, -0.15] | [1.4, 1.08, -1.3] | 40 | 0.06 | 0 | the register |
-| 578 | glide 40 f | [0.62, 1.36, -0.3] | [0.62, 1.08, -1.16] | 38 | 0.12 | 0 | the box beside the register, the stickers |
+| 552 | open | [1.7, 1.45, -0.15] | [1.75, 1.08, -1.3] | 40 | 0.06 | 0 | the register |
+| 578 | glide 40 f | [1.18, 1.72, -0.2] | [1.1, 1.04, -1.16] | 38 | 0.12 | 0 | the box beside the register, the stickers |
 
 - Kicks (7 f): none.
 - Physics & FX: the stack: set down, a 1 cm settle.
 - Light & mood: warm.
-- Sound: handset hang-up click f556; a soft cardboard thud f592; a glassy shimmer on the push f605.
+- Sound: handset hang-up click f556; a soft cardboard thud f620; a glassy shimmer on the push f605.
 - After-state: The stack sits on the counter right of the box.
 
 ### S06 · 0:21.2-0:24.1 · f635-f723 · "Tay anh ta thò vào. Một lá biến mất."
@@ -211,16 +211,17 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 - Set: shop. Light: day.
 - Build: as before; the woman now at the register paying (woman_reg).
 - Blocking: Man at the man mark, looking around the shop; owner at the register facing the woman.
-  - man at [0.98, -0.82], front; left arm into the box f638-700; whistle.
-  - owner at [1.55, -1.62], front; serving; smile.
-  - woman at [1.9, -0.78], front; paying; smile.
+  - man at [0.7, -0.88], front; left arm into the box f638-700; whistle.
+  - owner at [1.75, -1.62], front; serving; smile.
+  - woman at [2.1, -0.78], front; paying; smile.
 - Action, against the words: f638-650 his far arm (screen left) slides over the box rim; f651 ('thò vào') it dips in; f672 grips the Red RGB Mew's case; f672-684 lifts it out; f684-700 to his chest and behind the jacket ('biến mất' f692-704); the slot is empty from f684.
 - Acting: Man: whistling innocence, eyes up at the ceiling. Owner: chatting with the woman, eyes on her.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 635 | open | [0.131, 1.523, 3.664] | [1.133, 0.499, -1.05] | 44 | 0.08 | 0 | the man and the box, the owner busy with the woman |
+| 635 | open | [1.79, 1.877, 4.444] | [1.404, 0.7, -1.079] | 46 | 0.08 | 0 | the man and the box, the owner busy with the woman |
+| 660 | glide 14 f | [1.332, 1.559, 2.289] | [0.878, 0.866, -0.943] | 40 | 0.06 | 0 | closer on the lift, the man still full body |
 
 - Kicks (7 f): f651 strength 0.25.
 - Physics & FX: the case: kinematic in his hand.
@@ -235,15 +236,15 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 - Set: shop. Light: day.
 - Build: the register drawer, $100 bills.
 - Blocking: Woman leaves (walks off right f723-760); owner steps from the register to owner_pay f730-745.
-  - owner at [1.2, -1.58], front; drawer f748, bills f776-786; smile.
-  - man at [0.98, -0.82], front; palm up f770-790; smile.
+  - owner at [1.4, -1.5], front; drawer f748, bills f776-786; smile.
+  - man at [0.7, -0.88], front; palm up f770-790; smile.
 - Action, against the words: f748 the owner taps the register; f752 the drawer shoots out with a ka-ching; f756-768 he takes three bills; f776, f781, f786 he slaps them one by one into the man's palm ('cầm tiền' f776-789).
 - Acting: Owner: pleased with the deal. Man: friendly nod.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 723 | open | [2.437, 1.28, 3.049] | [1.211, 0.495, -1.228] | 42 | 0.12 | 0 | the deal across the counter, the register, the bills |
+| 723 | open | [2.22, 1.543, 2.911] | [1.046, 0.792, -1.182] | 42 | 0.12 | 0 | the deal across the counter, the register, the bills |
 
 - Kicks (7 f): f752 strength 0.4.
 - Physics & FX: the drawer: slides 16 cm in 3 f and bounces 1 cm.
@@ -258,16 +259,16 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 - Set: shop. Light: day.
 - Build: as before.
 - Blocking: Owner turns away to shelve the booster boxes (carries the stack to the back shelves, f805-890, side view walking); the man stays at the man mark.
-  - man at [0.98, -0.82], front; three lifts f846-885; smirk.
-  - owner at [1.55, -1.62], side walking; shelves the stack f805-890; neutral.
+  - man at [0.7, -0.88], front; three lifts f846-885; smirk.
+  - owner at [1.75, -1.62], side walking; shelves the stack f805-890; neutral.
 - Action, against the words: f804-815 he tucks the cash into his jacket; f822 ('quay lại') turns his eyes to the box; f846-856 the Psyduck slab out, into the jacket; f863-873 the gold Mew; f875-885 the M Charizard ('thêm ba lá nữa': f849, f866, f878); each lift 12 cm, each into the jacket; f886-895 the camera pushes into his jacket.
 - Acting: Man: quick and calm, a tiny smirk. Owner: back turned.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 800 | open | [0.181, 1.468, 3.478] | [0.648, 0.518, -0.965] | 40 | 0.12 | 0 | him and the box, the owner going to the shelves |
-| 882 | glide 13 f | [0.92, 1.3, -0.3] | [0.94, 1.25, -0.84] | 34 | 0 | 0 | into his jacket |
+| 800 | open | [1.332, 1.559, 2.289] | [0.878, 0.866, -0.943] | 40 | 0.12 | 0 | him and the box, the owner going to the shelves |
+| 882 | glide 13 f | [0.66, 1.3, -0.36] | [0.68, 1.25, -0.9] | 34 | 0 | 0 | into his jacket |
 
 - Kicks (7 f): f849 strength 0.2; f866 strength 0.2; f878 strength 0.3.
 - Physics & FX: the slabs: kinematic in his hand.
@@ -326,15 +327,15 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 - Set: shop. Light: day.
 - Build: the ceiling camera (REC lamp), the customer monitor with four views (the box view shows him at the counter).
 - Blocking: Man at the man mark (the S08 moment, cards already gone); owner at the register.
-  - man at [0.98, -0.82], front; standing at the box; smirk.
-  - owner at [1.55, -1.62], front; at the register; neutral.
+  - man at [0.7, -0.88], front; standing at the box; smirk.
+  - owner at [1.75, -1.62], front; at the register; neutral.
 - Action, against the words: f1188-1243 high wide: the owner at the register, the man at the box, the floor tiles between them ('vài bước' f1226-1236); f1246-1290 glide up to the ceiling camera: its REC lamp blinks (15 f on / 15 f off); f1295-1323 glide to the monitor: four views, the counter view shows the man and the box ('ai nhìn cũng thấy').
 - Acting: Owner: busy at the register. Man: casual.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1188 | open | [2.099, 2.702, 2.159] | [1.257, 0.355, -1.218] | 50 | 0.06 | 0 | a few steps apart, the floor tiles between them |
+| 1188 | open | [2.019, 2.548, 2.67] | [1.188, 0.768, -1.242] | 52 | 0.06 | 0 | a few steps apart, the floor tiles between them |
 | 1248 | glide 42 f | [1.85, 2.3, 1.95] | [3.02, 3.08, 0.38] | 36 | 0.08 | 0 | the ceiling camera, REC |
 | 1294 | glide 26 f | [1.75, 2.1, 0.15] | [2, 2.28, -1.45] | 34 | 0.08 | 0 | the monitor: anyone can see |
 
@@ -350,9 +351,9 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 - In: glide. Out: dissolve 8 f.
 - Set: shop. Light: day.
 - Build: as before.
-- Blocking: Man at the man mark; owner at owner_left, facing the man across the counter.
-  - man at [0.98, -0.82], front; frozen; smirk.
-  - owner at [0.6, -1.58], front; standing; smile.
+- Blocking: Man at the man mark; owner at owner_pay, right behind the box, facing the man across the counter.
+  - man at [0.7, -0.88], front; frozen; smirk.
+  - owner at [1.4, -1.5], front; standing behind the box; smile.
 - Action, against the words: f1336 'Khoan': everything freezes (the customers stop mid-move), a record scratch; f1351-1397 'trước mặt chủ': the owner's face across the counter, a metre from the box; f1405-1428 'dưới ống kính': the view from right under the ceiling camera down onto the man and the box (the camera's hood in the top of frame); f1432-1484 'gọi điện hẹn hẳn hoi': the caller-ID screen, his number.
 - Acting: Owner: friendly, oblivious. Man: frozen mid-smirk.
 - Camera keys:
@@ -360,9 +361,9 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 1336 | open | [1.75, 2.1, 0.15] | [2, 2.28, -1.45] | 32 | 0 | 0 | hold: the freeze |
-| 1350 | glide 38 f | [1.237, 1.282, 3.288] | [0.62, 0.499, -1.108] | 42 | 0.1 | 0 | right in front of the owner |
+| 1350 | glide 38 f | [1.427, 1.496, 2.784] | [1.014, 0.8, -1.145] | 42 | 0.1 | 0 | right in front of the owner |
 | 1402 | glide 24 f | [2.75, 2.95, 0.25] | [0.85, 1.05, -1] | 44 | 0.08 | 0 | under the lens |
-| 1436 | glide 26 f | [2.05, 1.36, -1.66] | [2, 0.95, -1.29] | 30 | 0.08 | 0 | his own number on the caller ID |
+| 1436 | glide 26 f | [2.15, 1.45, -1.53] | [2.15, 1.065, -1.31] | 30 | 0.08 | 0 | his own number on the caller ID |
 
 - Kicks (7 f): f1336 strength 0.6.
 - Physics & FX: none.
@@ -377,16 +378,16 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 - Set: shop. Light: day.
 - Build: as before; calm.
 - Blocking: Owner at owner_left; kid at the kid mark bending to the glass; man at the man mark.
-  - owner at [0.6, -1.58], front; eyes on the kid f1500-1560, handshake f1590-1615; stern -> smile.
+  - owner at [0.1, -1.55], front; eyes on the kid f1500-1560, handshake f1590-1615; stern -> smile.
   - kid at [-0.35, -0.72], front; bends to the glass; neutral.
-  - man at [0.98, -0.82], front; handshake; smile.
+  - man at [0.7, -0.88], front; handshake; smile.
 - Action, against the words: f1500-1560 the kid leans to the glass with a finger near it; the owner's eyes narrow and follow the kid's hand ('canh hàng' f1545); f1563 he turns his eyes to the man and smiles; f1590-1615 they shake hands across the counter (2 shakes).
 - Acting: Owner: stern on the kid -> warm on the seller. Kid: curious. Man: friendly.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1495 | open | [0.314, 1.04, 3.121] | [0.314, 0.455, -1.04] | 46 | 0.06 | 0 | calm wide: the owner between the kid and the seller |
+| 1495 | open | [0.164, 1.393, 3.573] | [0.164, 0.744, -1.05] | 46 | 0.06 | 0 | calm wide: the owner between the kid and the seller |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -397,7 +398,7 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 ### S14 · 0:54.1-0:56.9 · f1624-f1708 · "Người đó giống như khách đến chơi nhà mang theo quà."
 - Gloss: He's like a guest who comes to visit bringing a gift.
 - Spine link: 6. Viewer must get: A guest at the door with a gift, welcomed in.
-- In: dissolve 8 f. Out: glide.
+- In: dissolve 8 f. Out: dissolve 6 f (a moment later, at the table).
 - Set: house. Light: day.
 - Build: the house: the front door, the porch outside, the dining room; the gift (a booster box wrapped in red with a gold bow).
 - Blocking: Host (the owner's look) by the door at host_door; guest (the man's look) on the porch at guest_door holding the gift.
@@ -409,7 +410,7 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1624 | open | [-0.813, 1.071, 1.602] | [-0.813, 0.597, -2.917] | 46 | 0.08 | 0 | the door, the guest with the gift |
+| 1624 | open | [-0.995, 1.293, 1.112] | [-0.995, 0.872, -2.893] | 46 | 0.08 | 0 | the door, the guest with the gift |
 
 - Kicks (7 f): none.
 - Physics & FX: the door: hinged, eased open with a small bounce.
@@ -420,19 +421,20 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 ### S15 · 0:56.9-0:58.8 · f1708-f1765 · "Chẳng ai đi theo khách để đếm thìa."
 - Gloss: Nobody follows a guest around counting the spoons.
 - Spine link: 6. Viewer must get: The host turns his back; the spoon tray by the guest ends with one empty slot.
-- In: glide. Out: dissolve 8 f.
+- In: dissolve 6 f. Out: dissolve 8 f.
 - Set: house. Light: day.
 - Build: the table with the cake, the plates and the spoon tray (six spoons).
-- Blocking: Guest at guest_tbl behind the table; host walks away to the kitchen doorway (side view, to the right) carrying the gift, f1708-1750.
-  - man at [0.35, -1.25], front; spoon f1736-1757; smile.
+- Blocking: Guest seated on the chair behind the table (guest_tbl); host walks from host_mid to the kitchen doorway (side view, to the right) carrying the gift, f1708-1750.
+  - man at [0.3, -1.32], front, seated; spoon f1736-1757; smile.
   - owner at [2.6, -1.3], side walking; walks to the kitchen; smile.
-- Action, against the words: f1708-1750 the host walks off toward the kitchen, never looking back; f1736-1748 the guest's arm reaches the tray and lifts a spoon; f1750-1757 it goes into his jacket ('đếm thìa' f1750-1755); the tray keeps one empty slot.
+- Action, against the words: f1708-1750 the host walks off toward the kitchen, never looking back; f1736-1748 the guest's arm reaches the tray and lifts a spoon (the camera drops to the tray f1742-1754); f1750-1757 it goes into his jacket ('đếm thìa' f1750-1755); the tray keeps one empty slot.
 - Acting: Guest: angelic smile. Host: humming, happy.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1708 | open | [0.035, 1.412, 2.998] | [0.31, 0.573, -0.94] | 42 | 0.12 | 0 | the guest and the spoon tray, the host walking away |
+| 1708 | open | [0.085, 1.527, 1.732] | [0.293, 0.891, -1.252] | 42 | 0.08 | 0 | the guest and the spoon tray, the host walking away |
+| 1742 | glide 12 f | [0.32, 1.22, -0.3] | [0.31, 0.79, -0.86] | 40 | 0.08 | 0 | the spoon tray: one slot empty |
 
 - Kicks (7 f): f1755 strength 0.2.
 - Physics & FX: the spoon: kinematic.
@@ -446,16 +448,16 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 - In: dissolve 8 f. Out: dissolve 8 f.
 - Set: shop. Light: day.
 - Build: the box with four gaps; the glass case with its hinged door and padlock.
-- Blocking: Owner at owner_left behind the box; then he walks with the box around the left end of the counter to case_stand.
-  - owner at [0.6, -1.58], front then side walking; head scratch, lifts the box, walks to the case; sad.
+- Blocking: Owner at owner_pay behind the box; then he walks with the box behind the counter, around its left end, to case_stand.
+  - owner at [1.4, -1.5], front then side walking; head scratch, lifts the box, walks to the case; sad.
 - Action, against the words: f1765-1812 he looks down at the four gaps, scratches his head; f1830-1842 he lifts the box with both arms; f1842-1895 he walks left behind the counter, around its end and to the case (side view); f1896-1906 the case door swings open; f1906-1918 he sets the box on the shelf; f1920 the door shuts; f1926 the padlock snaps shut ('ngoài' f1928).
 - Acting: Owner: sheepish, a sigh.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1765 | open | [0.45, 1.45, 0.25] | [0.55, 1.15, -1.25] | 40 | 0.08 | 0 | the four gaps, the owner behind |
-| 1832 | glide 40 f | [2.673, 1.08, -1.697] | [-1.948, 0.265, -1.697] | 58 | 0.06 | 0 | he carries the box to the case |
+| 1765 | open | [1.12, 1.55, -0.12] | [1.18, 1.22, -1.32] | 40 | 0.08 | 0 | the four gaps, the owner behind |
+| 1832 | glide 40 f | [1.285, 1.44, 0.127] | [-1.814, 0.664, -1.809] | 54 | 0.06 | 0 | he carries the box to the case |
 
 - Kicks (7 f): f1926 strength 0.3.
 - Physics & FX: the case door: hinged at its back edge, swings 100 deg and back; the padlock shackle snaps down 1 cm.
@@ -470,15 +472,15 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 - Set: shop. Light: day.
 - Build: as before.
 - Blocking: Owner at owner_left and the man at the man mark, shaking hands across the counter.
-  - owner at [0.6, -1.58], front; handshake; smile.
-  - man at [0.98, -0.82], front; handshake; smile.
+  - owner at [0.1, -1.55], front; handshake; smile.
+  - man at [0.7, -0.88], front; handshake; smile.
 - Action, against the words: f1950-2040 the handshake, slow pumps every 20 f, both smiling; slow push; f2047 hard cut on 'Tiệm' to the ceiling camera lens, the REC lamp blinking on.
 - Acting: Owner: warm. Man: warm.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1947 | open | [0.795, 1.007, 3.518] | [0.795, 0.511, -1.2] | 40 | 0.06 | 0 | the handshake: trust |
+| 1947 | open | [0.453, 1.2, 2.479] | [0.453, 0.811, -1.215] | 40 | 0.06 | 0 | the handshake: trust |
 | 2047 | cut | [2.6, 2.82, -0.05] | [3.05, 3.1, 0.4] | 32 | 0.2 | 0 | the shop's camera |
 
 - Kicks (7 f): f2047 strength 0.5.
@@ -494,14 +496,14 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 - Set: shop. Light: day.
 - Build: as before.
 - Blocking: Owner at owner_phone, the handset at his ear.
-  - owner at [2, -1.62], front; handset to his ear; stern.
+  - owner at [2.15, -1.62], front; handset to his ear; stern.
 - Action, against the words: f2092-2104 he lifts the handset and dials; f2113 'cảnh sát' he speaks, urgent.
 - Acting: Owner: urgent, serious.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 2089 | open | [2.706, 1.263, 2.571] | [1.989, 0.535, -1.495] | 42 | 0.08 | 0 | the owner calls the police |
+| 2089 | open | [2.692, 1.414, 1.431] | [2.163, 0.876, -1.569] | 42 | 0.08 | 0 | the owner calls the police |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -516,16 +518,16 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 - Set: shop. Light: day.
 - Build: the officer's notepad: the number written stroke by stroke.
 - Blocking: Officer at the cop mark in front of the counter; owner at owner_phone, pointing at the phone.
-  - cop at [1.75, -0.8], front; writes on the notepad f2160-2196; neutral.
-  - owner at [2, -1.62], front; points at the phone; stern.
+  - cop at [1.95, -0.8], front; writes on the notepad f2160-2196; neutral.
+  - owner at [2.15, -1.62], front; points at the phone; stern.
 - Action, against the words: f2140-2160 the owner points at the caller-ID screen; f2160-2196 the officer writes (773) 555-0142 on her notepad ('số điện thoại' f2151-2162, 'gọi tới' f2186-2193); f2180-2207 glide to the notepad.
 - Acting: Owner: firm. Officer: businesslike.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 2132 | open | [2.952, 1.281, 3.135] | [1.869, 0.491, -1.21] | 42 | 0.08 | 0 | the owner points, the officer writes |
-| 2178 | glide 24 f | [1.72, 1.42, -0.25] | [1.78, 1.13, -0.74] | 32 | 0.08 | 0 | the number on her notepad |
+| 2132 | open | [2.85, 1.414, 2.169] | [2.009, 0.801, -1.201] | 42 | 0.08 | 0 | the owner points, the officer writes |
+| 2178 | glide 24 f | [1.99, 1.45, -0.08] | [1.99, 1.19, -0.68] | 32 | 0.08 | 0 | the number on her notepad |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -540,14 +542,14 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 - Set: shop. Light: day.
 - Build: the street.
 - Blocking: Man comes out of the door (man_door outside) and walks toward the lens to man_walk.
-  - man at [1.15, 6.8], front walking then standing; pats the jacket f2248-2262, fans the cash f2268-2290; grin.
+  - man at [1.6, 6.8], front walking then standing; pats the jacket f2248-2262, fans the cash f2268-2290; grin.
 - Action, against the words: f2208 the door opens, bell; f2210-2246 he walks out to man_walk (front view walking); f2248-2262 he pats his jacket twice ('bốn lá bài' f2240-2256); f2268-2290 he fans the three $100 bills by his face ('ba trăm đô' f2274-2285).
 - Acting: Man: smug grin.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 2207 | open | [1.176, 1.101, 10.84] | [1.508, 0.768, 6.099] | 44 | 0.06 | 0 | he walks out toward us, the shop door behind |
+| 2207 | open | [1.352, 1.234, 10.33] | [1.623, 0.962, 6.446] | 44 | 0.06 | 0 | he walks out toward us, the shop door behind |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -562,7 +564,7 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 - Set: shop. Light: day.
 - Build: the monitor shows one frozen view: his face at the counter, REC, NOV 18 4:07 PM; his own phone (cast prop) with a ringing screen.
 - Blocking: Man at man_walk on the sidewalk.
-  - man at [1.15, 6.8], front; phone out f2380, freeze f2398; grin -> shock.
+  - man at [1.6, 6.8], front; phone out f2380, freeze f2398; grin -> shock.
 - Action, against the words: f2300-2340 the camera flies past him through the door glass to the monitor: his face frozen on it ('gương mặt trên camera' f2327-2350); f2353-2392 the camera flies back out through the door to him; f2371 ('số điện thoại') his own phone rings in his jacket; f2380 he pulls it out; f2398 he looks at it and freezes ('chính mình' f2396-2410): shock, a sweat drop; hold to the end.
 - Acting: Man: grin -> shock.
 - Camera keys:
@@ -570,7 +572,7 @@ One hard cut (S17, the handshake to the camera lens on "Tiệm"). Travels: S01 o
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 2300 | open | [1.85, 2.08, 0.2] | [2, 2.28, -1.45] | 32 | 0.08 | 0 | his face on the monitor |
-| 2350 | glide 50 f | [0.845, 0.842, 11.16] | [1.15, 0.536, 6.8] | 40 | 0.12 | 0 | his own phone rings |
+| 2350 | glide 50 f | [1.366, 1.073, 10.129] | [1.598, 0.839, 6.8] | 40 | 0.12 | 0 | his own phone rings |
 
 - Kicks (7 f): f2398 strength 0.6.
 - Physics & FX: the phone: buzz jitter 2 mm while ringing.
