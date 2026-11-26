@@ -27,8 +27,8 @@ Hard cuts: S10 ("Khoan đã"), the S11 phone POV, the S13 board's-eye view. Diss
 
 ### piazza
 - Origin in the shared world: [0, 0, 0]. Axes: the civic hall's façade on z -6 faces +z; the board in front of it, left; the café on the right (front z -4, x 3.2..8.2); +z toward the lens.
-- Light: day; sun az/el [-35, 42]. Open camera sides: sky.
-- Marks [x, z]: tear [-0.55, -2.68]; staff [2.85, -5.45]; sit [0.3, -2.55]; him_t1 [3.78, -2.45]; str_t1 [4.62, -2.45].
+- Light: day; sun az/el [145, 48]. Open camera sides: sky.
+- Marks [x, z]: tear [-0.55, -2.68]; staff [2.95, -5.45]; sit [0.3, -2.55]; him_t1 [3.78, -2.45]; str_t1 [4.62, -2.45].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
@@ -41,8 +41,8 @@ Hard cuts: S10 ("Khoan đã"), the S11 phone POV, the S13 board's-eye view. Diss
 | ann | new: the announcement 44 x 58 cm (S08 on): TÔI BỊ CẤM VĨNH VIỄN KHỎI MỌI GIẢI ĐẤU CHÍNH THỨC — iCaterpie | [-0.55, 1.02, -2.955] | [0.44, 0.58, 0.002] |
 | bin | new: green litter bin r 20 cm, 74 cm | [-2.15, 0.37, -2.65] | [0.4, 0.74, 0.4] |
 | cafe | new: one-storey café front x 3.2..8.2 on z -4: terracotta wall, red-and-white striped awning 1.5 m deep, CAFFÈ lettering, window with cakes, door, lemon trees in pots; three round tables with chairs; Italian-flag bunting from the hall to the café | [5.7, 1.8, -4] | [5, 3.6, 0.3] |
-| signpost | new: wooden signpost with arrows STAZIONE, NICE 300 km, ROMA, MILANO | [2.65, 1.3, -1.25] | [0.9, 2.6, 0.1] |
-| scale | adapt:balance (Mudkip S15): a brass public scale, pivot post 1.5 m at (-3.2, 1.0), beam 1.8 m along z, two pans on chains; iron weights CẤM CẢ ĐỜI and NÊU TÊN TRỌNG TÀI (S14 on) | [-3.2, 0.8, 1] | [0.7, 1.6, 2.2] |
+| signpost | new: wooden signpost with arrows STAZIONE, NICE 300 km, ROMA, MILANO | [5.9, 1.3, -0.6] | [0.9, 2.6, 0.1] |
+| scale | adapt:balance (Mudkip S15): a brass public scale, pivot post 1.5 m at (-3.2, 1.0), beam 1.8 m along z, two pans on chains; iron weights CẤM CẢ ĐỜI and NÊU TÊN TRỌNG TÀI (S14 on) | [-3, 0.8, 1.5] | [0.7, 1.6, 2.2] |
 | houses | new: house fronts on the other three sides (ochre, terracotta, pale yellow), green shutters, balconies with flowers, a scooter, a fountain at (-3.8, 3.6), lamp posts; blue sky with inked clouds above the roofs | [0, 4, 0] | [24, 8, 28] |
 
 ### worlds
@@ -77,14 +77,14 @@ Hard cuts: S10 ("Khoan đã"), the S11 phone POV, the S13 board's-eye view. Diss
 - Build: new: the piazza: the board with the post sheet, the bin, the civic hall with the open door and the clock; the staff with the hook pole beside the door.
 - Blocking: Him at the tear mark (right of the sheet, facing +z); the staff at the staff mark beside the door, hook pole up at the shutter's bottom bar.
   - him at [-0.55, -2.68], front; reach f12, rip f17, crumple, toss f32-48; stern -> shock.
-  - staff at [2.85, -5.45], front; hook pole up; pulls f92-136; neutral.
+  - staff at [2.95, -5.45], front; hook pole up; pulls f92-136; neutral.
 - Action, against the words: f0-12 he glances at the sheet; f12-17 his left arm (screen left) reaches the sheet's right edge; f17 the rip (2 f before 'xóa' f19): the sheet tears off under the pin, the top corner stays pinned; f18-30 he crumples it into a ball; f32-48 he tosses it left into the bin (arc, lands f48, the bin rocks); f92 the staff hooks the shutter's bar and pulls: the shutter rattles down f100-136 and slams on 'đời' f137 (dust puff at the sill); he turns his head to it, shocked.
 - Acting: Him: stern -> shock on the slam. Staff: neutral.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 0 | open | [-0.45, 1.7, 2.3] | [-0.75, 1.25, -3] | 44 | 0.07 | 0 | him tearing the post off the board |
+| 0 | open | [-0.55, 1.9, 3.4] | [-0.95, 1.45, -3] | 46 | 0.07 | 0 | him tearing the post off the board |
 | 80 | glide 44 f | [0.9, 2.9, 6.8] | [1, 2.4, -4.5] | 48 | 0.05 | 0 | pull back: the board and the hall's shutter coming down |
 
 - Kicks (7 f): f17 strength 0.35; f137 strength 1.
@@ -198,13 +198,13 @@ Hard cuts: S10 ("Khoan đã"), the S11 phone POV, the S13 board's-eye view. Diss
 - Build: reuse the sheet: the name line at its bottom.
 - Blocking: Him at the tear mark, his arm at the sheet.
   - him at [-0.55, -2.68], front; writes the name f745-768; stern.
-- Action, against the words: f745-768 his marker writes the name in big red letters (we never see it legibly: scribble shapes); f770 a black censor bar slams over it (2 f squash) on 'tên' (f774); he underlines it twice f778-790.
+- Action, against the words: f745-768 his marker writes the name in big red letters (we never see it legibly: scribble shapes); f766-772 he steps aside to the right; f772 a black censor bar slams over it (2 f squash) on 'tên' (f774); he looks at it, satisfied.
 - Acting: Him: stern.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 739 | open | [-1.05, 1.35, -1.2] | [-1.2, 1.12, -2.95] | 38 | 0.06 | 0 | the name on the sheet |
+| 739 | open | [-0.85, 1.4, 0.7] | [-0.95, 0.9, -2.95] | 42 | 0.06 | 0 | the name on the sheet, him writing it |
 
 - Kicks (7 f): f770 strength 0.4.
 - Physics & FX: none.
@@ -242,7 +242,7 @@ Hard cuts: S10 ("Khoan đã"), the S11 phone POV, the S13 board's-eye view. Diss
 - Build: reuse the piazza; the suitcase with a NICE luggage tag; the announcement sheet; the padlock and the sign.
 - Blocking: Him wheels the suitcase in from the right to the tear mark; the staff at the door.
   - him at [-0.55, -2.68], side walking -> front; wheels f862-930; pins f998; sad.
-  - staff at [2.85, -5.45], front; pulls f1003-1020, padlock f1030-1036, sign f1044-1058; neutral.
+  - staff at [2.95, -5.45], front; pulls f1003-1020, padlock f1030-1036, sign f1044-1058; neutral.
 - Action, against the words: f862-930 he wheels the suitcase from (1.9, -2.3) to the tear mark; f945-962 the NICE tag swings on the handle ('Nice' f958); f975-995 he takes the announcement from his jacket and pins it (pin f998, 'báo tin' f982-988); f1003-1020 the staff pulls the shutter down, it slams on 'cấm' f1022; f1030-1036 the staff snaps the padlock shut ('vĩnh viễn' f1036); f1044-1058 he hangs the sign CẤM VĨNH VIỄN on the shutter's hasp; f1062-1095 the camera rises to the sign above the door: POKÉMON · GIẢI ĐẤU CHÍNH THỨC.
 - Acting: Him: tired, sad. Staff: neutral, businesslike.
 - Camera keys:
@@ -251,7 +251,8 @@ Hard cuts: S10 ("Khoan đã"), the S11 phone POV, the S13 board's-eye view. Diss
 |---|---|---|---|---|---|---|---|
 | 859 | open | [1.1, 2, 4.6] | [0.4, 1.6, -3.5] | 46 | 0.06 | 0 | him and the suitcase crossing to the board |
 | 940 | glide 22 f | [0, 1.45, 0.9] | [-0.3, 0.9, -2.6] | 40 | 0.06 | 0 | the NICE tag, the announcement pinned |
-| 1004 | glide 26 f | [1.6, 2.5, 4.6] | [2, 2, -5.5] | 46 | 0.06 | 0 | the shutter slams, the padlock, the sign |
+| 1000 | glide 22 f | [1.6, 2.5, 4.6] | [2, 2, -5.5] | 46 | 0.06 | 0 | the shutter slams |
+| 1026 | glide 10 f | [1.25, 1.55, -2] | [2.25, 1, -5.9] | 40 | 0.06 | 0 | the padlock, the sign |
 | 1060 | glide 30 f | [1.3, 2.9, 0.8] | [1.5, 3.3, -6] | 40 | 0.06 | 0 | the sign over the shut door |
 
 - Kicks (7 f): f1022 strength 1; f1036 strength 0.3.
@@ -291,7 +292,7 @@ Hard cuts: S10 ("Khoan đã"), the S11 phone POV, the S13 board's-eye view. Diss
 - Set: piazza. Light: day.
 - Build: reuse the board: the torn corner, the announcement.
 - Blocking: Friend standing in front of the board at (-1.1, -1.3), facing +z.
-  - friend at [-1.1, -1.3], front; points f1262; scratches f1300; shrugs f1334; nervous.
+  - friend at [-0.6, -1.3], front; points f1262; scratches f1300; shrugs f1334; nervous.
 - Action, against the words: f1258 Huh; f1262-1290 the friend points back at the torn corner; f1300-1325 scratches his head; f1334 shrugs on 'phạt?'.
 - Acting: Friend: puzzled.
 - Camera keys:
@@ -319,7 +320,7 @@ Hard cuts: S10 ("Khoan đã"), the S11 phone POV, the S13 board's-eye view. Diss
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1346 | open | [-1.1, 1.62, -1.25] | [-1.15, 1.22, -3] | 56 | 0.03 | 0 | the phone, the bare board behind |
+| 1346 | open | [-0.6, 1.62, -1.25] | [-1, 1.22, -3] | 56 | 0.03 | 0 | the phone, the bare board behind |
 
 - Kicks (7 f): none.
 - Physics & FX: none (screen content).
@@ -335,16 +336,16 @@ Hard cuts: S10 ("Khoan đã"), the S11 phone POV, the S13 board's-eye view. Diss
 - Build: reuse the terrace T1/T2: a tall water glass, a napkin; the patrons at T2.
 - Blocking: Him seated at T1; the friend walks across the terrace right to left; two patrons seated at T2.
   - him at [3.78, -2.45], front seated -> crouch; knocks f1506; mops f1558-1584; shock -> relief -> nervous.
-  - friend at [2.7, -1.7], side walking; walks f1522-1580 through the puddle; neutral -> nervous.
-  - patrons at [5.35, -1], front seated; look down f1600; point f1627; grin.
-- Action, against the words: f1500-1506 his right arm gestures and knocks the glass ('ly nước' f1508); it tips off the near edge and falls (rigid body), hits the cobbles f1519 ('đổ' f1519): a splash, a puddle spreads to r 0.32 m by f1530; the glass rolls and rests; f1522-1546 the friend walks through the puddle (one step in it f1533); f1548-1556 he stands, f1558-1584 crouches and wipes with the napkin: the puddle shrinks to nothing ('lau' f1558); f1584-1650 the wet prints the friend left run across the cobbles to where he stands; the patrons look down at the prints, then point at his dripping legs ('nhìn thấy' f1627, 'giày ướt' f1641).
+  - friend at [4.3, 0.3], side walking; walks f1522-1580 through the puddle; neutral -> nervous.
+  - patrons at [3, -3.35], front seated; look down f1600; point f1627; grin.
+- Action, against the words: f1500-1506 his right arm gestures and knocks the glass ('ly nước' f1508); it tips off the near edge and falls (rigid body), hits the cobbles f1519 ('đổ' f1519): a splash, a puddle spreads to r 0.32 m by f1530; the glass rolls and rests; f1522-1546 the friend walks in along the café front and steps in the puddle (f1533), then turns toward the lens; f1548-1556 he stands, f1558-1584 crouches and wipes with the napkin: the puddle shrinks to nothing ('lau' f1558); f1584-1650 the wet prints the friend left run from the puddle toward the lens to where he stands (a trail down the frame); the patrons look down at the prints, then point at his dripping legs ('nhìn thấy' f1627, 'giày ướt' f1641).
 - Acting: Him: oops -> relieved (puddle gone) -> nervous. Friend: oblivious -> embarrassed. Patrons: grin, pointing.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 1476 | open | [4.15, 1.8, 1.9] | [4.05, 1, -2.2] | 46 | 0.06 | 0 | the table, the glass, the terrace |
-| 1590 | glide 34 f | [3.4, 1.75, 2.1] | [3.3, 0.85, -1.7] | 48 | 0.06 | 0 | the wet prints to the friend, the patrons pointing |
+| 1545 | glide 40 f | [4, 1.75, 3.9] | [3.8, 0.6, -1.4] | 50 | 0.06 | 0 | the wet prints to the friend, the patrons pointing |
 
 - Kicks (7 f): f1519 strength 0.4.
 - Physics & FX: the glass: cannon-es cylinder, tipped from the table edge, 240 Hz bake; the splash a 6 f FX; the puddle a flat decal that grows then shrinks under the napkin; prints a fading decal per step.
@@ -359,7 +360,7 @@ Hard cuts: S10 ("Khoan đã"), the S11 phone POV, the S13 board's-eye view. Diss
 - Set: piazza. Light: day.
 - Build: reuse the piazza looking +z from the board's face: the crowd, the house fronts, the fountain.
 - Blocking: Five passers-by in front of the board (z -1.5..-0.2), facing the board (the lens), phones held up, screens to them.
-  - crowd at [-1, 0.6], front; phones up, flash; grin / shock.
+  - crowd at [-1, 1.4], front; phones up, flash; grin / shock.
 - Action, against the words: f1662-1700 they gather; flashes from their phones at f1702, f1712, f1718, f1723, f1729 ('chụp lại' f1723).
 - Acting: Crowd: curious, gossiping.
 - Camera keys:
@@ -381,15 +382,15 @@ Hard cuts: S10 ("Khoan đã"), the S11 phone POV, the S13 board's-eye view. Diss
 - Set: piazza. Light: day.
 - Build: reuse; the scale stands at (-3.2, 1.0); the two iron weights on the cobbles by the pans.
 - Blocking: Six people in a group beside the scale; three walk to the near pan, three to the far pan.
-  - crowd at [-3.2, 1], side walking -> front; split f1740-1778; lift f1800-1838; stern.
+  - crowd at [-3, 1.5], side walking -> front; split f1740-1778; lift f1800-1838; stern.
 - Action, against the words: f1740-1778 the group splits (three walk toward the lens, three away); f1800-1838 two of the near side lift the CẤM CẢ ĐỜI weight (both arms) and drop it on the near pan f1840; f1845 ('quá nặng') the pan slams to the ground, the beam tilts hard; the far pan rises; they throw up their arms.
 - Acting: Near side: indignant. Far side: arms folded.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1735 | open | [-1.4, 2.5, 6.4] | [-3.3, 1.2, 0.8] | 48 | 0.06 | 0 | the crowd by the scale |
-| 1795 | glide 30 f | [-2.7, 1.95, 5.4] | [-3.5, 0.85, 1.6] | 44 | 0.06 | 0 | the near pan and the heavy weight |
+| 1735 | open | [0.6, 2.7, 4.9] | [-3, 0.95, 1.5] | 46 | 0.06 | 0 | the crowd by the scale |
+| 1795 | glide 30 f | [-0.1, 1.9, 5.4] | [-2.56, 0.8, 2.8] | 44 | 0.06 | 0 | the near pan and the heavy weight |
 
 - Kicks (7 f): f1845 strength 0.8.
 - Physics & FX: the beam: a damped pendulum about the pivot; the weight lands with no bounce (iron), the pan hits the ground stop.
@@ -404,15 +405,15 @@ Hard cuts: S10 ("Khoan đã"), the S11 phone POV, the S13 board's-eye view. Diss
 - Set: piazza. Light: day.
 - Build: reuse.
 - Blocking: Far side at the far pan.
-  - crowd at [-3.2, 1], front; lift f1880-1922; stern.
+  - crowd at [-3, 1.5], front; lift f1880-1922; stern.
 - Action, against the words: f1880-1922 two of the far side lift their weight; f1925 it lands on the far pan; f1928-1960 the beam swings back to level, overshoots once and settles; both sides glare at each other f1960-1974.
 - Acting: Far side: stern. Near side: annoyed.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1863 | open | [-2, 2.3, 3.6] | [-3.2, 1.3, -0.1] | 44 | 0.06 | 0 | the far side and their weight |
-| 1932 | glide 26 f | [-1, 2.6, 6.6] | [-3.1, 1.3, 0.8] | 48 | 0.06 | 0 | the scale level, the two camps |
+| 1863 | open | [-0.1, 2.2, 3] | [-2.9, 1, 0.7] | 44 | 0.06 | 0 | the far side and their weight |
+| 1932 | glide 26 f | [0.8, 2.8, 5.1] | [-3, 0.95, 1.5] | 48 | 0.06 | 0 | the scale level, the two camps |
 
 - Kicks (7 f): f1925 strength 0.4.
 - Physics & FX: beam: damped pendulum back to level (period 1.1 s, damping 0.35).
@@ -433,7 +434,7 @@ Hard cuts: S10 ("Khoan đã"), the S11 phone POV, the S13 board's-eye view. Diss
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1974 | open | [-0.85, 2.2, 0.6] | [-1, 2.12, -3] | 38 | 0.09 | 0 | the empty official frame |
+| 1974 | open | [-0.85, 2.45, 0.6] | [-1, 2.42, -3] | 38 | 0.09 | 0 | the empty official frame |
 
 - Kicks (7 f): none.
 - Physics & FX: the crow: flap-glide in, a 2 f squash on landing.

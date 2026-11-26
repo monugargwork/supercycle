@@ -291,8 +291,8 @@
    "axes": "the civic hall's façade on z -6 faces +z; the board in front of it, left; the café on the right (front z -4, x 3.2..8.2); +z toward the lens",
    "light": "day",
    "sun": [
-    -35,
-    42
+    145,
+    48
    ],
    "open_sides": "sky",
    "objects": [
@@ -2277,7 +2277,7 @@
      "why": "the table, the glass, the terrace"
     },
     {
-     "f": 1590,
+     "f": 1545,
      "pos": [
       4.0,
       1.75,
@@ -2293,7 +2293,7 @@
      "push": 0.0006,
      "blur": 0,
      "why": "the wet prints to the friend, the patrons pointing",
-     "glide": 34
+     "glide": 40
     }
    ],
    "kicks": [
@@ -2316,7 +2316,7 @@
     {
      "who": "friend",
      "at": [
-      3.7,
+      4.3,
       0.3
      ],
      "view": "side walking",
@@ -2362,7 +2362,7 @@
     {
      "n": "friend head",
      "p": [
-      3.7,
+      4.3,
       1.85,
       0.3
      ],
@@ -2398,7 +2398,7 @@
     {
      "n": "friend feet",
      "p": [
-      3.7,
+      4.3,
       0.02,
       0.3
      ],

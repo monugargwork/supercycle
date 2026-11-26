@@ -497,7 +497,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   { mesh(new THREE.BoxGeometry(0.6, 0.42, 0.22), [C("#a82a32"), C("#a82a32"), C("#a82a32"), C("#a82a32"), lamC(sideT), lamC(sideT)], suitcase, 0, 0.25, 0);
     mesh(new THREE.BoxGeometry(0.03, 0.34, 0.03), C("#2a2c33"), suitcase, -0.2, 0.62, 0); mesh(new THREE.BoxGeometry(0.03, 0.34, 0.03), C("#2a2c33"), suitcase, 0.2, 0.62, 0); mesh(new THREE.BoxGeometry(0.44, 0.03, 0.04), C("#2a2c33"), suitcase, 0, 0.79, 0);
     for (const x of [-0.24, 0.24]) mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.03, 14), C("#1d1b22"), suitcase, x, 0.04, -0.09).rotation.x = Math.PI / 2; }
-  const tag = mesh(new THREE.PlaneGeometry(0.15, 0.09), tagM, suitcase, 0.36, 0.62, 0.0); tag.castShadow = false; (tag.material as THREE.Material).side = THREE.DoubleSide;
+  const tag = mesh(new THREE.PlaneGeometry(0.15, 0.09), tagM, suitcase, 0.27, 0.62, 0.115); tag.castShadow = false; (tag.material as THREE.Material).side = THREE.DoubleSide;
   // the water glass (S12, a rigid body), the espresso cup, the two trophies on T1
   const glass = mesh(new THREE.CylinderGeometry(0.04, 0.034, 0.13, 18), new THREE.MeshLambertMaterial({ color: "#bfe6ff" }), pz, 0, 0, 0); glass.castShadow = false;
   mesh(new THREE.CylinderGeometry(0.036, 0.036, 0.004, 18), new THREE.MeshLambertMaterial({ color: "#58a8f0" }), glass, 0, 0.03, 0).name = "water";

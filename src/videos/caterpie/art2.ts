@@ -207,7 +207,7 @@ export const puddle = (p: Pen) => {
   g.fillStyle = gr; g.beginPath(); for (let i = 0; i <= 24; i++) { const a = (i / 24) * Math.PI * 2, r = 112 + 12 * Math.sin(i * 2.7); g.lineTo(128 + Math.cos(a) * r, 128 + Math.sin(a) * r); } g.fill();
   g.fillStyle = "rgba(255,255,255,0.7)"; g.beginPath(); g.ellipse(96, 96, 30, 10, -0.5, 0, 7); g.fill();
 };
-export const wetPrint = (p: Pen) => { const g = p.g; g.fillStyle = "rgba(60,110,190,0.75)"; g.beginPath(); g.ellipse(64, 64, 40, 26, 0, 0, 7); g.fill(); g.fillStyle = "rgba(160,210,255,0.6)"; g.beginPath(); g.ellipse(52, 56, 12, 6, 0, 0, 7); g.fill(); };
+export const wetPrint = (p: Pen) => { const g = p.g; g.fillStyle = "rgba(40,95,200,0.92)"; g.beginPath(); g.ellipse(64, 64, 40, 26, 0, 0, 7); g.fill(); g.fillStyle = "rgba(160,210,255,0.6)"; g.beginPath(); g.ellipse(52, 56, 12, 6, 0, 0, 7); g.fill(); };
 export const tearDrop = (p: Pen) => { p.poly([[32, 4], [52, 40], [44, 58], [20, 58], [12, 40]], "#7fc4ff", 4); p.dot(26, 40, 5, "#ffffff"); };
 export const wetDot = (p: Pen) => { const g = p.g; g.fillStyle = "rgba(90,70,55,0.55)"; g.beginPath(); g.ellipse(32, 32, 28, 20, 0, 0, 7); g.fill(); };
 export const napkin = (p: Pen) => { p.poly([[20, 40], [180, 24], [196, 120], [30, 140]], "#ffffff", 6); p.stroke([[40, 60], [170, 50]], 4, "#d8322f"); };

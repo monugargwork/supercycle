@@ -58,7 +58,7 @@ PLAN = {
  "piazza": PIAZZA, "worlds": WORLDS,
  "sets": {
   "piazza": {"origin": [0, 0, 0], "axes": "the civic hall's façade on z -6 faces +z; the board in front of it, left; the café on the right (front z -4, x 3.2..8.2); +z toward the lens",
-   "light": "day", "sun": [-35, 42], "open_sides": "sky",
+   "light": "day", "sun": [145, 48], "open_sides": "sky",   # the sun behind the lens: the façades we face are lit (bright palette)
    "objects": [
     {"id": "ground", "build": "new: warm cobbles x -12..12, z -14..14", "pos": [0, 0, 0], "size": [24, 0, 28]},
     {"id": "hall", "build": "new: civic hall façade 9.2 m wide x 7.4 m: cream stucco, terracotta cornice and pilasters, two upper windows with green shutters and flower boxes; arched door 2 x 3 m with a lit tournament room inside (tables, players, banner); the clock (r 0.7 m) at y 5.6; a bell turret to 9.6 m", "pos": [0, 3.7, -6.0], "size": [9.2, 7.4, 0.4]},
@@ -292,12 +292,12 @@ scene(id="S12", hero=True, f=[1476, 1660], set="piazza", light="day",
   action="f1500-1506 his right arm gestures and knocks the glass ('ly nước' f1508); it tips off the near edge and falls (rigid body), hits the cobbles f1519 ('đổ' f1519): a splash, a puddle spreads to r 0.32 m by f1530; the glass rolls and rests; f1522-1546 the friend walks in along the café front and steps in the puddle (f1533), then turns toward the lens; f1548-1556 he stands, f1558-1584 crouches and wipes with the napkin: the puddle shrinks to nothing ('lau' f1558); f1584-1650 the wet prints the friend left run from the puddle toward the lens to where he stands (a trail down the frame); the patrons look down at the prints, then point at his dripping legs ('nhìn thấy' f1627, 'giày ướt' f1641).",
   acting="Him: oops -> relieved (puddle gone) -> nervous. Friend: oblivious -> embarrassed. Patrons: grin, pointing.",
   cams=[k(1476, [4.15, 1.8, 1.9], [4.05, 1.0, -2.2], 46, why="the table, the glass, the terrace"),
-        k(1590, [4.0, 1.75, 3.9], [3.8, 0.6, -1.4], 50, glide=34, why="the wet prints to the friend, the patrons pointing")],
+        k(1545, [4.0, 1.75, 3.9], [3.8, 0.6, -1.4], 50, glide=40, why="the wet prints to the friend, the patrons pointing")],
   kicks=[[1519, 0.4]],
   marks=[{"who": "him", "at": P["him_t1"], "view": "front seated -> crouch", "pose": "knocks f1506; mops f1558-1584", "expr": "shock -> relief -> nervous"},
-         {"who": "friend", "at": [3.7, 0.3], "view": "side walking", "pose": "walks f1522-1580 through the puddle", "expr": "neutral -> nervous"},
+         {"who": "friend", "at": [4.3, 0.3], "view": "side walking", "pose": "walks f1522-1580 through the puddle", "expr": "neutral -> nervous"},
          {"who": "patrons", "at": P["t3"], "view": "front seated", "pose": "look down f1600; point f1627", "expr": "grin"}],
-  subjects=[{"n": "him head", "p": HIM_T1, "f": [1476, 1550]}, {"n": "puddle", "p": [4.05, 0.0, -1.95], "f": [1520, 1580]}, {"n": "friend head", "p": [3.7, HEAD, 0.3], "f": [1630, 1659]}, {"n": "pat2 head", "p": [3.5, SEATED, -3.35], "f": [1630, 1659]}],
+  subjects=[{"n": "him head", "p": HIM_T1, "f": [1476, 1550]}, {"n": "puddle", "p": [4.05, 0.0, -1.95], "f": [1520, 1580]}, {"n": "friend head", "p": [4.3, HEAD, 0.3], "f": [1630, 1659]}, {"n": "pat2 head", "p": [3.5, SEATED, -3.35], "f": [1630, 1659]}],
   physics="the glass: cannon-es cylinder, tipped from the table edge, 240 Hz bake; the splash a 6 f FX; the puddle a flat decal that grows then shrinks under the napkin; prints a fading decal per step.",
   light_mood="sunny terrace.", sound="glass knock f1506, a clink-splash f1519; footsteps; squeaky napkin f1558-1584; a wet squelch per step; patrons' giggle.",
   after="A dry spot where the puddle was; the wet prints fade by f1660.")

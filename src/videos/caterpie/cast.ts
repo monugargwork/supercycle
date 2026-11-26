@@ -466,7 +466,7 @@ const cafe3 = (out: Stage, cam: CamInfo, f: number) => {
 // S12: the glass, the puddle, the friend's wet prints, the patrons pointing
 import { glassAt, splashAt } from "./physics";
 const T3 = PZ.t3, PAT: [Who, V3][] = [["pat1", Pm(T3[0] - 0.5, 0, T3[1])], ["pat2", Pm(T3[0] + 0.5, 0, T3[1])]];
-const WALKA = (): V3 => Pm(5.3, 0, -1.95), WALKB = (): V3 => Pm(3.7, 0, 0.3);
+const WALKA = (): V3 => Pm(5.3, 0, -1.95), WALKB = (): V3 => Pm(4.3, 0, 0.3);
 const cafe12 = (out: Stage, cam: CamInfo, f: number) => {
   const sp = splashAt(), Pd = Pm(sp.p[0], 0.004, sp.p[2]);
   // the puddle: grows after the splash, shrinks under the napkin
@@ -507,7 +507,7 @@ const cafe12 = (out: Stage, cam: CamInfo, f: number) => {
     const tStep = STEP12 + (i * 0.38 / L2) * (WALK12[1] - STEP12); if (f < tStep) break;
     const fade = 1 - ramp(f - tStep, 80, 125); if (fade <= 0.02) continue;
     const sx = (i % 2 ? 0.08 : -0.08), q: V3 = [M[0] + ux * i * 0.38 - uz * sx, 0.003, M[2] + uz * i * 0.38 + ux * sx];
-    flat(out, `wet${i % 2}${Math.round(fade * 6)}`, (pp) => { pp.g.globalAlpha = fade; art2.wetPrint(pp); pp.g.globalAlpha = 1; }, q, 0.2, Math.atan2(ux, uz), 128, 128, 0.13);
+    flat(out, `wet${i % 2}${Math.round(fade * 6)}`, (pp) => { pp.g.globalAlpha = fade; art2.wetPrint(pp); pp.g.globalAlpha = 1; }, q, 0.3, Math.atan2(ux, uz), 128, 128, 0.2);
   }
   // the patrons at T2: grin, look down at the prints, point at the friend
   PAT.forEach(([who, Pp], i) => {
