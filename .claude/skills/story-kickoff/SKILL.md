@@ -21,7 +21,7 @@ Read first: `CLAUDE.md`, `docs/rules.md`, `docs/production-flow.md`, `docs/sourc
 1. `scripts/new_reel.sh <slug> <Name>` sets up the build in one go: the per-reel files of the newest reel copied to `src/videos/<name>/` with exports renamed and paths pointed at this reel, `audio/<name>_audio.py`, `public/<name>/` with the voice and words, and both compositions registered in `src/Root.tsx`. The engine stays in `src/engine/` and is imported, not copied; read it only if a scene needs an engine change, and keep any change additive.
 2. Cards: `python3 scripts/card.py use <name> <card>[:<alias>] …` copies the scans into `public/<name>/cards/` and writes `SOURCES.txt`.
 3. Memes into `public/<name>/memes/` (from `~/Downloads/meme sounds`), then build `mix.wav` with the sound script.
-4. Mechanical jobs (fetching card scans, copying meme sounds, renaming exports) can go to a subagent on a cheaper model.
+4. Do mechanical jobs (fetching card scans, copying meme sounds, renaming exports) inline: no subagents (they burn credits). Only if one is truly unavoidable, `haiku` or `sonnet` at medium effort.
 5. Reuse before inventing. Tag every move `reuse:` / `adapt:` / `new` (from `library/INDEX.md`).
 
 ## 4. Check, then hand over

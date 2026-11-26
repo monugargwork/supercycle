@@ -36,12 +36,12 @@ Account skills they call: `vn-news-script` (the script), `story-reel-director` (
 - **Look at sheets, not stills**: check with `scripts/sweep.command` (9 frames per image); open a single full still only to inspect a detail.
 - **Read `direction.md`, not raw `plan.json`** (71 KB). Change the plan through its generator script (`mkplan.py`), then regenerate `direction.md`.
 - **Don't read the engine** (`src/engine/`) unless the scene needs an engine change; the per-reel files and `library/INDEX.md` are enough.
-- **Mechanical side jobs** (finding card scans, copying assets, renaming exports) can go to a subagent on a cheaper model (`sonnet` or `haiku`).
+- **No subagents** (26 Nov 2026: they burn credits fast). Find card scans and slab photos, copy assets and rename exports inline; if a subagent is truly unavoidable, only `haiku` or `sonnet` at medium effort.
 
 ## Layout
 | Path | What |
 |---|---|
-| `src/index.ts`, `src/Root.tsx` | Register the compositions: `JirachiReel`, `FossilReel`, `MonacoReel`, `ChocoboReel`, `FanaticsReel`, `MudkipReel`, `AtticReel`, `GpsReel`, `PsaReel`, `LucasReel`, `TcgplayerReel`, `GengarReel`, `GoldenrodReel` (each with a `…Captions` comp), `BridgeShort`, `CharTest` |
+| `src/index.ts`, `src/Root.tsx` | Register the compositions: `JirachiReel`, `FossilReel`, `MonacoReel`, `ChocoboReel`, `FanaticsReel`, `MudkipReel`, `AtticReel`, `GpsReel`, `PsaReel`, `LucasReel`, `TcgplayerReel`, `GengarReel`, `GoldenrodReel`, `ChicagoReel` (each with a `…Captions` comp), `BridgeShort`, `CharTest` |
 | `src/engine/` | The shared engine (toon characters, ink, shading, paint, lights, grade, lens blur, geometry). New reels import it; changes must be additive |
 | `src/videos/<reel>/` | One folder per reel: that reel's story, sets, cast, art, captions and `Reel.tsx` (see `library/INDEX.md`). The newest base is `monaco/` (channel logo, anti-flicker `box()` helper, near plane 0.12; `new_reel.sh` copies it). Attic, GPS, PSA and Bridge still hold their own engine copies |
 | `src/enzo/` | Enzo's `Title2` titles and the Bolota font loader |
@@ -56,6 +56,7 @@ Account skills they call: `vn-news-script` (the script), `story-reel-director` (
 
 | Reel | Composition | Video folder | Status |
 |---|---|---|---|
+| Chicago shop (Old Skool TCG: sells, gets paid, steals 4 cards) | `ChicagoReel` (2440 f) | `videos/chicago-mew-theft/` | v1 built to the 25 Nov quality bar, ready to render (26 Nov 2026) |
 | Goldenrod heist (masked burglars, a rented minivan, Justice IL) | `GoldenrodReel` (2370 f) | `videos/goldenrod-heist/` | v1 built, ready to render (22 Nov 2026) |
 | Gengar unpaid ($576k Pristine 10, marked unpaid) | `GengarReel` (2420 f) | `videos/gengar-unpaid/` | v2 re-edited to the 25 Nov quality bar (real CGC slab photos), ready to render (25 Nov 2026) |
 | Lucas DeRuyter's big collection ("easy as candy") | `LucasReel` (2430 f) | `videos/lucas-big-collection/` | v1 built, ready to render (22 Nov 2026) |
