@@ -19,3 +19,12 @@ Composition `CaterpieReel` · code `src/videos/caterpie/` · assets `public/cate
 - S12 f1550-1575: the friend walks close past the lens while the camera pulls back; look at it in motion.
 - Flicker check: `[coplanar] 0`; 2 short runs over 370 frames: f1005-1006 (the S08 glide from the NICE tag to the shutter) and f2204-2206 (the S18 tilt from the torn corner to the clock). Both are the two fast glides the plan check warns about; I looked at the frames and they're plain camera motion, so both pass.
 - Render as v1: `scripts/render.command CaterpieReel Caterpie_v1`.
+
+## Review v1 (Frame.io CSV, 27 Nov 2026)
+The edit has already been posted, so nothing is rebuilt; the notes go into the rules so they aren't repeated.
+| Time (frame) | Note | Scene | What it means / where it went |
+|---|---|---|---|
+| 0:07 (f231) | "dont create chairs or scenes where our character have to sit … how bad it looks getting standing there like that" | S02 (him seated at the café table with the trophies) | Seated cards look like people standing stiffly in front of chairs. Rule added: nobody sits (`docs/rules.md` section 2); rejected (`taste/rejected.md`). |
+| 0:15 (f459) | "here again" | S03 (seated teaching at the café table) | Same note. S04 (Worlds, seated players), S09 (sitting on the suitcase), S12 (seated at the café, the patrons) and S19 had the same problem. |
+| 1:02 (f1869) | "this weighing machine was also badly animated, dont create complex scene if we can't actually make them well" | S14-S15 (the public scale) | Rule added: only gags we can animate well, one simple motion (`docs/rules.md` section 4); rejected. A simpler version would have been two signs held up by the two camps, or one weight dropped on a sign. |
+- Taste: stage everyone standing; prefer one-motion sight gags over machines the cast has to operate.

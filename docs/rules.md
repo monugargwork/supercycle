@@ -50,8 +50,9 @@ The characters were explicitly approved: keep them exactly as they are. These ru
 ## 2. Characters
 - They are the prebuilt flat 2D toon cards (bean body, round head, ink outline) billboarded in the 3D world. A full-3D rig was tried and rejected.
 - They are stick figures: arms and legs are plain lines, with no hands, fingers, feet or shoes, even in close-ups. A limb just ends, and contact with a prop is the line's end touching it.
-- Limbs never stretch or shrink; the arm is about 0.47 m. To reach something, the body moves (steps closer, bends, crouches, sits, lies down). `arm3d` warns `arm short by …` when a pose cheats.
+- Limbs never stretch or shrink; the arm is about 0.47 m. To reach something, the body moves (steps closer, bends, crouches). `arm3d` warns `arm short by …` when a pose cheats.
 - Expressions come from the face artwork (`Expr`). The jaw drop is `FrontOpts.gape` (0..1).
+- **Nobody sits (iCaterpie review, 27 Nov 2026).** The seated front card can't be animated sitting down, standing up or acting from a seat: it reads as a person standing stiffly in front of a chair. So no chairs, stools, café tables with seated people, match tables, suitcases or benches to sit on. Stage people standing: at a bar-height table or counter, at a stall, against a wall, walking. A sad or tired beat is shown with the face, a slump of the head, the light, the set, not by sitting.
 
 ## 3. Real cards
 - Every reel uses real TCG card scans (e.g. Pokémon), relevant to that story. Never drawn stand-in cards.
@@ -63,6 +64,7 @@ The characters were explicitly approved: keep them exactly as they are. These ru
 - Act, don't illustrate: every line gets a verb, a cause, a consequence and weight.
 - The camera travels and rarely cuts. Time jumps dissolve (4-10 f); hard cuts are for punches (3 or fewer per reel).
 - 2-3 hero moments get the full treatment; everything else is clear and in motion.
+- **Only gags we can animate well (iCaterpie review, 27 Nov 2026).** A metaphor machine with several moving parts driven by the cast (a public scale with pans, chains, weights carried by two people and a swinging beam) came out badly. Before a gag goes in the beats, ask: can it be done with one simple motion, by one person, with a prop we've already made work? If it needs multi-person carrying, chains or linkages, coupled swinging parts, or people crouching to lift things, cut it or swap it for a simpler sight gag (a sign, a stamp, one object falling, a reaction). When in doubt, the simpler gag wins.
 - The full grammar is in the `story-reel-director` skill.
 
 ## 5. Frame and text

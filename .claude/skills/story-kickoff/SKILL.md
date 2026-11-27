@@ -13,9 +13,10 @@ Read first: `CLAUDE.md`, `docs/rules.md`, `docs/production-flow.md`, `docs/sourc
 
 ## 2. Direct (skill `story-reel-director`)
 1. Look again at the loved reference reels for the grammar (`docs/sources.md` §1; never copy them). Then write `beats.md`, and list the real TCG cards the story needs. Look in the library first (`python3 scripts/card.py find …`); fetch only what's missing with `card.py add`, which keeps it there for later reels.
-2. Wait for his OK on the beats, unless he said "don't wait for my permission".
-3. Write `plan.json` with a generator script next to it (as `videos/mudkip-art-academy/mkplan.py` does). Every scene, mark and camera key goes in it. Change it only through the generator, and read `direction.md` rather than the raw JSON.
-4. Check and document it: `scripts/plan_check.py` (aim for 0 errors), `plan_view.py` and `plan_md.py` (which writes `direction.md`).
+2. Check the beats against two review rules (27 Nov 2026, `docs/rules.md` sections 2 and 4): nobody sits anywhere (no chairs, seated tables, sitting on props), and every gag is one simple motion we can animate well (no multi-part machines the cast operates).
+3. Wait for his OK on the beats, unless he said "don't wait for my permission".
+4. Write `plan.json` with a generator script next to it (as `videos/mudkip-art-academy/mkplan.py` does). Every scene, mark and camera key goes in it. Change it only through the generator, and read `direction.md` rather than the raw JSON.
+5. Check and document it: `scripts/plan_check.py` (aim for 0 errors), `plan_view.py` and `plan_md.py` (which writes `direction.md`).
 
 ## 3. Build
 1. `scripts/new_reel.sh <slug> <Name>` sets up the build in one go: the per-reel files of the newest reel copied to `src/videos/<name>/` with exports renamed and paths pointed at this reel, `audio/<name>_audio.py`, `public/<name>/` with the voice and words, and both compositions registered in `src/Root.tsx`. The engine stays in `src/engine/` and is imported, not copied; read it only if a scene needs an engine change, and keep any change additive.

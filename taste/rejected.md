@@ -19,3 +19,5 @@
 | 2026-11-25 | Bare box sets, empty walls, flat-colour skies | Dressed sets, plus blue skies with clouds. |
 | 2026-11-25 | Custom-drawn graded slabs; low-res card textures | Real slab photos (label edits through Grok image_edit); scans of 1000 px or more drawn at twice their on-screen size. |
 | 2026-11-25 | Higgsfield for anything | Too expensive; only when the user asks for it by name. |
+| 2026-11-27 | Characters sitting (café chairs, match-table chairs, sitting on a suitcase) | "dont create chairs or scenes where our character have to sit … how bad it looks getting standing there like that" (iCaterpie f231, f459). Stage everyone standing. |
+| 2026-11-27 | Complex metaphor machines the cast operates (the iCaterpie public scale: pans on chains, a swinging beam, weights carried by two lifters) | "this weighing machine was also badly animated, dont create complex scene if we can't actually make them well" (iCaterpie f1869). Simple one-motion gags only. |
