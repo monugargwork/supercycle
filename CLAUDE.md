@@ -41,7 +41,7 @@ Account skills they call: `vn-news-script` (the script), `story-reel-director` (
 ## Layout
 | Path | What |
 |---|---|
-| `src/index.ts`, `src/Root.tsx` | Register the compositions: `JirachiReel`, `FossilReel`, `MonacoReel`, `ChocoboReel`, `FanaticsReel`, `MudkipReel`, `AtticReel`, `GpsReel`, `PsaReel`, `LucasReel`, `TcgplayerReel`, `GengarReel`, `GoldenrodReel`, `CaterpieReel`, `ChicagoReel`, `MesaReel` (each with a `…Captions` comp), `BridgeShort`, `CharTest` |
+| `src/index.ts`, `src/Root.tsx` | Register the compositions: `JirachiReel`, `FossilReel`, `MonacoReel`, `ChocoboReel`, `FanaticsReel`, `MudkipReel`, `AtticReel`, `GpsReel`, `PsaReel`, `LucasReel`, `TcgplayerReel`, `GengarReel`, `GoldenrodReel`, `CaterpieReel`, `ChicagoReel`, `MesaReel`, `RetfordReel` (each with a `…Captions` comp), `BridgeShort`, `CharTest` |
 | `src/engine/` | The shared engine (toon characters, ink, shading, paint, lights, grade, lens blur, geometry). New reels import it; changes must be additive |
 | `src/videos/<reel>/` | One folder per reel: that reel's story, sets, cast, art, captions and `Reel.tsx` (see `library/INDEX.md`). The newest base is `monaco/` (channel logo, anti-flicker `box()` helper, near plane 0.12; `new_reel.sh` copies it). Attic, GPS, PSA and Bridge still hold their own engine copies |
 | `src/enzo/` | Enzo's `Title2` titles and the Bolota font loader |
@@ -56,6 +56,7 @@ Account skills they call: `vn-news-script` (the script), `story-reel-director` (
 
 | Reel | Composition | Video folder | Status |
 |---|---|---|---|
+| Retford wall heist (drilled through a wall, a fake-plated van, six charged at Mansfield) | `RetfordReel` (2425 f) | `videos/retford-wall-heist/` | v1 built to the 25 Nov quality bar, ready to render (27 Nov 2026) |
 | Mira Mesa Bubble Mew (a stranger runs off with a 12-year-old's card at her first show) | `MesaReel` (2510 f) | `videos/mira-mesa-bubble-mew/` | v1 built to the 25 Nov quality bar, ready to render (27 Nov 2026) |
 | Chicago shop (Old Skool TCG: sells, gets paid, steals 4 cards) | `ChicagoReel` (2440 f) | `videos/chicago-mew-theft/` | v1 built to the 25 Nov quality bar, ready to render (26 Nov 2026) |
 | iCaterpie lifetime ban (a deleted post, a lifetime ban, Worlds SF) | `CaterpieReel` (2360 f) | `videos/icaterpie-lifetime-ban/` | v1 built to the 25 Nov quality bar, ready to render (26 Nov 2026) |

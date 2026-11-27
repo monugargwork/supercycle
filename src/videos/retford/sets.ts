@@ -651,7 +651,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   for (const y of [3.2, 5.6, 8.8]) box(b, stone, fx0 - 0.03, y, 0, fx1 + 0.03, y + 0.22, 0.06);
   box(b, cbrick, fx0, 0, -14, fx0 + 0.3, FH, -0.4); box(b, cbrick, fx1 - 0.3, 0, -14, fx1, FH, -0.4); box(b, C("#c9643a"), fx0 - 0.2, FH, -14.2, fx1 + 0.2, FH + 0.25, 0.25);
   box(b, stone, cdx0 - 0.4, cdy + 0.6, 0, cdx1 + 0.4, cdy + 0.75, 1.6); box(b, stone, cdx0 - 0.35, 0, 0, cdx0 - 0.25, cdy + 0.6, 1.5); box(b, stone, cdx1 + 0.25, 0, 0, cdx1 + 0.35, cdy + 0.6, 1.5);
-  box(b, stone, cdx0 - 1.0, 0, 0, cdx1 + 1.0, 0.12, 0.5);
+  box(b, stone, cdx0 - 1.0, 0, 0.02, cdx1 + 1.0, 0.12, 0.5);
   box(b, C("#2a2c33"), CO.board[0] - CO.board_size[0] / 2 - 0.04, CO.board[1] - CO.board_size[1] / 2 - 0.04, 0, CO.board[0] + CO.board_size[0] / 2 + 0.04, CO.board[1] + CO.board_size[1] / 2 + 0.04, 0.045);
   { const [spx, spz] = CO.signpost; cyl(b, C("#f4f1ea"), spx, 0, spz, 0.06, 0.06, 2.9, 10); for (let y = 0.2; y < 2.6; y += 0.5) cyl(b, C("#1a1a1a"), spx, y, spz, 0.062, 0.062, 0.25, 10); sph(b, C("#1a1a1a"), spx, 2.92, spz, 0.08); }
   for (const x of [-6.5, -4.2, 4.2, 6.5]) { box(b, C("#c9a46a"), x - 0.5, 0, 1.6, x + 0.5, 0.5, 2.6); sph(b, C("#d8322f"), x - 0.2, 0.6, 2.1, 0.25); sph(b, C("#f2c23a"), x + 0.2, 0.6, 2.0, 0.22); sph(b, C("#3fa048"), x, 0.62, 2.3, 0.24); }

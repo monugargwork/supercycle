@@ -31,7 +31,7 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 ### unit
 - Origin in the shared world: [0, 0, 0]. Axes: the unit's front wall is z 0 (faces +z, the estate road along x); the side wall with the hole is x 6 (faces +x, the side yard); the police station is down the road at x 55..65 across it; the road runs west (-x) under the two gantry signs.
 - Light: night; sun az/el [-40, 35]. Open camera sides: +x, +z.
-- Marks [x, z]: A_drill [6.85, -4.75]; A_load [9.4, -6.8]; B_rack [4.68, -2.6]; B_hole [5.3, -3.6]; A_freeze [7, -4.75]; B_freeze [7.5, -3.2]; officer [58.6, 15.4]; kid_walk [6.5, 3.2]; kid_door [2.5, 0.55].
+- Marks [x, z]: A_drill [6.85, -4.75]; A_load [9.4, -6.8]; B_rack [4.5, -2.6]; B_hole [5.3, -3.6]; A_freeze [7, -4.75]; B_freeze [7.5, -3.2]; officer [58.6, 15.4]; kid_walk [6.5, 3.2]; kid_door [2.5, 0.55].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
@@ -149,7 +149,7 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 - Set: unit. Light: night.
 - Build: the warehouse: racks of cartons (TRADING CARDS / FRAGILE), the plug lying on the floor, ceiling lights.
 - Blocking: B at B_rack (front view) lifts a carton from the third shelf f116-128, walks to B_hole f130-146 and pushes it into the hole f146-160.
-  - B at [4.68, -2.6], front; lifts a carton f116-128; walks to B_hole f130-146; pushes it into the hole f146-160; nervous.
+  - B at [4.5, -2.6], front; lifts a carton f116-128; walks to B_hole f130-146; pushes it into the hole f146-160; nervous.
 - Action, against the words: f110-116 the camera passes through the hole (along z -4); f112 title 26; f116-128 B slides a carton off the rack; f130-146 B carries it to the hole; f146-160 he pushes it into the tunnel; f160-178 the carton slides out through the tunnel.
 - Acting: B: quick, careful, eyes on the hole.
 - Camera keys:
@@ -157,7 +157,7 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 110 | open | [5.25, 1, -4] | [3, 0.95, -3.7] | 46 | 0 | 0 | through the hole |
-| 124 | glide 20 f | [4.95, 1.6, -0.35] | [5, 1, -3.3] | 56 | 0.06 | 0 | inside: B, the racks of cartons, the hole |
+| 124 | glide 20 f | [5.6, 1.6, -0.4] | [4.9, 1, -3.3] | 56 | 0.06 | 0 | inside: B, the racks of cartons, the hole |
 
 - Kicks (7 f): none.
 - Physics & FX: the carton: kinematic in his hands.
@@ -402,7 +402,8 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1553 | open | [1.858, 1.401, 11.662] | [4.094, 0.714, 5.519] | 44 | 0.07 | 0 | the detective and the recovered stack |
+| 1553 | open | [2.3, 1.45, 0.5] | [3.4, 1.2, 4.5] | 44 | 0 | 0 | out of the gap between the van and the container |
+| 1567 | glide 30 f | [1.858, 1.401, 11.662] | [4.094, 0.714, 5.519] | 44 | 0.07 | 0 | the detective and the recovered stack |
 
 - Kicks (7 f): none.
 - Physics & FX: none.

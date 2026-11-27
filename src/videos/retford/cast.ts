@@ -390,7 +390,7 @@ const s11 = (out: Stage, cam: CamInfo, f: number, id: number) => {
     const A = mkAt(YAo, from), B = mkAt(YAo, to);
     if (id === 11 && f < WALK11[0]) continue;
     if (id === 11 && f < WALK11[1]) { walkTo(out, cam, who, A, B, f, WALK11[0], WALK11[1], { expr: "stern" }); continue; }
-    const at2 = id === 12 ? mkAt(YAo, [1.2, 7.2]) : B, fo = stand(out, cam, who, at2, f, { expr: "stern" }); if (fo) restArms(out, cam, who, at2, fo, f);
+    const at2 = id === 12 ? mkAt(YAo, [-2.6, 7.4]) : B, fo = stand(out, cam, who, at2, f, { expr: "stern" }); if (fo) restArms(out, cam, who, at2, fo, f);
   }
   if (id === 12) {
     const p = mkAt(YAo, Y.det), fo = stand(out, cam, "det", p, f, { expr: f > NOD12 ? "smile" : "stern", headTilt: f >= NOD12 && f < NOD12 + 10 ? 0.15 * Math.sin(((f - NOD12) / 10) * Math.PI) : 0 }, [NOD12]);
