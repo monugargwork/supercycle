@@ -88,6 +88,7 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | smoliv | Scarlet & Violet Smoliv 20 | sv1 | 20 | https://images.pokemontcg.io/sv1/20.png | mudkip |
 | sprigatito | Scarlet & Violet Sprigatito 13 | sv1 | 13 | https://images.pokemontcg.io/sv1/13.png | mudkip, caterpie, mesa |
 | tandemaus | Scarlet & Violet Tandemaus 159 | sv1 | 159 | https://images.pokemontcg.io/sv1/159.png | mudkip |
+| magikarp_ar | sv2 Magikarp 203 | sv2 | 203 | https://images.pokemontcg.io/sv2/203_hires.png |  |
 | blast151 | Scarlet & Violet 151 Blastoise ex SIR 200/165 | sv3pt5 | 200 | https://images.pokemontcg.io/sv3pt5/200_hires.png | tcgplayer, mesa, retford |
 | caterpie151 | Scarlet & Violet 151 Caterpie 010/165 | sv3pt5 | 10 | https://images.pokemontcg.io/sv3pt5/10_hires.png | caterpie |
 | pika151 | Scarlet & Violet 151 Pikachu 25/165 | sv3pt5 | 25 | https://images.pokemontcg.io/sv3pt5/25_hires.png | tcgplayer, caterpie, mesa, retford |
