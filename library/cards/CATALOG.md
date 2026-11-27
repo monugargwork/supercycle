@@ -88,14 +88,14 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | smoliv | Scarlet & Violet Smoliv 20 | sv1 | 20 | https://images.pokemontcg.io/sv1/20.png | mudkip |
 | sprigatito | Scarlet & Violet Sprigatito 13 | sv1 | 13 | https://images.pokemontcg.io/sv1/13.png | mudkip, caterpie, mesa |
 | tandemaus | Scarlet & Violet Tandemaus 159 | sv1 | 159 | https://images.pokemontcg.io/sv1/159.png | mudkip |
-| magikarp_ar | sv2 Magikarp 203 | sv2 | 203 | https://images.pokemontcg.io/sv2/203_hires.png |  |
+| magikarp_ar | sv2 Magikarp 203 | sv2 | 203 | https://images.pokemontcg.io/sv2/203_hires.png | roush |
 | blast151 | Scarlet & Violet 151 Blastoise ex SIR 200/165 | sv3pt5 | 200 | https://images.pokemontcg.io/sv3pt5/200_hires.png | tcgplayer, mesa, retford |
 | caterpie151 | Scarlet & Violet 151 Caterpie 010/165 | sv3pt5 | 10 | https://images.pokemontcg.io/sv3pt5/10_hires.png | caterpie |
 | pika151 | Scarlet & Violet 151 Pikachu 25/165 | sv3pt5 | 25 | https://images.pokemontcg.io/sv3pt5/25_hires.png | tcgplayer, caterpie, mesa, retford |
 | venu151 | Scarlet & Violet 151 Venusaur ex SIR 198/165 | sv3pt5 | 198 | https://images.pokemontcg.io/sv3pt5/198_hires.png | tcgplayer, mesa, retford |
 | zard151 | Scarlet & Violet 151 Charizard ex SIR 199/165 | sv3pt5 | 199 | https://images.pokemontcg.io/sv3pt5/199_hires.png | tcgplayer, caterpie, mesa, retford |
 | bubble_mew | Paldean Fates Mew ex 232/091 (SIR, 'Bubble Mew') | sv4pt5 | 232 | https://images.pokemontcg.io/sv4pt5/232_hires.png | mesa, retford |
-| umbreon_pe | sv8pt5 Umbreon 161 | sv8pt5 | 161 | https://images.pokemontcg.io/sv8pt5/161_hires.png | retford |
+| umbreon_pe | sv8pt5 Umbreon 161 | sv8pt5 | 161 | https://images.pokemontcg.io/sv8pt5/161_hires.png | retford, roush |
 | bunnelby | XY Bunnelby 111 | xy1 | 111 | https://images.pokemontcg.io/xy1/111.png | mudkip |
 | chespin | XY Chespin 12 | xy1 | 12 | https://images.pokemontcg.io/xy1/12.png | mudkip, mesa |
 | fennekin | XY Fennekin 24 | xy1 | 24 | https://images.pokemontcg.io/xy1/24.png | mudkip, mesa |

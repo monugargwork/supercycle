@@ -19,6 +19,7 @@ import { CaterpieReel, CaterpieCaptions, CATERPIE_FRAMES } from "./videos/caterp
 import { ChicagoReel, ChicagoCaptions, CHICAGO_FRAMES } from "./videos/chicago/Reel";
 import { MesaReel, MesaCaptions, MESA_FRAMES } from "./videos/mesa/Reel";
 import { RetfordReel, RetfordCaptions, RETFORD_FRAMES } from "./videos/retford/Reel";
+import { RoushReel, RoushCaptions, ROUSH_FRAMES } from "./videos/roush/Reel";
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -58,5 +59,7 @@ export const RemotionRoot: React.FC = () => (
     <Composition id="MesaCaptions" component={MesaCaptions} durationInFrames={MESA_FRAMES} fps={30} width={1440} height={2560} />
     <Composition id="RetfordReel" component={RetfordReel} durationInFrames={RETFORD_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="RetfordCaptions" component={RetfordCaptions} durationInFrames={RETFORD_FRAMES} fps={30} width={1440} height={2560} />
+    <Composition id="RoushReel" component={RoushReel} durationInFrames={ROUSH_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="RoushCaptions" component={RoushCaptions} durationInFrames={ROUSH_FRAMES} fps={30} width={1440} height={2560} />
   </>
 );

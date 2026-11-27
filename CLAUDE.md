@@ -57,6 +57,7 @@ Account skills they call: `vn-news-script` (the script), `story-reel-director` (
 | Reel | Composition | Video folder | Status |
 |---|---|---|---|
 | Retford wall heist (drilled through a wall, a fake-plated van, six charged at Mansfield) | `RetfordReel` (2425 f) | `videos/retford-wall-heist/` | v1 built to the 25 Nov quality bar, ready to render (27 Nov 2026) |
+| Natalie Roush early Night UPC (a creator opens an unreleased box with a $2,262 buy button under it) | `RoushReel` (2330 f) | `videos/natalie-roush-upc/` | v1 built to the 25 Nov quality bar, ready to render (27 Nov 2026) |
 | Mira Mesa Bubble Mew (a stranger runs off with a 12-year-old's card at her first show) | `MesaReel` (2510 f) | `videos/mira-mesa-bubble-mew/` | v1 built to the 25 Nov quality bar, ready to render (27 Nov 2026) |
 | Chicago shop (Old Skool TCG: sells, gets paid, steals 4 cards) | `ChicagoReel` (2440 f) | `videos/chicago-mew-theft/` | v1 built to the 25 Nov quality bar, ready to render (26 Nov 2026) |
 | iCaterpie lifetime ban (a deleted post, a lifetime ban, Worlds SF) | `CaterpieReel` (2360 f) | `videos/icaterpie-lifetime-ban/` | v1 built to the 25 Nov quality bar, ready to render (26 Nov 2026) |

@@ -1,0 +1,3 @@
+Real card scans for the Roush reel (from library/cards, see CATALOG.md).
+magikarp_ar.png   sv2 Magikarp 203                                  https://images.pokemontcg.io/sv2/203_hires.png
+umbreon_pe.png    sv8pt5 Umbreon 161                                https://images.pokemontcg.io/sv8pt5/161_hires.png
