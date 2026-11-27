@@ -386,7 +386,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   up(b, lam("lotA", () => ({ map: asphalt("lotM", "#7c7884") })), -40, 40, P.plaza[1] + 0.2, P.lot[1] + 30, 0, 6);
   for (const zr of [15.6, 24.4]) for (let x = -14; x <= 16; x += 2.8) box(b, C("#f4f1ea"), x - 0.05, 0, zr - 2.6, x + 0.05, 0.008, zr + 2.6);
   const carCols = ["#d8322f", "#f2c23a", "#4fb0e8", "#f4f1ea", "#2f9a55", "#f2785a", "#3f78d8"];
-  [-11.2, -8.4, -2.8, 0, 2.8, 5.6, 11.2, 14.0].forEach((x, i) => carZ(b, x + 1.4, 15.6, carCols[i % carCols.length]));
+  [-11.2, -8.4, 5.6, 11.2, 14.0].forEach((x, i) => carZ(b, x + 1.4, 15.6, carCols[i % carCols.length]));
   [-8.4, -5.6, 0, 5.6, 8.4, 11.2].forEach((x, i) => carZ(b, x + 1.4, 24.4, carCols[(i + 3) % carCols.length]));
   for (const [x, z, s] of [[-4.2, 9.8, 1], [6.4, 9.9, 2], [-12, 10, 3], [14, 10.2, 4]] as [number, number, number][]) palm(b, x, 0, z, 6.5 + s * 0.3, s);
   for (const [x0, x1] of [[-8.5, -1.6], [4.0, 8.5]]) { box(b, C("#c9643a"), x0, 0, FZ1 + 0.2, x1, 0.35, FZ1 + 1.1); for (let x = x0 + 0.5; x < x1; x += 0.9) bush(b, x, 0.3, FZ1 + 0.65, 0.55); }
@@ -404,7 +404,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   plane(4.2, 0.7, lamC(tex("bnMM", 1500, 250, (p) => banner(p, 1500, 250, "MIRA MESA", "#d8322f", "#fbf3dc"))), gym, 0, 5.75, rz0 + 0.012);
   plane(5.2, 0.95, lamC(tex("bnShow", 1600, 290, (p) => banner(p, 1600, 290, "CARD SHOW TODAY", "#3f86e0", "#ffffff", "BUY · SELL · TRADE"))), gym, 1.4, 2.75, rz0 + 0.012);
   plane(1.8, 1.08, lamC(tex("board", 900, 540, (p) => corkBoard(p, 900, 540))), gym, P.board[0], P.board[1], FZ - 0.012, Math.PI);
-  { const fr = mesh(new THREE.BoxGeometry(1.7, 1.18, 0.03), oak, gym, P.board[0], P.board[1], FZ - 0.006); void fr; }
+  { const fr = mesh(new THREE.BoxGeometry(1.7, 1.18, 0.006), oak, gym, P.board[0], P.board[1], FZ - 0.005); void fr; }
   plane(4.4, 0.44, basicC(tex("letMM", 2200, 220, (p) => lettersArt(p, 2200, 220, "MIRA MESA HIGH SCHOOL", "#c0323c", 170)), true), gym, P.letters[0], P.letters[1], FZ1 + 0.012);
   plane(2.6, 0.8, lamC(tex("bnShowOut", 1300, 400, (p) => banner(p, 1300, 400, "CARD SHOW", "#3f86e0", "#ffffff", "TODAY · GYM"))), gym, P.banner[0], P.banner[1], FZ1 + 0.014);
   plane(1.0, 0.62, lamC(tex("schoolFlag", 500, 310, (p) => { const g = p.g; g.fillStyle = "#d8322f"; g.fillRect(0, 0, 500, 310); lettersArt(p, 500, 310, "MM", "#fbf3dc", 220); })), gym, -5.48, 7.9, 11.0).material = new THREE.MeshLambertMaterial({ map: tex("schoolFlag", 500, 310, () => undefined), side: THREE.DoubleSide });
@@ -421,11 +421,11 @@ export const buildSets = (root: THREE.Object3D): Sets => {
     const a = plane(0.24, 0.14, ft, t, 0, 0.068, 0.02); a.rotation.x = -0.28; const c2 = plane(0.24, 0.14, ft, t, 0, 0.068, -0.02, Math.PI); c2.rotation.x = 0.28; }
   // the easel: two slanted legs, a ledge; the case on it (live canvas: the Mew, nothing or the replica); the price tag on its string
   const easel = new THREE.Group(); easel.position.set(P.easel[0], TOPY, P.easel[2]); gym.add(easel);
-  for (const s2 of [-1, 1]) { const leg = mesh(new THREE.BoxGeometry(0.012, 0.17, 0.012), oak, easel, s2 * 0.035, 0.08, -0.01); leg.rotation.x = 0.22; leg.rotation.z = -s2 * 0.12; }
-  { const back = mesh(new THREE.BoxGeometry(0.01, 0.15, 0.01), oak, easel, 0, 0.07, -0.05); back.rotation.x = -0.45; mesh(new THREE.BoxGeometry(0.11, 0.012, 0.025), oak, easel, 0, 0.022, 0.012); }
+  for (const s2 of [-1, 1]) mesh(new THREE.BoxGeometry(0.01, 0.1, 0.01), oak, easel, s2 * 0.032, 0.05, -0.03);   // two posts behind the card
+  { const back = mesh(new THREE.BoxGeometry(0.01, 0.1, 0.01), oak, easel, 0, 0.05, -0.04); back.rotation.x = -0.45; mesh(new THREE.BoxGeometry(0.11, 0.012, 0.025), oak, easel, 0, 0.022, 0.012); }
   const easelC = canvasMat2(720, 1000);
   const easelCase = plane(0.095, 0.132, new THREE.MeshBasicMaterial({ map: easelC.tex, transparent: true, alphaTest: 0.05 }), easel, 0, 0.094, 0.004); easelCase.rotation.x = -0.2;
-  const tag = new THREE.Group(); tag.position.set(0.05, 0.155, 0.0); easel.add(tag);
+  const tag = new THREE.Group(); tag.position.set(0.075, 0.15, 0.012); easel.add(tag);
   { mesh(new THREE.BoxGeometry(0.0015, 0.06, 0.0015), C("#f4f1ea"), tag, 0, -0.03, 0.003); const tg = plane(0.056, 0.035, lamC(tex("tag", 320, 200, (p) => priceTag(p, 320, 200)), true), tag, 0.022, -0.07, 0.004); (tg.material as THREE.Material).side = THREE.DoubleSide; }
   // the stand of three top-loaders (each its own mesh: they get knocked off)
   const tlStand = mesh(new THREE.BoxGeometry(0.12, 0.02, 0.05), C("#cfe6f2"), gym, P.stack[0], TOPY + 0.01, P.stack[2]); void tlStand;
@@ -434,7 +434,8 @@ export const buildSets = (root: THREE.Object3D): Sets => {
     m.position.set(P.stack[0] - 0.035 + 0.035 * i, TOPY + 0.07, P.stack[2] - 0.01 + 0.008 * i); m.rotation.set(-0.2, 0, 0); gym.add(m); return m; });
   // the fundraiser jar (S16 on): glass cylinder, the meter card, bills inside
   const jar = new THREE.Group(); jar.position.set(P.jar[0], TOPY, P.jar[2]); gym.add(jar); jar.visible = false;
-  mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.16, 20, 1, true), glassMat(0.22), jar, 0, 0.08, 0); mesh(new THREE.CylinderGeometry(0.064, 0.064, 0.02, 20), C("#f2c23a"), jar, 0, 0.17, 0);
+  mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.16, 20, 1, true), new THREE.MeshBasicMaterial({ color: "#bfe6f8", transparent: true, opacity: 0.38, depthWrite: false, side: THREE.DoubleSide }), jar, 0, 0.08, 0);
+  mesh(new THREE.TorusGeometry(0.06, 0.004, 6, 24), C("#ffffff"), jar, 0, 0.16, 0).rotation.x = Math.PI / 2; mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.004, 20), C("#d9eef8"), jar, 0, 0.003, 0);
   const meterC = canvasMat2(300, 420); plane(0.12, 0.17, new THREE.MeshBasicMaterial({ map: meterC.tex }), jar, 0.15, 0.085, 0.0).rotation.y = -0.25;
   const jarBills: THREE.Mesh[] = [0, 1, 2].map((i) => { const m = plane(0.08, 0.034, new THREE.MeshBasicMaterial({ map: tex("bill20", 470, 200, (p) => billArt(p, 470, 200)), side: THREE.DoubleSide }), jar, 0, 0.03 + 0.025 * i, 0.01 - 0.01 * i); m.rotation.set(0.2, 0.6 * i, 0.3); m.visible = false; return m; });
   // her sign on the table front (S17 on) and the same sign on every table (S19)
@@ -443,8 +444,8 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   const signsAll = P.tables.map(([cx, cz], i) => { const m = plane(0.5, 0.3, lookMat(1 + (i % 3)), gym, cx, 0.42, cz + 0.256); m.visible = false; return m; });
   // the notice board's flyer (S14 on) and its loose corner
   const flyerTex = tex("flyer", 600, 776, (p) => flyer(p, 600, 776));
-  const flyerM = plane(0.34, 0.44, new THREE.MeshBasicMaterial({ map: flyerTex }), gym, P.flyer[0], P.flyer[1], FZ - 0.016, Math.PI); flyerM.visible = false;
-  const flap = new THREE.Group(); flap.position.set(P.flyer[0] + 0.17, P.flyer[1] - 0.22, FZ - 0.017); flap.rotation.y = Math.PI; gym.add(flap); flap.visible = false;
+  const flyerM = plane(0.34, 0.44, new THREE.MeshBasicMaterial({ map: flyerTex }), gym, P.flyer[0], P.flyer[1], FZ - 0.018, Math.PI); flyerM.visible = false;
+  const flap = new THREE.Group(); flap.position.set(P.flyer[0] + 0.17, P.flyer[1] - 0.22, FZ - 0.02); flap.rotation.y = Math.PI; gym.add(flap); flap.visible = false;
   { const fl = plane(0.07, 0.07, new THREE.MeshBasicMaterial({ color: "#ffffff", side: THREE.DoubleSide }), flap, 0.035, 0.035, 0); void fl; }
   // the vendor rules A-frame (S15 on)
   const rules = new THREE.Group(); rules.position.set(P.rules[0], 0, P.rules[1]); rules.rotation.y = Math.PI - 0.35; gym.add(rules); rules.visible = false;
@@ -495,7 +496,7 @@ export const buildSets = (root: THREE.Object3D): Sets => {
   for (const x of [pr0, pr1 - 0.06]) box(b, white, x, 0.9, -70, x + 0.06, 0.96, RZ - 0.14);
   box(b, C("#f4f1ea"), pr0 + 0.4, -0.02, -66, pr1 - 0.4, 2.4, -61); slab(b, C("#d8322f"), (pr0 + pr1) / 2, 2.7, -63.5, pr1 - pr0, 0.12, 6.2, 0, 0);
   // palms, an ice-cream cart under a striped canopy, planters, pastel buildings behind the promenade
-  for (const [x, z, s] of [[-5.2, 1.6, 2], [4.6, 3.6, 5], [-8.5, 4.8, 7], [9.0, 1.2, 9]] as [number, number, number][]) palm(b, x, 0, z, 6.2 + (s % 3) * 0.4, s);
+  for (const [x, z, s] of [[-6.5, 4.6, 2], [4.6, 3.6, 5], [-11.5, 5.6, 7], [9.0, 1.2, 9]] as [number, number, number][]) palm(b, x, 0, z, 6.2 + (s % 3) * 0.4, s);
   box(b, C("#fbf3dc"), -3.6, 0.25, 3.5, -2.6, 1.05, 4.1); box(b, C("#4fb0e8"), -3.62, 0.25, 4.1, -2.58, 1.05, 4.12);
   for (const [x, z] of [[-3.55, 3.55], [-2.65, 3.55], [-3.55, 4.05], [-2.65, 4.05]]) cyl(b, white, x, 1.05, z, 0.02, 0.02, 0.9, 6);
   box(b, lam("canopy", () => ({ map: stripes("#d8322f", "#ffffff") })), -3.8, 1.95, 3.3, -2.4, 2.02, 4.3);

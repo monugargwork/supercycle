@@ -16,7 +16,7 @@ No blur, no shadows, bright palettes (maple floor, cream walls, red trim, sky-bl
 - Attention is eye-line: in the analogy every eye is on the phone, none on its holder.
 
 ## Transitions
-Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through the doors, S08 out through them, S14 across the hall. Dissolves for the time jumps (S01 to the morning, S10, S13, S19) and the move to the beach (S11).
+Three hard cuts (S09, the freeze on "Khoan"; S12, the phone POV; S18, the far lot). Travels: S02 in through the doors, S08 out through them, S14 across the hall. Dissolves for the time jumps (S01 to the morning, S10, S13, S19) and the move to the beach (S11).
 
 ## Titles (house Title2, Bolota Bold, top of frame)
 
@@ -31,14 +31,14 @@ Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through th
 ### gym
 - Origin in the shared world: [0, 0, 0]. Axes: centre court at the origin; the front wall with the double doors at z 8.0..8.3 opens onto the plaza and the parking lot (+z); the back wall (scoreboard) at z -7; bleachers on the left wall (-x).
 - Light: day; sun az/el [-30, 50]. Open camera sides: +z outside; inside every side (the room is 18 x 15 m).
-- Marks [x, z]: dad [-0.38, 0.6]; girl [0.46, 0.62]; stranger [-0.58, 1.34]; girl_front [0.42, 1.55]; woman [-0.2, 1.42]; door_in [2, 7.55]; door_out [2, 8.7]; dad_out [2.4, 10.4]; thief_lot [6.6, 18.6]; guard [2, 7.35]; cop [-1.55, 7.35]; shop1 [-4.2, 1.6]; shop2 [2.1, -2.35]; shop3 [-2.6, -2.35].
+- Marks [x, z]: dad [-0.38, 0.6]; girl [0.42, 0.72]; stranger [-0.58, 1.34]; girl_front [0.42, 1.55]; woman [-1, 1.4]; door_in [2, 7.55]; door_out [2, 8.7]; dad_out [3, 11.4]; thief_lot [2.9, 22]; guard [2, 7.35]; cop [-1.6, 7.75]; shop1 [-4.2, 1.6]; shop2 [2.1, -2.35]; shop3 [-2.6, -2.35].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
 | room | new: gym x -9..9, z -7..8, 6.5 m: warm maple floor in 9 cm boards with painted court lines (red centre circle with MM, white lines, a blue key at each end), cream block walls with a red band at 1.2 m, a row of high windows with blue sky and clouds on both side walls (y 4.4..5.8), a ceiling with steel trusses and round lights | [0, 3.25, 0.5] | [18, 6.5, 15] |
 | back wall | new: scoreboard (HOME 0 GUEST 0, red digits on a dark-green face, 3.2 x 1.4 m) at y 4.6, a MIRA MESA banner (red with cream letters) over it, a CARD SHOW TODAY banner (sky blue) at y 2.6, a basketball backboard raised high (4.0 m) on the left | [0, 3.5, -6.95] | [16, 4, 0.1] |
 | bleachers | new: folded wooden bleachers against the left wall x -9..-7.8, z -5.5..5.5, 2.6 m tall: seven stepped tiers of warm oak with red risers (folded, nobody sits) | [-8.4, 1.3, 0] | [1.2, 2.6, 11] |
-| booth | new: their vendor table x -0.9..0.9, z 0.75..1.25, top 0.76 (standing height table, folding steel legs), a sky-blue cloth with a skirt to the floor; on it: a glass-top display tray x -0.78..-0.08 with ten real cards on red felt, the wooden easel at x 0.32 holding the Bubble Mew in a magnetic one-touch case with a white price tag $3,200 on a string, a stand of three top-loaders at the front-right corner, a red cash tin, a cardboard tent sign FIRST SHOW! (hand-lettered) | [0, 0.38, 1] | [1.8, 0.76, 0.5] |
+| booth | new: their vendor table x -0.9..0.9, z 0.75..1.25, top 0.76 (standing height table, folding steel legs), a sky-blue cloth with a skirt to the floor; on it: a glass-top display tray x -0.55..0.15 with ten real cards on red felt, the wooden easel at x 0.34 holding the Bubble Mew in a magnetic one-touch case with a white price tag $3,200 on a string, a stand of three top-loaders at the front-left corner (by the customer's hip), a red cash tin, a cardboard tent sign FIRST SHOW! (hand-lettered) | [0, 0.38, 1] | [1.8, 0.76, 0.5] |
 | booths | new: nine more vendor tables (same build, cloths in orange, green, red, teal, yellow) in rows at z 1.0, -3.0 and -5.6, each with a display tray of real cards, a banner sign on a pole (CARDS, SLABS, SEALED, VINTAGE, BINDERS), binders and booster boxes | [0, 0.38, -2.5] | [16, 0.76, 7] |
 | doors | new: double doors x 1.0..3.0 in the front wall, 2.4 m, red steel leaves with a tall glass window each and a chrome push bar, hinged at x 1.0 and x 3.0, swinging outward on spring hinges (a damped swing that settles); the bright plaza beyond | [2, 1.2, 8.15] | [2, 2.4, 0.06] |
 | board | new: cork notice board 1.6 x 1.0 m in an oak frame on the front wall inside, x -3.3..-1.7, with school notices (BAKE SALE FRI, CLUB FAIR) and, from S14, the police flyer HAVE YOU SEEN THIS CAR? with a photo-style print of a black sedan and SDPD | [-2.5, 1.75, 7.98] | [1.6, 1, 0.04] |
@@ -81,21 +81,21 @@ Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through th
 - Blocking: Stranger at the stranger mark in front of the table, holding the case up at eye level; dad behind the table at the dad mark with his right palm open over the table (waiting to get it back); girl at the girl mark. From f103 the stranger runs to the doors (door_in) and out (door_out).
   - stranger at [-0.58, 1.34], front then side running; case held up f0-102; sprint f103-170; smile -> grin.
   - dad at [-0.38, 0.6], front; right palm open over the table; smile -> shock.
-  - girl at [0.46, 0.62], front; standing by the tent sign; smile -> shock.
-- Action, against the words: f0-96 he tilts the case to the light, admiring (two small tilts, f20 and f60); dad's palm stays open; f44 title $3,000+ ('hơn ba nghìn đô' f44-67); f100 his eyes slide to the doors; f103 ('chạy' f103) he spins and bolts: one-frame turn to the side view, a sprint at 4.5 m/s toward the doors with speed lines; his hip clips the table's right corner: the three top-loaders slide off and fall to the floor (f106-124) and lie there; f150-170 he hits the doors' push bar, they fly open; f137-183 'ngay trong buổi bán thẻ đầu tiên của hai cha con': the camera settles back on dad and girl behind their table, the FIRST SHOW! sign between them, faces from smile to shock (f150).
+  - girl at [0.42, 0.72], front; standing by the tent sign; smile -> shock.
+- Action, against the words: f0-96 he tilts the case to the light, admiring (two small tilts, f20 and f60); dad's palm stays open; f44 title $3,000+ ('hơn ba nghìn đô' f44-67); f100 his eyes slide to the doors; f103 ('chạy' f103) he spins and bolts: one-frame turn to the side view, a sprint at 4.5 m/s toward the doors with speed lines; his hip clips the table's left corner as he spins: the three top-loaders slide off and fall to the floor (f106-124) and lie there; f185 he hits the doors' push bar, they fly open; f137-183 'ngay trong buổi bán thẻ đầu tiên của hai cha con': the camera settles back on dad and girl behind their table, the FIRST SHOW! sign between them, faces from smile to shock (f150).
 - Acting: Stranger: polite admiring smile -> sly glance -> sprint. Dad: proud smile, palm out -> frozen. Girl: beaming -> shock.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 0 | open | [2.628, 1.853, 4.933] | [-0.094, 0.994, 0.897] | 44 | 0.05 | 0 | the stranger with the card at their table, all three full body |
-| 104 | glide 26 f | [5.567, 2.479, -9.088] | [0.478, 0.388, 4.895] | 50 | 0 | 0 | whip after him: the run to the doors |
-| 150 | glide 30 f | [0.931, 1.469, 6.381] | [-0.056, 0.67, 0.785] | 42 | 0.12 | 0 | father and daughter at their first booth, faces falling |
+| 0 | open | [2.505, 1.814, 4.821] | [-0.118, 0.986, 0.933] | 44 | 0.05 | 0 | the stranger with the card at their table, all three full body |
+| 104 | glide 26 f | [-0.9, 1.6, -1.8] | [1.6, 1, 6] | 50 | 0 | 0 | whip after him: the run to the doors |
+| 150 | glide 30 f | [0.931, 1.469, 6.381] | [-0.05, 0.675, 0.819] | 42 | 0.12 | 0 | father and daughter at their first booth, faces falling |
 
-- Kicks (7 f): f103 strength 0.5; f160 strength 0.35.
+- Kicks (7 f): f103 strength 0.5; f185 strength 0.35.
 - Physics & FX: the three top-loaders: knocked off the corner at f106 with ~1.2 m/s, they tip and fall 0.76 m (light, a small flutter), land flat by f124 and stay. The doors: spring hinges, open to 80 deg and swing back with a damped swing.
 - Light & mood: bright midday through the high windows.
-- Sound: hall murmur; a sly pluck f100; a whoosh + Gogogogogo-style run cue f103; toploader clatter f118-124; the doors' bang f160; a suspense sting f150.
+- Sound: hall murmur; a sly pluck f100; a whoosh + Gogogogogo-style run cue f103; toploader clatter f118-124; the doors' bang f185; a suspense sting f150.
 - After-state: The top-loaders lie on the floor; the easel is empty.
 
 ### S02 · 0:07.5-0:14.3 · f224-f428 · "Cô bé mười hai tuổi, ở San Diego, lần đầu bày sạp ở một hội thẻ tại trường trung học Mira Mesa."
@@ -105,7 +105,7 @@ Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through th
 - Set: gym. Light: day.
 - Build: the school front: cream stucco, MIRA MESA HIGH SCHOOL letters, CARD SHOW TODAY banner, palms, flagpole, the plaza and lot; the doors propped open; the booth before the show (easel with the Mew, stack upright).
 - Blocking: Outside: two shoppers walk in through the doors f240-320 (side view). Inside: girl at the girl mark lays top-loaders into the tray; dad at the dad mark sets the case on the easel.
-  - girl at [0.46, 0.62], front; lays top-loaders f350-394; smile.
+  - girl at [0.42, 0.72], front; lays top-loaders f350-394; smile.
   - dad at [-0.38, 0.6], front; case onto the easel f400-412; smile.
 - Action, against the words: f224-300 wide on the school front; title SAN DIEGO f268; f300-400 the camera travels in through the open doors and across the gym floor to the booth ('Mira Mesa' f377-400 as it passes the letters); f340-420 the girl sets out cards (one top-loader at a time, f350, f372, f394); dad places the case on the easel f400-412.
 - Acting: Girl: excited, careful. Dad: proud.
@@ -113,9 +113,9 @@ Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through th
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 224 | open | [3.2, 2.2, 26] | [2, 3.3, 8.3] | 50 | 0.06 | 0 | the school front, the banner, palms, blue sky |
+| 224 | open | [-1.4, 3.2, 25.5] | [1, 3, 8.3] | 54 | 0.06 | 0 | the school front, the banner, palms, blue sky |
 | 330 | glide 40 f | [2, 1.75, 11] | [2, 1.5, 6] | 50 | 0 | 0 | toward the open doors |
-| 372 | glide 46 f | [0.679, 1.58, 5.916] | [-0.043, 0.666, 0.78] | 46 | 0.08 | 0 | in across the floor to the booth |
+| 372 | glide 46 f | [0.679, 1.58, 5.916] | [-0.038, 0.672, 0.815] | 46 | 0.08 | 0 | in across the floor to the booth |
 
 - Kicks (7 f): none.
 - Physics & FX: the doors are propped open (hooked back at 90 deg).
@@ -130,7 +130,7 @@ Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through th
 - Set: gym. Light: day.
 - Build: the easel and the case (real scan), the price tag on its string.
 - Blocking: Dad and girl behind the table.
-  - girl at [0.46, 0.62], front; standing; smile.
+  - girl at [0.42, 0.72], front; standing; smile.
   - dad at [-0.38, 0.6], front; standing; smile.
 - Action, against the words: f428-460 glide down to the easel; f460-545 the Bubble Mew fills the frame (~50% of the width, title BUBBLE MEW f470); a gleam crosses the case f475; f530 the tag turns to us on its string ($3,200, 'đắt nhất' f530); f545-586 pull back: the girl beams behind it.
 - Acting: Girl: proud.
@@ -138,8 +138,8 @@ Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through th
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 428 | open | [0.32, 0.98, 1.58] | [0.32, 0.86, 1.1] | 30 | 0.05 | 0 | the Bubble Mew on its easel |
-| 548 | glide 34 f | [0.495, 1.409, 4.856] | [0.053, 0.814, 0.649] | 40 | 0.08 | 0 | the card and the proud girl |
+| 428 | open | [0.34, 1.28, 1.42] | [0.34, 0.84, 1.02] | 30 | 0.05 | 0 | the Bubble Mew on its easel |
+| 548 | glide 34 f | [0.466, 1.382, 4.751] | [0.039, 0.808, 0.688] | 40 | 0.08 | 0 | the card and the proud girl |
 
 - Kicks (7 f): none.
 - Physics & FX: the tag: hangs on a 6 cm string, a small pendulum (period 0.5 s) after the turn.
@@ -156,14 +156,14 @@ Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through th
 - Blocking: Stranger walks up to the stranger mark f586-600 (front view walking) and leans in; dad lifts the case off the easel and holds it across; the stranger takes it and holds it up.
   - stranger at [-0.58, 1.34], front; walks up, takes the case f629; smile.
   - dad at [-0.38, 0.6], front; passes the case f596-629, palm open after; smile.
-  - girl at [0.46, 0.62], front; standing; smile.
+  - girl at [0.42, 0.72], front; standing; smile.
 - Action, against the words: f596 'đưa' dad lifts the case off the easel (the tag swings); f600-620 carries it across to the hand-over point; f629 'người lạ' the stranger takes it; f630-650 he lifts it to eye level; dad's palm stays open over the table, waiting.
 - Acting: Stranger: polite, eager. Dad: friendly. Girl: watching the card.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 586 | open | [2.511, 1.574, 5.419] | [-0.096, 0.654, 0.902] | 42 | 0.1 | 0 | the hand-over across the table, all three full body |
+| 586 | open | [2.383, 1.544, 5.264] | [-0.116, 0.662, 0.935] | 42 | 0.1 | 0 | the hand-over across the table, all three full body |
 
 - Kicks (7 f): none.
 - Physics & FX: the tag swings when the case leaves the easel (period 0.5 s, damped).
@@ -196,21 +196,21 @@ Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through th
 
 ### S06 · 0:25.3-0:31.3 · f758-f938 · "Ông kể: "Tôi tưởng anh ta đùa. Tôi tưởng anh ta chạy hai bước rồi quay lại.""
 - Gloss: He recalls: "I thought he was joking. I thought he'd run two steps and come back."
-- Spine link: 3. Viewer must get: The father laughs, palm still out, waiting for the joke to end, while the stranger bursts out through the doors.
+- Spine link: 3. Viewer must get: Seen from the doors: the father laughs, palm still out, waiting for the joke to end, while the stranger runs past us and out.
 - In: glide. Out: glide.
 - Set: gym. Light: day.
 - Build: as before; the doors.
 - Blocking: Dad and girl behind the table; the stranger runs from the table to the doors (arrives f790) and out.
   - dad at [-0.38, 0.6], front; palm open; laugh -> smile.
-  - girl at [0.46, 0.62], front; looks up at him; nervous.
-  - stranger at [2, 7.55], side running; sprint to the doors f758-790; grin.
-- Action, against the words: f758-790 the stranger sprints across the floor, small in the background; f790 he slams the push bar, the doors fly open and he's out; the doors swing; f800-830 dad laughs ('đùa' f821), palm still open; f849-900 'chạy hai bước rồi quay lại': dad keeps smiling at the doors, waiting; the girl looks up at him, worried.
+  - girl at [0.42, 0.72], front; looks up at him; nervous.
+  - stranger at [2, 7.55], side running; sprints toward and past the lens to the doors f758-790; grin.
+- Action, against the words: f758-790 the stranger sprints toward the lens and past it (the doors are behind the lens); f790 the bang of the push bar off-screen, the light on the floor flickers as the doors swing; f800-830 dad laughs ('đùa' f821), palm still open; f849-900 'chạy hai bước rồi quay lại': dad keeps smiling at the doors, waiting; the girl looks up at him, worried.
 - Acting: Dad: laughing, easy -> expectant. Girl: worried.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 758 | open | [3.306, 1.783, -8.69] | [0.964, 0.598, 2.331] | 48 | 0.06 | 0 | from the booth's side toward the doors: the father laughing, the stranger leaving |
+| 758 | open | [1.811, 1.19, 5.575] | [-0.096, 0.654, 0.853] | 44 | 0.06 | 0 | from the doors back at the booth: the father laughing at us, the stranger running past the lens |
 
 - Kicks (7 f): f790 strength 0.3.
 - Physics & FX: the doors: open to 80 deg in 5 f at f790, then a damped swing (period 1.3 s) toward shut.
@@ -247,7 +247,7 @@ Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through th
 - Set: gym. Light: day.
 - Build: the plaza, the lot, the black sedan.
 - Blocking: Dad pushes out through the doors (door_out) f1000 and limps along the plaza to dad_out; the stranger far away near the sedan (thief_lot), gone behind it by f1040; the sedan pulls out of its bay and drives off left f1050-1125.
-  - dad at [2.4, 10.4], side walking (limp); limps out f1000-1068; stops f1076; stern -> pained.
+  - dad at [3, 11.4], side walking (limp); limps out f1000-1068; stops f1076; stern -> pained.
 - Action, against the words: f995 the doors burst open outward; f1000-1068 dad limps out (side view: a short step with the bad leg, a long hop with the good one, the body dips on each bad step; 'đuổi theo' f1003-1015); f1045 'đau' a red pain star pops at his heel; f1073-1080 'còn đau thêm': a bigger star, he stops dead and winces (expr pained), one hand flying back toward the heel; f1050-1125 the sedan reverses out of its bay and drives off to the left.
 - Acting: Dad: determined -> pained.
 - Camera keys:
@@ -255,7 +255,7 @@ Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through th
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 991 | open | [3.814, 1.428, 3.202] | [1.925, 1.042, 8.393] | 46 | 0 | 0 | he bursts out through the doors |
-| 1020 | glide 34 f | [0.521, 1.103, 6.45] | [3.158, 0.549, 11.017] | 50 | 0.08 | 0 | outside: his limp, the sedan in the lot |
+| 1020 | glide 26 f | [1.6, 1.5, 8.5] | [2.8, 0.6, 12] | 58 | 0.04 | 0 | outside: his limp, the sedan in the lot |
 
 - Kicks (7 f): f1045 strength 0.3; f1076 strength 0.55.
 - Physics & FX: the doors swing outward on his push and back (damped). The sedan: eases out of the bay (0.4 m/s back, then 4 m/s forward, out of frame left by f1125).
@@ -266,18 +266,18 @@ Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through th
 ### S09 · 0:37.6-0:41.0 · f1129-f1229 · "Khoan, sao chỉ vì một lá bài mà phải chạy?"
 - Gloss: Wait, why run over a single card?
 - Spine link: 5. Viewer must get: Everything freezes on the hurt father in the empty lot: why go to such lengths for one card?
-- In: glide. Out: dissolve 8 f.
+- In: cut. Out: dissolve 8 f.
 - Set: gym. Light: day.
 - Build: as before.
 - Blocking: Dad at dad_out, frozen mid-wince.
-  - dad at [2.4, 10.4], front; frozen wince; pained.
+  - dad at [3, 11.4], front; frozen wince; pained.
 - Action, against the words: f1129 'Khoan': freeze, a record scratch; slow push in on dad's face; f1186 'phải chạy' a tiny shrug of the camera (roll 3 deg back to 0).
 - Acting: Dad: frozen, pained.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1129 | open | [1.252, 1.073, 7.266] | [2.394, 0.839, 10.402] | 40 | 0.05 | 0 | hold on the frozen father |
+| 1129 | open | [5, 1.4, 16.2] | [3, 0.9, 11.4] | 40 | 0.05 | 0 | hold on the frozen father |
 
 - Kicks (7 f): f1129 strength 0.6.
 - Physics & FX: none.
@@ -299,7 +299,7 @@ Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through th
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1229 | open | [2.351, 7.295, 16.739] | [-1.436, -0.064, -1.075] | 50 | 0.08 | 0 | high wide: hand-overs all over the hall |
+| 1229 | open | [-5.67, 5.59, 6.22] | [-1.49, -0.5, -1.03] | 50 | 0.02 | 0 | high wide: hand-overs all over the hall |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -322,7 +322,7 @@ Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through th
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1393 | open | [-9.087, 1.589, 5.064] | [0.324, 0.469, 0.06] | 48 | 0.08 | 0 | the family, the passer-by and the phone, the sea behind |
+| 1393 | open | [-3.849, 1.41, 7.368] | [0.296, 0.482, -0.428] | 44 | 0.06 | 0 | the family, the passer-by and the phone, the sea behind |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -361,7 +361,7 @@ Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through th
 - Set: gym. Light: day.
 - Build: the booth after the theft: the easel empty, the tag on its string; the top-loaders picked up.
 - Blocking: Girl at the girl mark looking down at the easel; dad beside her, head down.
-  - girl at [0.46, 0.62], front; looks at the easel; sad.
+  - girl at [0.42, 0.72], front; looks at the easel; sad.
   - dad at [-0.38, 0.6], front; head down; sad.
 - Action, against the words: f1568-1620 glide to the empty easel; the tag turns slowly on its string; f1624 'nên mất' push in on the empty easel; f1637 'nhanh' the tag swings once more.
 - Acting: Girl: sad. Dad: sad, head down.
@@ -369,8 +369,8 @@ Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through th
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1568 | open | [0.642, 1.561, 4.814] | [0.057, 0.819, 0.648] | 40 | 0.1 | 0 | the girl and the empty easel |
-| 1622 | glide 24 f | [0.32, 1, 1.75] | [0.32, 0.86, 1.1] | 32 | 0.12 | 0 | push in: the empty easel and its tag |
+| 1568 | open | [0.607, 1.528, 4.701] | [0.043, 0.813, 0.688] | 40 | 0.1 | 0 | the girl and the empty easel |
+| 1622 | glide 24 f | [0.34, 1.32, 1.5] | [0.34, 0.84, 1.02] | 32 | 0.12 | 0 | push in: the empty easel and its tag |
 
 - Kicks (7 f): none.
 - Physics & FX: the tag: a slow pendulum on its string.
@@ -385,16 +385,16 @@ Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through th
 - Set: gym. Light: day.
 - Build: the notice board; the flyer HAVE YOU SEEN THIS CAR? with the black sedan photo, SDPD.
 - Blocking: Officer at the cop mark facing the board (front view), pins the flyer f1740-1760; then steps aside.
-  - cop at [-1.55, 7.35], front; pins the flyer f1740-1760; shrug f1855; neutral.
+  - cop at [-1.6, 7.75], front; pins the flyer f1740-1760; shrug f1855; neutral.
 - Action, against the words: f1693-1735 the camera travels from the booth across the hall to the notice board; f1740 the officer presses the flyer to the cork; f1755 the pin goes in (a tap; 'công bố hình' f1737-1768); f1774 'xe sedan đen': push on the photo; f1853 'Chưa ai bị bắt': the officer steps back and shrugs; the flyer's loose corner lifts in the draft from the doors.
 - Acting: Officer: businesslike -> a small shrug.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1693 | open | [-1.842, 1.497, 2.076] | [-2.227, 0.917, 7.581] | 44 | 0.06 | 0 | the officer and the notice board |
-| 1772 | glide 26 f | [-2.45, 1.82, 6.6] | [-2.45, 1.8, 7.98] | 34 | 0.1 | 0 | the black sedan on the flyer |
-| 1840 | glide 24 f | [-1.842, 1.497, 2.076] | [-2.227, 0.917, 7.581] | 44 | 0.06 | 0 | no arrest: the shrug, the flyer corner lifting |
+| 1693 | open | [-1.907, 1.533, 2.339] | [-2.29, 0.956, 7.819] | 44 | 0.06 | 0 | the officer and the notice board |
+| 1772 | glide 26 f | [-1.95, 1.64, 6.6] | [-1.95, 1.62, 7.98] | 34 | 0.1 | 0 | the black sedan on the flyer |
+| 1840 | glide 24 f | [-1.907, 1.533, 2.339] | [-2.29, 0.956, 7.819] | 44 | 0.06 | 0 | no arrest: the shrug, the flyer corner lifting |
 
 - Kicks (7 f): f1755 strength 0.3.
 - Physics & FX: the flyer corner: lifts 3 cm and drops back (a slow sine, 0.6 Hz) from f1853.
@@ -417,7 +417,7 @@ Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through th
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 1906 | open | [3.599, 1.676, 0.183] | [2.564, 0.895, 7.543] | 46 | 0.08 | 0 | the guard at the doors, the rules board |
-| 1950 | glide 28 f | [3.55, 1.25, 5.65] | [3.9, 1.05, 7] | 36 | 0.08 | 0 | the rules |
+| 1950 | glide 28 f | [4.65, 1.2, 4.9] | [3.9, 1, 7] | 40 | 0.08 | 0 | the rules |
 
 - Kicks (7 f): f1931 strength 0.25.
 - Physics & FX: none.
@@ -431,18 +431,18 @@ Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through th
 - In: glide. Out: glide.
 - Set: gym. Light: day.
 - Build: the replica in a case with a REPLICA sticker; the fundraiser jar with a hand-drawn thermometer card (GOAL 1/3).
-- Blocking: Woman walks up to the woman mark f2004-2018 holding the replica; the girl takes it (f2030) and sets it on the easel (f2056-2070); dad beside.
-  - woman at [-0.2, 1.42], front; holds out the replica f2018; smile.
-  - girl at [0.46, 0.62], front; takes it f2030, easel f2056-2070; smile.
+- Blocking: Woman walks up to the woman mark (front-left of the table) f2004-2018 holding the replica and hands it to dad (f2030); dad passes it to the girl (f2036-2048); she sets it on the easel (f2056-2070).
+  - woman at [-1, 1.4], front; holds out the replica f2018; smile.
+  - girl at [0.42, 0.72], front; takes it f2030, easel f2056-2070; smile.
   - dad at [-0.38, 0.6], front; standing; smile.
-- Action, against the words: f2018 'tặng' the woman holds the replica out; f2030 the girl takes it with both hands, beaming; f2056-2070 she stands it on the easel ('bản sao lá bài' f2047-2061); f2088-2140 glide to the jar: bills drop in (f2096, f2110, f2124) and the thermometer fills to a third ('bù một phần' f2129-2138).
+- Action, against the words: f2018 'tặng' the woman holds the replica out to dad; f2030 he takes it, touched; f2036-2048 he passes it to the girl, beaming; f2056-2070 she stands it on the easel ('bản sao lá bài' f2047-2061); f2088-2140 glide to the jar: bills drop in (f2096, f2110, f2124) and the thermometer fills to a third ('bù một phần' f2129-2138).
 - Acting: Woman: warm. Girl: surprised -> beaming. Dad: grateful.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 2002 | open | [2.332, 1.407, 5.442] | [-0.052, 0.693, 0.958] | 42 | 0.08 | 0 | the gift across the table |
-| 2086 | glide 26 f | [-0.36, 1.08, 1.62] | [-0.42, 0.9, 0.86] | 34 | 0.08 | 0 | the jar and its meter |
+| 2002 | open | [2.637, 1.516, 6.488] | [-0.289, 0.64, 0.984] | 42 | 0.08 | 0 | the gift across the table |
+| 2086 | glide 26 f | [0.14, 1.06, 1.62] | [0.15, 0.88, 0.86] | 32 | 0.08 | 0 | the jar and its meter |
 
 - Kicks (7 f): none.
 - Physics & FX: the bills: drop into the jar (light, a flutter), settle inside.
@@ -464,7 +464,7 @@ Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through th
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 2179 | open | [-1.181, 0.199, 6.661] | [-0.051, 0.579, 1.347] | 40 | 0.1 | 0 | low: the girl and her sign |
+| 2179 | open | [-1.182, 0.778, 6.668] | [-0.051, 0.588, 1.347] | 38 | 0.1 | 0 | low: the girl and her sign |
 
 - Kicks (7 f): f2203 strength 0.2.
 - Physics & FX: none.
@@ -509,7 +509,7 @@ Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through th
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 2401 | open | [-0.129, 0.856, 4.146] | [0.337, 0.669, 1.505] | 40 | 0.08 | 0 | the girl and her sign |
-| 2436 | glide 64 f | [3, 9.5, 9] | [-0.8, 0.4, -1.6] | 54 | 0.04 | 0 | crane up: her sign on every table |
+| 2436 | glide 64 f | [4, 5.6, 6.6] | [-0.8, 0.3, -1.2] | 56 | 0.04 | 0 | crane up: her sign on every table |
 
 - Kicks (7 f): none.
 - Physics & FX: none.

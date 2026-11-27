@@ -105,9 +105,9 @@
    0.88
   ],
   "jar": [
-   -0.2,
+   0.08,
    0.76,
-   0.84
+   0.86
   ],
   "sign_front": [
    0.0,
@@ -190,8 +190,8 @@
    36.0
   ],
   "sedan": [
-   8.5,
-   20.0
+   4.2,
+   24.4
   ],
   "letters": [
    2.0,
@@ -220,8 +220,8 @@
    1.55
   ],
   "woman": [
-   -0.2,
-   1.42
+   -1.0,
+   1.4
   ],
   "door_in": [
    2.0,
@@ -232,12 +232,12 @@
    8.7
   ],
   "dad_out": [
-   2.4,
-   10.4
+   3.0,
+   11.4
   ],
   "thief_lot": [
-   6.6,
-   18.6
+   2.9,
+   22.0
   ],
   "guard": [
    2.0,
@@ -480,8 +480,8 @@
      1.55
     ],
     "woman": [
-     -0.2,
-     1.42
+     -1.0,
+     1.4
     ],
     "door_in": [
      2.0,
@@ -492,12 +492,12 @@
      8.7
     ],
     "dad_out": [
-     2.4,
-     10.4
+     3.0,
+     11.4
     ],
     "thief_lot": [
-     6.6,
-     18.6
+     2.9,
+     22.0
     ],
     "guard": [
      2.0,
@@ -772,14 +772,14 @@
     {
      "f": 104,
      "pos": [
-      5.567,
-      2.479,
-      -9.088
+      -0.9,
+      1.6,
+      -1.8
      ],
      "look": [
-      0.478,
-      0.388,
-      4.895
+      1.6,
+      1.0,
+      6.0
      ],
      "fov": 50,
      "roll": 0,
@@ -1020,16 +1020,16 @@
     {
      "f": 224,
      "pos": [
+      -1.4,
       3.2,
-      2.2,
-      26.0
+      25.5
      ],
      "look": [
-      2.0,
-      3.3,
+      1.0,
+      3.0,
       8.3
      ],
-     "fov": 50,
+     "fov": 54,
      "roll": 0,
      "push": 0.0006,
      "blur": 0,
@@ -1205,14 +1205,14 @@
     {
      "f": 428,
      "pos": [
-      0.32,
-      0.98,
-      1.58
+      0.34,
+      1.28,
+      1.42
      ],
      "look": [
-      0.32,
-      0.86,
-      1.1
+      0.34,
+      0.84,
+      1.02
      ],
      "fov": 30,
      "roll": 0,
@@ -1586,7 +1586,7 @@
    "vo": "Ông kể: \"Tôi tưởng anh ta đùa. Tôi tưởng anh ta chạy hai bước rồi quay lại.\"",
    "gloss": "He recalls: \"I thought he was joking. I thought he'd run two steps and come back.\"",
    "spine": 3,
-   "viewer": "The father laughs, palm still out, waiting for the joke to end, while the stranger bursts out through the doors.",
+   "viewer": "Seen from the doors: the father laughs, palm still out, waiting for the joke to end, while the stranger runs past us and out.",
    "in": {
     "type": "glide",
     "from": "S05"
@@ -1597,26 +1597,26 @@
    },
    "build": "as before; the doors.",
    "blocking": "Dad and girl behind the table; the stranger runs from the table to the doors (arrives f790) and out.",
-   "action": "f758-790 the stranger sprints across the floor, small in the background; f790 he slams the push bar, the doors fly open and he's out; the doors swing; f800-830 dad laughs ('đùa' f821), palm still open; f849-900 'chạy hai bước rồi quay lại': dad keeps smiling at the doors, waiting; the girl looks up at him, worried.",
+   "action": "f758-790 the stranger sprints toward the lens and past it (the doors are behind the lens); f790 the bang of the push bar off-screen, the light on the floor flickers as the doors swing; f800-830 dad laughs ('đùa' f821), palm still open; f849-900 'chạy hai bước rồi quay lại': dad keeps smiling at the doors, waiting; the girl looks up at him, worried.",
    "acting": "Dad: laughing, easy -> expectant. Girl: worried.",
    "cams": [
     {
      "f": 758,
      "pos": [
-      3.306,
-      1.794,
-      -8.689
+      1.811,
+      1.19,
+      5.575
      ],
      "look": [
-      0.957,
-      0.607,
-      2.362
+      -0.096,
+      0.654,
+      0.853
      ],
-     "fov": 48,
+     "fov": 44,
      "roll": 0,
      "push": 0.0006,
      "blur": 0,
-     "why": "from the booth's side toward the doors: the father laughing, the stranger leaving",
+     "why": "from the doors back at the booth: the father laughing at us, the stranger running past the lens",
      "glide": 30
     }
    ],
@@ -1654,7 +1654,7 @@
       7.55
      ],
      "view": "side running",
-     "pose": "sprint to the doors f758-790",
+     "pose": "sprints toward and past the lens to the doors f758-790",
      "expr": "grin"
     }
    ],
@@ -1685,16 +1685,17 @@
      "kid": true
     },
     {
-     "n": "doors",
+     "n": "runner",
      "p": [
-      2.0,
-      1.2,
-      8.0
+      0.6,
+      1.0,
+      3.6
      ],
      "f": [
-      780,
-      937
-     ]
+      760,
+      770
+     ],
+     "nofeet": true
     },
     {
      "n": "dad feet",
@@ -1852,21 +1853,21 @@
     {
      "f": 1020,
      "pos": [
-      0.521,
-      1.103,
-      6.45
+      1.6,
+      1.5,
+      8.5
      ],
      "look": [
-      3.158,
-      0.549,
-      11.017
+      2.8,
+      0.6,
+      12.0
      ],
-     "fov": 50,
+     "fov": 58,
      "roll": 0,
-     "push": 0.0008,
+     "push": 0.0004,
      "blur": 0,
      "why": "outside: his limp, the sedan in the lot",
-     "glide": 34
+     "glide": 26
     }
    ],
    "kicks": [
@@ -1883,8 +1884,8 @@
     {
      "who": "dad",
      "at": [
-      2.4,
-      10.4
+      3.0,
+      11.4
      ],
      "view": "side walking (limp)",
      "pose": "limps out f1000-1068; stops f1076",
@@ -1895,9 +1896,9 @@
     {
      "n": "dad head",
      "p": [
-      2.4,
+      3.0,
       1.82,
-      10.4
+      11.4
      ],
      "f": [
       1050,
@@ -1907,9 +1908,9 @@
     {
      "n": "sedan",
      "p": [
-      8.5,
+      4.2,
       0.8,
-      20.0
+      24.4
      ],
      "f": [
       1060,
@@ -1919,9 +1920,9 @@
     {
      "n": "dad feet",
      "p": [
-      2.4,
+      3.0,
       0.02,
-      10.4
+      11.4
      ],
      "f": [
       1050,
@@ -1947,7 +1948,7 @@
    "spine": 5,
    "viewer": "Everything freezes on the hurt father in the empty lot: why go to such lengths for one card?",
    "in": {
-    "type": "glide",
+    "type": "cut",
     "from": "S08"
    },
    "out": {
@@ -1963,21 +1964,21 @@
     {
      "f": 1129,
      "pos": [
-      1.252,
-      1.073,
-      7.266
+      5.0,
+      1.4,
+      16.2
      ],
      "look": [
-      2.394,
-      0.839,
-      10.402
+      3.0,
+      0.9,
+      11.4
      ],
      "fov": 40,
      "roll": 0,
      "push": 0.0005,
      "blur": 0,
      "why": "hold on the frozen father",
-     "glide": 24
+     "cut": true
     }
    ],
    "kicks": [
@@ -1990,8 +1991,8 @@
     {
      "who": "dad",
      "at": [
-      2.4,
-      10.4
+      3.0,
+      11.4
      ],
      "view": "front",
      "pose": "frozen wince",
@@ -2002,9 +2003,9 @@
     {
      "n": "dad head",
      "p": [
-      2.4,
+      3.0,
       1.82,
-      10.4
+      11.4
      ],
      "f": [
       1129,
@@ -2014,9 +2015,9 @@
     {
      "n": "dad feet",
      "p": [
-      2.4,
+      3.0,
       0.02,
-      10.4
+      11.4
      ],
      "f": [
       1129,
@@ -2059,18 +2060,18 @@
     {
      "f": 1229,
      "pos": [
-      2.351,
-      7.295,
-      16.739
+      -5.67,
+      5.59,
+      6.22
      ],
      "look": [
-      -1.436,
-      -0.064,
-      -1.075
+      -1.49,
+      -0.5,
+      -1.03
      ],
      "fov": 50,
      "roll": 0,
-     "push": 0.0008,
+     "push": 0.0002,
      "blur": 0,
      "why": "high wide: hand-overs all over the hall"
     }
@@ -2172,18 +2173,18 @@
     {
      "f": 1393,
      "pos": [
-      -9.087,
-      1.589,
-      5.064
+      -3.849,
+      1.41,
+      7.368
      ],
      "look": [
-      0.324,
-      0.469,
-      0.06
+      0.296,
+      0.482,
+      -0.428
      ],
-     "fov": 48,
+     "fov": 44,
      "roll": 0,
-     "push": 0.0008,
+     "push": 0.0006,
      "blur": 0,
      "why": "the family, the passer-by and the phone, the sea behind"
     }
@@ -2469,14 +2470,14 @@
     {
      "f": 1622,
      "pos": [
-      0.32,
-      1.0,
-      1.75
+      0.34,
+      1.32,
+      1.5
      ],
      "look": [
-      0.32,
-      0.86,
-      1.1
+      0.34,
+      0.84,
+      1.02
      ],
      "fov": 32,
      "roll": 0,
@@ -2770,16 +2771,16 @@
     {
      "f": 1950,
      "pos": [
-      3.55,
-      1.25,
-      5.65
+      4.65,
+      1.2,
+      4.9
      ],
      "look": [
       3.9,
-      1.05,
+      1.0,
       7.0
      ],
-     "fov": 36,
+     "fov": 40,
      "roll": 0,
      "push": 0.0008,
      "blur": 0,
@@ -2870,20 +2871,20 @@
     "to": "S17"
    },
    "build": "the replica in a case with a REPLICA sticker; the fundraiser jar with a hand-drawn thermometer card (GOAL 1/3).",
-   "blocking": "Woman walks up to the woman mark f2004-2018 holding the replica; the girl takes it (f2030) and sets it on the easel (f2056-2070); dad beside.",
-   "action": "f2018 'tặng' the woman holds the replica out; f2030 the girl takes it with both hands, beaming; f2056-2070 she stands it on the easel ('bản sao lá bài' f2047-2061); f2088-2140 glide to the jar: bills drop in (f2096, f2110, f2124) and the thermometer fills to a third ('bù một phần' f2129-2138).",
+   "blocking": "Woman walks up to the woman mark (front-left of the table) f2004-2018 holding the replica and hands it to dad (f2030); dad passes it to the girl (f2036-2048); she sets it on the easel (f2056-2070).",
+   "action": "f2018 'tặng' the woman holds the replica out to dad; f2030 he takes it, touched; f2036-2048 he passes it to the girl, beaming; f2056-2070 she stands it on the easel ('bản sao lá bài' f2047-2061); f2088-2140 glide to the jar: bills drop in (f2096, f2110, f2124) and the thermometer fills to a third ('bù một phần' f2129-2138).",
    "acting": "Woman: warm. Girl: surprised -> beaming. Dad: grateful.",
    "cams": [
     {
      "f": 2002,
      "pos": [
-      2.257,
-      1.394,
-      5.345
+      2.637,
+      1.516,
+      6.488
      ],
      "look": [
-      -0.062,
-      0.699,
+      -0.289,
+      0.64,
       0.984
      ],
      "fov": 42,
@@ -2895,16 +2896,16 @@
     {
      "f": 2086,
      "pos": [
-      -0.14,
-      1.08,
+      0.14,
+      1.06,
       1.62
      ],
      "look": [
-      -0.2,
-      0.9,
-      0.84
+      0.15,
+      0.88,
+      0.86
      ],
-     "fov": 34,
+     "fov": 32,
      "roll": 0,
      "push": 0.0008,
      "blur": 0,
@@ -2917,8 +2918,8 @@
     {
      "who": "woman",
      "at": [
-      -0.2,
-      1.42
+      -1.0,
+      1.4
      ],
      "view": "front",
      "pose": "holds out the replica f2018",
@@ -2962,9 +2963,9 @@
     {
      "n": "woman head",
      "p": [
-      -0.2,
+      -1.0,
       1.82,
-      1.42
+      1.4
      ],
      "f": [
       2010,
@@ -2974,9 +2975,9 @@
     {
      "n": "jar",
      "p": [
-      -0.2,
+      0.08,
       0.9,
-      0.84
+      0.86
      ],
      "f": [
       2120,
@@ -2999,9 +3000,9 @@
     {
      "n": "woman feet",
      "p": [
-      -0.2,
+      -1.0,
       0.02,
-      1.42
+      1.4
      ],
      "f": [
       2010,
@@ -3042,16 +3043,16 @@
     {
      "f": 2179,
      "pos": [
-      -1.181,
-      0.199,
-      6.661
+      -1.182,
+      0.778,
+      6.668
      ],
      "look": [
       -0.051,
-      0.579,
+      0.588,
       1.347
      ],
-     "fov": 40,
+     "fov": 38,
      "roll": 0,
      "push": 0.001,
      "blur": 0,
@@ -3247,16 +3248,16 @@
     {
      "f": 2436,
      "pos": [
-      3.0,
-      9.5,
-      9.0
+      4.0,
+      5.6,
+      6.6
      ],
      "look": [
       -0.8,
-      0.4,
-      -1.6
+      0.3,
+      -1.2
      ],
-     "fov": 54,
+     "fov": 56,
      "roll": 0,
      "push": 0.0004,
      "blur": 0,

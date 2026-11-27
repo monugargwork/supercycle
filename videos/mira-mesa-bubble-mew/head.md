@@ -16,4 +16,4 @@ No blur, no shadows, bright palettes (maple floor, cream walls, red trim, sky-bl
 - Attention is eye-line: in the analogy every eye is on the phone, none on its holder.
 
 ## Transitions
-Two hard cuts (S12, the phone POV; S18, the far lot). Travels: S02 in through the doors, S08 out through them, S14 across the hall. Dissolves for the time jumps (S01 to the morning, S10, S13, S19) and the move to the beach (S11).
+Three hard cuts (S09, the freeze on "Khoan"; S12, the phone POV; S18, the far lot). Travels: S02 in through the doors, S08 out through them, S14 across the hall. Dissolves for the time jumps (S01 to the morning, S10, S13, S19) and the move to the beach (S11).

@@ -312,7 +312,7 @@ const dadAt = (out: Stage, cam: CamInfo, f: number, expr: Expr, swaps: number[] 
 
 // ---- the hall: vendors behind every other table, shoppers browsing ----
 const VEND: Who[] = ["v1", "v2", "v3", "v4", "v5", "v6"];
-const AISLE: [number, number, Who][] = [[-6.2, 3.4, "v5"], [5.6, 2.8, "v6"], [-1.6, -1.2, "v1"], [3.8, -1.4, "v4"], [-5.0, -4.4, "v3"], [6.2, -4.6, "v2"]];
+const AISLE: [number, number, Who][] = [[-6.2, 3.4, "v5"], [5.6, 2.8, "v6"], [-2.4, 2.8, "v1"], [3.8, -1.4, "v4"], [-5.0, -4.4, "v3"], [6.2, -4.6, "v2"]];
 const crowd = (out: Stage, cam: CamInfo, f: number, id: number, skip: number[] = []) => {
   P.tables.forEach(([cx, cz], i) => { if (skip.includes(i)) return; const p = Gm(cx, 0, cz - 0.42); if (!near(cam, p)) front(out, cam, VEND[i % 6], ...p, { mode: "stand", expr: "smile", look: (i % 3) - 1 }, f); });
   if (id === 10) return;
@@ -421,7 +421,7 @@ const limpPos = (f: number): { p: V3; dir: V3 } => {
 };
 const s08 = (out: Stage, cam: CamInfo, f: number) => {
   // the thief, far off, reaches the sedan and is gone behind it (f1040)
-  if (f < 1040) { const p = lerp3(Gm(5.6, 0, 16.9), mk(P.thief_lot), ramp(f, 991, 1040)); if (!near(cam, p)) side(out, cam, "stranger", ...p, 1, 1.4, { mode: "march", phase: walkPhase(f, 3.2), stride: 1.1, expr: "grin" }, f); }
+  if (f < 1040) { const p = lerp3(Gm(2.4, 0, 19.2), mk(P.thief_lot), ramp(f, 991, 1040)); if (!near(cam, p)) side(out, cam, "stranger", ...p, 1, 1.4, { mode: "march", phase: walkPhase(f, 3.2), stride: 1.1, expr: "grin" }, f); }
   if (f < DOOR8 - 4) return;
   const { p, dir } = limpPos(f), stopped = f >= PAIN8[1];
   if (near(cam, p)) return;
@@ -490,7 +490,7 @@ const s12 = (out: Stage, cam: CamInfo, f: number) => {
     fxc(out, `phoneFrame${Math.round(ramp(f, 1504, 1516) * 8)}`, 592, 1200, (pp) => art2.phoneFrame(pp, 592, 1200, ramp(f, 1504, 1516)), ph, 0.074, 0.15);
     const J = frontPts(C.stranger2, { seed: IDX.stranger2 + 1 });
     for (const sd of [-1, 1]) { const A: V3 = [c.x + F.x * 0.12 + R.x * sd * 0.14 - U.x * 0.3, c.y + F.y * 0.12 - U.y * 0.3, c.z + F.z * 0.12 + R.z * sd * 0.14 - U.z * 0.3];
-      const Bh: V3 = [ph[0] + R.x * sd * 0.036 - U.x * 0.03, ph[1] - U.y * 0.03, ph[2] + R.z * sd * 0.036 - U.z * 0.03]; seg3d(out, cam, A, Bh, J.armW * SU * 0.6, J.armCol, J.hand * SU); }
+      const Bh: V3 = [ph[0] + R.x * sd * 0.036 - U.x * 0.03, ph[1] - U.y * 0.03, ph[2] + R.z * sd * 0.036 - U.z * 0.03]; seg3d(out, cam, A, Bh, J.armW * SU * 0.6, J.armCol, 0); }
     if (f >= 1520 && f < 1524) out.fx.push({ key: "flash", cw: 64, ch: 64, draw: (pp) => { pp.g.fillStyle = "#ffffff"; pp.g.fillRect(0, 0, 64, 64); }, x: ph[0] + F.x * 0.01, y: ph[1], z: ph[2] + F.z * 0.01, w: 0.06, h: 0.12, soft: true });
     return;
   }
@@ -506,14 +506,14 @@ const s13 = (out: Stage, cam: CamInfo, f: number) => {
 const COPBACK = (): V3 => Gm(-1.15, 0, 7.2);
 const s14 = (out: Stage, cam: CamInfo, f: number) => {
   crowd(out, cam, f, 14);
-  const cp = mk(P.cop), flyerP = Gm(P.flyer[0] + 0.1, P.flyer[1], P.flyer[2] - 0.03);
-  if (f < SHRUG14 - 10) { const fo: FrontOpts = { mode: "stand", expr: "neutral", armOff: 2, look: -0.7 }; if (near(cam, cp)) return; front(out, cam, "cop", ...cp, fo, f);
-    const u = smooth(ramp(f, PIN14[0] - 10, PIN14[0])), back = smooth(ramp(f, PIN14[1] + 4, PIN14[1] + 14));
-    const hand = lerp3(lerp3(restHand(cam, "cop", cp, fo, -1), flyerP, u), restHand(cam, "cop", cp, fo, -1), back);
-    arm3d(out, cam, "cop", cp, fo, -1, f >= PIN14[1] && f < PIN14[1] + 4 ? [flyerP[0], flyerP[1] + 0.005 * (f % 2), flyerP[2]] : hand, f); arm3d(out, cam, "cop", cp, fo, 1, restHand(cam, "cop", cp, fo, 1), f);
+  const cp = mk(P.cop), flyerP = Gm(P.flyer[0] + 0.1, P.flyer[1], P.flyer[2] - 0.03), off = PIN14[1] + 6;
+  if (f < off) { const fo: FrontOpts = { mode: "stand", expr: "neutral", armOff: 2, look: -0.7 }; if (near(cam, cp)) return; front(out, cam, "cop", ...cp, fo, f);
+    const u = smooth(ramp(f, PIN14[0] - 10, PIN14[0]));
+    const hand = f >= PIN14[1] ? [flyerP[0], flyerP[1] + 0.005 * (f % 2), flyerP[2]] as V3 : lerp3(restHand(cam, "cop", cp, fo, -1), flyerP, u);
+    arm3d(out, cam, "cop", cp, fo, -1, hand, f); arm3d(out, cam, "cop", cp, fo, 1, restHand(cam, "cop", cp, fo, 1), f);
     if (f < PIN14[0]) fxc(out, "flyerHeld", 300, 388, (pp) => art2.flyer(pp, 300, 388), [hand[0], hand[1] + 0.05, hand[2] - 0.02], 0.2, 0.26); return; }
-  if (f < SHRUG14) { walkTo(out, cam, "cop", cp, COPBACK(), f, SHRUG14 - 10, SHRUG14, { expr: "neutral" }); return; }
-  const fo: FrontOpts = { mode: "stand", expr: f >= SHRUG14 + 4 ? "sad" : "neutral", armOff: 2 }, p = COPBACK(); front(out, cam, "cop", ...p, fo, f, [SHRUG14 + 4]);
+  if (f < off + 12) { walkTo(out, cam, "cop", cp, COPBACK(), f, off, off + 12, { expr: "neutral" }); return; }
+  const fo: FrontOpts = { mode: "stand", expr: f >= SHRUG14 + 4 ? "sad" : "neutral", armOff: 2, look: -0.6 }, p = COPBACK(); if (near(cam, p)) return; front(out, cam, "cop", ...p, fo, f, [SHRUG14 + 4]);
   const sh = smooth(ramp(f, SHRUG14, SHRUG14 + 8)) * (1 - smooth(ramp(f, SHRUG14 + 24, SHRUG14 + 34))), r = cam.right;
   for (const sd of [-1, 1] as const) { const h = restHand(cam, "cop", p, fo, sd); arm3d(out, cam, "cop", p, fo, sd, [h[0] + r.x * sd * 0.12 * sh, h[1] + 0.18 * sh, h[2] + r.z * sd * 0.12 * sh], f); }
 };
@@ -524,18 +524,25 @@ const s15 = (out: Stage, cam: CamInfo, f: number) => {
 };
 const s16 = (out: Stage, cam: CamInfo, f: number) => {
   crowd(out, cam, f, 16); guardPost(out, cam, f);
-  const d = dadAt(out, cam, f, "smile"); if (d) rest2(out, cam, "dad", d.p, d.fo, f);
-  const wp = mk(P.woman), H2 = Gm(0.12, 1.06, 1.12);
-  if (f < WOMAN16[1]) { const p = walkTo(out, cam, "woman", Gm(-1.8, 0, 2.8), wp, f, WOMAN16[0] - 8, WOMAN16[1], { expr: "smile", reach: 0.6 }); out.props.replicaCase = { p: [p[0], 1.12, p[2] + 0.2], ry: faceTo(cam, p[0], p[2] + 0.2) }; }
-  else { const fo: FrontOpts = { mode: "stand", expr: "smile", armOff: 2 }; if (!near(cam, wp)) { front(out, cam, "woman", ...wp, fo, f);
-      const hand = f < TAKE16 + 4 ? lerp3(chestAt(cam, "woman", wp, fo, 0.4, 0.16), H2, smooth(ramp(f, WOMAN16[1], TAKE16 - 4))) : lerp3(H2, restHand(cam, "woman", wp, fo, 1), smooth(ramp(f, TAKE16 + 4, TAKE16 + 14)));
-      arm3d(out, cam, "woman", wp, fo, 1, hand, f); arm3d(out, cam, "woman", wp, fo, -1, restHand(cam, "woman", wp, fo, -1), f);
-      if (f < TAKE16) out.props.replicaCase = { p: hand, ry: faceTo(cam, hand[0], hand[2]) }; } }
-  const g = girlAt(out, cam, f, f >= TAKE16 - 4 ? "laugh" : "smile", [TAKE16 - 4], { look: -0.5 });
-  if (g) { if (f < TAKE16 - 6 || f >= EASEL16[1] + 6) rest2(out, cam, "girl", g.p, g.fo, f);
-    else { const hold = chestAt(cam, "girl", g.p, g.fo, 0.35, 0.16), c = f < TAKE16 ? H2 : f < EASEL16[0] ? lerp3(H2, hold, smooth(ramp(f, TAKE16, TAKE16 + 10))) : lerp3(hold, EASEL(), smooth(ramp(f, EASEL16[0], EASEL16[1]))), r = cam.right;
+  const wp = mk(P.woman), H2 = Gm(-0.7, 1.06, 1.02), DG = Gm(0.04, 1.0, 0.74), PASS = [TAKE16 + 6, TAKE16 + 18];
+  // the woman: walks up with the replica, holds it out to dad
+  if (f < WOMAN16[1]) { const p = walkTo(out, cam, "woman", Gm(-2.4, 0, 2.6), wp, f, WOMAN16[0] - 8, WOMAN16[1], { expr: "smile", reach: 0.6 }); out.props.replicaCase = { p: [p[0], 1.12, p[2] + 0.2], ry: faceTo(cam, p[0], p[2] + 0.2) }; }
+  else if (!near(cam, wp)) { const fo: FrontOpts = { mode: "stand", expr: "smile", armOff: 2, look: 0.6 }; front(out, cam, "woman", ...wp, fo, f);
+    const hand = f < TAKE16 + 2 ? lerp3(chestAt(cam, "woman", wp, fo, 0.4, 0.16), H2, smooth(ramp(f, WOMAN16[1], TAKE16 - 4))) : lerp3(H2, restHand(cam, "woman", wp, fo, 1), smooth(ramp(f, TAKE16 + 2, TAKE16 + 12)));
+    arm3d(out, cam, "woman", wp, fo, 1, hand, f); arm3d(out, cam, "woman", wp, fo, -1, restHand(cam, "woman", wp, fo, -1), f);
+    if (f < TAKE16) out.props.replicaCase = { p: hand, ry: faceTo(cam, hand[0], hand[2]) }; }
+  // dad: takes it, passes it to the girl
+  const d = dadAt(out, cam, f, f >= TAKE16 ? "relief" : "smile", [TAKE16]);
+  if (d) { let hnd = restHand(cam, "dad", d.p, d.fo, -1);
+    if (f >= TAKE16 - 8 && f < PASS[1] + 4) { hnd = f < TAKE16 ? lerp3(restHand(cam, "dad", d.p, d.fo, -1), H2, smooth(ramp(f, TAKE16 - 8, TAKE16))) : f < PASS[0] ? H2 : lerp3(H2, DG, smooth(ramp(f, PASS[0], PASS[1])));
+      if (f >= TAKE16 && f < PASS[1]) out.props.replicaCase = { p: hnd, ry: faceTo(cam, hnd[0], hnd[2]) }; }
+    arm3d(out, cam, "dad", d.p, d.fo, -1, hnd, f); arm3d(out, cam, "dad", d.p, d.fo, 1, restHand(cam, "dad", d.p, d.fo, 1), f); }
+  // the girl: takes it from dad, holds it, sets it on the easel
+  const g = girlAt(out, cam, f, f >= PASS[1] - 4 ? "laugh" : "smile", [PASS[1] - 4], { look: -0.5 });
+  if (g) { if (f < PASS[1] - 6 || f >= EASEL16[1] + 6) rest2(out, cam, "girl", g.p, g.fo, f);
+    else { const hold = chestAt(cam, "girl", g.p, g.fo, 0.35, 0.16), c = f < PASS[1] ? DG : f < EASEL16[0] ? lerp3(DG, hold, smooth(ramp(f, PASS[1], PASS[1] + 8))) : lerp3(hold, EASEL(), smooth(ramp(f, EASEL16[0], EASEL16[1]))), r = cam.right;
       arm3d(out, cam, "girl", g.p, g.fo, -1, [c[0] - r.x * 0.045, c[1] - 0.03, c[2] - r.z * 0.045], f); arm3d(out, cam, "girl", g.p, g.fo, 1, [c[0] + r.x * 0.045, c[1] - 0.03, c[2] + r.z * 0.045], f);
-      if (f >= TAKE16 && f < EASEL16[1]) out.props.replicaCase = { p: c, ry: faceTo(cam, c[0], c[2]) }; } }
+      if (f >= PASS[1] && f < EASEL16[1]) out.props.replicaCase = { p: c, ry: faceTo(cam, c[0], c[2]) }; } }
   // bills drop into the jar
   BILLS16.forEach((t0, i) => { if (f >= t0 - 8 && f < t0 + 4) { const u = ramp(f, t0 - 8, t0 + 4), jp = Gm(P.jar[0], TOPY + 0.35 - 0.3 * u * u, P.jar[2]); fxc(out, `billD${i}`, 470, 200, (pp) => art2.bill(pp, 470, 200), jp, 0.08, 0.034, { rot: 0.4 * Math.sin(f * 0.7 + i) }); } });
 };

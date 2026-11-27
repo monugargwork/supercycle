@@ -52,7 +52,7 @@ export const doorAngle = (id: number, f: number) => {
   if (id === 2) return 1.55;                       // the morning: propped open
   if (id === 1) return swing(f, DOOR1);
   if (id === 6 || id === 7) return swing(f, DOOR6);
-  if (id === 8 || id === 9) return swing(f, DOOR8);
+  if (id === 8 || id === 9) return f < DOOR8 ? 0 : 1.45 * Math.min(1, (f - DOOR8) / 6);   // he shoves them wide; the closer holds them open
   return 0;
 };
 /** what stands on the easel: the Bubble Mew, nothing, or the replica */

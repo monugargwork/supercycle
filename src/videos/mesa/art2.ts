@@ -86,11 +86,11 @@ export const courtLines = (p: Pen, W: number, H: number) => {
   const g = p.g, s = W / 18, X = (x: number) => (x + 9) * s, Z = (z: number) => (z + 7) * s, lw = 0.06 * s;
   g.strokeStyle = "#ffffff"; g.lineWidth = lw;
   g.strokeRect(X(-8.4), Z(-6.4), 16.8 * s, 13.8 * s); g.beginPath(); g.moveTo(X(-8.4), Z(0.5)); g.lineTo(X(8.4), Z(0.5)); g.stroke();
-  g.fillStyle = "#d8322f"; g.beginPath(); g.arc(X(0), Z(0.5), 1.8 * s, 0, 7); g.fill(); g.stroke();
-  g.fillStyle = "#ffffff"; font(g, 900, 1.5 * s); g.textAlign = "center"; g.textBaseline = "middle"; g.fillText("MM", X(0), Z(0.55));
+  g.fillStyle = "#e2604e"; g.beginPath(); g.arc(X(0), Z(0.5), 1.2 * s, 0, 7); g.fill(); g.stroke();
+  g.fillStyle = "#ffffff"; font(g, 900, 1.0 * s); g.textAlign = "center"; g.textBaseline = "middle"; g.fillText("MM", X(0), Z(0.55));
   for (const [z0, d] of [[-6.4, 1], [7.4, -1]] as [number, number][]) {
-    g.fillStyle = "#3f86e0"; g.fillRect(X(-2.4), Math.min(Z(z0), Z(z0 + d * 5.8)), 4.8 * s, 5.8 * s); g.strokeRect(X(-2.4), Math.min(Z(z0), Z(z0 + d * 5.8)), 4.8 * s, 5.8 * s);
-    g.beginPath(); g.arc(X(0), Z(z0 + d * 5.8), 1.8 * s, d > 0 ? 0 : Math.PI, d > 0 ? Math.PI : 2 * Math.PI); g.stroke();
+    g.fillStyle = "rgba(63,150,230,0.42)"; g.fillRect(X(-1.8), Math.min(Z(z0), Z(z0 + d * 4.0)), 3.6 * s, 4.0 * s); g.strokeRect(X(-1.8), Math.min(Z(z0), Z(z0 + d * 4.0)), 3.6 * s, 4.0 * s);
+    g.beginPath(); g.arc(X(0), Z(z0 + d * 4.0), 1.2 * s, d > 0 ? 0 : Math.PI, d > 0 ? Math.PI : 2 * Math.PI); g.stroke();
     g.beginPath(); g.arc(X(0), Z(z0 + d * 1.6), 6.75 * s, d > 0 ? 0.15 : Math.PI + 0.15, d > 0 ? Math.PI - 0.15 : 2 * Math.PI - 0.15); g.stroke();
   }
 };

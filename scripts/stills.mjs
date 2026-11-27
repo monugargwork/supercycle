@@ -7,7 +7,7 @@ import path from "node:path";
 const [prefix, frames, dpr = "0.5"] = process.argv.slice(2);
 const chromiumOptions = { gl: process.env.REMOTION_GL || (process.platform === "darwin" ? "angle" : "swangle") }; // Mac GPU, else software
 const inputProps = { audio: false, post: { dpr: Number(dpr), ...JSON.parse(process.env.POST || "{}") } }; // POST='{"lens":false}' switches post passes off (A/B tests)
-const serveUrl = await bundle({ entryPoint: path.resolve("src/index.ts"), publicDir: path.resolve("public") });
+const serveUrl = await bundle({ entryPoint: path.resolve(process.env.ENTRY || "src/index.ts"), /* ENTRY: bundle one reel alone (out/entry_<reel>.tsx) */ publicDir: path.resolve("public") });
 const composition = await selectComposition({ serveUrl, id: process.env.COMP || "PsaReel", chromiumOptions, inputProps });
 const onBrowserLog = (l) => { if (l.type === "error" || l.type === "warning") console.log(`[${l.type}]`, l.text.slice(0, 400)); };
 // frames: "120,640" or with "every:60" (0, 60, … up to the last frame), e.g. "every:60,333,1501"; sorted, no repeats
