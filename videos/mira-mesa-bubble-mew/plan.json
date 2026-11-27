@@ -772,21 +772,21 @@
     {
      "f": 104,
      "pos": [
-      -0.9,
-      1.6,
-      -1.8
+      2.6,
+      1.7,
+      2.6
      ],
      "look": [
-      1.6,
-      1.0,
-      6.0
+      1.8,
+      1.1,
+      8.0
      ],
      "fov": 50,
      "roll": 0,
      "push": 0.0,
      "blur": 0,
      "why": "whip after him: the run to the doors",
-     "glide": 26
+     "glide": 22
     },
     {
      "f": 150,
@@ -1740,8 +1740,10 @@
    "spine": 3,
    "viewer": "The doors swing shut and settle. Nobody comes back.",
    "in": {
-    "type": "glide",
-    "from": "S06"
+    "type": "dissolve",
+    "n": 6,
+    "from": "S06",
+    "note": "a few seconds later"
    },
    "out": {
     "type": "glide",
@@ -1768,8 +1770,7 @@
      "roll": 0,
      "push": 0.002,
      "blur": 0,
-     "why": "locked on the empty doors",
-     "glide": 22
+     "why": "locked on the empty doors"
     }
    ],
    "kicks": [],

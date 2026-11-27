@@ -89,7 +89,7 @@ Three hard cuts (S09, the freeze on "Khoan"; S12, the phone POV; S18, the far lo
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 0 | open | [2.505, 1.814, 4.821] | [-0.118, 0.986, 0.933] | 44 | 0.05 | 0 | the stranger with the card at their table, all three full body |
-| 104 | glide 26 f | [-0.9, 1.6, -1.8] | [1.6, 1, 6] | 50 | 0 | 0 | whip after him: the run to the doors |
+| 104 | glide 22 f | [2.6, 1.7, 2.6] | [1.8, 1.1, 8] | 50 | 0 | 0 | whip after him: the run to the doors |
 | 150 | glide 30 f | [0.931, 1.469, 6.381] | [-0.05, 0.675, 0.819] | 42 | 0.12 | 0 | father and daughter at their first booth, faces falling |
 
 - Kicks (7 f): f103 strength 0.5; f185 strength 0.35.
@@ -221,7 +221,7 @@ Three hard cuts (S09, the freeze on "Khoan"; S12, the phone POV; S18, the far lo
 ### S07 · 0:31.3-0:33.0 · f938-f991 · "Anh ta không quay lại."
 - Gloss: He didn't come back.
 - Spine link: 3. Viewer must get: The doors swing shut and settle. Nobody comes back.
-- In: glide. Out: glide.
+- In: dissolve 6 f (a few seconds later). Out: glide.
 - Set: gym. Light: day.
 - Build: the doors.
 - Blocking: Nobody in the doorway; dad in the foreground at the booth.
