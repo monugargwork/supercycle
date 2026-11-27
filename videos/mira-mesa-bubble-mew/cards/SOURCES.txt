@@ -1,1 +1,24 @@
 Real card scans for the Mesa reel (from library/cards, see CATALOG.md).
+bubble_mew.png    Paldean Fates Mew ex 232/091 (SIR, 'Bubble Mew')  https://images.pokemontcg.io/sv4pt5/232_hires.png
+pika151.png       Scarlet & Violet 151 Pikachu 25/165               https://images.pokemontcg.io/sv3pt5/25_hires.png
+zard151.png       Scarlet & Violet 151 Charizard ex SIR 199/165     https://images.pokemontcg.io/sv3pt5/199_hires.png
+blast151.png      Scarlet & Violet 151 Blastoise ex SIR 200/165     https://images.pokemontcg.io/sv3pt5/200_hires.png
+venu151.png       Scarlet & Violet 151 Venusaur ex SIR 198/165      https://images.pokemontcg.io/sv3pt5/198_hires.png
+eevee.png         Jungle Eevee 51                                   https://images.pokemontcg.io/base2/51.png
+jigglypuff.png    Jungle Jigglypuff 54                              https://images.pokemontcg.io/base2/54.png
+meowth.png        Jungle Meowth 56                                  https://images.pokemontcg.io/base2/56.png
+diglett.png       Base Set Diglett 47                               https://images.pokemontcg.io/base1/47.png
+magikarp.png      Base Set Magikarp 35                              https://images.pokemontcg.io/base1/35.png
+abra.png          Base Set Abra 43                                  https://images.pokemontcg.io/base1/43.png
+charmander.png    Base Set Charmander 46                            https://images.pokemontcg.io/base1/46.png
+squirtle.png      Base Set Squirtle 63                              https://images.pokemontcg.io/base1/63.png
+bulbasaur.png     Base Set Bulbasaur 44                             https://images.pokemontcg.io/base1/44.png
+sprigatito.png    Scarlet & Violet Sprigatito 13                    https://images.pokemontcg.io/sv1/13.png
+fuecoco.png       Scarlet & Violet Fuecoco 36                       https://images.pokemontcg.io/sv1/36.png
+quaxly.png        Scarlet & Violet Quaxly 52                        https://images.pokemontcg.io/sv1/52.png
+pawmi.png         Scarlet & Violet Pawmi 73                         https://images.pokemontcg.io/sv1/73.png
+pikachu_xy.png    XY Pikachu 42                                     https://images.pokemontcg.io/xy1/42.png
+fennekin.png      XY Fennekin 24                                    https://images.pokemontcg.io/xy1/24.png
+froakie.png       XY Froakie 39                                     https://images.pokemontcg.io/xy1/39.png
+chespin.png       XY Chespin 12                                     https://images.pokemontcg.io/xy1/12.png
+bubble_mew upscaled 2x (Lanczos + unsharp 1.2/60/2) in public/mesa/cards/ from the 733x1024 pokemontcg.io scan

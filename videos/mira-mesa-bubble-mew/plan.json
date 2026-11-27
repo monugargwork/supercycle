@@ -79,39 +79,39 @@
   ],
   "table_y": 0.76,
   "easel": [
-   0.32,
+   0.34,
    0.76,
-   1.1
+   1.02
   ],
   "case_tray": [
-   -0.78,
-   -0.08,
-   0.82,
-   1.18
+   -0.55,
+   0.15,
+   0.95,
+   1.2
   ],
   "stack": [
-   0.74,
+   -0.8,
    0.76,
    1.12
   ],
   "tin": [
    -0.2,
    0.76,
-   0.85
+   0.84
   ],
   "tent": [
-   0.62,
+   0.66,
    0.76,
-   0.86
+   0.88
   ],
   "jar": [
-   -0.42,
+   -0.2,
    0.76,
-   0.86
+   0.84
   ],
   "sign_front": [
    0.0,
-   0.42,
+   0.55,
    1.262
   ],
   "handover": [
@@ -208,8 +208,8 @@
    0.6
   ],
   "girl": [
-   0.46,
-   0.62
+   0.42,
+   0.72
   ],
   "stranger": [
    -0.58,
@@ -244,8 +244,13 @@
    7.35
   ],
   "cop": [
-   -1.55,
-   7.35
+   -1.6,
+   7.75
+  ],
+  "flyer": [
+   -1.95,
+   1.62,
+   7.98
   ],
   "shop1": [
    -4.2,
@@ -360,7 +365,7 @@
     },
     {
      "id": "booth",
-     "build": "new: their vendor table x -0.9..0.9, z 0.75..1.25, top 0.76 (standing height table, folding steel legs), a sky-blue cloth with a skirt to the floor; on it: a glass-top display tray x -0.78..-0.08 with ten real cards on red felt, the wooden easel at x 0.32 holding the Bubble Mew in a magnetic one-touch case with a white price tag $3,200 on a string, a stand of three top-loaders at the front-right corner, a red cash tin, a cardboard tent sign FIRST SHOW! (hand-lettered)",
+     "build": "new: their vendor table x -0.9..0.9, z 0.75..1.25, top 0.76 (standing height table, folding steel legs), a sky-blue cloth with a skirt to the floor; on it: a glass-top display tray x -0.55..0.15 with ten real cards on red felt, the wooden easel at x 0.34 holding the Bubble Mew in a magnetic one-touch case with a white price tag $3,200 on a string, a stand of three top-loaders at the front-left corner (by the customer's hip), a red cash tin, a cardboard tent sign FIRST SHOW! (hand-lettered)",
      "pos": [
       0,
       0.38,
@@ -463,8 +468,8 @@
      0.6
     ],
     "girl": [
-     0.46,
-     0.62
+     0.42,
+     0.72
     ],
     "stranger": [
      -0.58,
@@ -499,8 +504,8 @@
      7.35
     ],
     "cop": [
-     -1.55,
-     7.35
+     -1.6,
+     7.75
     ],
     "shop1": [
      -4.2,
@@ -743,20 +748,20 @@
    },
    "build": "the gym, their booth (easel empty, the case in his hands), the top-loader stand, the double doors.",
    "blocking": "Stranger at the stranger mark in front of the table, holding the case up at eye level; dad behind the table at the dad mark with his right palm open over the table (waiting to get it back); girl at the girl mark. From f103 the stranger runs to the doors (door_in) and out (door_out).",
-   "action": "f0-96 he tilts the case to the light, admiring (two small tilts, f20 and f60); dad's palm stays open; f44 title $3,000+ ('hơn ba nghìn đô' f44-67); f100 his eyes slide to the doors; f103 ('chạy' f103) he spins and bolts: one-frame turn to the side view, a sprint at 4.5 m/s toward the doors with speed lines; his hip clips the table's right corner: the three top-loaders slide off and fall to the floor (f106-124) and lie there; f150-170 he hits the doors' push bar, they fly open; f137-183 'ngay trong buổi bán thẻ đầu tiên của hai cha con': the camera settles back on dad and girl behind their table, the FIRST SHOW! sign between them, faces from smile to shock (f150).",
+   "action": "f0-96 he tilts the case to the light, admiring (two small tilts, f20 and f60); dad's palm stays open; f44 title $3,000+ ('hơn ba nghìn đô' f44-67); f100 his eyes slide to the doors; f103 ('chạy' f103) he spins and bolts: one-frame turn to the side view, a sprint at 4.5 m/s toward the doors with speed lines; his hip clips the table's left corner as he spins: the three top-loaders slide off and fall to the floor (f106-124) and lie there; f185 he hits the doors' push bar, they fly open; f137-183 'ngay trong buổi bán thẻ đầu tiên của hai cha con': the camera settles back on dad and girl behind their table, the FIRST SHOW! sign between them, faces from smile to shock (f150).",
    "acting": "Stranger: polite admiring smile -> sly glance -> sprint. Dad: proud smile, palm out -> frozen. Girl: beaming -> shock.",
    "cams": [
     {
      "f": 0,
      "pos": [
-      2.628,
-      1.853,
-      4.933
+      2.505,
+      1.814,
+      4.821
      ],
      "look": [
-      -0.094,
-      0.994,
-      0.897
+      -0.118,
+      0.986,
+      0.933
      ],
      "fov": 44,
      "roll": 0,
@@ -791,9 +796,9 @@
       6.381
      ],
      "look": [
-      -0.056,
-      0.67,
-      0.785
+      -0.05,
+      0.675,
+      0.819
      ],
      "fov": 42,
      "roll": 0,
@@ -809,7 +814,7 @@
      0.5
     ],
     [
-     160,
+     185,
      0.35
     ]
    ],
@@ -837,8 +842,8 @@
     {
      "who": "girl",
      "at": [
-      0.46,
-      0.62
+      0.42,
+      0.72
      ],
      "view": "front",
      "pose": "standing by the tent sign",
@@ -873,9 +878,9 @@
     {
      "n": "girl head",
      "p": [
-      0.46,
+      0.42,
       1.45,
-      0.62
+      0.72
      ],
      "f": [
       0,
@@ -910,9 +915,9 @@
     {
      "n": "girl head",
      "p": [
-      0.46,
+      0.42,
       1.45,
-      0.62
+      0.72
      ],
      "f": [
       180,
@@ -947,9 +952,9 @@
     {
      "n": "girl feet",
      "p": [
-      0.46,
+      0.42,
       0.02,
-      0.62
+      0.72
      ],
      "f": [
       0,
@@ -971,9 +976,9 @@
     {
      "n": "girl feet",
      "p": [
-      0.46,
+      0.42,
       0.02,
-      0.62
+      0.72
      ],
      "f": [
       180,
@@ -983,7 +988,7 @@
    ],
    "physics": "the three top-loaders: knocked off the corner at f106 with ~1.2 m/s, they tip and fall 0.76 m (light, a small flutter), land flat by f124 and stay. The doors: spring hinges, open to 80 deg and swing back with a damped swing.",
    "light_mood": "bright midday through the high windows.",
-   "sound": "hall murmur; a sly pluck f100; a whoosh + Gogogogogo-style run cue f103; toploader clatter f118-124; the doors' bang f160; a suspense sting f150.",
+   "sound": "hall murmur; a sly pluck f100; a whoosh + Gogogogogo-style run cue f103; toploader clatter f118-124; the doors' bang f185; a suspense sting f150.",
    "after": "The top-loaders lie on the floor; the easel is empty."
   },
   {
@@ -1057,9 +1062,9 @@
       5.916
      ],
      "look": [
-      -0.043,
-      0.666,
-      0.78
+      -0.038,
+      0.672,
+      0.815
      ],
      "fov": 46,
      "roll": 0,
@@ -1074,8 +1079,8 @@
     {
      "who": "girl",
      "at": [
-      0.46,
-      0.62
+      0.42,
+      0.72
      ],
      "view": "front",
      "pose": "lays top-loaders f350-394",
@@ -1132,9 +1137,9 @@
     {
      "n": "girl head",
      "p": [
-      0.46,
+      0.42,
       1.45,
-      0.62
+      0.72
      ],
      "f": [
       415,
@@ -1157,9 +1162,9 @@
     {
      "n": "girl feet",
      "p": [
-      0.46,
+      0.42,
       0.02,
-      0.62
+      0.72
      ],
      "f": [
       415,
@@ -1219,14 +1224,14 @@
     {
      "f": 548,
      "pos": [
-      0.495,
-      1.409,
-      4.856
+      0.466,
+      1.382,
+      4.751
      ],
      "look": [
-      0.053,
-      0.814,
-      0.649
+      0.039,
+      0.808,
+      0.688
      ],
      "fov": 40,
      "roll": 0,
@@ -1241,8 +1246,8 @@
     {
      "who": "girl",
      "at": [
-      0.46,
-      0.62
+      0.42,
+      0.72
      ],
      "view": "front",
      "pose": "standing",
@@ -1263,9 +1268,9 @@
     {
      "n": "mew",
      "p": [
-      0.32,
+      0.34,
       0.85,
-      1.1
+      1.02
      ],
      "f": [
       470,
@@ -1276,9 +1281,9 @@
     {
      "n": "girl head",
      "p": [
-      0.46,
+      0.42,
       1.45,
-      0.62
+      0.72
      ],
      "f": [
       575,
@@ -1289,9 +1294,9 @@
     {
      "n": "girl feet",
      "p": [
-      0.46,
+      0.42,
       0.02,
-      0.62
+      0.72
      ],
      "f": [
       575,
@@ -1332,14 +1337,14 @@
     {
      "f": 586,
      "pos": [
-      2.511,
-      1.574,
-      5.419
+      2.383,
+      1.544,
+      5.264
      ],
      "look": [
-      -0.096,
-      0.654,
-      0.902
+      -0.116,
+      0.662,
+      0.935
      ],
      "fov": 42,
      "roll": 0,
@@ -1374,8 +1379,8 @@
     {
      "who": "girl",
      "at": [
-      0.46,
-      0.62
+      0.42,
+      0.72
      ],
      "view": "front",
      "pose": "standing",
@@ -1599,13 +1604,13 @@
      "f": 758,
      "pos": [
       3.306,
-      1.783,
-      -8.69
+      1.794,
+      -8.689
      ],
      "look": [
-      0.964,
-      0.598,
-      2.331
+      0.957,
+      0.607,
+      2.362
      ],
      "fov": 48,
      "roll": 0,
@@ -1635,8 +1640,8 @@
     {
      "who": "girl",
      "at": [
-      0.46,
-      0.62
+      0.42,
+      0.72
      ],
      "view": "front",
      "pose": "looks up at him",
@@ -1669,9 +1674,9 @@
     {
      "n": "girl head",
      "p": [
-      0.46,
+      0.42,
       1.45,
-      0.62
+      0.72
      ],
      "f": [
       758,
@@ -1706,9 +1711,9 @@
     {
      "n": "girl feet",
      "p": [
-      0.46,
+      0.42,
       0.02,
-      0.62
+      0.72
      ],
      "f": [
       758,
@@ -2445,14 +2450,14 @@
     {
      "f": 1568,
      "pos": [
-      0.642,
-      1.561,
-      4.814
+      0.607,
+      1.528,
+      4.701
      ],
      "look": [
-      0.057,
-      0.819,
-      0.648
+      0.043,
+      0.813,
+      0.688
      ],
      "fov": 40,
      "roll": 0,
@@ -2486,8 +2491,8 @@
     {
      "who": "girl",
      "at": [
-      0.46,
-      0.62
+      0.42,
+      0.72
      ],
      "view": "front",
      "pose": "looks at the easel",
@@ -2508,9 +2513,9 @@
     {
      "n": "girl head",
      "p": [
-      0.46,
+      0.42,
       1.45,
-      0.62
+      0.72
      ],
      "f": [
       1580,
@@ -2521,9 +2526,9 @@
     {
      "n": "easel",
      "p": [
-      0.32,
+      0.34,
       0.85,
-      1.1
+      1.02
      ],
      "f": [
       1650,
@@ -2534,9 +2539,9 @@
     {
      "n": "girl feet",
      "p": [
-      0.46,
+      0.42,
       0.02,
-      0.62
+      0.72
      ],
      "f": [
       1580,
@@ -2577,14 +2582,14 @@
     {
      "f": 1693,
      "pos": [
-      -1.842,
-      1.497,
-      2.076
+      -1.907,
+      1.533,
+      2.339
      ],
      "look": [
-      -2.227,
-      0.917,
-      7.581
+      -2.29,
+      0.956,
+      7.819
      ],
      "fov": 44,
      "roll": 0,
@@ -2596,13 +2601,13 @@
     {
      "f": 1772,
      "pos": [
-      -2.45,
-      1.82,
+      -1.95,
+      1.64,
       6.6
      ],
      "look": [
-      -2.45,
-      1.8,
+      -1.95,
+      1.62,
       7.98
      ],
      "fov": 34,
@@ -2615,14 +2620,14 @@
     {
      "f": 1840,
      "pos": [
-      -1.842,
-      1.497,
-      2.076
+      -1.907,
+      1.533,
+      2.339
      ],
      "look": [
-      -2.227,
-      0.917,
-      7.581
+      -2.29,
+      0.956,
+      7.819
      ],
      "fov": 44,
      "roll": 0,
@@ -2642,8 +2647,8 @@
     {
      "who": "cop",
      "at": [
-      -1.55,
-      7.35
+      -1.6,
+      7.75
      ],
      "view": "front",
      "pose": "pins the flyer f1740-1760; shrug f1855",
@@ -2654,9 +2659,9 @@
     {
      "n": "cop head",
      "p": [
-      -1.55,
+      -1.6,
       1.82,
-      7.35
+      7.75
      ],
      "f": [
       1730,
@@ -2666,8 +2671,8 @@
     {
      "n": "flyer",
      "p": [
-      -2.45,
-      1.8,
+      -1.95,
+      1.62,
       7.98
      ],
      "f": [
@@ -2679,9 +2684,9 @@
     {
      "n": "cop head",
      "p": [
-      -1.55,
+      -1.6,
       1.82,
-      7.35
+      7.75
      ],
      "f": [
       1862,
@@ -2691,9 +2696,9 @@
     {
      "n": "cop feet",
      "p": [
-      -1.55,
+      -1.6,
       0.02,
-      7.35
+      7.75
      ],
      "f": [
       1730,
@@ -2703,9 +2708,9 @@
     {
      "n": "cop feet",
      "p": [
-      -1.55,
+      -1.6,
       0.02,
-      7.35
+      7.75
      ],
      "f": [
       1862,
@@ -2872,14 +2877,14 @@
     {
      "f": 2002,
      "pos": [
-      2.332,
-      1.407,
-      5.442
+      2.257,
+      1.394,
+      5.345
      ],
      "look": [
-      -0.052,
-      0.693,
-      0.958
+      -0.062,
+      0.699,
+      0.984
      ],
      "fov": 42,
      "roll": 0,
@@ -2890,14 +2895,14 @@
     {
      "f": 2086,
      "pos": [
-      -0.36,
+      -0.14,
       1.08,
       1.62
      ],
      "look": [
-      -0.42,
+      -0.2,
       0.9,
-      0.86
+      0.84
      ],
      "fov": 34,
      "roll": 0,
@@ -2922,8 +2927,8 @@
     {
      "who": "girl",
      "at": [
-      0.46,
-      0.62
+      0.42,
+      0.72
      ],
      "view": "front",
      "pose": "takes it f2030, easel f2056-2070",
@@ -2944,9 +2949,9 @@
     {
      "n": "girl head",
      "p": [
-      0.46,
+      0.42,
       1.45,
-      0.62
+      0.72
      ],
      "f": [
       2010,
@@ -2969,9 +2974,9 @@
     {
      "n": "jar",
      "p": [
-      -0.42,
+      -0.2,
       0.9,
-      0.86
+      0.84
      ],
      "f": [
       2120,
@@ -2982,9 +2987,9 @@
     {
      "n": "girl feet",
      "p": [
-      0.46,
+      0.42,
       0.02,
-      0.62
+      0.72
      ],
      "f": [
       2010,
@@ -3090,7 +3095,7 @@
      "n": "sign",
      "p": [
       0.0,
-      0.42,
+      0.55,
       1.262
      ],
      "f": [
