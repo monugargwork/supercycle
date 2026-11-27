@@ -1,4 +1,4 @@
-// The TCGplayer reel (Vietnamese voice, 77.7 s) in the flat-characters-in-a-3D-toon-world style of the cartoon
+// The Retford wall-heist reel (Vietnamese voice, 79.7 s) in the flat-characters-in-a-3D-toon-world style of the cartoon
 // short skill. Same post chain as the bridge short; the sound mix (score, SFX, meme sounds) plays from public/retford/mix.wav.
 // One three.js world (world.ts) posed per frame from the story timeline (story.ts). Post chain (look-match pass):
 //   InkPass (world ink lines, own pass) -> lens blur pre + main (thin-lens DOF per shot from dofAt) ->
@@ -24,7 +24,7 @@ import { TCG_IMG, TCG_ALL, loadTcg } from "./art";
 import { InkPass, noInkFallback } from "../../engine/ink";
 import { LensBlur, GrainEffect } from "../../engine/lensblur";
 import { GradeEffect, GRADES, GRADE_STRENGTH, gradeFor } from "../../engine/grade";
-import { TOTAL, FLASH_AT, SHOTS, layersAt, dofAt, lightAt, TITLES as PLAN_TITLES } from "./story";
+import { TOTAL, FLASH_AT, SHOTS, layersAt, dofAt, lightAt, TITLES as PLAN_TITLES, RED6 } from "./story";
 
 export const RETFORD_FRAMES = TOTAL;
 
@@ -163,6 +163,7 @@ export const RetfordReel: React.FC = () => {
     <AbsoluteFill style={{ background: "#cfe3f2" }}>
       {tcg && layersAt(f).map((l, i) => <ShotView key={i ? "over" : "base"} id={l.id} alpha={l.alpha} />)}
       {flash > 0 && <AbsoluteFill style={{ background: "#ffffff", opacity: flash }} />}
+      {f >= RED6[0] && f < RED6[1] && Math.floor((f - RED6[0]) / 8) % 2 === 0 && <AbsoluteFill style={{ background: "#ff3a2a", opacity: 0.32, mixBlendMode: "multiply" }} />}
       <Titles f={f} />
       <Logo />
       {(getInputProps() as { captions?: boolean }).captions !== false && <Captions f={f} />}

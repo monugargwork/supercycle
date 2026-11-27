@@ -4,10 +4,9 @@ import * as THREE from "three";
 import { Pen, bodyFront, bodySide, frontPts, fxBurst, fxPuff, fxSplash, fxShadow, fxContact, fxRing, Outfit, FrontOpts, SideOpts, SKIN, Expr } from "../../engine/toon";
 import * as art from "./art";
 import {
-  FPS, SHOTS, V3, at, SHo, HOo, JKo, clamp01, smooth, easeOut, hop, SHOPP, HOUSEP, JACKP,
-  BILLS1, STEP1, LIFT1, HIDE1, RING4, LIFT4, WALK4, SET5, HANG5, DIP6, GRAB6, LIFT6, HIDE6, STEP7, KEY7, TAKE7, BILLS7, SHUT7, TUCK8, LIFTS8, SHELF8,
-  KID13, TURN13, SHAKE13, DOOR14, STEP14, GIFT14, WALK15, SPOON15, HIDE15, SCRATCH16, LIFT16, WALK16, PUT16, LOCK16, SHAKE17, CUT17, DIAL18, POINT19, WRITE19,
-  WALK20, PAT20, FAN20, RING21, PHONE21, FREEZE21,
+  FPS, SHOTS, V3, at, clamp01, smooth, easeOut, hop, UNo, KIo, CTo, YAo, COo, RMo, UP, VANP, KIDP, CTRLP, YARDP, COURTP, ROOMP,
+  DRILL1, TIP1, LAND1, STEP1, LIFT2, WALK2, PUSH2, TURN3, LOADA4, LOADB4, LOAD7, PEEL9, STICK9, OPEN9, POINT10, WALK11, FREEZE11, DROP11, LAND11,
+  TAP12, NOD12, OUT15, GLANCE15, AWAY15, STOPR15, BACK15, WALK17, DOOR17, IN17,
 } from "./story";
 import * as art2 from "./art2";
 import { LOOKS } from "./looks";
@@ -133,7 +132,7 @@ const fkey = (o: object) => JSON.stringify(o, (_k, v) => (typeof v === "number" 
 // ---------------- the cast ----------------
 const C = LOOKS;
 type Who = keyof typeof C;
-const IDX: Record<Who, number> = { owner: 3, man: 4, kid: 5, teen: 6, woman: 7, teal: 8, cop: 9 };
+const IDX: Record<Who, number> = { A: 3, B: 4, officer: 5, cop1: 6, cop2: 7, aide: 8, det: 9, C1: 10, C2: 11, kid: 12, kid2: 13, m1: 14, m2: 15, m3: 16, m4: 17, m5: 18, m6: 19 };
 
 /** front-facing person at (x, y, z) */
 const front = (out: Stage, cam: CamInfo, who: Who, x: number, y: number, z: number, fo: FrontOpts, f: number, swaps: number[] = [], mirror = false) => {
@@ -244,17 +243,12 @@ const tcardFx = (out: Stage, key: string, p: V3, h: number, o: { bent?: number; 
   card(out, `tc|${key}|${q(o.bent ?? 0, 10)}|${!!o.holo}|${!!o.scuff}|${o.img ?? ""}`, 260, 360, (pp) => art.tcard(pp, (o.k ?? 0) as art.Kind, 10, 10, 250, 350, o), p[0], p[1], p[2], h * 0.72, h, { rot: o.rot ?? 0 });
 
 // ---------------- per-shot staging ----------------
-const Sm = (x: number, y: number, z: number) => at(SHo, x, y, z);
-const Hm = (x: number, y: number, z: number) => at(HOo, x, y, z);
 const SEAT_CHAIR = 0.92;
 const lerpN = (a: number, b: number, k: number) => a + (b - a) * k;
 const ramp = (f: number, a: number, b: number) => clamp01((f - a) / (b - a));
 const fxc = (out: Stage, key: string, cw: number, ch: number, draw: (p: Pen) => void, p: V3, w: number, h: number, extra: Partial<FxPlace> = {}) => card(out, key, cw, ch, draw, p[0], p[1], p[2], w, h, extra);
 const near = (cam: CamInfo, P: V3, d = 0.45) => cam.pos.distanceTo(new THREE.Vector3(P[0], P[1] + 1.3, P[2])) < d;
 const talkOpen = (f: number, a: number, b: number) => f >= a && f < b && Math.floor((f - a) / 5) % 2 === 1;
-const P = SHOPP, TOPY = P.counter_y, HP = HOUSEP;
-const mk = (m: number[]): V3 => Sm(m[0], 0, m[1]);
-const mkH = (m: number[]): V3 => Hm(m[0], 0, m[1]);
 /** a walk between two marks (side view), then standing */
 const walkTo = (out: Stage, cam: CamInfo, who: Who, A: V3, B: V3, f: number, a: number, b: number, so: SideOpts = {}) => {
   const u = ramp(f, a, b), p = lerp3(A, B, smooth(u)), dx = B[0] - A[0], dz = B[2] - A[2];
@@ -270,332 +264,183 @@ const walkPath = (out: Stage, cam: CamInfo, who: Who, pts: V3[], f: number, a: n
   return { p, dir: [B[0] - A[0], 0, B[2] - A[2]] as V3 };
 };
 
-// ---- the box and its items (positions in the world) ----
-const BOXC = (): V3 => Sm((P.box[0] + P.box[1]) / 2, TOPY, (P.box[2] + P.box[3]) / 2);
-const itemH = (i: number) => P.slab[1];
-/** the top edge of item i where it stands in the box (the hand grips it there) */
-const itemTop = (i: number): V3 => { const row = i < 5 ? P.rows.front : P.rows.back, y = TOPY + 0.006 + (i < 5 ? 0 : P.riser) + itemH(i); return Sm(P.slot_x[i % 5], y - 0.01, row + Math.sin(P.lean) * itemH(i) * 0.9); };
-const itemCentre = (i: number): V3 => { const t = itemTop(i); return [t[0], t[1] + 0.01 - itemH(i) / 2, t[2] - Math.sin(P.lean) * itemH(i) * 0.45]; };
-/** the man takes item i: reach (12 f before the lift), lift 15 cm by the top edge, carry to his chest, slip it behind the jacket */
-const takeItem = (out: Stage, cam: CamInfo, f: number, i: number, lift: number[], hide: number[], body: V3, fo: FrontOpts, side: -1 | 1): V3 | null => {
-  const [a, b] = lift, [, d] = hide, top = itemTop(i), up: V3 = [top[0], top[1] + 0.15, top[2] + 0.03];
-  const chest = chestAt(cam, "man", body, fo, 0.5, 0.06), behind: V3 = [chest[0] + cam.fwd.x * 0.08, chest[1], chest[2] + cam.fwd.z * 0.08];
-  if (f < a - 12 || f > d + 10) return null;
-  const rest = restHand(cam, "man", body, fo, side);
-  let hand: V3, held: V3 | null = null;
-  if (f < a) hand = lerp3(rest, top, smooth((f - a + 12) / 12));
-  else if (f < b) { hand = lerp3(top, up, smooth((f - a) / (b - a))); held = hand; }
-  else if (f < d) { hand = lerp3(up, chest, smooth((f - b) / Math.max(1, d - b - 2))); held = f >= d - 2 ? behind : hand; }
-  else hand = lerp3(chest, rest, smooth((f - d) / 10));
-  arm3d(out, cam, "man", body, fo, side, hand, f);
-  if (held) out.props[`item${i}`] = { p: [held[0], held[1] - itemH(i) / 2 + 0.01, held[2]], rx: -0.1 };
-  return hand;
+// ================= the Retford reel's staging =================
+const Um = (x: number, y: number, z: number) => at(UNo, x, y, z);
+const mkU = (m: number[], y = 0): V3 => Um(m[0], y, m[1]);
+const mkAt = (o: V3, m: number[], y = 0): V3 => at(o, m[0], y, m[1]);
+const CART = UP.carton;
+/** a carton held in front of the chest by both hands (front view): the carton prop and two arms to its sides */
+const holdCarton = (out: Stage, cam: CamInfo, who: Who, p: V3, fo: FrontOpts, slot: number, drop = 0.5) => {
+  const ch = chestAt(cam, who, p, fo, drop, 0.2), r = cam.right;
+  out.props[`carry${slot}`] = { p: ch, ry: Math.atan2(cam.fwd.x, cam.fwd.z) };
+  arm3d(out, cam, who, p, fo, -1, [ch[0] - r.x * 0.19, ch[1] + 0.02, ch[2] - r.z * 0.19], 0);
+  arm3d(out, cam, who, p, fo, 1, [ch[0] + r.x * 0.19, ch[1] + 0.02, ch[2] + r.z * 0.19], 0);
+  return ch;
 };
-/** bills in an open palm (flat), n of them */
-const billsFlat = (out: Stage, at: V3, n: number, key = "") => { for (let k = 0; k < n; k++) fxc(out, `billF${key}${k}`, 470, 200, (pp) => art2.bill(pp, 470, 200), [at[0] + 0.006 * k, at[1] + 0.004 * k, at[2] - 0.004 * k], 0.156, 0.066, { flat: true, rot: 0.15 * (k - 1) }); };
-const billWad = (out: Stage, at: V3, key = "wad") => fxc(out, key, 470, 200, (pp) => art2.bill(pp, 470, 200), at, 0.1, 0.043, { rot: 0.3 });
-
-// ---- the cast in the shop ----
-const customers = (out: Stage, cam: CamInfo, f: number, id: number) => {
-  if (id >= 16 && id <= 19) return;
-  if (!near(cam, mk(P.kid))) front(out, cam, "kid", ...mk(P.kid), { mode: "stand", crouch: id === 13 ? 0.3 : 0.15, expr: id === 13 && f > KID13[0] + 20 ? "nervous" : "neutral", look: -1 }, f);
-  front(out, cam, "teen", ...mk(P.teen), { mode: "stand", expr: "smile", look: 1 }, f);
-  front(out, cam, "teal", ...mk(P.teal), { mode: "stand", expr: "neutral", look: -1 }, f);
-  if (id === 3 || id === 4 || id === 5) front(out, cam, "woman", ...mk(P.woman), { mode: "stand", expr: "smile", look: 1 }, f);
+const restArms = (out: Stage, cam: CamInfo, who: Who, p: V3, fo: FrontOpts, f: number) => { arm3d(out, cam, who, p, fo, -1, restHand(cam, who, p, fo, -1), f); arm3d(out, cam, who, p, fo, 1, restHand(cam, who, p, fo, 1), f); };
+/** a front-view person with hanging arms */
+const stand = (out: Stage, cam: CamInfo, who: Who, p: V3, f: number, extra: Partial<FrontOpts> = {}, swaps: number[] = []) => {
+  if (near(cam, p)) return null;
+  const fo: FrontOpts = { mode: "stand", expr: "neutral", armOff: 2, ...extra }; front(out, cam, who, ...p, fo, f, swaps); return fo;
 };
-/** the owner at a mark, one arm typing at the register (optional) */
-const ownerAt = (out: Stage, cam: CamInfo, f: number, m: number[], expr: Expr, extra: Partial<FrontOpts> = {}, swaps: number[] = []) => {
-  const p = mk(m); if (near(cam, p)) return null;
-  const fo: FrontOpts = { mode: "stand", expr, ...extra };
-  front(out, cam, "owner", ...p, fo, f, swaps);
-  return { p, fo };
+/** carrying a carton while walking (side view, both arms reaching forward) */
+const walkCarry = (out: Stage, cam: CamInfo, who: Who, A: V3, B: V3, f: number, a: number, b: number, slot: number) => {
+  const p = walkTo(out, cam, who, A, B, f, a, b, { reach: 1, expr: "stern" }), d = Math.hypot(B[0] - A[0], B[2] - A[2]) || 1;
+  out.props[`carry${slot}`] = { p: [p[0] + ((B[0] - A[0]) / d) * 0.32, p[1] + 1.08, p[2] + ((B[2] - A[2]) / d) * 0.32], ry: Math.atan2(B[0] - A[0], B[2] - A[2]) };
 };
-const typing = (out: Stage, cam: CamInfo, f: number, o: { p: V3; fo: FrontOpts }) => {
-  const k = Sm(P.register[0] + 0.03 * Math.sin(f * 0.9), TOPY + 0.17 + (Math.floor(f / 4) % 2 ? 0.015 : 0), P.register[2] + 0.05);
-  arm3d(out, cam, "owner", o.p, o.fo, 1, k, f);
-};
-const HANDOVER = (): V3 => Sm(1.08, 1.16, -1.15);
-/** the cash: the owner slaps bills one by one into the man's palm (S01, S07) */
-const cash = (out: Stage, cam: CamInfo, f: number, bills: number[], man: V3, manFo: FrontOpts, own: { p: V3; fo: FrontOpts } | null, start: number) => {
-  const H = HANDOVER(), n = bills.filter((t) => f >= t).length, palm: V3 = [H[0], H[1], H[2]];
-  if (f >= start && f < bills[2] + 8) {
-    arm3d(out, cam, "man", man, manFo, 1, palm, f); billsFlat(out, [palm[0], palm[1] + 0.012, palm[2]], n, "p");
-    if (own) { const next = bills.find((t) => f < t) ?? bills[2], dt = next - f, lift = dt > 0 && dt < 4 ? 0.06 * (dt / 4) : f - (bills.filter((t) => f >= t).pop() ?? -9) < 3 ? 0.0 : 0.05;
-      const oh: V3 = [palm[0] + 0.05, palm[1] + 0.03 + lift, palm[2] - 0.05]; arm3d(out, cam, "owner", own.p, own.fo, -1, oh, f); billsFlat(out, [oh[0], oh[1] - 0.008, oh[2]], 3 - n, "o"); }
-  } else if (f >= bills[2] + 8) {
-    const hold = holdHand(cam, "man", man, manFo, 1); arm3d(out, cam, "man", man, manFo, 1, hold, f); billWad(out, [hold[0], hold[1] + 0.02, hold[2]]);
-    if (own) arm3d(out, cam, "owner", own.p, own.fo, -1, restHand(cam, "owner", own.p, own.fo, -1), f);
-  }
-};
+const drillArt = (p: Pen) => { const g = p.g; g.fillStyle = "#f2c23a"; g.strokeStyle = "#1a1a1a"; g.lineWidth = 8;
+  g.beginPath(); g.roundRect(150, 30, 220, 90, 20); g.fill(); g.stroke(); g.fillStyle = "#2a2c33"; g.beginPath(); g.roundRect(250, 110, 70, 110, 14); g.fill(); g.stroke();
+  g.fillStyle = "#8a8f9a"; g.fillRect(20, 66, 135, 18); g.strokeRect(20, 66, 135, 18); };
+const holeW = (): V3 => Um(UP.hole[0], UP.hole[1], UP.hole[2]);
+const VAN_REAR = (): V3 => { const [x, z, h] = VANP.yard, r = (h * Math.PI) / 180; return Um(x - Math.cos(r) * 3.2, 0, z - Math.sin(r) * 3.2); };
+const HOLE_OUT = (): V3 => Um(UP.hole[0] + 0.7, 0, UP.hole[2] - 0.35);
 
 const s01 = (out: Stage, cam: CamInfo, f: number) => {
-  const man = mk(P.man), fo: FrontOpts = { mode: "stand", expr: f < 96 ? "smile" : "grin", look: f > 100 && f < 140 ? 1 : 0, armOff: 2 };
-  front(out, cam, "man", ...man, fo, f, [96]);
-  let own: { p: V3; fo: FrontOpts } | null = null;
-  if (f < STEP1[0]) own = ownerAt(out, cam, f, P.owner_pay, "smile", { armOff: -1 });
-  else if (f < STEP1[1]) walkTo(out, cam, "owner", mk(P.owner_pay), mk(P.owner_reg), f, STEP1[0], STEP1[1], { expr: "smile" });
-  else { const o = ownerAt(out, cam, f, P.owner_reg, "smile", { armOff: 1, look: -1 }); if (o) typing(out, cam, f, o); }
-  // the cash lands in his right palm; he passes the wad to his left hand (f96-112), freeing the right one for the box
-  const ch = chestAt(cam, "man", man, fo, 0.5, 0.12), lh = holdHand(cam, "man", man, fo, -1);
-  if (f < 96) { cash(out, cam, f, BILLS1, man, fo, own, 0); arm3d(out, cam, "man", man, fo, -1, restHand(cam, "man", man, fo, -1), f); }
-  else {
-    const k = smooth(ramp(f, 96, 106)), rh = lerp3(HANDOVER(), ch, k), lk = f < 104 ? restHand(cam, "man", man, fo, -1) : lerp3(ch, lh, smooth(ramp(f, 106, 114)));
-    arm3d(out, cam, "man", man, fo, -1, f < 104 ? lerp3(restHand(cam, "man", man, fo, -1), ch, smooth(ramp(f, 98, 104))) : lk, f);
-    billWad(out, f < 106 ? [rh[0], rh[1] + 0.02, rh[2]] : [lk[0], lk[1] + 0.02, lk[2]]);
-    const h = takeItem(out, cam, f, 1, LIFT1, HIDE1, man, fo, 1);
-    if (!h) arm3d(out, cam, "man", man, fo, 1, f < 110 ? rh : lerp3(ch, restHand(cam, "man", man, fo, 1), smooth(ramp(f, 106, 116))), f);
-    if (own) arm3d(out, cam, "owner", own.p, own.fo, -1, restHand(cam, "owner", own.p, own.fo, -1), f);
-  }
-  stackOn(out, "counter");
+  const A = mkU(UP.A_drill), W2 = mkU(UP.A_wait), wall: V3 = Um(UP.hole[0] + 0.02, 1.1, UP.hole[2] - 0.44);
+  if (f < STEP1[0]) {
+    side(out, cam, "A", ...A, -1, 0, { mode: "stand", reach: 1, expr: f < TIP1 ? "stern" : "grin" }, f);
+    const back = f < DRILL1[1] ? 0 : Math.min(0.12, (f - DRILL1[1]) * 0.04), h0: V3 = [A[0] - 0.4 + back, 1.13, A[2] + 0.18], h1: V3 = [wall[0] + 0.02 + back, wall[1], wall[2]];
+    out.fx.push({ key: "drill", cw: 400, ch: 240, draw: drillArt, x: (h0[0] + h1[0]) / 2, y: (h0[1] + h1[1]) / 2, z: (h0[2] + h1[2]) / 2, w: 0.42, h: 0.25, axis: [h1, h0] });
+    if (f < DRILL1[1] && f % 3 === 0) { const t = (f % 9) / 9; fxc(out, `dust${f % 9}`, 200, 200, (pp) => art.poof(pp, t), [wall[0] + 0.12, wall[1] - 0.05, wall[2] + 0.05], 0.18, 0.18, { soft: true }); }
+  } else if (f < STEP1[1]) walkTo(out, cam, "A", A, W2, f, STEP1[0], STEP1[1], { expr: "grin" });
+  else { const fo = stand(out, cam, "A", W2, f, { expr: "grin" }); if (fo) restArms(out, cam, "A", W2, fo, f); }
+  if (f >= LAND1 && f < LAND1 + 14) fxc(out, `crash${f}`, 300, 300, (pp) => art.poof(pp, (f - LAND1) / 14), Um(5.25, 0.35, -4.4), 0.9, 0.9, { soft: true });
 };
-/** the three booster boxes he sold: carried in, on the counter, carried to the shelf by the owner, on the shelf */
-const STACK_CTR = (): V3 => Sm(P.stack[0], TOPY, P.stack[2]), STACK_SHELF = (): V3 => Sm(0.45, 1.06, -3.38);
-const stackOn = (out: Stage, where: "counter" | "shelf" | V3, ry = 0) => { const p = where === "counter" ? STACK_CTR() : where === "shelf" ? STACK_SHELF() : where; out.props.stack = { p, ry }; };
-
 const s02 = (out: Stage, cam: CamInfo, f: number) => {
-  if (f >= 240 && f < 330) walkTo(out, cam, "woman", Sm(-4.5, 0, 7.3), Sm(3.0, 0, 7.3), f, 240, 330, { expr: "smile" });
-  customers(out, cam, f, 3); const o = ownerAt(out, cam, f, P.owner_reg, "smile", { armOff: 1 }); if (o) typing(out, cam, f, o);
-};
-const s03 = (out: Stage, cam: CamInfo, f: number) => { customers(out, cam, f, 3); const o = ownerAt(out, cam, f, P.owner_reg, "smile", { armOff: 1 }); if (o) typing(out, cam, f, o); };
-/** S04-S05: the phone, the man walking in with the stack */
-const phoneCall = (out: Stage, cam: CamInfo, f: number, id: number) => {
-  const op = mk(P.owner_phone), rest: V3 = Sm(P.phone[0], TOPY + 0.075, P.phone[2] + 0.05);
-  const onEar = (id === 4 && f >= LIFT4) || (id === 5 && f < HANG5), fo: FrontOpts = { mode: "stand", expr: onEar && talkOpen(f, 490, 550) ? "relief_open" : "smile", look: -1, armOff: 1 };
-  if (id === 5 && f >= HANG5 + 4) {
-    if (f < 590) walkTo(out, cam, "owner", op, mk(P.owner_reg), f, HANG5 + 4, 590, { expr: "smile" });
-    else ownerAt(out, cam, f, P.owner_reg, "smile");
-    out.props.handset = { p: rest }; return;
+  const R = mkU(UP.B_rack), H = mkU(UP.B_hole), shelf: V3 = Um(UP.rack[1] - 0.08 - CART[2] / 2, UP.shelves[2] + CART[1] / 2, UP.B_rack[1]);
+  if (f < WALK2[0]) {
+    const fo = stand(out, cam, "B", R, f, { expr: "nervous", look: 1 }); if (!fo) return;
+    if (f < LIFT2[0]) { restArms(out, cam, "B", R, fo, f); return; }
+    const ch = chestAt(cam, "B", R, fo, 0.5, 0.2), u = smooth(clamp01((f - LIFT2[0]) / (LIFT2[1] - LIFT2[0]))), c = lerp3(shelf, ch, u), r = cam.right;
+    out.props.carry0 = { p: c }; arm3d(out, cam, "B", R, fo, -1, [c[0] - r.x * 0.19, c[1], c[2] - r.z * 0.19], f); arm3d(out, cam, "B", R, fo, 1, [c[0] + r.x * 0.19, c[1], c[2] + r.z * 0.19], f);
+  } else if (f < WALK2[1]) {
+    const p = lerp3(R, H, smooth(clamp01((f - WALK2[0]) / (WALK2[1] - WALK2[0])))), fo: FrontOpts = { mode: "march", phase: walkPhase(f, 2), expr: "nervous", armOff: 2 };
+    if (!near(cam, p)) { front(out, cam, "B", ...p, fo, f); holdCarton(out, cam, "B", p, fo, 0); }
+  } else {
+    const fo = stand(out, cam, "B", H, f, { expr: "stern", crouch: 0.25 }); if (!fo) return;
+    const ch = chestAt(cam, "B", H, fo, 0.5, 0.2), hole = holeW(), u = smooth(clamp01((f - PUSH2[0]) / (PUSH2[1] - PUSH2[0]))), c = u < 1 ? lerp3(ch, [hole[0] - 0.05, hole[1], hole[2]], u) : lerp3([hole[0] - 0.05, hole[1], hole[2]], [hole[0] + 0.8, hole[1] - 0.2, hole[2]], clamp01((f - PUSH2[1]) / 12));
+    out.props.carry0 = { p: c, ry: Math.PI / 2 };
+    const hr = u < 1 || f < PUSH2[1] + 3 ? c : restHand(cam, "B", H, fo, 1); arm3d(out, cam, "B", H, fo, 1, [hr[0] - 0.2, hr[1], hr[2]], f); arm3d(out, cam, "B", H, fo, -1, restHand(cam, "B", H, fo, -1), f);
   }
-  if (near(cam, op)) { out.props.handset = { p: rest }; return; }
-  front(out, cam, "owner", ...op, fo, f, [LIFT4]);
-  const ear: V3 = [op[0] + cam.right.x * 0.25 - cam.fwd.x * 0.03, 1.5, op[2] + cam.right.z * 0.25 - cam.fwd.z * 0.03];
-  let hp: V3 = rest, rz = 0;
-  const ring = id === 4 && f >= RING4[0] && f < LIFT4;
-  if (id === 4 && f >= LIFT4 - 6 && f < LIFT4 + 6) { const u = smooth((f - LIFT4 + 6) / 12); hp = lerp3(rest, ear, u); rz = 1.3 * u; }
-  else if (onEar) { hp = ear; rz = 1.3; }
-  else if (ring) hp = [rest[0], rest[1] + (f % 4 < 2 ? 0.003 : 0), rest[2]];
-  out.props.handset = { p: hp, rz };
-  arm3d(out, cam, "owner", op, fo, 1, onEar || (id === 4 && f >= LIFT4 - 6) ? [hp[0], hp[1] - 0.02, hp[2]] : restHand(cam, "owner", op, fo, 1), f);
-  if (ring && (f - RING4[0]) % 16 < 10) fxc(out, `ring${f % 4}`, 200, 200, (pp) => art.sparkle(pp, ((f - RING4[0]) % 16) / 10), [rest[0], rest[1] + 0.12, rest[2]], 0.16, 0.16, { soft: true });
 };
-const walkIn = (out: Stage, cam: CamInfo, f: number) => {
-  const A = Sm(P.man_door[0], 0, P.man_door[1] + 0.6), B = mk(P.man);
-  if (f < WALK4[0] - 12) return;
-  if (f >= WALK4[1]) return manAtCounter(out, cam, f);
-  const u = smooth(ramp(f, WALK4[0], WALK4[1])), p = lerp3(A, B, u);
-  if (near(cam, p, 0.8)) return;
-  const fo: FrontOpts = { mode: f < WALK4[0] ? "stand" : "march", phase: walkPhase(f, 2), expr: "smile", armOff: 2 };
-  front(out, cam, "man", ...p, fo, f);
-  const ch = chestAt(cam, "man", p, fo, 0.55, 0.14); stackOn(out, [ch[0], ch[1] - 0.12, ch[2]]);
-  const r = cam.right; arm3d(out, cam, "man", p, fo, -1, [ch[0] - r.x * 0.16, ch[1] - 0.02, ch[2] - r.z * 0.16], f); arm3d(out, cam, "man", p, fo, 1, [ch[0] + r.x * 0.16, ch[1] - 0.02, ch[2] + r.z * 0.16], f);
+const s03 = (out: Stage, cam: CamInfo, f: number) => {
+  const p = mkU(UP.officer); const fo = stand(out, cam, "officer", p, f, { expr: f >= TURN3 ? "shock" : "neutral", look: f >= TURN3 ? 1 : 0 }, [TURN3]); if (fo) restArms(out, cam, "officer", p, fo, f);
 };
-/** he stands at the counter: sets the stack down (S05), then waits */
-const manAtCounter = (out: Stage, cam: CamInfo, f: number, expr: Expr = "smile") => {
-  const man = mk(P.man); if (near(cam, man)) return;
-  const fo: FrontOpts = { mode: "stand", expr, armOff: 2 };
-  front(out, cam, "man", ...man, fo, f);
-  if (f >= SET5[0] && f < SET5[1] + 6) { const S = STACK_CTR(), k = smooth(ramp(f, SET5[0], SET5[1])), ch = chestAt(cam, "man", man, fo, 0.55, 0.14), p = lerp3([ch[0], ch[1] - 0.12, ch[2]], S, k);
-    stackOn(out, p); const r = cam.right; arm3d(out, cam, "man", man, fo, -1, [p[0] - r.x * 0.16, p[1] + 0.12, p[2] - r.z * 0.16], f); arm3d(out, cam, "man", man, fo, 1, [p[0] + r.x * 0.16, p[1] + 0.12, p[2] + r.z * 0.16], f); return; }
-  stackOn(out, "counter");
-  arm3d(out, cam, "man", man, fo, -1, restHand(cam, "man", man, fo, -1), f); arm3d(out, cam, "man", man, fo, 1, restHand(cam, "man", man, fo, 1), f);
+/** the two loading the van (S04, S07): hole -> rear of the van with a carton, then back */
+const loader = (out: Stage, cam: CamInfo, who: Who, f: number, legs: number[][], slot: number, wait: V3) => {
+  for (const [a, b] of legs) {
+    const m = Math.round((a + b) / 2);
+    if (f >= a && f < m) return walkCarry(out, cam, who, HOLE_OUT(), VAN_REAR(), f, a, m, slot);
+    if (f >= m && f < b) { walkTo(out, cam, who, VAN_REAR(), HOLE_OUT(), f, m, b, { expr: "neutral" }); return; }
+  }
+  const fo = stand(out, cam, who, wait, f, { expr: "neutral" }); if (fo) restArms(out, cam, who, wait, fo, f);
 };
+const s04 = (out: Stage, cam: CamInfo, f: number) => { loader(out, cam, "A", f, [LOADA4], 0, mkU(UP.A_wait)); loader(out, cam, "B", f, [LOADB4], 1, mkU(UP.B_freeze)); };
 const s06 = (out: Stage, cam: CamInfo, f: number) => {
-  customers(out, cam, f, 6); stackOn(out, "counter");
-  front(out, cam, "woman", ...mk(P.woman_reg), { mode: "stand", expr: talkOpen(f, 640, 700) ? "relief_open" : "smile", look: -1 }, f);
-  const o = ownerAt(out, cam, f, P.owner_reg, talkOpen(f, 650, 715) ? "relief_open" : "smile", { look: 1 });
-  void o;
-  const man = mk(P.man), fo: FrontOpts = { mode: "stand", expr: "whistle", look: f > 640 ? 0.6 : 0, armOff: 2 };
-  front(out, cam, "man", ...man, fo, f, [636]);
-  const dipping = f >= DIP6[0] && f < GRAB6 - 12;   // the hand hovers in the box, waiting for the owner to look away
-  const h = dipping ? null : takeItem(out, cam, f, 0, [GRAB6, LIFT6[1]], HIDE6, man, fo, 1);
-  if (dipping) arm3d(out, cam, "man", man, fo, 1, lerp3(restHand(cam, "man", man, fo, 1), [itemTop(0)[0], itemTop(0)[1] + 0.03, itemTop(0)[2]], smooth(ramp(f, DIP6[0], DIP6[1]))), f);
-  else if (!h) arm3d(out, cam, "man", man, fo, 1, restHand(cam, "man", man, fo, 1), f);
-  arm3d(out, cam, "man", man, fo, -1, restHand(cam, "man", man, fo, -1), f);
-};
-const s07 = (out: Stage, cam: CamInfo, f: number) => {
-  customers(out, cam, f, 7); stackOn(out, "counter");
-  if (f < 760) walkTo(out, cam, "woman", mk(P.woman_reg), Sm(3.0, 0, 0.6), f, 723, 760, { expr: "smile" });
-  let own: { p: V3; fo: FrontOpts } | null = null;
-  if (f < STEP7[0]) { const o = ownerAt(out, cam, f, P.owner_reg, "smile"); void o; }
-  else if (f < STEP7[1]) walkTo(out, cam, "owner", mk(P.owner_reg), mk(P.owner_pay), f, STEP7[0], STEP7[1], { expr: "smile" });
-  else {
-    own = ownerAt(out, cam, f, P.owner_pay, "smile", { armOff: 2 });
-    if (own) { const keys = Sm(P.register[0] - 0.1, TOPY + 0.17, P.register[2] + 0.05), dr = Sm(P.register[0] - 0.05, TOPY + 0.06, P.register[2] - 0.3);
-      if (f < TAKE7[1]) { const hnd = f < KEY7 ? lerp3(restHand(cam, "owner", own.p, own.fo, 1), keys, smooth(ramp(f, STEP7[1], KEY7))) : f < TAKE7[0] ? keys : dr;
-        arm3d(out, cam, "owner", own.p, own.fo, 1, hnd, f); if (f >= TAKE7[0]) billsFlat(out, [dr[0], dr[1] + 0.01, dr[2]], 3, "d"); arm3d(out, cam, "owner", own.p, own.fo, -1, restHand(cam, "owner", own.p, own.fo, -1), f); own = null; }
-      else arm3d(out, cam, "owner", own.p, own.fo, 1, f < SHUT7 ? restHand(cam, "owner", own.p, own.fo, 1) : dr, f); }
+  for (const [who, m, slot, expr] of [["A", UP.A_freeze, 0, "nervous"], ["B", UP.B_freeze, 1, "shock"]] as [Who, number[], number, Expr][]) {
+    const p = mkU(m), fo = stand(out, cam, who, p, f, { expr }); if (!fo) continue; holdCarton(out, cam, who, p, fo, slot);
+    if (f > 560) fxc(out, `sweat${who}`, 120, 160, (pp) => { pp.g.fillStyle = "#8fd0f2"; pp.g.strokeStyle = "#1a1a1a"; pp.g.lineWidth = 6; pp.g.beginPath(); pp.g.moveTo(60, 10); pp.g.quadraticCurveTo(110, 110, 60, 150); pp.g.quadraticCurveTo(10, 110, 60, 10); pp.g.fill(); pp.g.stroke(); },
+      [p[0] + cam.right.x * 0.24, 1.72, p[2] + cam.right.z * 0.24], 0.07, 0.09);
   }
-  const man = mk(P.man), fo: FrontOpts = { mode: "stand", expr: "smile", armOff: 2 };
-  front(out, cam, "man", ...man, fo, f);
-  arm3d(out, cam, "man", man, fo, -1, restHand(cam, "man", man, fo, -1), f);
-  if (f < 766) arm3d(out, cam, "man", man, fo, 1, restHand(cam, "man", man, fo, 1), f); else cash(out, cam, f, BILLS7, man, fo, own, 766);
 };
-const s08 = (out: Stage, cam: CamInfo, f: number) => {
-  customers(out, cam, f, 8);
-  // the owner shelves the stack: walks to it, picks it up, carries it straight back to a shelf, puts it there, stays facing it
-  const [p0, w0, l0, w1, put] = SHELF8, A = mk(P.owner_pay), B0 = Sm(P.stack[0] + 0.03, 0, -1.55), B = Sm(P.stack[0] + 0.03, 0, -3.02);
-  if (f < p0) { ownerAt(out, cam, f, P.owner_pay, "smile"); stackOn(out, "counter"); }
-  else if (f < w0) { walkTo(out, cam, "owner", A, B0, f, p0, w0); stackOn(out, "counter"); }
-  else if (f < l0) { const fo2: FrontOpts = { mode: "stand", expr: "neutral", armOff: 2 }; front(out, cam, "owner", ...B0, fo2, f); const S = lerp3(STACK_CTR(), Sm(P.stack[0], 1.05, -1.5), smooth(ramp(f, w0, l0))); stackOn(out, S);
-    const r = cam.right; arm3d(out, cam, "owner", B0, fo2, -1, [S[0] - r.x * 0.16, S[1] + 0.12, S[2] - r.z * 0.16], f); arm3d(out, cam, "owner", B0, fo2, 1, [S[0] + r.x * 0.16, S[1] + 0.12, S[2] + r.z * 0.16], f); }
-  else if (f < w1) { const p = walkTo(out, cam, "owner", B0, B, f, l0, w1, { reach: 0.8 }); stackOn(out, [p[0], 1.02, p[2] - 0.32]); }
-  else if (f < put) { side(out, cam, "owner", ...B, 0, -1, { mode: "march", phase: 0.25, reach: 1, expr: "neutral" }, f); stackOn(out, lerp3(Sm(P.stack[0], 1.02, -3.34), STACK_SHELF(), smooth(ramp(f, w1, put)))); }
-  else { side(out, cam, "owner", ...B, 0, -1, { mode: "stand", expr: "neutral" }, f); stackOn(out, "shelf"); }
-  // the man: tucks the cash, then three slabs into his jacket
-  const man = mk(P.man); if (near(cam, man, 0.4)) return;
-  const fo: FrontOpts = { mode: "stand", expr: f > 840 ? "grin" : "smile", look: f > 822 ? -0.6 : 0, armOff: 2 };
-  front(out, cam, "man", ...man, fo, f, [822]);
-  let busy = false;
-  const ch = chestAt(cam, "man", man, fo, 0.45, 0.08), hold = holdHand(cam, "man", man, fo, 1);
-  if (f < TUCK8[1] + 10) { const hnd = f < TUCK8[1] ? lerp3(hold, ch, smooth(ramp(f, TUCK8[0], TUCK8[1]))) : lerp3(ch, restHand(cam, "man", man, fo, 1), smooth(ramp(f, TUCK8[1], TUCK8[1] + 10)));
-    arm3d(out, cam, "man", man, fo, 1, hnd, f); if (f < TUCK8[1] - 2) billWad(out, [hnd[0], hnd[1] + 0.02, hnd[2]]); busy = true; }
-  else for (const [k, i] of [[0, 1], [1, 5], [2, 6]] as const) { const L = LIFTS8[k], h = takeItem(out, cam, f, i, L, [L[1], L[1] + 6], man, fo, 1); if (h) { busy = true; break; } }
-  if (!busy) arm3d(out, cam, "man", man, fo, 1, restHand(cam, "man", man, fo, 1), f);
-  arm3d(out, cam, "man", man, fo, -1, restHand(cam, "man", man, fo, -1), f);
-};
-/** the man and the owner simply standing (S11, S12) */
-const standing = (out: Stage, cam: CamInfo, f: number, id: number, ownerMark: number[]) => {
-  customers(out, cam, f, id); stackOn(out, "shelf");
-  const o = ownerAt(out, cam, f, ownerMark, id === 12 ? "smile" : "neutral", { armOff: ownerMark === P.owner_reg ? 1 : undefined, look: -1 });
-  if (o && ownerMark === P.owner_reg && id !== 12) typing(out, cam, f, o);
-  const man = mk(P.man); if (!near(cam, man)) front(out, cam, "man", ...man, { mode: "stand", expr: "grin", look: 0.3 }, f);
-};
-/** the handshake across the counter (S13, S17): pumps every `per` frames */
-const handshake = (out: Stage, cam: CamInfo, f: number, a: number, b: number, per: number, ownerFo: FrontOpts, manExpr: Expr = "smile") => {
-  const op = mk(P.owner_left), man = mk(P.man), mfo: FrontOpts = { mode: "stand", expr: manExpr, armOff: 2 };
-  front(out, cam, "owner", ...op, { ...ownerFo, armOff: 1 }, f); front(out, cam, "man", ...man, mfo, f);
-  const HS = Sm(0.4, 1.13, -1.15), on = f >= a && f < b, pump = on ? 0.03 * Math.sin(((f - a) / per) * Math.PI * 2) : 0, hp: V3 = [HS[0], HS[1] + pump, HS[2]];
-  arm3d(out, cam, "owner", op, ownerFo, 1, on ? hp : restHand(cam, "owner", op, ownerFo, 1), f);
-  arm3d(out, cam, "man", man, mfo, -1, on ? hp : restHand(cam, "man", man, mfo, -1), f); arm3d(out, cam, "man", man, mfo, 1, restHand(cam, "man", man, mfo, 1), f);
-};
-const s13 = (out: Stage, cam: CamInfo, f: number) => {
-  customers(out, cam, f, 13); stackOn(out, "shelf");
-  const stern = f >= KID13[0] && f < TURN13;
-  handshake(out, cam, f, SHAKE13[0], SHAKE13[1], 12, { mode: "stand", expr: stern ? "stern" : "smile", look: stern ? -1 : 1 }, "smile");
-};
-const s16 = (out: Stage, cam: CamInfo, f: number) => {
-  stackOn(out, "shelf");
-  const op = mk(P.owner_pay), CS = mk(P.case_stand), B = BOXC();
-  if (f < LIFT16[0]) {
-    const fo: FrontOpts = { mode: "stand", expr: "sad", look: 0, armOff: 1 }; front(out, cam, "owner", ...op, fo, f, [1772]);
-    const head: V3 = [op[0] + cam.right.x * 0.06, 1.86 + 0.02 * Math.sin(f * 0.8), op[2]];
-    arm3d(out, cam, "owner", op, fo, 1, f >= SCRATCH16[0] && f < SCRATCH16[1] ? head : restHand(cam, "owner", op, fo, 1), f);
-    out.props.box = { p: B }; return;
+const s07 = (out: Stage, cam: CamInfo, f: number) => loader(out, cam, "A", f, LOAD7, 0, mkU(UP.A_wait));
+const s09 = (out: Stage, cam: CamInfo, f: number) => {
+  const K = KIDP, p = at(KIo, K.kid[0], 0, K.kid[1]), DY = K.desk_y;
+  const expr: Expr = f < STICK9[1] ? "smile" : f < 1150 ? "grin" : "nervous";
+  const fo = stand(out, cam, "kid", p, f, { expr, look: 0 }, [STICK9[1], 1150]); if (!fo) { /* the lens is at the desk: the hands still act */ }
+  const F: FrontOpts = fo ?? { mode: "stand", expr, armOff: 2 };
+  const lab: V3 = at(KIo, K.book[0] + 0.01, DY + 0.016, K.book[1] - 0.03), drop: V3 = at(KIo, 0.3, DY + 0.004, 0.14), back: V3 = at(KIo, 0.38, DY + 0.007, -0.05);
+  let h: V3 | null = null;
+  if (f >= PEEL9[0] - 8 && f < PEEL9[0]) h = lerp3(restHand(cam, "kid", p, F, 1), lab, smooth((f - PEEL9[0] + 8) / 8));
+  else if (f >= PEEL9[0] && f < PEEL9[1] + 4) { const u = smooth((f - PEEL9[0]) / (PEEL9[1] + 4 - PEEL9[0])); h = lerp3(lab, [drop[0], drop[1] + 0.12, drop[2]], u); out.props.peel = { p: [h[0], h[1] - 0.01, h[2]], rx: -Math.PI / 2 + 1.2 * Math.sin(u * Math.PI) }; }
+  if (f >= PEEL9[1] + 4) out.props.peel = { p: drop, rx: -Math.PI / 2, rz: 0.4 };
+  if (f >= STICK9[0] && f < STICK9[1] + 6) {
+    const u1 = smooth(clamp01((f - STICK9[0]) / 8)), u2 = smooth(clamp01((f - STICK9[0] - 8) / (STICK9[1] - STICK9[0] - 8)));
+    h = f < STICK9[0] + 8 ? lerp3([drop[0], drop[1] + 0.12, drop[2]], back, u1) : f < STICK9[1] ? lerp3(back, [lab[0], lab[1] + 0.002, lab[2]], u2) : lab;
+    if (f >= STICK9[0] + 8 && f < STICK9[1]) out.props.label2 = { p: [h[0], h[1] - 0.004, h[2]], rx: -Math.PI / 2 };
   }
-  if (f < WALK16[0]) { const fo: FrontOpts = { mode: "stand", expr: "sad", armOff: 2 }; front(out, cam, "owner", ...op, fo, f);
-    const ch = chestAt(cam, "owner", op, fo, 0.5, 0.12), bp = lerp3(B, [ch[0], ch[1] - 0.08, ch[2]], smooth(ramp(f, LIFT16[0], LIFT16[1]))); out.props.box = { p: bp };
-    const r = cam.right; arm3d(out, cam, "owner", op, fo, -1, [bp[0] - r.x * 0.24, bp[1] + 0.06, bp[2] - r.z * 0.24], f); arm3d(out, cam, "owner", op, fo, 1, [bp[0] + r.x * 0.24, bp[1] + 0.06, bp[2] + r.z * 0.24], f); return; }
-  if (f < WALK16[1]) { const w = walkPath(out, cam, "owner", [op, Sm(-1.3, 0, -1.62), CS], f, WALK16[0], WALK16[1], { reach: 0.8, expr: "sad" });
-    const L = Math.hypot(w.dir[0], w.dir[2]) || 1; out.props.box = { p: [w.p[0] + (w.dir[0] / L) * 0.3, 1.0, w.p[2] + (w.dir[2] / L) * 0.3], ry: Math.atan2(w.dir[0], w.dir[2]) + Math.PI / 2 }; return; }
-  // at the case: the door opens, the box goes in, the door shuts, the padlock snaps
-  side(out, cam, "owner", ...CS, -1, 0, { mode: "march", phase: 0.25, reach: f < PUT16[1] ? 1 : 0.6, expr: f >= LOCK16 ? "sad" : "neutral" }, f);
-  const inside = Sm(-3.12, P.case_shelf + 0.012, -1.7), held = Sm(-2.3, 1.0, -1.7);
-  out.props.box = { p: f < PUT16[0] ? held : f < PUT16[1] ? lerp3(held, inside, smooth(ramp(f, PUT16[0], PUT16[1]))) : inside, ry: Math.PI / 2 };
+  if (f >= OPEN9[0] - 6 && f < OPEN9[1] + 6) { const a = Math.PI * smooth(clamp01((f - OPEN9[0]) / (OPEN9[1] - OPEN9[0]))), hx = K.book[0] - 0.1 + 0.2 * Math.cos(a);
+    h = at(KIo, hx, DY + 0.014 + 0.2 * Math.sin(a), K.book[1] + 0.08); }
+  if (fo) { arm3d(out, cam, "kid", p, F, 1, h ?? restHand(cam, "kid", p, F, 1), f); arm3d(out, cam, "kid", p, F, -1, restHand(cam, "kid", p, F, -1), f); }
 };
-const s17 = (out: Stage, cam: CamInfo, f: number) => { customers(out, cam, f, 17); stackOn(out, "shelf"); if (f < CUT17) handshake(out, cam, f, SHAKE17[0], SHAKE17[1], 20, { mode: "stand", expr: "smile", look: 1 }); };
-const s18 = (out: Stage, cam: CamInfo, f: number) => {
-  stackOn(out, "shelf");
-  const op = mk(P.owner_phone), fo: FrontOpts = { mode: "stand", expr: talkOpen(f, 2108, 2132) ? "relief_open" : "stern", look: -1, armOff: 2 };
-  front(out, cam, "owner", ...op, fo, f);
-  const rest: V3 = Sm(P.phone[0], TOPY + 0.075, P.phone[2] + 0.05), ear: V3 = [op[0] + cam.right.x * 0.25 - cam.fwd.x * 0.03, 1.5, op[2] + cam.right.z * 0.25 - cam.fwd.z * 0.03];
-  const u = smooth(ramp(f, 2090, 2098)), hp = lerp3(rest, ear, u); out.props.handset = { p: hp, rz: 1.3 * u };
-  arm3d(out, cam, "owner", op, fo, 1, [hp[0], hp[1] - 0.02, hp[2]], f);
-  const pad = Sm(P.phone[0] - 0.04 + 0.02 * (Math.floor(f / 4) % 3), TOPY + 0.07, P.phone[2] - 0.03);
-  arm3d(out, cam, "owner", op, fo, -1, f >= DIAL18[0] && f < DIAL18[1] + 4 ? pad : restHand(cam, "owner", op, fo, -1), f);
+const s10 = (out: Stage, cam: CamInfo, f: number) => {
+  const C2p = CTRLP, p = at(CTo, C2p.officer[0], 0, C2p.officer[1]), fo = stand(out, cam, "officer", p, f, { expr: "stern", look: f >= POINT10 ? 1 : 0 });
+  if (fo) { const S2 = shoulderAt(cam, "officer", p, fo, -1), tgt = at(CTo, C2p.map[0] + C2p.route[4][0] * (C2p.map[1] - C2p.map[0]), C2p.map[3] - C2p.route[4][1] * (C2p.map[3] - C2p.map[2]), -2.97);
+    const d = v3(tgt).sub(v3(S2)).normalize(), k = smooth(clamp01((f - POINT10) / 8)), pt = add3(S2, [d.x, d.y, d.z], 0.44);
+    arm3d(out, cam, "officer", p, fo, -1, lerp3(restHand(cam, "officer", p, fo, -1), pt, k), f); arm3d(out, cam, "officer", p, fo, 1, restHand(cam, "officer", p, fo, 1), f); }
+  const a = at(CTo, C2p.aide[0], 0, C2p.aide[1]), fa = stand(out, cam, "aide", a, f, { expr: "smile", look: 1 });
+  if (fa) { const hh2 = holdHand(cam, "aide", a, fa, 1); arm3d(out, cam, "aide", a, fa, 1, hh2, f); arm3d(out, cam, "aide", a, fa, -1, restHand(cam, "aide", a, fa, -1), f);
+    fxc(out, "mug", 120, 140, (pp) => { pp.g.fillStyle = "#d8322f"; pp.g.strokeStyle = "#1a1a1a"; pp.g.lineWidth = 8; pp.g.beginPath(); pp.g.roundRect(14, 20, 78, 106, 10); pp.g.fill(); pp.g.stroke(); pp.g.beginPath(); pp.g.arc(96, 70, 20, -1.3, 1.3); pp.g.stroke(); }, [hh2[0], hh2[1] + 0.05, hh2[2]], 0.08, 0.095); }
 };
-const s19 = (out: Stage, cam: CamInfo, f: number) => {
-  stackOn(out, "shelf"); out.props.handset = { p: Sm(P.phone[0], TOPY + 0.075, P.phone[2] + 0.05) };
-  const op = mk(P.owner_phone), fo: FrontOpts = { mode: "stand", expr: "stern", look: -1, armOff: 2 };
-  if (!near(cam, op)) { front(out, cam, "owner", ...op, fo, f);
-    const lcd = Sm(P.phone[0], TOPY + 0.07, P.phone[2] - 0.05); arm3d(out, cam, "owner", op, fo, -1, f >= POINT19[0] ? lcd : restHand(cam, "owner", op, fo, -1), f);
-    arm3d(out, cam, "owner", op, fo, 1, restHand(cam, "owner", op, fo, 1), f); }
-  const cp = mk(P.cop), cfo: FrontOpts = { mode: "stand", expr: "neutral", look: 0.4, armOff: 2 };
-  front(out, cam, "cop", ...cp, cfo, f);
-  const pad: V3 = Sm(P.cop[0] + 0.04, 1.2, P.cop[1] + 0.12), k = ramp(f, WRITE19[0], WRITE19[1]);
-  fxc(out, `note${Math.round(k * 24)}`, 450, 600, (pp) => art2.notepad(pp, 450, 600, Math.round(k * 24) / 24), pad, 0.18, 0.24);
-  const r = cam.right; arm3d(out, cam, "cop", cp, cfo, -1, [pad[0] - r.x * 0.07, pad[1] - 0.06, pad[2] - r.z * 0.07], f);
-  const pen: V3 = [pad[0] + r.x * (-0.06 + 0.13 * k) - cam.fwd.x * 0.012, pad[1] - 0.02 + 0.006 * Math.sin(f * 1.7), pad[2] + r.z * (-0.06 + 0.13 * k) - cam.fwd.z * 0.012];
-  arm3d(out, cam, "cop", cp, cfo, 1, f >= WRITE19[0] && f < WRITE19[1] + 4 ? pen : restHand(cam, "cop", cp, cfo, 1), f);
-  if (f >= WRITE19[0] && f < WRITE19[1] + 4) fxc(out, "pen", 40, 200, (pp) => { pp.g.fillStyle = "#2f4a8a"; pp.g.fillRect(12, 0, 16, 180); pp.g.fillStyle = "#c9a24a"; pp.g.fillRect(12, 0, 16, 30); }, [pen[0], pen[1] + 0.04, pen[2]], 0.012, 0.09, { rot: -0.4 });
+const DROP_REST = (): V3 => at(YAo, YARDP.C2[0] + 0.4, CART[2] / 2, YARDP.C2[1] + 0.35);
+const s11 = (out: Stage, cam: CamInfo, f: number, id: number) => {
+  const Y = YARDP;
+  if (id === 11) for (const [who, m, slot] of [["C1", Y.C1, 0], ["C2", Y.C2, 1]] as [Who, number[], number][]) {
+    const p = mkAt(YAo, m), shock = f >= FREEZE11, fo = stand(out, cam, who, p, f, { expr: shock ? "shock" : "neutral", look: shock ? 0 : (who === "C1" ? 1 : -1) }, [FREEZE11]); if (!fo) continue;
+    if (who === "C2" && f >= DROP11) {
+      restArms(out, cam, who, p, fo, f);
+      const ch = chestAt(cam, who, p, fo, 0.5, 0.2), R = DROP_REST(), t = (f - DROP11) / (LAND11 - DROP11);
+      const q: V3 = t < 1 ? [ch[0] + (R[0] - ch[0]) * t, ch[1] + (R[1] - ch[1]) * t * t, ch[2] + (R[2] - ch[2]) * t] : [R[0], R[1] + hop(f, LAND11, 0.9), R[2]];
+      out.props.drop = { p: q, rz: (Math.PI / 2) * smooth(clamp01((f - LAND11) / 14)), ry: 0.4 };
+    } else holdCarton(out, cam, who, p, fo, slot);
+  }
+  if (id === 12) out.props.drop = { p: DROP_REST(), rz: Math.PI / 2, ry: 0.4 };
+  for (const [who, from, to] of [["cop1", Y.cop1_from, Y.cop1], ["cop2", Y.cop2_from, Y.cop2]] as [Who, number[], number[]][]) {
+    if (id === 12 && who === "cop2") continue;
+    const A = mkAt(YAo, from), B = mkAt(YAo, to);
+    if (id === 11 && f < WALK11[0]) continue;
+    if (id === 11 && f < WALK11[1]) { walkTo(out, cam, who, A, B, f, WALK11[0], WALK11[1], { expr: "stern" }); continue; }
+    const at2 = id === 12 ? mkAt(YAo, [1.2, 7.2]) : B, fo = stand(out, cam, who, at2, f, { expr: "stern" }); if (fo) restArms(out, cam, who, at2, fo, f);
+  }
+  if (id === 12) {
+    const p = mkAt(YAo, Y.det), fo = stand(out, cam, "det", p, f, { expr: f > NOD12 ? "smile" : "stern", headTilt: f >= NOD12 && f < NOD12 + 10 ? 0.15 * Math.sin(((f - NOD12) / 10) * Math.PI) : 0 }, [NOD12]);
+    if (fo) { const tap = f >= TAP12 && f < TAP12 + 24, wrist = holdHand(cam, "det", p, fo, -1);
+      arm3d(out, cam, "det", p, fo, -1, wrist, f); arm3d(out, cam, "det", p, fo, 1, tap ? [wrist[0] + 0.02 * Math.sin(f * 1.3), wrist[1] + 0.03, wrist[2]] : restHand(cam, "det", p, fo, 1), f); }
+  }
 };
-const s20 = (out: Stage, cam: CamInfo, f: number) => {
-  const A = Sm(P.man_door[0], 0, P.man_door[1]), B = mk(P.man_walk);
-  if (f < WALK20[0]) { front(out, cam, "man", ...A, { mode: "stand", expr: "grin" }, f); return; }
-  if (f < WALK20[1]) { const p = lerp3(A, B, smooth(ramp(f, WALK20[0], WALK20[1]))); front(out, cam, "man", ...p, { mode: "march", phase: walkPhase(f, 2), expr: "grin" }, f); return; }
-  const fo: FrontOpts = { mode: "stand", expr: "grin", armOff: 2 }; front(out, cam, "man", ...B, fo, f, [WALK20[1]]);
-  const ch = chestAt(cam, "man", B, fo, 0.4, 0.1), pat = f >= PAT20[0] && f < PAT20[1] ? (Math.floor((f - PAT20[0]) / 7) % 2 ? 0.03 : 0) : 0;
-  arm3d(out, cam, "man", B, fo, -1, f >= PAT20[0] && f < PAT20[1] + 4 ? [ch[0] - cam.fwd.x * pat, ch[1], ch[2] - cam.fwd.z * pat] : restHand(cam, "man", B, fo, -1), f);
-  if (f >= FAN20[0]) { const r = cam.right, up = Math.min(1, ramp(f, FAN20[0], FAN20[0] + 8)), fan: V3 = [B[0] + r.x * 0.32 - cam.fwd.x * 0.12, lerpN(1.0, 1.55, up), B[2] + r.z * 0.32 - cam.fwd.z * 0.12];
-    arm3d(out, cam, "man", B, fo, 1, fan, f); for (let k = 0; k < 3; k++) fxc(out, `fan${k}`, 470, 200, (pp) => art2.bill(pp, 470, 200), [fan[0] + r.x * 0.02 * k, fan[1] + 0.05 + 0.005 * k, fan[2] + r.z * 0.02 * k - cam.fwd.z * 0.003 * k], 0.156, 0.066, { rot: 1.2 - 0.25 * k }); }
-  else arm3d(out, cam, "man", B, fo, 1, restHand(cam, "man", B, fo, 1), f);
-};
-const s21 = (out: Stage, cam: CamInfo, f: number) => {
-  const B = mk(P.man_walk); if (near(cam, B)) return;
-  const shock = f >= FREEZE21, fo: FrontOpts = { mode: "stand", expr: shock ? "shock" : "grin", gape: shock ? 0.5 : 0, armOff: 2 };
-  front(out, cam, "man", ...B, fo, f, [FREEZE21]);
-  const r = cam.right, pocket = chestAt(cam, "man", B, fo, 0.45, 0.06), up: V3 = [B[0] + r.x * 0.22 - cam.fwd.x * 0.22, 1.18, B[2] + r.z * 0.22 - cam.fwd.z * 0.22];
-  const ringing = f >= RING21 && f < 2425, jit = ringing ? 0.003 * (f % 2 ? 1 : -1) : 0;
-  const ph = f < PHONE21[0] ? pocket : lerp3(pocket, up, smooth(ramp(f, PHONE21[0], PHONE21[1])));
-  if (f >= PHONE21[0]) { arm3d(out, cam, "man", B, fo, 1, [ph[0], ph[1] - 0.05, ph[2]], f);
-    fxc(out, "hisPhone", 140, 280, (pp) => { const g = pp.g; g.fillStyle = "#2f5fb4"; g.beginPath(); g.roundRect(4, 4, 132, 272, 22); g.fill(); g.fillStyle = "#1d1b22"; g.beginPath(); g.roundRect(18, 18, 46, 70, 14); g.fill(); g.fillStyle = "#4f78c8"; g.beginPath(); g.arc(41, 40, 12, 0, 7); g.fill(); g.beginPath(); g.arc(41, 70, 12, 0, 7); g.fill(); },
-      [ph[0] + r.x * jit, ph[1] + 0.03, ph[2] + r.z * jit], 0.075, 0.15); }
-  else arm3d(out, cam, "man", B, fo, 1, restHand(cam, "man", B, fo, 1), f);
-  arm3d(out, cam, "man", B, fo, -1, restHand(cam, "man", B, fo, -1), f);
-  if (ringing && f % 10 < 6) fxc(out, `buzz${f % 10}`, 300, 300, (pp) => art.sparkle(pp, (f % 10) / 6), [ph[0], ph[1] + 0.1, ph[2]], 0.28, 0.28, { soft: true });
-  if (shock) fxc(out, "sweat", 100, 140, (pp) => { const g = pp.g; g.fillStyle = "#8fd0f2"; g.strokeStyle = "#1d1b22"; g.lineWidth = 6; g.beginPath(); g.moveTo(50, 8); g.quadraticCurveTo(92, 90, 50, 132); g.quadraticCurveTo(8, 90, 50, 8); g.fill(); g.stroke(); },
-    [B[0] + r.x * 0.2, 1.78 - Math.min(0.08, (f - FREEZE21) * 0.003), B[2] + r.z * 0.2 - cam.fwd.z * 0.05], 0.05, 0.07);
-};
-
-// ---- the house ----
-const s14 = (out: Stage, cam: CamInfo, f: number) => {
-  const host = mkH(HP.host_door), hfo: FrontOpts = { mode: "stand", expr: "grin", armOff: 2 };
-  front(out, cam, "owner", ...host, hfo, f, [DOOR14[1]]);
-  const A = mkH(HP.guest_door), Bp = mkH(HP.guest_in), gp = f < STEP14[0] ? A : lerp3(A, Bp, smooth(ramp(f, STEP14[0], STEP14[1])));
-  const gfo: FrontOpts = { mode: f >= STEP14[0] && f < STEP14[1] ? "march" : "stand", phase: walkPhase(f, 2), expr: "smile", armOff: 2 };
-  front(out, cam, "man", ...gp, gfo, f);
-  const r = cam.right, gch = chestAt(cam, "man", gp, gfo, 0.5, 0.15), hch = chestAt(cam, "owner", host, hfo, 0.5, 0.15);
-  const k = smooth(ramp(f, GIFT14[0], GIFT14[1])), gift = lerp3(gch, hch, k); out.props.gift = { p: gift };
-  if (k < 1) { arm3d(out, cam, "man", gp, gfo, -1, [gift[0] - r.x * 0.15, gift[1], gift[2] - r.z * 0.15], f); arm3d(out, cam, "man", gp, gfo, 1, [gift[0] + r.x * 0.15, gift[1], gift[2] + r.z * 0.15], f); }
-  else { arm3d(out, cam, "man", gp, gfo, -1, restHand(cam, "man", gp, gfo, -1), f); arm3d(out, cam, "man", gp, gfo, 1, restHand(cam, "man", gp, gfo, 1), f); }
-  if (k > 0) { arm3d(out, cam, "owner", host, hfo, -1, [gift[0] - r.x * 0.15, gift[1], gift[2] - r.z * 0.15], f); arm3d(out, cam, "owner", host, hfo, 1, [gift[0] + r.x * 0.15, gift[1], gift[2] + r.z * 0.15], f); }
-  else { arm3d(out, cam, "owner", host, hfo, -1, f < DOOR14[1] + 4 ? Hm(HP.door[0] + 0.35, 1.05, -2.62) : restHand(cam, "owner", host, hfo, -1), f); arm3d(out, cam, "owner", host, hfo, 1, f > STEP14[0] ? [host[0] + r.x * 0.45, 1.55, host[2] + r.z * 0.45] : restHand(cam, "owner", host, hfo, 1), f); }
-};
+const MEN_W: Who[] = ["m1", "m2", "m3", "m4", "m5", "m6"];
+const s13 = (out: Stage, cam: CamInfo, f: number) => COURTP.men.forEach((m, i) => { const p = mkAt(COo, m), fo = stand(out, cam, MEN_W[i], p, f, { expr: i % 2 ? "neutral" : "nervous", look: [1, -1, 0, 1, -1, 0][i] }); if (fo) restArms(out, cam, MEN_W[i], p, fo, f); });
+const s14 = (out: Stage, cam: CamInfo, f: number) => ROOMP.dock_men.forEach((m, i) => { const who = (["m2", "m4", "m6"] as Who[])[i], p = mkAt(RMo, m, 0.15), fo = stand(out, cam, who, p, f, { expr: "neutral" }); if (fo) restArms(out, cam, who, p, fo, f); });
 const s15 = (out: Stage, cam: CamInfo, f: number) => {
-  if (f < WALK15[1]) { const p = walkTo(out, cam, "owner", mkH(HP.host_mid), mkH(HP.host_walk), f, WALK15[0], WALK15[1], { reach: 0.8, expr: "smile" }); out.props.gift = { p: [p[0] + 0.3, 1.02, p[2] + 0.1] }; }
-  else out.props.gift = { p: Hm(0, -5, 0), vis: false };
-  const g = mkH(HP.guest_tbl), fo: FrontOpts = { mode: "sit", chair: SEAT_CHAIR, expr: "smile", look: f > SPOON15[0] - 10 && f < HIDE15[1] ? 0.5 : 0, armOff: 2 };
-  front(out, cam, "man", ...g, fo, f);
-  const slot = Hm(HP.tray[0] + 0.117, HP.tray[1] + 0.01, HP.tray[2]), rest = restHand(cam, "man", g, fo, 1), ch = chestAt(cam, "man", g, fo, 0.5, 0.06);
-  let hand = rest;
-  if (f >= SPOON15[0] - 8 && f < SPOON15[0]) hand = lerp3(rest, slot, smooth((f - SPOON15[0] + 8) / 8));
-  else if (f >= SPOON15[0] && f < SPOON15[1]) { hand = lerp3(slot, [slot[0], slot[1] + 0.1, slot[2]], smooth(ramp(f, SPOON15[0], SPOON15[1]))); out.props.spoon = { p: [hand[0], hand[1] - 0.04, hand[2]], rx: -1.2 }; }
-  else if (f >= SPOON15[1] && f < HIDE15[1]) { hand = lerp3([slot[0], slot[1] + 0.1, slot[2]], ch, smooth(ramp(f, SPOON15[1], HIDE15[1]))); out.props.spoon = { p: f >= HIDE15[1] - 2 ? [ch[0] + cam.fwd.x * 0.08, ch[1], ch[2] + cam.fwd.z * 0.08] : [hand[0], hand[1] - 0.04, hand[2]], rx: -0.4 }; }
-  else if (f >= HIDE15[1]) hand = lerp3(ch, rest, smooth(ramp(f, HIDE15[1], HIDE15[1] + 8)));
-  arm3d(out, cam, "man", g, fo, 1, hand, f); arm3d(out, cam, "man", g, fo, -1, restHand(cam, "man", g, fo, -1), f);
+  const C = COURTP, who: Who[] = ["m2", "m4", "m6"], door = mkAt(COo, [C.out_from[0], 0.75]), ends = [C.goL, C.goC, C.goR];
+  who.forEach((w, i) => {
+    const O = mkAt(COo, C.out[i]);
+    if (f < OUT15[0]) return;
+    if (f < OUT15[1]) { const p = lerp3(door, O, smooth(clamp01((f - OUT15[0] - i * 4) / (OUT15[1] - OUT15[0] - 8)))), fo: FrontOpts = { mode: "march", phase: walkPhase(f + i * 7, 2), expr: "neutral", armOff: 2 };
+      if (!near(cam, p)) { front(out, cam, w, ...p, fo, f); restArms(out, cam, w, p, fo, f); } return; }
+    if (f < AWAY15[0]) { const lk = f < GLANCE15[1] ? [1, -1, -1][i] * (Math.floor((f - GLANCE15[0]) / 5) % 2 ? -1 : 1) : 0, fo = stand(out, cam, w, O, f, { expr: "nervous", look: lk }); if (fo) restArms(out, cam, w, O, fo, f); return; }
+    const E = mkAt(COo, ends[i]);
+    if (i < 2) { if (f < AWAY15[1]) walkTo(out, cam, w, O, E, f, AWAY15[0], AWAY15[1], { expr: "neutral" }); else { const fo = stand(out, cam, w, E, f); if (fo) restArms(out, cam, w, E, fo, f); } return; }
+    if (f < AWAY15[1]) { walkTo(out, cam, w, O, E, f, AWAY15[0], AWAY15[1], { expr: "neutral" }); return; }
+    if (f < BACK15[0]) { const fo = stand(out, cam, w, E, f, { expr: f >= STOPR15 ? "shock" : "neutral", look: 1 }, [STOPR15]); if (fo) restArms(out, cam, w, E, fo, f); return; }
+    walkTo(out, cam, w, E, mkAt(COo, C.backR), f, BACK15[0], BACK15[1], { expr: "nervous" });
+  });
+};
+const s17 = (out: Stage, cam: CamInfo, f: number) => {
+  const A = mkU(UP.kid_walk), D = mkU(UP.kid_door), inside = Um(UP.kid_door[0], 0, -0.7);
+  if (f < WALK17[0]) return;
+  if (f < WALK17[1]) { walkTo(out, cam, "kid2", A, D, f, WALK17[0], WALK17[1], { expr: "grin" }); return; }
+  if (f < IN17[0]) { const fo = stand(out, cam, "kid2", D, f, { expr: "grin" }); if (fo) { arm3d(out, cam, "kid2", D, fo, 1, f >= DOOR17 - 6 ? Um(UP.door[0] + 0.85, 1.0, -0.1) : restHand(cam, "kid2", D, fo, 1), f); arm3d(out, cam, "kid2", D, fo, -1, restHand(cam, "kid2", D, fo, -1), f); } return; }
+  if (f < IN17[1]) walkTo(out, cam, "kid2", D, inside, f, IN17[0], IN17[1], { expr: "grin" });
 };
 
 export const stage = (id: number, f: number, cam: CamInfo): Stage => {
   const out: Stage = { places: [], fx: [], props: {} };
-  LNAME = SHOTS[id - 1].light; SUN = cam.sun.clone();
+  LNAME = SHOTS[id - 1].light === "golden" ? "golden" : "day"; SUN = cam.sun.clone();
   if (id === 1) s01(out, cam, f);
   if (id === 2) s02(out, cam, f);
-  if (id === 3) { s03(out, cam, f); stackOn(out, Sm(0, -5, 0)); }
-  if (id === 4) { customers(out, cam, f, 4); phoneCall(out, cam, f, 4); walkIn(out, cam, f); if (f < WALK4[0] - 12) stackOn(out, Sm(0, -5, 0)); }
-  if (id === 5) { customers(out, cam, f, 5); phoneCall(out, cam, f, 5); walkIn(out, cam, f); }
+  if (id === 3) s03(out, cam, f);
+  if (id === 4) s04(out, cam, f);
   if (id === 6) s06(out, cam, f);
   if (id === 7) s07(out, cam, f);
-  if (id === 8) s08(out, cam, f);
-  if (id === 11) standing(out, cam, f, 11, P.owner_reg);
-  if (id === 12) standing(out, cam, f, 12, P.owner_pay);
+  if (id === 9) s09(out, cam, f);
+  if (id === 10) s10(out, cam, f);
+  if (id === 11 || id === 12) s11(out, cam, f, id);
   if (id === 13) s13(out, cam, f);
   if (id === 14) s14(out, cam, f);
   if (id === 15) s15(out, cam, f);
-  if (id === 16) s16(out, cam, f);
   if (id === 17) s17(out, cam, f);
-  if (id === 18) s18(out, cam, f);
-  if (id === 19) s19(out, cam, f);
-  if (id === 20) { s20(out, cam, f); stackOn(out, "shelf"); }
-  if (id === 21) { s21(out, cam, f); stackOn(out, "shelf"); }
   return out;
 };
-void art; void IDX; void tier; void tcardFx; void glowAt; void faceTo; void fxPuff; void SKIN; void shoulderAt; void burst; void sparkle; void FPS; void easeOut; void hop; void JKo; void JACKP;
+void art2; void IDX; void tier; void tcardFx; void glowAt; void faceTo; void fxPuff; void SKIN; void burst; void sparkle; void FPS; void easeOut; void walkPath; void talkOpen; void SEAT_CHAIR; void lerpN; void ramp; void fxBurst; void fxSplash; void fxRing; void fxContact; void fxShadow;
+void VANP; void TIP1; void LAND1; void DROP11;

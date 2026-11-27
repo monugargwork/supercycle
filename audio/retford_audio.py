@@ -1,9 +1,9 @@
-# Sound for the Chicago reel (Old Skool TCG): an original synthesized underscore (sneaky pizzicato plucks in A minor for the thefts,
-# bright plucks for the Chicago street, a music-box sparkle per card in the jacket and a brass hit on $6,700, a low drone for the
-# camera, a tape-stop freeze on "Khoan", calm vibes for the "you see" and the house, a sad pad for the admission, a smug brass bounce
-# for the exit), SFX on the picture's event frames (mirrors src/videos/retford/story.ts and plan.json), and a few of the user's meme
-# sounds where the sound is the joke: ka-ching on the register and on $6,700, suspicious on the first dip into the box, huh on
-# "Khoan", hehe boi on the spoon, the camera shutter on the cut to the lens, his own phone ringing at the end, the realization sting.
+# Sound for the Retford wall-heist reel: an original synthesized underscore (sneaky low pizzicato in A minor for the break-in, a
+# tense drone for the camera, driving plucks for the road, calm vibes for the notebook, an arpeggio as the route draws, warm brass
+# for the recovery, a serious piano-ish pad for the court, a warm music-box close at the shop door), SFX on the picture's event
+# frames (mirrors src/videos/retford/story.ts and plan.json: drill, the brick crash, the alarm bell, the station beeps, the van, the
+# siren, the dropped carton, doors), and a few of the user's meme sounds where the sound is the joke: huh on "Khoan", the camera
+# shutter when the camera wakes, the suspense riser into the arrest, the realization sting on the turn at the signpost.
 # Music ducked under speech, -14 LUFS, TP < -1.
 # Output: public/retford/mix.wav (48 kHz stereo, exact length) + stems.   python3 retford_audio.py ../public/retford/voice.wav ../public/retford/mix.wav
 import os, subprocess, sys
@@ -14,7 +14,7 @@ from instruments import m2f, pluck, vibes, glock, musicbox, snare, brush, cymbal
 from sfx_gen import whoosh, clink, rattle, wood_crack, creak, stroll_step, push_thump, bird_chirps, breeze
 
 FPS = 30
-TOTAL = 2440
+TOTAL = 2425
 DUR = TOTAL / FPS
 fr = lambda f: f / FPS
 R = rng(7)
@@ -87,29 +87,26 @@ def score():
         place(mus, pan(fades(y, 0.05, 0.3) * 0.5, -0.1), t0, g)
     def box(t0, notes, gap, g=0.35):
         for i, m in enumerate(notes): place(mus, pan(musicbox(m2f(m), 0.6, r, 1.4), 0.2 * np.sin(i)), t0 + i * gap, g)
-    plucks(fr(0), fr(165), 0.42, 0, Am)                                       # S01 sneaky
-    plucks(fr(229), fr(398), 0.4, 2)                                           # S02 the Chicago street, bright
-    plucks(fr(398), fr(635), 0.32, 0)                                          # S03-S05 the busy shop
-    plucks(fr(635), fr(800), 0.4, 0, Am)                                       # S06-S07 sneaky again
-    plucks(fr(800), fr(895), 0.45, 0, Am, accel=0.4)                           # S08 three more, faster
-    padrun(fr(895), fr(1188), 0.4, 1400, 12)                                   # S09-S10 the jacket
-    for t0 in [905, 990, 1070]: box(fr(t0), [84, 88, 91, 96], 0.07, 0.3)
-    place(mus, brass(m2f(48), 1.2, 0.8, r, kind="tuba", scoop=-12), fr(1146), 0.4); place(mus, brass(m2f(60), 1.0, 0.7, r, kind="tuba"), fr(1146), 0.3)
-    padrun(fr(1188), fr(1336), 0.45, 320, -12, Am)                             # S11 the camera: a low drone
-    padrun(fr(1350), fr(1495), 0.3, 500, -12, Am)                              # S12 after the freeze
-    t = fr(1495); k = 0                                                        # S13-S15 the calm "you see": vibes
-    while t < fr(1765):
+    plucks(fr(0), fr(254), 0.4, -12, Am)                                      # S01-S03 the break-in, low and sneaky
+    padrun(fr(181), fr(415), 0.28, 500, -12, Am)                               # the alarm's drone under it
+    box(fr(372), [76, 79, 84, 88, 84], 0.12, 0.25)                             # S04 December: a music-box Christmas sting
+    plucks(fr(415), fr(548), 0.3, 0)                                           # S05 days of watching
+    padrun(fr(671), fr(827), 0.42, 320, -12, Am)                               # S07 the camera: a low drone
+    plucks(fr(827), fr(994), 0.42, 0, Am, beat=B * 0.8, accel=0.3)             # S08 the road, driving
+    t = fr(994); k = 0                                                         # S09 the calm "you see": vibes
+    while t < fr(1207):
         place(mus, pan(vibes(m2f([72, 76, 79, 76, 74, 77, 81, 77][k % 8]), 0.45, r, 1.6), 0.2 * np.sin(k)), t, 0.4); t += B; k += 1
-    padrun(fr(1495), fr(1765), 0.32, 900)
-    box(fr(1624), [79, 84, 88, 91], 0.1, 0.3)                                  # the guest at the door
-    padrun(fr(1765), fr(1947), 0.42, 400, -12, Am)                             # S16 the admission, sad
-    padrun(fr(1947), fr(2047), 0.38, 1000)                                     # S17 trust, warm (stops on the cut)
-    plucks(fr(2089), fr(2207), 0.38, 0, Am)                                    # S18-S19 the police
-    t = fr(2210); k = 0                                                        # S20 smug exit: brass bounce
-    while t < fr(2300):
-        place(mus, brass(m2f([55, 59, 62, 59][k % 4]), B * 0.45, 0.7, r, kind="tuba", scoop=-8), t, 0.32); t += B / 2; k += 1
-    padrun(fr(2300), fr(2440), 0.3, 600, -12, Am)                              # S21 the face, the phone
-    box(fr(2412), [69, 64, 57], 0.18, 0.35)
+    padrun(fr(994), fr(1207), 0.3, 900)
+    for i in range(12): place(mus, pan(glock(m2f([69, 72, 76, 79][i % 4] + 12 * (i // 4)), 0.5, r, 1.0), 0.3 * np.sin(i)), fr(1215) + i * 0.22, 0.22)   # S10 the route draws
+    padrun(fr(1207), fr(1322), 0.3, 700, 0, Am)
+    plucks(fr(1322), fr(1553), 0.4, 0, Am, accel=0.2)                          # S11 the yard, the arrest
+    place(mus, brass(m2f(48), 1.2, 0.8, r, kind="tuba", scoop=-12), fr(1438), 0.35)
+    padrun(fr(1553), fr(1706), 0.38, 1200)                                     # S12 recovered: warm
+    place(mus, brass(m2f(60), 1.4, 0.7, r, kind="tuba"), fr(1685), 0.3); place(mus, brass(m2f(64), 1.4, 0.7, r, kind="tuba"), fr(1685), 0.25)
+    padrun(fr(1706), fr(2225), 0.4, 450, -12, Am)                              # S13-S16 court: serious
+    for i, m in enumerate([57, 60, 64, 62, 60, 57, 55, 57]): place(mus, pan(vibes(m2f(m), 0.6, r, 2.2), 0.1), fr(1720) + i * 2 * B, 0.25)
+    padrun(fr(2225), fr(2425), 0.36, 1100)                                     # S17 the shop door, warm
+    box(fr(2296), [79, 84, 88, 91], 0.1, 0.32); box(fr(2380), [72, 76, 79, 84], 0.16, 0.3)
     wet = convolve_st(mus, make_ir(1.6, 3, hf=0.6))[:, :N]
     return mus * 0.85 + wet * 0.25
 
@@ -132,55 +129,54 @@ def sfx():
             t = tt(1.0); y = (np.sin(TAU * 440 * t) + np.sin(TAU * 480 * t)) * (0.5 + 0.5 * np.sign(np.sin(TAU * 20 * t))) * 0.3
             P(fades(y, 0.01, 0.05), fr(f0) + i * 0.55, g, 0.2)
     bell = lambda f0, g=0.3: P(chime([m2f(91), m2f(96), m2f(91)], r, 0.06), fr(f0), g, 0.3)
-    # S01 the shop, three bills, the lift, the swish, out through the window
-    murmur(0, 160, 0.1)
-    for f0 in [80, 85, 89]: slap(f0)
-    P(pluck(m2f(64), 0.5, r, 0.4), fr(142), 0.25); swish(157); W(fr(185), 0.25, 0.8)
-    # S02 the street
-    P(breeze(5.8, r, 0.6), fr(229), 0.12); P(bird_chirps(5.5, r, 0.3), fr(232), 0.1); W(fr(268), 0.18, 1.2); steps(240, 330, 10, 0.12, -0.3)
-    # S03-S05 the busy shop, the phone, the door, footsteps, the stack on the counter
-    murmur(398, 800, 0.08)
-    ring(462, 2); P(click(r), fr(484), 0.3); bell(512); steps(514, 612, 9, 0.2, 0.2)
-    P(click(r), fr(556), 0.25); P(thud(140, 0.15, r, 0.5), fr(620), 0.35)
-    # S06 the swish into the jacket
-    swish(700)
-    # S07 the key, the drawer, three slaps
-    P(click(r), fr(748), 0.3); slide(752, 0.25, 0.4); P(clink(r, 3200, 0.1), fr(754), 0.15)
-    for f0 in [776, 781, 786]: slap(f0, 0.35)
-    slide(794, 0.2, 0.3)
-    # S08 three plucks and swishes
-    murmur(800, 895, 0.08)
-    for i, f0 in enumerate([849, 866, 878]): P(pluck(m2f(64 + 3 * i), 0.5, r, 0.4), fr(f0), 0.25); swish(f0 + 8, 0.2)
-    # S09-S10 a price tick on each sticker
-    for f0 in [965, 1048]: P(click(r), fr(f0), 0.2)
-    # S12 the freeze: a record scratch, three soft hits on the reasons
-    t = tt(0.4); P(fades(np.sin(TAU * np.cumsum(np.linspace(900, 80, len(t))) / SR) * np.exp(-t / 0.18) + 0.3 * bp(r.standard_normal(len(t)), 1500, 6000) * np.exp(-t / 0.1), 0.003, 0.08), fr(1336), 0.3)
-    for f0 in [1397, 1422, 1478]: P(thud(90, 0.3, r, 0.4), fr(f0), 0.35)
-    # S13 a warm chord on the handshake; S14 the doorbell and the creak; S15 the spoon
-    P(chime([m2f(72), m2f(76), m2f(79)], r, 0.03), fr(1590), 0.18)
-    P(chime([m2f(88), m2f(84)], r, 0.35), fr(1624), 0.3); P(creak(0.6, r, 250, 450), fr(1630), 0.18)
-    P(clink(r, 4200, 0.12), fr(1745), 0.3)
-    # S16 footsteps, the case door, the padlock
-    steps(1832, 1896, 10, 0.18, -0.3); P(creak(0.35, r, 500, 900), fr(1896), 0.2); P(click(r), fr(1920), 0.3); P(S(clink(r, 1800, 0.12), click(r)), fr(1926), 0.45)
-    # S17 a REC beep after the shutter
-    P(np.sin(TAU * 1760 * tt(0.12)) * 0.3, fr(2052), 0.2)
-    # S18 dial beeps (DTMF), the ringing tone
-    for k, (a1, b1) in enumerate([(852, 1336), (770, 1336), (697, 1209)]): t = tt(0.12); P(fades((np.sin(TAU * a1 * t) + np.sin(TAU * b1 * t)) * 0.25, 0.005, 0.02), fr(2096 + 4 * k), 0.25)
-    t = tt(1.0); P(fades((np.sin(TAU * 440 * t) + np.sin(TAU * 480 * t)) * 0.15, 0.01, 0.05), fr(2110), 0.12)
-    # S19 pen scratches
-    for f0 in range(2160, 2196, 5): P(noise_burst(0.12, 2000, 7000, r, 0.01, 0.05), fr(f0), 0.08, 0.2)
-    # S20 the door bell, footsteps out, the street
-    bell(2208); steps(2212, 2246, 9, 0.2); P(breeze(7.5, r, 0.6), fr(2207), 0.1); P(bird_chirps(7.0, r, 0.3), fr(2210), 0.08)
-    # S21 a record stop on the freeze
-    t = tt(0.5); P(fades(np.sin(TAU * np.cumsum(np.linspace(500, 40, len(t))) / SR) * np.exp(-t / 0.25), 0.005, 0.1), fr(2398), 0.25)
+    def drill(f0, f1, g=0.22):
+        t = tt(fr(f1) - fr(f0)); y = np.sin(TAU * np.cumsum(820 + 40 * np.sin(TAU * 7 * t)) / SR) * 0.4 + bp(r.standard_normal(len(t)), 1500, 5000) * 0.5 * (0.6 + 0.4 * np.sign(np.sin(TAU * 11 * t)))
+        P(fades(y, 0.02, 0.05), fr(f0), g, 0.25)
+    def alarm(f0, f1, g=0.12):
+        t = tt(fr(f1) - fr(f0)); y = (np.sin(TAU * 1250 * t) + 0.5 * np.sin(TAU * 2500 * t)) * (0.55 + 0.45 * np.sign(np.sin(TAU * 18 * t))) * 0.3
+        P(fades(y, 0.02, 0.3), fr(f0), g, 0.3)
+    engine = lambda f0, f1, g=0.18: P(fades(lp(colored(ns(fr(f1) - fr(f0)), r, 0.6), 400) * (1 + 0.3 * np.sin(TAU * 32 * tt(fr(f1) - fr(f0)))), 0.2, 0.4), fr(f0), g)
+    # S01 the drill, the crunch, the crash, the bricks
+    P(breeze(9, r, 0.4), 0, 0.08); drill(0, 29); P(noise_burst(0.2, 400, 3000, r, 0.002, 0.08), fr(20), 0.3)
+    P(S(thud(55, 0.6, r, 1.0), noise_burst(0.5, 200, 4000, r, 0.003, 0.18)), fr(40), 0.75); P(thud(90, 0.25, r, 0.6), fr(44), 0.3)
+    for f0 in [46, 50, 53, 58]: P(S(wood_crack(r) * 0.3, thud(260, 0.08, r, 0.8)), fr(f0), 0.22, -0.2)
+    W(fr(110), 0.2, 0.5)
+    # S02 cardboard, footsteps, the slide into the tunnel; S03 the bell, the line, the station beeps
+    slide(118, 0.4, 0.3); steps(130, 146, 8, 0.18); slide(148, 0.5, 0.3)
+    alarm(181, 720); W(fr(205), 0.25, 0.8); W(fr(222), 0.25, 0.8)
+    for k in range(6): P(np.sin(TAU * 1600 * tt(0.08)) * 0.3, fr(229) + k * 0.4, 0.2, -0.2)
+    # S04 night air; S05 the clock and the calendar tears
+    P(breeze(5.5, r, 0.5), fr(254), 0.08); P(bird_chirps(4.4, r, 0.4), fr(415), 0.08)
+    for k in range(int((fr(548) - fr(415)) / 0.5)): P(click(r), fr(415) + k * 0.5, 0.08)
+    for f0 in [455, 490, 522]: P(noise_burst(0.25, 1500, 7000, r, 0.01, 0.1), fr(f0), 0.25, 0.2)
+    # S06 a record scratch on "Khoan"; S07 the servo
+    t = tt(0.4); P(fades(np.sin(TAU * np.cumsum(np.linspace(900, 80, len(t))) / SR) * np.exp(-t / 0.18) + 0.3 * bp(r.standard_normal(len(t)), 1500, 6000) * np.exp(-t / 0.1), 0.003, 0.08), fr(548), 0.3)
+    t = tt(0.55); P(fades(np.sin(TAU * np.cumsum(np.linspace(300, 520, len(t))) / SR) * 0.25, 0.02, 0.05), fr(756), 0.18)
+    # S08 doors shut, the engine, whooshes under the gantries, REC beeps
+    P(thud(120, 0.2, r, 0.6), fr(840), 0.3); engine(880, 994, 0.2); W(fr(936), 0.3, 0.9); W(fr(976), 0.3, 0.9)
+    for f0 in [930, 950, 965, 985]: P(np.sin(TAU * 1760 * tt(0.08)) * 0.3, fr(f0), 0.12)
+    # S09 the peel, the pat, the cover
+    P(noise_burst(0.3, 2000, 8000, r, 0.05, 0.1), fr(1051), 0.2); P(thud(400, 0.06, r, 0.6), fr(1094), 0.25); P(noise_burst(0.2, 800, 4000, r, 0.01, 0.08), fr(1124), 0.2)
+    P(pluck(m2f(55), 0.5, r, 0.4), fr(1157), 0.25)
+    # S10 a blip as each monitor comes on
+    for i in range(6): P(np.sin(TAU * (880 + 110 * i) * tt(0.06)) * 0.3, fr(1215 + 12 * i), 0.15)
+    # S11 siren whoop, skid, doors, footsteps, the dropped carton; the hammer ting
+    t = tt(1.2); P(fades(np.sin(TAU * np.cumsum(700 + 500 * np.abs(np.sin(TAU * 1.2 * t))) / SR) * 0.3, 0.02, 0.3), fr(1334), 0.25)
+    P(fades(bp(colored(ns(0.5), r, 0.3), 800, 5000) * np.exp(-tt(0.5) / 0.25), 0.01, 0.1), fr(1342), 0.3)
+    P(thud(160, 0.15, r, 0.5), fr(1365), 0.25); steps(1370, 1430, 9, 0.18)
+    P(S(thud(110, 0.25, r, 0.7), noise_burst(0.15, 600, 3000, r, 0.002, 0.05)), fr(1452), 0.45); P(thud(130, 0.15, r, 0.5), fr(1462), 0.25)
+    P(clink(r, 3600, 0.15), fr(1510), 0.3)
+    # S12 birds; S13 the town; S15 the doors, footsteps; S17 the street, the door bell
+    P(bird_chirps(5.0, r, 0.4), fr(1553), 0.1); P(breeze(6.0, r, 0.4), fr(1706), 0.08); P(bird_chirps(6.0, r, 0.3), fr(1710), 0.07)
+    P(noise_burst(0.4, 500, 3000, r, 0.05, 0.15), fr(1948), 0.15); steps(1950, 2140, 10, 0.14)
+    P(breeze(6.5, r, 0.5), fr(2225), 0.1); P(bird_chirps(6.0, r, 0.3), fr(2230), 0.08); steps(2262, 2292, 9, 0.15)
+    P(chime([m2f(91), m2f(96), m2f(91), m2f(96)], r, 0.06), fr(2295), 0.32, 0.2)
     return out
 
 def memes():
     out = np.zeros((2, N))
-    for name, f0, g, secs in [("Kaching Sound FX.mp3", 91, 0.35, None), ("Suspicious Sound.mp3", 648, 0.4, 2.4), ("Kaching Sound FX.mp3", 752, 0.45, None),
-                              ("Kaching Sound FX.mp3", 1146, 0.45, None), ("Camera shutter.mp3", 1262, 0.35, None), ("Huh5544.mp3", 1338, 0.55, None),
-                              ("Hehe Boiiiiiii.mp3", 1756, 0.35, None), ("Camera shutter.mp3", 2047, 0.45, None), ("Yo Phone Ringing -Chino.mp3", 2371, 0.4, 2.3),
-                              ("Realization Sound.mp3", 2398, 0.35, 1.4)]:
+    for name, f0, g, secs in [("Huh5544.mp3", 550, 0.55, None), ("Camera shutter.mp3", 754, 0.4, None), ("Cinemaitc Suspense Riser.mp3", 1300, 0.3, 1.4),
+                              ("Realization Sound.mp3", 2084, 0.35, 1.4)]:
         place(out, pan(meme(name, secs), 0.0), fr(f0), g)
     return out
 
@@ -202,7 +198,7 @@ def main(voice_path, out_path):
     duck = env_duck(v, -7)                               # music dips under speech
     mix = v + mus * duck[None, :] + fx + mm * env_duck(v, -3)[None, :]
     mix = mix * dbg(-14 - integrated(mix))
-    if true_peak(mix) > -1.0: lim = dbg(-1.0); mix = np.tanh(mix / lim) * lim
+    if true_peak(mix) > -1.2: lim = dbg(-1.8); mix = np.tanh(mix / lim) * lim
     write_wav(out_path, mix, 16)
     for nm, x in [("music", mus), ("sfx", fx)]: write_wav(out_path.replace(".wav", f"_{nm}.wav"), x, 16)
     print("mix", out_path, "LUFS", round(integrated(mix), 2), "TP", round(true_peak(mix), 2), "len", mix.shape[1] / SR)

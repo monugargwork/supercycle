@@ -1,7 +1,7 @@
 // Timeline of the Chicago reel (Old Skool TCG), timed to the Vietnamese voice (public/retford/words.json, 80.3 s).
 // Everything a camera needs (keys, glides, pushes, kicks, dissolves) is read from plan.json, the direction's source of truth
 // (videos/retford-wall-heist/plan.json, written by mkplan.py): numbers are never retyped here.
-// Sets: SHOP (the interior and the street outside it, one set), HOUSE (the analogy), JACKET (the lining insert).
+// Sets: UNIT (the estate, the road, the station), KIDROOM, CTRL, YARD, COURT, COURTROOM.
 import plan from "../../../videos/retford-wall-heist/plan.json";
 export const FPS = 30;
 export const TOTAL = plan.frames;
@@ -19,52 +19,36 @@ export const pop = (f: number, f0: number, n = 8) => {
 export const at = (o: V3, x: number, y: number, z: number): V3 => [o[0] + x, o[1] + y, o[2] + z];
 type SetName = keyof typeof plan.sets;
 export const ORIGIN = Object.fromEntries(Object.entries(plan.sets).map(([k, s]) => [k, s.origin as V3])) as Record<SetName, V3>;
-export const SHo = ORIGIN.shop, HOo = ORIGIN.house, JKo = ORIGIN.jacket;
+export const UNo = ORIGIN.unit, KIo = ORIGIN.kidroom, CTo = ORIGIN.ctrl, YAo = ORIGIN.yard, COo = ORIGIN.court, RMo = ORIGIN.courtroom;
 /** a mark from the plan: the character's feet in the world */
 export const mark = (set: SetName, who: string, y = 0): V3 => { const m = (plan.sets[set].marks as Record<string, number[]>)[who]; return at(ORIGIN[set], m[0], y, m[1]); };
 /** an object's centre from the plan, in the world */
 export const obj = (set: SetName, id: string): { p: V3; s: V3 } => { const o = plan.sets[set].objects.find((x) => x.id === id)!; return { p: at(ORIGIN[set], o.pos[0], o.pos[1], o.pos[2]), s: o.size as V3 }; };
 
 // ---------------- beats (frames; the plan's scene cards give the same numbers in words) ----------------
-export const BILLS1 = [80, 85, 89], STEP1 = [100, 122], DIP1 = [128, 140], GRAB1 = 142, LIFT1 = [142, 150], HIDE1 = [150, 157]; // S01 the hook
-export const RING4 = [462, 478], LIFT4 = 484, DOOR4 = 510, WALK4 = [512, 612], SET5 = [612, 622];                         // S04-S05 the call, he walks in
-export const HANG5 = 556;
-export const DIP6 = [638, 651], GRAB6 = 672, LIFT6 = [672, 684], HIDE6 = [684, 700];                                     // S06 the first card
-export const STEP7 = [728, 745], KEY7 = 748, DRAWER7 = 752, TAKE7 = [756, 768], BILLS7 = [776, 781, 786], SHUT7 = 794;   // S07 the deal
-export const TUCK8 = [804, 815], LIFTS8: [number, number][] = [[846, 856], [863, 873], [875, 885]], SHELF8 = [805, 826, 834, 866, 878]; // S08 three more
-export const GLEAM9 = [905, 990, 1070];
-export const REC_PERIOD = 30;                                                                                          // the REC lamp: 15 f on, 15 f off
-export const FREEZE12 = 1336;
-export const KID13 = [1500, 1560], TURN13 = 1563, SHAKE13 = [1590, 1615];                                               // S13
-export const DOOR14 = [1628, 1642], STEP14 = [1650, 1680], GIFT14 = [1688, 1698];                                      // S14 the guest
-export const WALK15 = [1708, 1750], SPOON15 = [1736, 1748], HIDE15 = [1750, 1757];                                     // S15 the spoon
-export const SCRATCH16 = [1775, 1812], LIFT16 = [1822, 1832], WALK16 = [1832, 1896], OPEN16 = [1896, 1906], PUT16 = [1906, 1918], SHUT16 = 1920, LOCK16 = 1926; // S16
-export const SHAKE17 = [1950, 2040], CUT17 = 2047;
-export const DIAL18 = [2092, 2104];
-export const POINT19 = [2140, 2160], WRITE19 = [2160, 2196];
-export const DOOR20 = 2208, WALK20 = [2210, 2246], PAT20 = [2248, 2262], FAN20 = [2268, 2290];                         // S20 he leaves
-export const RING21 = 2371, PHONE21 = [2380, 2392], FREEZE21 = 2398;                                                    // S21 his phone
-export const SHOPP = plan.shop, HOUSEP = plan.house, JACKP = plan.jacket;
-/** the box's ten items: when each one leaves (it rises out of the box, goes to his chest and behind the jacket) */
-export const TAKEN: Record<number, { id: number; lift: number[]; hide: number[] }[]> = {
-  0: [{ id: 6, lift: [GRAB6, LIFT6[1]], hide: HIDE6 }],
-  1: [{ id: 8, lift: LIFTS8[0], hide: [LIFTS8[0][1], LIFTS8[0][1] + 6] }, { id: 1, lift: LIFT1, hide: HIDE1 }],
-  5: [{ id: 8, lift: LIFTS8[1], hide: [LIFTS8[1][1], LIFTS8[1][1] + 6] }],
-  6: [{ id: 8, lift: LIFTS8[2], hide: [LIFTS8[2][1], LIFTS8[2][1] + 6] }],
-};
-/** is item i still in the box at shot id, frame f? (S02-S05 come before the thefts; S01 is S08's first lift seen early) */
-export const inBox = (i: number, id: number, f: number) => {
-  if (id >= 2 && id <= 5) return true;
-  if (id === 14 || id === 15) return true;
-  const t = TAKEN[i]; if (!t) return true;
-  if (id === 1) { if (i === 0) return false; if (i === 1) return f < LIFT1[0]; return true; }
-  for (const x of t) if (x.id === id) return f < x.lift[0];
-  const first = Math.min(...t.filter((x) => x.id !== 1).map((x) => x.id));
-  return id < first;
-};
-/** the box sits in the locked glass case from S16 (after he puts it there) through S19 */
-export const boxInCase = (id: number, f: number) => (id === 16 && f >= PUT16[1]) || id === 18 || id === 19;
+export const UP = plan.unit, VANP = plan.van, KIDP = plan.kid, CTRLP = plan.ctrl, YARDP = plan.yard, COURTP = plan.court, ROOMP = plan.room;
+export const DRILL1 = [0, 29], RING1 = 28, TIP1 = 32, LAND1 = 40, STEP1 = [40, 52];                    // S01 the breach
+export const LIFT2 = [116, 128], WALK2 = [130, 146], PUSH2 = [146, 160];                               // S02 a carton out through the hole
+export const BELL3 = 181, PANEL3 = 229, TURN3 = 236;                                                   // S03 the alarm reaches the station
+export const LOADA4 = [300, 340], LOADB4 = [350, 390];                                                 // S04 loading in the wide
+export const TEAR5 = [455, 490, 522];                                                                  // S05 the calendar pages
+export const FREEZE6 = 548, RED6 = [631, 671];                                                         // S06 frozen, red strobe
+export const REC7 = 754, SWIVEL7 = [756, 772], LOAD7 = [[700, 760], [770, 820]];                       // S07 the camera wakes up
+export const PEEL9 = [1051, 1062], STICK9 = [1066, 1094], OPEN9 = [1124, 1136];                        // S09 the notebook
+export const MON10 = 1215, MONSTEP10 = 12, ROUTE10 = [1215, 1300], POINT10 = 1290;                     // S10 the control room
+export const STOP11 = YARDP.car_turn, DOORS11 = 1365, WALK11 = [1370, 1430], FREEZE11 = 1438, DROP11 = 1440, LAND11 = 1452; // S11
+export const TAP12 = 1588, NOD12 = 1650;
+export const OUT15 = [1950, 1990], GLANCE15 = [1995, 2005], AWAY15 = [2010, 2075], STOPR15 = 2082, BACK15 = [2090, 2140]; // S15
+export const WALK17 = [2262, 2292], DOOR17 = 2295, IN17 = [2300, 2320];                                // S17
+export const REC_PERIOD = 30;
 export const recOn = (f: number) => Math.floor(f / (REC_PERIOD / 2)) % 2 === 0;
+/** the van's route (plan.van_route, dense [f, x, z, heading deg]); outside S08 it stands where the scene puts it */
+const ROUTE = plan.van_route as number[][];
+export const vanRoute = (f: number): [number, number, number] => {
+  if (f <= ROUTE[0][0]) return [ROUTE[0][1], ROUTE[0][2], ROUTE[0][3]];
+  const i = Math.min(ROUTE.length - 1, Math.max(0, Math.floor(f) - ROUTE[0][0])), r = ROUTE[i], n = ROUTE[Math.min(ROUTE.length - 1, i + 1)], u = f - Math.floor(f);
+  return [r[1] + (n[1] - r[1]) * u, r[2] + (n[2] - r[2]) * u, r[3] + (n[3] - r[3]) * u];
+};
 /** a hop after an impact: launched at v0 m/s at f0, falls under gravity, two small rattles */
 export const hop = (f: number, f0: number, v0: number) => {
   let t = (f - f0) / FPS, v = v0;
@@ -74,13 +58,13 @@ export const hop = (f: number, f0: number, v0: number) => {
 };
 export const lightAt = (_id: number, _f: number): { k: number; sat: number } => ({ k: 1, sat: 1 }); // quality bar: no dims
 
-export type Light = "day" | "golden";
+export type Light = "day" | "golden" | "night";
 export type Place = SetName;
 export type ShotDef = { id: number; a: number; b: number; light: Light; place: Place; sunAz?: number; sunEl?: number };
 export const SHOTS: ShotDef[] = plan.scenes.map((s, i) => ({ id: i + 1, a: s.f[0], b: s.f[1], light: s.light as Light, place: s.set as Place,
-  sunAz: (plan.sets[s.set as SetName].sun as number[])[0], sunEl: (plan.sets[s.set as SetName].sun as number[])[1] }));
+  sunAz: (((s as { sun?: number[] }).sun ?? plan.sets[s.set as SetName].sun) as number[])[0], sunEl: (((s as { sun?: number[] }).sun ?? plan.sets[s.set as SetName].sun) as number[])[1] }));
 /** sets built and shown per place */
-export const SHOWN: Record<string, string[]> = { shop: ["shop"], house: ["house"], jacket: ["jacket"] };
+export const SHOWN: Record<string, string[]> = { unit: ["unit"], kidroom: ["kidroom"], ctrl: ["ctrl"], yard: ["yard"], court: ["court"], courtroom: ["courtroom"] };
 /** dissolves between scenes (the plan's In): time jumps dissolve, the screen-to-card match is a through-object dissolve */
 export const XFADE: Record<number, number> = Object.fromEntries(plan.scenes.map((s, i) => [i + 1, (s.in as { n?: number }).n ?? 0]).filter(([, n]) => n > 0));
 export const FLASH_AT = -100;

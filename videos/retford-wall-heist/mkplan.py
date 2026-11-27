@@ -29,26 +29,26 @@ UNIT = dict(
     door=[2.0, 3.0, 0.0, 2.3], window=[0.15, 1.75, 0.7, 2.1], shutter=[-4.6, -1.2, 0.0, 3.4],
     sign=[0.0, 4.15, 0.06], sign_size=[7.0, 0.75],
     rack=[3.4, 4.2, -8.2, -1.2], shelves=[0.12, 0.52, 0.92, 1.32, 1.72], carton=[0.4, 0.3, 0.3],
-    bell=[6.04, 3.4, -2.0], post=[12.6, -0.6], post_h=6.2, cctv=[12.3, 5.35, -0.6],
+    bell=[6.04, 3.4, -2.0], post=[14.2, -0.6], post_h=6.2, cctv=[13.9, 5.35, -0.6],
     yard=[6.0, 15.0, -11.0, 0.0], road=[4.0, 11.0], lane_w=5.75, lane_e=9.25, pave=[0.0, 4.0],
     poles_x=[6.6, 18.6, 30.6, 42.6, 54.6], pole_z=3.5, wire_y=6.0,
     station=[55.0, 65.0, 13.0, 20.0], station_h=4.6, st_window=[56.6, 59.6, 0.9, 2.3], st_door=[61.0, 62.2], st_lamp=[61.6, 2.75, 12.85],
     st_panel=[57.4, 1.85, 19.9],
-    town_sign=[14.6, 3.2], layby=[-5.0, 8.0, 13.0, 19.0],
+    town_sign=[-3.0, 3.3], layby=[-5.0, 8.0, 13.0, 19.0],
     gantries=[[-18.0, "SOUTH YORKSHIRE"], [-58.0, "MANCHESTER"]], road_cams=[-8.0, -30.0, -44.0, -72.0, -88.0], road_cam_z=12.4,
     # marks [x, z] at the feet
-    A_drill=[6.85, -4.75], A_wait=[7.05, -4.75], A_load=[7.2, -3.6], B_rack=[4.68, -1.7], B_hole=[5.3, -3.6],
+    A_drill=[6.85, -4.75], A_wait=[7.05, -4.75], A_load=[9.4, -6.8], B_rack=[4.68, -2.6], B_hole=[5.3, -3.6],
     A_freeze=[7.0, -4.75], B_freeze=[7.5, -3.2], officer=[58.6, 15.4], kid_walk=[6.5, 3.2], kid_door=[2.5, 0.55])
 U = UNIT
 VAN = dict(L=5.2, W=2.0, H=2.3, cab=0.9, rear=-2.6,
-           yard=[8.7, -4.2, 90.0], layby=[1.2, 16.4, 270.0], plate="TK18 RVW", plate_under="YD68 PQX")   # [x, z, heading deg]: 0 = nose +x, 90 = nose +z
+           yard=[12.2, -6.0, 90.0], layby=[1.2, 16.4, 270.0], plate="TK18 RVW", plate_under="YD68 PQX")   # [x, z, heading deg]: 0 = nose +x, 90 = nose +z
 def van_world(v, lx, ly, lz):
     """a point in the van's own frame (nose +x, right side +z, floor of the road y 0) to the set's frame"""
     h = math.radians(v[2]); c, s = math.cos(h), math.sin(h)
     return [v[0] + lx * c - lz * s, ly, v[1] + lx * s + lz * c]
 # the van's route out of the yard and west along the estate road (S08): dense samples [f, x, z, heading]
 def _route():
-    keys = [(885, 8.7, -4.2), (897, 8.7, 0.6), (907, 7.2, 4.4), (915, 3.6, 5.75)]
+    keys = [(885, 12.2, -6.0), (899, 12.2, 1.0), (909, 10.4, 4.6), (917, 6.6, 5.75)]
     pts = []
     for f in range(827, 995):
         if f <= keys[0][0]: x, z = keys[0][1], keys[0][2]
@@ -78,12 +78,12 @@ CTRL = dict(room=[-3.5, 3.5, -3.0, 4.0], h=3.0, map=[-2.0, 0.4, 0.9, 2.4], mons=
             # where the route is drawn on the map screen (canvas units 0..1 of its width / height): Retford -> South Yorkshire -> Manchester
             route=[[0.9, 0.55], [0.7, 0.66], [0.52, 0.7], [0.32, 0.55], [0.12, 0.42]], towns=[["RETFORD", 0.9, 0.55], ["SOUTH YORKSHIRE", 0.56, 0.78], ["MANCHESTER", 0.12, 0.42]])
 YARD = dict(box=[-1.6, 0.84, -6.06, 0.0], box_h=2.6, gate=[-4.0, 4.0], fence_z=10.0, van=[-0.38, 3.6, 90.0],
-            car_from=[16.0, 8.6], car_stop=[0.8, 8.6], car_turn=[1337, 1352],
-            C1=[-1.95, 1.4], C2=[1.3, 1.5], cop1_from=[2.6, 7.6], cop1=[2.4, 3.0], cop2_from=[-0.6, 7.6], cop2=[-2.6, 3.4],
+            car_from=[16.0, 8.6], car_stop=[-1.2, 8.6], car_turn=[1337, 1352],
+            C1=[2.7, -0.3], C2=[1.9, 1.7], cop1_from=[2.6, 7.6], cop1=[3.7, 3.2], cop2_from=[1.6, 7.6], cop2=[0.95, 5.0],
             hammer=[-0.62, 0.58, 1.9], stack=[3.7, 5.2], det=[4.9, 5.9], pallet=[1.2, 0.8])
-COURT = dict(front=[-8.0, 8.0], h=9.0, door=[-1.2, 1.2, 2.6], board=[-2.7, 1.5, 0.05], board_size=[0.9, 0.7], signpost=[4.3, 6.2],
-             men=[[-2.6, 3.2], [-1.55, 3.5], [-0.5, 3.2], [0.55, 3.5], [1.6, 3.2], [2.65, 3.5]],
-             out=[[-0.7, 2.4], [0.0, 2.7], [0.7, 2.4]], out_from=[0.0, 0.4], goL=[-7.0, 3.2], goC=[-4.0, 9.0], goR=[3.3, 5.3], backR=[-7.0, 7.0])
+COURT = dict(front=[-8.0, 8.0], h=9.0, door=[-1.2, 1.2, 2.6], board=[-3.8, 1.5, 0.05], board_size=[0.9, 0.7], signpost=[4.3, 6.2],
+             men=[[-2.2, 3.0], [-1.45, 4.7], [-0.7, 3.0], [0.05, 4.7], [0.8, 3.0], [1.55, 4.7]],
+             out=[[-0.7, 2.4], [0.0, 2.7], [0.7, 2.4]], out_from=[0.0, 0.75], goL=[-7.0, 3.2], goC=[-4.0, 9.0], goR=[3.3, 5.3], backR=[-7.0, 7.0])
 ROOM = dict(room=[-4.0, 4.0, -4.0, 4.0], h=4.2, tv=[-1.8, 2.35, -3.98], tv_size=[1.7, 0.96], dock=[0.6, 3.3, -1.7, -0.4], dock_h=1.15,
             dock_men=[[1.15, -1.05], [1.95, -1.05], [2.75, -1.05]])
 
@@ -91,9 +91,9 @@ P = {
  "fps": 30, "frames": 2425, "voice_end": 2392,
  "coords": "metres, y up, ground y=0; cams/marks/objects are SET-LOCAL, world = set origin + local",
  "titles": [
-  {"f": 55, "out": 100, "text": "1:00 AM", "style": 3, "from": "top"},
+  {"f": 55, "out": 88, "text": "1:00 AM", "style": 3, "from": "top"},
   {"f": 112, "out": 140, "text": "26", "style": 3, "from": "top"},
-  {"f": 368, "out": 410, "text": "12/2025", "style": 3, "from": "top"},
+  {"f": 366, "out": 398, "text": "12/2025", "style": 3, "from": "top"},
   {"f": 1708, "out": 1765, "text": "11 THANG SAU", "style": 3, "from": "top"}],
  "cards": {"window": ["zard151", "umbreon_pe", "bubble_mew", "pika151", "blast151", "venu151"]},
  "unit": UNIT, "van": VAN, "van_route": ROUTE, "kid": KID, "ctrl": CTRL, "yard": YARD, "court": COURT, "room": ROOM,
@@ -110,7 +110,7 @@ P = {
     {"id": "van", "build": "new: white panel van 5.2 x 2.0 x 2.3 m: orange roof ladder, a dent in the sliding side door (right side), rear doors that open, a hollow cab (dash, wheel, windscreen); a printed number plate taped over the real one at the back, one tape corner lifting (TK18 RVW over YD68 PQX)", "pos": [8.7, 1.15, -4.2], "size": [5.2, 2.3, 2.0]},
     {"id": "road", "build": "new: the estate road along x (z 4..11): asphalt, white dashes, kerbs, pavements; telephone poles at z 3.5 every 12 m carrying the alarm line east to the police station; the A-road west with two blue gantry signs (SOUTH YORKSHIRE at x -18, MANCHESTER at x -58) and five road cameras on poles; lamp posts with warm sodium light; hedges, fields, distant hills", "pos": [0, 0, 7.5], "size": [400, 0.1, 7]},
     {"id": "station", "build": "new: the police station across the road at x 55..65, z 13..20: red brick, a blue POLICE lamp over the door, a lit window (x 56.6..59.6) into the front office: a desk officer standing, an alarm panel whose red lamp flashes from f229", "pos": [60, 2.3, 16.5], "size": [10, 4.6, 7]},
-    {"id": "estate", "build": "new: neighbour units (cladding in cream, sky blue, red), a RETFORD town sign (white with black letters) by the yard entrance at x 14.6, a lay-by car park across the road (x -5..8, z 13..19) where the van waits by day, hedges and trees, a church spire far off", "pos": [0, 2, 0], "size": [60, 4, 40]}],
+    {"id": "estate", "build": "new: neighbour units (cladding in cream, sky blue, red), a RETFORD town sign (white with black letters) on the pavement in front of the unit, a lay-by car park across the road (x -5..8, z 13..19) where the van waits by day, hedges and trees, a church spire far off", "pos": [0, 2, 0], "size": [60, 4, 40]}],
    "marks": {k2: U[k2] for k2 in ["A_drill", "A_load", "B_rack", "B_hole", "A_freeze", "B_freeze", "officer", "kid_walk", "kid_door"]}},
   "kidroom": {"origin": [400, 0, 0], "axes": "the kid stands behind a tall desk facing +z (the lens); the window in the back wall",
    "light": "day", "sun": [30, 45], "open_sides": "+z",
@@ -195,17 +195,16 @@ scene(id="S02", f=[110, 178], set="unit", light="night",
   vo="để khuân đi hai mươi sáu hộp thẻ Pokémon",
   gloss="to carry off twenty-six boxes of Pokémon cards",
   spine=1, viewer="Inside: racks of cartons; B lifts one off and passes it out through the hole.",
-  **{"in": {"type": "travel", "from": "S01"}, "out": {"type": "follow", "to": "S03", "note": "the camera backs out through the hole with the carton"}},
+  **{"in": {"type": "travel", "from": "S01"}, "out": {"type": "cut", "to": "S03"}},
   build="the warehouse: racks of cartons (TRADING CARDS / FRAGILE), the plug lying on the floor, ceiling lights.",
   blocking="B at B_rack (front view) lifts a carton from the third shelf f116-128, walks to B_hole f130-146 and pushes it into the hole f146-160.",
-  action="f110-116 the camera passes through the hole (along z -4); f112 title 26; f116-128 B slides a carton off the rack; f130-146 B carries it to the hole; f146-160 he pushes it into the tunnel; f158-178 the camera backs out through the hole ahead of the carton.",
+  action="f110-116 the camera passes through the hole (along z -4); f112 title 26; f116-128 B slides a carton off the rack; f130-146 B carries it to the hole; f146-160 he pushes it into the tunnel; f160-178 the carton slides out through the tunnel.",
   acting="B: quick, careful, eyes on the hole.",
   cams=[k(110, [5.25, 1.0, -4.0], [3.0, 0.95, -3.7], 46, glide=8, push=0.0, why="through the hole"),
-        k(122, [5.62, 1.25, -4.05], [4.75, 0.95, -1.75], 60, glide=18, push=0.0006, why="turn to B and the racks of cartons"),
-        k(158, [7.4, 1.05, -4.0], [5.2, 1.0, -4.0], 44, glide=18, push=0.0, why="back out through the hole with the carton")],
+        k(124, [4.95, 1.6, -0.35], [5.0, 1.0, -3.3], 56, glide=20, push=0.0006, why="inside: B, the racks of cartons, the hole")],
   kicks=[],
   marks=[{"who": "B", "at": U["B_rack"], "view": "front", "pose": "lifts a carton f116-128; walks to B_hole f130-146; pushes it into the hole f146-160", "expr": "nervous"}],
-  subjects=[{"n": "B head", "p": HEAD(U["B_rack"]), "f": [141, 150]}],
+  subjects=[{"n": "B head", "p": HEAD(U["B_hole"]), "f": [148, 176]}],
   physics="the carton: kinematic in his hands.", light_mood="warm warehouse light, the hole a dark-blue circle of night.", sound="cardboard scrape f118; footsteps; a soft thud as the carton slides into the tunnel f150.",
   after="A gap on the third shelf.")
 
@@ -213,12 +212,12 @@ scene(id="S03", f=[178, 254], set="unit", light="night",
   vo="và chuông báo động réo thẳng về đồn cảnh sát",
   gloss="and the alarm bell rang straight through to the police station",
   spine=1, viewer="The bell rattles; its line runs pole to pole to the police station, where a red lamp flashes and the officer turns.",
-  **{"in": {"type": "follow", "from": "S02"}, "out": {"type": "travel", "to": "S04", "note": "the camera flies back along the road to the wide of the estate"}},
+  **{"in": {"type": "cut", "from": "S02"}, "out": {"type": "travel", "to": "S04", "note": "the camera flies back along the road to the wide of the estate"}},
   build="the bell box and its cable, the telephone poles and the line, the police station and its lit window.",
   blocking="Officer at the officer mark inside the station, front view; turns his eyes to the panel at f236.",
   action="f181 ('chuông') the bell hammer rattles (2 mm shake, 6 Hz), the blue strobe flashes; f188-214 the camera climbs the cable to the roof edge and the first pole; f214-236 it races east along the line, pole to pole; f229 the station's alarm-panel lamp flashes red (on 6 f / off 6 f); f236 the officer's eyes snap to it.",
   acting="Officer: calm -> alert.",
-  cams=[k(178, [8.5, 3.15, -0.7], [BELL[0], BELL[1], BELL[2]], 34, glide=16, push=0.0008, why="the bell rattles"),
+  cams=[k(178, [8.5, 3.15, -0.7], [BELL[0], BELL[1], BELL[2]], 34, cut=True, push=0.0008, why="the bell rattles"),
         k(200, [9.2, 6.4, 0.8], [6.6, 6.0, 3.5], 44, glide=16, push=0.0, why="up the cable to the line"),
         k(214, [36.0, 7.0, 1.6], [48.0, 6.0, 3.5], 46, glide=18, push=0.0, why="along the line, pole to pole"),
         k(228, [58.4, 1.85, 9.4], [58.3, 1.45, 15.0], 42, glide=16, push=0.0008, why="the station window: the red lamp and the officer")],
@@ -237,7 +236,7 @@ scene(id="S04", f=[254, 415], set="unit", light="night",
   blocking="A and B small in the side yard, carrying cartons from the hole to the van.",
   action="f254-300 the camera flies back from the station and settles on the wide; f300-415 slow push; f368 title 12/2025 ('tháng mười hai' f372); the Christmas bulbs twinkle (each bulb 30 f on, 4 f dim); A walks hole -> van with a carton f300-340, B f350-390.",
   acting="none.",
-  cams=[kf(254, [[U["sign"][0] - 3.5, U["sign"][1] + 0.4, 0.06], [U["sign"][0] + 3.5, U["sign"][1] - 0.4, 0.06], [VY[0], 2.3, VY[1]], [VY[0], 0.02, VY[1] + 2.6], [U["town_sign"][0], 2.4, U["town_sign"][1]], [U["town_sign"][0], 0.02, U["town_sign"][1]], [2.5, 0.02, 0.0]], az=-14, el=-7, fov=50, d_max=70.0, glide=44, push=0.0001, why="the wide: town sign, unit, yard, van")],
+  cams=[kf(254, [[U["sign"][0] - 3.5, U["sign"][1] + 0.4, 0.06], [U["sign"][0] + 3.5, U["sign"][1] - 0.4, 0.06], [VY[0], 2.3, VY[1]], [VY[0], 0.02, VY[1] + 2.6], [U["town_sign"][0], 2.4, U["town_sign"][1]], [U["town_sign"][0], 0.02, U["town_sign"][1]], [2.5, 0.02, 0.0]], az=-12, el=-7, fov=56, d_max=70.0, glide=44, push=0.0001, why="the wide: town sign, unit, yard, van")],
   kicks=[],
   marks=[{"who": "A", "at": U["A_load"], "view": "side walking", "pose": "hole -> van with a carton f300-340", "expr": "neutral"}],
   subjects=[{"n": "sign", "p": U["sign"], "f": [300, 414]}, {"n": "van", "p": [VY[0], 1.2, VY[1]], "f": [300, 414]}, {"n": "town sign", "p": [U["town_sign"][0], 1.6, U["town_sign"][1]], "f": [300, 414]}],
@@ -245,7 +244,7 @@ scene(id="S04", f=[254, 415], set="unit", light="night",
   after="Unchanged.")
 
 LAY = VAN["layby"]
-CAB = van_world(LAY, 1.25, 1.55, -0.05); CABLOOK = van_world(LAY, 8.0, 0.62, 0.2)
+CAB = van_world(LAY, 1.05, 1.55, -0.05); CABLOOK = van_world(LAY, 8.0, 0.62, 0.2)
 scene(id="S05", f=[415, 548], set="unit", light="day",
   vo="Theo cảnh sát, cả nhóm đã nhắm vào nơi này suốt nhiều ngày.",
   gloss="According to police, the group had been targeting the place for days.",
@@ -258,7 +257,7 @@ scene(id="S05", f=[415, 548], set="unit", light="day",
   cams=[k(415, CAB, CABLOOK, 50, push=0.0002, why="through the windscreen: the shop across the road, the calendar on the dash")],
   kicks=[],
   marks=[],
-  subjects=[{"n": "shop door", "p": [2.5, 1.2, 0.0], "f": [415, 547]}, {"n": "calendar", "p": van_world(LAY, 2.05, 1.27, 0.06), "f": [415, 547]}],
+  subjects=[{"n": "shop door", "p": [2.5, 1.2, 0.0], "f": [415, 547]}, {"n": "calendar", "p": van_world(LAY, 2.12, 1.25, 0.06), "f": [415, 547]}],
   physics="calendar pages: light, a curl and flutter (scripted sine fall).", light_mood="bright winter day, blue sky with clouds.", sound="a ticking clock under it; a paper tear on each page f455, f490, f522.",
   after="The calendar reads 26 DEC.")
 
@@ -290,7 +289,7 @@ scene(id="S07", hero=True, f=[671, 827], set="unit", light="night",
   acting="A: busy, never looks up.",
   cams=[k(671, [9.6, 1.6, -6.4], [BELL[0], BELL[1], BELL[2]], 40, glide=20, push=0.0008, why="the small bell"),
         k(700, [10.3, 2.4, -6.8], [CCTV[0], CCTV[1], CCTV[2]], 36, glide=36, push=0.0012, why="up the post to the camera: it is the big one"),
-        kf(782, body(U["A_load"]) + VANP + [[CCTV[0], CCTV[1] + 0.35, CCTV[2]]], az=150, el=-6, fov=50, glide=36, push=0.0006, why="the camera watching the van being loaded")],
+        kf(782, body(U["A_load"]) + VANP + [[CCTV[0], CCTV[1] + 0.35, CCTV[2]], HOLE], az=8, el=-8, fov=50, glide=36, push=0.0006, why="the camera watching the van being loaded")],
   kicks=[[754, 0.5]],
   marks=[{"who": "A", "at": U["A_load"], "view": "side walking", "pose": "hole -> van door with a carton, and back", "expr": "neutral"}],
   subjects=[{"n": "bell", "p": BELL, "f": [671, 700]}, {"n": "cctv", "p": CCTV, "f": [730, 780]}, {"n": "A head", "p": HEAD(U["A_load"]), "f": [815, 826]}, {"n": "van", "p": [VY[0], 1.2, VY[1]], "f": [815, 826]}],
@@ -302,7 +301,7 @@ def follow(f, back=10.0, side=4.0, hgt=4.2, ahead=7.0, fov=46, glide=22):
     pos = [x - dx * back - dz * side, hgt, z - dz * back + dx * side]
     look = [x + dx * ahead, 1.4, z + dz * ahead]
     return k(f, pos, look, fov, glide=glide, push=0.0, why="follow the van west")
-PLATE = van_world(VY, -2.63, 0.56, 0.0)
+PLATE = van_world(VY, -2.69, 0.56, 0.0)
 scene(id="S08", hero=True, f=[827, 994], set="unit", light="night",
   vo="Chiếc xe tải chở hộp thẻ mang biển số nhái, chạy về phía nam Yorkshire rồi vòng sang Manchester.",
   gloss="The van carrying the boxes wore cloned plates and headed south toward Yorkshire, then swung over to Manchester.",
@@ -313,7 +312,7 @@ scene(id="S08", hero=True, f=[827, 994], set="unit", light="night",
   action="f827-860 glide down to the back of the van; f860-890 insert on the plate ('biển số nhái' f872-890): the tape corner flutters; f885 the van pulls forward out of the yard, turns west onto the road (f897-915) and runs at 30 m/s; f915-994 the camera follows behind and above; each road camera's REC lamp lights as the van passes it; the gantries: SOUTH YORKSHIRE overhead at f936 ('nam Yorkshire'), MANCHESTER at f976.",
   acting="none.",
   cams=[k(827, [PLATE[0], 0.8, PLATE[2] - 1.45], PLATE, 32, glide=30, push=0.0010, why="the taped plate")] +
-       [follow(f) for f in range(890, 994, 8)],
+       [follow(f) for f in range(906, 994, 8)],
   kicks=[[872, 0.3]],
   marks=[],
   subjects=[{"n": "plate", "p": PLATE, "f": [862, 884]}],
@@ -373,8 +372,8 @@ scene(id="S11", hero=True, f=[1322, 1553], set="yard", light="golden",
   blocking="C1 and C2 carry cartons van -> container (C1 at C1, C2 at C2, front view); cop1 and cop2 get out of the car (f1365) and walk to their marks (f1370-1430).",
   action="f1322-1337 the men carry cartons; f1337 ('chặn') the police car swings in from the right and stops across the gate (f1337-1352), the light bar flashes blue; f1365 the doors open, the officers walk in; f1438 ('bắt') both men freeze (shock); f1440 C2's carton drops from his chest, lands at f1452, bounces twice and settles on its side by f1470 (closed); f1500 glide into the van's open back: the sledgehammer on the floor ('búa tạ' f1510).",
   acting="C1, C2: busy -> shock. Officers: firm.",
-  cams=[kf(1322, body(C1) + body(C2) + YVANP + [[Y_["car_stop"][0] - 2.3, 1.6, Y_["car_stop"][1]], [Y_["car_stop"][0] + 2.3, 1.6, Y_["car_stop"][1]]], az=150, el=-8, fov=50, push=0.0005, why="the yard: van, container, the men, the gate behind"),
-        kf(1420, body(C1) + body(C2) + body(Y_["cop1"]) + body(Y_["cop2"]), az=165, el=-6, fov=46, glide=24, push=0.001, why="the arrest"),
+  cams=[kf(1322, body(C1) + body(C2) + YVANP + [[Y_["car_stop"][0] - 2.3, 1.6, Y_["car_stop"][1]], [Y_["car_stop"][0] + 2.3, 1.6, Y_["car_stop"][1]]], az=80, el=-8, fov=50, push=0.0005, why="the yard: van, container, the men, the gate behind"),
+        kf(1420, body(C1) + body(C2) + body(Y_["cop1"]) + body(Y_["cop2"]), az=75, el=-6, fov=46, glide=24, push=0.001, why="the arrest"),
         k(1498, [YV[0] + 0.05, 1.3, 0.25], HAM, 34, glide=16, push=0.0008, why="the sledgehammer in the van")],
   kicks=[[1352, 0.5], [1438, 0.6], [1452, 0.4]],
   marks=[{"who": "C1", "at": C1, "view": "front", "pose": "carton at the chest", "expr": "neutral -> shock"}, {"who": "C2", "at": C2, "view": "front", "pose": "carton at the chest; drops it f1440", "expr": "neutral -> shock"},
@@ -394,7 +393,7 @@ scene(id="S12", f=[1553, 1706], set="yard", light="golden",
   blocking="Detective at det, front view; cop1 behind at the car.",
   action="f1553-1600 glide out of the van to the detective and the stack; f1588 ('chỉ trong vài giờ') she taps her watch; f1650 she nods at the stack ('lấy lại'); the sun climbs 2 deg over the scene.",
   acting="Detective: brisk, satisfied.",
-  cams=[kf(1553, body(DET) + [[STK[0] - 0.7, 1.55, STK[1]], [STK[0] + 0.7, 0.02, STK[1]]], az=200, el=-6, fov=44, glide=34, push=0.0007, why="the detective and the recovered stack")],
+  cams=[kf(1553, body(DET) + [[STK[0] - 0.7, 1.55, STK[1]], [STK[0] + 0.7, 0.02, STK[1]]], az=-20, el=-6, fov=44, glide=34, push=0.0007, why="the detective and the recovered stack")],
   kicks=[],
   marks=[{"who": "det", "at": DET, "view": "front", "pose": "taps her watch f1588; nods at the stack f1650", "expr": "stern -> smile"}],
   subjects=[{"n": "det head", "p": HEAD(DET), "f": [1590, 1705]}, {"n": "stack", "p": [STK[0], 0.8, STK[1]], "f": [1590, 1705]}],
@@ -465,7 +464,7 @@ scene(id="S16", f=[2143, 2225], set="court", light="day",
   blocking="Nobody.",
   action="f2143-2170 glide to the board; slow push; stillness.",
   acting="none.",
-  cams=[k(2143, [BRD[0] + 0.15, BRD[1] - 0.05, 1.35], BRD, 36, glide=26, push=0.0008, why="the board: allegations only")],
+  cams=[k(2143, [BRD[0] + 0.15, BRD[1] - 0.05, 2.1], BRD, 36, glide=26, push=0.0008, why="the board: allegations only")],
   kicks=[],
   marks=[],
   subjects=[{"n": "board", "p": BRD, "f": [2175, 2224]}],

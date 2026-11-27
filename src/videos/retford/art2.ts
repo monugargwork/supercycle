@@ -282,3 +282,191 @@ export const spoonTray = (p: Pen, W: number, H: number, n: number) => {
     g.beginPath(); g.roundRect(x - W * 0.01, H * 0.36, W * 0.02, H * 0.46, W * 0.01); g.fill(); g.stroke();
   }
 };
+
+// ================= the Retford reel's drawings =================
+const U2 = (s: number) => { let x = s; return () => { x = (x * 16807) % 2147483647; return x / 2147483647; }; };
+/** red brick, cream mortar, 1 texture = W x H px; pale = the new bricks of the repair */
+export const bricks = (p: Pen, W: number, H: number, pale = false, rows = 12) => {
+  const g = p.g, r = U2(pale ? 7 : 3), rh = H / rows, bw = rh * 2.3;
+  g.fillStyle = pale ? "#f3e6cf" : "#efe0c4"; g.fillRect(0, 0, W, H);
+  for (let j = 0; j < rows; j++) for (let i = -1; i * bw < W + bw; i++) {
+    const x = i * bw + (j % 2) * bw * 0.5, v = r();
+    g.fillStyle = pale ? `hsl(${18 + v * 8}, ${48 + v * 10}%, ${62 + v * 6}%)` : `hsl(${8 + v * 8}, ${52 + v * 12}%, ${40 + v * 8}%)`;
+    g.fillRect(x + rh * 0.08, j * rh + rh * 0.08, bw - rh * 0.16, rh * 0.84);
+  }
+};
+/** the plug's outer face: brick inside a circle, a ring of n drilled holes (dark dots), the first `done` of them drilled */
+export const plugFace = (p: Pen, S: number, n: number, done: number) => {
+  const g = p.g; g.save(); g.beginPath(); g.arc(S / 2, S / 2, S / 2, 0, 7); g.clip(); bricks(p, S, S, false, 9); g.restore();
+  for (let i = 0; i < n; i++) {
+    const a = (i / n) * Math.PI * 2 - Math.PI / 2, x = S / 2 + Math.cos(a) * S * 0.46, y = S / 2 + Math.sin(a) * S * 0.46;
+    g.fillStyle = i < done ? "#1a1410" : "rgba(0,0,0,0)"; g.beginPath(); g.arc(x, y, S * 0.028, 0, 7); g.fill();
+    if (i < done) { g.strokeStyle = "rgba(240,220,190,0.8)"; g.lineWidth = S * 0.008; g.stroke(); }
+  }
+};
+/** a wall panel of brick with a round hole (transparent) of radius rr (px) at its centre */
+export const holedBricks = (p: Pen, S: number, rr: number) => {
+  bricks(p, S, S, false, 10); const g = p.g; g.globalCompositeOperation = "destination-out"; g.beginPath(); g.arc(S / 2, S / 2, rr, 0, 7); g.fill(); g.globalCompositeOperation = "source-over";
+  g.strokeStyle = "#5a3a26"; g.lineWidth = S * 0.02; g.beginPath(); g.arc(S / 2, S / 2, rr + S * 0.008, 0, 7); g.stroke();
+};
+/** the repaired wall: old brick with a ring of paler new bricks where the hole was */
+export const patchedBricks = (p: Pen, S: number, rr: number) => {
+  bricks(p, S, S, false, 10); const g = p.g; g.save(); g.beginPath(); g.arc(S / 2, S / 2, rr * 1.08, 0, 7); g.clip(); bricks(p, S, S, true, 10); g.restore();
+  g.strokeStyle = "rgba(255,255,255,0.7)"; g.lineWidth = S * 0.01; g.beginPath(); g.arc(S / 2, S / 2, rr * 1.08, 0, 7); g.stroke();
+};
+/** a carton face: kraft card, tape, stencil TRADING CARDS / FRAGILE */
+export const carton = (p: Pen, W: number, H: number, top = false) => {
+  const g = p.g; g.fillStyle = "#c99a62"; g.fillRect(0, 0, W, H);
+  g.fillStyle = "rgba(90,60,30,0.15)"; for (let i = 0; i < 6; i++) g.fillRect(0, (i * H) / 6, W, 2);
+  if (top) { g.fillStyle = "#e9d7a8"; g.fillRect(W * 0.42, 0, W * 0.16, H); return; }
+  lt(g, "TRADING CARDS", W / 2, H * 0.36, H * 0.17, "#3a2a1a", 900, "center", W * 0.9);
+  lt(g, "FRAGILE", W / 2, H * 0.66, H * 0.15, "#c0323c", 900, "center", W * 0.7);
+  g.strokeStyle = "#c0323c"; g.lineWidth = 4; g.strokeRect(W * 0.26, H * 0.55, W * 0.48, H * 0.22);
+  g.strokeStyle = "rgba(60,40,20,0.6)"; g.lineWidth = 3; g.strokeRect(2, 2, W - 4, H - 4);
+};
+export const unitSign = (p: Pen, W: number, H: number) => {
+  const g = p.g; g.fillStyle = "#1f6fbf"; g.fillRect(0, 0, W, H); g.fillStyle = "#f2c23a"; g.fillRect(0, H * 0.84, W, H * 0.16);
+  lt(g, "TRADING CARDS", W * 0.5, H * 0.44, H * 0.5, "#ffffff", 900, "center", W * 0.86);
+  lt(g, "BUY · SELL · COLLECT", W * 0.5, H * 0.92, H * 0.11, "#1f3a6a", 800, "center");
+};
+export const alarmBox = (p: Pen, W: number, H: number) => {
+  const g = p.g; rrect(g, 4, 4, W - 8, H - 8, 18, "#d8322f", "#8a1a1a", 6);
+  lt(g, "ALARM", W / 2, H * 0.82, H * 0.12, "#ffffff", 900, "center");
+  g.fillStyle = "rgba(255,255,255,0.25)"; g.fillRect(W * 0.12, H * 0.1, W * 0.12, H * 0.6);
+};
+export const townSign = (p: Pen, W: number, H: number) => {
+  const g = p.g; rrect(g, 6, 6, W - 12, H - 12, 22, "#ffffff", "#1a1a1a", 10);
+  lt(g, "RETFORD", W / 2, H * 0.46, H * 0.36, "#1a1a1a", 800, "center", W * 0.86);
+  lt(g, "Please drive carefully", W / 2, H * 0.78, H * 0.11, "#1a1a1a", 600, "center");
+};
+/** a blue motorway / A-road gantry sign: place name, road number, an arrow */
+export const gantrySign = (p: Pen, W: number, H: number, name: string, road: string) => {
+  const g = p.g; rrect(g, 4, 4, W - 8, H - 8, 16, "#1f5fbf", "#ffffff", 8);
+  lt(g, name, W * 0.08, H * 0.4, H * 0.24, "#ffffff", 800, "left", W * 0.7);
+  rrect(g, W * 0.08, H * 0.6, W * 0.22, H * 0.26, 8, "#d8322f"); lt(g, road, W * 0.19, H * 0.73, H * 0.16, "#ffffff", 900, "center");
+  g.strokeStyle = "#ffffff"; g.lineWidth = H * 0.06; g.lineCap = "round";
+  g.beginPath(); g.moveTo(W * 0.86, H * 0.85); g.lineTo(W * 0.86, H * 0.3); g.moveTo(W * 0.79, H * 0.42); g.lineTo(W * 0.86, H * 0.3); g.lineTo(W * 0.93, H * 0.42); g.stroke();
+};
+export const policeSign = (p: Pen, W: number, H: number) => {
+  const g = p.g; rrect(g, 4, 4, W - 8, H - 8, 12, "#1f4fa8", "#ffffff", 6); lt(g, "POLICE", W / 2, H / 2 + 2, H * 0.55, "#ffffff", 900, "center", W * 0.86);
+};
+/** UK rear number plate (yellow); paper = a printed sheet taped over it, its top-right corner lifting to show the real one */
+export const plate = (p: Pen, W: number, H: number, txt: string, under: string, lift: number) => {
+  const g = p.g; rrect(g, 2, 2, W - 4, H - 4, 10, "#f6d23a", "#1a1a1a", 4); lt(g, under, W / 2, H / 2 + 3, H * 0.62, "#1a1a1a", 900, "center", W * 0.9);
+  g.save(); g.beginPath(); g.moveTo(10, 10); g.lineTo(W - 10 - lift * W * 0.18, 10); g.lineTo(W - 10, 10 + lift * H * 0.5); g.lineTo(W - 10, H - 10); g.lineTo(10, H - 10); g.closePath(); g.clip();
+  g.fillStyle = "#fbe56a"; g.fillRect(8, 8, W - 16, H - 16); lt(g, txt, W / 2, H / 2 + 3, H * 0.6, "#2a2a2a", 800, "center", W * 0.86); g.restore();
+  g.fillStyle = "rgba(240,240,230,0.85)"; for (const [x, y] of [[14, 14], [W - 40, H - 30], [14, H - 30]]) g.fillRect(x, y, 26, 16);
+  if (lift > 0) { g.fillStyle = "#e9e0b8"; g.beginPath(); g.moveTo(W - 10 - lift * W * 0.18, 10); g.lineTo(W - 10, 10 + lift * H * 0.5); g.lineTo(W - 10 - lift * W * 0.12, 10 + lift * H * 0.42); g.closePath(); g.fill(); }
+};
+/** a tear-off desk calendar page */
+export const deskCal = (p: Pen, W: number, H: number, day: number) => {
+  const g = p.g; rrect(g, 3, 3, W - 6, H - 6, 10, "#ffffff", "#8a8070", 3); g.fillStyle = "#d8322f"; g.fillRect(3, 3, W - 6, H * 0.26);
+  lt(g, "DEC", W / 2, H * 0.16, H * 0.15, "#ffffff", 900, "center"); lt(g, String(day), W / 2, H * 0.62, H * 0.46, "#1d1b22", 900, "center");
+};
+/** the notebook: cover (red, a white name label), a page (lines, the name at the top in the kid's wobbly hand) */
+export const nbCover = (p: Pen, W: number, H: number) => {
+  const g = p.g; rrect(g, 2, 2, W - 4, H - 4, 10, "#d8322f", "#8a1a1a", 5); g.fillStyle = "#a8222a"; g.fillRect(2, 2, W * 0.08, H - 4);
+  lt(g, "SCHOOL BOOK", W * 0.56, H * 0.14, H * 0.05, "#fbf3dc", 900, "center");
+  for (let i = 0; i < 5; i++) { g.fillStyle = "rgba(255,240,200,0.5)"; g.beginPath(); g.arc(W * (0.3 + i * 0.12), H * 0.85, W * 0.03, 0, 7); g.fill(); }
+};
+export const nbLabel = (p: Pen, W: number, H: number, name: string) => {
+  const g = p.g; rrect(g, 3, 3, W - 6, H - 6, 12, "#ffffff", "#2f5fb4", 5); g.strokeStyle = "#9fc4ec"; g.lineWidth = 2;
+  g.beginPath(); g.moveTo(W * 0.08, H * 0.78); g.lineTo(W * 0.92, H * 0.78); g.stroke();
+  wobble(g, name, W / 2, H * 0.52, H * 0.5, "#1f3a8a");
+};
+const wobble = (g: CanvasRenderingContext2D, s: string, cx: number, cy: number, px: number, col: string) => {
+  font(g, 700, px, '"Comic Sans MS", "Chalkboard SE", "Marker Felt", sans-serif'); g.fillStyle = col; g.textBaseline = "middle";
+  const w = g.measureText(s).width; let x = cx - w / 2;
+  for (let i = 0; i < s.length; i++) { const c = s[i], cw = g.measureText(c).width; g.save(); g.translate(x + cw / 2, cy + Math.sin(i * 2.1) * px * 0.06); g.rotate(Math.sin(i * 1.7) * 0.12); g.textAlign = "center"; g.fillText(c, 0, 0); g.restore(); x += cw; }
+};
+export const nbPage = (p: Pen, W: number, H: number, name: string, seed = 1) => {
+  const g = p.g, r = U2(seed + 4); g.fillStyle = "#fffdf4"; g.fillRect(0, 0, W, H);
+  g.strokeStyle = "#9fc4ec"; g.lineWidth = 2; for (let y = H * 0.18; y < H; y += H * 0.065) { g.beginPath(); g.moveTo(0, y); g.lineTo(W, y); g.stroke(); }
+  g.strokeStyle = "#f29a9a"; g.beginPath(); g.moveTo(W * 0.12, 0); g.lineTo(W * 0.12, H); g.stroke();
+  wobble(g, name, W * 0.5, H * 0.08, H * 0.075, "#1f3a8a");
+  g.strokeStyle = "#3a4a8a"; g.lineWidth = 2.5;
+  for (let y = H * 0.18 + H * 0.065, n = 0; y < H * 0.95; y += H * 0.065, n++) { if (n % 4 === 3) continue; let x = W * 0.16; g.beginPath(); g.moveTo(x, y - 6);
+    while (x < W * (0.7 + r() * 0.22)) { x += 8 + r() * 10; g.lineTo(x, y - 6 - r() * 10); } g.stroke(); }
+  g.strokeStyle = "#f2c23a"; g.lineWidth = 4; g.beginPath(); for (let i = 0; i < 11; i++) { const a = (i / 10) * Math.PI * 2, rr2 = i % 2 ? W * 0.04 : W * 0.09; g.lineTo(W * 0.78 + Math.cos(a) * rr2, H * 0.84 + Math.sin(a) * rr2); } g.stroke();
+};
+/** a small drawing of the van seen on a road camera: white box, orange ladder, the dent */
+const vanIcon = (g: CanvasRenderingContext2D, x: number, y: number, s: number) => {
+  rrect(g, x - s, y - s * 0.55, s * 2, s * 0.9, s * 0.12, "#f4f2ee", "#2a2c33", s * 0.05);
+  g.fillStyle = "#8fd0f2"; g.fillRect(x + s * 0.55, y - s * 0.45, s * 0.35, s * 0.3);
+  g.fillStyle = "#f2902f"; g.fillRect(x - s * 0.9, y - s * 0.68, s * 1.4, s * 0.08); for (let i = 0; i < 5; i++) g.fillRect(x - s * 0.85 + i * s * 0.32, y - s * 0.74, s * 0.05, s * 0.2);
+  g.strokeStyle = "#8a8f9a"; g.lineWidth = s * 0.05; g.beginPath(); g.arc(x - s * 0.2, y - s * 0.05, s * 0.16, 0.3, 2.6); g.stroke();
+  g.fillStyle = "#2a2c33"; for (const dx of [-0.6, 0.6]) { g.beginPath(); g.arc(x + dx * s, y + s * 0.36, s * 0.2, 0, 7); g.fill(); }
+};
+/** a road-camera monitor: dusk road, the van, CAM number, REC */
+export const roadMon = (p: Pen, W: number, H: number, n: number, on: boolean, rec: boolean) => {
+  const g = p.g; g.fillStyle = "#1a2030"; g.fillRect(0, 0, W, H); if (!on) { lt(g, "NO SIGNAL", W / 2, H / 2, H * 0.1, "#4f78c8", 800, "center"); return; }
+  camView(g, 0, 0, W, H, `CAM ${String(n).padStart(2, "0")}`, rec, () => {
+    const gr = g.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, "#2f4f9a"); gr.addColorStop(0.45, "#5a7ac8"); gr.addColorStop(0.46, "#4a4a5a"); gr.addColorStop(1, "#6a6a78");
+    g.fillStyle = gr; g.fillRect(0, 0, W, H); g.fillStyle = "#f2c84a"; for (let i = 0; i < 6; i++) g.fillRect(W * (0.05 + i * 0.18), H * (0.7 + (n % 2) * 0.04), W * 0.08, H * 0.02);
+    for (let i = 0; i < 4; i++) { g.fillStyle = "#ffd98a"; g.beginPath(); g.arc(W * (0.1 + i * 0.27), H * 0.3, H * 0.025, 0, 7); g.fill(); }
+    vanIcon(g, W * (0.3 + (n * 0.13) % 0.4), H * 0.62, H * 0.18);
+  });
+};
+/** the control-room map screen: northern England, three towns, the route drawn up to k (0..1), camera dots lit as it passes */
+export const routeMap = (p: Pen, W: number, H: number, route: number[][], towns: (string | number)[][], k: number) => {
+  const g = p.g; g.fillStyle = "#bfe6f8"; g.fillRect(0, 0, W, H);
+  g.fillStyle = "#8fd07a"; g.beginPath(); g.moveTo(W * 0.04, H * 0.1); g.bezierCurveTo(W * 0.4, H * 0.02, W * 0.7, H * 0.06, W * 0.97, H * 0.12);
+  g.lineTo(W * 0.98, H * 0.95); g.bezierCurveTo(W * 0.6, H * 0.98, W * 0.3, H * 0.94, W * 0.02, H * 0.9); g.closePath(); g.fill();
+  g.fillStyle = "#b8e2a0"; for (const [x, y, r] of [[0.3, 0.3, 0.12], [0.62, 0.42, 0.1], [0.8, 0.7, 0.14], [0.2, 0.7, 0.1]]) { g.beginPath(); g.ellipse(W * x, H * y, W * r, H * r, 0, 0, 7); g.fill(); }
+  g.strokeStyle = "#4f78c8"; g.lineWidth = H * 0.014; for (const pts of [[[0.06, 0.3], [0.5, 0.38], [0.96, 0.3]], [[0.5, 0.06], [0.55, 0.5], [0.6, 0.96]], [[0.1, 0.8], [0.45, 0.62], [0.9, 0.82]]]) { g.beginPath(); pts.forEach(([x, y], i) => i ? g.lineTo(W * x, H * y) : g.moveTo(W * x, H * y)); g.stroke(); }
+  const P2 = route.map(([x, y]) => [x * W, y * H]); const seg = P2.slice(1).map((q, i) => Math.hypot(q[0] - P2[i][0], q[1] - P2[i][1])), T = seg.reduce((a, b) => a + b, 0);
+  let left = k * T; g.strokeStyle = "#d8322f"; g.lineWidth = H * 0.026; g.lineCap = "round"; g.beginPath(); g.moveTo(P2[0][0], P2[0][1]);
+  let tip = P2[0];
+  for (let i = 0; i < seg.length && left > 0; i++) { const u = Math.min(1, left / seg[i]); tip = [P2[i][0] + (P2[i + 1][0] - P2[i][0]) * u, P2[i][1] + (P2[i + 1][1] - P2[i][1]) * u]; g.lineTo(tip[0], tip[1]); left -= seg[i]; }
+  g.stroke();
+  P2.forEach((q, i) => { const lit = k * T >= seg.slice(0, i).reduce((a, b) => a + b, 0) - 1; g.fillStyle = lit ? "#ff3a2f" : "#ffffff"; g.strokeStyle = "#1a1a1a"; g.lineWidth = 3; g.beginPath(); g.arc(q[0], q[1], H * 0.022, 0, 7); g.fill(); g.stroke(); });
+  if (k > 0) { g.fillStyle = "#ffffff"; g.beginPath(); g.arc(tip[0], tip[1], H * 0.03, 0, 7); g.fill(); vanIcon(g, tip[0], tip[1] - H * 0.08, H * 0.05); }
+  for (const [nm, x, y] of towns) { const tx = (x as number) * W, ty = (y as number) * H; rrect(g, tx - W * 0.11, ty + H * 0.04, W * 0.22, H * 0.08, 8, "#ffffff", "#1a1a1a", 3); lt(g, nm as string, tx, ty + H * 0.08, H * 0.045, "#1a1a1a", 900, "center", W * 0.2); }
+  lt(g, "LIVE ROUTE  ·  ANPR", W * 0.03, H * 0.05, H * 0.045, "#1a3a6a", 900);
+};
+export const courtLetters = (p: Pen, W: number, H: number) => { rrect(p.g, 4, 4, W - 8, H - 8, 10, "#f2e6cc", "#8a5230", 6); lt(p.g, "MANSFIELD MAGISTRATES' COURT", W / 2, H / 2 + 2, H * 0.56, "#2f3a6a", 800, "center", W * 0.94); };
+export const noticeSheet = (p: Pen, W: number, H: number) => {
+  const g = p.g; g.fillStyle = "#2f5fb4"; g.fillRect(0, 0, W, H); rrect(g, W * 0.08, H * 0.1, W * 0.84, H * 0.82, 6, "#ffffff", "#b8b0a0", 3);
+  lt(g, "COURT NOTICE", W / 2, H * 0.2, H * 0.07, "#1d1b22", 900, "center");
+  g.fillStyle = "#c0bcb2"; for (let i = 0; i < 3; i++) g.fillRect(W * 0.16, H * (0.3 + i * 0.05), W * (0.68 - i * 0.12), H * 0.02);
+  lt(g, "PLEA HEARING", W / 2, H * 0.52, H * 0.1, "#d8322f", 900, "center", W * 0.78);
+  lt(g, "NOTTINGHAM CROWN COURT", W / 2, H * 0.66, H * 0.062, "#1d1b22", 800, "center", W * 0.8);
+  lt(g, "15 DEC", W / 2, H * 0.8, H * 0.09, "#1d1b22", 900, "center");
+};
+export const fingerArm = (p: Pen, W: number, H: number, txt: string, right: boolean) => {
+  const g = p.g; g.fillStyle = "#ffffff"; g.strokeStyle = "#1a1a1a"; g.lineWidth = 6; g.beginPath();
+  if (right) { g.moveTo(6, 6); g.lineTo(W - H * 0.45, 6); g.lineTo(W - 6, H / 2); g.lineTo(W - H * 0.45, H - 6); g.lineTo(6, H - 6); }
+  else { g.moveTo(W - 6, 6); g.lineTo(H * 0.45, 6); g.lineTo(6, H / 2); g.lineTo(H * 0.45, H - 6); g.lineTo(W - 6, H - 6); }
+  g.closePath(); g.fill(); g.stroke(); lt(g, txt, W / 2 + (right ? -H * 0.15 : H * 0.15), H / 2 + 2, H * 0.48, "#1a1a1a", 800, "center", W * 0.8);
+};
+/** the courtroom TV: a video link in three tiles; two men in prison grey against cell walls with a barred window, one at home */
+export const videoLink = (p: Pen, W: number, H: number, a: Outfit, b: Outfit, c: Outfit) => {
+  const g = p.g; g.fillStyle = "#1a2030"; g.fillRect(0, 0, W, H);
+  const tile = (x: number, w: number, o: Outfit, prison: boolean, label: string) => {
+    g.save(); g.beginPath(); g.rect(x + 6, 6, w - 12, H - 12); g.clip();
+    g.fillStyle = prison ? "#d9d2c0" : "#f2d9a8"; g.fillRect(x, 0, w, H);
+    if (prison) { g.fillStyle = "#8fd0f2"; g.fillRect(x + w * 0.62, H * 0.12, w * 0.26, H * 0.3); g.fillStyle = "#4a4a58"; for (let i = 0; i < 4; i++) g.fillRect(x + w * (0.64 + i * 0.065), H * 0.12, w * 0.02, H * 0.3); }
+    else { for (let r = 0; r < 3; r++) for (let i = 0; i < 6; i++) { g.fillStyle = ["#d8322f", "#2f5fb4", "#f2c23a", "#2f9a55"][(i + r) % 4]; g.fillRect(x + w * (0.08 + i * 0.14), H * (0.1 + r * 0.16), w * 0.1, H * 0.13); } }
+    figure(g, o, x + w / 2, H * 1.55, H * 1.55); lt(g, label, x + w * 0.06, H * 0.92, H * 0.06, "#ffffff", 800); g.restore();
+  };
+  const w = W / 3; tile(0, w, a, true, "HMP LINK 1"); tile(w, w, b, true, "HMP LINK 2"); tile(2 * w, w, c, false, "REMOTE 3");
+};
+export const policeCheck = (p: Pen, W: number, H: number) => {
+  const g = p.g, s = H / 2; g.fillStyle = "#f4f2ee"; g.fillRect(0, 0, W, H);
+  for (let i = 0; i * s < W; i++) for (let j = 0; j < 2; j++) { g.fillStyle = (i + j) % 2 ? "#2f5fb4" : "#f2d23a"; g.fillRect(i * s, j * s, s, s); }
+};
+export const corrugated = (p: Pen, W: number, H: number, col: string) => {
+  const g = p.g; g.fillStyle = col; g.fillRect(0, 0, W, H);
+  for (let x = 0; x < W; x += 24) { g.fillStyle = "rgba(255,255,255,0.18)"; g.fillRect(x, 0, 8, H); g.fillStyle = "rgba(0,0,0,0.16)"; g.fillRect(x + 14, 0, 6, H); }
+  g.fillStyle = "rgba(0,0,0,0.25)"; g.fillRect(0, 0, W, 10); g.fillRect(0, H - 10, W, 10);
+};
+export const cctvSign = (p: Pen, W: number, H: number) => {
+  const g = p.g; rrect(g, 4, 4, W - 8, H - 8, 14, "#f2c23a", "#1a1a1a", 6); lt(g, "CCTV", W / 2, H * 0.36, H * 0.26, "#1a1a1a", 900, "center");
+  lt(g, "IN OPERATION 24/7", W / 2, H * 0.72, H * 0.13, "#1a1a1a", 800, "center", W * 0.86);
+};
+export const kidPoster = (p: Pen, W: number, H: number, k: number) => {
+  const g = p.g, cols = [["#4fb0e8", "#f2c23a"], ["#2f9a55", "#fbf3dc"], ["#d8322f", "#f2c23a"]][k % 3]; g.fillStyle = cols[0]; g.fillRect(0, 0, W, H);
+  g.fillStyle = cols[1]; g.beginPath(); for (let i = 0; i < 11; i++) { const a = (i / 10) * Math.PI * 2 - Math.PI / 2, r = i % 2 ? W * 0.16 : W * 0.34; g.lineTo(W / 2 + Math.cos(a) * r, H * 0.42 + Math.sin(a) * r); } g.fill();
+  lt(g, ["SPACE", "ROCKS!", "ABC"][k % 3], W / 2, H * 0.84, H * 0.1, "#ffffff", 900, "center", W * 0.9);
+};
+export const officeSign = (p: Pen, W: number, H: number, txt: string, bg = "#2f9a55") => plainSign(p, W, H, txt, bg, "#ffffff");

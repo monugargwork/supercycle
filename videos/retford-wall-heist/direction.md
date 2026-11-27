@@ -21,9 +21,9 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 
 | in | out | text |
 |---|---|---|
-| f55 | f100 | 1:00 AM |
+| f55 | f88 | 1:00 AM |
 | f112 | f140 | 26 |
-| f368 | f410 | 12/2025 |
+| f366 | f398 | 12/2025 |
 | f1708 | f1765 | 11 THANG SAU |
 
 ## Sets
@@ -31,7 +31,7 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 ### unit
 - Origin in the shared world: [0, 0, 0]. Axes: the unit's front wall is z 0 (faces +z, the estate road along x); the side wall with the hole is x 6 (faces +x, the side yard); the police station is down the road at x 55..65 across it; the road runs west (-x) under the two gantry signs.
 - Light: night; sun az/el [-40, 35]. Open camera sides: +x, +z.
-- Marks [x, z]: A_drill [6.85, -4.75]; A_load [7.2, -3.6]; B_rack [4.68, -1.7]; B_hole [5.3, -3.6]; A_freeze [7, -4.75]; B_freeze [7.5, -3.2]; officer [58.6, 15.4]; kid_walk [6.5, 3.2]; kid_door [2.5, 0.55].
+- Marks [x, z]: A_drill [6.85, -4.75]; A_load [9.4, -6.8]; B_rack [4.68, -2.6]; B_hole [5.3, -3.6]; A_freeze [7, -4.75]; B_freeze [7.5, -3.2]; officer [58.6, 15.4]; kid_walk [6.5, 3.2]; kid_door [2.5, 0.55].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
@@ -44,7 +44,7 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 | van | new: white panel van 5.2 x 2.0 x 2.3 m: orange roof ladder, a dent in the sliding side door (right side), rear doors that open, a hollow cab (dash, wheel, windscreen); a printed number plate taped over the real one at the back, one tape corner lifting (TK18 RVW over YD68 PQX) | [8.7, 1.15, -4.2] | [5.2, 2.3, 2] |
 | road | new: the estate road along x (z 4..11): asphalt, white dashes, kerbs, pavements; telephone poles at z 3.5 every 12 m carrying the alarm line east to the police station; the A-road west with two blue gantry signs (SOUTH YORKSHIRE at x -18, MANCHESTER at x -58) and five road cameras on poles; lamp posts with warm sodium light; hedges, fields, distant hills | [0, 0, 7.5] | [400, 0.1, 7] |
 | station | new: the police station across the road at x 55..65, z 13..20: red brick, a blue POLICE lamp over the door, a lit window (x 56.6..59.6) into the front office: a desk officer standing, an alarm panel whose red lamp flashes from f229 | [60, 2.3, 16.5] | [10, 4.6, 7] |
-| estate | new: neighbour units (cladding in cream, sky blue, red), a RETFORD town sign (white with black letters) by the yard entrance at x 14.6, a lay-by car park across the road (x -5..8, z 13..19) where the van waits by day, hedges and trees, a church spire far off | [0, 2, 0] | [60, 4, 40] |
+| estate | new: neighbour units (cladding in cream, sky blue, red), a RETFORD town sign (white with black letters) on the pavement in front of the unit, a lay-by car park across the road (x -5..8, z 13..19) where the van waits by day, hedges and trees, a church spire far off | [0, 2, 0] | [60, 4, 40] |
 
 ### kidroom
 - Origin in the shared world: [400, 0, 0]. Axes: the kid stands behind a tall desk facing +z (the lens); the window in the back wall.
@@ -72,7 +72,7 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 ### yard
 - Origin in the shared world: [800, 0, 0]. Axes: an open shipping container's doors face +z at z 0; the van is backed up to it; the yard gate in the fence at z 10 (x -4..4); the city behind -z.
 - Light: golden; sun az/el [-55, 14]. Open camera sides: +x, +z.
-- Marks [x, z]: C1 [-1.95, 1.4]; C2 [1.3, 1.5]; cop1 [2.4, 3]; cop2 [-2.6, 3.4]; det [4.9, 5.9]; stack [3.7, 5.2].
+- Marks [x, z]: C1 [2.7, -0.3]; C2 [1.9, 1.7]; cop1 [3.7, 3.2]; cop2 [0.95, 5]; det [4.9, 5.9]; stack [3.7, 5.2].
 
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
@@ -89,7 +89,7 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 | id | build | centre [x, y, z] | size [x, y, z] m |
 |---|---|---|---|
 | front | new: Mansfield court front x -8..8, 9 m: red brick with cream stone bands, a tall glass entrance x -1.2..1.2 with a canopy, the letters MANSFIELD MAGISTRATES' COURT, windows in rows | [0, 4.5, -0.2] | [16, 9, 0.4] |
-| board | new: a glass-fronted notice board 90 x 70 cm on the wall left of the doors: the daily list with one sheet PLEA HEARING / NOTTINGHAM CROWN COURT / 15 DEC (no names) | [-2.7, 1.5, 0.05] | [0.9, 0.7, 0.05] |
+| board | new: a glass-fronted notice board 90 x 70 cm on the wall left of the doors: the daily list with one sheet PLEA HEARING / NOTTINGHAM CROWN COURT / 15 DEC (no names) | [-3.8, 1.5, 0.05] | [0.9, 0.7, 0.05] |
 | signpost | new: a black-and-white finger post with three arms: RETFORD (pointing +x), MANSFIELD CENTRE, NOTTINGHAM | [4.3, 1.4, 6.2] | [0.1, 2.8, 0.1] |
 | plaza | new: paved plaza with two low steps at the door, planters with red flowers, autumn trees (orange and yellow), bollards, a bench nobody uses, parked cars at the kerb, houses opposite | [0, 0, 6] | [30, 0.2, 14] |
 
@@ -145,20 +145,19 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 ### S02 · 0:03.7-0:05.9 · f110-f178 · "để khuân đi hai mươi sáu hộp thẻ Pokémon"
 - Gloss: to carry off twenty-six boxes of Pokémon cards
 - Spine link: 1. Viewer must get: Inside: racks of cartons; B lifts one off and passes it out through the hole.
-- In: travel. Out: follow (the camera backs out through the hole with the carton).
+- In: travel. Out: cut.
 - Set: unit. Light: night.
 - Build: the warehouse: racks of cartons (TRADING CARDS / FRAGILE), the plug lying on the floor, ceiling lights.
 - Blocking: B at B_rack (front view) lifts a carton from the third shelf f116-128, walks to B_hole f130-146 and pushes it into the hole f146-160.
-  - B at [4.68, -1.7], front; lifts a carton f116-128; walks to B_hole f130-146; pushes it into the hole f146-160; nervous.
-- Action, against the words: f110-116 the camera passes through the hole (along z -4); f112 title 26; f116-128 B slides a carton off the rack; f130-146 B carries it to the hole; f146-160 he pushes it into the tunnel; f158-178 the camera backs out through the hole ahead of the carton.
+  - B at [4.68, -2.6], front; lifts a carton f116-128; walks to B_hole f130-146; pushes it into the hole f146-160; nervous.
+- Action, against the words: f110-116 the camera passes through the hole (along z -4); f112 title 26; f116-128 B slides a carton off the rack; f130-146 B carries it to the hole; f146-160 he pushes it into the tunnel; f160-178 the carton slides out through the tunnel.
 - Acting: B: quick, careful, eyes on the hole.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 110 | open | [5.25, 1, -4] | [3, 0.95, -3.7] | 46 | 0 | 0 | through the hole |
-| 122 | glide 18 f | [5.62, 1.25, -4.05] | [4.75, 0.95, -1.75] | 60 | 0.06 | 0 | turn to B and the racks of cartons |
-| 158 | glide 18 f | [7.4, 1.05, -4] | [5.2, 1, -4] | 44 | 0 | 0 | back out through the hole with the carton |
+| 124 | glide 20 f | [4.95, 1.6, -0.35] | [5, 1, -3.3] | 56 | 0.06 | 0 | inside: B, the racks of cartons, the hole |
 
 - Kicks (7 f): none.
 - Physics & FX: the carton: kinematic in his hands.
@@ -169,7 +168,7 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 ### S03 · 0:05.9-0:08.5 · f178-f254 · "và chuông báo động réo thẳng về đồn cảnh sát"
 - Gloss: and the alarm bell rang straight through to the police station
 - Spine link: 1. Viewer must get: The bell rattles; its line runs pole to pole to the police station, where a red lamp flashes and the officer turns.
-- In: follow. Out: travel (the camera flies back along the road to the wide of the estate).
+- In: cut. Out: travel (the camera flies back along the road to the wide of the estate).
 - Set: unit. Light: night.
 - Build: the bell box and its cable, the telephone poles and the line, the police station and its lit window.
 - Blocking: Officer at the officer mark inside the station, front view; turns his eyes to the panel at f236.
@@ -198,14 +197,14 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 - Set: unit. Light: night.
 - Build: the estate wide: the RETFORD town sign, the unit's sign and window, Christmas bulbs and the wreath, the side yard with the van and the lamp post with the camera.
 - Blocking: A and B small in the side yard, carrying cartons from the hole to the van.
-  - A at [7.2, -3.6], side walking; hole -> van with a carton f300-340; neutral.
+  - A at [9.4, -6.8], side walking; hole -> van with a carton f300-340; neutral.
 - Action, against the words: f254-300 the camera flies back from the station and settles on the wide; f300-415 slow push; f368 title 12/2025 ('tháng mười hai' f372); the Christmas bulbs twinkle (each bulb 30 f on, 4 f dim); A walks hole -> van with a carton f300-340, B f350-390.
 - Acting: none.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 254 | open | [-5.442, 6.142, 45.046] | [5.837, 0.417, -0.191] | 50 | 0.01 | 0 | the wide: town sign, unit, yard, van |
+| 254 | open | [-2.986, 4.289, 28.833] | [3.213, 0.628, -0.334] | 56 | 0.01 | 0 | the wide: town sign, unit, yard, van |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -226,7 +225,7 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 415 | open | [1.15, 1.55, 15.15] | [1.4, 0.62, 8.4] | 50 | 0.02 | 0 | through the windscreen: the shop across the road, the calendar on the dash |
+| 415 | open | [1.15, 1.55, 15.35] | [1.4, 0.62, 8.4] | 50 | 0.02 | 0 | through the windscreen: the shop across the road, the calendar on the dash |
 
 - Kicks (7 f): none.
 - Physics & FX: calendar pages: light, a curl and flutter (scripted sine fall).
@@ -264,7 +263,7 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 - Set: unit. Light: night.
 - Build: the lamp post with the CCTV camera (REC lamp, swivel head), the van in the yard with its side door open.
 - Blocking: A at A_load carries a carton from the hole to the van's side door and back (side view walking), f700-760 and f770-820.
-  - A at [7.2, -3.6], side walking; hole -> van door with a carton, and back; neutral.
+  - A at [9.4, -6.8], side walking; hole -> van door with a carton, and back; neutral.
 - Action, against the words: f671-700 the camera tilts from the bell; f700-740 it pans and tilts up the lamp post to the camera head; f754 ('Camera') the REC lamp blinks on (15 f on / 15 f off from here to S10) and the head swivels 40 deg down toward the van (f756-772); f780-827 the camera pulls back and down to show the post, its camera and the van being loaded under it.
 - Acting: A: busy, never looks up.
 - Camera keys:
@@ -272,8 +271,8 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 671 | open | [9.6, 1.6, -6.4] | [6.04, 3.4, -2] | 40 | 0.08 | 0 | the small bell |
-| 700 | glide 36 f | [10.3, 2.4, -6.8] | [12.3, 5.35, -0.6] | 36 | 0.12 | 0 | up the post to the camera: it is the big one |
-| 782 | glide 36 f | [18.435, 3.82, -18.813] | [9.318, 1.903, -3.022] | 50 | 0.06 | 0 | the camera watching the van being loaded |
+| 700 | glide 36 f | [10.3, 2.4, -6.8] | [13.9, 5.35, -0.6] | 36 | 0.12 | 0 | up the post to the camera: it is the big one |
+| 782 | glide 36 f | [12.959, 4.902, 15.371] | [10.026, 1.941, -5.495] | 50 | 0.06 | 0 | the camera watching the van being loaded |
 
 - Kicks (7 f): f754 strength 0.5.
 - Physics & FX: none.
@@ -294,20 +293,18 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 827 | open | [8.7, 0.8, -8.28] | [8.7, 0.56, -6.83] | 32 | 0.1 | 0 | the taped plate |
-| 890 | glide 22 f | [4.7, 4.2, -12.394] | [8.7, 1.4, 4.606] | 46 | 0 | 0 | follow the van west |
-| 898 | glide 22 f | [8.501, 4.2, -9.79] | [5.98, 1.4, 7.491] | 46 | 0 | 0 | follow the van west |
-| 906 | glide 22 f | [13.348, 4.2, -4.926] | [1.571, 1.4, 7.971] | 46 | 0 | 0 | follow the van west |
-| 914 | glide 22 f | [13.751, 4.2, 0.902] | [-2.933, 1.4, 6.063] | 46 | 0 | 0 | follow the van west |
-| 922 | glide 22 f | [6.6, 4.2, 1.75] | [-10.4, 1.4, 5.75] | 46 | 0 | 0 | follow the van west |
-| 930 | glide 22 f | [-1.4, 4.2, 1.75] | [-18.4, 1.4, 5.75] | 46 | 0 | 0 | follow the van west |
-| 938 | glide 22 f | [-9.4, 4.2, 1.75] | [-26.4, 1.4, 5.75] | 46 | 0 | 0 | follow the van west |
-| 946 | glide 22 f | [-17.4, 4.2, 1.75] | [-34.4, 1.4, 5.75] | 46 | 0 | 0 | follow the van west |
-| 954 | glide 22 f | [-25.4, 4.2, 1.75] | [-42.4, 1.4, 5.75] | 46 | 0 | 0 | follow the van west |
-| 962 | glide 22 f | [-33.4, 4.2, 1.75] | [-50.4, 1.4, 5.75] | 46 | 0 | 0 | follow the van west |
-| 970 | glide 22 f | [-41.4, 4.2, 1.75] | [-58.4, 1.4, 5.75] | 46 | 0 | 0 | follow the van west |
-| 978 | glide 22 f | [-49.4, 4.2, 1.75] | [-66.4, 1.4, 5.75] | 46 | 0 | 0 | follow the van west |
-| 986 | glide 22 f | [-57.4, 4.2, 1.75] | [-74.4, 1.4, 5.75] | 46 | 0 | 0 | follow the van west |
+| 827 | open | [12.2, 0.8, -10.14] | [12.2, 0.56, -8.69] | 32 | 0.1 | 0 | the taped plate |
+| 906 | glide 22 f | [11.835, 4.2, -7.213] | [7.809, 1.4, 9.781] | 46 | 0 | 0 | follow the van west |
+| 914 | glide 22 f | [16.439, 4.2, -1.405] | [1.325, 1.4, 7.346] | 46 | 0 | 0 | follow the van west |
+| 922 | glide 22 f | [11.6, 4.2, 1.75] | [-5.4, 1.4, 5.75] | 46 | 0 | 0 | follow the van west |
+| 930 | glide 22 f | [3.6, 4.2, 1.75] | [-13.4, 1.4, 5.75] | 46 | 0 | 0 | follow the van west |
+| 938 | glide 22 f | [-4.4, 4.2, 1.75] | [-21.4, 1.4, 5.75] | 46 | 0 | 0 | follow the van west |
+| 946 | glide 22 f | [-12.4, 4.2, 1.75] | [-29.4, 1.4, 5.75] | 46 | 0 | 0 | follow the van west |
+| 954 | glide 22 f | [-20.4, 4.2, 1.75] | [-37.4, 1.4, 5.75] | 46 | 0 | 0 | follow the van west |
+| 962 | glide 22 f | [-28.4, 4.2, 1.75] | [-45.4, 1.4, 5.75] | 46 | 0 | 0 | follow the van west |
+| 970 | glide 22 f | [-36.4, 4.2, 1.75] | [-53.4, 1.4, 5.75] | 46 | 0 | 0 | follow the van west |
+| 978 | glide 22 f | [-44.4, 4.2, 1.75] | [-61.4, 1.4, 5.75] | 46 | 0 | 0 | follow the van west |
+| 986 | glide 22 f | [-52.4, 4.2, 1.75] | [-69.4, 1.4, 5.75] | 46 | 0 | 0 | follow the van west |
 
 - Kicks (7 f): f872 strength 0.3.
 - Physics & FX: the van: kinematic along the plan's van_route; a 2 cm body roll in the turn.
@@ -371,18 +368,18 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 - Set: yard. Light: golden.
 - Build: the yard: containers, the open one, the van backed up with its rear doors open, the gate; the police car; the sledgehammer.
 - Blocking: C1 and C2 carry cartons van -> container (C1 at C1, C2 at C2, front view); cop1 and cop2 get out of the car (f1365) and walk to their marks (f1370-1430).
-  - C1 at [-1.95, 1.4], front; carton at the chest; neutral -> shock.
-  - C2 at [1.3, 1.5], front; carton at the chest; drops it f1440; neutral -> shock.
-  - cop1 at [2.4, 3], side walking then front; walks in f1370-1430; stern.
-  - cop2 at [-2.6, 3.4], side walking then front; walks in f1370-1430; stern.
+  - C1 at [2.7, -0.3], front; carton at the chest; neutral -> shock.
+  - C2 at [1.9, 1.7], front; carton at the chest; drops it f1440; neutral -> shock.
+  - cop1 at [3.7, 3.2], side walking then front; walks in f1370-1430; stern.
+  - cop2 at [0.95, 5], side walking then front; walks in f1370-1430; stern.
 - Action, against the words: f1322-1337 the men carry cartons; f1337 ('chặn') the police car swings in from the right and stops across the gate (f1337-1352), the light bar flashes blue; f1365 the doors open, the officers walk in; f1438 ('bắt') both men freeze (shock); f1440 C2's carton drops from his chest, lands at f1452, bounces twice and settles on its side by f1470 (closed); f1500 glide into the van's open back: the sledgehammer on the floor ('búa tạ' f1510).
 - Acting: C1, C2: busy -> shock. Officers: firm.
 - Camera keys:
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1322 | open | [10.164, 2.96, -12.575] | [0.885, 0.352, 3.497] | 50 | 0.05 | 0 | the yard: van, container, the men, the gate behind |
-| 1420 | glide 24 f | [3.797, 1.846, -11.228] | [0.14, 0.361, 2.419] | 46 | 0.1 | 0 | the arrest |
+| 1322 | open | [23.874, 3.529, 7.968] | [0.799, 0.236, 3.9] | 50 | 0.05 | 0 | the yard: van, container, the men, the gate behind |
+| 1420 | glide 24 f | [16.725, 1.879, 6.26] | [2.313, 0.31, 2.398] | 46 | 0.1 | 0 | the arrest |
 | 1498 | glide 16 f | [-0.33, 1.3, 0.25] | [-0.62, 0.58, 1.9] | 34 | 0.08 | 0 | the sledgehammer in the van |
 
 - Kicks (7 f): f1352 strength 0.5; f1438 strength 0.6; f1452 strength 0.4.
@@ -405,7 +402,7 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 1553 | open | [2.208, 1.253, 0.739] | [4.06, 0.684, 5.827] | 44 | 0.07 | 0 | the detective and the recovered stack |
+| 1553 | open | [1.858, 1.401, 11.662] | [4.094, 0.714, 5.519] | 44 | 0.07 | 0 | the detective and the recovered stack |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
@@ -420,12 +417,12 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 - Set: court. Light: day.
 - Build: the court front, the plaza, autumn trees, the six men.
 - Blocking: Six men at the six men marks, front view, standing apart in a loose line.
-  - man1 at [-2.6, 3.2], front; standing; neutral.
-  - man2 at [-1.55, 3.5], front; standing; neutral.
-  - man3 at [-0.5, 3.2], front; standing; neutral.
-  - man4 at [0.55, 3.5], front; standing; neutral.
-  - man5 at [1.6, 3.2], front; standing; neutral.
-  - man6 at [2.65, 3.5], front; standing; neutral.
+  - man1 at [-2.2, 3], front; standing; neutral.
+  - man2 at [-1.45, 4.7], front; standing; neutral.
+  - man3 at [-0.7, 3], front; standing; neutral.
+  - man4 at [0.05, 4.7], front; standing; neutral.
+  - man5 at [0.8, 3], front; standing; neutral.
+  - man6 at [1.55, 4.7], front; standing; neutral.
 - Action, against the words: f1706-1780 the camera cranes down from the lettering to the doors; f1708 title 11 THANG SAU; f1765 ('sáu người') the six are all in frame; slow push to f1900; one adjusts his tie f1810, one checks his watch f1850.
 - Acting: The six: tense, neutral.
 - Camera keys:
@@ -433,7 +430,7 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
 | 1706 | open | [0, 7.6, 21] | [0, 5.6, 0] | 44 | 0 | 0 | the court's lettering |
-| 1762 | glide 46 f | [0.053, 2.398, 18.95] | [0.053, 0.731, 3.092] | 46 | 0.06 | 0 | the six in front of the doors |
+| 1762 | glide 46 f | [-0.168, 1.993, 15.444] | [-0.168, 0.744, 3.554] | 46 | 0.06 | 0 | the six in front of the doors |
 
 - Kicks (7 f): none.
 - Physics & FX: falling leaves (light, sine flutter).
@@ -503,7 +500,7 @@ Two hard cuts (S06 "Khoan", S15 out of the courtroom). Travels: through the hole
 
 | f | move | pos | look | fov | push %/f | blur px | why |
 |---|---|---|---|---|---|---|---|
-| 2143 | open | [-2.55, 1.45, 1.35] | [-2.7, 1.5, 0.05] | 36 | 0.08 | 0 | the board: allegations only |
+| 2143 | open | [-3.65, 1.45, 2.1] | [-3.8, 1.5, 0.05] | 36 | 0.08 | 0 | the board: allegations only |
 
 - Kicks (7 f): none.
 - Physics & FX: none.
