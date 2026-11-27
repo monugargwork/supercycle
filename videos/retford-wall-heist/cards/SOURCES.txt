@@ -1,1 +1,7 @@
 Real card scans for the Retford reel (from library/cards, see CATALOG.md).
+zard151.png       Scarlet & Violet 151 Charizard ex SIR 199/165     https://images.pokemontcg.io/sv3pt5/199_hires.png
+umbreon_pe.png    sv8pt5 Umbreon 161                                https://images.pokemontcg.io/sv8pt5/161_hires.png
+bubble_mew.png    Paldean Fates Mew ex 232/091 (SIR, 'Bubble Mew')  https://images.pokemontcg.io/sv4pt5/232_hires.png
+pika151.png       Scarlet & Violet 151 Pikachu 25/165               https://images.pokemontcg.io/sv3pt5/25_hires.png
+blast151.png      Scarlet & Violet 151 Blastoise ex SIR 200/165     https://images.pokemontcg.io/sv3pt5/200_hires.png
+venu151.png       Scarlet & Violet 151 Venusaur ex SIR 198/165      https://images.pokemontcg.io/sv3pt5/198_hires.png

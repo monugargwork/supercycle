@@ -9,27 +9,27 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | c30_vulpix | 2026 30th Celebration Vulpix 9 | 30c | 9 | https://den-cards.pokellector.com/434/Vulpix.30C.9.62050.png | jirachi |
 | jirachi_sir | 2026 30th Celebration Jirachi ex Special Illustration Rare (Akira Egawa) 155/128 | 30c | 155 | https://den-cards.pokellector.com/434/Jirachi-ex.30C.155.62175.png | jirachi |
 | rgb_mew_r | 30th Celebration Mew R/RGB (Red) | 30th | R | https://tcgplayer-cdn.tcgplayer.com/product/717607_in_1000x1000.jpg | chicago |
-| abra | Base Set Abra 43 | base1 | 43 | https://images.pokemontcg.io/base1/43.png | attic |
+| abra | Base Set Abra 43 | base1 | 43 | https://images.pokemontcg.io/base1/43.png | attic, mesa |
 | blastoise | Base Set Blastoise 2 | base1 | 2 | https://images.pokemontcg.io/base1/2_hires.png | attic, fanatics, monaco, tcgplayer, gengar, goldenrod, chicago |
-| bulbasaur | Base Set Bulbasaur 44 | base1 | 44 | https://images.pokemontcg.io/base1/44.png | attic, caterpie |
+| bulbasaur | Base Set Bulbasaur 44 | base1 | 44 | https://images.pokemontcg.io/base1/44.png | attic, caterpie, mesa |
 | caterpie | Base Set Caterpie 45 | base1 | 45 | https://images.pokemontcg.io/base1/45_hires.png |  |
-| charmander | Base Set Charmander 46 | base1 | 46 | https://images.pokemontcg.io/base1/46.png | attic, fanatics, caterpie |
-| diglett | Base Set Diglett 47 | base1 | 47 | https://images.pokemontcg.io/base1/47.png | attic |
+| charmander | Base Set Charmander 46 | base1 | 46 | https://images.pokemontcg.io/base1/46.png | attic, fanatics, caterpie, mesa |
+| diglett | Base Set Diglett 47 | base1 | 47 | https://images.pokemontcg.io/base1/47.png | attic, mesa |
 | gastly | Base Set Gastly 50 | base1 | 50 | https://images.pokemontcg.io/base1/50.png | attic, fanatics |
 | machop | Base Set Machop 52 | base1 | 52 | https://images.pokemontcg.io/base1/52.png | attic |
-| magikarp | Base Set Magikarp 35 | base1 | 35 | https://images.pokemontcg.io/base1/35.png | attic |
+| magikarp | Base Set Magikarp 35 | base1 | 35 | https://images.pokemontcg.io/base1/35.png | attic, mesa |
 | mewtwo | Base Set Mewtwo 10 | base1 | 10 | https://images.pokemontcg.io/base1/10_hires.png | attic, fanatics, gengar, chicago |
 | onix | Base Set Onix 56 | base1 | 56 | https://images.pokemontcg.io/base1/56.png | attic, fanatics |
 | pikachu | Base Set Pikachu 58 | base1 | 58 | https://images.pokemontcg.io/base1/58.png | attic, fanatics, lucas, tcgplayer, gengar, goldenrod, caterpie, chicago |
 | ponyta | Base Set Ponyta 60 | base1 | 60 | https://images.pokemontcg.io/base1/60.png | attic |
-| squirtle | Base Set Squirtle 63 | base1 | 63 | https://images.pokemontcg.io/base1/63.png | attic, fanatics, caterpie |
+| squirtle | Base Set Squirtle 63 | base1 | 63 | https://images.pokemontcg.io/base1/63.png | attic, fanatics, caterpie, mesa |
 | venusaur | Base Set Venusaur 15 | base1 | 15 | https://images.pokemontcg.io/base1/15_hires.png | attic, fanatics, monaco, tcgplayer, goldenrod |
 | vulpix | Base Set Vulpix 68 | base1 | 68 | https://images.pokemontcg.io/base1/68.png | attic, fanatics |
 | zard_base | Base Set Charizard 4 | base1 | 4 | https://images.pokemontcg.io/base1/4_hires.png | attic, mudkip (as zard), fanatics, monaco, lucas, tcgplayer, gengar, goldenrod, chicago |
-| eevee | Jungle Eevee 51 | base2 | 51 | https://images.pokemontcg.io/base2/51.png | attic, fanatics, caterpie |
+| eevee | Jungle Eevee 51 | base2 | 51 | https://images.pokemontcg.io/base2/51.png | attic, fanatics, caterpie, mesa |
 | jg_scyther | Jungle Scyther 10 | base2 | 10 | https://images.pokemontcg.io/base2/10_hires.png | lucas |
-| jigglypuff | Jungle Jigglypuff 54 | base2 | 54 | https://images.pokemontcg.io/base2/54.png | attic, fanatics |
-| meowth | Jungle Meowth 56 | base2 | 56 | https://images.pokemontcg.io/base2/56.png | attic |
+| jigglypuff | Jungle Jigglypuff 54 | base2 | 54 | https://images.pokemontcg.io/base2/54.png | attic, fanatics, mesa |
+| meowth | Jungle Meowth 56 | base2 | 56 | https://images.pokemontcg.io/base2/56.png | attic, mesa |
 | fs_aerodactyl | Fossil Fs 1 | base3 | 1 | https://images.pokemontcg.io/base3/1_hires.png | fossil, lucas |
 | fs_articuno | Fossil Fs 2 | base3 | 2 | https://images.pokemontcg.io/base3/2_hires.png | fossil |
 | fs_ditto | Fossil Fs 3 | base3 | 3 | https://images.pokemontcg.io/base3/3_hires.png | fossil |
@@ -81,25 +81,26 @@ Every real TCG scan we have fetched, stored once. Look here first (`python3 scri
 | totodile | Neo Genesis Totodile 80 | neo1 | 80 | https://images.pokemontcg.io/neo1/80.png | attic, fanatics |
 | neo_hooh | Neo Revelation Ho-Oh 7 | neo3 | 7 | https://images.pokemontcg.io/neo3/7_hires.png | goldenrod |
 | fidough | Scarlet & Violet Fidough 97 | sv1 | 97 | https://images.pokemontcg.io/sv1/97.png | mudkip |
-| fuecoco | Scarlet & Violet Fuecoco 36 | sv1 | 36 | https://images.pokemontcg.io/sv1/36.png | mudkip, caterpie |
+| fuecoco | Scarlet & Violet Fuecoco 36 | sv1 | 36 | https://images.pokemontcg.io/sv1/36.png | mudkip, caterpie, mesa |
 | lechonk | Scarlet & Violet Lechonk 154 | sv1 | 154 | https://images.pokemontcg.io/sv1/154.png | mudkip |
-| pawmi | Scarlet & Violet Pawmi 73 | sv1 | 73 | https://images.pokemontcg.io/sv1/73.png | mudkip, caterpie |
-| quaxly | Scarlet & Violet Quaxly 52 | sv1 | 52 | https://images.pokemontcg.io/sv1/52.png | mudkip, caterpie |
+| pawmi | Scarlet & Violet Pawmi 73 | sv1 | 73 | https://images.pokemontcg.io/sv1/73.png | mudkip, caterpie, mesa |
+| quaxly | Scarlet & Violet Quaxly 52 | sv1 | 52 | https://images.pokemontcg.io/sv1/52.png | mudkip, caterpie, mesa |
 | smoliv | Scarlet & Violet Smoliv 20 | sv1 | 20 | https://images.pokemontcg.io/sv1/20.png | mudkip |
-| sprigatito | Scarlet & Violet Sprigatito 13 | sv1 | 13 | https://images.pokemontcg.io/sv1/13.png | mudkip, caterpie |
+| sprigatito | Scarlet & Violet Sprigatito 13 | sv1 | 13 | https://images.pokemontcg.io/sv1/13.png | mudkip, caterpie, mesa |
 | tandemaus | Scarlet & Violet Tandemaus 159 | sv1 | 159 | https://images.pokemontcg.io/sv1/159.png | mudkip |
-| blast151 | Scarlet & Violet 151 Blastoise ex SIR 200/165 | sv3pt5 | 200 | https://images.pokemontcg.io/sv3pt5/200_hires.png | tcgplayer |
+| blast151 | Scarlet & Violet 151 Blastoise ex SIR 200/165 | sv3pt5 | 200 | https://images.pokemontcg.io/sv3pt5/200_hires.png | tcgplayer, mesa, retford |
 | caterpie151 | Scarlet & Violet 151 Caterpie 010/165 | sv3pt5 | 10 | https://images.pokemontcg.io/sv3pt5/10_hires.png | caterpie |
-| pika151 | Scarlet & Violet 151 Pikachu 25/165 | sv3pt5 | 25 | https://images.pokemontcg.io/sv3pt5/25_hires.png | tcgplayer, caterpie |
-| venu151 | Scarlet & Violet 151 Venusaur ex SIR 198/165 | sv3pt5 | 198 | https://images.pokemontcg.io/sv3pt5/198_hires.png | tcgplayer |
-| zard151 | Scarlet & Violet 151 Charizard ex SIR 199/165 | sv3pt5 | 199 | https://images.pokemontcg.io/sv3pt5/199_hires.png | tcgplayer, caterpie |
-| bubble_mew | Paldean Fates Mew ex 232/091 (SIR, 'Bubble Mew') | sv4pt5 | 232 | https://images.pokemontcg.io/sv4pt5/232_hires.png |  |
+| pika151 | Scarlet & Violet 151 Pikachu 25/165 | sv3pt5 | 25 | https://images.pokemontcg.io/sv3pt5/25_hires.png | tcgplayer, caterpie, mesa, retford |
+| venu151 | Scarlet & Violet 151 Venusaur ex SIR 198/165 | sv3pt5 | 198 | https://images.pokemontcg.io/sv3pt5/198_hires.png | tcgplayer, mesa, retford |
+| zard151 | Scarlet & Violet 151 Charizard ex SIR 199/165 | sv3pt5 | 199 | https://images.pokemontcg.io/sv3pt5/199_hires.png | tcgplayer, caterpie, mesa, retford |
+| bubble_mew | Paldean Fates Mew ex 232/091 (SIR, 'Bubble Mew') | sv4pt5 | 232 | https://images.pokemontcg.io/sv4pt5/232_hires.png | mesa, retford |
+| umbreon_pe | sv8pt5 Umbreon 161 | sv8pt5 | 161 | https://images.pokemontcg.io/sv8pt5/161_hires.png | retford |
 | bunnelby | XY Bunnelby 111 | xy1 | 111 | https://images.pokemontcg.io/xy1/111.png | mudkip |
-| chespin | XY Chespin 12 | xy1 | 12 | https://images.pokemontcg.io/xy1/12.png | mudkip |
-| fennekin | XY Fennekin 24 | xy1 | 24 | https://images.pokemontcg.io/xy1/24.png | mudkip |
+| chespin | XY Chespin 12 | xy1 | 12 | https://images.pokemontcg.io/xy1/12.png | mudkip, mesa |
+| fennekin | XY Fennekin 24 | xy1 | 24 | https://images.pokemontcg.io/xy1/24.png | mudkip, mesa |
 | fletchling | XY Fletchling 113 | xy1 | 113 | https://images.pokemontcg.io/xy1/113.png | mudkip |
-| froakie | XY Froakie 39 | xy1 | 39 | https://images.pokemontcg.io/xy1/39.png | mudkip |
-| pikachu_xy | XY Pikachu 42 | xy1 | 42 | https://images.pokemontcg.io/xy1/42.png | mudkip |
+| froakie | XY Froakie 39 | xy1 | 39 | https://images.pokemontcg.io/xy1/39.png | mudkip, mesa |
+| pikachu_xy | XY Pikachu 42 | xy1 | 42 | https://images.pokemontcg.io/xy1/42.png | mudkip, mesa |
 | skiddo | XY Skiddo 18 | xy1 | 18 | https://images.pokemontcg.io/xy1/18.png | mudkip |
 | spritzee | XY Spritzee 92 | xy1 | 92 | https://images.pokemontcg.io/xy1/92.png | mudkip |
 | evo_mzard | XY Evolutions M Charizard-EX 13/108 | xy12 | 13 | https://images.pokemontcg.io/xy12/13_hires.png | chicago |
