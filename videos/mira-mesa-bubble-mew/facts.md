@@ -18,3 +18,8 @@ Sources (the CBS8 article named in the topic returned 403 and could not be read)
 
 ## Show
 - A school gym card show, a booth with a case, a hand passing a card, a black sedan, a girl at a table.
+
+## The card (added at kickoff, 27 Nov 2026)
+- "Bubble Mew" is the collectors' name for the Paldean Fates Mew ex 232/091 special illustration rare (Mew asleep inside a bubble, illus. USGMEN). Real scan: `library/cards/sv4pt5/bubble_mew.png` (pokemontcg.io, 733x1024).
+- The reports don't say whether it was graded. On screen it sits in a clear magnetic one-touch case (no slab label, so no invented grade or cert), which keeps the real card face large and readable.
+- The girl also collided with the running thief and was bruised (second 10News report). Not in the VO, so not shown.
